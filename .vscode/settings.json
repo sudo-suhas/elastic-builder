@@ -1,0 +1,20 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+  "eslint.enable": true,
+  "eslint.autoFixOnSave": true,
+  "files.eol": "\n",
+  "vsicons.presets.angular": false,
+  "npm-intellisense.scanDevDependencies": true,
+  "npm-intellisense.packageSubfoldersIntellisense": true,
+  "editor.detectIndentation": true,
+  "[json]": {
+    "editor.tabSize": 2
+  },
+  "beautify.language": {
+    "js": {
+      "type": [
+        "javascript"
+      ]
+    }
+  }
+}
