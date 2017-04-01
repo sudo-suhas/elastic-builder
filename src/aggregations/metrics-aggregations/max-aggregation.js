@@ -1,6 +1,6 @@
 'use strict';
 
-const MetricsAggregation = require('./metrics-aggregation');
+const MetricsAggregationBase = require('./metrics-aggregation-base');
 
 /**
  * A single-value metrics aggregation that keeps track and returns the
@@ -13,9 +13,9 @@ const MetricsAggregation = require('./metrics-aggregation');
  * Aggregation that keeps track and returns the maximum value among the
  * numeric values extracted from the aggregated documents.
  *
- * @extends MetricsAggregation
+ * @extends MetricsAggregationBase
  */
-class MaxAggregation extends MetricsAggregation {
+class MaxAggregation extends MetricsAggregationBase {
 
     /**
      * Creates an instance of MaxAggregation

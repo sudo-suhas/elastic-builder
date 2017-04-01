@@ -1,6 +1,6 @@
 'use strict';
 
-const MetricsAggregation = require('./metrics-aggregation');
+const MetricsAggregationBase = require('./metrics-aggregation-base');
 
 const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-valuecount-aggregation.html';
 
@@ -16,9 +16,9 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * Aggregation that counts the number of values that are extracted from the
  * aggregated documents.
  *
- * @extends MetricsAggregation
+ * @extends MetricsAggregationBase
  */
-class ValueCountAggregation extends MetricsAggregation {
+class ValueCountAggregation extends MetricsAggregationBase {
 
     /**
      * Creates an instance of ValueCountAggregation
@@ -34,11 +34,11 @@ class ValueCountAggregation extends MetricsAggregation {
 
     /**
      * @override
-     * @throws {Error} This method cannot be called on TopHitsAggregation
+     * @throws {Error} This method cannot be called on ValueCountAggregation
      */
-    missing() {
+    format() {
         console.log(`Please refer ${ES_REF_URL}`);
-        throw new Error('missing is not supported in TopHitsAggregation');
+        throw new Error('format is not supported in ValueCountAggregation');
     }
 }
 

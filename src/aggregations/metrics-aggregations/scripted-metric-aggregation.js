@@ -1,6 +1,6 @@
 'use strict';
 
-const MetricsAggregation = require('./metrics-aggregation');
+const MetricsAggregationBase = require('./metrics-aggregation-base');
 
 const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-scripted-metric-aggregation.html';
 
@@ -12,9 +12,9 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * Aggregation that keeps track and returns the minimum value among numeric
  * values extracted from the aggregated documents.
  *
- * @extends MetricsAggregation
+ * @extends MetricsAggregationBase
  */
-class ScriptedMetricAggregation extends MetricsAggregation {
+class ScriptedMetricAggregation extends MetricsAggregationBase {
 
     /**
      * Creates an instance of ScriptedMetricAggregation

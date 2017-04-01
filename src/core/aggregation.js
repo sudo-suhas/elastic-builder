@@ -13,12 +13,17 @@ class Aggregation {
      * Creates an instance of Aggregation
      *
      * @param {string} name
+     * @param {string} type Type of aggregation
      * @returns {Aggregation}
      */
-    constructor(name) {
-        this._aggs = {};
-        this._nestedAggs = [];
+    constructor(name, type) {
         this.name = name;
+        this.type = type;
+
+        this._aggs = {};
+        this._aggsDef = this._aggs[type] = {};
+        this._nestedAggs = [];
+
         return this;
     }
 
@@ -28,13 +33,17 @@ class Aggregation {
      * Sets nested aggregations.
      * This method can be called multiple times in order to set multiple nested aggregations.
      *
-     * @param {Aggregation} aggs Any valid {@link Aggregation}
+     * @param {Aggregation} agg Any valid {@link Aggregation}
      * @returns {Aggregation} returns `this` so that calls can be chained.
+     * @throws {TypeError} If `agg` is not an instance of `Aggregation`
      */
-    aggregations(aggs) {
-        checkType(aggs, Aggregation);
+    aggregation(agg) {
+        checkType(agg, Aggregation);
 
-        this._nestedAggs.push(aggs);
+        // Possible to check for Global aggregation?
+        // Global aggregation can only be at the top level.
+
+        this._nestedAggs.push(agg);
 
         return this;
     }
@@ -43,11 +52,11 @@ class Aggregation {
      * Sets nested aggregation.
      * This method can be called multiple times in order to set multiple nested aggregations.
      *
-     * @param {Aggregation} aggs Any valid {@link Aggregation}
+     * @param {Aggregation} agg Any valid {@link Aggregation}
      * @returns {Aggregation} returns `this` so that calls can be chained.
      */
-    aggs(aggs) {
-        return this.aggregation(aggs);
+    agg(agg) {
+        return this.aggregation(agg);
     }
 
     /**

@@ -1,6 +1,8 @@
 'use strict';
 
-const MetricsAggregation = require('./metrics-aggregation');
+const MetricsAggregationBase = require('./metrics-aggregation-base');
+
+const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html';
 
 /**
  * A single-value metrics aggregation that calculates an approximate count of
@@ -11,9 +13,9 @@ const MetricsAggregation = require('./metrics-aggregation');
  *
  * Aggregation that calculates an approximate count of distinct values.
  *
- * @extends MetricsAggregation
+ * @extends MetricsAggregationBase
  */
-class CardinalityAggregation extends MetricsAggregation {
+class CardinalityAggregation extends MetricsAggregationBase {
 
     /**
      * Creates an instance of CardinalityAggregation
@@ -25,6 +27,16 @@ class CardinalityAggregation extends MetricsAggregation {
     constructor(name, field) {
         super(name, 'cardinality', field);
         return this;
+    }
+
+    /**
+     * @override
+     * @throws {Error} This method cannot be called on CardinalityAggregation
+     */
+    format() {
+        // Not 100% sure about this.
+        console.log(`Please refer ${ES_REF_URL}`);
+        throw new Error('format is not supported in CardinalityAggregation');
     }
 
     /**

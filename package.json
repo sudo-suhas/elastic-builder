@@ -4,6 +4,9 @@
   "description": "A JavaScript implementation of the elasticsearch Query DSL",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint src index.js",
+    "lint:fix": "npm run lint -- --fix",
+    "lint-staged": "lint-staged",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -13,7 +16,10 @@
   "keywords": [
     "elasticsearch",
     "search",
-    "elastic-builder"
+    "elasticjs",
+    "elastic search",
+    "elastic-builder",
+    "ejs"
   ],
   "author": "Suhas Karanth <sudo.suhas@gmail.com>",
   "license": "MIT",
@@ -21,8 +27,17 @@
     "url": "https://github.com/sudo-suhas/elastic-builder/issues"
   },
   "homepage": "https://github.com/sudo-suhas/elastic-builder#readme",
+  "lint-staged": {
+    "src/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "pre-commit": "lint-staged",
   "devDependencies": {
-    "eslint": "^3.18.0"
+    "eslint": "^3.18.0",
+    "lint-staged": "^3.4.0",
+    "pre-commit": "^1.2.2"
   },
   "dependencies": {
     "lodash": "^4.17.4"

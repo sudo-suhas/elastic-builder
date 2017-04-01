@@ -43,6 +43,7 @@ class Highlight {
      * @param {string|null} field
      * @param {string} option
      * @param {string} val
+     * @private
      */
     _setFieldOption(field, option, val) {
         if (_.isNil(field)) {
@@ -71,6 +72,7 @@ class Highlight {
      *
      * @param {Array} fields Array of field names.
      * @returns {Highlight} returns `this` so that calls can be chained
+     * @throws {TypeError} If `fields` is not an instance of Array
      */
     fields(fields) {
         checkType(fields, Array);
@@ -161,6 +163,7 @@ class Highlight {
      * @param {Query} query
      * @param {string=} field An optional field name
      * @returns {Highlight} returns `this` so that calls can be chained
+     * @throws {TypeError} If `query` is not an instance of `Query`
      */
     highlightQuery(query, field) {
         checkType(query, Query);
@@ -177,6 +180,7 @@ class Highlight {
      * @param {string} field Field name
      * @returns {Highlight} returns `this` so that calls can be chained
      * @throws {Error} field parameter should be valid field name
+     * @throws {TypeError} If `fields` is not an instance of Array
      */
     matchedFields(fields, field) {
         checkType(fields, Array);
@@ -184,7 +188,6 @@ class Highlight {
 
         this.type('fvh', field);
         this._setFieldOption(field, 'matched_fields', fields);
-
         return this;
     }
 
@@ -239,7 +242,7 @@ class Highlight {
     /**
      * Defines what constitutes a boundary for highlighting.
      * It is a single string with each boundary character defined in it.
-     * It defaults to .,!? \t\n. You can apply the
+     * It defaults to `.,!? \t\n`. You can apply the
      * option to a specific field by passing the optional field name parameter.
      *
      * @param {string} charStr

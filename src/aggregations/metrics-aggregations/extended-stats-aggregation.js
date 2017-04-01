@@ -1,6 +1,6 @@
 'use strict';
 
-const MetricsAggregation = require('./metrics-aggregation');
+const MetricsAggregationBase = require('./metrics-aggregation-base');
 
 /**
  * A multi-value metrics aggregation that computes stats over numeric values
@@ -13,9 +13,9 @@ const MetricsAggregation = require('./metrics-aggregation');
  * Aggregation that computes extra stats over numeric values extracted from
  * the aggregated documents.
  *
- * @extends MetricsAggregation
+ * @extends MetricsAggregationBase
  */
-class ExtendedStatsAggregation extends MetricsAggregation {
+class ExtendedStatsAggregation extends MetricsAggregationBase {
 
     /**
      * Creates an instance of ExtendedStatsAggregation

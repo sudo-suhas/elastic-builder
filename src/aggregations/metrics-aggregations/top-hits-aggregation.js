@@ -2,8 +2,8 @@
 
 const _ = require('lodash');
 
-const MetricsAggregation = require('./metrics-aggregation'),
-    { Highlight, Script, util: { checkType } } = require('../../core');
+const MetricsAggregationBase = require('./metrics-aggregation-base'),
+    { Highlight, util: { checkType } } = require('../../core');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html';
@@ -18,9 +18,9 @@ const ES_REF_URL =
  * top_hits metric aggregator keeps track of the most relevant document being
  * aggregated.
  *
- * @extends MetricsAggregation
+ * @extends MetricsAggregationBase
  */
-class TopHitsAggregation extends MetricsAggregation {
+class TopHitsAggregation extends MetricsAggregationBase {
 
     /**
      * Creates an instance of TopHitsAggregation
@@ -58,6 +58,15 @@ class TopHitsAggregation extends MetricsAggregation {
     missing() {
         console.log(`Please refer ${ES_REF_URL}`);
         throw new Error('missing is not supported in TopHitsAggregation');
+    }
+
+    /**
+     * @override
+     * @throws {Error} This method cannot be called on TopHitsAggregation
+     */
+    format() {
+        console.log(`Please refer ${ES_REF_URL}`);
+        throw new Error('format is not supported in TopHitsAggregation');
     }
 
     /**

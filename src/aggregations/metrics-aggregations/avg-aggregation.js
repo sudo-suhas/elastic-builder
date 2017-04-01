@@ -1,6 +1,6 @@
 'use strict';
 
-const MetricsAggregation = require('./metrics-aggregation');
+const MetricsAggregationBase = require('./metrics-aggregation-base');
 
 /**
  * A single-value metrics aggregation that computes the average of numeric
@@ -13,9 +13,9 @@ const MetricsAggregation = require('./metrics-aggregation');
  * Aggregation that computes the average of numeric values that are extracted
  * from the aggregated documents.
  *
- * @extends MetricsAggregation
+ * @extends MetricsAggregationBase
  */
-class AvgAggregation extends MetricsAggregation {
+class AvgAggregation extends MetricsAggregationBase {
 
     /**
      * Creates an instance of AvgAggregation

@@ -1,17 +1,18 @@
 'use strict';
 
-const MetricsAggregation = require('./metrics-aggregation');
+const MetricsAggregationBase = require('./metrics-aggregation-base');
 
 const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geocentroid-aggregation.html';
 
 /**
- * A metric aggregation that computes the weighted centroid from all coordinate values for a Geo-point datatype field.
+ * A metric aggregation that computes the weighted centroid
+ * from all coordinate values for a Geo-point datatype field.
  *
- * [Elasticsearch`reference](${ES_REF_URL}`
+ * [Elasticsearchreference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geocentroid-aggregation.html)
  *
- * @extends MetricsAggregation
+ * @extends MetricsAggregationBase
  */
-class GeoCentroidAggregation extends MetricsAggregation {
+class GeoCentroidAggregation extends MetricsAggregationBase {
 
     /**
      * Creates an instance of GeoCentroidAggregation
@@ -29,18 +30,9 @@ class GeoCentroidAggregation extends MetricsAggregation {
      * @override
      * @throws {Error} This method cannot be called on GeoCentroidAggregation
      */
-    script() {
+    format() {
         console.log(`Please refer ${ES_REF_URL}`);
-        throw new Error('script is not supported in GeoCentroidAggregation');
-    }
-
-    /**
-     * @override
-     * @throws {Error} This method cannot be called on GeoCentroidAggregation
-     */
-    missing() {
-        console.log(`Please refer ${ES_REF_URL}`);
-        throw new Error('missing is not supported in GeoCentroidAggregation');
+        throw new Error('format is not supported in GeoCentroidAggregation');
     }
 }
 

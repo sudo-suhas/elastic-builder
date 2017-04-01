@@ -4,7 +4,7 @@ const {
     util: { checkType }
 } = require('../../core');
 
-const MetricsAggregation = require('./metrics-aggregation');
+const MetricsAggregationBase = require('./metrics-aggregation-base');
 
 /**
  * A multi-value metrics aggregation that calculates one or more percentiles
@@ -17,9 +17,9 @@ const MetricsAggregation = require('./metrics-aggregation');
  * Aggregation that calculates one or more percentiles over numeric values
  * extracted from the aggregated documents.
  *
- * @extends MetricsAggregation
+ * @extends MetricsAggregationBase
  */
-class PercentilesAggregation extends MetricsAggregation {
+class PercentilesAggregation extends MetricsAggregationBase {
 
     /**
      * Creates an instance of PercentilesAggregation
@@ -51,6 +51,7 @@ class PercentilesAggregation extends MetricsAggregation {
      *
      * @param {Array} percents Parameter to specify particular percentiles to calculate
      * @returns {PercentilesAggregation} returns `this` so that calls can be chained
+     * @throws {TypeError} If `percents` is not an instance of Array
      */
     percents(percents) {
         checkType(percents, Array);

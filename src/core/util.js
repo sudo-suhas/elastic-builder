@@ -14,9 +14,22 @@ exports.checkType = function checktype(instance, type) {
 };
 
 /**
+ * Change first character of given string to lowercase.
+ * ExampleClass -> exampleClass
+ *
+ * @param {string} str
+ * @return {string}
+ */
+exports.lowercaseFirstLetter = function lowercaseFirstLetter(str) {
+    return str.charAt(0).toLowerCase() + str.slice(1);
+};
+
+/**
  * Wrapper for calling constructor with given parameters
  *
  * @param {Class} Cls
- * @returns {Object} an instance of given Class
+ * @returns {function} Wrapper on constructor which creates an instance of given Class
  */
-exports.constructorWrapper = Cls => (...args) => new Cls(...args);
+exports.constructorWrapper = function constructorWrapper(Cls) {
+    return (...args) => new Cls(...args);
+};

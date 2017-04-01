@@ -1,6 +1,8 @@
 'use strict';
 
-const MetricsAggregation = require('./metrics-aggregation');
+const MetricsAggregationBase = require('./metrics-aggregation-base');
+
+const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geobounds-aggregation.html';
 
 /**
  * A metric aggregation that computes the bounding box
@@ -8,9 +10,9 @@ const MetricsAggregation = require('./metrics-aggregation');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geobounds-aggregation.html)
  *
- * @extends MetricsAggregation
+ * @extends MetricsAggregationBase
  */
-class GeoBoundsAggregation extends MetricsAggregation {
+class GeoBoundsAggregation extends MetricsAggregationBase {
 
     /**
      * Creates an instance of GeoBoundsAggregation
@@ -24,6 +26,26 @@ class GeoBoundsAggregation extends MetricsAggregation {
         return this;
     }
 
+    // TODO: Override missing and take only GeoPoint as parameter
+
+    /**
+     * @override
+     * @throws {Error} This method cannot be called on GeoBoundsAggregation
+     */
+    format() {
+        console.log(`Please refer ${ES_REF_URL}`);
+        throw new Error('format is not supported in GeoBoundsAggregation');
+    }
+
+    /**
+     * @override
+     * @throws {Error} This method cannot be called on GeoBoundsAggregation
+     */
+    script() {
+        console.log(`Please refer ${ES_REF_URL}`);
+        throw new Error('script is not supported in GeoBoundsAggregation');
+    }
+
     /**
      *
      * @param {boolean} allowOverlap Optional parameter which specifies whether
@@ -34,24 +56,6 @@ class GeoBoundsAggregation extends MetricsAggregation {
     wrapLongitude(allowOverlap) {
         this._aggsDef.wrap_longitude = allowOverlap;
         return this;
-    }
-
-    /**
-     * @override
-     * @throws {Error} This method cannot be called on GeoBoundsAggregation
-     */
-    script() {
-        console.log('Please refer https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geobounds-aggregation.html');
-        throw new Error('script is not supported in GeoBoundsAggregation');
-    }
-
-    /**
-     * @override
-     * @throws {Error} This method cannot be called on GeoBoundsAggregation
-     */
-    missing() {
-        console.log('Please refer https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geobounds-aggregation.html');
-        throw new Error('missing is not supported in GeoBoundsAggregation');
     }
 }
 

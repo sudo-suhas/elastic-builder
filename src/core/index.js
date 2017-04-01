@@ -7,9 +7,15 @@
  */
 
 // Base classes
-/** Aggregation base class */
+
 exports.Aggregation = require('./aggregation');
 
+exports.Query = require('./query');
+
 exports.Highlight = require('./highlight');
+
+exports.GeoPoint = require('./geo-point');
+
+exports.consts = require('./consts');
 
 exports.util = require('./util');

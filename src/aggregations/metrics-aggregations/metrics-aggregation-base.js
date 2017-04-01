@@ -8,25 +8,23 @@ const {
 const Script = require('../../script-types/script');
 
 /**
- * The MetricsAggregationMixin provides support for common options used across
+ * The MetricsAggregationBase provides support for common options used across
  * various metrics `Aggregation` implementations.
  *
  * @extends Aggregation
  */
-class MetricsAggregation extends Aggregation {
+class MetricsAggregationBase extends Aggregation {
 
     /**
-     * Creates an instance of MetricsAggregation
+     * Creates an instance of MetricsAggregationBase
      *
      * @param {string} name a valid aggregation name
      * @param {string} type type of aggregation
      * @param {string} field The field to aggregate on
-     * @returns {Aggregation} returns `this` so that calls can be chained
+     * @returns {MetricsAggregationBase} returns `this` so that calls can be chained
      */
     constructor(name, type, field) {
-        super(name);
-
-        this._aggsDef = this._aggs[type] = {};
+        super(name, type);
 
         field && this.field(field);
 
@@ -42,7 +40,7 @@ class MetricsAggregation extends Aggregation {
      * Sets field to run aggregation on.
      *
      * @param {string} field a valid field name
-     * @returns {Aggregation} returns `this` so that calls can be chained
+     * @returns {MetricsAggregationBase} returns `this` so that calls can be chained
      */
     field(field) {
         this._aggsDef.field = field;
@@ -53,7 +51,8 @@ class MetricsAggregation extends Aggregation {
      * Sets script parameter for aggregation.
      *
      * @param {Script} script
-     * @returns {Aggregation} returns `this` so that calls can be chained
+     * @returns {MetricsAggregationBase} returns `this` so that calls can be chained
+     * @throws {TypeError} If `script` is not an instance of `Script`
      */
     script(script) {
         checkType(script, Script);
@@ -66,12 +65,24 @@ class MetricsAggregation extends Aggregation {
      * that are missing a value should be treated.
      *
      * @param {string} value
-     * @returns {Aggregation} returns `this` so that calls can be chained
+     * @returns {MetricsAggregationBase} returns `this` so that calls can be chained
      */
     missing(value) {
         this._aggsDef.missing = value;
         return this;
     }
+
+    /**
+     * Sets the format expression if applicable.
+     *
+     * @param {string} fmt Format mask to apply on aggregation response. Example: ####.00
+     * @returns {MetricsAggregationBase} returns `this` so that calls can be chained
+     */
+    format(fmt) {
+        this._aggsDef.format = fmt;
+        return this;
+    }
 }
 
-module.exports = MetricsAggregation;
+module.exports = MetricsAggregationBase;
+
