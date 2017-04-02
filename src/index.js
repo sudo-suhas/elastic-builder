@@ -82,6 +82,8 @@ const {
     SerialDifferencingAggregation
 } = require('./aggregations/pipeline-aggregations');
 
+const { MatrixStatsAggregation } = require('./aggregations/matrix-aggregations');
+
 /* ============ ============ ============ */
 /* ======== Metrics Aggregations ======== */
 /* ============ ============ ============ */
@@ -223,8 +225,14 @@ exports.bucketScriptAggregation = constructorWrapper(BucketScriptAggregation);
 exports.BucketSelectorAggregation = BucketSelectorAggregation;
 exports.bucketSelectorAggregation = constructorWrapper(BucketSelectorAggregation);
 
-exports.SerialDifferencingAggregatio = SerialDifferencingAggregation;
-exports.serialDifferencingAggregatio = constructorWrapper(SerialDifferencingAggregation);
+exports.SerialDifferencingAggregation = SerialDifferencingAggregation;
+exports.serialDifferencingAggregation = constructorWrapper(SerialDifferencingAggregation);
+
+/* ============ ============ ============ */
+/* ========= Matrix Aggregations ======== */
+/* ============ ============ ============ */
+exports.MatrixStatsAggregation = MatrixStatsAggregation;
+exports.MatrixStatsAggregation = constructorWrapper(MatrixStatsAggregation);
 
 /* ============ ============ ============ */
 /* ============ Script Types ============  */
