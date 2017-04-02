@@ -61,6 +61,18 @@ class Aggregation {
     }
 
     /**
+     * You can associate a piece of metadata with individual aggregations at request time
+     * that will be returned in place at response time.
+     *
+     * @param {Object} meta
+     * @returns {Aggregation} returns `this` so that calls can be chained.
+     */
+    meta(meta) {
+        this._aggs.meta = meta;
+        return this;
+    }
+
+    /**
      * Build and returns DSL representation of the Aggregation class instance.
      *
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL
