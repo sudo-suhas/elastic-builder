@@ -1,9 +1,7 @@
 'use strict';
 
 /*
-    DON'T LOOK AT ME!!!
-    I AM HIDEOUS :-{
-    I USED TO BE SHORT AND CONSISE
+    DON'T LOOK AT ME!!! I AM HIDEOUS :-{ I USED TO BE SHORT AND CONSISE
 
     const aggregations = require('./aggregations'),
         queries = require('./queries'),
@@ -23,8 +21,7 @@
     module.exports = bob;
 
     BUT THEN IDE WAS LIKE 'I HAVE NO IDEA WHAT YOU ARE TALKING ABOUT'
-    SO I ENDED UP LIKE THIS
-    OH IDE.. THE THINGS I DO FOR YOU...
+    SO I ENDED UP LIKE THIS. OH IDE.. THE THINGS I DO FOR YOU...
 */
 
 const { Highlight, GeoPoint, util: { constructorWrapper } } = require('./core');
@@ -69,7 +66,25 @@ const {
     TermsAggregation
 } = require('./aggregations/bucket-aggregations');
 
-/* ====== Metrics Aggregations ====== */
+const {
+    AvgBucketAggregation,
+    DerivativeAggregation,
+    MaxBucketAggregation,
+    MinBucketAggregation,
+    SumBucketAggregation,
+    StatsBucketAggregation,
+    ExtendedStatsBucketAggregation,
+    PercentilesBucketAggregation,
+    MovingAverageAggregation,
+    CumulativeSumAggregation,
+    BucketScriptAggregation,
+    BucketSelectorAggregation,
+    SerialDifferencingAggregation
+} = require('./aggregations/pipeline-aggregations');
+
+/* ============ ============ ============ */
+/* ======== Metrics Aggregations ======== */
+/* ============ ============ ============ */
 exports.AvgAggregation = AvgAggregation;
 exports.avgAggregation = constructorWrapper(AvgAggregation);
 
@@ -112,7 +127,9 @@ exports.topHitsAggregation = constructorWrapper(TopHitsAggregation);
 exports.ValueCountAggregation = ValueCountAggregation;
 exports.valueCountAggregation = constructorWrapper(ValueCountAggregation);
 
-/* ====== Bucket Aggregations ====== */
+/* ============ ============ ============ */
+/* ========= Bucket Aggregations ======== */
+/* ============ ============ ============ */
 exports.ChildrenAggregation = ChildrenAggregation;
 exports.childrenAggregation = constructorWrapper(ChildrenAggregation);
 
@@ -167,7 +184,51 @@ exports.significantTermsAggregation = constructorWrapper(SignificantTermsAggrega
 exports.TermsAggregation = TermsAggregation;
 exports.termsAggregation = constructorWrapper(TermsAggregation);
 
-/* ====== Script Types ======  */
+/* ============ ============ ============ */
+/* ======== Pipeline Aggregations ======= */
+/* ============ ============ ============ */
+exports.AvgBucketAggregation = AvgBucketAggregation;
+exports.avgBucketAggregation = constructorWrapper(AvgBucketAggregation);
+
+exports.DerivativeAggregation = DerivativeAggregation;
+exports.derivativeAggregation = constructorWrapper(DerivativeAggregation);
+
+exports.MaxBucketAggregation = MaxBucketAggregation;
+exports.maxBucketAggregation = constructorWrapper(MaxBucketAggregation);
+
+exports.MinBucketAggregation = MinBucketAggregation;
+exports.minBucketAggregation = constructorWrapper(MinBucketAggregation);
+
+exports.SumBucketAggregation = SumBucketAggregation;
+exports.sumBucketAggregation = constructorWrapper(SumBucketAggregation);
+
+exports.StatsBucketAggregation = StatsBucketAggregation;
+exports.statsBucketAggregation = constructorWrapper(StatsBucketAggregation);
+
+exports.ExtendedStatsBucketAggregation = ExtendedStatsBucketAggregation;
+exports.extendedStatsBucketAggregation = constructorWrapper(ExtendedStatsBucketAggregation);
+
+exports.PercentilesBucketAggregation = PercentilesBucketAggregation;
+exports.percentilesBucketAggregation = constructorWrapper(PercentilesBucketAggregation);
+
+exports.MovingAverageAggregation = MovingAverageAggregation;
+exports.movingAverageAggregation = constructorWrapper(MovingAverageAggregation);
+
+exports.CumulativeSumAggregation = CumulativeSumAggregation;
+exports.cumulativeSumAggregation = constructorWrapper(CumulativeSumAggregation);
+
+exports.BucketScriptAggregation = BucketScriptAggregation;
+exports.bucketScriptAggregation = constructorWrapper(BucketScriptAggregation);
+
+exports.BucketSelectorAggregation = BucketSelectorAggregation;
+exports.bucketSelectorAggregation = constructorWrapper(BucketSelectorAggregation);
+
+exports.SerialDifferencingAggregatio = SerialDifferencingAggregation;
+exports.serialDifferencingAggregatio = constructorWrapper(SerialDifferencingAggregation);
+
+/* ============ ============ ============ */
+/* ============ Script Types ============  */
+/* ============ ============ ============ */
 exports.InlineScript = InlineScript;
 exports.inlineScript = constructorWrapper(InlineScript);
 
@@ -177,7 +238,9 @@ exports.storedScript = constructorWrapper(StoredScript);
 exports.FileScript = FileScript;
 exports.fileScript = constructorWrapper(FileScript);
 
-/* ====== Miscellaneous ======  */
+/* ============ ============ ============ */
+/* ============ Miscellaneous ===========  */
+/* ============ ============ ============ */
 exports.Highlight = Highlight;
 exports.highlight = constructorWrapper(Highlight);
 

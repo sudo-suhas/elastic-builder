@@ -3,14 +3,16 @@
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
 /**
- * Base class which can be extended for Histogram Aggregation, Date Histogram aggregation.
+ * The `HistogramAggregationBase` provides support for common options used across
+ * various histogram `Aggregation` implementations like Histogram Aggregation,
+ * Date Histogram aggregation.
  *
  * @extends BucketAggregationBase
  */
 class HistogramAggregationBase extends BucketAggregationBase {
 
     /**
-     * Creates an instance of HistogramAggregationBase
+     * Creates an instance of `HistogramAggregationBase`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string} type Type of aggregation

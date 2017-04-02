@@ -24,7 +24,7 @@ const ES_REF_URL =
 class FiltersAggregation extends BucketAggregationBase {
 
     /**
-     * Creates an instance of FiltersAggregation
+     * Creates an instance of `FiltersAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {Query} filterQuery Query to filter on. Example - term query.

@@ -24,7 +24,7 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
 class PercentileRanksAggregation extends MetricsAggregationBase {
 
     /**
-     * Creates an instance of PercentileRanksAggregation
+     * Creates an instance of `PercentileRanksAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on. It must be a numeric field

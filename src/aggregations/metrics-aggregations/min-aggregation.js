@@ -18,7 +18,7 @@ const MetricsAggregationBase = require('./metrics-aggregation-base');
 class MinAggregation extends MetricsAggregationBase {
 
     /**
-     * Creates an instance of MinAggregation
+     * Creates an instance of `MinAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on

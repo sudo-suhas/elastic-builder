@@ -8,15 +8,15 @@ const {
 const Script = require('../../script-types/script');
 
 /**
- * The BucketAggregationBase provides support for common options used across
- * various metrics `Aggregation` implementations.
+ * The `BucketAggregationBase` provides support for common options used across
+ * various bucket `Aggregation` implementations.
  *
  * @extends Aggregation
  */
 class BucketAggregationBase extends Aggregation {
 
     /**
-     * Creates an instance of BucketAggregationBase
+     * Creates an instance of `BucketAggregationBase`
      *
      * @param {string} name a valid aggregation name
      * @param {string} type type of aggregation

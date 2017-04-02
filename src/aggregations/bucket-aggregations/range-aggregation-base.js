@@ -7,14 +7,16 @@ const BucketAggregationBase = require('./bucket-aggregation-base');
 const hasOwnProp = Object.prototype.hasOwnProperty;
 
 /**
- * Base class which can be extended for Range Aggregation, Date Range aggregation.
+ * The `RangeAggregationBase` provides support for common options used across
+ * various range `Aggregation` implementations like Range Aggregation and
+ * Date Range aggregation.
  *
  * @extends BucketAggregationBase
  */
 class RangeAggregationBase extends BucketAggregationBase {
 
     /**
-     * Creates an instance of RangeAggregationBase
+     * Creates an instance of `RangeAggregationBase`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string} type Type of aggregation

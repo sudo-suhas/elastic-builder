@@ -21,7 +21,7 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
 class ValueCountAggregation extends MetricsAggregationBase {
 
     /**
-     * Creates an instance of ValueCountAggregation
+     * Creates an instance of `ValueCountAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on

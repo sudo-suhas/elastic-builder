@@ -22,7 +22,7 @@ const ES_REF_URL =
 class SignificantTermsAggregation extends TermsAggregationBase {
 
     /**
-     * Creates an instance of SignificantTermsAggregation
+     * Creates an instance of `SignificantTermsAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on

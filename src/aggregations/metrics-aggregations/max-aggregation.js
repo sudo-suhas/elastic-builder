@@ -18,7 +18,7 @@ const MetricsAggregationBase = require('./metrics-aggregation-base');
 class MaxAggregation extends MetricsAggregationBase {
 
     /**
-     * Creates an instance of MaxAggregation
+     * Creates an instance of `MaxAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on

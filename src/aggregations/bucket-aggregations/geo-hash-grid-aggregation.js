@@ -17,7 +17,7 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
 class GeoHashGridAggregation extends BucketAggregationBase {
 
     /**
-     * Creates an instance of GeoHashGridAggregation
+     * Creates an instance of `GeoHashGridAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on

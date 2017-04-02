@@ -16,7 +16,7 @@ const ES_REF_URL =
 class SamplerAggregation extends BucketAggregationBase {
 
     /**
-     * Creates an instance of SamplerAggregation
+     * Creates an instance of `SamplerAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on

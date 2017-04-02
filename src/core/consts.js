@@ -19,3 +19,7 @@ exports.UNIT_SET = new Set(
         'm', 'meters'
     ]
 );
+
+exports.MODEL_SET = new Set(
+    ['simple', 'linear', 'ewma', 'holt', 'holt_winters']
+);

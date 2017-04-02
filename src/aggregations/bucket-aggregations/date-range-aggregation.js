@@ -16,7 +16,7 @@ const RangeAggregationBase = require('./range-aggregation-base');
 class DateRangeAggregation extends RangeAggregationBase {
 
     /**
-     * Creates an instance of DateRangeAggregation
+     * Creates an instance of `DateRangeAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on

@@ -23,7 +23,7 @@ const ES_REF_URL =
 class TopHitsAggregation extends MetricsAggregationBase {
 
     /**
-     * Creates an instance of TopHitsAggregation
+     * Creates an instance of `TopHitsAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @returns {TopHitsAggregation} returns `this` so that calls can be chained

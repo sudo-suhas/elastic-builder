@@ -21,7 +21,7 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
 class FilterAggregation extends BucketAggregationBase {
 
     /**
-     * Creates an instance of FilterAggregation
+     * Creates an instance of `FilterAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {Query} filterQuery Query to filter on. Example - term query.

@@ -9,15 +9,16 @@ const {
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
 /**
- * Base class for Significant terms and Terms aggregation.
- *
+ * The `TermsAggregationBase` provides support for common options used across
+ * various terms `Aggregation` implementations like Significant terms and
+ * Terms aggregation.
  *
  * @extends BucketAggregationBase
  */
 class TermsAggregationBase extends BucketAggregationBase {
 
     /**
-     * Creates an instance of TermsAggregationBase
+     * Creates an instance of `TermsAggregationBase`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string} type Type of aggregation

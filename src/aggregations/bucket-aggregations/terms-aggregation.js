@@ -16,7 +16,7 @@ const ES_REF_URL =
 class TermsAggregation extends TermsAggregationBase {
 
     /**
-     * Creates an instance of TermsAggregation
+     * Creates an instance of `TermsAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on

@@ -12,7 +12,7 @@ const { checkType } = require('./util');
  */
 class GeoPoint {
     /**
-     * Creates an instance of GeoPoint
+     * Creates an instance of `GeoPoint`
      * @returns {GeoPoint} returns `this` so that calls can be chained
      */
     constructor() {

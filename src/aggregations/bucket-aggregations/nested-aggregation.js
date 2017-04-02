@@ -16,7 +16,7 @@ const ES_REF_URL =
 class NestedAggregation extends BucketAggregationBase {
 
     /**
-     * Creates an instance of NestedAggregation
+     * Creates an instance of `NestedAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} path `path` of the nested document

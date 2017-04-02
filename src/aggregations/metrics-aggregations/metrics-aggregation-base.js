@@ -8,7 +8,7 @@ const {
 const Script = require('../../script-types/script');
 
 /**
- * The MetricsAggregationBase provides support for common options used across
+ * The `MetricsAggregationBase` provides support for common options used across
  * various metrics `Aggregation` implementations.
  *
  * @extends Aggregation
@@ -16,7 +16,7 @@ const Script = require('../../script-types/script');
 class MetricsAggregationBase extends Aggregation {
 
     /**
-     * Creates an instance of MetricsAggregationBase
+     * Creates an instance of `MetricsAggregationBase`
      *
      * @param {string} name a valid aggregation name
      * @param {string} type type of aggregation

@@ -21,7 +21,7 @@ const ES_REF_URL =
 class DiversifiedSamplerAggregation extends BucketAggregationBase {
 
     /**
-     * Creates an instance of DiversifiedSamplerAggregation
+     * Creates an instance of `DiversifiedSamplerAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on

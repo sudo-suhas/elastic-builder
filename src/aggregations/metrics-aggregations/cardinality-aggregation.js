@@ -18,7 +18,7 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
 class CardinalityAggregation extends MetricsAggregationBase {
 
     /**
-     * Creates an instance of CardinalityAggregation
+     * Creates an instance of `CardinalityAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on

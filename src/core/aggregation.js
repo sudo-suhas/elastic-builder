@@ -10,13 +10,14 @@ const { checkType } = require('./util');
 class Aggregation {
 
     /**
-     * Creates an instance of Aggregation
+     * Creates an instance of `Aggregation`
      *
      * @param {string} name
      * @param {string} type Type of aggregation
      * @returns {Aggregation}
      */
     constructor(name, type) {
+        // TODO: Throw error if name or type is not present.
         this.name = name;
         this.type = type;
 

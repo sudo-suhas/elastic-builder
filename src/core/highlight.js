@@ -23,7 +23,7 @@ const Query = require('./query'),
 class Highlight {
 
     /**
-     * Creates an instance of Highlight to highlight search results on one or more fields.
+     * Creates an instance of `Highlight` to highlight search results on one or more fields.
      *
      * @param {String|Array} fields An optional field or array of fields to highlight.
      * @returns {Highlight} returns `this` so that calls can be chained

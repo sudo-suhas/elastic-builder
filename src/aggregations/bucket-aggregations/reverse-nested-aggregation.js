@@ -22,7 +22,7 @@ const ES_REF_URL =
 class ReverseNestedAggregation extends BucketAggregationBase {
 
     /**
-     * Creates an instance of ReverseNestedAggregation
+     * Creates an instance of `ReverseNestedAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} path Defines to what nested object field should be joined back.

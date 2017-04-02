@@ -12,7 +12,7 @@ const HistogramAggregationBase = require('./histogram-aggregation-base');
 class DateHistogramAggregation extends HistogramAggregationBase {
 
     /**
-     * Creates an instance of DateHistogramAggregation
+     * Creates an instance of `DateHistogramAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on

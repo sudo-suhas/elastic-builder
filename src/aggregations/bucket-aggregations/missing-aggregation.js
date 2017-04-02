@@ -16,7 +16,7 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
 class MissingAggregation extends BucketAggregationBase {
 
     /**
-     * Creates an instance of MissingAggregation
+     * Creates an instance of `MissingAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
