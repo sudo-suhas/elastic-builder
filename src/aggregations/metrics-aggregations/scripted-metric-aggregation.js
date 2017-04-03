@@ -20,11 +20,9 @@ class ScriptedMetricAggregation extends MetricsAggregationBase {
      * Creates an instance of `ScriptedMetricAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
-     * @returns {ScriptedMetricAggregation} returns `this` so that calls can be chained
      */
     constructor(name) {
         super(name, 'scripted_metric');
-        return this;
     }
 
     /**

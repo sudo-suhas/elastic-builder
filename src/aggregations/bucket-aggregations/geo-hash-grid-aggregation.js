@@ -21,11 +21,9 @@ class GeoHashGridAggregation extends BucketAggregationBase {
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
-     * @returns {GeoHashGridAggregation} returns `this` so that calls can be chained
      */
     constructor(name, field) {
         super(name, 'geohash_grid', field);
-        return this;
     }
 
     /**

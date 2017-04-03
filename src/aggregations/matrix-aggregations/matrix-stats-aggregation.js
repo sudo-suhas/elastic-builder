@@ -12,14 +12,11 @@ class MatrixStatsAggregation extends Aggregation {
      *
      * @param {string} name A valid aggregation name
      * @param {Array} fields Array of fields
-     * @returns {MatrixStatsAggregation} returns `this` so that calls can be chained
      */
     constructor(name, fields) {
         super(name, 'matrix_stats');
 
         fields && this.fields(fields);
-
-        return this;
     }
 
     /**

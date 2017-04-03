@@ -26,11 +26,9 @@ class PercentilesAggregation extends MetricsAggregationBase {
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
-     * @returns {PercentilesAggregation} returns `this` so that calls can be chained
      */
     constructor(name, field) {
         super(name, 'percentiles', field);
-        return this;
     }
 
     /**

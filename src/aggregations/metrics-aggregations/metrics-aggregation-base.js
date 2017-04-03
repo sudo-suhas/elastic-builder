@@ -21,14 +21,11 @@ class MetricsAggregationBase extends Aggregation {
      * @param {string} name a valid aggregation name
      * @param {string} type type of aggregation
      * @param {string} field The field to aggregate on
-     * @returns {MetricsAggregationBase} returns `this` so that calls can be chained
      */
     constructor(name, type, field) {
         super(name, type);
 
         field && this.field(field);
-
-        return this;
     }
 
     // TODO: Investigate whether Metrics Aggregations can have sub aggregations

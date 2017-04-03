@@ -28,14 +28,11 @@ class ReverseNestedAggregation extends BucketAggregationBase {
      * @param {string=} path Defines to what nested object field should be joined back.
      * The default is empty, which means that it joins back to the root / main document
      * level.
-     * @returns {ReverseNestedAggregation} returns `this` so that calls can be chained
      */
     constructor(name, path) {
         super(name, 'reverse_nested');
 
         path && this.path(path);
-
-        return this;
     }
 
     /**

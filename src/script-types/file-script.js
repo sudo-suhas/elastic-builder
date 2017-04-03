@@ -10,7 +10,6 @@ class FileScript extends Script {
 
     constructor(code, lang, params) {
         super('file', code, lang, params);
-        return this;
     }
 }
 

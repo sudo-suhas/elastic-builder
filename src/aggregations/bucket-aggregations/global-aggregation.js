@@ -19,11 +19,9 @@ class GlobalAggregation extends BucketAggregationBase {
      * Creates an instance of `GlobalAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
-     * @returns {GlobalAggregation} returns `this` so that calls can be chained
      */
     constructor(name) {
         super(name, 'global');
-        return this;
     }
 
     /**

@@ -21,7 +21,6 @@ class RangeAggregationBase extends BucketAggregationBase {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string} type Type of aggregation
      * @param {string=} field The field to aggregate on
-     * @returns {RangeAggregationBase} returns `this` so that calls can be chained
      */
     constructor(name, type, field) {
         super(name, type, field);
@@ -29,7 +28,6 @@ class RangeAggregationBase extends BucketAggregationBase {
         this._rangeRequiredKeys = ['from', 'to'];
 
         this._aggsDef.ranges = [];
-        return this;
     }
 
     /**

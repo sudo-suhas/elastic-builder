@@ -10,7 +10,6 @@ class InlineScript extends Script {
 
     constructor(code, lang, params) {
         super('inline', code, lang, params);
-        return this;
     }
 }
 

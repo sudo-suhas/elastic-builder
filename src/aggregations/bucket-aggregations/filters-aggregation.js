@@ -28,11 +28,9 @@ class FiltersAggregation extends BucketAggregationBase {
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {Query} filterQuery Query to filter on. Example - term query.
-     * @returns {FiltersAggregation} returns `this` so that calls can be chained
      */
     constructor(name) {
         super(name, 'filters');
-        return this;
     }
 
     /**

@@ -21,11 +21,9 @@ class ChildrenAggregation extends BucketAggregationBase {
      * Creates an instance of `ChildrenAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
-     * @returns {ChildrenAggregation} returns `this` so that calls can be chained
      */
     constructor(name) {
         super(name, 'children');
-        return this;
     }
 
     /**

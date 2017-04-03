@@ -21,11 +21,9 @@ class MyAggregation extends PipelineAggregationBase {
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} bucketsPath The relative path of metric to aggregate over
-     * @returns {MyAggregation} returns `this` so that calls can be chained
      */
     constructor(name, bucketsPath) {
         super(name, 'percentiles_bucket', bucketsPath);
-        return this;
     }
 
     /**

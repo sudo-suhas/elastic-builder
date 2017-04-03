@@ -22,11 +22,9 @@ class CumulativeSumAggregation extends PipelineAggregationBase {
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} bucketsPath The relative path of metric to aggregate over
-     * @returns {CumulativeSumAggregation} returns `this` so that calls can be chained
      */
     constructor(name, bucketsPath) {
         super(name, 'cumulative_sum', bucketsPath);
-        return this;
     }
 
     /**

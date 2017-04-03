@@ -27,11 +27,9 @@ class BucketSelectorAggregation extends PipelineAggregationBase {
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} bucketsPath The relative path of metric to aggregate over
-     * @returns {BucketSelectorAggregation} returns `this` so that calls can be chained
      */
     constructor(name, bucketsPath) {
         super(name, 'bucket_selector', bucketsPath);
-        return this;
     }
 
     /**

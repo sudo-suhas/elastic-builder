@@ -20,6 +20,8 @@ exports.UNIT_SET = new Set(
     ]
 );
 
-exports.MODEL_SET = new Set(
-    ['simple', 'linear', 'ewma', 'holt', 'holt_winters']
-);
+exports.MODEL_SET = new Set(['simple', 'linear', 'ewma', 'holt', 'holt_winters']);
+
+exports.SORT_MODE_SET = new Set(['min', 'max', 'sum', 'avg', 'median']);
+
+exports.SCORE_MODE_SET = new Set(['total', 'multiply', 'min', 'max', 'avg']);

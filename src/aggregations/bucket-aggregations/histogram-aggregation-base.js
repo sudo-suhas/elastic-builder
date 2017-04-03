@@ -12,19 +12,6 @@ const BucketAggregationBase = require('./bucket-aggregation-base');
 class HistogramAggregationBase extends BucketAggregationBase {
 
     /**
-     * Creates an instance of `HistogramAggregationBase`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string} type Type of aggregation
-     * @param {string=} field The field to aggregate on
-     * @returns {HistogramAggregationBase} returns `this` so that calls can be chained
-     */
-    constructor(name, type, field) {
-        super(name, type, field);
-        return this;
-    }
-
-    /**
      * Sets the histogram interval. Buckets are generated based on this interval value.
      *
      * @param {string} interval Interval to generate histogram over.

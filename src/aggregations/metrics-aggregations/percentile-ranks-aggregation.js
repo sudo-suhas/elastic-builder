@@ -29,7 +29,6 @@ class PercentileRanksAggregation extends MetricsAggregationBase {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on. It must be a numeric field
      * @param {Array=} values Values to compute percentiles from.
-     * @returns {PercentileRanksAggregation} returns `this` so that calls can be chained
      * @throws {TypeError} If `values` is not an instance of Array
      */
     constructor(name, field, values) {
@@ -37,7 +36,6 @@ class PercentileRanksAggregation extends MetricsAggregationBase {
         checkType(values, Array);
 
         this._aggsDef.values = values;
-        return this;
     }
 
     /**

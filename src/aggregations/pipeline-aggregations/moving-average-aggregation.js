@@ -27,11 +27,9 @@ class MovingAverageAggregation extends PipelineAggregationBase {
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} bucketsPath The relative path of metric to aggregate over
-     * @returns {MovingAverageAggregation} returns `this` so that calls can be chained
      */
     constructor(name, bucketsPath) {
         super(name, 'moving_avg', bucketsPath);
-        return this;
     }
 
     /**

@@ -3,7 +3,7 @@
 const _ = require('lodash');
 
 const MetricsAggregationBase = require('./metrics-aggregation-base'),
-    { Highlight, util: { checkType } } = require('../../core');
+    { Highlight, Sort, util: { checkType } } = require('../../core');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html';
@@ -26,11 +26,9 @@ class TopHitsAggregation extends MetricsAggregationBase {
      * Creates an instance of `TopHitsAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
-     * @returns {TopHitsAggregation} returns `this` so that calls can be chained
      */
     constructor(name) {
         super(name, 'top_hits');
-        return this;
     }
 
     /**
@@ -92,14 +90,34 @@ class TopHitsAggregation extends MetricsAggregationBase {
     }
 
     /**
-     * How the top matching hits should be sorted.
-     * By default the hits are sorted by the score of the main query.
+     * How the top matching hits should be sorted. Allows to add sort on specific field.
+     * The sort can be reversed as well. The sort is defined on a per field level,
+     * with special field name for `_score` to sort by score, and `_doc` to sort by
+     * index order.
      *
-     * @param {number} sort How the top matching hits should be sorted.
-     * @returns {TopHitsAggregation} returns `this` so that calls can be chained
+     * @param {Sort} sort How the top matching hits should be sorted.
+     * @returns {TopHitsAggregation} returns `this` so that calls can be chained.
+     * @throws {TypeError} If parameter `sort` is not an instance of `Sort`.
      */
     sort(sort) {
-        this._aggsDef.dort = sort;
+        checkType(sort, Sort);
+        if (!_.has(this._aggsDef, 'sort')) this._aggsDef.sort = [];
+
+        this._aggsDef.sort.push(sort);
+        return this;
+    }
+
+    /**
+     * Allows to add multiple sort on specific fields. Each sort can be reversed as well.
+     * The sort is defined on a per field level, with special field name for _score to
+     * sort by score, and _doc to sort by index order.
+     *
+     * @param {Array} sorts Arry of sort How the top matching hits should be sorted.
+     * @returns {TopHitsAggregation} returns `this` so that calls can be chained.
+     * @throws {TypeError} If any item in parameter `sorts` is not an instance of `Sort`.
+     */
+    sorts(sorts) {
+        _.invokeMap(sorts, sort => this.sort(sort));
         return this;
     }
 
@@ -150,10 +168,10 @@ class TopHitsAggregation extends MetricsAggregationBase {
     }
 
     /**
-     * Allows to control how the _source field is returned with every hit.
-     * You can turn off _source retrieval by passing `false`.
+     * Allows to control how the `_source` field is returned with every hit.
+     * You can turn off `_source` retrieval by passing `false`.
      * It also accepts one(string) or more wildcard(array) patterns to control
-     * what parts of the _source should be returned
+     * what parts of the `_source` should be returned
      * An object can also be used to specify the wildcard patterns for `includes` and `excludes`.
      *
      * @param {boolean|string|Array|Object} source

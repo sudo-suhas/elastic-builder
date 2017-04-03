@@ -10,7 +10,6 @@ class StoredScript extends Script {
 
     constructor(code, lang, params) {
         super('stored', code, lang, params);
-        return this;
     }
 }
 

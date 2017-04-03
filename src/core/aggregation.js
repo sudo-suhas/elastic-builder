@@ -14,7 +14,6 @@ class Aggregation {
      *
      * @param {string} name
      * @param {string} type Type of aggregation
-     * @returns {Aggregation}
      */
     constructor(name, type) {
         // TODO: Throw error if name or type is not present.
@@ -24,8 +23,6 @@ class Aggregation {
         this._aggs = {};
         this._aggsDef = this._aggs[type] = {};
         this._nestedAggs = [];
-
-        return this;
     }
 
     // TODO: Investigate case when getter for aggregation will be required

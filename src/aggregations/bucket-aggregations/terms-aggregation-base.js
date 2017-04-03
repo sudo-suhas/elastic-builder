@@ -24,13 +24,11 @@ class TermsAggregationBase extends BucketAggregationBase {
      * @param {string} type Type of aggregation
      * @param {string} refUrl Elasticsearch reference URL.
      * @param {string=} field The field to aggregate on
-     * @returns {TermsAggregationBase} returns `this` so that calls can be chained
      */
     constructor(name, type, refUrl, field) {
         super(name, type, field);
 
         this._refUrl = refUrl;
-        return this;
     }
 
     /**

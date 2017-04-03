@@ -21,14 +21,11 @@ class PipelineAggregationBase extends Aggregation {
      * @param {string} name a valid aggregation name
      * @param {string} type type of aggregation
      * @param {string|Object=} bucketsPath The relative path of metric to aggregate over
-     * @returns {PipelineAggregationBase} returns `this` so that calls can be chained
      */
     constructor(name, type, bucketsPath) {
         super(name, type);
 
         bucketsPath && this.bucketsPath(bucketsPath);
-
-        return this;
     }
 
     /**

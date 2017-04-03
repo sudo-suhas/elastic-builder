@@ -18,11 +18,9 @@ class AvgBucketAggregation extends PipelineAggregationBase {
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} bucketsPath The relative path of metric to aggregate over
-     * @returns {AvgBucketAggregation} returns `this` so that calls can be chained
      */
     constructor(name, bucketsPath) {
         super(name, 'avg_bucket', bucketsPath);
-        return this;
     }
 }
 

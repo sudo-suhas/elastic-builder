@@ -19,11 +19,9 @@ class GeoCentroidAggregation extends MetricsAggregationBase {
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on. field must be a Geo-point datatype type
-     * @returns {GeoCentroidAggregation} returns `this` so that calls can be chained
      */
     constructor(name, field) {
         super(name, 'geo_centroid', field);
-        return this;
     }
 
     /**

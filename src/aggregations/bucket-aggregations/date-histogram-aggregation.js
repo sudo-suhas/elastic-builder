@@ -18,14 +18,11 @@ class DateHistogramAggregation extends HistogramAggregationBase {
      * @param {string=} field The field to aggregate on
      * @param {string=} interval Interval to generate histogram over.
      * Available expressions for interval: year, quarter, month, week, day, hour, minute, second
-     * @returns {DateHistogramAggregation} returns `this` so that calls can be chained
      */
     constructor(name, field, interval) {
         super(name, 'date_histogram', field);
 
         interval && this.interval(interval);
-
-        return this;
     }
 
     /**

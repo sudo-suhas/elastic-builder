@@ -26,7 +26,6 @@ class Highlight {
      * Creates an instance of `Highlight` to highlight search results on one or more fields.
      *
      * @param {String|Array} fields An optional field or array of fields to highlight.
-     * @returns {Highlight} returns `this` so that calls can be chained
      */
     constructor(fields) {
         this._fields = {};
@@ -34,7 +33,6 @@ class Highlight {
 
         if (_.isString(fields)) this.field(fields);
         else this.fields(fields);
-        return this;
     }
 
     /**
@@ -50,6 +48,7 @@ class Highlight {
             this._highlight[option] = val;
             return;
         }
+
         this.field(field);
         this._fields[field][option] = val;
     }
@@ -62,7 +61,11 @@ class Highlight {
      * @returns {Highlight} returns `this` so that calls can be chained
      */
     field(field) {
-        if (!_.isNil(field) && !_.has(this._fields, field)) this._fields[field] = {};
+        if (!_.isNil(field) &&
+            !_.has(this._fields, field)) {
+            this._fields[field] = {};
+        }
+
         return this;
     }
 
@@ -76,7 +79,9 @@ class Highlight {
      */
     fields(fields) {
         checkType(fields, Array);
+
         for (const field of fields) this.field(field);
+
         return this;
     }
 
@@ -89,7 +94,7 @@ class Highlight {
      * @returns {Highlight} returns `this` so that calls can be chained
      */
     preTags(tags, field) {
-        this._setFieldOption(field, 'pre_tags', _.isString(field) ? [tags] : tags);
+        this._setFieldOption(field, 'pre_tags', _.isString(tags) ? [tags] : tags);
         return this;
     }
 
@@ -102,7 +107,7 @@ class Highlight {
      * @returns {Highlight} returns `this` so that calls can be chained
      */
     postTags(tags, field) {
-        this._setFieldOption(field, 'post_tags', _.isString(field) ? [tags] : tags);
+        this._setFieldOption(field, 'post_tags', _.isString(tags) ? [tags] : tags);
         return this;
     }
 
@@ -167,6 +172,7 @@ class Highlight {
      */
     highlightQuery(query, field) {
         checkType(query, Query);
+
         this._setFieldOption(field, 'highlight_query', query);
         return this;
     }
@@ -184,15 +190,31 @@ class Highlight {
      */
     matchedFields(fields, field) {
         checkType(fields, Array);
-        if (_.isEmpty(field)) throw new Error('`matched_fields` requires field name to be passed');
+        if (_.isEmpty(field)) {
+            throw new Error('`matched_fields` requires field name to be passed');
+        }
 
         this.type('fvh', field);
         this._setFieldOption(field, 'matched_fields', fields);
         return this;
     }
 
-    // TODO: Figure out how to pass phrase_limit parameter
-    // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html#phrase-limit
+    /**
+     * The fast vector highlighter has a phrase_limit parameter that prevents
+     * it from analyzing too many phrases and eating tons of memory. It defaults
+     * to 256 so only the first 256 matching phrases in the document scored
+     * considered. You can raise the limit with the phrase_limit parameter.
+     *
+     * If using `matched_fields`, `phrase_limit` phrases per matched field
+     * are considered.
+     *
+     * @param {number} limit Defaults to 256.
+     * @returns {Highlight} returns `this` so that calls can be chained
+     */
+    phraseLimit(limit) {
+        this._highlight.phrase_limit = limit;
+        return this;
+    }
 
     /**
      * Can be used to define how highlighted text will be encoded.
@@ -207,7 +229,8 @@ class Highlight {
         if (encoderLower !== 'default' && encoderLower !== 'html') {
             throw new Error('Encoder can be either `default` or `html`');
         }
-        this._highlight.encoder = encoder;
+
+        this._highlight.encoder = encoderLower;
         return this;
     }
 
@@ -272,6 +295,7 @@ class Highlight {
             typeLower !== 'fvh') {
             throw new Error('Type can be one of `plain`, `postings` or `fvh`.');
         }
+
         this._setFieldOption(field, 'type', typeLower);
         return this;
     }
@@ -284,7 +308,7 @@ class Highlight {
      * @param {string=} field An optional field name
      * @returns {Highlight} returns `this` so that calls can be chained
      */
-    forceSourceHighlighting(forceSource, field) {
+    forceSource(forceSource, field) {
         this._setFieldOption(field, 'force_source', forceSource);
         return this;
     }
@@ -308,6 +332,7 @@ class Highlight {
         if (fragmenterLower !== 'simple' && fragmenterLower !== 'span') {
             throw new Error('Fragmenter can be either `simple` or `span`');
         }
+
         this._setFieldOption(field, 'fragmenter', fragmenterLower);
         return this;
     }

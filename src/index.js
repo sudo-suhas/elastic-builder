@@ -24,7 +24,15 @@
     SO I ENDED UP LIKE THIS. OH IDE.. THE THINGS I DO FOR YOU...
 */
 
-const { Highlight, GeoPoint, util: { constructorWrapper } } = require('./core');
+const {
+    RequestBodySearch,
+    Highlight,
+    GeoPoint,
+    Sort,
+    Rescore,
+    InnerHits,
+    util: { constructorWrapper }
+} = require('./core');
 
 const { InlineScript, StoredScript, FileScript } = require('./script-types');
 
@@ -83,6 +91,9 @@ const {
 } = require('./aggregations/pipeline-aggregations');
 
 const { MatrixStatsAggregation } = require('./aggregations/matrix-aggregations');
+
+exports.RequestBodySearch = RequestBodySearch;
+exports.requestBodySearch = constructorWrapper(RequestBodySearch);
 
 /* ============ ============ ============ */
 /* ======== Metrics Aggregations ======== */
@@ -254,3 +265,12 @@ exports.highlight = constructorWrapper(Highlight);
 
 exports.GeoPoint = GeoPoint;
 exports.geoPoint = constructorWrapper(GeoPoint);
+
+exports.Sort = Sort;
+exports.sort = constructorWrapper(Sort);
+
+exports.Rescore = Rescore;
+exports.rescore = constructorWrapper(Rescore);
+
+exports.InnerHits = InnerHits;
+exports.innerHits = constructorWrapper(InnerHits);

@@ -33,11 +33,9 @@ class GeoDistanceAggregation extends RangeAggregationBase {
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
-     * @returns {GeoDistanceAggregation} returns `this` so that calls can be chained
      */
     constructor(name, field) {
         super(name, 'geo_distance', field);
-        return this;
     }
 
     /**

@@ -20,14 +20,11 @@ class NestedAggregation extends BucketAggregationBase {
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} path `path` of the nested document
-     * @returns {NestedAggregation} returns `this` so that calls can be chained
      */
     constructor(name, path) {
         super(name, 'nested');
 
         path && this.path(path);
-
-        return this;
     }
 
     /**
