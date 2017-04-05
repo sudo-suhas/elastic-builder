@@ -6,7 +6,7 @@ const _ = require('lodash');
 
 const { util: { checkType }, consts: { MULTI_MATCH_TYPE } } = require('../../core');
 const FullTextQueryBase = require('./full-text-query-base');
-const { validateRewiteMethod } = require('./helper');
+const { validateRewiteMethod } = require('../helper');
 
 const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html';
 
@@ -41,9 +41,8 @@ class MultiMatchQuery extends FullTextQueryBase {
         this._queryOpts.fields = [];
 
         if (!_.isNil(fields)) {
-            if (_.isString(fields)) this.field(fields);
-
             if (_.isArray(fields)) this.fields(fields);
+            else this.field(fields);
         }
     }
 

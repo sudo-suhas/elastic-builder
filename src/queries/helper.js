@@ -2,7 +2,7 @@
 
 const { inspect } = require('util');
 
-const { util: { firstDigitPos }, consts: { REWRITE_METHOD_SET } } = require('../../core');
+const { util: { firstDigitPos }, consts: { REWRITE_METHOD_SET } } = require('../core');
 
 /**
  * Validate the rewrite method.

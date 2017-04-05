@@ -45,6 +45,18 @@ const {
         CommonTermsQuery,
         QueryStringQuery,
         SimpleQueryStringQuery
+    },
+    termLevelQueries: {
+        TermQuery,
+        TermsQuery,
+        RangeQuery,
+        ExistsQuery,
+        PrefixQuery,
+        WildcardQuery,
+        RegexpQuery,
+        FuzzyQuery,
+        TypeQuery,
+        IdsQuery
     }
 } = require('./queries');
 
@@ -140,6 +152,39 @@ exports.queryStringQuery = constructorWrapper(QueryStringQuery);
 
 exports.SimpleQueryStringQuery = SimpleQueryStringQuery;
 exports.simpleQueryStringQuery = constructorWrapper(SimpleQueryStringQuery);
+
+/* ============ ============ ============ */
+/* ========= Term Level Queries ========= */
+/* ============ ============ ============ */
+exports.TermQuery = TermQuery;
+exports.termQuery = constructorWrapper(TermQuery);
+
+exports.TermsQuery = TermsQuery;
+exports.termsQuery = constructorWrapper(TermsQuery);
+
+exports.RangeQuery = RangeQuery;
+exports.rangeQuery = constructorWrapper(RangeQuery);
+
+exports.ExistsQuery = ExistsQuery;
+exports.existsQuery = constructorWrapper(ExistsQuery);
+
+exports.PrefixQuery = PrefixQuery;
+exports.prefixQuery = constructorWrapper(PrefixQuery);
+
+exports.WildcardQuery = WildcardQuery;
+exports.wildcardQuery = constructorWrapper(WildcardQuery);
+
+exports.RegexpQuery = RegexpQuery;
+exports.regexpQuery = constructorWrapper(RegexpQuery);
+
+exports.FuzzyQuery = FuzzyQuery;
+exports.fuzzyQuery = constructorWrapper(FuzzyQuery);
+
+exports.TypeQuery = TypeQuery;
+exports.typeQuery = constructorWrapper(TypeQuery);
+
+exports.IdsQuery = IdsQuery;
+exports.idsQuery = constructorWrapper(IdsQuery);
 
 /* ============ ============ ============ */
 /* ======== Metrics Aggregations ======== */

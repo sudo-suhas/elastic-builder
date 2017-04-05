@@ -37,7 +37,7 @@ class MonoFieldQueryBase extends FullTextQueryBase {
     }
 
     /**
-     * Build and returns DSL representation of the Aggregation class instance.
+     * Build and returns DSL representation of the Full text query class instance.
      *
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      * @override

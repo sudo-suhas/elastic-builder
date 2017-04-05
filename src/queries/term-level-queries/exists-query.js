@@ -1,0 +1,39 @@
+'use strict';
+
+const _ = require('lodash');
+
+const { Query } = require('../../core');
+
+/**
+ * Returns documents that have at least one non-`null` value in the original field
+ *
+ * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html)
+ *
+ * @extends Query
+ */
+class ExistsQuery extends Query {
+
+    /**
+     * Creates an instance of `ExistsQuery`.
+     *
+     * @param {string=} field
+     */
+    constructor(field) {
+        super('exists');
+
+        if (!_.isNil(field)) this._queryOpts.field = field;
+    }
+
+    /**
+     * Sets the field to search on.
+     *
+     * @param {string} field
+     * @returns {ExistsQuery} returns `this` so that calls can be chained.
+     */
+    field(field) {
+        this._queryOpts.field = field;
+        return this;
+    }
+}
+
+module.exports = ExistsQuery;

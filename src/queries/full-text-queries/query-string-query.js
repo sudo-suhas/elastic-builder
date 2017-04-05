@@ -1,7 +1,7 @@
 'use strict';
 
 const QueryStringQueryBase = require('./query-string-query-base');
-const { validateRewiteMethod } = require('./helper');
+const { validateRewiteMethod } = require('../helper');
 
 const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html';
 
