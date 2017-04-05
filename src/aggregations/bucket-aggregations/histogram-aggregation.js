@@ -18,9 +18,10 @@ class HistogramAggregation extends HistogramAggregationBase {
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
+     * @param {number=} interval Interval to generate histogram over.
      */
-    constructor(name, field) {
-        super(name, 'histogram', field);
+    constructor(name, field, interval) {
+        super(name, 'histogram', field, interval);
     }
 }
 

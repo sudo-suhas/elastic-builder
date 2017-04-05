@@ -32,7 +32,7 @@ class Sort {
         this._geoPoint = null;
         this._script = null;
 
-        order && this.order(order);
+        if (!_.isNil(order)) this.order(order);
     }
 
     /**

@@ -1,12 +1,15 @@
 'use strict';
 
+const _ = require('lodash');
+
 const {
     util: { checkType }
 } = require('../../core');
 
 const MetricsAggregationBase = require('./metrics-aggregation-base');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-rank-aggregation.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-rank-aggregation.html';
 
 /**
  * A multi-value metrics aggregation that calculates one or more percentile ranks
@@ -33,9 +36,8 @@ class PercentileRanksAggregation extends MetricsAggregationBase {
      */
     constructor(name, field, values) {
         super(name, 'percentile_ranks', field);
-        checkType(values, Array);
 
-        this._aggsDef.values = values;
+        if (!_.isNil(values)) this.values(values);
     }
 
     /**

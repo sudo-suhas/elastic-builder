@@ -20,9 +20,7 @@ class DateHistogramAggregation extends HistogramAggregationBase {
      * Available expressions for interval: year, quarter, month, week, day, hour, minute, second
      */
     constructor(name, field, interval) {
-        super(name, 'date_histogram', field);
-
-        interval && this.interval(interval);
+        super(name, 'date_histogram', field, interval);
     }
 
     /**

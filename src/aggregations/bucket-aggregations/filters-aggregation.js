@@ -27,7 +27,6 @@ class FiltersAggregation extends BucketAggregationBase {
      * Creates an instance of `FiltersAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {Query} filterQuery Query to filter on. Example - term query.
      */
     constructor(name) {
         super(name, 'filters');
@@ -167,7 +166,7 @@ class FiltersAggregation extends BucketAggregationBase {
 
         this._checkAnonymousFilters();
 
-        this._aggsDef.filters = [...this._aggsDef.filters, ...filterQueries];
+        this._aggsDef.filters = _.concat(this._aggsDef.filters, filterQueries);
         return this;
     }
 

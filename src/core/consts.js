@@ -25,3 +25,15 @@ exports.MODEL_SET = new Set(['simple', 'linear', 'ewma', 'holt', 'holt_winters']
 exports.SORT_MODE_SET = new Set(['min', 'max', 'sum', 'avg', 'median']);
 
 exports.SCORE_MODE_SET = new Set(['total', 'multiply', 'min', 'max', 'avg']);
+
+exports.REWRITE_METHOD_SET = new Set(
+    [
+        'constant_score', 'constant_score_auto', 'constant_score_filter',
+        'scoring_boolean', 'constant_score_boolean', 'top_terms_N',
+        'top_terms_boost_N', 'top_terms_blended_freqs_N'
+    ]
+);
+
+exports.MULTI_MATCH_TYPE = new Set(
+    ['best_fields', 'most_fields', 'cross_fields', 'phrase', 'phrase_prefix']
+);

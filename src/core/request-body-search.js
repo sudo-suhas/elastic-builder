@@ -21,6 +21,7 @@ class RequestBodySearch {
      * Creates an instance of `RequestBodySearch`
      */
     constructor() {
+        // Maybe accept some optional parameter?
         this._body = {};
     }
 

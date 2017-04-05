@@ -34,66 +34,112 @@ const {
     util: { constructorWrapper }
 } = require('./core');
 
+const {
+    MatchAllQuery,
+    MatchNoneQuery,
+    fullTextQueries: {
+        MatchQuery,
+        MatchPhraseQuery,
+        MatchPhrasePrefixQuery,
+        MultiMatchQuery,
+        CommonTermsQuery,
+        QueryStringQuery,
+        SimpleQueryStringQuery
+    }
+} = require('./queries');
+
+const {
+    metricsAggregations: {
+        AvgAggregation,
+        CardinalityAggregation,
+        ExtendedStatsAggregation,
+        GeoBoundsAggregation,
+        GeoCentroidAggregation,
+        MaxAggregation,
+        MinAggregation,
+        PercentilesAggregation,
+        PercentileRanksAggregation,
+        ScriptedMetricAggregation,
+        StatsAggregation,
+        SumAggregation,
+        TopHitsAggregation,
+        ValueCountAggregation
+    },
+    bucketAggregations: {
+        ChildrenAggregation,
+        DateHistogramAggregation,
+        DateRangeAggregation,
+        DiversifiedSamplerAggregation,
+        FilterAggregation,
+        FiltersAggregation,
+        GeoDistanceAggregation,
+        GeoHashGridAggregation,
+        GlobalAggregation,
+        HistogramAggregation,
+        IpRangeAggregation,
+        MissingAggregation,
+        NestedAggregation,
+        RangeAggregation,
+        ReverseNestedAggregation,
+        SamplerAggregation,
+        SignificantTermsAggregation,
+        TermsAggregation
+    },
+    pipelineAggregations: {
+        AvgBucketAggregation,
+        DerivativeAggregation,
+        MaxBucketAggregation,
+        MinBucketAggregation,
+        SumBucketAggregation,
+        StatsBucketAggregation,
+        ExtendedStatsBucketAggregation,
+        PercentilesBucketAggregation,
+        MovingAverageAggregation,
+        CumulativeSumAggregation,
+        BucketScriptAggregation,
+        BucketSelectorAggregation,
+        SerialDifferencingAggregation
+    },
+    matrixAggregations: { MatrixStatsAggregation }
+} = require('./aggregations');
+
 const { InlineScript, StoredScript, FileScript } = require('./script-types');
-
-const {
-    AvgAggregation,
-    CardinalityAggregation,
-    ExtendedStatsAggregation,
-    GeoBoundsAggregation,
-    GeoCentroidAggregation,
-    MaxAggregation,
-    MinAggregation,
-    PercentilesAggregation,
-    PercentileRanksAggregation,
-    ScriptedMetricAggregation,
-    StatsAggregation,
-    SumAggregation,
-    TopHitsAggregation,
-    ValueCountAggregation
-} = require('./aggregations/metrics-aggregations');
-
-const {
-    ChildrenAggregation,
-    DateHistogramAggregation,
-    DateRangeAggregation,
-    DiversifiedSamplerAggregation,
-    FilterAggregation,
-    FiltersAggregation,
-    GeoDistanceAggregation,
-    GeoHashGridAggregation,
-    GlobalAggregation,
-    HistogramAggregation,
-    IpRangeAggregation,
-    MissingAggregation,
-    NestedAggregation,
-    RangeAggregation,
-    ReverseNestedAggregation,
-    SamplerAggregation,
-    SignificantTermsAggregation,
-    TermsAggregation
-} = require('./aggregations/bucket-aggregations');
-
-const {
-    AvgBucketAggregation,
-    DerivativeAggregation,
-    MaxBucketAggregation,
-    MinBucketAggregation,
-    SumBucketAggregation,
-    StatsBucketAggregation,
-    ExtendedStatsBucketAggregation,
-    PercentilesBucketAggregation,
-    MovingAverageAggregation,
-    CumulativeSumAggregation,
-    BucketScriptAggregation,
-    BucketSelectorAggregation,
-    SerialDifferencingAggregation
-} = require('./aggregations/pipeline-aggregations');
-
-const { MatrixStatsAggregation } = require('./aggregations/matrix-aggregations');
 
 exports.RequestBodySearch = RequestBodySearch;
 exports.requestBodySearch = constructorWrapper(RequestBodySearch);
+
+/* ============ ============ ============ */
+/* ============== Queries =============== */
+/* ============ ============ ============ */
+exports.MatchAllQuery = MatchAllQuery;
+exports.matchAllQuery = constructorWrapper(MatchAllQuery);
+
+exports.MatchNoneQuery = MatchNoneQuery;
+exports.matchNoneQuery = constructorWrapper(MatchNoneQuery);
+
+/* ============ ============ ============ */
+/* ========== Full Text Queries ========= */
+/* ============ ============ ============ */
+exports.MatchQuery = MatchQuery;
+exports.matchQuery = constructorWrapper(MatchQuery);
+
+exports.MatchPhraseQuery = MatchPhraseQuery;
+exports.matchPhraseQuery = constructorWrapper(MatchPhraseQuery);
+
+exports.MatchPhrasePrefixQuery = MatchPhrasePrefixQuery;
+exports.matchPhrasePrefixQuery = constructorWrapper(MatchPhrasePrefixQuery);
+
+exports.MultiMatchQuery = MultiMatchQuery;
+exports.multiMatchQuery = constructorWrapper(MultiMatchQuery);
+
+exports.CommonTermsQuery = CommonTermsQuery;
+exports.commonTermsQuery = constructorWrapper(CommonTermsQuery);
+
+exports.QueryStringQuery = QueryStringQuery;
+exports.queryStringQuery = constructorWrapper(QueryStringQuery);
+
+exports.SimpleQueryStringQuery = SimpleQueryStringQuery;
+exports.simpleQueryStringQuery = constructorWrapper(SimpleQueryStringQuery);
 
 /* ============ ============ ============ */
 /* ======== Metrics Aggregations ======== */

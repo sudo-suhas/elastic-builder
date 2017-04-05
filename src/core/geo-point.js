@@ -15,6 +15,8 @@ class GeoPoint {
      * Creates an instance of `GeoPoint`
      */
     constructor() {
+        // Take optional parameter and call appropriate method?
+        // Will have to check for string, object and array.
         // this will be set depending on subsequent method called
         this._point = null;
     }

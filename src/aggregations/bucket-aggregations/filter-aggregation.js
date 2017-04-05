@@ -1,5 +1,7 @@
 'use strict';
 
+const _ = require('lodash');
+
 const {
     Query,
     util: { checkType }
@@ -24,12 +26,12 @@ class FilterAggregation extends BucketAggregationBase {
      * Creates an instance of `FilterAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {Query} filterQuery Query to filter on. Example - term query.
+     * @param {Query=} filterQuery Query to filter on. Example - term query.
      */
     constructor(name, filterQuery) {
         super(name, 'filter');
 
-        filterQuery && this.filter(filterQuery);
+        if (!_.isNil(filterQuery)) this.filter(filterQuery);
     }
 
     /**

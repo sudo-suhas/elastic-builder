@@ -1,5 +1,7 @@
 'use strict';
 
+const _ = require('lodash');
+
 const { Aggregation } = require('../../core');
 
 /**
@@ -25,7 +27,7 @@ class PipelineAggregationBase extends Aggregation {
     constructor(name, type, bucketsPath) {
         super(name, type);
 
-        bucketsPath && this.bucketsPath(bucketsPath);
+        if (!_.isNil(bucketsPath)) this._aggsDef.buckets_path = bucketsPath;
     }
 
     /**
@@ -38,7 +40,7 @@ class PipelineAggregationBase extends Aggregation {
      * @returns {PipelineAggregationBase} returns `this` so that calls can be chained
      */
     bucketsPath(path) {
-        this._aggsDef = path;
+        this._aggsDef.buckets_path = path;
         return this;
     }
 

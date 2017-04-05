@@ -21,6 +21,7 @@ class InnerHits {
      * Creates an instance of `InnerHits`
      */
     constructor() {
+        // Maybe accept some optional parameter?
         this._body = {};
     }
 

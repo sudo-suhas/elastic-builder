@@ -25,11 +25,14 @@ class Highlight {
     /**
      * Creates an instance of `Highlight` to highlight search results on one or more fields.
      *
-     * @param {String|Array} fields An optional field or array of fields to highlight.
+     * @param {String|Array=} fields An optional field or array of fields to highlight.
      */
     constructor(fields) {
         this._fields = {};
         this._highlight = { fields: this._fields };
+
+        // Does this smell?
+        if (_.isNil(fields)) return;
 
         if (_.isString(fields)) this.field(fields);
         else this.fields(fields);

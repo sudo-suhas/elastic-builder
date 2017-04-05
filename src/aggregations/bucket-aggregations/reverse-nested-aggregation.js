@@ -1,5 +1,7 @@
 'use strict';
 
+const _ = require('lodash');
+
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
 const ES_REF_URL =
@@ -32,7 +34,7 @@ class ReverseNestedAggregation extends BucketAggregationBase {
     constructor(name, path) {
         super(name, 'reverse_nested');
 
-        path && this.path(path);
+        if (!_.isNil(path)) this._aggsDef.path = path;
     }
 
     /**

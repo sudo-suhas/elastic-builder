@@ -5,7 +5,7 @@
 
 // const _ = require('lodash');
 
-// const { util: { lowercaseFirstLetter, constructorWrapper } } = require('../core');
+// const { util: { constructorWrapper } } = require('../core');
 
 // const metricsAggs = require('./metrics-aggregations'),
 //     bucketAggs = require('./bucket-aggregations');
@@ -15,7 +15,7 @@
 //     if (!_.has(metricsAggs, clsName)) continue;
 
 //     exports[clsName] = metricsAggs[clsName];
-//     exports[lowercaseFirstLetter(clsName)] = constructorWrapper(metricsAggs[clsName]);
+//     exports[_.lowerFirst(clsName)] = constructorWrapper(metricsAggs[clsName]);
 // }
 
 // /* === Bucket Aggregations === */
@@ -23,5 +23,13 @@
 //     if (!_.has(bucketAggs, clsName)) continue;
 
 //     exports[clsName] = bucketAggs[clsName];
-//     exports[lowercaseFirstLetter(clsName)] = constructorWrapper(bucketAggs[clsName]);
+//     exports[_.lowerFirst(clsName)] = constructorWrapper(bucketAggs[clsName]);
 // }
+
+exports.metricsAggregations = require('./metrics-aggregations');
+
+exports.bucketAggregations = require('./bucket-aggregations');
+
+exports.pipelineAggregations = require('./pipeline-aggregations');
+
+exports.matrixAggregations = require('./matrix-aggregations');

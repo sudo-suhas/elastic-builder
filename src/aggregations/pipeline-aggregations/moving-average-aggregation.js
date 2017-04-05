@@ -51,14 +51,15 @@ class MovingAverageAggregation extends PipelineAggregationBase {
      * @returns {MovingAverageAggregation} returns `this` so that calls can be chained
      */
     model(model) {
-        if (!MODEL_SET.has(model)) {
+        const modelLower = model.toLowerCase();
+        if (!MODEL_SET.has(modelLower)) {
             console.log(`See ${ES_REF_URL}`);
             throw new Error(
                 `The 'model' parameter should belong to ${inspect(MODEL_SET)}`
             );
         }
 
-        this._aggsDef.model = model;
+        this._aggsDef.model = modelLower;
         return this;
     }
 
@@ -79,11 +80,11 @@ class MovingAverageAggregation extends PipelineAggregationBase {
      * Minimization is disabled by default for `ewma` and `holt_linear`,
      * while it is enabled by default for `holt_winters`.
      *
-     * @param {boolean} enabled `false` for most models
+     * @param {boolean} enable `false` for most models
      * @returns {MovingAverageAggregation} returns `this` so that calls can be chained
      */
-    minimize(enabled) {
-        this._aggsDef.minimize = enabled;
+    minimize(enable) {
+        this._aggsDef.minimize = enable;
         return this;
     }
 

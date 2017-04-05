@@ -2,6 +2,8 @@
 
 const { inspect } = require('util');
 
+const _ = require('lodash');
+
 const Query = require('./query');
 const { checkType } = require('./util');
 const { SCORE_MODE_SET } = require('./consts');
@@ -23,15 +25,15 @@ class Rescore {
     /**
      * Creates an instance of `Rescore`
      *
-     * @param {number} windowSize
-     * @param {Query} rescoreQuery
+     * @param {number=} windowSize
+     * @param {Query=} rescoreQuery
      */
     constructor(windowSize, rescoreQuery) {
         this._body = {};
-        this._queryOpts = this._body.query = {};
+        this._rescoreOpts = this._body.query = {};
 
-        windowSize && this.windowSize(windowSize);
-        rescoreQuery && this.rescoreQuery(rescoreQuery);
+        if (!_.isNil(windowSize)) this._body.window_size = windowSize;
+        if (!_.isNil(rescoreQuery)) this.rescoreQuery(rescoreQuery);
     }
 
     /**
@@ -56,7 +58,7 @@ class Rescore {
     rescoreQuery(rescoreQuery) {
         checkType(rescoreQuery, Query);
 
-        this._queryOpts.rescore_query = rescoreQuery;
+        this._rescoreOpts.rescore_query = rescoreQuery;
         return this;
     }
 
@@ -67,7 +69,7 @@ class Rescore {
      * @returns {Rescore} returns `this` so that calls can be chained.
      */
     queryWeight(weight) {
-        this._queryOpts.query_weight = weight;
+        this._rescoreOpts.query_weight = weight;
         return this;
     }
 
@@ -78,7 +80,7 @@ class Rescore {
      * @returns {Rescore} returns `this` so that calls can be chained.
      */
     rescoreQueryWeight(weight) {
-        this._queryOpts.rescore_query_weight = weight;
+        this._rescoreOpts.rescore_query_weight = weight;
         return this;
     }
 
@@ -97,7 +99,7 @@ class Rescore {
             );
         }
 
-        this._queryOpts.score_mode = mode;
+        this._rescoreOpts.score_mode = mode;
         return this;
     }
 

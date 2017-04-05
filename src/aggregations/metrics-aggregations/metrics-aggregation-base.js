@@ -1,5 +1,7 @@
 'use strict';
 
+const _ = require('lodash');
+
 const {
     Aggregation,
     util: { checkType }
@@ -20,12 +22,12 @@ class MetricsAggregationBase extends Aggregation {
      *
      * @param {string} name a valid aggregation name
      * @param {string} type type of aggregation
-     * @param {string} field The field to aggregate on
+     * @param {string=} field The field to aggregate on
      */
     constructor(name, type, field) {
         super(name, type);
 
-        field && this.field(field);
+        if (!_.isNil(field)) this._aggsDef.field = field;
     }
 
     // TODO: Investigate whether Metrics Aggregations can have sub aggregations

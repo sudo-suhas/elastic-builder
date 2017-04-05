@@ -1,5 +1,7 @@
 'use strict';
 
+const _ = require('lodash');
+
 /**
  * Check if the object is instance of class type
  *
@@ -14,17 +16,6 @@ exports.checkType = function checktype(instance, type) {
 };
 
 /**
- * Change first character of given string to lowercase.
- * ExampleClass -> exampleClass
- *
- * @param {string} str
- * @return {string}
- */
-exports.lowercaseFirstLetter = function lowercaseFirstLetter(str) {
-    return str.charAt(0).toLowerCase() + str.slice(1);
-};
-
-/**
  * Wrapper for calling constructor with given parameters
  *
  * @param {Class} Cls
@@ -32,4 +23,37 @@ exports.lowercaseFirstLetter = function lowercaseFirstLetter(str) {
  */
 exports.constructorWrapper = function constructorWrapper(Cls) {
     return (...args) => new Cls(...args);
+};
+
+/**
+ * Check if the number is in the given range.
+ * Returns `true` is number is less than or equal to min, max.
+ *
+ * @param {number} num
+ * @param {number} min
+ * @param {number} max
+ * @returns {Boolean} `true` if in range, `false` otherwise
+ */
+function between(num, min, max) {
+    return num >= min && num <= max;
+}
+
+/**
+ * Finds and returns the first position of first digit in string
+ *
+ * @param {string} str
+ * @returns {number} Index of first digit in string.
+ * `-1` if digit is not found in string
+ */
+exports.firstDigitPos = function firstDigitPos(str) {
+    if (_.isEmpty(str)) return -1;
+
+    const len = str.length;
+    for (let idx = 0; idx < len; idx++) {
+        // '0'.charCodeAt(0) => 48
+        // '9'.charCodeAt(0) => 57
+        if (between(str.charCodeAt(idx), 48, 57)) return idx;
+    }
+
+    return -1;
 };
