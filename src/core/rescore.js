@@ -6,7 +6,7 @@ const _ = require('lodash');
 
 const Query = require('./query');
 const { checkType, recursiveToJSON } = require('./util');
-const { SCORE_MODE_SET } = require('./consts');
+const { RESCORE_MODE_SET } = require('./consts');
 
 const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html';
 
@@ -92,10 +92,10 @@ class Rescore {
      * @returns {Rescore} returns `this` so that calls can be chained.
      */
     scoreMode(mode) {
-        if (!SCORE_MODE_SET.has(mode)) {
+        if (!RESCORE_MODE_SET.has(mode)) {
             console.log(`See ${ES_REF_URL}`);
             throw new Error(
-                `The 'score_mode' parameter should belong to ${inspect(SCORE_MODE_SET)}`
+                `The 'score_mode' parameter should belong to ${inspect(RESCORE_MODE_SET)}`
             );
         }
 

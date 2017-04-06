@@ -24,7 +24,7 @@ exports.MODEL_SET = new Set(['simple', 'linear', 'ewma', 'holt', 'holt_winters']
 
 exports.SORT_MODE_SET = new Set(['min', 'max', 'sum', 'avg', 'median']);
 
-exports.SCORE_MODE_SET = new Set(['total', 'multiply', 'min', 'max', 'avg']);
+exports.RESCORE_MODE_SET = new Set(['total', 'multiply', 'min', 'max', 'avg']);
 
 exports.REWRITE_METHOD_SET = new Set(
     [
@@ -36,4 +36,12 @@ exports.REWRITE_METHOD_SET = new Set(
 
 exports.MULTI_MATCH_TYPE = new Set(
     ['best_fields', 'most_fields', 'cross_fields', 'phrase', 'phrase_prefix']
+);
+
+exports.SCORE_MODE_SET = new Set(['multiply', 'sum', 'first', 'min', 'max', 'avg']);
+
+exports.BOOST_MODE_SET = new Set(['multiply', 'sum', 'replace', 'min', 'max', 'avg']);
+
+exports.FIELD_MODIFIER_SET = new Set(
+    ['none', 'log', 'log1p', 'log2p', 'ln', 'ln1p', 'ln2p', 'square', 'sqrt', 'reciprocal']
 );

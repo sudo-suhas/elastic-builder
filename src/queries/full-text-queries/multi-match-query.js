@@ -115,7 +115,7 @@ class MultiMatchQuery extends FullTextQueryBase {
      * that include the same term in multiple fields to be judged better than
      * results that include this term in only the best of those multiple
      * fields, without confusing this with the better case of two different
-     * terms in the multiple fields.  Default: 0.0.
+     * terms in the multiple fields. Default: `0.0`.
      *
      * @param {number} factor
      * @returns {MultiMatchQuery} returns `this` so that calls can be chained.

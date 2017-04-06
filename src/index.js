@@ -57,6 +57,21 @@ const {
         FuzzyQuery,
         TypeQuery,
         IdsQuery
+    },
+    compoundQueries: {
+        ConstantScoreQuery,
+        BoolQuery,
+        DisMaxQuery,
+        FunctionScoreQuery,
+        BoostingQuery,
+        scoreFunctions: {
+            ScoreFunction,
+            ScriptScoreFunction,
+            WeightFunction,
+            RandomScoreFunction,
+            FieldValueFactorFunction,
+            DecayScoreFunction
+        }
     }
 } = require('./queries');
 
@@ -185,6 +200,24 @@ exports.typeQuery = constructorWrapper(TypeQuery);
 
 exports.IdsQuery = IdsQuery;
 exports.idsQuery = constructorWrapper(IdsQuery);
+
+/* ============ ============ ============ */
+/* ========== Compound Queries ========== */
+/* ============ ============ ============ */
+exports.ConstantScoreQuery = ConstantScoreQuery;
+exports.constantScoreQuery = constructorWrapper(ConstantScoreQuery);
+
+exports.BoolQuery = BoolQuery;
+exports.boolQuery = constructorWrapper(BoolQuery);
+
+exports.DisMaxQuery = DisMaxQuery;
+exports.disMaxQuery = constructorWrapper(DisMaxQuery);
+
+exports.FunctionScoreQuery = FunctionScoreQuery;
+exports.functionScoreQuery = constructorWrapper(FunctionScoreQuery);
+
+exports.BoostingQuery = BoostingQuery;
+exports.boostingQuery = constructorWrapper(BoostingQuery);
 
 /* ============ ============ ============ */
 /* ======== Metrics Aggregations ======== */
@@ -348,6 +381,29 @@ exports.storedScript = constructorWrapper(StoredScript);
 exports.FileScript = FileScript;
 exports.fileScript = constructorWrapper(FileScript);
 
+
+/* ============ ============ ============ */
+/* ========== Score Functions ===========  */
+/* ============ ============ ============ */
+exports.ScoreFunction = ScoreFunction;
+exports.scoreFunction = constructorWrapper(ScoreFunction);
+
+exports.ScriptScoreFunction = ScriptScoreFunction;
+exports.scriptScoreFunction = constructorWrapper(ScriptScoreFunction);
+
+exports.WeightFunction = WeightFunction; // Alias for ScoreFunction
+exports.weightFunction = constructorWrapper(WeightFunction); // Alias for ScoreFunction
+
+exports.RandomScoreFunction = RandomScoreFunction;
+exports.randomScoreFunction = constructorWrapper(RandomScoreFunction);
+
+exports.FieldValueFactorFunction = FieldValueFactorFunction;
+exports.fieldValueFactorFunction = constructorWrapper(FieldValueFactorFunction);
+
+exports.DecayScoreFunction = DecayScoreFunction;
+exports.decayScoreFunction = constructorWrapper(DecayScoreFunction);
+
+
 /* ============ ============ ============ */
 /* ============ Miscellaneous ===========  */
 /* ============ ============ ============ */
@@ -365,3 +421,15 @@ exports.rescore = constructorWrapper(Rescore);
 
 exports.InnerHits = InnerHits;
 exports.innerHits = constructorWrapper(InnerHits);
+
+/**
+ * Utility function to pretty print objects to console.
+ * To be used in development.
+ *
+ * @param {Object} obj
+ */
+exports.prettyPrint = function prettyPrint(obj) {
+    console.log(
+        JSON.stringify(obj, null, 2)
+    );
+};
