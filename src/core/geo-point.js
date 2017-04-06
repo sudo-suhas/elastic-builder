@@ -133,7 +133,7 @@ class GeoPoint {
      * Override default `toJSON` to return DSL representation
      *
      * @override
-     * @returns {Object}
+     * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON() {
         return this._point;

@@ -44,7 +44,7 @@ class FullTextQueryBase extends Query {
     /**
      * Sets the value controlling how many "should" clauses in the resulting boolean
      * query should match. It can be an absolute value (2), a percentage (30%)
-     * or a combination of both. For Common Terms Querym when specifying different
+     * or a combination of both. For Common Terms Query when specifying different
      * `minimum_should_match` for low and high frequency terms, an object with the
      * keys `low_freq` and `high_freq` can be used.
      *

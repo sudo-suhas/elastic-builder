@@ -57,3 +57,23 @@ exports.firstDigitPos = function firstDigitPos(str) {
 
     return -1;
 };
+
+/**
+ * Convert class object to JSON by recursively calling `toJSON` on the class members.
+ *
+ * @param {*} obj
+ * @returns {Object} JSON representation of class.
+ */
+exports.recursiveToJSON = function recursiveToJSON(obj) {
+    if (!_.isObject(obj)) return obj;
+
+    if (_.isArray(obj)) return _.map(obj, recursiveToJSON);
+
+    const json = {},
+        baseLevelJSON = _.hasIn(obj, 'toJSON') ? obj.toJSON() : obj;
+
+    for (const key of Object.keys(baseLevelJSON)) {
+        json[key] = recursiveToJSON(baseLevelJSON[key]);
+    }
+    return json;
+};

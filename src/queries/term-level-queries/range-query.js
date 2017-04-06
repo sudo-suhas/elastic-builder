@@ -160,12 +160,15 @@ class RangeQuery extends Query {
     }
 
     /**
-     * Build and returns DSL representation of the term level query class instance.
+     * Override default `toJSON` to return DSL representation of the `range` query
+     * class instance.
      *
-     * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      * @override
+     * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
-    getDSL() {
+    toJSON() {
+        // recursiveToJSON doesn't seem to be required here.
+
         return {
             [this.type]: {
                 [this._field]: this._queryOpts

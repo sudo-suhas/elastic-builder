@@ -3,7 +3,7 @@
 const _ = require('lodash');
 
 const Query = require('./query'),
-    { checkType } = require('./util');
+    { checkType, recursiveToJSON } = require('./util');
 
 /**
  * Allows to highlight search results on one or more fields. In order to
@@ -320,9 +320,9 @@ class Highlight {
      * Sets the fragmenter type. You can apply the
      * option to a specific field by passing the optional field name parameter.
      * Valid values for order are:
-     *  simple - breaks text up into same-size fragments with no concerns
+     *  - `simple` - breaks text up into same-size fragments with no concerns
      *      over spotting sentence boundaries.
-     *  span - breaks text up into same-size fragments but does not split
+     *  - `span` - breaks text up into same-size fragments but does not split
      *      up Spans.
      *
      * @param {string} fragmenter The fragmenter.
@@ -347,10 +347,10 @@ class Highlight {
      * Override default `toJSON` to return DSL representation
      *
      * @override
-     * @returns {Object}
+     * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON() {
-        return this._highlight;
+        return recursiveToJSON(this._highlight);
     }
 }
 

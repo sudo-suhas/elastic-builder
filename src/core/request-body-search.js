@@ -8,7 +8,7 @@ const Query = require('./query'),
     Highlight = require('./highlight'),
     InnerHits = require('./inner-hits');
 
-const { checkType } = require('./util');
+const { checkType, recursiveToJSON } = require('./util');
 
 /**
  * The `RequestBodySearch` object provides methods generating an elasticsearch
@@ -331,10 +331,10 @@ class RequestBodySearch {
      * Override default `toJSON` to return DSL representation
      *
      * @override
-     * @returns {Object}
+     * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON() {
-        return this._body;
+        return recursiveToJSON(this._body);
     }
 }
 

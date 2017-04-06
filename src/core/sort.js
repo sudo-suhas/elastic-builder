@@ -6,7 +6,7 @@ const _ = require('lodash');
 
 const Query = require('./query'),
     Script = require('../script-types/script');
-const { checkType } = require('./util');
+const { checkType, recursiveToJSON } = require('./util');
 const { SORT_MODE_SET, UNIT_SET } = require('./consts');
 
 const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html';
@@ -228,24 +228,27 @@ class Sort {
      * Override default `toJSON` to return DSL representation
      *
      * @override
-     * @returns {Object|string}
+     * @returns {Object|string} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON() {
+        let repr;
         if (!_.isNil(this._geoPoint)) {
             // Should I pick only the accepted properties here?
-            return {
+            repr = {
                 _geo_distance: Object.assign({
                     [this.field]: this._geoPoint
                 }, this._opts)
             };
         } else if (!_.isNil(this._script)) {
-            return {
+            repr = {
                 _script: Object.assign({ script: this._script }, this._opts)
             };
+        } else {
+            repr = _.isEmpty(this._opts) ? this.field : {
+                [this.field]: this._opts
+            };
         }
-        return _.isEmpty(this._opts) ? this.field : {
-            [this.field]: this._opts
-        };
+        return recursiveToJSON(repr);
     }
 }
 

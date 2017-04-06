@@ -5,7 +5,7 @@ const { inspect } = require('util');
 const _ = require('lodash');
 
 const Query = require('./query');
-const { checkType } = require('./util');
+const { checkType, recursiveToJSON } = require('./util');
 const { SCORE_MODE_SET } = require('./consts');
 
 const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html';
@@ -107,10 +107,10 @@ class Rescore {
      * Override default `toJSON` to return DSL representation
      *
      * @override
-     * @returns {Object}
+     * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON() {
-        return this._body;
+        return recursiveToJSON(this._body);
     }
 }
 

@@ -1,5 +1,7 @@
 'use strict';
 
+const { recursiveToJSON } = require('./util');
+
 /**
  * Base class implementation for all query types.
  */
@@ -40,22 +42,22 @@ class Query {
     }
 
     /**
-     * Build and returns DSL representation of the Aggregation class instance.
+     * Build and returns DSL representation of the `Query` class instance.
      *
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     getDSL() {
-        return this._body;
+        return this.toJSON();
     }
 
     /**
      * Override default `toJSON` to return DSL representation
      *
      * @override
-     * @returns {Object}
+     * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON() {
-        return this.getDSL();
+        return recursiveToJSON(this._body);
     }
 }
 

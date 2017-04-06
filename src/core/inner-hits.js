@@ -5,7 +5,7 @@ const _ = require('lodash');
 const Sort = require('./sort'),
     Highlight = require('./highlight');
 
-const { checkType } = require('./util');
+const { checkType, recursiveToJSON } = require('./util');
 
 /**
  * Inner hits returns per search hit in the search response additional
@@ -160,10 +160,10 @@ class InnerHits {
      * Override default `toJSON` to return DSL representation
      *
      * @override
-     * @returns {Object}
+     * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON() {
-        return this._body;
+        return recursiveToJSON(this._body);
     }
 }
 

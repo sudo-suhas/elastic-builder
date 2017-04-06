@@ -2,7 +2,7 @@
 
 const _ = require('lodash');
 
-const { checkType } = require('./util');
+const { checkType, recursiveToJSON } = require('./util');
 
 /**
  * Base class implementation for all aggregation types.
@@ -70,31 +70,31 @@ class Aggregation {
     }
 
     /**
-     * Build and returns DSL representation of the Aggregation class instance.
+     * Build and returns DSL representation of the `Aggregation` class instance.
      *
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     getDSL() {
-        const repr = {
-            [this.name]: this._aggs
-        };
-
-        if (!_.isEmpty(this._nestedAggs)) {
-            const nestedAggsRepr = repr.aggs = {};
-            for (const aggs of this._nestedAggs) nestedAggsRepr[aggs.name] = aggs.getDSL();
-        }
-
-        return repr;
+        return this.toJSON();
     }
 
     /**
      * Override default `toJSON` to return DSL representation
      *
      * @override
-     * @returns {Object}
+     * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON() {
-        return this.getDSL();
+        const repr = {
+            [this.name]: recursiveToJSON(this._aggs)
+        };
+
+        if (!_.isEmpty(this._nestedAggs)) {
+            const nestedAggsRepr = repr.aggs = {};
+            for (const aggs of this._nestedAggs) nestedAggsRepr[aggs.name] = recursiveToJSON(aggs);
+        }
+
+        return repr;
     }
 }
 
