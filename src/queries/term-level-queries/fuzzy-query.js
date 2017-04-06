@@ -63,6 +63,18 @@ class FuzzyQuery extends ValueTermQueryBase {
         this._queryOpts.max_expansions = limit;
         return this;
     }
+
+    /**
+     * Transpositions (`ab` → `ba`) are allowed by default but can be disabled
+     * by setting `transpositions` to false.
+     *
+     * @param {boolean} enable
+     * @returns {FuzzyQuery} returns `this` so that calls can be chained.
+     */
+    transpositions(enable) {
+        this._queryOpts.transpositions = enable;
+        return this;
+    }
 }
 
 module.exports = FuzzyQuery;

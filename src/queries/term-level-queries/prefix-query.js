@@ -6,7 +6,7 @@ const { validateRewiteMethod } = require('../helper');
 const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html';
 
 /**
- * Matches documents that have fields containing terms with a specified prefix (*not analyzed*).
+ * Matches documents that have fields containing terms with a specified prefix (**not analyzed**).
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html)
  *
@@ -43,7 +43,7 @@ class PrefixQuery extends ValueTermQueryBase {
      *  and scores are only computed as the boost using the top N
      *  scoring terms. Replace N with an integer value.
      *
-     * `top_terms_N` - first translates each term into boolean should
+     * - `top_terms_N` - first translates each term into boolean should
      *  and keeps the scores as computed by the query. Only the top N
      *  scoring terms are used. Replace N with an integer value.
      *

@@ -80,6 +80,86 @@ class RangeQuery extends Query {
     }
 
     /**
+     * The lower bound. Defaults to start from the first.
+     *
+     * @param {string|number} val The lower bound value, type depends on field type
+     * @returns {RangeQuery} returns `this` so that calls can be chained.
+     */
+    from(val) {
+        this._queryOpts.from = val;
+        return this;
+    }
+
+    /**
+     * The upper bound. Defaults to unbounded.
+     *
+     * @param {string|number} val The upper bound value, type depends on field type
+     * @returns {RangeQuery} returns `this` so that calls can be chained.
+     */
+    to(val) {
+        this._queryOpts.to = val;
+        return this;
+    }
+
+    /**
+     * Should the first from (if set) be inclusive or not. Defaults to `true`
+     *
+     * @param {boolean} enable `true` to include, `false` to exclude
+     * @returns {RangeQuery} returns `this` so that calls can be chained.
+     */
+    includeLower(enable) {
+        this._queryOpts.include_lower = enable;
+        return this;
+    }
+
+    /**
+     * Should the last to (if set) be inclusive or not. Defaults to `true`.
+     *
+     * @param {boolean} enable `true` to include, `false` to exclude
+     * @returns {RangeQuery} returns `this` so that calls can be chained.
+     */
+    includeUpper(enable) {
+        this._queryOpts.include_upper = enable;
+        return this;
+    }
+
+    /**
+     * Time Zone to be applied to any range query related to dates.
+     *
+     * @param {string} zone
+     * @returns {RangeQuery} returns `this` so that calls can be chained.
+     */
+    timeZone(zone) {
+        this._queryOpts.time_zone = zone;
+        return this;
+    }
+
+    /**
+     * Sets the format expression for parsing the upper and lower bounds.
+     * If no format is specified, then it will use the first format specified in the field mapping.
+     *
+     * @param {string} fmt Format for parsing upper and lower bounds.
+     * @returns {RangeQuery} returns `this` so that calls can be chained
+     */
+    format(fmt) {
+        this._queryOpts.format = fmt;
+        return this;
+    }
+
+    /**
+     * Sets the relationship between Query and indexed data
+     * that will be used to determine if a Document should be matched or not.
+     *
+     * @param {string} relation Can be one of `WITHIN`, `CONTAINS`, `disjoint`
+     * or `INTERSECTS`(default)
+     * @returns {RangeQuery} returns `this` so that calls can be chained
+     */
+    relation(relation) {
+        this._queryOpts.relation = relation;
+        return this;
+    }
+
+    /**
      * Build and returns DSL representation of the term level query class instance.
      *
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL

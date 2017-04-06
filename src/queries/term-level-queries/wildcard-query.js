@@ -6,7 +6,7 @@ const { validateRewiteMethod } = require('../helper');
 const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html';
 
 /**
- * Matches documents that have fields matching a wildcard expression (*not analyzed*).
+ * Matches documents that have fields matching a wildcard expression (**not analyzed**).
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html)
  *
@@ -43,7 +43,7 @@ class WildcardQuery extends ValueTermQueryBase {
      *  and scores are only computed as the boost using the top N
      *  scoring terms. Replace N with an integer value.
      *
-     * `top_terms_N` - first translates each term into boolean should
+     * - `top_terms_N` - first translates each term into boolean should
      *  and keeps the scores as computed by the query. Only the top N
      *  scoring terms are used. Replace N with an integer value.
      *

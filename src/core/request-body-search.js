@@ -219,7 +219,6 @@ class RequestBodySearch {
      * @throws {TypeError} If `query` is not an instance of `Rescore`
      */
     rescore(rescore) {
-        // TODO: Change to RescoreQuery
         checkType(rescore, Rescore);
 
         if (_.has(this._body, 'rescore')) {

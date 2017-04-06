@@ -231,7 +231,7 @@ class MultiMatchQuery extends FullTextQueryBase {
      *  and scores are only computed as the boost using the top N
      *  scoring terms. Replace N with an integer value.
      *
-     * `top_terms_N` - first translates each term into boolean should
+     * - `top_terms_N` - first translates each term into boolean should
      *  and keeps the scores as computed by the query. Only the top N
      *  scoring terms are used. Replace N with an integer value.
      *
@@ -270,7 +270,7 @@ class MultiMatchQuery extends FullTextQueryBase {
      *  and scores are only computed as the boost using the top N
      *  scoring terms. Replace N with an integer value.
      *
-     * `top_terms_N` - first translates each term into boolean should
+     * - `top_terms_N` - first translates each term into boolean should
      *  and keeps the scores as computed by the query. Only the top N
      *  scoring terms are used. Replace N with an integer value.
      *

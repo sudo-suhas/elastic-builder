@@ -9,7 +9,7 @@ const {
 const { Query } = require('../../core');
 
 /**
- * Filters documents that have fields that match any of the provided terms (*not analyzed*).
+ * Filters documents that have fields that match any of the provided terms (**not analyzed**).
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html)
  *
