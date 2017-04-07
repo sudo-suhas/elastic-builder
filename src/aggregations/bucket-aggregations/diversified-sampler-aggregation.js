@@ -69,6 +69,7 @@ class DiversifiedSamplerAggregation extends BucketAggregationBase {
     executionHint(hint) {
         if (!EXECUTION_HINT_SET.has(hint)) {
             console.log(`See ${ES_REF_URL}#_execution_hint`);
+            console.warn(`Got 'execution_hint' - ${hint}`);
             throw new Error(
                 `The 'execution_hint' parameter should belong to ${
                     inspect(EXECUTION_HINT_SET)

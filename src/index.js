@@ -72,6 +72,12 @@ const {
             FieldValueFactorFunction,
             DecayScoreFunction
         }
+    },
+    joiningQueries: {
+        NestedQuery,
+        HasChildQuery,
+        HasParentQuery,
+        ParentIdQuery
     }
 } = require('./queries');
 
@@ -218,6 +224,21 @@ exports.functionScoreQuery = constructorWrapper(FunctionScoreQuery);
 
 exports.BoostingQuery = BoostingQuery;
 exports.boostingQuery = constructorWrapper(BoostingQuery);
+
+/* ============ ============ ============ */
+/* =========== Joining Queries ========== */
+/* ============ ============ ============ */
+exports.NestedQuery = NestedQuery;
+exports.nestedQuery = constructorWrapper(NestedQuery);
+
+exports.HasChildQuery = HasChildQuery;
+exports.hasChildQuery = constructorWrapper(HasChildQuery);
+
+exports.HasParentQuery = HasParentQuery;
+exports.hasParentQuery = constructorWrapper(HasParentQuery);
+
+exports.ParentIdQuery = ParentIdQuery;
+exports.parentIdQuery = constructorWrapper(ParentIdQuery);
 
 /* ============ ============ ============ */
 /* ======== Metrics Aggregations ======== */
@@ -381,7 +402,6 @@ exports.storedScript = constructorWrapper(StoredScript);
 exports.FileScript = FileScript;
 exports.fileScript = constructorWrapper(FileScript);
 
-
 /* ============ ============ ============ */
 /* ========== Score Functions ===========  */
 /* ============ ============ ============ */
@@ -402,7 +422,6 @@ exports.fieldValueFactorFunction = constructorWrapper(FieldValueFactorFunction);
 
 exports.DecayScoreFunction = DecayScoreFunction;
 exports.decayScoreFunction = constructorWrapper(DecayScoreFunction);
-
 
 /* ============ ============ ============ */
 /* ============ Miscellaneous ===========  */

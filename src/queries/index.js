@@ -8,3 +8,5 @@ exports.fullTextQueries = require('./full-text-queries');
 exports.termLevelQueries = require('./term-level-queries');
 
 exports.compoundQueries = require('./compound-queries');
+
+exports.joiningQueries = require('./joining-queries');

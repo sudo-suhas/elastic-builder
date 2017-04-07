@@ -83,6 +83,7 @@ class GeoDistanceAggregation extends RangeAggregationBase {
     unit(unit) {
         if (!UNIT_SET.has(unit)) {
             console.log(`See ${ES_REF_URL}`);
+            console.warn(`Got 'unit' - ${unit}`);
             throw new Error(
                 `The 'unit' parameter should belong to ${inspect(UNIT_SET)}`
             );
@@ -105,6 +106,7 @@ class GeoDistanceAggregation extends RangeAggregationBase {
         const typeLower = type.toLowerCase();
         if (typeLower !== 'plane' && typeLower !== 'arc') {
             console.log(`See ${ES_REF_URL}`);
+            console.warn(`Got 'distance_type' - ${type}`);
             throw new Error('The distance_type parameter can only be `plane` or `arc`');
         }
 

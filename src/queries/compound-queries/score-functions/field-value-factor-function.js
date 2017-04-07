@@ -71,6 +71,7 @@ class FieldValueFactorFunction extends ScoreFunction {
     modifier(mod) {
         if (!FIELD_MODIFIER_SET.has(mod)) {
             console.log(`See ${ES_REF_URL}`);
+            console.warn(`Got 'modifier' - ${mod}`);
             throw new Error(
                 `The 'modifier' parameter should belong to ${inspect(FIELD_MODIFIER_SET)}`
             );

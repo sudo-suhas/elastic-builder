@@ -59,6 +59,7 @@ class FunctionScoreQuery extends Query {
     scoreMode(mode) {
         if (!SCORE_MODE_SET.has(mode)) {
             console.log(`See ${ES_REF_URL}`);
+            console.warn(`Got 'score_mode' - ${mode}`);
             throw new Error(
                 `The 'score_mode' parameter should belong to ${inspect(SCORE_MODE_SET)}`
             );
@@ -78,6 +79,7 @@ class FunctionScoreQuery extends Query {
     boostMode(mode) {
         if (!BOOST_MODE_SET.has(mode)) {
             console.log(`See ${ES_REF_URL}`);
+            console.warn(`Got 'boost_mode' - ${mode}`);
             throw new Error(
                 `The 'boost_mode' parameter should belong to ${inspect(BOOST_MODE_SET)}`
             );

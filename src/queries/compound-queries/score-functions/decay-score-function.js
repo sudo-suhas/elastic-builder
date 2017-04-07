@@ -50,6 +50,7 @@ class DecayScoreFunction extends ScoreFunction {
         const modeLower = mode.toLowerCase();
         if (modeLower !== 'linear' && modeLower !== 'exp' && modeLower !== 'gauss') {
             console.log(`See ${ES_REF_URL}`);
+            console.warn(`Got 'mode' - ${mode}`);
             throw new Error('The mode can only be `linear`, `exp` or `gauss`');
         }
 

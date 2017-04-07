@@ -88,6 +88,7 @@ class CommonTermsQuery extends MonoFieldQueryBase {
         const operatorLower = operator.toLowerCase();
         if (operatorLower !== 'and' && operatorLower !== 'or') {
             console.log(`See ${ES_REF_URL}`);
+            console.warn(`Got 'low_freq_operator' - ${operator}`);
             throw new Error('The operator parameter can only be `and` or `or`');
         }
 
@@ -107,6 +108,7 @@ class CommonTermsQuery extends MonoFieldQueryBase {
         const operatorLower = operator.toLowerCase();
         if (operatorLower !== 'and' && operatorLower !== 'or') {
             console.log(`See ${ES_REF_URL}`);
+            console.warn(`Got 'high_freq_operator' - ${operator}`);
             throw new Error('The operator parameter can only be `and` or `or`');
         }
 

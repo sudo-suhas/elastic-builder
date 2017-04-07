@@ -45,3 +45,5 @@ exports.BOOST_MODE_SET = new Set(['multiply', 'sum', 'replace', 'min', 'max', 'a
 exports.FIELD_MODIFIER_SET = new Set(
     ['none', 'log', 'log1p', 'log2p', 'ln', 'ln1p', 'ln2p', 'square', 'sqrt', 'reciprocal']
 );
+
+exports.NESTED_SCORE_MODE_SET = new Set(['none', 'sum', 'min', 'max', 'avg']);

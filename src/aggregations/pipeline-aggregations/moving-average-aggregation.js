@@ -54,6 +54,7 @@ class MovingAverageAggregation extends PipelineAggregationBase {
         const modelLower = model.toLowerCase();
         if (!MODEL_SET.has(modelLower)) {
             console.log(`See ${ES_REF_URL}`);
+            console.warn(`Got 'model' - ${model}`);
             throw new Error(
                 `The 'model' parameter should belong to ${inspect(MODEL_SET)}`
             );

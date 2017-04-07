@@ -39,6 +39,7 @@ class MatchQuery extends MonoFieldQueryBase {
         const operatorLower = operator.toLowerCase();
         if (operatorLower !== 'and' && operatorLower !== 'or') {
             console.log(`See ${ES_REF_URL}`);
+            console.warn(`Got 'operator' - ${operator}`);
             throw new Error('The operator parameter can only be `and` or `or`');
         }
 
@@ -198,6 +199,7 @@ class MatchQuery extends MonoFieldQueryBase {
         const behaviorLower = behavior.toLowerCase();
         if (behaviorLower !== 'all' && behaviorLower !== 'none') {
             console.log(`See ${ES_REF_URL}`);
+            console.warn(`Got 'zero_terms_query' - ${behavior}`);
             throw new Error('The `zero_terms_query` parameter can only be `all` or `one`');
         }
 

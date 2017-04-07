@@ -63,6 +63,7 @@ class Sort {
     mode(mode) {
         if (!SORT_MODE_SET.has(mode)) {
             console.log(`See ${ES_REF_URL}`);
+            console.warn(`Got 'mode' - ${mode}`);
             throw new Error(
                 `The 'mode' parameter should belong to ${inspect(SORT_MODE_SET)}`
             );
@@ -158,6 +159,7 @@ class Sort {
         const typeLower = type.toLowerCase();
         if (typeLower !== 'plane' && typeLower !== 'arc') {
             console.log(`See ${ES_REF_URL}`);
+            console.warn(`Got 'distance_type' - ${type}`);
             throw new Error('The distance_type parameter can only be `plane` or `arc`');
         }
 
@@ -178,6 +180,7 @@ class Sort {
     unit(unit) {
         if (!UNIT_SET.has(unit)) {
             console.log(`See ${ES_REF_URL}`);
+            console.warn(`Got 'unit' - ${unit}`);
             throw new Error(
                 `The 'unit' parameter should belong to ${inspect(UNIT_SET)}`
             );
