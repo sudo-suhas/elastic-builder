@@ -7,6 +7,7 @@ const { util: { firstDigitPos }, consts: { REWRITE_METHOD_SET } } = require('../
 /**
  * Validate the rewrite method.
  *
+ * @private
  * @param {string} method
  * @param {string} paramName
  * @param {string} refUrl

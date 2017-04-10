@@ -1,13 +1,25 @@
 'use strict';
 
+const { inspect } = require('util');
+
 const _ = require('lodash');
 
-const { Query } = require('../../core');
+const {
+    Query,
+    consts: { GEO_RELATION_SET }
+} = require('../../core');
+
+const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html';
 
 /**
  * Matches documents with fields that have terms within a certain range.
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html)
+ *
+ * @example
+ * bob.rangeQuery('age')
+ *  .gte(10)
+ *  .lte(20);
  *
  * @extends Query
  */
@@ -150,12 +162,21 @@ class RangeQuery extends Query {
      * Sets the relationship between Query and indexed data
      * that will be used to determine if a Document should be matched or not.
      *
-     * @param {string} relation Can be one of `WITHIN`, `CONTAINS`, `disjoint`
+     * @param {string} relation Can be one of `WITHIN`, `CONTAINS`, `DISJOINT`
      * or `INTERSECTS`(default)
      * @returns {RangeQuery} returns `this` so that calls can be chained
      */
     relation(relation) {
-        this._queryOpts.relation = relation;
+        const relationUpper = relation.toUpperCase();
+        if (!GEO_RELATION_SET.has(relationUpper)) {
+            console.log(`See ${ES_REF_URL}`);
+            console.warn(`Got 'relation' - ${relationUpper}`);
+            throw new Error(
+                `The 'relation' parameter should belong to ${inspect(GEO_RELATION_SET)}`
+            );
+        }
+
+        this._queryOpts.relation = relationUpper;
         return this;
     }
 
@@ -168,7 +189,6 @@ class RangeQuery extends Query {
      */
     toJSON() {
         // recursiveToJSON doesn't seem to be required here.
-
         return {
             [this.type]: {
                 [this._field]: this._queryOpts

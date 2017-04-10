@@ -14,10 +14,10 @@ const PipelineAggregationBase = require('./pipeline-aggregation-base');
  *
  * @extends PipelineAggregationBase
  */
-class MyAggregation extends PipelineAggregationBase {
+class PercentilesBucketAggregation extends PipelineAggregationBase {
 
     /**
-     * Creates an instance of `MyAggregation`
+     * Creates an instance of `PercentilesBucketAggregation`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} bucketsPath The relative path of metric to aggregate over
@@ -30,7 +30,7 @@ class MyAggregation extends PipelineAggregationBase {
      * Sets the list of percentiles to calculate
      *
      * @param {Array} percents The list of percentiles to calculate
-     * @returns {MyAggregation} returns `this` so that calls can be chained
+     * @returns {PercentilesBucketAggregation} returns `this` so that calls can be chained
      */
     percents(percents) {
         checkType(percents, Array);
@@ -40,4 +40,4 @@ class MyAggregation extends PipelineAggregationBase {
     }
 }
 
-module.exports = MyAggregation;
+module.exports = PercentilesBucketAggregation;

@@ -10,3 +10,5 @@ exports.termLevelQueries = require('./term-level-queries');
 exports.compoundQueries = require('./compound-queries');
 
 exports.joiningQueries = require('./joining-queries');
+
+exports.geoQueries = require('./geo-queries');

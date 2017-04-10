@@ -328,7 +328,7 @@ class RequestBodySearch {
     }
 
     /**
-     * Override default `toJSON` to return DSL representation
+     * Override default `toJSON` to return DSL representation for the request body search
      *
      * @override
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL

@@ -10,6 +10,9 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html)
  *
+ * @example
+ * const matchQry = bob.matchQuery('message', 'to be or not to be');
+ *
  * @extends MonoFieldQueryBase
  */
 class MatchQuery extends MonoFieldQueryBase {

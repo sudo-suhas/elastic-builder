@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 'use strict';
 
 /*
@@ -28,6 +30,8 @@ const {
     RequestBodySearch,
     Highlight,
     GeoPoint,
+    GeoShape,
+    IndexedShape,
     Sort,
     Rescore,
     InnerHits,
@@ -78,6 +82,12 @@ const {
         HasChildQuery,
         HasParentQuery,
         ParentIdQuery
+    },
+    geoQueries: {
+        GeoShapeQuery,
+        GeoBoundingBoxQuery,
+        GeoDistanceQuery,
+        GeoPolygonQuery
     }
 } = require('./queries');
 
@@ -139,6 +149,15 @@ const {
 const { InlineScript, StoredScript, FileScript } = require('./script-types');
 
 exports.RequestBodySearch = RequestBodySearch;
+
+// TODO: Deal with this
+/**
+ * Creates an instance of `RequestBodySearch`
+ *
+ * @function
+ *
+ * @returns {RequestBodySearch} new instance.
+ */
 exports.requestBodySearch = constructorWrapper(RequestBodySearch);
 
 /* ============ ============ ============ */
@@ -239,6 +258,21 @@ exports.hasParentQuery = constructorWrapper(HasParentQuery);
 
 exports.ParentIdQuery = ParentIdQuery;
 exports.parentIdQuery = constructorWrapper(ParentIdQuery);
+
+/* ============ ============ ============ */
+/* ============ Geo Queries ============= */
+/* ============ ============ ============ */
+exports.GeoShapeQuery = GeoShapeQuery;
+exports.geoShapeQuery = constructorWrapper(GeoShapeQuery);
+
+exports.GeoBoundingBoxQuery = GeoBoundingBoxQuery;
+exports.geoBoundingBoxQuery = constructorWrapper(GeoBoundingBoxQuery);
+
+exports.GeoDistanceQuery = GeoDistanceQuery;
+exports.geoDistanceQuery = constructorWrapper(GeoDistanceQuery);
+
+exports.GeoPolygonQuery = GeoPolygonQuery;
+exports.geoPolygonQuery = constructorWrapper(GeoPolygonQuery);
 
 /* ============ ============ ============ */
 /* ======== Metrics Aggregations ======== */
@@ -431,6 +465,12 @@ exports.highlight = constructorWrapper(Highlight);
 
 exports.GeoPoint = GeoPoint;
 exports.geoPoint = constructorWrapper(GeoPoint);
+
+exports.GeoShape = GeoShape;
+exports.geoShape = constructorWrapper(GeoShape);
+
+exports.IndexedShape = IndexedShape;
+exports.indexedShape = constructorWrapper(IndexedShape);
 
 exports.Sort = Sort;
 exports.sort = constructorWrapper(Sort);

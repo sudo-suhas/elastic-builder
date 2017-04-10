@@ -148,6 +148,7 @@ class InnerHits {
 
     /**
      * Returns a version for each search hit.
+     *
      * @param {boolean} enable
      * @returns {RequestBodySearch} returns `this` so that calls can be chained.
      */
@@ -157,7 +158,7 @@ class InnerHits {
     }
 
     /**
-     * Override default `toJSON` to return DSL representation
+     * Override default `toJSON` to return DSL representation for the inner hits request
      *
      * @override
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL

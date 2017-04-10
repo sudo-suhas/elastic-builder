@@ -1,5 +1,6 @@
 'use strict';
 
+// TODO: Deal with this!
 /**
  * Core class modules
  *
@@ -17,6 +18,10 @@ exports.Query = require('./query');
 exports.Highlight = require('./highlight');
 
 exports.GeoPoint = require('./geo-point');
+
+exports.GeoShape = require('./geo-shape');
+
+exports.IndexedShape = require('./indexed-shape');
 
 exports.Sort = require('./sort');
 

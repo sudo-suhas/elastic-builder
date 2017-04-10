@@ -5,8 +5,8 @@ const _ = require('lodash');
 const { checkType } = require('./util');
 
 /**
- * A GeoPoint object that can be used in queries and filters that
- * take a GeoPoint.  GeoPoint supports various input formats.
+ * A `GeoPoint` object that can be used in queries and filters that
+ * take a `GeoPoint`.  `GeoPoint` supports various input formats.
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html)
  */
@@ -130,7 +130,7 @@ class GeoPoint {
     }
 
     /**
-     * Override default `toJSON` to return DSL representation
+     * Override default `toJSON` to return DSL representation for the `GeoPoint`
      *
      * @override
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL

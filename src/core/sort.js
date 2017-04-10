@@ -228,7 +228,7 @@ class Sort {
     }
 
     /**
-     * Override default `toJSON` to return DSL representation
+     * Override default `toJSON` to return DSL representation for `sort` parameter.
      *
      * @override
      * @returns {Object|string} returns an Object which maps to the elasticsearch query DSL

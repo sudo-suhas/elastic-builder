@@ -117,7 +117,7 @@ class Highlight {
     /**
      * Sets the styled schema to be used for the tags.
      *
-     * styled - 10 <em> pre tags with css class of hltN, where N is 1-10
+     * styled - 10 `<em>` pre tags with css class of hltN, where N is 1-10
      *
      * @returns {Highlight} returns `this` so that calls can be chained
      */
@@ -344,7 +344,7 @@ class Highlight {
     // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html#explicit-field-order
 
     /**
-     * Override default `toJSON` to return DSL representation
+     * Override default `toJSON` to return DSL representation for the `highlight` request
      *
      * @override
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL

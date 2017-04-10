@@ -8,6 +8,9 @@ const ValueTermQueryBase = require('./value-term-query-base');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html)
  *
+ * @example
+ * const termQry = bob.termQuery('user', 'Kimchy');
+ *
  * @extends ValueTermQueryBase
  */
 class TermQuery extends ValueTermQueryBase {

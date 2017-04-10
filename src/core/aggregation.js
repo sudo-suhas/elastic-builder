@@ -79,7 +79,7 @@ class Aggregation {
     }
 
     /**
-     * Override default `toJSON` to return DSL representation
+     * Override default `toJSON` to return DSL representation for the `aggregation` query.
      *
      * @override
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL

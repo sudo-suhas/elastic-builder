@@ -23,6 +23,7 @@ class JoiningQueryBase extends Query {
      * Creates an instance of `JoiningQueryBase`
      *
      * @param {string} type
+     * @param {string} refUrl
      * @param {Query=} qry A valid `Query` object
      */
     constructor(type, refUrl, qry) {

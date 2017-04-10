@@ -155,19 +155,18 @@ class BoolQuery extends Query {
     }
 
     /**
-     * Override default `toJSON` to return DSL representation of the compound query
+     * Override default `toJSON` to return DSL representation of the `bool` compound query
      * class instance.
      *
      * @override
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON() {
+        const clauseKeys = ['must', 'filter', 'must_not', 'should'];
+
         const cleanQryOpts = _.reduce(
             // Pick the clauses which have some queries
-            _.filter(
-                ['must', 'filter', 'must_not', 'should'],
-                clause => _.has(this._queryOpts, clause)
-            ),
+            _.filter(clauseKeys, clause => _.has(this._queryOpts, clause)),
             // Unwrap array and put into qryOpts if required
             (qryOpts, clause) => {
                 const clauseQueries = this._queryOpts[clause];
@@ -176,8 +175,8 @@ class BoolQuery extends Query {
                 );
                 return qryOpts;
             },
-            // initial value
-            {}
+            // initial value - all key-value except clauses
+            _.omit(this._queryOpts, clauseKeys)
         );
 
         return {
