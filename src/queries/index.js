@@ -14,3 +14,5 @@ exports.joiningQueries = require('./joining-queries');
 exports.geoQueries = require('./geo-queries');
 
 exports.specializedQueries = require('./specialized-queries');
+
+exports.spanQueries = require('./span-queries');

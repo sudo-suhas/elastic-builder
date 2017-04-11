@@ -11,7 +11,6 @@ const {
 /**
  * A query allowing to define scripts as queries.
  *
- *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-script-query.html)
  *
  * @example

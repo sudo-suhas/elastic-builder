@@ -1,6 +1,6 @@
 'use strict';
 
-const ValueTermQueryBase = require('./value-term-query-base');
+const MultiTermQueryBase = require('./multi-term-query-base');
 const { validateRewiteMethod } = require('../helper');
 
 const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html';
@@ -10,9 +10,12 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html)
  *
- * @extends ValueTermQueryBase
+ * @example
+ * const prefixQry = bob.prefixQuery('user', 'ki');
+ *
+ * @extends MultiTermQueryBase
  */
-class PrefixQuery extends ValueTermQueryBase {
+class PrefixQuery extends MultiTermQueryBase {
 
     /**
      * Creates an instance of `PrefixQuery`.

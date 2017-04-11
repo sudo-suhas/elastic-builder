@@ -11,7 +11,6 @@ const {
  * The `percolate` query itself contains the document that will be used
  * as query to match with the stored queries.
  *
- *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-percolate-query.html)
  *
  * @example

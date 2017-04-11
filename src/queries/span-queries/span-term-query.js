@@ -2,25 +2,36 @@
 
 const _ = require('lodash');
 
-const { Query } = require('../../core');
+const SpanQueryBase = require('./span-query-base');
 
 /**
- * The `ValueTermQueryBase` provides support for common options used across
- * various term level query implementations.
+ * Matches spans containing a term. The span term query maps to Lucene `SpanTermQuery`.
  *
- * @extends Query
+ * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-term-query.html)
+ *
+ * @example
+ * const spanQry = bob.spanTermQuery('user', 'kimchy');
+ *
+ * const spanQry = bob.spanTermQuery()
+ *  .field('user')
+ *  .value('kimchy')
+ *  .boost(2.0);
+ *
+ * @extends SpanQueryBase
  */
-class ValueTermQueryBase extends Query {
+class SpanTermQuery extends SpanQueryBase {
+
+    // This is extremely similar to ValueTermQueryBase
+    // Maybe rename, move and reuse it?
 
     /**
-     * Creates an instance of `ValueTermQueryBase`
+     * Creates an instance of `SpanTermQuery`
      *
-     * @param {string} type
      * @param {string=} field The document field to query against
-     * @param {string=} value The query string
+     * @param {string|number=} value The query string
      */
-    constructor(type, field, value) {
-        super(type);
+    constructor(field, value) {
+        super('span_term');
 
         if (!_.isNil(field)) this._field = field;
         if (!_.isNil(value)) this._queryOpts.value = value;
@@ -30,7 +41,7 @@ class ValueTermQueryBase extends Query {
      * Sets the field to search on.
      *
      * @param {string} field
-     * @returns {ValueTermQueryBase} returns `this` so that calls can be chained.
+     * @returns {SpanTermQuery} returns `this` so that calls can be chained.
      */
     field(field) {
         this._field = field;
@@ -41,7 +52,7 @@ class ValueTermQueryBase extends Query {
      * Sets the query string.
      *
      * @param {string|number} queryVal
-     * @returns {ValueTermQueryBase} returns `this` so that calls can be chained.
+     * @returns {SpanTermQuery} returns `this` so that calls can be chained.
      */
     value(queryVal) {
         this._queryOpts.value = queryVal;
@@ -50,7 +61,7 @@ class ValueTermQueryBase extends Query {
 
 
     /**
-     * Override default `toJSON` to return DSL representation of the term level query
+     * Override default `toJSON` to return DSL representation of the Span term query
      * class instance.
      *
      * @override
@@ -61,7 +72,7 @@ class ValueTermQueryBase extends Query {
 
         // Revisit this.. Smells a little bit
         if (!_.has(this._queryOpts, 'value')) {
-            throw new Error('Value is required for term level query!');
+            throw new Error('Value is required for Span term query!');
         }
 
         const qryOpts = Object.keys(this._queryOpts).length === 1 ?
@@ -74,4 +85,4 @@ class ValueTermQueryBase extends Query {
     }
 }
 
-module.exports = ValueTermQueryBase;
+module.exports = SpanTermQuery;

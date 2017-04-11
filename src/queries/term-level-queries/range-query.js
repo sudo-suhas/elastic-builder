@@ -2,12 +2,11 @@
 
 const { inspect } = require('util');
 
-const _ = require('lodash');
-
 const {
-    Query,
     consts: { GEO_RELATION_SET }
 } = require('../../core');
+
+const MultiTermQueryBase = require('./multi-term-query-base');
 
 const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html';
 
@@ -21,9 +20,9 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  *  .gte(10)
  *  .lte(20);
  *
- * @extends Query
+ * @extends MultiTermQueryBase
  */
-class RangeQuery extends Query {
+class RangeQuery extends MultiTermQueryBase {
 
     /**
      * Creates an instance of `RangeQuery`.
@@ -31,20 +30,16 @@ class RangeQuery extends Query {
      * @param {string=} field
      */
     constructor(field) {
-        super('range');
-
-        if (!_.isNil(field)) this._field = field;
+        super('range', field);
     }
 
     /**
-     * Sets the field to search on.
-     *
-     * @param {string} field
-     * @returns {RangeQuery} returns `this` so that calls can be chained.
+     * @override
+     * @throws {Error} This method cannot be called on ChildrenAggregation
      */
-    field(field) {
-        this._field = field;
-        return this;
+    value() {
+        console.log(`Please refer ${ES_REF_URL}`);
+        throw new Error('value is not supported in RangeQuery');
     }
 
     /**

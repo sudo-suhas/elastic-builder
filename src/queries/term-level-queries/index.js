@@ -1,5 +1,7 @@
 'use strict';
 
+exports.MultiTermQueryBase = require('./multi-term-query-base');
+
 exports.TermQuery = require('./term-query');
 exports.TermsQuery = require('./terms-query');
 exports.RangeQuery = require('./range-query');

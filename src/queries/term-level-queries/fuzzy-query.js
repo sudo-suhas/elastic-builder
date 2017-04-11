@@ -1,6 +1,6 @@
 'use strict';
 
-const ValueTermQueryBase = require('./value-term-query-base');
+const MultiTermQueryBase = require('./multi-term-query-base');
 
 /**
  * The fuzzy query generates all possible matching terms that are within
@@ -12,9 +12,9 @@ const ValueTermQueryBase = require('./value-term-query-base');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html)
  *
- * @extends ValueTermQueryBase
+ * @extends MultiTermQueryBase
  */
-class FuzzyQuery extends ValueTermQueryBase {
+class FuzzyQuery extends MultiTermQueryBase {
 
     /**
      * Creates an instance of `FuzzyQuery`.

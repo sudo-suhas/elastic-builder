@@ -1,6 +1,6 @@
 'use strict';
 
-const ValueTermQueryBase = require('./value-term-query-base');
+const MultiTermQueryBase = require('./multi-term-query-base');
 const { validateRewiteMethod } = require('../helper');
 
 const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html';
@@ -12,9 +12,9 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html)
  *
- * @extends ValueTermQueryBase
+ * @extends MultiTermQueryBase
  */
-class RegexpQuery extends ValueTermQueryBase {
+class RegexpQuery extends MultiTermQueryBase {
 
     /**
      * Creates an instance of `RegexpQuery`.

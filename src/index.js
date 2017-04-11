@@ -94,6 +94,17 @@ const {
         MoreLikeThisQuery,
         ScriptQuery,
         PercolateQuery
+    },
+    spanQueries: {
+        SpanTermQuery,
+        SpanMultiTermQuery,
+        SpanFirstQuery,
+        SpanNearQuery,
+        SpanOrQuery,
+        SpanNotQuery,
+        SpanContainingQuery,
+        SpanWithinQuery,
+        SpanFieldMaskingQuery
     }
 } = require('./queries');
 
@@ -290,6 +301,35 @@ exports.scriptQuery = constructorWrapper(ScriptQuery);
 exports.PercolateQuery = PercolateQuery;
 exports.percolateQuery = constructorWrapper(PercolateQuery);
 
+/* ============ ============ ============ */
+/* ============ Span Queries ============ */
+/* ============ ============ ============ */
+exports.SpanTermQuery = SpanTermQuery;
+exports.spanTermQuery = constructorWrapper(SpanTermQuery);
+
+exports.SpanMultiTermQuery = SpanMultiTermQuery;
+exports.spanMultiTermQuery = constructorWrapper(SpanMultiTermQuery);
+
+exports.SpanFirstQuery = SpanFirstQuery;
+exports.spanFirstQuery = constructorWrapper(SpanFirstQuery);
+
+exports.SpanNearQuery = SpanNearQuery;
+exports.spanNearQuery = constructorWrapper(SpanNearQuery);
+
+exports.SpanOrQuery = SpanOrQuery;
+exports.spanOrQuery = constructorWrapper(SpanOrQuery);
+
+exports.SpanNotQuery = SpanNotQuery;
+exports.spanNotQuery = constructorWrapper(SpanNotQuery);
+
+exports.SpanContainingQuery = SpanContainingQuery;
+exports.spanContainingQuery = constructorWrapper(SpanContainingQuery);
+
+exports.SpanWithinQuery = SpanWithinQuery;
+exports.spanWithinQuery = constructorWrapper(SpanWithinQuery);
+
+exports.SpanFieldMaskingQuery = SpanFieldMaskingQuery;
+exports.spanFieldMaskingQuery = constructorWrapper(SpanFieldMaskingQuery);
 /* ============ ============ ============ */
 /* ======== Metrics Aggregations ======== */
 /* ============ ============ ============ */
