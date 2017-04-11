@@ -5,7 +5,7 @@ const { inspect } = require('util');
 const _ = require('lodash');
 
 const Query = require('./query'),
-    Script = require('../script-types/script');
+    Script = require('./script');
 const { checkType, recursiveToJSON } = require('./util');
 const { SORT_MODE_SET, UNIT_SET } = require('./consts');
 

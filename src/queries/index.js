@@ -12,3 +12,5 @@ exports.compoundQueries = require('./compound-queries');
 exports.joiningQueries = require('./joining-queries');
 
 exports.geoQueries = require('./geo-queries');
+
+exports.specializedQueries = require('./specialized-queries');

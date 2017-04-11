@@ -1,8 +1,9 @@
 'use strict';
 
-const { util: { checkType } } = require('../../core');
-
-const Script = require('../../script-types/script');
+const {
+    Script,
+    util: { checkType }
+} = require('../../core');
 
 const PipelineAggregationBase = require('./pipeline-aggregation-base');
 

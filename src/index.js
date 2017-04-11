@@ -29,6 +29,7 @@
 const {
     RequestBodySearch,
     Highlight,
+    Script,
     GeoPoint,
     GeoShape,
     IndexedShape,
@@ -88,6 +89,11 @@ const {
         GeoBoundingBoxQuery,
         GeoDistanceQuery,
         GeoPolygonQuery
+    },
+    specializedQueries: {
+        MoreLikeThisQuery,
+        ScriptQuery,
+        PercolateQuery
     }
 } = require('./queries');
 
@@ -145,8 +151,6 @@ const {
     },
     matrixAggregations: { MatrixStatsAggregation }
 } = require('./aggregations');
-
-const { InlineScript, StoredScript, FileScript } = require('./script-types');
 
 exports.RequestBodySearch = RequestBodySearch;
 
@@ -273,6 +277,18 @@ exports.geoDistanceQuery = constructorWrapper(GeoDistanceQuery);
 
 exports.GeoPolygonQuery = GeoPolygonQuery;
 exports.geoPolygonQuery = constructorWrapper(GeoPolygonQuery);
+
+/* ============ ============ ============ */
+/* ======== Specialized Queries ========= */
+/* ============ ============ ============ */
+exports.MoreLikeThisQuery = MoreLikeThisQuery;
+exports.moreLikeThisQuery = constructorWrapper(MoreLikeThisQuery);
+
+exports.ScriptQuery = ScriptQuery;
+exports.scriptQuery = constructorWrapper(ScriptQuery);
+
+exports.PercolateQuery = PercolateQuery;
+exports.percolateQuery = constructorWrapper(PercolateQuery);
 
 /* ============ ============ ============ */
 /* ======== Metrics Aggregations ======== */
@@ -425,18 +441,6 @@ exports.MatrixStatsAggregation = MatrixStatsAggregation;
 exports.MatrixStatsAggregation = constructorWrapper(MatrixStatsAggregation);
 
 /* ============ ============ ============ */
-/* ============ Script Types ============  */
-/* ============ ============ ============ */
-exports.InlineScript = InlineScript;
-exports.inlineScript = constructorWrapper(InlineScript);
-
-exports.StoredScript = StoredScript;
-exports.storedScript = constructorWrapper(StoredScript);
-
-exports.FileScript = FileScript;
-exports.fileScript = constructorWrapper(FileScript);
-
-/* ============ ============ ============ */
 /* ========== Score Functions ===========  */
 /* ============ ============ ============ */
 exports.ScoreFunction = ScoreFunction;
@@ -462,6 +466,9 @@ exports.decayScoreFunction = constructorWrapper(DecayScoreFunction);
 /* ============ ============ ============ */
 exports.Highlight = Highlight;
 exports.highlight = constructorWrapper(Highlight);
+
+exports.Script = Script;
+exports.script = constructorWrapper(Script);
 
 exports.GeoPoint = GeoPoint;
 exports.geoPoint = constructorWrapper(GeoPoint);

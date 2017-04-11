@@ -12,7 +12,7 @@ const {
 } = require('../../core');
 
 /**
- * The `JoiningQueryBase` provides support for common options used across
+ * The `JoiningQueryBase` class provides support for common options used across
  * various joining query implementations.
  *
  * @extends Query

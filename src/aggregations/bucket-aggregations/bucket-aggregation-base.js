@@ -4,10 +4,9 @@ const _ = require('lodash');
 
 const {
     Aggregation,
+    Script,
     util: { checkType }
 } = require('../../core');
-
-const Script = require('../../script-types/script');
 
 /**
  * The `BucketAggregationBase` provides support for common options used across

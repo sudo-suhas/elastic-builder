@@ -61,7 +61,7 @@ class MultiMatchQuery extends FullTextQueryBase {
     }
 
     /**
-     * Appends givven fields to the list of fields to search against.
+     * Appends given fields to the list of fields to search against.
      * Fields can be specified with wildcards.
      * Individual fields can be boosted with the caret (^) notation.
      * Example - `[ "subject^3", "message" ]`
