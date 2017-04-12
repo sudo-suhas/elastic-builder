@@ -21,7 +21,7 @@
     "preversion": "npm run lint && npm run build && npm run git-commit",
     "postversion": "npm run git-push",
     "git-commit": "git add docs browser && git commit -m \"Commit built files\"",
-    "git-push": "git push origin master && git push origin v$npm_package_version"
+    "git-push": "cross-env \"git push origin master && git push origin v$npm_package_version\""
   },
   "repository": {
     "type": "git",
@@ -53,6 +53,7 @@
     "babel-core": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.24.1",
+    "cross-env": "^4.0.0",
     "documentation": "^4.0.0-beta.19",
     "eslint": "^3.18.0",
     "lint-staged": "^3.4.0",
