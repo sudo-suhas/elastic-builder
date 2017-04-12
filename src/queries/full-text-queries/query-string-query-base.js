@@ -20,12 +20,12 @@ class QueryStringQueryBase extends FullTextQueryBase {
     /**
      * Creates an instance of `QueryStringQueryBase`
      *
-     * @param {string} type
+     * @param {string} queryType
      * @param {string} refUrl
      * @param {string=} queryString The actual query to be parsed.
      */
-    constructor(type, refUrl, queryString) {
-        super(type, queryString);
+    constructor(queryType, refUrl, queryString) {
+        super(queryType, queryString);
 
         this._refUrl = refUrl;
     }

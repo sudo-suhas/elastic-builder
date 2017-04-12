@@ -13,15 +13,15 @@ class Aggregation {
      * Creates an instance of `Aggregation`
      *
      * @param {string} name
-     * @param {string} type Type of aggregation
+     * @param {string} aggType Type of aggregation
      */
-    constructor(name, type) {
+    constructor(name, aggType) {
         // TODO: Throw error if name or type is not present.
         this.name = name;
-        this.type = type;
+        this.aggType = aggType;
 
         this._aggs = {};
-        this._aggsDef = this._aggs[type] = {};
+        this._aggsDef = this._aggs[aggType] = {};
         this._nestedAggs = [];
     }
 
@@ -85,16 +85,15 @@ class Aggregation {
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON() {
-        const repr = {
-            [this.name]: recursiveToJSON(this._aggs)
-        };
+        const mainAggs = recursiveToJSON(this._aggs);
 
         if (!isEmpty(this._nestedAggs)) {
-            const nestedAggsRepr = repr.aggs = {};
-            for (const aggs of this._nestedAggs) nestedAggsRepr[aggs.name] = recursiveToJSON(aggs);
+            mainAggs.aggs = Object.assign({}, ...recursiveToJSON(this._nestedAggs));
         }
 
-        return repr;
+        return {
+            [this.name]: mainAggs
+        };
     }
 }
 

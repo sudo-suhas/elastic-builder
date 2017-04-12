@@ -66,7 +66,7 @@ class FilterAggregation extends BucketAggregationBase {
      */
     filter(filterQuery) {
         checkType(filterQuery, Query);
-        this._aggsDef = this._aggs[this.type] = filterQuery;
+        this._aggsDef = this._aggs[this.aggType] = filterQuery;
         return this;
     }
 }

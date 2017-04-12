@@ -13,13 +13,13 @@ class MatchPhraseQueryBase extends MonoFieldQueryBase {
     /**
      * Creates an instance of `MatchPhraseQueryBase`
      *
-     * @param {string} type
+     * @param {string} queryType
      * @param {string} refUrl
      * @param {string=} field The document field to query against
      * @param {string=} queryString The query string
      */
-    constructor(type, refUrl, field, queryString) {
-        super(type, field, queryString);
+    constructor(queryType, refUrl, field, queryString) {
+        super(queryType, field, queryString);
 
         this.refUrl = refUrl;
     }

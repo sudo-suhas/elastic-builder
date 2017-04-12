@@ -16,12 +16,12 @@ class ValueTermQueryBase extends Query {
     /**
      * Creates an instance of `ValueTermQueryBase`
      *
-     * @param {string} type
+     * @param {string} queryType
      * @param {string=} field The document field to query against
      * @param {string=} value The query string
      */
-    constructor(type, field, value) {
-        super(type);
+    constructor(queryType, field, value) {
+        super(queryType);
 
         if (!isNil(field)) this._field = field;
         if (!isNil(value)) this._queryOpts.value = value;
@@ -68,7 +68,7 @@ class ValueTermQueryBase extends Query {
         const qryOpts = Object.keys(this._queryOpts).length === 1 ?
             this._queryOpts.value : this._queryOpts;
         return {
-            [this.type]: {
+            [this.queryType]: {
                 [this._field]: qryOpts
             }
         };

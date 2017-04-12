@@ -21,11 +21,11 @@ class PipelineAggregationBase extends Aggregation {
      * Creates an instance of `PipelineAggregationBase`
      *
      * @param {string} name a valid aggregation name
-     * @param {string} type type of aggregation
+     * @param {string} aggType type of aggregation
      * @param {string|Object=} bucketsPath The relative path of metric to aggregate over
      */
-    constructor(name, type, bucketsPath) {
-        super(name, type);
+    constructor(name, aggType, bucketsPath) {
+        super(name, aggType);
 
         if (!isNil(bucketsPath)) this._aggsDef.buckets_path = bucketsPath;
     }

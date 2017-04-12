@@ -21,12 +21,12 @@ class TermsAggregationBase extends BucketAggregationBase {
      * Creates an instance of `TermsAggregationBase`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string} type Type of aggregation
+     * @param {string} aggType Type of aggregation
      * @param {string} refUrl Elasticsearch reference URL.
      * @param {string=} field The field to aggregate on
      */
-    constructor(name, type, refUrl, field) {
-        super(name, type, field);
+    constructor(name, aggType, refUrl, field) {
+        super(name, aggType, field);
 
         this._refUrl = refUrl;
     }

@@ -19,11 +19,11 @@ class RangeAggregationBase extends BucketAggregationBase {
      * Creates an instance of `RangeAggregationBase`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string} type Type of aggregation
+     * @param {string} aggType Type of aggregation
      * @param {string=} field The field to aggregate on
      */
-    constructor(name, type, field) {
-        super(name, type, field);
+    constructor(name, aggType, field) {
+        super(name, aggType, field);
         // Variable name is misleading. Only one of these needs to be present.
         this._rangeRequiredKeys = ['from', 'to'];
 

@@ -185,7 +185,7 @@ class BoolQuery extends Query {
         );
 
         return {
-            [this.type]: cleanQryOpts
+            [this.queryType]: cleanQryOpts
         };
     }
 }

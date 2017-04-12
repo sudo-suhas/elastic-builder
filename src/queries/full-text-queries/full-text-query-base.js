@@ -21,11 +21,11 @@ class FullTextQueryBase extends Query {
     /**
      * Creates and instance of `FullTextQueryBase`
      *
-     * @param {string} type
+     * @param {string} queryType
      * @param {string=} queryString The query string
      */
-    constructor(type, queryString) {
-        super(type);
+    constructor(queryType, queryString) {
+        super(queryType);
 
         if (!isNil(queryString)) this._queryOpts.query = queryString;
     }

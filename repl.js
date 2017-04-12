@@ -2,6 +2,6 @@
 
 const repl = require('repl');
 
-const bob = require('.');
+const bob = require('./lib');
 
-repl.start('bob > ').context.bob = bob;
+repl.start('elastic-builder > ').context.bob = bob;

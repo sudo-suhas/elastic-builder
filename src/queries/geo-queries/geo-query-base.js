@@ -19,11 +19,11 @@ class GeoQueryBase extends Query {
     /**
      * Creates an instance of `GeoQueryBase`
      *
-     * @param {string} type
+     * @param {string} queryType
      * @param {string} field
      */
-    constructor(type, field) {
-        super(type);
+    constructor(queryType, field) {
+        super(queryType);
 
         this._field = null;
         this._fieldOpts = {};
@@ -75,7 +75,7 @@ class GeoQueryBase extends Query {
      */
     toJSON() {
         return recursiveToJSON({
-            [this.type]: Object.assign({
+            [this.queryType]: Object.assign({
                 [this._field]: this._fieldOpts
             }, this._queryOpts)
         });

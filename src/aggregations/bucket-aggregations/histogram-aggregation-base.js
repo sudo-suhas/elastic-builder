@@ -17,12 +17,12 @@ class HistogramAggregationBase extends BucketAggregationBase {
      * Creates an instance of `HistogramAggregationBase`
      *
      * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string} type Type of aggregation
+     * @param {string} aggType Type of aggregation
      * @param {string=} field The field to aggregate on
      * @param {string|number=} interval Interval to generate histogram over.
      */
-    constructor(name, type, field, interval) {
-        super(name, type, field);
+    constructor(name, aggType, field, interval) {
+        super(name, aggType, field);
 
         if (!isNil(interval)) this._aggsDef.interval = interval;
     }

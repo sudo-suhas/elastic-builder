@@ -1,11 +1,11 @@
 # Roadmap
 
- - [ ] Setup github pages, add CNAME
+ - [x] Setup github pages, add CNAME
+ - [x] Improve README
+     + [x] Usage
+     + [x] Examples
+     + [x] Credits
  - [ ] Host documentation, demo using js.org
- - [ ] Improve README
-     + [ ] Usage
-     + [ ] Examples
-     + [ ] Credits
  - [ ] Tests
  - [ ] travis setup with npm publish
  - [ ] Documentation examples

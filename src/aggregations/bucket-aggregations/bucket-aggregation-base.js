@@ -20,11 +20,11 @@ class BucketAggregationBase extends Aggregation {
      * Creates an instance of `BucketAggregationBase`
      *
      * @param {string} name a valid aggregation name
-     * @param {string} type type of aggregation
+     * @param {string} aggType type of aggregation
      * @param {string=} field The field to aggregate on
      */
-    constructor(name, type, field) {
-        super(name, type);
+    constructor(name, aggType, field) {
+        super(name, aggType);
 
         if (!isNil(field)) this._aggsDef.field = field;
     }

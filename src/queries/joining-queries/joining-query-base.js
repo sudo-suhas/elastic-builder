@@ -22,12 +22,12 @@ class JoiningQueryBase extends Query {
     /**
      * Creates an instance of `JoiningQueryBase`
      *
-     * @param {string} type
+     * @param {string} queryType
      * @param {string} refUrl
      * @param {Query=} qry A valid `Query` object
      */
-    constructor(type, refUrl, qry) {
-        super(type);
+    constructor(queryType, refUrl, qry) {
+        super(queryType);
         this.refUrl = refUrl;
 
         if (!isNil(qry)) this.query(qry);

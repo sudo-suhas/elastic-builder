@@ -24,7 +24,7 @@ class IdsQuery extends Query {
      * @param {Array=} ids List of ids to fiter on.
      */
     constructor(type, ids) {
-        super('type');
+        super('ids');
 
         if (!isNil(type)) this._queryOpts.type = type;
         if (!isNil(ids)) this.values(ids);

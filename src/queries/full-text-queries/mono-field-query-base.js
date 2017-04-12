@@ -16,12 +16,12 @@ class MonoFieldQueryBase extends FullTextQueryBase {
     /**
      * Creates an instance of `MonoFieldQueryBase`
      *
-     * @param {string} type
+     * @param {string} queryType
      * @param {string=} field The document field to query against
      * @param {string=} queryString The query string
      */
-    constructor(type, field, queryString) {
-        super(type, queryString);
+    constructor(queryType, field, queryString) {
+        super(queryType, queryString);
 
         if (!isNil(field)) this._field = field;
     }
@@ -56,7 +56,7 @@ class MonoFieldQueryBase extends FullTextQueryBase {
         const qryOpts = queryOptKeys.length === 1 ? this._queryOpts.query : this._queryOpts;
 
         const repr = {
-            [this.type]: {
+            [this.queryType]: {
                 [this._field]: qryOpts
             }
         };

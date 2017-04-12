@@ -10,13 +10,13 @@ class Query {
     /**
      * Creates an instance of `Query`.
      *
-     * @param {string} type
+     * @param {string} queryType
      */
-    constructor(type) {
-        this.type = type;
+    constructor(queryType) {
+        this.queryType = queryType;
 
         this._body = {};
-        this._queryOpts = this._body[type] = {};
+        this._queryOpts = this._body[queryType] = {};
     }
 
     /**

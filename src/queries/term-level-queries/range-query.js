@@ -185,7 +185,7 @@ class RangeQuery extends MultiTermQueryBase {
     toJSON() {
         // recursiveToJSON doesn't seem to be required here.
         return {
-            [this.type]: {
+            [this.queryType]: {
                 [this._field]: this._queryOpts
             }
         };

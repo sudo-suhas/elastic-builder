@@ -79,7 +79,7 @@ class SpanTermQuery extends SpanQueryBase {
         const qryOpts = Object.keys(this._queryOpts).length === 1 ?
             this._queryOpts.value : this._queryOpts;
         return {
-            [this.type]: {
+            [this.queryType]: {
                 [this._field]: qryOpts
             }
         };

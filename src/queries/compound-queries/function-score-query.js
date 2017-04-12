@@ -159,7 +159,7 @@ class FunctionScoreQuery extends Query {
         } else qryOpts = this._queryOpts;
 
         return recursiveToJSON({
-            [this.type]: qryOpts
+            [this.queryType]: qryOpts
         });
     }
 }
