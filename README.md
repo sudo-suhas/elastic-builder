@@ -55,13 +55,13 @@ Try it out on the command line using the node REPL:
 ```
 # Start the repl
 node ./node_modules/elastic-builder/repl.js
-# The builder is available in the context variable bodybuilder
+# The builder is available in the context variable bob
 bob > bob.prettyPrint(bob.requestBodySearch().query(bob.matchQuery('message', 'this is a test')));
 ```
 
 ## Motivation
 Elasticsearch only provides a low level client for making requests.
-[`elastic.js`](https://github.com/fullscale/elastic.js) was a popular library for building the request search body.
+[`elastic.js`](https://github.com/fullscale/elastic.js) was a relatively popular library for building the request search body.
 However, this project is not being maintained nor is the [fork](https://github.com/ErwanPigneul/elastic.js).
 There were [several changes](https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking_50_search_changes.html)
 in the 5.0 release which make the older libraries unusable.
