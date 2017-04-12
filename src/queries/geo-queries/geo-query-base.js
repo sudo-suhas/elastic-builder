@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const {
     Query,
@@ -28,7 +28,7 @@ class GeoQueryBase extends Query {
         this._field = null;
         this._fieldOpts = {};
 
-        if (!_.isNil(field)) this._field = field;
+        if (!isNil(field)) this._field = field;
     }
 
     /**

@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const { Query } = require('../../core');
 
@@ -21,7 +21,7 @@ class TypeQuery extends Query {
     constructor(type) {
         super('type');
 
-        if (!_.isNil(type)) this._queryOpts.value = type;
+        if (!isNil(type)) this._queryOpts.value = type;
     }
 
     /**

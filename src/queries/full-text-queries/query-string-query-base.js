@@ -1,6 +1,7 @@
 'use strict';
 
-const _ = require('lodash');
+const has = require('lodash.has'),
+    concat = require('lodash.concat');
 
 const { util: { checkType } } = require('../../core');
 const FullTextQueryBase = require('./full-text-query-base');
@@ -39,7 +40,7 @@ class QueryStringQueryBase extends FullTextQueryBase {
      * @returns {QueryStringQueryBase} returns `this` so that calls can be chained.
      */
     field(field) {
-        if (!_.has(this._queryOpts, 'fields')) this._queryOpts.fields = [];
+        if (!has(this._queryOpts, 'fields')) this._queryOpts.fields = [];
 
         this._queryOpts.fields.push(field);
         return this;
@@ -56,9 +57,9 @@ class QueryStringQueryBase extends FullTextQueryBase {
      */
     fields(fields) {
         checkType(fields, Array);
-        if (!_.has(this._queryOpts, 'fields')) this._queryOpts.fields = [];
+        if (!has(this._queryOpts, 'fields')) this._queryOpts.fields = [];
 
-        this._queryOpts.fields = _.concat(this._queryOpts.fields, fields);
+        this._queryOpts.fields = concat(this._queryOpts.fields, fields);
         return this;
     }
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const {
     util: { checkType }
@@ -32,7 +32,7 @@ class SpanMultiTermQuery extends SpanQueryBase {
     constructor(multiTermQry) {
         super('span_multi');
 
-        if (!_.isNil(multiTermQry)) this.match(multiTermQry);
+        if (!isNil(multiTermQry)) this.match(multiTermQry);
     }
 
     /**

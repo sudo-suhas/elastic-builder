@@ -1,6 +1,7 @@
 'use strict';
 
-const _ = require('lodash');
+const isObject = require('lodash.isobject'),
+    has = require('lodash.has');
 
 const MonoFieldQueryBase = require('./mono-field-query-base');
 
@@ -53,9 +54,9 @@ class CommonTermsQuery extends MonoFieldQueryBase {
      */
     _checkMinMatchRepr() {
 
-        if (!_.has(this._queryOpts, 'minimum_should_match')) {
+        if (!has(this._queryOpts, 'minimum_should_match')) {
             this._queryOpts.minimum_should_match = {};
-        } else if (!_.isObject(this._queryOpts.minimum_should_match)) {
+        } else if (!isObject(this._queryOpts.minimum_should_match)) {
             this._warnMixedRepr();
             this._queryOpts.minimum_should_match = {};
         }

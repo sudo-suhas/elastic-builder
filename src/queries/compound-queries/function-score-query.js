@@ -2,7 +2,9 @@
 
 const { inspect } = require('util');
 
-const _ = require('lodash');
+const invokeMap = require('lodash.invokemap'),
+    head = require('lodash.head'),
+    omit = require('lodash.omit');
 
 const {
     Query,
@@ -133,7 +135,7 @@ class FunctionScoreQuery extends Query {
     functions(funcs) {
         checkType(funcs, Array);
 
-        _.invokeMap(funcs, func => this.function(func));
+        invokeMap(funcs, func => this.function(func));
         return this;
     }
 
@@ -151,8 +153,8 @@ class FunctionScoreQuery extends Query {
 
         if (scoreFunctions.length === 1) {
             qryOpts = Object.assign(
-                _.omit(this._queryOpts, 'functions'),
-                recursiveToJSON(_.head(scoreFunctions))
+                omit(this._queryOpts, 'functions'),
+                recursiveToJSON(head(scoreFunctions))
             );
         } else qryOpts = this._queryOpts;
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const {
     util: { recursiveToJSON }
@@ -36,7 +36,7 @@ class DecayScoreFunction extends ScoreFunction {
     constructor(mode = 'gauss', field) {
         super(mode);
 
-        if (!_.isNil(field)) this._field = field;
+        if (!isNil(field)) this._field = field;
     }
 
     /**

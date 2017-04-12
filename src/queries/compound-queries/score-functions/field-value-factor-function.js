@@ -2,7 +2,7 @@
 
 const { inspect } = require('util');
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const {
     consts: { FIELD_MODIFIER_SET }
@@ -33,7 +33,7 @@ class FieldValueFactorFunction extends ScoreFunction {
     constructor(field) {
         super('field_value_factor');
 
-        if (!_.isNil(field)) this._opts.field = field;
+        if (!isNil(field)) this._opts.field = field;
     }
 
     /**

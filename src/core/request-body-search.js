@@ -1,8 +1,12 @@
 'use strict';
 
-const _ = require('lodash');
+const has = require('lodash.has'),
+    isNil = require('lodash.isnil'),
+    isEmpty = require('lodash.isempty'),
+    invokeMap = require('lodash.invokemap');
 
 const Query = require('./query'),
+    Aggregation = require('./aggregation'),
     Rescore = require('./rescore'),
     Sort = require('./sort'),
     Highlight = require('./highlight'),
@@ -23,6 +27,7 @@ class RequestBodySearch {
     constructor() {
         // Maybe accept some optional parameter?
         this._body = {};
+        this._aggs = [];
     }
 
     /**
@@ -35,6 +40,31 @@ class RequestBodySearch {
         checkType(query, Query);
 
         this._body.query = query;
+        return this;
+    }
+
+    /**
+     * Sets aggregation on the request body.
+     * Alias for method `aggregation`
+     *
+     * @param {Aggregation} agg Any valid `Aggregation`
+     * @returns {RequestBodySearch} returns `this` so that calls can be chained.
+     * @throws {TypeError} If `agg` is not an instance of `Aggregation`
+     */
+    agg(agg) {
+        return this.aggregation(agg);
+    }
+
+    /**
+     * Sets aggregation on the request body.
+     *
+     * @param {Aggregation} agg Any valid `Aggregation`
+     * @returns {RequestBodySearch} returns `this` so that calls can be chained.
+     * @throws {TypeError} If `agg` is not an instance of `Aggregation`
+     */
+    aggregation(agg) {
+        checkType(agg, Aggregation);
+        this._aggs.push(agg);
         return this;
     }
 
@@ -103,7 +133,7 @@ class RequestBodySearch {
      */
     sort(sort) {
         checkType(sort, Sort);
-        if (!_.has(this._body, 'sort')) this._body.sort = [];
+        if (!has(this._body, 'sort')) this._body.sort = [];
 
         this._body.sort.push(sort);
         return this;
@@ -119,7 +149,7 @@ class RequestBodySearch {
      * @throws {TypeError} If any item in parameter `sorts` is not an instance of `Sort`.
      */
     sorts(sorts) {
-        _.invokeMap(sorts, sort => this.sort(sort));
+        invokeMap(sorts, sort => this.sort(sort));
         return this;
     }
 
@@ -161,7 +191,7 @@ class RequestBodySearch {
      * @returns {RequestBodySearch} returns `this` so that calls can be chained
      */
     scriptField(scriptFieldName, script) {
-        if (!_.has(this._body, 'script_fields')) this._body.script_fields = {};
+        if (!has(this._body, 'script_fields')) this._body.script_fields = {};
 
         this._body.script_fields[scriptFieldName] = { script };
         return this;
@@ -221,8 +251,8 @@ class RequestBodySearch {
     rescore(rescore) {
         checkType(rescore, Rescore);
 
-        if (_.has(this._body, 'rescore')) {
-            if (!_.isArray(this._body.rescore)) {
+        if (has(this._body, 'rescore')) {
+            if (!Array.isArray(this._body.rescore)) {
                 this._body.rescore = [this._body.rescore];
             }
 
@@ -266,7 +296,7 @@ class RequestBodySearch {
      * @returns {RequestBodySearch} returns `this` so that calls can be chained.
      */
     indexBoost(index, boost) {
-        if (!_.has(this._body, 'indices_boost')) this._body.indices_boost = [];
+        if (!has(this._body, 'indices_boost')) this._body.indices_boost = [];
 
         this._body.indices_boost.push({
             [index]: boost
@@ -302,7 +332,7 @@ class RequestBodySearch {
     collapse(field, innerHits, maxConcurrentGroupRequests) {
         const collapse = this._body.collapse = { field };
 
-        if (!_.isNil(innerHits)) {
+        if (!isNil(innerHits)) {
             checkType(innerHits, InnerHits);
 
             collapse.inner_hits = innerHits;
@@ -334,7 +364,10 @@ class RequestBodySearch {
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON() {
-        return recursiveToJSON(this._body);
+        if (isEmpty(this._aggs)) return recursiveToJSON(this._body);
+
+        const aggregations = Object.assign({}, ...recursiveToJSON(this._aggs));
+        return Object.assign({}, recursiveToJSON(this._body), { aggregations });
     }
 }
 

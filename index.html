@@ -1,0 +1,91 @@
+<html>
+
+<head>
+  <title>elastic-builder | An elasticsearch query body builder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+</head>
+
+<body>
+  <div class="bb_headers">
+    <img class="bb_logo" src="assets/elastic-builder.png" alt="elastic-builder">
+    <h1 class="bb_h1">elastic-builder</h1>
+
+    <h2 class="bb_h2">
+      An elasticsearch query body builder compatible with the latest version.
+    </h2>
+
+    <div class="bb_buttons">
+      <a class="bb_button-docs" href="/docs">
+        <img class="bb_icon-github" src="assets/ic-docs.png" alt="Documentation">
+        <span>Read the Docs</span>
+      </a>
+      <a class="bb_button-github" href="https://github.com/sudo-suhas/elastic-builder">
+        <img class="bb_icon-github" src="assets/ic-github.png" alt="github">
+        <span>View on GitHub</span>
+      </a>
+    </div>
+  </div>
+  <div class="bb_textareas">
+    <div id="input_textarea" class="bb_textarea"></div>
+    <div id="output_textarea" class="bb_textarea"></div>
+  </div>
+
+  <script type="text/javascript" src="browser/elastic-builder.min.js" charset="utf-8"></script>
+  <script src="https://unpkg.com/monaco-editor@0.8.3/min/vs/loader.js"></script>
+  <script>
+    require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@0.8.3/min/vs/' } });
+    var inputTextarea = document.getElementById('input_textarea');
+    var outputTextarea = document.getElementById('output_textarea');
+    require(['vs/editor/editor.main'], function() {
+      var inputEditor = monaco.editor.create(inputTextarea, {
+        language: 'javascript',
+        renderIndentGuides: true
+      });
+
+      var outputEditor = monaco.editor.create(outputTextarea, {
+        language: 'json',
+        readOnly: true,
+        renderIndentGuides: true
+      });
+
+      function onInputChange(event) {
+        var input;
+        try {
+          input = inputEditor.getValue().trim();
+        } catch (ignore) {
+          return;
+        }
+        try {
+          var newOutput = eval(input);
+          console.log('Generated DSL - ', newOutput.toJSON())
+          var json = JSON.stringify(newOutput, null, 2);
+          outputEditor.setValue(json);
+        } catch (err) {
+          outputEditor.setValue(err.toString());
+          console.error('invalid input', err);
+        }
+      }
+
+      inputEditor.onDidChangeModelContent(onInputChange);
+      inputEditor.setValue([
+        "bob.requestBodySearch()",
+        "    .query(",
+        "        bob.boolQuery()",
+        "            .must(bob.matchQuery('message', 'this is a test'))",
+        "            .filter(bob.termQuery('user', 'kimchy'))",
+        "            .filter(bob.termQuery('user', 'herald'))",
+        "            .should(bob.termQuery('user', 'johnny'))",
+        "            .mustNot(bob.termQuery('user', 'cassie'))",
+        "    )",
+        "    .agg(bob.termsAggregation('user_terms', 'user'));"
+      ].join('\n'));
+    });
+
+  </script>
+</body>
+
+</html>

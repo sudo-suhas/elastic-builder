@@ -1,6 +1,7 @@
 'use strict';
 
-const _ = require('lodash');
+const has = require('lodash.has'),
+    invokeMap = require('lodash.invokemap');
 
 const {
     Query,
@@ -61,9 +62,9 @@ class DisMaxQuery extends Query {
      * @returns {DisMaxQuery} returns `this` so that calls can be chained.
      */
     queries(queries) {
-        if (!_.has(this._queryOpts, 'queries')) this._queryOpts.queries = [];
+        if (!has(this._queryOpts, 'queries')) this._queryOpts.queries = [];
 
-        if (_.isArray(queries)) _.invokeMap(queries, qry => this._addQuery(qry));
+        if (Array.isArray(queries)) invokeMap(queries, qry => this._addQuery(qry));
         else this._addQuery(queries);
 
         return this;

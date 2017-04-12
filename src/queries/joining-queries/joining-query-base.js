@@ -2,7 +2,7 @@
 
 const { inspect } = require('util');
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const {
     Query,
@@ -30,7 +30,7 @@ class JoiningQueryBase extends Query {
         super(type);
         this.refUrl = refUrl;
 
-        if (!_.isNil(qry)) this.query(qry);
+        if (!isNil(qry)) this.query(qry);
     }
 
     /**

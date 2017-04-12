@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const {
     Query
@@ -38,8 +38,8 @@ class PercolateQuery extends Query {
     constructor(field, docType) {
         super('percolate');
 
-        if (!_.isNil(field)) this._queryOpts.field = field;
-        if (!_.isNil(docType)) this._queryOpts.document_type = docType;
+        if (!isNil(field)) this._queryOpts.field = field;
+        if (!isNil(docType)) this._queryOpts.document_type = docType;
     }
 
     /**

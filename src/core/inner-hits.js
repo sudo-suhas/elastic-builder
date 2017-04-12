@@ -1,6 +1,7 @@
 'use strict';
 
-const _ = require('lodash');
+const has = require('lodash.has'),
+    invokeMap = require('lodash.invokemap');
 
 const Sort = require('./sort'),
     Highlight = require('./highlight');
@@ -59,7 +60,7 @@ class InnerHits {
      */
     sort(sort) {
         checkType(sort, Sort);
-        if (!_.has(this._body, 'sort')) this._body.sort = [];
+        if (!has(this._body, 'sort')) this._body.sort = [];
 
         this._body.sort.push(sort);
         return this;
@@ -75,7 +76,7 @@ class InnerHits {
      * @throws {TypeError} If any item in parameter `sorts` is not an instance of `Sort`.
      */
     sorts(sorts) {
-        _.invokeMap(sorts, sort => this.sort(sort));
+        invokeMap(sorts, sort => this.sort(sort));
         return this;
     }
 
@@ -128,7 +129,7 @@ class InnerHits {
      * @returns {RequestBodySearch} returns `this` so that calls can be chained
      */
     scriptField(scriptFieldName, script) {
-        if (!_.has(this._body, 'script_fields')) this._body.script_fields = {};
+        if (!has(this._body, 'script_fields')) this._body.script_fields = {};
 
         this._body.script_fields[scriptFieldName] = { script };
         return this;

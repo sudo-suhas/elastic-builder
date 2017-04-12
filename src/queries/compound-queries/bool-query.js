@@ -1,6 +1,11 @@
 'use strict';
 
-const _ = require('lodash');
+const has = require('lodash.has'),
+    invokeMap = require('lodash.invokemap'),
+    reduce = require('lodash.reduce'),
+    filter = require('lodash.filter'),
+    head = require('lodash.head'),
+    omit = require('lodash.omit');
 
 const {
     Query,
@@ -48,9 +53,9 @@ class BoolQuery extends Query {
      * @throws {TypeError} If Array item or query is not an instance of `Query`
      */
     _addQueries(clause, queries) {
-        if (!_.has(this._queryOpts, clause)) this._queryOpts[clause] = [];
+        if (!has(this._queryOpts, clause)) this._queryOpts[clause] = [];
 
-        if (_.isArray(queries)) _.invokeMap(queries, qry => this._addQuery(clause, qry));
+        if (Array.isArray(queries)) invokeMap(queries, qry => this._addQuery(clause, qry));
         else this._addQuery(clause, queries);
     }
 
@@ -164,19 +169,19 @@ class BoolQuery extends Query {
     toJSON() {
         const clauseKeys = ['must', 'filter', 'must_not', 'should'];
 
-        const cleanQryOpts = _.reduce(
+        const cleanQryOpts = reduce(
             // Pick the clauses which have some queries
-            _.filter(clauseKeys, clause => _.has(this._queryOpts, clause)),
+            filter(clauseKeys, clause => has(this._queryOpts, clause)),
             // Unwrap array and put into qryOpts if required
             (qryOpts, clause) => {
                 const clauseQueries = this._queryOpts[clause];
                 qryOpts[clause] = recursiveToJSON(
-                    clauseQueries.length === 1 ? _.head(clauseQueries) : clauseQueries
+                    clauseQueries.length === 1 ? head(clauseQueries) : clauseQueries
                 );
                 return qryOpts;
             },
             // initial value - all key-value except clauses
-            _.omit(this._queryOpts, clauseKeys)
+            omit(this._queryOpts, clauseKeys)
         );
 
         return {

@@ -1,6 +1,9 @@
 'use strict';
 
-const _ = require('lodash');
+const isObject = require('lodash.isobject'),
+    isEmpty = require('lodash.isempty'),
+    has = require('lodash.has'),
+    concat = require('lodash.concat');
 
 const {
     Query,
@@ -68,9 +71,9 @@ class FiltersAggregation extends BucketAggregationBase {
      * @private
      */
     _checkNamedFilters() {
-        if (!_.has(this._aggsDef, 'filters')) this._aggsDef.filters = {};
+        if (!has(this._aggsDef, 'filters')) this._aggsDef.filters = {};
 
-        else if (!_.isObject(this._aggsDef.filters)) {
+        else if (!isObject(this._aggsDef.filters)) {
             this._warn('Do not mix named and anonymous filters!');
             this._warn('Overwriting anonymous filters.');
             this._aggsDef.filters = {};
@@ -85,9 +88,9 @@ class FiltersAggregation extends BucketAggregationBase {
      * @private
      */
     _checkAnonymousFilters() {
-        if (!_.has(this._aggsDef, 'filters')) this._aggsDef.filters = [];
+        if (!has(this._aggsDef, 'filters')) this._aggsDef.filters = [];
 
-        else if (!_.isArray(this._aggsDef.filters)) {
+        else if (!Array.isArray(this._aggsDef.filters)) {
             this._warn('Do not mix named and anonymous filters!');
             this._warn('Overwriting named filters.');
             this._aggsDef.filters = [];
@@ -166,7 +169,7 @@ class FiltersAggregation extends BucketAggregationBase {
 
         this._checkAnonymousFilters();
 
-        this._aggsDef.filters = _.concat(this._aggsDef.filters, filterQueries);
+        this._aggsDef.filters = concat(this._aggsDef.filters, filterQueries);
         return this;
     }
 
@@ -186,7 +189,7 @@ class FiltersAggregation extends BucketAggregationBase {
     otherBucket(enable, otherBucketKey) {
         this._aggsDef.other_bucket = enable;
 
-        !_.isEmpty(otherBucketKey) && this.otherBucketKey(otherBucketKey);
+        !isEmpty(otherBucketKey) && this.otherBucketKey(otherBucketKey);
 
         return this;
     }

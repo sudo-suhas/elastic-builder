@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 /**
  * Class supporting the Elasticsearch scripting API.
@@ -31,7 +31,7 @@ class Script {
         this._isTypeSet = false;
         this._body = {};
 
-        if (!_.isNil(type) && !_.isNil(source)) {
+        if (!isNil(type) && !isNil(source)) {
             const typeLower = type.toLowerCase();
 
             switch (typeLower) {

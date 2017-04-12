@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const {
     Script,
@@ -28,7 +28,7 @@ class ScriptScoreFunction extends ScoreFunction {
     constructor(script) {
         super('script_score');
 
-        if (!_.isNil(script)) this.script(script);
+        if (!isNil(script)) this.script(script);
     }
 
     /**

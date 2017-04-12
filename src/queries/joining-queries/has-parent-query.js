@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const JoiningQueryBase = require('./joining-query-base');
 
@@ -27,7 +27,7 @@ class HasParentQuery extends JoiningQueryBase {
     constructor(qry, type) {
         super('has_parent', ES_REF_URL, qry);
 
-        if (!_.isNil(type)) this._queryOpts.parent_type = type;
+        if (!isNil(type)) this._queryOpts.parent_type = type;
     }
 
     /**

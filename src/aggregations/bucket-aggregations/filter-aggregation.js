@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const {
     Query,
@@ -31,7 +31,7 @@ class FilterAggregation extends BucketAggregationBase {
     constructor(name, filterQuery) {
         super(name, 'filter');
 
-        if (!_.isNil(filterQuery)) this.filter(filterQuery);
+        if (!isNil(filterQuery)) this.filter(filterQuery);
     }
 
     /**

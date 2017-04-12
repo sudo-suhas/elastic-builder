@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const { Query } = require('../../core');
 
@@ -22,8 +22,8 @@ class ParentIdQuery extends Query {
     constructor(type, id) {
         super('parent_id');
 
-        if (!_.isNil(type)) this._queryOpts.type = type;
-        if (!_.isNil(id)) this._queryOpts.id = id;
+        if (!isNil(type)) this._queryOpts.type = type;
+        if (!isNil(id)) this._queryOpts.id = id;
     }
 
     /**

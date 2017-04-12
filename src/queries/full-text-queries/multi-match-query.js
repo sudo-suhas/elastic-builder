@@ -2,7 +2,8 @@
 
 const { inspect } = require('util');
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil'),
+    concat = require('lodash.concat');
 
 const { util: { checkType }, consts: { MULTI_MATCH_TYPE } } = require('../../core');
 const FullTextQueryBase = require('./full-text-query-base');
@@ -40,8 +41,8 @@ class MultiMatchQuery extends FullTextQueryBase {
         // Avoid checking for key in `this.field`
         this._queryOpts.fields = [];
 
-        if (!_.isNil(fields)) {
-            if (_.isArray(fields)) this.fields(fields);
+        if (!isNil(fields)) {
+            if (Array.isArray(fields)) this.fields(fields);
             else this.field(fields);
         }
     }
@@ -72,7 +73,7 @@ class MultiMatchQuery extends FullTextQueryBase {
     fields(fields) {
         checkType(fields, Array);
 
-        this._queryOpts.fields = _.concat(this._queryOpts.fields, fields);
+        this._queryOpts.fields = concat(this._queryOpts.fields, fields);
         return this;
     }
 

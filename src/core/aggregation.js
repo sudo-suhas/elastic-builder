@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isEmpty = require('lodash.isempty');
 
 const { checkType, recursiveToJSON } = require('./util');
 
@@ -89,7 +89,7 @@ class Aggregation {
             [this.name]: recursiveToJSON(this._aggs)
         };
 
-        if (!_.isEmpty(this._nestedAggs)) {
+        if (!isEmpty(this._nestedAggs)) {
             const nestedAggsRepr = repr.aggs = {};
             for (const aggs of this._nestedAggs) nestedAggsRepr[aggs.name] = recursiveToJSON(aggs);
         }

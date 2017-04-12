@@ -12,7 +12,7 @@
 
 // /* === Metrics Aggregations === */
 // for (const clsName in metricsAggs) {
-//     if (!_.has(metricsAggs, clsName)) continue;
+//     if (!has(metricsAggs, clsName)) continue;
 
 //     exports[clsName] = metricsAggs[clsName];
 //     exports[_.lowerFirst(clsName)] = constructorWrapper(metricsAggs[clsName]);
@@ -20,7 +20,7 @@
 
 // /* === Bucket Aggregations === */
 // for (const clsName in bucketAggs) {
-//     if (!_.has(bucketAggs, clsName)) continue;
+//     if (!has(bucketAggs, clsName)) continue;
 
 //     exports[clsName] = bucketAggs[clsName];
 //     exports[_.lowerFirst(clsName)] = constructorWrapper(bucketAggs[clsName]);

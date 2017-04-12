@@ -38,3 +38,6 @@ jspm_packages
 
 # local test files
 experiment.js
+
+# babel generated files
+lib

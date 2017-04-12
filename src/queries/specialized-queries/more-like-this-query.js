@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const has = require('lodash.has');
 
 const {
     Query,
@@ -60,12 +60,12 @@ class MoreLikeThisQuery extends Query {
      */
     _setSearchClause(clauseType, clauses) {
         // Replace the field. Don't care about previous contents
-        if (_.isArray(clauses)) this._queryOpts[clauseType] = clauses;
+        if (Array.isArray(clauses)) this._queryOpts[clauseType] = clauses;
         // Keep the single `like` without array.
-        else if (!_.has(this._queryOpts, clauseType)) this._queryOpts[clauseType] = clauses;
+        else if (!has(this._queryOpts, clauseType)) this._queryOpts[clauseType] = clauses;
         else {
             // Wrap the single `like` in an array
-            if (!_.isArray(this._queryOpts[clauseType])) {
+            if (!Array.isArray(this._queryOpts[clauseType])) {
                 this._queryOpts[clauseType] = [this._queryOpts[clauseType]];
             }
             // Append to array

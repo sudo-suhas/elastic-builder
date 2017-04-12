@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const { Query } = require('../../core');
 
@@ -21,7 +21,7 @@ class ExistsQuery extends Query {
     constructor(field) {
         super('exists');
 
-        if (!_.isNil(field)) this._queryOpts.field = field;
+        if (!isNil(field)) this._queryOpts.field = field;
     }
 
     /**

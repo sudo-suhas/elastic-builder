@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const {
     Aggregation,
@@ -26,7 +26,7 @@ class BucketAggregationBase extends Aggregation {
     constructor(name, type, field) {
         super(name, type);
 
-        if (!_.isNil(field)) this._aggsDef.field = field;
+        if (!isNil(field)) this._aggsDef.field = field;
     }
 
     // TODO: Investigate case when getters will be required

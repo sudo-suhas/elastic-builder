@@ -2,7 +2,8 @@
 
 const { inspect } = require('util');
 
-const _ = require('lodash');
+const isEmpty = require('lodash.isempty'),
+    isNil = require('lodash.isnil');
 
 const Query = require('./query'),
     Script = require('./script');
@@ -32,7 +33,7 @@ class Sort {
         this._geoPoint = null;
         this._script = null;
 
-        if (!_.isNil(order)) this.order(order);
+        if (!isNil(order)) this.order(order);
     }
 
     /**
@@ -235,19 +236,19 @@ class Sort {
      */
     toJSON() {
         let repr;
-        if (!_.isNil(this._geoPoint)) {
+        if (!isNil(this._geoPoint)) {
             // Should I pick only the accepted properties here?
             repr = {
                 _geo_distance: Object.assign({
                     [this.field]: this._geoPoint
                 }, this._opts)
             };
-        } else if (!_.isNil(this._script)) {
+        } else if (!isNil(this._script)) {
             repr = {
                 _script: Object.assign({ script: this._script }, this._opts)
             };
         } else {
-            repr = _.isEmpty(this._opts) ? this.field : {
+            repr = isEmpty(this._opts) ? this.field : {
                 [this.field]: this._opts
             };
         }

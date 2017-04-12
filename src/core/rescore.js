@@ -2,7 +2,7 @@
 
 const { inspect } = require('util');
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const Query = require('./query');
 const { checkType, recursiveToJSON } = require('./util');
@@ -32,8 +32,8 @@ class Rescore {
         this._body = {};
         this._rescoreOpts = this._body.query = {};
 
-        if (!_.isNil(windowSize)) this._body.window_size = windowSize;
-        if (!_.isNil(rescoreQuery)) this.rescoreQuery(rescoreQuery);
+        if (!isNil(windowSize)) this._body.window_size = windowSize;
+        if (!isNil(rescoreQuery)) this.rescoreQuery(rescoreQuery);
     }
 
     /**

@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const {
     util: { checkType }
@@ -47,8 +47,8 @@ class SpanFieldMaskingQuery extends SpanQueryBase {
     constructor(field, spanQry) {
         super('field_masking_span');
 
-        if (!_.isNil(field)) this._queryOpts.field = field;
-        if (!_.isNil(spanQry)) this.query(spanQry);
+        if (!isNil(field)) this._queryOpts.field = field;
+        if (!isNil(spanQry)) this.query(spanQry);
     }
 
     /**

@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const { checkType } = require('./util');
 
@@ -46,8 +46,8 @@ class GeoShape {
     constructor(type, coords) {
         this._body = {};
 
-        if (!_.isNil(type)) this.type(type);
-        if (!_.isNil(coords)) this.coordinates(coords);
+        if (!isNil(type)) this.type(type);
+        if (!isNil(coords)) this.coordinates(coords);
     }
 
     /**

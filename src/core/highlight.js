@@ -1,6 +1,9 @@
 'use strict';
 
-const _ = require('lodash');
+const has = require('lodash.has'),
+    isEmpty = require('lodash.isempty'),
+    isNil = require('lodash.isnil'),
+    isString = require('lodash.isstring');
 
 const Query = require('./query'),
     { checkType, recursiveToJSON } = require('./util');
@@ -32,9 +35,9 @@ class Highlight {
         this._highlight = { fields: this._fields };
 
         // Does this smell?
-        if (_.isNil(fields)) return;
+        if (isNil(fields)) return;
 
-        if (_.isString(fields)) this.field(fields);
+        if (isString(fields)) this.field(fields);
         else this.fields(fields);
     }
 
@@ -47,7 +50,7 @@ class Highlight {
      * @private
      */
     _setFieldOption(field, option, val) {
-        if (_.isNil(field)) {
+        if (isNil(field)) {
             this._highlight[option] = val;
             return;
         }
@@ -64,8 +67,8 @@ class Highlight {
      * @returns {Highlight} returns `this` so that calls can be chained
      */
     field(field) {
-        if (!_.isNil(field) &&
-            !_.has(this._fields, field)) {
+        if (!isNil(field) &&
+            !has(this._fields, field)) {
             this._fields[field] = {};
         }
 
@@ -97,7 +100,7 @@ class Highlight {
      * @returns {Highlight} returns `this` so that calls can be chained
      */
     preTags(tags, field) {
-        this._setFieldOption(field, 'pre_tags', _.isString(tags) ? [tags] : tags);
+        this._setFieldOption(field, 'pre_tags', isString(tags) ? [tags] : tags);
         return this;
     }
 
@@ -110,7 +113,7 @@ class Highlight {
      * @returns {Highlight} returns `this` so that calls can be chained
      */
     postTags(tags, field) {
-        this._setFieldOption(field, 'post_tags', _.isString(tags) ? [tags] : tags);
+        this._setFieldOption(field, 'post_tags', isString(tags) ? [tags] : tags);
         return this;
     }
 
@@ -193,7 +196,7 @@ class Highlight {
      */
     matchedFields(fields, field) {
         checkType(fields, Array);
-        if (_.isEmpty(field)) {
+        if (isEmpty(field)) {
             throw new Error('`matched_fields` requires field name to be passed');
         }
 

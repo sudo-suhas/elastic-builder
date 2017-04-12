@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const invokeMap = require('lodash.invokemap');
 
 const {
     util: { checkType }
@@ -42,7 +42,7 @@ class SpanOrQuery extends SpanQueryBase {
      */
     clauses(clauses) {
         checkType(clauses, Array);
-        _.invokeMap(clauses, clause => checkType(clause, SpanQueryBase));
+        invokeMap(clauses, clause => checkType(clause, SpanQueryBase));
 
         this._queryOpts.clauses = clauses;
         return this;

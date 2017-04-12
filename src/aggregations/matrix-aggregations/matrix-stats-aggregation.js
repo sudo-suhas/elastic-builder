@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const { Aggregation, util: { checkType } } = require('../../core');
 
@@ -18,7 +18,7 @@ class MatrixStatsAggregation extends Aggregation {
     constructor(name, fields) {
         super(name, 'matrix_stats');
 
-        if (!_.isNil(fields)) this.fields(fields);
+        if (!isNil(fields)) this.fields(fields);
     }
 
     /**

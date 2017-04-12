@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
@@ -24,7 +24,7 @@ class HistogramAggregationBase extends BucketAggregationBase {
     constructor(name, type, field, interval) {
         super(name, type, field);
 
-        if (!_.isNil(interval)) this._aggsDef.interval = interval;
+        if (!isNil(interval)) this._aggsDef.interval = interval;
     }
 
     /**

@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const {
     Query,
@@ -30,7 +30,7 @@ class ScriptQuery extends Query {
     constructor(script) {
         super('script');
 
-        if (!_.isNil(script)) this.script(script);
+        if (!isNil(script)) this.script(script);
     }
 
     /**

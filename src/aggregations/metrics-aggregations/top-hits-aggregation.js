@@ -1,6 +1,7 @@
 'use strict';
 
-const _ = require('lodash');
+const has = require('lodash.has'),
+    invokeMap = require('lodash.invokemap');
 
 const MetricsAggregationBase = require('./metrics-aggregation-base'),
     { Highlight, Sort, util: { checkType } } = require('../../core');
@@ -101,7 +102,7 @@ class TopHitsAggregation extends MetricsAggregationBase {
      */
     sort(sort) {
         checkType(sort, Sort);
-        if (!_.has(this._aggsDef, 'sort')) this._aggsDef.sort = [];
+        if (!has(this._aggsDef, 'sort')) this._aggsDef.sort = [];
 
         this._aggsDef.sort.push(sort);
         return this;
@@ -117,7 +118,7 @@ class TopHitsAggregation extends MetricsAggregationBase {
      * @throws {TypeError} If any item in parameter `sorts` is not an instance of `Sort`.
      */
     sorts(sorts) {
-        _.invokeMap(sorts, sort => this.sort(sort));
+        invokeMap(sorts, sort => this.sort(sort));
         return this;
     }
 
@@ -205,7 +206,7 @@ class TopHitsAggregation extends MetricsAggregationBase {
      * @returns {TopHitsAggregation} returns `this` so that calls can be chained
      */
     scriptField(scriptFieldName, script) {
-        if (!_.has(this._aggsDef, 'script_fields')) this._aggsDef.script_fields = {};
+        if (!has(this._aggsDef, 'script_fields')) this._aggsDef.script_fields = {};
 
         this._aggsDef.script_fields[scriptFieldName] = { script };
         return this;

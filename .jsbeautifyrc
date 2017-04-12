@@ -2,6 +2,13 @@
     "indent_size": 4,
     "indent_char": " ",
     "eol": "\n",
+    "html": {
+        "indent_size": 2,
+        "wrap_line_length": 80
+    },
+    "css": {
+        "indent_size": 2
+    },
     "indent_level": 0,
     "indent_with_tabs": false,
     "preserve_newlines": true,

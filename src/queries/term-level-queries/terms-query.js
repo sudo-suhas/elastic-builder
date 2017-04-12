@@ -1,6 +1,7 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil'),
+    concat = require('lodash.concat');
 
 const {
     util: { checkType }
@@ -33,9 +34,9 @@ class TermsQuery extends Query {
         this._termsLookupOpts = {};
         this._values = [];
 
-        if (!_.isNil(field)) this._field = field;
-        if (!_.isNil(values)) {
-            if (_.isArray(values)) this.values(values);
+        if (!isNil(field)) this._field = field;
+        if (!isNil(values)) {
+            if (Array.isArray(values)) this.values(values);
             else this.value(values);
         }
     }
@@ -84,7 +85,7 @@ class TermsQuery extends Query {
     values(values) {
         checkType(values, Array);
 
-        this._values = _.concat(this._values, values);
+        this._values = concat(this._values, values);
         return this;
     }
 

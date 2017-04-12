@@ -1,6 +1,9 @@
 'use strict';
 
-const _ = require('lodash');
+const isEmpty = require('lodash.isempty'),
+    isObject = require('lodash.isobject'),
+    map = require('lodash.map'),
+    hasIn = require('lodash.hasin');
 
 /**
  * Check if the object is instance of class type
@@ -51,7 +54,7 @@ function between(num, min, max) {
  * `-1` if digit is not found in string
  */
 exports.firstDigitPos = function firstDigitPos(str) {
-    if (_.isEmpty(str)) return -1;
+    if (isEmpty(str)) return -1;
 
     const len = str.length;
     for (let idx = 0; idx < len; idx++) {
@@ -71,12 +74,12 @@ exports.firstDigitPos = function firstDigitPos(str) {
  * @returns {Object} JSON representation of class.
  */
 exports.recursiveToJSON = function recursiveToJSON(obj) {
-    if (!_.isObject(obj)) return obj;
+    if (!isObject(obj)) return obj;
 
-    if (_.isArray(obj)) return _.map(obj, recursiveToJSON);
+    if (Array.isArray(obj)) return map(obj, recursiveToJSON);
 
     const json = {},
-        baseLevelJSON = _.hasIn(obj, 'toJSON') ? obj.toJSON() : obj;
+        baseLevelJSON = hasIn(obj, 'toJSON') ? obj.toJSON() : obj;
 
     for (const key of Object.keys(baseLevelJSON)) {
         json[key] = recursiveToJSON(baseLevelJSON[key]);

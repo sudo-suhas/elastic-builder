@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 /**
  * A shape which has already been indexed in another index and/or index
@@ -31,8 +31,8 @@ class IndexedShape {
     constructor(id, type) {
         this._body = {};
 
-        if (!_.isNil(id)) this._body.id = id;
-        if (!_.isNil(type)) this._body.type = type;
+        if (!isNil(id)) this._body.id = id;
+        if (!isNil(type)) this._body.type = type;
     }
 
     /**

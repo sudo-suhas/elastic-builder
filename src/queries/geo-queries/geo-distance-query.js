@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const {
     GeoPoint,
@@ -36,7 +36,7 @@ class GeoDistanceQuery extends GeoQueryBase {
     constructor(field, point) {
         super('geo_distance', field);
 
-        if(!_.isNil(point)) this.geoPoint(point);
+        if(!isNil(point)) this.geoPoint(point);
     }
 
     /**

@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const JoiningQueryBase = require('./joining-query-base');
 
@@ -26,7 +26,7 @@ class NestedQuery extends JoiningQueryBase {
     constructor(qry, path) {
         super('nested', ES_REF_URL, qry);
 
-        if (!_.isNil(path)) this._queryOpts.path = path;
+        if (!isNil(path)) this._queryOpts.path = path;
     }
 
     /**

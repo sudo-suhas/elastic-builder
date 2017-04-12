@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const { Aggregation } = require('../../core');
 
@@ -27,7 +27,7 @@ class PipelineAggregationBase extends Aggregation {
     constructor(name, type, bucketsPath) {
         super(name, type);
 
-        if (!_.isNil(bucketsPath)) this._aggsDef.buckets_path = bucketsPath;
+        if (!isNil(bucketsPath)) this._aggsDef.buckets_path = bucketsPath;
     }
 
     /**

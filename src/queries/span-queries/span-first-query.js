@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash');
+const isNil = require('lodash.isnil');
 
 const {
     util: { checkType }
@@ -30,7 +30,7 @@ class SpanFirstQuery extends SpanQueryBase {
     constructor(spanQry) {
         super('span_first');
 
-        if (!_.isNil(spanQry)) this.match(spanQry);
+        if (!isNil(spanQry)) this.match(spanQry);
     }
 
     /**
