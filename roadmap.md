@@ -5,7 +5,7 @@
      + [x] Usage
      + [x] Examples
      + [x] Credits
- - [ ] Host documentation, demo using js.org
+ - [x] Host documentation, demo using js.org
  - [ ] Tests
  - [ ] travis setup with npm publish
  - [ ] Documentation examples

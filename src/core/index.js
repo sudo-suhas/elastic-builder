@@ -15,6 +15,8 @@ exports.Aggregation = require('./aggregation');
 
 exports.Query = require('./query');
 
+exports.Script = require('./script');
+
 exports.Highlight = require('./highlight');
 
 exports.GeoPoint = require('./geo-point');

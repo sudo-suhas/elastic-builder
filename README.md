@@ -6,7 +6,8 @@ A Node.js implementation of the [Elasticsearch](http://www.elasticsearch.org/) D
 **Check out the [API reference documentation](http://elastic-builder.js.org/docs).**
 
 ## Elasticsearch compatibility
-`elastic-builder` supports 5.x query DSL. For older versions of the DSL, you can try
+`elastic-builder` was built for 5.x query DSL. However, the library should be usable with
+2.x as well. For older versions of the DSL, you can try
 [`elastic.js`](https://github.com/ErwanPigneul/elastic.js)
 or [`bodybuilder`](https://github.com/danpaz/bodybuilder)
 
@@ -56,7 +57,7 @@ Try it out on the command line using the node REPL:
 # Start the repl
 node ./node_modules/elastic-builder/repl.js
 # The builder is available in the context variable bob
-bob > bob.prettyPrint(bob.requestBodySearch().query(bob.matchQuery('message', 'this is a test')));
+elastic-builder > bob.prettyPrint(bob.requestBodySearch().query(bob.matchQuery('message', 'this is a test')));
 ```
 
 ## Motivation
@@ -70,7 +71,8 @@ This library is a port of `elastic.js` to es6 with elasticsearch 5.3 compatibili
 
 ## API Reference
 API documentation was generated using [documentation.js](https://github.com/documentationjs/documentation)
-It can be accessed here - http://elastic-builder.js.org/docs
+It can be accessed here - http://elastic-builder.js.org/docs.
+It is being hosted with help from this awesome project - https://github.com/js-org/dns.js.org
 
 Dcoumentation is a WIP. See [roadmap](roadmap.md).
 

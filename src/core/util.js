@@ -24,8 +24,9 @@ exports.checkType = function checktype(instance, type) {
  * Wrapper for calling constructor with given parameters
  *
  * @private
- * @param {Class} Cls
- * @returns {function} Wrapper on constructor which creates an instance of given Class
+ * @param {function(new:T, ...*)} Cls The class constructor.
+ * @returns {function(...*): T} Wrapper of the class constructor which creates an instance of given Class
+ * @template T
  */
 exports.constructorWrapper = function constructorWrapper(Cls) {
     return (...args) => new Cls(...args);
