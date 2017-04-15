@@ -1,7 +1,6 @@
 'use strict';
 
-const isEmpty = require('lodash.isempty'),
-    forEach = require('lodash.foreach');
+const isEmpty = require('lodash.isempty'), forEach = require('lodash.foreach');
 
 const { util: { checkType } } = require('../../core');
 
@@ -17,7 +16,6 @@ const hasOwnProp = Object.prototype.hasOwnProperty;
  * @extends BucketAggregationBase
  */
 class RangeAggregationBase extends BucketAggregationBase {
-
     /**
      * Creates an instance of `RangeAggregationBase`
      *
@@ -59,9 +57,7 @@ class RangeAggregationBase extends BucketAggregationBase {
         checkType(range, Object);
         if (!this._rangeRequiredKeys.some(hasOwnProp, range)) {
             throw new Error(
-                `Invalid Range! Range must have at least one of ${
-                    this._rangeRequiredKeys
-                }`
+                `Invalid Range! Range must have at least one of ${this._rangeRequiredKeys}`
             );
         }
 

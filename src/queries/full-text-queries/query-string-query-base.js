@@ -1,7 +1,7 @@
 'use strict';
 
-const has = require('lodash.has'),
-    concat = require('lodash.concat');
+const has = require('lodash.has');
+const concat = require('lodash.concat');
 
 const { util: { checkType } } = require('../../core');
 const FullTextQueryBase = require('./full-text-query-base');
@@ -16,7 +16,6 @@ const FullTextQueryBase = require('./full-text-query-base');
  * @extends FullTextQueryBase
  */
 class QueryStringQueryBase extends FullTextQueryBase {
-
     /**
      * Creates an instance of `QueryStringQueryBase`
      *

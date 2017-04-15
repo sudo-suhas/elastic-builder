@@ -2,9 +2,7 @@
 
 const isNil = require('lodash.isnil');
 
-const {
-    Query
-} = require('../../core');
+const { Query } = require('../../core');
 
 /**
  * The `percolate` query can be used to match queries stored in an index.
@@ -28,7 +26,6 @@ const {
  * @extends Query
  */
 class PercolateQuery extends Query {
-
     /**
      * Creates an instance of `PercolateQuery`
      *

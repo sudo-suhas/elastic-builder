@@ -8,7 +8,8 @@ const Query = require('./query');
 const { checkType, recursiveToJSON } = require('./util');
 const { RESCORE_MODE_SET } = require('./consts');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html';
 
 /**
  * A `rescore` request can help to improve precision by reordering just

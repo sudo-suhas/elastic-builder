@@ -11,7 +11,8 @@ const {
 
 const GeoQueryBase = require('./geo-query-base');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-query.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-query.html';
 
 /**
  * Filter documents indexed using the `geo_shape` type. Requires
@@ -44,7 +45,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  *      .path('location'))
  */
 class GeoShapeQuery extends GeoQueryBase {
-
     /**
      * Creates an instance of `GeoShapeQuery`
      *

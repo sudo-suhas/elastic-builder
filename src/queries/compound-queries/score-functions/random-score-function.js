@@ -11,7 +11,6 @@ const ScoreFunction = require('./score-function');
  * @extends ScoreFunction
  */
 class RandomScoreFunction extends ScoreFunction {
-
     /**
      * Creates an instance of `RandomScoreFunction`
      */

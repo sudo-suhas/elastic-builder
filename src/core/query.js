@@ -6,7 +6,6 @@ const { recursiveToJSON } = require('./util');
  * Base class implementation for all query types.
  */
 class Query {
-
     /**
      * Creates an instance of `Query`.
      *

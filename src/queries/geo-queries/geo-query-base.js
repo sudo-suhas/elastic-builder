@@ -2,10 +2,7 @@
 
 const isNil = require('lodash.isnil');
 
-const {
-    Query,
-    util: { recursiveToJSON }
-} = require('../../core');
+const { Query, util: { recursiveToJSON } } = require('../../core');
 
 /**
  * The `GeoQueryBase` provides support for common options used across
@@ -15,7 +12,6 @@ const {
  * @extends Query
  */
 class GeoQueryBase extends Query {
-
     /**
      * Creates an instance of `GeoQueryBase`
      *
@@ -54,9 +50,11 @@ class GeoQueryBase extends Query {
     validationMethod(method) {
         const methodUpper = method.toUpperCase();
 
-        if (methodUpper !== 'IGNORE_MALFORMED' &&
+        if (
+            methodUpper !== 'IGNORE_MALFORMED' &&
             methodUpper !== 'COERCE' &&
-            methodUpper !== 'STRICT') {
+            methodUpper !== 'STRICT'
+        ) {
             throw new Error(
                 '`validation_method` must be one of `IGNORE_MALFORMED`, `COERCE` or `STRICT`'
             );
@@ -75,9 +73,7 @@ class GeoQueryBase extends Query {
      */
     toJSON() {
         return recursiveToJSON({
-            [this.queryType]: Object.assign({
-                [this._field]: this._fieldOpts
-            }, this._queryOpts)
+            [this.queryType]: Object.assign({ [this._field]: this._fieldOpts }, this._queryOpts)
         });
     }
 }

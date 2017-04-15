@@ -4,7 +4,8 @@ const isNil = require('lodash.isnil');
 
 const JoiningQueryBase = require('./joining-query-base');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html';
 
 /**
  * Nested query allows to query nested objects. The query is executed against
@@ -16,7 +17,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends JoiningQueryBase
  */
 class NestedQuery extends JoiningQueryBase {
-
     /**
      * Creates an instance of `NestedQuery`
      *

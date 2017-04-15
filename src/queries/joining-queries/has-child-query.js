@@ -4,7 +4,8 @@ const isNil = require('lodash.isnil');
 
 const JoiningQueryBase = require('./joining-query-base');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html';
 
 /**
  * The `has_child` filter accepts a query and the child type to run against, and
@@ -15,7 +16,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends JoiningQueryBase
  */
 class HasChildQuery extends JoiningQueryBase {
-
     /**
      * Creates an instance of `HasChildQuery`
      *

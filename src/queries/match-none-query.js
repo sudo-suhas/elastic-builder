@@ -10,7 +10,6 @@ const { Query } = require('../core');
  * @extends Query
  */
 class MatchNoneQuery extends Query {
-
     /**
      * Creates an instance of `MatchNoneQuery`
      */

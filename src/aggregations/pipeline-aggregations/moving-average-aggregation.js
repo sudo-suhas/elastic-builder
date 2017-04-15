@@ -21,7 +21,6 @@ const ES_REF_URL =
  * @extends PipelineAggregationBase
  */
 class MovingAverageAggregation extends PipelineAggregationBase {
-
     /**
      * Creates an instance of `MovingAverageAggregation`
      *
@@ -55,9 +54,7 @@ class MovingAverageAggregation extends PipelineAggregationBase {
         if (!MODEL_SET.has(modelLower)) {
             console.log(`See ${ES_REF_URL}`);
             console.warn(`Got 'model' - ${model}`);
-            throw new Error(
-                `The 'model' parameter should belong to ${inspect(MODEL_SET)}`
-            );
+            throw new Error(`The 'model' parameter should belong to ${inspect(MODEL_SET)}`);
         }
 
         this._aggsDef.model = modelLower;

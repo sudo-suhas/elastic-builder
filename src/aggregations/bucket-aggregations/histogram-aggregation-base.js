@@ -12,7 +12,6 @@ const BucketAggregationBase = require('./bucket-aggregation-base');
  * @extends BucketAggregationBase
  */
 class HistogramAggregationBase extends BucketAggregationBase {
-
     /**
      * Creates an instance of `HistogramAggregationBase`
      *
@@ -78,8 +77,7 @@ class HistogramAggregationBase extends BucketAggregationBase {
     order(key, direction = 'desc') {
         const directionLower = direction.toLowerCase();
 
-        if (directionLower !== 'asc' &&
-            directionLower !== 'desc') {
+        if (directionLower !== 'asc' && directionLower !== 'desc') {
             throw new Error('`direction` must be either `asc` or `desc`');
         }
 

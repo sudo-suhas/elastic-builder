@@ -1,7 +1,7 @@
 'use strict';
 
-const has = require('lodash.has'),
-    isNil = require('lodash.isnil');
+const has = require('lodash.has');
+const isNil = require('lodash.isnil');
 
 const { Query } = require('../../core');
 
@@ -12,7 +12,6 @@ const { Query } = require('../../core');
  * @extends Query
  */
 class ValueTermQueryBase extends Query {
-
     /**
      * Creates an instance of `ValueTermQueryBase`
      *
@@ -49,7 +48,6 @@ class ValueTermQueryBase extends Query {
         return this;
     }
 
-
     /**
      * Override default `toJSON` to return DSL representation of the term level query
      * class instance.
@@ -65,8 +63,9 @@ class ValueTermQueryBase extends Query {
             throw new Error('Value is required for term level query!');
         }
 
-        const qryOpts = Object.keys(this._queryOpts).length === 1 ?
-            this._queryOpts.value : this._queryOpts;
+        const qryOpts = Object.keys(this._queryOpts).length === 1
+            ? this._queryOpts.value
+            : this._queryOpts;
         return {
             [this.queryType]: {
                 [this._field]: qryOpts

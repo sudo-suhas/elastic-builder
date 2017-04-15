@@ -15,7 +15,6 @@ const MultiTermQueryBase = require('./multi-term-query-base');
  * @extends MultiTermQueryBase
  */
 class FuzzyQuery extends MultiTermQueryBase {
-
     /**
      * Creates an instance of `FuzzyQuery`.
      *

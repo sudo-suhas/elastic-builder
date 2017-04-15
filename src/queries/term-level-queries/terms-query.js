@@ -1,11 +1,9 @@
 'use strict';
 
-const isNil = require('lodash.isnil'),
-    concat = require('lodash.concat');
+const isNil = require('lodash.isnil');
+const concat = require('lodash.concat');
 
-const {
-    util: { checkType }
-} = require('../../core');
+const { util: { checkType } } = require('../../core');
 
 const { Query } = require('../../core');
 
@@ -17,7 +15,6 @@ const { Query } = require('../../core');
  * @extends Query
  */
 class TermsQuery extends Query {
-
     // TODO: The DSL is a mess. Think about cleaning up some.
 
     /**

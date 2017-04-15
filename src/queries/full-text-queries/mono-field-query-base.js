@@ -1,7 +1,7 @@
 'use strict';
 
-const has = require('lodash.has'),
-    isNil = require('lodash.isnil');
+const has = require('lodash.has');
+const isNil = require('lodash.isnil');
 
 const FullTextQueryBase = require('./full-text-query-base');
 
@@ -12,7 +12,6 @@ const FullTextQueryBase = require('./full-text-query-base');
  * @extends FullTextQueryBase
  */
 class MonoFieldQueryBase extends FullTextQueryBase {
-
     /**
      * Creates an instance of `MonoFieldQueryBase`
      *

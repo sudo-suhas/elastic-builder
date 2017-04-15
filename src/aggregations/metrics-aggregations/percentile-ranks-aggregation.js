@@ -2,9 +2,7 @@
 
 const isNil = require('lodash.isnil');
 
-const {
-    util: { checkType }
-} = require('../../core');
+const { util: { checkType } } = require('../../core');
 
 const MetricsAggregationBase = require('./metrics-aggregation-base');
 
@@ -25,7 +23,6 @@ const ES_REF_URL =
  * @extends MetricsAggregationBase
  */
 class PercentileRanksAggregation extends MetricsAggregationBase {
-
     /**
      * Creates an instance of `PercentileRanksAggregation`
      *

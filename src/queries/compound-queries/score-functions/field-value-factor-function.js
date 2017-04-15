@@ -4,9 +4,7 @@ const { inspect } = require('util');
 
 const isNil = require('lodash.isnil');
 
-const {
-    consts: { FIELD_MODIFIER_SET }
-} = require('../../../core');
+const { consts: { FIELD_MODIFIER_SET } } = require('../../../core');
 
 const ScoreFunction = require('./score-function');
 
@@ -24,7 +22,6 @@ const ES_REF_URL =
  * @extends ScoreFunction
  */
 class FieldValueFactorFunction extends ScoreFunction {
-
     /**
      * Creates an instance of `FieldValueFactorFunction`
      *

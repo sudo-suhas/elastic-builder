@@ -2,10 +2,7 @@
 
 const isNil = require('lodash.isnil');
 
-const {
-    Script,
-    util: { checkType }
-} = require('../../../core');
+const { Script, util: { checkType } } = require('../../../core');
 
 const ScoreFunction = require('./score-function');
 
@@ -19,7 +16,6 @@ const ScoreFunction = require('./score-function');
  * @extends ScoreFunction
  */
 class ScriptScoreFunction extends ScoreFunction {
-
     /**
      * Creates an instance of `ScriptScoreFunction`
      *

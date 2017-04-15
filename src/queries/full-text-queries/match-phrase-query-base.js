@@ -9,7 +9,6 @@ const MonoFieldQueryBase = require('./mono-field-query-base');
  * @extends MonoFieldQueryBase
  */
 class MatchPhraseQueryBase extends MonoFieldQueryBase {
-
     /**
      * Creates an instance of `MatchPhraseQueryBase`
      *

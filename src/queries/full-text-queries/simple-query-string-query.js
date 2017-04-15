@@ -15,7 +15,6 @@ const ES_REF_URL =
  * @extends QueryStringQueryBase
  */
 class SimpleQueryStringQuery extends QueryStringQueryBase {
-
     /**
      * Creates an instance of `SimpleQueryStringQuery`
      *

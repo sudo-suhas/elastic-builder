@@ -1,9 +1,6 @@
 'use strict';
 
-const {
-    Query,
-    util: { checkType, recursiveToJSON }
-} = require('../../../core');
+const { Query, util: { checkType, recursiveToJSON } } = require('../../../core');
 
 /**
  * `ScoreFunction` provides support for common options used across
@@ -12,7 +9,6 @@ const {
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#score-functions)
  */
 class ScoreFunction {
-
     /**
      * Creates an instance of `ScoreFunction`
      *
@@ -59,9 +55,7 @@ class ScoreFunction {
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON() {
-        const repr = Object.assign({
-            [this.name]: this._opts
-        }, this._body);
+        const repr = Object.assign({ [this.name]: this._opts }, this._body);
         return recursiveToJSON(repr);
     }
 }

@@ -1,12 +1,9 @@
 'use strict';
 
-const has = require('lodash.has'),
-    forEach = require('lodash.foreach');
+const has = require('lodash.has');
+const forEach = require('lodash.foreach');
 
-const {
-    Query,
-    util: { checkType }
-} = require('../../core');
+const { Query, util: { checkType } } = require('../../core');
 
 /**
  * A query that generates the union of documents produced by its subqueries,
@@ -19,7 +16,6 @@ const {
  * @extends Query
  */
 class DisMaxQuery extends Query {
-
     /**
      * Creates an instance of `DisMaxQuery`
      */

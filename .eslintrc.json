@@ -14,6 +14,9 @@
   },
   "globals": {},
   "extends": ["eslint:recommended"],
+  "plugins": [
+    "prettier"
+  ],
   "settings": {
     "lodash": {
       "pragma": "_",
@@ -28,13 +31,7 @@
         "allowEmptyCatch": true
       }
     ],
-    "no-extra-parens": [
-      "warn",
-      "all",
-      {
-        "nestedBinaryExpressions": false
-      }
-    ],
+    "no-extra-parens": "off", // let prettier handle it
     "no-irregular-whitespace": [
       "error",
       {
@@ -95,10 +92,7 @@
         "commentPattern": "^skip\\sdefault"
       }
     ],
-    "dot-location": [
-      "error",
-      "property"
-    ],
+    "dot-location": "off", // let prettier handle it
     "no-alert": "error",
     "no-caller": "error",
     "no-extra-bind": "error",
@@ -156,29 +150,16 @@
     // Node.js and CommonJS
     "no-path-concat": "error",
     // Stylistic Issues
-    "block-spacing": "warn",
+    "block-spacing": "off", // let prettier handle it
     "camelcase": [
       "warn",
       {
         "properties": "never"
       }
     ],
-    "comma-style": [
-      "warn",
-      "last"
-    ],
-    "eol-last": [
-      "error",
-      "unix"
-    ],
-    "indent": [
-      "warn",
-      4,
-      {
-        "VariableDeclarator": 1,
-        "SwitchCase": 1
-      }
-    ],
+    "comma-style": "off", // let prettier handle it
+    "eol-last": "off", // let prettier handle it
+    "indent": "off", // let prettier handle it
     "linebreak-style": [
       "error",
       "unix"
@@ -199,13 +180,7 @@
     ],
     "no-bitwise": "error",
     "no-lonely-if": "warn",
-    "no-multiple-empty-lines": [
-      "error",
-      {
-        "max": 2,
-        "maxEOF": 1
-      }
-    ],
+    "no-multiple-empty-lines": "off", // let prettier handle it
     "no-new": "error",
     "quotes": [
       "warn",
@@ -221,10 +196,7 @@
         }
       }
     ],
-    "semi": [
-      "error",
-      "always"
-    ],
+    "semi": "off", // let prettier handle it
     "callback-return": ["error", ["callback", "cb", "done"]],
     "handle-callback-err": "error",
     "no-mixed-requires": [
@@ -234,20 +206,11 @@
       }
     ],
     "no-new-require": "error",
-    "array-bracket-spacing": [
-      "error",
-      "never"
-    ],
-    "brace-style": "error",
-    "comma-dangle": [
-      "error",
-      "never"
-    ],
-    "comma-spacing": "warn",
-    "computed-property-spacing": [
-      "error",
-      "never"
-    ],
+    "array-bracket-spacing": "off", // let prettier handle it
+    "brace-style": "off", // let prettier handle it
+    "comma-dangle": "off", // let prettier handle it
+    "comma-spacing": "off", // let prettier handle it
+    "computed-property-spacing": "off", // let prettier handle it
     "consistent-this": [
       "error",
       "self"
@@ -286,13 +249,8 @@
       6
     ],
     "max-statements-per-line": "error",
-    "new-parens": "error",
-    "newline-per-chained-call": [
-      "error",
-      {
-        "ignoreChainWithDepth": 3
-      }
-    ],
+    "new-parens": "off", // let prettier handle it
+    "newline-per-chained-call": "off", // let prettier handle it
     "no-array-constructor": "error",
     "no-mixed-operators": [
       "error",
@@ -300,32 +258,18 @@
         "allowSamePrecedence": true
       }
     ],
-    "no-mixed-spaces-and-tabs": [
-      "error",
-      "smart-tabs"
-    ],
+    "no-mixed-spaces-and-tabs": "off", // let prettier handle it
     "no-new-object": "error",
-    "no-spaced-func": "error",
-    "no-trailing-spaces": [
-      "warn",
-      {
-        "skipBlankLines": true
-      }
-    ],
+    "no-spaced-func": "off", // let prettier handle it
+    "no-trailing-spaces": "off", // let prettier handle it
     "no-unneeded-ternary": "error",
-    "no-whitespace-before-property": "error",
+    "no-whitespace-before-property": "off", // let prettier handle it
     "operator-assignment": [
       "error",
       "always"
     ],
-    "quote-props": [
-      "error",
-      "as-needed",
-      {
-        "keywords": true
-      }
-    ],
-    "space-unary-ops": "error",
+    "quote-props": "off", // let prettier handle it
+    "space-unary-ops": "off", // let prettier handle it
     "spaced-comment": [
       "error",
       "always",
@@ -338,27 +282,15 @@
         ]
       }
     ],
-    "wrap-regex": "error",
+    "wrap-regex": "off", // let prettier handle it
     // ECMAScript 6
     "arrow-body-style": [
       "error",
       "as-needed"
     ],
-    "arrow-parens": [
-      "error",
-      "as-needed"
-    ],
-    "arrow-spacing": [
-      "error",
-      {
-        "before": true,
-        "after": true
-      }
-    ],
-    "generator-star-spacing": [
-      "error",
-      "after"
-    ],
+    "arrow-parens": "off", // let prettier handle it
+    "arrow-spacing": "off", // let prettier handle it
+    "generator-star-spacing": "off", // let prettier handle it
     "no-confusing-arrow": "error",
     "no-duplicate-imports": [
       "error",
@@ -380,6 +312,15 @@
     "prefer-rest-params": "warn",
     "prefer-spread": "warn",
     "prefer-template": "error",
-    "require-yield": "error"
+    "require-yield": "error",
+    // Prettier rules
+    "prettier/prettier": [
+      "error", {
+          "trailingComma": "none",
+          "singleQuote": true,
+          "printWidth": 100,
+          "tabWidth": 4
+        }
+      ]
   }
 }

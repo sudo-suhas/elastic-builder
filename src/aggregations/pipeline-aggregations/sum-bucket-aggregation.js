@@ -12,7 +12,6 @@ const PipelineAggregationBase = require('./pipeline-aggregation-base');
  * @extends PipelineAggregationBase
  */
 class SumBucketAggregation extends PipelineAggregationBase {
-
     /**
      * Creates an instance of `SumBucketAggregation`
      *

@@ -16,7 +16,6 @@ const ES_REF_URL =
  * @extends BucketAggregationBase
  */
 class ChildrenAggregation extends BucketAggregationBase {
-
     /**
      * Creates an instance of `ChildrenAggregation`
      *

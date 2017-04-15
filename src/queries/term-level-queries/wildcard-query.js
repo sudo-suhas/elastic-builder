@@ -3,7 +3,8 @@
 const MultiTermQueryBase = require('./multi-term-query-base');
 const { validateRewiteMethod } = require('../helper');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html';
 
 /**
  * Matches documents that have fields matching a wildcard expression (**not analyzed**).
@@ -13,7 +14,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends MultiTermQueryBase
  */
 class WildcardQuery extends MultiTermQueryBase {
-
     /**
      * Creates an instance of `WildcardQuery`.
      *

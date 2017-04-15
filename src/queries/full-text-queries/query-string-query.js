@@ -3,7 +3,8 @@
 const QueryStringQueryBase = require('./query-string-query-base');
 const { validateRewiteMethod } = require('../helper');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html';
 
 /**
  * A query that uses a query parser in order to parse its content.
@@ -13,7 +14,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends QueryStringQueryBase
  */
 class QueryStringQuery extends QueryStringQueryBase {
-
     /**
      * Creates an instance of `QueryStringQuery`
      *

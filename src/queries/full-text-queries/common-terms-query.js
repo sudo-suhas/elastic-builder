@@ -1,11 +1,12 @@
 'use strict';
 
-const isObject = require('lodash.isobject'),
-    has = require('lodash.has');
+const isObject = require('lodash.isobject');
+const has = require('lodash.has');
 
 const MonoFieldQueryBase = require('./mono-field-query-base');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html';
 
 /**
  * The `common` terms query is a modern alternative to stopwords which
@@ -16,7 +17,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends MonoFieldQueryBase
  */
 class CommonTermsQuery extends MonoFieldQueryBase {
-
     /**
      * Creates an instance of `CommonTermsQuery`
      *
@@ -53,7 +53,6 @@ class CommonTermsQuery extends MonoFieldQueryBase {
      * @private
      */
     _checkMinMatchRepr() {
-
         if (!has(this._queryOpts, 'minimum_should_match')) {
             this._queryOpts.minimum_should_match = {};
         } else if (!isObject(this._queryOpts.minimum_should_match)) {

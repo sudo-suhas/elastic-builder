@@ -21,7 +21,6 @@ const isNil = require('lodash.isnil');
  *  .path('location');
  */
 class IndexedShape {
-
     /**
      * Creates an instance of `IndexedShape`
      *

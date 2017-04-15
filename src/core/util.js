@@ -1,5 +1,7 @@
 'use strict';
 
+const { inspect } = require('util');
+
 const isEmpty = require('lodash.isempty'),
     isObject = require('lodash.isobject'),
     map = require('lodash.map'),
@@ -15,7 +17,7 @@ const isEmpty = require('lodash.isempty'),
  */
 exports.checkType = function checktype(instance, type) {
     if (!(instance instanceof type)) {
-        console.warn(`${instance} is of the type ${typeof instance}`);
+        console.warn(`${inspect(instance)} is of the type ${typeof instance}`);
         throw new TypeError(`Argument must be an instance of ${type.name}`);
     }
 };

@@ -16,7 +16,6 @@ const MetricsAggregationBase = require('./metrics-aggregation-base');
  * @extends MetricsAggregationBase
  */
 class ExtendedStatsAggregation extends MetricsAggregationBase {
-
     /**
      * Creates an instance of `ExtendedStatsAggregation`
      *

@@ -2,13 +2,12 @@
 
 const { inspect } = require('util');
 
-const {
-    consts: { GEO_RELATION_SET }
-} = require('../../core');
+const { consts: { GEO_RELATION_SET } } = require('../../core');
 
 const MultiTermQueryBase = require('./multi-term-query-base');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html';
 
 /**
  * Matches documents with fields that have terms within a certain range.
@@ -23,7 +22,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends MultiTermQueryBase
  */
 class RangeQuery extends MultiTermQueryBase {
-
     /**
      * Creates an instance of `RangeQuery`.
      *

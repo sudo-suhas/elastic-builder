@@ -19,7 +19,6 @@ const ES_REF_URL =
  * @extends BucketAggregationBase
  */
 class DiversifiedSamplerAggregation extends BucketAggregationBase {
-
     /**
      * Creates an instance of `DiversifiedSamplerAggregation`
      *
@@ -71,9 +70,7 @@ class DiversifiedSamplerAggregation extends BucketAggregationBase {
             console.log(`See ${ES_REF_URL}#_execution_hint`);
             console.warn(`Got 'execution_hint' - ${hint}`);
             throw new Error(
-                `The 'execution_hint' parameter should belong to ${
-                    inspect(EXECUTION_HINT_SET)
-                }`
+                `The 'execution_hint' parameter should belong to ${inspect(EXECUTION_HINT_SET)}`
             );
         }
 

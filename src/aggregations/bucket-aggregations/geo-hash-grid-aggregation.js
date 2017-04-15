@@ -2,7 +2,8 @@
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html';
 
 /**
  * A multi-bucket aggregation that works on geo_point fields and groups points
@@ -15,7 +16,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends BucketAggregationBase
  */
 class GeoHashGridAggregation extends BucketAggregationBase {
-
     /**
      * Creates an instance of `GeoHashGridAggregation`
      *

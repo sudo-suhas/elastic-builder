@@ -2,9 +2,7 @@
 
 const forEach = require('lodash.foreach');
 
-const {
-    util: { checkType }
-} = require('../../core');
+const { util: { checkType } } = require('../../core');
 
 const SpanQueryBase = require('./span-query-base');
 
@@ -28,7 +26,6 @@ const SpanQueryBase = require('./span-query-base');
  * @extends SpanQueryBase
  */
 class SpanNearQuery extends SpanQueryBase {
-
     /**
      * Creates an instance of `SpanNearQuery`
      */

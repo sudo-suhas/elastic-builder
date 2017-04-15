@@ -14,7 +14,6 @@ const ValueTermQueryBase = require('./value-term-query-base');
  * @extends ValueTermQueryBase
  */
 class TermQuery extends ValueTermQueryBase {
-
     /**
      * Creates an instance of `TermQuery`.
      *

@@ -2,9 +2,7 @@
 
 const isNil = require('lodash.isnil');
 
-const {
-    util: { checkType }
-} = require('../../core');
+const { util: { checkType } } = require('../../core');
 
 const SpanQueryBase = require('./span-query-base');
 
@@ -37,7 +35,6 @@ const SpanQueryBase = require('./span-query-base');
  * @extends SpanQueryBase
  */
 class SpanFieldMaskingQuery extends SpanQueryBase {
-
     /**
      * Creates an instance of `SpanFieldMaskingQuery`
      *

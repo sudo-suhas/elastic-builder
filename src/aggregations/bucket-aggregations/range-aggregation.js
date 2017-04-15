@@ -16,7 +16,6 @@ const RangeAggregationBase = require('./range-aggregation-base');
  * @extends RangeAggregationBase
  */
 class RangeAggregation extends RangeAggregationBase {
-
     /**
      * Creates an instance of `RangeAggregation`
      *

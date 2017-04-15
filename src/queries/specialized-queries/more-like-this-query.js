@@ -2,10 +2,7 @@
 
 const has = require('lodash.has');
 
-const {
-    Query,
-    util: { checkType }
-} = require('../../core');
+const { Query, util: { checkType } } = require('../../core');
 
 /**
  * The More Like This Query (MLT Query) finds documents that are "like" a given set
@@ -44,7 +41,6 @@ const {
  * @extends Query
  */
 class MoreLikeThisQuery extends Query {
-
     /**
      * Creates an instance of `MoreLikeThisQuery`
      */
@@ -61,9 +57,10 @@ class MoreLikeThisQuery extends Query {
     _setSearchClause(clauseType, clauses) {
         // Replace the field. Don't care about previous contents
         if (Array.isArray(clauses)) this._queryOpts[clauseType] = clauses;
-        // Keep the single `like` without array.
-        else if (!has(this._queryOpts, clauseType)) this._queryOpts[clauseType] = clauses;
-        else {
+        else if (!has(this._queryOpts, clauseType)) {
+            // Keep the single `like` without array.
+            this._queryOpts[clauseType] = clauses;
+        } else {
             // Wrap the single `like` in an array
             if (!Array.isArray(this._queryOpts[clauseType])) {
                 this._queryOpts[clauseType] = [this._queryOpts[clauseType]];

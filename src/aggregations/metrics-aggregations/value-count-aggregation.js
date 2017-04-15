@@ -2,7 +2,8 @@
 
 const MetricsAggregationBase = require('./metrics-aggregation-base');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-valuecount-aggregation.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-valuecount-aggregation.html';
 
 /**
  * A single-value metrics aggregation that counts the number of values that
@@ -19,7 +20,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends MetricsAggregationBase
  */
 class ValueCountAggregation extends MetricsAggregationBase {
-
     /**
      * Creates an instance of `ValueCountAggregation`
      *

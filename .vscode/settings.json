@@ -10,11 +10,26 @@
   "[json]": {
     "editor.tabSize": 2
   },
+  "prettier.printWidth": 100,
+  "prettier.tabWidth": 4,
+  "prettier.singleQuote": true,
   "beautify.language": {
     "js": {
-      "type": [
-        "javascript"
+      "ext": [
+        "json"
       ]
-    }
-  }
+    },
+    "css": [
+      "css"
+    ],
+    "html": [
+      "htm",
+      "html"
+    ]
+  },
+  "beautify.onSave": [
+    "html",
+    "css",
+    "json"
+  ]
 }

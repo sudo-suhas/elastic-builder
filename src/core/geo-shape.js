@@ -33,7 +33,6 @@ const { checkType } = require('./util');
  * bob.geoShape('multipoint', [ [102.0, 2.0], [103.0, 2.0] ])
  */
 class GeoShape {
-
     /**
      * A Shape object that can be used in queries and filters that
      * take a Shape.  Shape uses the GeoJSON format.

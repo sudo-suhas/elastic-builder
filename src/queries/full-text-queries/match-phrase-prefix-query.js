@@ -11,7 +11,6 @@ const ES_REF_URL =
  * @extends MatchPhraseQueryBase
  */
 class MatchPhrasePrefixQuery extends MatchPhraseQueryBase {
-
     /**
      * Creates an instance of `MatchPhrasePrefixQuery`
      *

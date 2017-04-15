@@ -2,7 +2,8 @@
 
 const MetricsAggregationBase = require('./metrics-aggregation-base');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-scripted-metric-aggregation.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-scripted-metric-aggregation.html';
 
 /**
  * A metric aggregation that executes using scripts to provide a metric output.
@@ -15,7 +16,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends MetricsAggregationBase
  */
 class ScriptedMetricAggregation extends MetricsAggregationBase {
-
     /**
      * Creates an instance of `ScriptedMetricAggregation`
      *

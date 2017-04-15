@@ -2,11 +2,7 @@
 
 const isNil = require('lodash.isnil');
 
-const {
-    Aggregation,
-    Script,
-    util: { checkType }
-} = require('../../core');
+const { Aggregation, Script, util: { checkType } } = require('../../core');
 
 /**
  * The `BucketAggregationBase` provides support for common options used across
@@ -15,7 +11,6 @@ const {
  * @extends Aggregation
  */
 class BucketAggregationBase extends Aggregation {
-
     /**
      * Creates an instance of `BucketAggregationBase`
      *

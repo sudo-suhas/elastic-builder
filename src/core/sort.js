@@ -2,15 +2,16 @@
 
 const { inspect } = require('util');
 
-const isEmpty = require('lodash.isempty'),
-    isNil = require('lodash.isnil');
+const isEmpty = require('lodash.isempty');
+const isNil = require('lodash.isnil');
 
-const Query = require('./query'),
-    Script = require('./script');
+const Query = require('./query');
+const Script = require('./script');
 const { checkType, recursiveToJSON } = require('./util');
 const { SORT_MODE_SET, UNIT_SET } = require('./consts');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html';
 
 /**
  * Allows creating and configuring sort on specified field.
@@ -18,7 +19,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html)
  */
 class Sort {
-
     /**
      * Creates an instance of `Sort`
      *
@@ -46,8 +46,7 @@ class Sort {
      */
     order(order) {
         const orderLower = order.toLowerCase();
-        if (orderLower !== 'asc' &&
-            orderLower !== 'desc') {
+        if (orderLower !== 'asc' && orderLower !== 'desc') {
             throw new Error('`order` must be either `asc` or `desc`');
         }
 
@@ -65,9 +64,7 @@ class Sort {
         if (!SORT_MODE_SET.has(mode)) {
             console.log(`See ${ES_REF_URL}`);
             console.warn(`Got 'mode' - ${mode}`);
-            throw new Error(
-                `The 'mode' parameter should belong to ${inspect(SORT_MODE_SET)}`
-            );
+            throw new Error(`The 'mode' parameter should belong to ${inspect(SORT_MODE_SET)}`);
         }
 
         this._opts.mode = mode;
@@ -182,9 +179,7 @@ class Sort {
         if (!UNIT_SET.has(unit)) {
             console.log(`See ${ES_REF_URL}`);
             console.warn(`Got 'unit' - ${unit}`);
-            throw new Error(
-                `The 'unit' parameter should belong to ${inspect(UNIT_SET)}`
-            );
+            throw new Error(`The 'unit' parameter should belong to ${inspect(UNIT_SET)}`);
         }
 
         this._aggsDef.unit = unit;
@@ -239,18 +234,14 @@ class Sort {
         if (!isNil(this._geoPoint)) {
             // Should I pick only the accepted properties here?
             repr = {
-                _geo_distance: Object.assign({
-                    [this.field]: this._geoPoint
-                }, this._opts)
+                _geo_distance: Object.assign({ [this.field]: this._geoPoint }, this._opts)
             };
         } else if (!isNil(this._script)) {
             repr = {
                 _script: Object.assign({ script: this._script }, this._opts)
             };
         } else {
-            repr = isEmpty(this._opts) ? this.field : {
-                [this.field]: this._opts
-            };
+            repr = isEmpty(this._opts) ? this.field : { [this.field]: this._opts };
         }
         return recursiveToJSON(repr);
     }

@@ -1,7 +1,7 @@
 'use strict';
 
-const isObject = require('lodash.isobject'),
-    isNil = require('lodash.isnil');
+const isObject = require('lodash.isobject');
+const isNil = require('lodash.isnil');
 
 const { checkType } = require('./util');
 
@@ -49,7 +49,6 @@ class GeoPoint {
      */
     _checkObjRepr() {
         if (isNil(this._point)) this._point = {};
-
         else if (!isObject(this._point)) {
             this._warnMixedRepr();
             this._point = {};

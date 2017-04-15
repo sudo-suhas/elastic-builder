@@ -63,9 +63,11 @@
     "documentation": "^4.0.0-beta.19",
     "eslint": "^3.18.0",
     "eslint-plugin-ava": "^4.2.0",
+    "eslint-plugin-prettier": "^2.0.1",
     "lint-staged": "^3.4.0",
     "nyc": "^10.2.0",
     "pre-commit": "^1.2.2",
+    "prettier": "^1.1.0",
     "webpack": "^2.3.3"
   },
   "dependencies": {

@@ -8,7 +8,6 @@ const { Aggregation, util: { checkType } } = require('../../core');
  * @extends Aggregation
  */
 class MatrixStatsAggregation extends Aggregation {
-
     /**
      * Creates and instance of `MatrixStatsAggregation`
      *

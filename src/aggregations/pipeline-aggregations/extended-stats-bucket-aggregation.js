@@ -13,7 +13,6 @@ const PipelineAggregationBase = require('./pipeline-aggregation-base');
  * @extends PipelineAggregationBase
  */
 class ExtendedStatsBucketAggregation extends PipelineAggregationBase {
-
     /**
      * Creates an instance of `ExtendedStatsBucketAggregation`
      *

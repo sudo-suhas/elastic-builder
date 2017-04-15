@@ -1,8 +1,6 @@
 'use strict';
 
-const {
-    util: { checkType }
-} = require('../../core');
+const { util: { checkType } } = require('../../core');
 
 const MetricsAggregationBase = require('./metrics-aggregation-base');
 
@@ -20,7 +18,6 @@ const MetricsAggregationBase = require('./metrics-aggregation-base');
  * @extends MetricsAggregationBase
  */
 class PercentilesAggregation extends MetricsAggregationBase {
-
     /**
      * Creates an instance of `PercentilesAggregation`
      *

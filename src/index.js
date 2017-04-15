@@ -78,23 +78,9 @@ const {
             DecayScoreFunction
         }
     },
-    joiningQueries: {
-        NestedQuery,
-        HasChildQuery,
-        HasParentQuery,
-        ParentIdQuery
-    },
-    geoQueries: {
-        GeoShapeQuery,
-        GeoBoundingBoxQuery,
-        GeoDistanceQuery,
-        GeoPolygonQuery
-    },
-    specializedQueries: {
-        MoreLikeThisQuery,
-        ScriptQuery,
-        PercolateQuery
-    },
+    joiningQueries: { NestedQuery, HasChildQuery, HasParentQuery, ParentIdQuery },
+    geoQueries: { GeoShapeQuery, GeoBoundingBoxQuery, GeoDistanceQuery, GeoPolygonQuery },
+    specializedQueries: { MoreLikeThisQuery, ScriptQuery, PercolateQuery },
     spanQueries: {
         SpanTermQuery,
         SpanMultiTermQuery,
@@ -535,7 +521,5 @@ exports.innerHits = constructorWrapper(InnerHits);
  * @param {Object} obj
  */
 exports.prettyPrint = function prettyPrint(obj) {
-    console.log(
-        JSON.stringify(obj, null, 2)
-    );
+    console.log(JSON.stringify(obj, null, 2));
 };

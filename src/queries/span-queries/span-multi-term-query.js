@@ -2,9 +2,7 @@
 
 const isNil = require('lodash.isnil');
 
-const {
-    util: { checkType }
-} = require('../../core');
+const { util: { checkType } } = require('../../core');
 
 const { MultiTermQueryBase } = require('../term-level-queries');
 
@@ -23,7 +21,6 @@ const SpanQueryBase = require('./span-query-base');
  * @extends SpanQueryBase
  */
 class SpanMultiTermQuery extends SpanQueryBase {
-
     /**
      * Creates an instance of `SpanMultiTermQuery`
      *

@@ -2,11 +2,7 @@
 
 const isNil = require('lodash.isnil');
 
-const {
-    Query,
-    Script,
-    util: { checkType }
-} = require('../../core');
+const { Query, Script, util: { checkType } } = require('../../core');
 
 /**
  * A query allowing to define scripts as queries.
@@ -21,7 +17,6 @@ const {
  * @extends Query
  */
 class ScriptQuery extends Query {
-
     /**
      * Creates an instance of `ScriptQuery`
      *

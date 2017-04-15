@@ -22,7 +22,6 @@ const ES_REF_URL =
  * @extends BucketAggregationBase
  */
 class ReverseNestedAggregation extends BucketAggregationBase {
-
     /**
      * Creates an instance of `ReverseNestedAggregation`
      *

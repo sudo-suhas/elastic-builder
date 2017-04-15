@@ -14,7 +14,6 @@ const ES_REF_URL =
  * @extends TermsAggregationBase
  */
 class TermsAggregation extends TermsAggregationBase {
-
     /**
      * Creates an instance of `TermsAggregation`
      *
@@ -79,8 +78,7 @@ class TermsAggregation extends TermsAggregationBase {
     order(key, direction = 'desc') {
         const directionLower = direction.toLowerCase();
 
-        if (directionLower !== 'asc' &&
-            directionLower !== 'desc') {
+        if (directionLower !== 'asc' && directionLower !== 'desc') {
             throw new Error('`direction` must be either `asc` or `desc`');
         }
 

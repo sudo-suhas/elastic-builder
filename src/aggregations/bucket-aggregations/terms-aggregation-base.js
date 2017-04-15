@@ -2,9 +2,7 @@
 
 const { inspect } = require('util');
 
-const {
-    consts: { EXECUTION_HINT_SET }
-} = require('../../core');
+const { consts: { EXECUTION_HINT_SET } } = require('../../core');
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
@@ -16,7 +14,6 @@ const BucketAggregationBase = require('./bucket-aggregation-base');
  * @extends BucketAggregationBase
  */
 class TermsAggregationBase extends BucketAggregationBase {
-
     /**
      * Creates an instance of `TermsAggregationBase`
      *
@@ -147,9 +144,7 @@ class TermsAggregationBase extends BucketAggregationBase {
         if (!EXECUTION_HINT_SET.has(hint)) {
             console.log(`See ${this._refUrl}#_execution_hint`);
             throw new Error(
-                `The 'execution_hint' parameter should belong to ${
-                    inspect(EXECUTION_HINT_SET)
-                }`
+                `The 'execution_hint' parameter should belong to ${inspect(EXECUTION_HINT_SET)}`
             );
         }
 

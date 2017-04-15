@@ -15,7 +15,6 @@ const PipelineAggregationBase = require('./pipeline-aggregation-base');
  * @extends PipelineAggregationBase
  */
 class PercentilesBucketAggregation extends PipelineAggregationBase {
-
     /**
      * Creates an instance of `PercentilesBucketAggregation`
      *

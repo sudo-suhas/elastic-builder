@@ -1,9 +1,6 @@
 'use strict';
 
-const {
-    Script,
-    util: { checkType }
-} = require('../../core');
+const { Script, util: { checkType } } = require('../../core');
 
 const PipelineAggregationBase = require('./pipeline-aggregation-base');
 
@@ -22,7 +19,6 @@ const ES_REF_URL =
  * @extends PipelineAggregationBase
  */
 class BucketSelectorAggregation extends PipelineAggregationBase {
-
     /**
      * Creates an instance of `BucketSelectorAggregation`
      *

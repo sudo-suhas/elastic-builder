@@ -18,7 +18,6 @@ const {
  * @extends Query
  */
 class JoiningQueryBase extends Query {
-
     /**
      * Creates an instance of `JoiningQueryBase`
      *
@@ -98,7 +97,6 @@ class JoiningQueryBase extends Query {
         this._queryOpts.inner_hits = innerHits;
         return this;
     }
-
 }
 
 module.exports = JoiningQueryBase;

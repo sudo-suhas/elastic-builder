@@ -3,7 +3,8 @@
 const MonoFieldQueryBase = require('./mono-field-query-base');
 const { validateRewiteMethod } = require('../helper');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html';
 
 /**
  * `match` query accepts text/numerics/dates, analyzes them, and constructs a query.
@@ -16,7 +17,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends MonoFieldQueryBase
  */
 class MatchQuery extends MonoFieldQueryBase {
-
     // NOTE: Did not add methods for `slop`, `phrase_slop` and `type`.
     // These are deprecated.
 

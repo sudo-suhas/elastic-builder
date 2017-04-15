@@ -2,7 +2,8 @@
 
 const MetricsAggregationBase = require('./metrics-aggregation-base');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geocentroid-aggregation.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geocentroid-aggregation.html';
 
 /**
  * A metric aggregation that computes the weighted centroid
@@ -13,7 +14,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends MetricsAggregationBase
  */
 class GeoCentroidAggregation extends MetricsAggregationBase {
-
     /**
      * Creates an instance of `GeoCentroidAggregation`
      *

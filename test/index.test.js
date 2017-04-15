@@ -314,7 +314,6 @@ test('aggregations are exported', t => {
     /* ============ ============ ============ */
     t.truthy(bob.MatrixStatsAggregation);
     t.truthy(bob.MatrixStatsAggregation);
-
 });
 
 test('score functions are exported', t => {
@@ -338,7 +337,6 @@ test('score functions are exported', t => {
 
     t.truthy(bob.DecayScoreFunction);
     t.truthy(bob.decayScoreFunction);
-
 });
 
 test('misc are exported', t => {

@@ -1,9 +1,6 @@
 'use strict';
 
-const {
-    Script,
-    util: { checkType }
-} = require('../../core');
+const { Script, util: { checkType } } = require('../../core');
 
 const PipelineAggregationBase = require('./pipeline-aggregation-base');
 
@@ -18,7 +15,6 @@ const PipelineAggregationBase = require('./pipeline-aggregation-base');
  * @extends PipelineAggregationBase
  */
 class BucketScriptAggregation extends PipelineAggregationBase {
-
     /**
      * Creates an instance of `BucketScriptAggregation`
      *

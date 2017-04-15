@@ -28,7 +28,6 @@ const ES_REF_URL =
  * @extends Query
  */
 class FunctionScoreQuery extends Query {
-
     /**
      * Creates an instance of `FunctionScoreQuery`
      */

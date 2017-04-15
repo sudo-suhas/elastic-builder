@@ -2,7 +2,8 @@
 
 const MetricsAggregationBase = require('./metrics-aggregation-base');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geobounds-aggregation.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geobounds-aggregation.html';
 
 /**
  * A metric aggregation that computes the bounding box
@@ -13,7 +14,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends MetricsAggregationBase
  */
 class GeoBoundsAggregation extends MetricsAggregationBase {
-
     /**
      * Creates an instance of `GeoBoundsAggregation`
      *

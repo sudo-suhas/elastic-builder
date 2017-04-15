@@ -14,7 +14,6 @@ const ES_REF_URL =
  * @extends BucketAggregationBase
  */
 class SamplerAggregation extends BucketAggregationBase {
-
     /**
      * Creates an instance of `SamplerAggregation`
      *

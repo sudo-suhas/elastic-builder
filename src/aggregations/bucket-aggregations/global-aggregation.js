@@ -2,7 +2,8 @@
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-global-aggregation.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-global-aggregation.html';
 
 /**
  * Defines a single bucket of all the documents within the search execution
@@ -14,7 +15,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends BucketAggregationBase
  */
 class GlobalAggregation extends BucketAggregationBase {
-
     /**
      * Creates an instance of `GlobalAggregation`
      *

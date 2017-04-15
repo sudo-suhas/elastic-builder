@@ -2,14 +2,12 @@
 
 const isNil = require('lodash.isnil');
 
-const {
-    GeoPoint,
-    util: { checkType }
-} = require('../../core');
+const { GeoPoint, util: { checkType } } = require('../../core');
 
 const GeoQueryBase = require('./geo-query-base');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-query.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-query.html';
 
 /**
  * Filters documents that include only hits that exists within a specific distance from a geo point.
@@ -26,7 +24,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  *  .geoPoint(bob.geoPoint().lat(40).lon(-70));
  */
 class GeoDistanceQuery extends GeoQueryBase {
-
     /**
      * Creates an instance of `GeoDistanceQuery`
      *
@@ -36,7 +33,7 @@ class GeoDistanceQuery extends GeoQueryBase {
     constructor(field, point) {
         super('geo_distance', field);
 
-        if(!isNil(point)) this.geoPoint(point);
+        if (!isNil(point)) this.geoPoint(point);
     }
 
     /**

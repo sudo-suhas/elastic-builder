@@ -16,7 +16,6 @@ const { Aggregation } = require('../../core');
  * @extends Aggregation
  */
 class PipelineAggregationBase extends Aggregation {
-
     /**
      * Creates an instance of `PipelineAggregationBase`
      *

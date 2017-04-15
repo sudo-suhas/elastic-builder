@@ -2,9 +2,7 @@
 
 const isNil = require('lodash.isnil');
 
-const {
-    util: { recursiveToJSON }
-} = require('../../../core');
+const { util: { recursiveToJSON } } = require('../../../core');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-decay';
@@ -24,7 +22,6 @@ const ScoreFunction = require('./score-function');
  * @extends ScoreFunction
  */
 class DecayScoreFunction extends ScoreFunction {
-
     /**
      * Creates an instance of `DecayScoreFunction`.
      * If no `mode` is supplied, `gauss` will be used.
@@ -165,11 +162,14 @@ class DecayScoreFunction extends ScoreFunction {
     toJSON() {
         // TODO: If mode/field is not set throw an error.
 
-        const repr = Object.assign({
-            [this.name]: {
-                [this._field]: this._opts
-            }
-        }, this._body);
+        const repr = Object.assign(
+            {
+                [this.name]: {
+                    [this._field]: this._opts
+                }
+            },
+            this._body
+        );
         return recursiveToJSON(repr);
     }
 }

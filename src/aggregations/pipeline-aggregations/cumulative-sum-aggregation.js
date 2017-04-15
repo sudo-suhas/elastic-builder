@@ -16,7 +16,6 @@ const ES_REF_URL =
  * @extends PipelineAggregationBase
  */
 class CumulativeSumAggregation extends PipelineAggregationBase {
-
     /**
      * Creates an instance of `CumulativeSumAggregation`
      *

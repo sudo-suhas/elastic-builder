@@ -1,10 +1,10 @@
 'use strict';
 
-const has = require('lodash.has'),
-    forEach = require('lodash.foreach');
+const has = require('lodash.has');
+const forEach = require('lodash.foreach');
 
-const Sort = require('./sort'),
-    Highlight = require('./highlight');
+const Sort = require('./sort');
+const Highlight = require('./highlight');
 
 const { checkType, recursiveToJSON } = require('./util');
 
@@ -17,7 +17,6 @@ const { checkType, recursiveToJSON } = require('./util');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-inner-hits.html)
  */
 class InnerHits {
-
     /**
      * Creates an instance of `InnerHits`
      */

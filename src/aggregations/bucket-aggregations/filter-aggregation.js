@@ -2,14 +2,12 @@
 
 const isNil = require('lodash.isnil');
 
-const {
-    Query,
-    util: { checkType }
-} = require('../../core');
+const { Query, util: { checkType } } = require('../../core');
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html';
 
 /**
  * Defines a single bucket of all the documents in the current document set
@@ -21,7 +19,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends BucketAggregationBase
  */
 class FilterAggregation extends BucketAggregationBase {
-
     /**
      * Creates an instance of `FilterAggregation`
      *

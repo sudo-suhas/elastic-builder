@@ -1,12 +1,13 @@
 'use strict';
 
 const has = require('lodash.has'),
+    forEach = require('lodash.foreach'),
     isEmpty = require('lodash.isempty'),
     isNil = require('lodash.isnil'),
     isString = require('lodash.isstring');
 
-const Query = require('./query'),
-    { checkType, recursiveToJSON } = require('./util');
+const Query = require('./query');
+const { checkType, recursiveToJSON } = require('./util');
 
 /**
  * Allows to highlight search results on one or more fields. In order to
@@ -24,7 +25,6 @@ const Query = require('./query'),
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html)
  */
 class Highlight {
-
     /**
      * Creates an instance of `Highlight` to highlight search results on one or more fields.
      *
@@ -67,8 +67,7 @@ class Highlight {
      * @returns {Highlight} returns `this` so that calls can be chained
      */
     field(field) {
-        if (!isNil(field) &&
-            !has(this._fields, field)) {
+        if (!isNil(field) && !has(this._fields, field)) {
             this._fields[field] = {};
         }
 
@@ -86,8 +85,7 @@ class Highlight {
     fields(fields) {
         checkType(fields, Array);
 
-        for (const field of fields) this.field(field);
-
+        forEach(fields, field => this.field(field));
         return this;
     }
 
@@ -296,9 +294,7 @@ class Highlight {
      */
     type(type, field) {
         const typeLower = type.toLowerCase();
-        if (typeLower !== 'plain' &&
-            typeLower !== 'postings' &&
-            typeLower !== 'fvh') {
+        if (typeLower !== 'plain' && typeLower !== 'postings' && typeLower !== 'fvh') {
             throw new Error('Type can be one of `plain`, `postings` or `fvh`.');
         }
 

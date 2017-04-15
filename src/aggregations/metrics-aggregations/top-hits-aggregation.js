@@ -1,7 +1,6 @@
 'use strict';
 
-const has = require('lodash.has'),
-    forEach = require('lodash.foreach');
+const has = require('lodash.has'), forEach = require('lodash.foreach');
 
 const MetricsAggregationBase = require('./metrics-aggregation-base'),
     { Highlight, Sort, util: { checkType } } = require('../../core');
@@ -22,7 +21,6 @@ const ES_REF_URL =
  * @extends MetricsAggregationBase
  */
 class TopHitsAggregation extends MetricsAggregationBase {
-
     /**
      * Creates an instance of `TopHitsAggregation`
      *

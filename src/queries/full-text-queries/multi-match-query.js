@@ -2,14 +2,15 @@
 
 const { inspect } = require('util');
 
-const isNil = require('lodash.isnil'),
-    concat = require('lodash.concat');
+const isNil = require('lodash.isnil');
+const concat = require('lodash.concat');
 
 const { util: { checkType }, consts: { MULTI_MATCH_TYPE } } = require('../../core');
 const FullTextQueryBase = require('./full-text-query-base');
 const { validateRewiteMethod } = require('../helper');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html';
 
 /**
  * A `MultiMatchQuery` query builds further on top of the
@@ -23,7 +24,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends FullTextQueryBase
  */
 class MultiMatchQuery extends FullTextQueryBase {
-
     // Extremely similar to match query.
     // mixins are one way to go about it.
     // repeating code for now
@@ -103,9 +103,7 @@ class MultiMatchQuery extends FullTextQueryBase {
         if (!MULTI_MATCH_TYPE.has(typeLower)) {
             console.log(`See ${ES_REF_URL}`);
             console.warn(`Got 'type' - ${type}`);
-            throw new Error(
-                `The 'type' parameter should belong to ${inspect(MULTI_MATCH_TYPE)}`
-            );
+            throw new Error(`The 'type' parameter should belong to ${inspect(MULTI_MATCH_TYPE)}`);
         }
 
         this._queryOpts.type = type;

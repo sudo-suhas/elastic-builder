@@ -1,8 +1,6 @@
 'use strict';
 
-const {
-    util: { checkType }
-} = require('../../core');
+const { util: { checkType } } = require('../../core');
 
 const GeoQueryBase = require('./geo-query-base');
 
@@ -20,7 +18,6 @@ const GeoQueryBase = require('./geo-query-base');
  *  ]);
  */
 class GeoPolygonQuery extends GeoQueryBase {
-
     /**
      * Creates an instance of `GeoPolygonQuery`
      *

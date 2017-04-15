@@ -5,10 +5,7 @@ const isObject = require('lodash.isobject'),
     has = require('lodash.has'),
     concat = require('lodash.concat');
 
-const {
-    Query,
-    util: { checkType }
-} = require('../../core');
+const { Query, util: { checkType } } = require('../../core');
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
@@ -25,7 +22,6 @@ const ES_REF_URL =
  * @extends BucketAggregationBase
  */
 class FiltersAggregation extends BucketAggregationBase {
-
     /**
      * Creates an instance of `FiltersAggregation`
      *
@@ -72,7 +68,6 @@ class FiltersAggregation extends BucketAggregationBase {
      */
     _checkNamedFilters() {
         if (!has(this._aggsDef, 'filters')) this._aggsDef.filters = {};
-
         else if (!isObject(this._aggsDef.filters)) {
             this._warn('Do not mix named and anonymous filters!');
             this._warn('Overwriting anonymous filters.');
@@ -89,7 +84,6 @@ class FiltersAggregation extends BucketAggregationBase {
      */
     _checkAnonymousFilters() {
         if (!has(this._aggsDef, 'filters')) this._aggsDef.filters = [];
-
         else if (!Array.isArray(this._aggsDef.filters)) {
             this._warn('Do not mix named and anonymous filters!');
             this._warn('Overwriting named filters.');

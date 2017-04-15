@@ -20,7 +20,6 @@ const { checkType, recursiveToJSON } = require('./util');
  * which includes the Query DSL, within its body.
  */
 class RequestBodySearch {
-
     /**
      * Creates an instance of `RequestBodySearch`
      */
@@ -330,7 +329,7 @@ class RequestBodySearch {
      * @throws {TypeError} If `innerHits` is not an instance of `InnerHits`
      */
     collapse(field, innerHits, maxConcurrentGroupRequests) {
-        const collapse = this._body.collapse = { field };
+        const collapse = (this._body.collapse = { field });
 
         if (!isNil(innerHits)) {
             checkType(innerHits, InnerHits);

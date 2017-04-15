@@ -19,7 +19,6 @@ const isNil = require('lodash.isnil');
  *  .params({ my_modifier: 2 });
  */
 class Script {
-
     /**
      * Creates an instance of `Script`
      *

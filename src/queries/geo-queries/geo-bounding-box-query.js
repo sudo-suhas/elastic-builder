@@ -1,9 +1,6 @@
 'use strict';
 
-const {
-    GeoPoint,
-    util: { checkType }
-} = require('../../core');
+const { GeoPoint, util: { checkType } } = require('../../core');
 
 const GeoQueryBase = require('./geo-query-base');
 
@@ -28,7 +25,6 @@ const GeoQueryBase = require('./geo-query-base');
  *  .type('indexed');
  */
 class GeoBoundingBoxQuery extends GeoQueryBase {
-
     /**
      * Creates an instance of `GeoBoundingBoxQuery`
      *
@@ -65,7 +61,6 @@ class GeoBoundingBoxQuery extends GeoQueryBase {
         this._fieldOpts.bottom_right = point;
         return this;
     }
-
 
     /**
      * Sets the top right coordinate for the Geo bounding box filter for
@@ -152,8 +147,7 @@ class GeoBoundingBoxQuery extends GeoQueryBase {
     type(type) {
         const typeLower = type.toLowerCase();
 
-        if (typeLower !== 'memory' &&
-            typeLower !== 'indexed') {
+        if (typeLower !== 'memory' && typeLower !== 'indexed') {
             throw new Error('`type` must be either `memory` or `indexed`');
         }
 

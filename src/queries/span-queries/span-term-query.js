@@ -1,7 +1,7 @@
 'use strict';
 
-const has = require('lodash.has'),
-    isNil = require('lodash.isnil');
+const has = require('lodash.has');
+const isNil = require('lodash.isnil');
 
 const SpanQueryBase = require('./span-query-base');
 
@@ -21,7 +21,6 @@ const SpanQueryBase = require('./span-query-base');
  * @extends SpanQueryBase
  */
 class SpanTermQuery extends SpanQueryBase {
-
     // This is extremely similar to ValueTermQueryBase
     // Maybe rename, move and reuse it?
 
@@ -60,7 +59,6 @@ class SpanTermQuery extends SpanQueryBase {
         return this;
     }
 
-
     /**
      * Override default `toJSON` to return DSL representation of the Span term query
      * class instance.
@@ -76,8 +74,9 @@ class SpanTermQuery extends SpanQueryBase {
             throw new Error('Value is required for Span term query!');
         }
 
-        const qryOpts = Object.keys(this._queryOpts).length === 1 ?
-            this._queryOpts.value : this._queryOpts;
+        const qryOpts = Object.keys(this._queryOpts).length === 1
+            ? this._queryOpts.value
+            : this._queryOpts;
         return {
             [this.queryType]: {
                 [this._field]: qryOpts

@@ -2,11 +2,7 @@
 
 const { inspect } = require('util');
 
-const {
-    GeoPoint,
-    util: { checkType },
-    consts: { UNIT_SET }
-} = require('../../core');
+const { GeoPoint, util: { checkType }, consts: { UNIT_SET } } = require('../../core');
 
 const RangeAggregationBase = require('./range-aggregation-base');
 
@@ -27,7 +23,6 @@ const ES_REF_URL =
  * @extends RangeAggregationBase
  */
 class GeoDistanceAggregation extends RangeAggregationBase {
-
     /**
      * Creates an instance of `GeoDistanceAggregation`
      *
@@ -84,9 +79,7 @@ class GeoDistanceAggregation extends RangeAggregationBase {
         if (!UNIT_SET.has(unit)) {
             console.log(`See ${ES_REF_URL}`);
             console.warn(`Got 'unit' - ${unit}`);
-            throw new Error(
-                `The 'unit' parameter should belong to ${inspect(UNIT_SET)}`
-            );
+            throw new Error(`The 'unit' parameter should belong to ${inspect(UNIT_SET)}`);
         }
 
         this._aggsDef.unit = unit;

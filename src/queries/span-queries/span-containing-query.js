@@ -24,7 +24,6 @@ const SpanLittleBigQueryBase = require('./span-little-big-base');
  * @extends SpanLittleBigQueryBase
  */
 class SpanContainingQuery extends SpanLittleBigQueryBase {
-
     /**
      * Creates an instance of `SpanContainingQuery`
      */

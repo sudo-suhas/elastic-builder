@@ -1,10 +1,6 @@
 'use strict';
 
-const {
-    Query,
-    Script,
-    util: { checkType }
-} = require('../../core');
+const { Query, Script, util: { checkType } } = require('../../core');
 
 const TermsAggregationBase = require('./terms-aggregation-base');
 
@@ -20,7 +16,6 @@ const ES_REF_URL =
  * @extends TermsAggregationBase
  */
 class SignificantTermsAggregation extends TermsAggregationBase {
-
     /**
      * Creates an instance of `SignificantTermsAggregation`
      *

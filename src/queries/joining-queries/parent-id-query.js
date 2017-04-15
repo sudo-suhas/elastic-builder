@@ -12,7 +12,6 @@ const { Query } = require('../../core');
  * @extends Query
  */
 class ParentIdQuery extends Query {
-
     /**
      * Creates an instance of `ParentIdQuery`
      *

@@ -4,7 +4,8 @@ const isNil = require('lodash.isnil');
 
 const JoiningQueryBase = require('./joining-query-base');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-query.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-query.html';
 
 /**
  * The `has_parent` query accepts a query and a parent type. The query is
@@ -17,7 +18,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends JoiningQueryBase
  */
 class HasParentQuery extends JoiningQueryBase {
-
     /**
      * Creates an instance of `HasParentQuery`
      *

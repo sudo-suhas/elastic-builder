@@ -7,10 +7,7 @@ const has = require('lodash.has'),
     head = require('lodash.head'),
     omit = require('lodash.omit');
 
-const {
-    Query,
-    util: { checkType, recursiveToJSON }
-} = require('../../core');
+const { Query, util: { checkType, recursiveToJSON } } = require('../../core');
 
 /**
  * A query that matches documents matching boolean combinations of other queries.
@@ -22,7 +19,6 @@ const {
  * @extends Query
  */
 class BoolQuery extends Query {
-
     /**
      * Creates an instance of `BoolQuery`
      */

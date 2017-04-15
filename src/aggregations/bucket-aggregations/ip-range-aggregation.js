@@ -2,7 +2,8 @@
 
 const RangeAggregationBase = require('./range-aggregation-base');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-iprange-aggregation.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-iprange-aggregation.html';
 
 /**
  * Dedicated range aggregation for IP typed fields
@@ -11,7 +12,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends RangeAggregationBase
  */
 class IpRangeAggregation extends RangeAggregationBase {
-
     /**
      * Creates an instance of `IpRangeAggregation`
      *

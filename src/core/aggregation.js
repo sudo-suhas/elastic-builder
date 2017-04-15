@@ -8,7 +8,6 @@ const { checkType, recursiveToJSON } = require('./util');
  * Base class implementation for all aggregation types.
  */
 class Aggregation {
-
     /**
      * Creates an instance of `Aggregation`
      *

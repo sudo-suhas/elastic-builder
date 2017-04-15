@@ -2,7 +2,8 @@
 
 const MetricsAggregationBase = require('./metrics-aggregation-base');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html';
 
 /**
  * A single-value metrics aggregation that calculates an approximate count of
@@ -16,7 +17,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends MetricsAggregationBase
  */
 class CardinalityAggregation extends MetricsAggregationBase {
-
     /**
      * Creates an instance of `CardinalityAggregation`
      *

@@ -2,7 +2,8 @@
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-missing-aggregation.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-missing-aggregation.html';
 
 /**
  * A field data based single bucket aggregation, that creates a bucket of all
@@ -14,7 +15,6 @@ const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/curr
  * @extends BucketAggregationBase
  */
 class MissingAggregation extends BucketAggregationBase {
-
     /**
      * Creates an instance of `MissingAggregation`
      *

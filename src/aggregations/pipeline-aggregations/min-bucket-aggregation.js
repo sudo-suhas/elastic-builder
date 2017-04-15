@@ -14,7 +14,6 @@ const PipelineAggregationBase = require('./pipeline-aggregation-base');
  * @extends PipelineAggregationBase
  */
 class MinBucketAggregation extends PipelineAggregationBase {
-
     /**
      * Creates an instance of `MinBucketAggregation`
      *
