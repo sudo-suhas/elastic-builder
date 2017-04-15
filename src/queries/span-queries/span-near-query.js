@@ -1,6 +1,6 @@
 'use strict';
 
-const invokeMap = require('lodash.invokemap');
+const forEach = require('lodash.foreach');
 
 const {
     util: { checkType }
@@ -46,7 +46,7 @@ class SpanNearQuery extends SpanQueryBase {
      */
     clauses(clauses) {
         checkType(clauses, Array);
-        invokeMap(clauses, clause => checkType(clause, SpanQueryBase));
+        forEach(clauses, clause => checkType(clause, SpanQueryBase));
 
         this._queryOpts.clauses = clauses;
         return this;

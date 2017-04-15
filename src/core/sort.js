@@ -37,8 +37,8 @@ class Sort {
     }
 
     /**
-     * Set order for sorting. The order defaults to desc when sorting on the _score,
-     * and defaults to asc when sorting on anything else.
+     * Set order for sorting. The order defaults to `desc` when sorting on the `_score`,
+     * and defaults to `asc` when sorting on anything else.
      *
      * @param {string} order The `order` option can have the following values.
      * `asc`, `desc` to sort in ascending, descending order respectively.

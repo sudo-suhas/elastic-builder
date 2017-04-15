@@ -1,7 +1,7 @@
 'use strict';
 
 const has = require('lodash.has'),
-    invokeMap = require('lodash.invokemap');
+    forEach = require('lodash.foreach');
 
 const MetricsAggregationBase = require('./metrics-aggregation-base'),
     { Highlight, Sort, util: { checkType } } = require('../../core');
@@ -118,7 +118,7 @@ class TopHitsAggregation extends MetricsAggregationBase {
      * @throws {TypeError} If any item in parameter `sorts` is not an instance of `Sort`.
      */
     sorts(sorts) {
-        invokeMap(sorts, sort => this.sort(sort));
+        forEach(sorts, sort => this.sort(sort));
         return this;
     }
 

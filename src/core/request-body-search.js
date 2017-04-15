@@ -3,7 +3,7 @@
 const has = require('lodash.has'),
     isNil = require('lodash.isnil'),
     isEmpty = require('lodash.isempty'),
-    invokeMap = require('lodash.invokemap');
+    forEach = require('lodash.foreach');
 
 const Query = require('./query'),
     Aggregation = require('./aggregation'),
@@ -149,7 +149,7 @@ class RequestBodySearch {
      * @throws {TypeError} If any item in parameter `sorts` is not an instance of `Sort`.
      */
     sorts(sorts) {
-        invokeMap(sorts, sort => this.sort(sort));
+        forEach(sorts, sort => this.sort(sort));
         return this;
     }
 

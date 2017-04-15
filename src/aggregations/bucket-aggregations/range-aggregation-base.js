@@ -1,5 +1,8 @@
 'use strict';
 
+const isEmpty = require('lodash.isempty'),
+    forEach = require('lodash.foreach');
+
 const { util: { checkType } } = require('../../core');
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
@@ -47,6 +50,7 @@ class RangeAggregationBase extends BucketAggregationBase {
      *
      * @param {Object} range Range to aggregate over. Valid keys are `from`, `to` and `key`
      * @returns {RangeAggregationBase} returns `this` so that calls can be chained
+     *
      * @throws {TypeError} If `range` is not an instance of object
      * @throws {Error} If none of the required keys,
      * `from`, `to` or `mask`(for IP range) is passed
@@ -62,6 +66,25 @@ class RangeAggregationBase extends BucketAggregationBase {
         }
 
         this._aggsDef.ranges.push(range);
+        return this;
+    }
+
+    /**
+     * Adds the list of ranges to the list of existing range expressions.
+     *
+     * @param {Array<Object>} ranges Ranges to aggregate over.
+     * Each item must be an object with keys `from`, `to` and `key`.
+     * @returns {RangeAggregationBase} returns `this` so that calls can be chained
+     *
+     * @throws {TypeError} If `ranges` is not an instance of an array or
+     * and item in the array is not an instance of object
+     * @throws {Error} If none of the required keys,
+     * `from`, `to` or `mask`(for IP range) is passed
+     */
+    ranges(ranges) {
+        checkType(ranges, Array);
+
+        forEach(ranges, range => this.range(range));
         return this;
     }
 
@@ -87,6 +110,20 @@ class RangeAggregationBase extends BucketAggregationBase {
     keyed(keyed) {
         this._aggsDef.keyed = keyed;
         return this;
+    }
+
+    /**
+     * Override default `toJSON` to return DSL representation for the `aggregation` query.
+     *
+     * @override
+     * @returns {Object} returns an Object which maps to the elasticsearch query DSL
+     */
+    toJSON() {
+        if (isEmpty(this._aggsDef.ranges)) {
+            throw new Error('`ranges` cannot be empty.');
+        }
+
+        return super.toJSON();
     }
 }
 

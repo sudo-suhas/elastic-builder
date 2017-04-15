@@ -79,11 +79,14 @@ exports.recursiveToJSON = function recursiveToJSON(obj) {
 
     if (Array.isArray(obj)) return map(obj, recursiveToJSON);
 
-    const json = {},
-        baseLevelJSON = hasIn(obj, 'toJSON') ? obj.toJSON() : obj;
-
-    for (const key of Object.keys(baseLevelJSON)) {
-        json[key] = recursiveToJSON(baseLevelJSON[key]);
+    if (hasIn(obj, 'toJSON') && obj.constructor !== Object) {
+        return recursiveToJSON(obj.toJSON());
     }
+
+    const json = {};
+    for (const key of Object.keys(obj)) {
+        json[key] = recursiveToJSON(obj[key]);
+    }
+
     return json;
 };

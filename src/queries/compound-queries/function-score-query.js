@@ -2,7 +2,7 @@
 
 const { inspect } = require('util');
 
-const invokeMap = require('lodash.invokemap'),
+const forEach = require('lodash.foreach'),
     head = require('lodash.head'),
     omit = require('lodash.omit');
 
@@ -135,7 +135,7 @@ class FunctionScoreQuery extends Query {
     functions(funcs) {
         checkType(funcs, Array);
 
-        invokeMap(funcs, func => this.function(func));
+        forEach(funcs, func => this.function(func));
         return this;
     }
 

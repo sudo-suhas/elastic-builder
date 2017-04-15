@@ -1,7 +1,7 @@
 'use strict';
 
 const has = require('lodash.has'),
-    invokeMap = require('lodash.invokemap');
+    forEach = require('lodash.foreach');
 
 const {
     Query,
@@ -64,7 +64,7 @@ class DisMaxQuery extends Query {
     queries(queries) {
         if (!has(this._queryOpts, 'queries')) this._queryOpts.queries = [];
 
-        if (Array.isArray(queries)) invokeMap(queries, qry => this._addQuery(qry));
+        if (Array.isArray(queries)) forEach(queries, qry => this._addQuery(qry));
         else this._addQuery(queries);
 
         return this;

@@ -5,6 +5,7 @@ const HistogramAggregationBase = require('./histogram-aggregation-base');
 /**
  * A multi-bucket aggregation similar to the histogram except it can only be applied on date values.
  * The interval can be specified by date/time expressions.
+ *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-datehistogram-aggregation.html#_scripts)
  *
  * @extends HistogramAggregationBase

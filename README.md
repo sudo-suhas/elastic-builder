@@ -70,11 +70,12 @@ in the 5.0 release which make the older libraries unusable.
 This library is a port of `elastic.js` to es6 with elasticsearch 5.3 compatibility.
 
 ## API Reference
+API reference can be accessed here - http://elastic-builder.js.org/docs.
+
 API documentation was generated using [documentation.js](https://github.com/documentationjs/documentation)
-It can be accessed here - http://elastic-builder.js.org/docs.
 It is being hosted with help from this awesome project - https://github.com/js-org/dns.js.org
 
-Dcoumentation is a WIP. See [roadmap](roadmap.md).
+Documentation is a WIP. See [roadmap](roadmap.md).
 
 ## Examples
 
@@ -170,6 +171,53 @@ const requestBody = bob.requestBodySearch()
 //       }
 //    }
 // }
+
+// Sort
+const requestBody = bob.requestBodySearch()
+    .query(
+        bob.boolQuery()
+            .filter(bob.termQuery('message', 'test'))
+    )
+    .sort(bob.sort('timestamp', 'desc'))
+    .sorts([
+        bob.sort('channel', 'desc'),
+        bob.sort('categories', 'desc'),
+        // The order defaults to desc when sorting on the _score,
+        // and defaults to asc when sorting on anything else.
+        bob.sort('content'),
+        bob.sort('price').order('desc').mode('avg')
+    ]);
+// requestBody.toJSON()
+// {
+//   "query": {
+//     "bool": {
+//       "filter": {
+//         "term": { "message": "test" }
+//       }
+//     }
+//   },
+//   "sort": [
+//     { "timestamp": { "order": "desc" } },
+//     { "channel": { "order": "desc" } },
+//     { "categories": { "order": "desc" } },
+//     "content",
+//     { "price": { "order": "desc", "mode": "avg" } }
+//   ]
+// }
+
+// From / size
+const requestBody = bob.requestBodySearch()
+    .query(bob.matchAllQuery())
+    .size(5)
+    .from(10);
+// requestBody.toJSON()
+// {
+//   "query": {
+//     "match_all": {}
+//   },
+//   "size": 5,
+//   "from": 10
+// }
 ```
 
 ## Validation
@@ -199,7 +247,12 @@ Error: The 'type' parameter should belong to Set {
 ```
 
 ## Tests
-Tests are yet to be added. See [roadmap](roadmap.md).
+Tests are being added. See [roadmap](roadmap.md).
+
+For running whatever tests _have_ been added:
+```
+npm test
+```
 
 ## Credits
 `elastic-builder` is heavily inspired by [`elastic.js`](https://github.com/fullscale/elastic.js)

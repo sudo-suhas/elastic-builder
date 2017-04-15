@@ -9,7 +9,7 @@ const ES_REF_URL =
  * A special single bucket aggregation that enables aggregating
  * from buckets on parent document types to buckets on child documents.
  *
- * This aggregation relies on the _parent field in the mapping.
+ * This aggregation relies on the `_parent` field in the mapping.
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-children-aggregation.html)
  *

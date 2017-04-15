@@ -12,7 +12,7 @@
   "scripts": {
     "build:babel": "babel src --out-dir lib",
     "build:umd": "webpack lib browser/elastic-builder.min.js",
-    "build:docs": "documentation build src/index.js -o docs -f html --github --name elastic-builder",
+    "build:docs": "documentation build src/index.js --github -o docs -f html --name elastic-builder",
     "build": "npm run build:babel && npm run build:umd && npm run build:docs",
     "lint": "eslint src test",
     "lint:fix": "npm run lint -- --fix",
@@ -71,10 +71,10 @@
   "dependencies": {
     "lodash.concat": "^4.5.0",
     "lodash.filter": "^4.6.0",
+    "lodash.foreach": "^4.5.0",
     "lodash.has": "^4.5.2",
     "lodash.hasin": "^4.5.2",
     "lodash.head": "^4.0.1",
-    "lodash.invokemap": "^4.6.0",
     "lodash.isempty": "^4.4.0",
     "lodash.isnil": "^4.0.0",
     "lodash.isobject": "^3.0.2",

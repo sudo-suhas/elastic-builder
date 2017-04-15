@@ -1,7 +1,7 @@
 'use strict';
 
 const has = require('lodash.has'),
-    invokeMap = require('lodash.invokemap');
+    forEach = require('lodash.foreach');
 
 const Sort = require('./sort'),
     Highlight = require('./highlight');
@@ -76,7 +76,7 @@ class InnerHits {
      * @throws {TypeError} If any item in parameter `sorts` is not an instance of `Sort`.
      */
     sorts(sorts) {
-        invokeMap(sorts, sort => this.sort(sort));
+        forEach(sorts, sort => this.sort(sort));
         return this;
     }
 

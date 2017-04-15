@@ -1,7 +1,7 @@
 'use strict';
 
 const has = require('lodash.has'),
-    invokeMap = require('lodash.invokemap'),
+    forEach = require('lodash.foreach'),
     reduce = require('lodash.reduce'),
     filter = require('lodash.filter'),
     head = require('lodash.head'),
@@ -55,7 +55,7 @@ class BoolQuery extends Query {
     _addQueries(clause, queries) {
         if (!has(this._queryOpts, clause)) this._queryOpts[clause] = [];
 
-        if (Array.isArray(queries)) invokeMap(queries, qry => this._addQuery(clause, qry));
+        if (Array.isArray(queries)) forEach(queries, qry => this._addQuery(clause, qry));
         else this._addQuery(clause, queries);
     }
 
