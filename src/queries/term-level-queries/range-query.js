@@ -1,13 +1,15 @@
 'use strict';
 
-const { inspect } = require('util');
+const isNil = require('lodash.isnil');
 
-const { consts: { GEO_RELATION_SET } } = require('../../core');
+const { util: { invalidParam }, consts: { GEO_RELATION_SET } } = require('../../core');
 
 const MultiTermQueryBase = require('./multi-term-query-base');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html';
+
+const invalidRelationParam = invalidParam(ES_REF_URL, 'relation', GEO_RELATION_SET);
 
 /**
  * Matches documents with fields that have terms within a certain range.
@@ -33,7 +35,7 @@ class RangeQuery extends MultiTermQueryBase {
 
     /**
      * @override
-     * @throws {Error} This method cannot be called on ChildrenAggregation
+     * @throws {Error} This method cannot be called on RangeQuery
      */
     value() {
         console.log(`Please refer ${ES_REF_URL}`);
@@ -160,13 +162,11 @@ class RangeQuery extends MultiTermQueryBase {
      * @returns {RangeQuery} returns `this` so that calls can be chained
      */
     relation(relation) {
+        if (isNil(relation)) invalidRelationParam(relation);
+
         const relationUpper = relation.toUpperCase();
         if (!GEO_RELATION_SET.has(relationUpper)) {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'relation' - ${relationUpper}`);
-            throw new Error(
-                `The 'relation' parameter should belong to ${inspect(GEO_RELATION_SET)}`
-            );
+            invalidRelationParam(relation);
         }
 
         this._queryOpts.relation = relationUpper;

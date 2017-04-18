@@ -1,10 +1,16 @@
 'use strict';
 
+const isNil = require('lodash.isnil');
+
+const { util: { invalidParam } } = require('../../core');
 const MonoFieldQueryBase = require('./mono-field-query-base');
 const { validateRewiteMethod } = require('../helper');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html';
+
+const invalidOperatorParam = invalidParam(ES_REF_URL, 'operator', "'and' or 'or'");
+const invalidZeroTermsQueryParam = invalidParam(ES_REF_URL, 'zero_terms_query', "'all' or 'none'");
 
 /**
  * `match` query accepts text/numerics/dates, analyzes them, and constructs a query.
@@ -39,11 +45,11 @@ class MatchQuery extends MonoFieldQueryBase {
      * @returns {MatchQuery} returns `this` so that calls can be chained.
      */
     operator(operator) {
+        if (isNil(operator)) invalidOperatorParam(operator);
+
         const operatorLower = operator.toLowerCase();
         if (operatorLower !== 'and' && operatorLower !== 'or') {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'operator' - ${operator}`);
-            throw new Error('The operator parameter can only be `and` or `or`');
+            invalidOperatorParam(operator);
         }
 
         this._queryOpts.operator = operatorLower;
@@ -199,14 +205,13 @@ class MatchQuery extends MonoFieldQueryBase {
      * @returns {MatchQuery} returns `this` so that calls can be chained.
      */
     zeroTermsQuery(behavior) {
+        if (isNil(behavior)) invalidZeroTermsQueryParam(behavior);
         const behaviorLower = behavior.toLowerCase();
         if (behaviorLower !== 'all' && behaviorLower !== 'none') {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'zero_terms_query' - ${behavior}`);
-            throw new Error('The `zero_terms_query` parameter can only be `all` or `one`');
+            invalidZeroTermsQueryParam(behavior);
         }
 
-        this._queryOpts.zero_terms_query = behavior;
+        this._queryOpts.zero_terms_query = behaviorLower;
         return this;
     }
 

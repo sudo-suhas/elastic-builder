@@ -1,6 +1,7 @@
 'use strict';
 
-const isEmpty = require('lodash.isempty'), forEach = require('lodash.foreach');
+const isEmpty = require('lodash.isempty');
+const forEach = require('lodash.foreach');
 
 const { util: { checkType } } = require('../../core');
 

@@ -15,7 +15,9 @@ class Aggregation {
      * @param {string} aggType Type of aggregation
      */
     constructor(name, aggType) {
-        // TODO: Throw error if name or type is not present.
+        if (isEmpty(name)) throw new Error('Aggregation `name` cannot be empty');
+        if (isEmpty(aggType)) throw new Error('Aggregation `type` cannot be empty');
+
         this.name = name;
         this.aggType = aggType;
 

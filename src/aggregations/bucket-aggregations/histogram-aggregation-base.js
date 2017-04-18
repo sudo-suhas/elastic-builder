@@ -2,7 +2,11 @@
 
 const isNil = require('lodash.isnil');
 
+const { util: { invalidParam } } = require('../../core');
+
 const BucketAggregationBase = require('./bucket-aggregation-base');
+
+const invalidDirectionParam = invalidParam('', 'direction', "'asc' or 'desc'");
 
 /**
  * The `HistogramAggregationBase` provides support for common options used across
@@ -75,10 +79,11 @@ class HistogramAggregationBase extends BucketAggregationBase {
      * @returns {HistogramAggregationBase} returns `this` so that calls can be chained
      */
     order(key, direction = 'desc') {
-        const directionLower = direction.toLowerCase();
+        if (isNil(direction)) invalidDirectionParam(direction);
 
+        const directionLower = direction.toLowerCase();
         if (directionLower !== 'asc' && directionLower !== 'desc') {
-            throw new Error('`direction` must be either `asc` or `desc`');
+            invalidDirectionParam(direction);
         }
 
         this._aggsDef.order = {

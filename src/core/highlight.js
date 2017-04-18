@@ -7,7 +7,14 @@ const has = require('lodash.has'),
     isString = require('lodash.isstring');
 
 const Query = require('./query');
-const { checkType, recursiveToJSON } = require('./util');
+const { checkType, invalidParam, recursiveToJSON } = require('./util');
+
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html';
+
+const invalidEncoderParam = invalidParam(ES_REF_URL, 'encoder', "'default' or 'html'");
+const invalidTypeParam = invalidParam(ES_REF_URL, 'type', "'plain', 'postings' or 'fvh'");
+const invalidFragmenterParam = invalidParam(ES_REF_URL, 'fragmenter', "'simple' or 'span'");
 
 /**
  * Allows to highlight search results on one or more fields. In order to
@@ -229,9 +236,11 @@ class Highlight {
      * @throws {Error} Encoder can be either `default` or `html`
      */
     encoder(encoder) {
+        if (isNil(encoder)) invalidEncoderParam(encoder);
+
         const encoderLower = encoder.toLowerCase();
         if (encoderLower !== 'default' && encoderLower !== 'html') {
-            throw new Error('Encoder can be either `default` or `html`');
+            invalidEncoderParam(encoder);
         }
 
         this._highlight.encoder = encoderLower;
@@ -293,9 +302,10 @@ class Highlight {
      * @throws {Error} Type can be one of `plain`, `postings` or `fvh`.
      */
     type(type, field) {
+        if (isNil(type)) invalidTypeParam(type);
         const typeLower = type.toLowerCase();
         if (typeLower !== 'plain' && typeLower !== 'postings' && typeLower !== 'fvh') {
-            throw new Error('Type can be one of `plain`, `postings` or `fvh`.');
+            invalidTypeParam(type);
         }
 
         this._setFieldOption(field, 'type', typeLower);
@@ -330,9 +340,11 @@ class Highlight {
      * @throws {Error} Fragmenter can be either `simple` or `span`
      */
     fragmenter(fragmenter, field) {
+        if (isNil(fragmenter)) invalidFragmenterParam(fragmenter);
+
         const fragmenterLower = fragmenter.toLowerCase();
         if (fragmenterLower !== 'simple' && fragmenterLower !== 'span') {
-            throw new Error('Fragmenter can be either `simple` or `span`');
+            invalidFragmenterParam(fragmenter);
         }
 
         this._setFieldOption(field, 'fragmenter', fragmenterLower);

@@ -1,17 +1,20 @@
 'use strict';
 
-const { inspect } = require('util');
-
 const isEmpty = require('lodash.isempty');
 const isNil = require('lodash.isnil');
 
 const Query = require('./query');
 const Script = require('./script');
-const { checkType, recursiveToJSON } = require('./util');
+const { checkType, invalidParam, recursiveToJSON } = require('./util');
 const { SORT_MODE_SET, UNIT_SET } = require('./consts');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html';
+
+const invalidOrderParam = invalidParam(ES_REF_URL, 'order', "'asc' or 'desc'");
+const invalidModeParam = invalidParam(ES_REF_URL, 'mode', SORT_MODE_SET);
+const invalidDistanceTypeParam = invalidParam(ES_REF_URL, 'distance_type', "'plane' or 'arc'");
+const invalidUnitParam = invalidParam(ES_REF_URL, 'unit', UNIT_SET);
 
 /**
  * Allows creating and configuring sort on specified field.
@@ -45,9 +48,11 @@ class Sort {
      * @returns {Sort} returns `this` so that calls can be chained.
      */
     order(order) {
+        if (isNil(order)) invalidOrderParam(order);
+
         const orderLower = order.toLowerCase();
         if (orderLower !== 'asc' && orderLower !== 'desc') {
-            throw new Error('`order` must be either `asc` or `desc`');
+            invalidOrderParam(order);
         }
 
         this._opts.order = orderLower;
@@ -61,10 +66,10 @@ class Sort {
      * @returns {Sort} returns `this` so that calls can be chained.
      */
     mode(mode) {
+        if (isNil(mode)) invalidModeParam(mode);
+
         if (!SORT_MODE_SET.has(mode)) {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'mode' - ${mode}`);
-            throw new Error(`The 'mode' parameter should belong to ${inspect(SORT_MODE_SET)}`);
+            invalidModeParam(mode);
         }
 
         this._opts.mode = mode;
@@ -154,11 +159,11 @@ class Sort {
      * @throws {Error} If `type` is neither `plane` nor `arc`.
      */
     distanceType(type) {
+        if (isNil(type)) invalidDistanceTypeParam(type);
+
         const typeLower = type.toLowerCase();
         if (typeLower !== 'plane' && typeLower !== 'arc') {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'distance_type' - ${type}`);
-            throw new Error('The distance_type parameter can only be `plane` or `arc`');
+            invalidDistanceTypeParam(type);
         }
 
         this._aggsDef.distance_type = typeLower;
@@ -177,9 +182,7 @@ class Sort {
      */
     unit(unit) {
         if (!UNIT_SET.has(unit)) {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'unit' - ${unit}`);
-            throw new Error(`The 'unit' parameter should belong to ${inspect(UNIT_SET)}`);
+            invalidUnitParam(unit);
         }
 
         this._aggsDef.unit = unit;

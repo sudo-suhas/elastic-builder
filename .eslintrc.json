@@ -112,7 +112,7 @@
     "no-useless-call": "error",
     "no-useless-concat": "error",
     "no-useless-escape": "error",
-    "no-void": "error",
+    "no-void": "off",
     "radix": "error",
     "yoda": "error",
     // Strict Mode
@@ -184,7 +184,8 @@
     "no-new": "error",
     "quotes": [
       "warn",
-      "single"
+      "single",
+      { "avoidEscape": true }
     ],
     "require-jsdoc": [
       "warn",

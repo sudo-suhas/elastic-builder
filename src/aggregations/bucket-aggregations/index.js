@@ -1,5 +1,10 @@
 'use strict';
 
+exports.BucketAggregationBase = require('./bucket-aggregation-base');
+exports.HistogramAggregationBase = require('./histogram-aggregation-base');
+exports.RangeAggregationBase = require('./range-aggregation-base');
+exports.TermsAggregationBase = require('./terms-aggregation-base');
+
 exports.ChildrenAggregation = require('./children-aggregation');
 exports.DateHistogramAggregation = require('./date-histogram-aggregation');
 exports.DateRangeAggregation = require('./date-range-aggregation');

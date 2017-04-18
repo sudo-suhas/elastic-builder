@@ -5,7 +5,7 @@ exports.EXECUTION_HINT_SET = new Set([
     'map',
     'global_ordinals',
     'global_ordinals_hash',
-    'global_ordinals_low_cardinalit'
+    'global_ordinals_low_cardinality'
 ]);
 
 // Used in Geo Point Aggregation

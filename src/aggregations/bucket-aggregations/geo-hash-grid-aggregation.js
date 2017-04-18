@@ -1,5 +1,7 @@
 'use strict';
 
+const isNil = require('lodash.isnil');
+
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
 const ES_REF_URL =
@@ -52,7 +54,7 @@ class GeoHashGridAggregation extends BucketAggregationBase {
      * @throws {Error} If precision is not between 1 and 12.
      */
     precision(precision) {
-        if (precision < 1 || precision > 12) {
+        if (isNil(precision) || precision < 1 || precision > 12) {
             throw new Error('`precision` can only be value from 1 to 12.');
         }
 

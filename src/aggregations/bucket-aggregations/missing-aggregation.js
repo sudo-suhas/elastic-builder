@@ -27,11 +27,11 @@ class MissingAggregation extends BucketAggregationBase {
 
     /**
      * @override
-     * @throws {Error} This method cannot be called on ChildrenAggregation
+     * @throws {Error} This method cannot be called on MissingAggregation
      */
     script() {
         console.log(`Please refer ${ES_REF_URL}`);
-        throw new Error('script is not supported in ChildrenAggregation');
+        throw new Error('script is not supported in MissingAggregation');
     }
 }
 

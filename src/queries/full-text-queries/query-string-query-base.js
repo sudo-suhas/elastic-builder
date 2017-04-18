@@ -1,10 +1,13 @@
 'use strict';
 
+const isNil = require('lodash.isNil');
 const has = require('lodash.has');
 const concat = require('lodash.concat');
 
-const { util: { checkType } } = require('../../core');
+const { util: { checkType, invalidParam } } = require('../../core');
 const FullTextQueryBase = require('./full-text-query-base');
+
+const invalidOperatorParam = invalidParam('', 'operator', "'AND' or 'OR'");
 
 /**
  * The `MonoFieldQueryBase` provides support for common options used across
@@ -73,10 +76,11 @@ class QueryStringQueryBase extends FullTextQueryBase {
      * @returns {QueryStringQueryBase} returns `this` so that calls can be chained.
      */
     defaultOperator(operator) {
+        if (isNil(operator)) invalidOperatorParam(operator, this._refUrl);
+
         const operatorUpper = operator.toUpperCase();
         if (operatorUpper !== 'AND' && operatorUpper !== 'OR') {
-            console.log(`See ${this._refUrl}`);
-            throw new Error('The operator parameter can only be `AND` or `OR`');
+            invalidOperatorParam(operator, this._refUrl);
         }
 
         this._queryOpts.default_operator = operatorUpper;

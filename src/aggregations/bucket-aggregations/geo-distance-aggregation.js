@@ -1,13 +1,16 @@
 'use strict';
 
-const { inspect } = require('util');
+const isNil = require('lodash.isnil');
 
-const { GeoPoint, util: { checkType }, consts: { UNIT_SET } } = require('../../core');
+const { GeoPoint, util: { checkType, invalidParam }, consts: { UNIT_SET } } = require('../../core');
 
 const RangeAggregationBase = require('./range-aggregation-base');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geodistance-aggregation.html';
+
+const invalidUnitParam = invalidParam(ES_REF_URL, 'unit', UNIT_SET);
+const invalidDistanceTypeParam = invalidParam(ES_REF_URL, 'distance_type', "'plane' or 'arc'");
 
 /**
  * A multi-bucket aggregation that works on geo_point fields and conceptually
@@ -77,9 +80,7 @@ class GeoDistanceAggregation extends RangeAggregationBase {
      */
     unit(unit) {
         if (!UNIT_SET.has(unit)) {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'unit' - ${unit}`);
-            throw new Error(`The 'unit' parameter should belong to ${inspect(UNIT_SET)}`);
+            invalidUnitParam(unit);
         }
 
         this._aggsDef.unit = unit;
@@ -96,12 +97,10 @@ class GeoDistanceAggregation extends RangeAggregationBase {
      * @throws {Error} If `type` is neither `plane` nor `arc`.
      */
     distanceType(type) {
+        if (isNil(type)) invalidDistanceTypeParam(type);
+
         const typeLower = type.toLowerCase();
-        if (typeLower !== 'plane' && typeLower !== 'arc') {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'distance_type' - ${type}`);
-            throw new Error('The distance_type parameter can only be `plane` or `arc`');
-        }
+        if (typeLower !== 'plane' && typeLower !== 'arc') invalidDistanceTypeParam(type);
 
         this._aggsDef.distance_type = typeLower;
         return this;

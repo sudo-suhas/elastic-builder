@@ -1,13 +1,15 @@
 'use strict';
 
-const { inspect } = require('util');
+const isNil = require('lodash.isnil');
 
-const { consts: { MODEL_SET } } = require('../../core');
+const { util: { invalidParam }, consts: { MODEL_SET } } = require('../../core');
 
 const PipelineAggregationBase = require('./pipeline-aggregation-base');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-movavg-aggregation.html';
+
+const invalidModelParam = invalidParam(ES_REF_URL, 'model', MODEL_SET);
 
 /**
  * Given an ordered series of data, the Moving Average aggregation will
@@ -50,12 +52,10 @@ class MovingAverageAggregation extends PipelineAggregationBase {
      * @returns {MovingAverageAggregation} returns `this` so that calls can be chained
      */
     model(model) {
+        if (isNil(model)) invalidModelParam(model);
+
         const modelLower = model.toLowerCase();
-        if (!MODEL_SET.has(modelLower)) {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'model' - ${model}`);
-            throw new Error(`The 'model' parameter should belong to ${inspect(MODEL_SET)}`);
-        }
+        if (!MODEL_SET.has(modelLower)) invalidModelParam(model);
 
         this._aggsDef.model = modelLower;
         return this;

@@ -1,8 +1,15 @@
 'use strict';
 
-const { GeoPoint, util: { checkType } } = require('../../core');
+const isNil = require('lodash.isnil');
+
+const { GeoPoint, util: { checkType, invalidParam } } = require('../../core');
 
 const GeoQueryBase = require('./geo-query-base');
+
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-bounding-box-query.html';
+
+const invalidTypeParam = invalidParam(ES_REF_URL, 'type', "'memory' or 'indexed'");
 
 /**
  * A query allowing to filter hits based on a point location using a bounding box.
@@ -145,10 +152,11 @@ class GeoBoundingBoxQuery extends GeoQueryBase {
      * @returns {GeoBoundingBoxQuery} returns `this` so that calls can be chained.
      */
     type(type) {
-        const typeLower = type.toLowerCase();
+        if (isNil(type)) invalidTypeParam(type);
 
+        const typeLower = type.toLowerCase();
         if (typeLower !== 'memory' && typeLower !== 'indexed') {
-            throw new Error('`type` must be either `memory` or `indexed`');
+            invalidTypeParam(type);
         }
 
         this._queryOpts.type = typeLower;

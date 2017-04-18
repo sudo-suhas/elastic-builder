@@ -1,11 +1,11 @@
 'use strict';
 
-const { inspect } = require('util');
+const isNil = require('lodash.isnil');
 
 const {
     GeoShape,
     IndexedShape,
-    util: { checkType },
+    util: { checkType, invalidParam },
     consts: { GEO_RELATION_SET }
 } = require('../../core');
 
@@ -13,6 +13,8 @@ const GeoQueryBase = require('./geo-query-base');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-query.html';
+
+const invalidRelationParam = invalidParam(ES_REF_URL, 'relation', GEO_RELATION_SET);
 
 /**
  * Filter documents indexed using the `geo_shape` type. Requires
@@ -100,13 +102,11 @@ class GeoShapeQuery extends GeoQueryBase {
      * @returns {GeoShapeQuery} returns `this` so that calls can be chained
      */
     relation(relation) {
+        if (isNil(relation)) invalidRelationParam(relation);
+
         const relationUpper = relation.toUpperCase();
         if (!GEO_RELATION_SET.has(relationUpper)) {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'relation' - ${relationUpper}`);
-            throw new Error(
-                `The 'relation' parameter should belong to ${inspect(GEO_RELATION_SET)}`
-            );
+            invalidRelationParam(relation);
         }
 
         this._fieldOpts.relation = relationUpper;

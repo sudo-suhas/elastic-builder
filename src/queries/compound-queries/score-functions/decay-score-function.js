@@ -2,12 +2,14 @@
 
 const isNil = require('lodash.isnil');
 
-const { util: { recursiveToJSON } } = require('../../../core');
+const { util: { invalidParam, recursiveToJSON } } = require('../../../core');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-decay';
 
 const ScoreFunction = require('./score-function');
+
+const invalidModeParam = invalidParam(ES_REF_URL, 'mode', "'linear', 'exp' or 'gauss'");
 
 /**
  * Decay functions score a document with a function that decays depending on
@@ -44,11 +46,11 @@ class DecayScoreFunction extends ScoreFunction {
      * @returns {DecayScoreFunction} returns `this` so that calls can be chained.
      */
     mode(mode) {
+        if (isNil(mode)) invalidModeParam(mode);
+
         const modeLower = mode.toLowerCase();
         if (modeLower !== 'linear' && modeLower !== 'exp' && modeLower !== 'gauss') {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'mode' - ${mode}`);
-            throw new Error('The mode can only be `linear`, `exp` or `gauss`');
+            invalidModeParam(mode);
         }
 
         this.name = mode;

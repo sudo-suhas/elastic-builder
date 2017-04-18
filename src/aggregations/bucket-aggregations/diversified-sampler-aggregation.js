@@ -1,13 +1,15 @@
 'use strict';
 
-const { inspect } = require('util');
+const isNil = require('lodash.isnil');
 
-const { consts: { EXECUTION_HINT_SET } } = require('../../core');
+const { util: { invalidParam }, consts: { EXECUTION_HINT_SET } } = require('../../core');
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-diversified-sampler-aggregation.html';
+
+const invalidExecutionHintParam = invalidParam(ES_REF_URL, 'execution_hint', EXECUTION_HINT_SET);
 
 /**
  * A filtering aggregation used to limit any sub aggregations' processing
@@ -66,15 +68,14 @@ class DiversifiedSamplerAggregation extends BucketAggregationBase {
      * @throws {Error} If Execution Hint is outside the accepted set.
      */
     executionHint(hint) {
-        if (!EXECUTION_HINT_SET.has(hint)) {
-            console.log(`See ${ES_REF_URL}#_execution_hint`);
-            console.warn(`Got 'execution_hint' - ${hint}`);
-            throw new Error(
-                `The 'execution_hint' parameter should belong to ${inspect(EXECUTION_HINT_SET)}`
-            );
+        if (isNil(hint)) invalidExecutionHintParam(hint);
+
+        const hintLower = hint.toLowerCase();
+        if (!EXECUTION_HINT_SET.has(hintLower)) {
+            invalidExecutionHintParam(hint);
         }
 
-        this._aggsDef.execution_hint = hint;
+        this._aggsDef.execution_hint = hintLower;
         return this;
     }
 }

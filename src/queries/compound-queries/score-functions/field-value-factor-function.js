@@ -1,15 +1,15 @@
 'use strict';
 
-const { inspect } = require('util');
-
 const isNil = require('lodash.isnil');
 
-const { consts: { FIELD_MODIFIER_SET } } = require('../../../core');
+const { util: { invalidParam }, consts: { FIELD_MODIFIER_SET } } = require('../../../core');
 
 const ScoreFunction = require('./score-function');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-field-value-factor';
+
+const invaliModifierdParam = invalidParam(ES_REF_URL, 'modifier', FIELD_MODIFIER_SET);
 
 /**
  * The `field_value_factor` function allows you to use a field from a document
@@ -66,15 +66,14 @@ class FieldValueFactorFunction extends ScoreFunction {
      * @returns {FieldValueFactorFunction} returns `this` so that calls can be chained.
      */
     modifier(mod) {
-        if (!FIELD_MODIFIER_SET.has(mod)) {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'modifier' - ${mod}`);
-            throw new Error(
-                `The 'modifier' parameter should belong to ${inspect(FIELD_MODIFIER_SET)}`
-            );
+        if (isNil(mod)) invaliModifierdParam(mod);
+
+        const modLower = mod.toLowerCase();
+        if (!FIELD_MODIFIER_SET.has(modLower)) {
+            invaliModifierdParam(mod);
         }
 
-        this._opts.modifier = mod;
+        this._opts.modifier = modLower;
         return this;
     }
 

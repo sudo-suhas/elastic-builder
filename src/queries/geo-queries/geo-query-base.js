@@ -2,7 +2,13 @@
 
 const isNil = require('lodash.isnil');
 
-const { Query, util: { recursiveToJSON } } = require('../../core');
+const { Query, util: { invalidParam, recursiveToJSON } } = require('../../core');
+
+const invalidValidationMethod = invalidParam(
+    '',
+    'validation_method',
+    "'IGNORE_MALFORMED', 'COERCE' or 'STRICT'"
+);
 
 /**
  * The `GeoQueryBase` provides support for common options used across
@@ -48,19 +54,18 @@ class GeoQueryBase extends Query {
      * @throws {Error} If `method` parameter is not one of `IGNORE_MALFORMED`, `COERCE` or `STRICT`
      */
     validationMethod(method) {
-        const methodUpper = method.toUpperCase();
+        if (isNil(method)) invalidValidationMethod(method);
 
+        const methodUpper = method.toUpperCase();
         if (
             methodUpper !== 'IGNORE_MALFORMED' &&
             methodUpper !== 'COERCE' &&
             methodUpper !== 'STRICT'
         ) {
-            throw new Error(
-                '`validation_method` must be one of `IGNORE_MALFORMED`, `COERCE` or `STRICT`'
-            );
+            invalidValidationMethod(method);
         }
 
-        this._queryOpts.validation_method = method;
+        this._queryOpts.validation_method = methodUpper;
         return this;
     }
 

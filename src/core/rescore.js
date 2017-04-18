@@ -1,15 +1,15 @@
 'use strict';
 
-const { inspect } = require('util');
-
 const isNil = require('lodash.isnil');
 
 const Query = require('./query');
-const { checkType, recursiveToJSON } = require('./util');
+const { checkType, invalidParam, recursiveToJSON } = require('./util');
 const { RESCORE_MODE_SET } = require('./consts');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html';
+
+const invalidScoreModeParam = invalidParam(ES_REF_URL, 'score_mode', RESCORE_MODE_SET);
 
 /**
  * A `rescore` request can help to improve precision by reordering just
@@ -93,15 +93,14 @@ class Rescore {
      * @returns {Rescore} returns `this` so that calls can be chained.
      */
     scoreMode(mode) {
-        if (!RESCORE_MODE_SET.has(mode)) {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'score_mode' - ${mode}`);
-            throw new Error(
-                `The 'score_mode' parameter should belong to ${inspect(RESCORE_MODE_SET)}`
-            );
+        if (isNil(mode)) invalidScoreModeParam(mode);
+
+        const modeLower = mode.toLowerCase();
+        if (!RESCORE_MODE_SET.has(modeLower)) {
+            invalidScoreModeParam(mode);
         }
 
-        this._rescoreOpts.score_mode = mode;
+        this._rescoreOpts.score_mode = modeLower;
         return this;
     }
 

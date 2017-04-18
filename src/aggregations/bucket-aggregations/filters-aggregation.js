@@ -1,7 +1,6 @@
 'use strict';
 
-const isObject = require('lodash.isobject'),
-    isEmpty = require('lodash.isempty'),
+const isEmpty = require('lodash.isempty'),
     has = require('lodash.has'),
     concat = require('lodash.concat');
 
@@ -68,7 +67,7 @@ class FiltersAggregation extends BucketAggregationBase {
      */
     _checkNamedFilters() {
         if (!has(this._aggsDef, 'filters')) this._aggsDef.filters = {};
-        else if (!isObject(this._aggsDef.filters)) {
+        else if (Array.isArray(this._aggsDef.filters)) {
             this._warn('Do not mix named and anonymous filters!');
             this._warn('Overwriting anonymous filters.');
             this._aggsDef.filters = {};

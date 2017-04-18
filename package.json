@@ -17,7 +17,7 @@
     "lint": "eslint src test",
     "lint:fix": "npm run lint -- --fix",
     "lint-staged": "lint-staged",
-    "test": "nyc ava --verbose",
+    "test": "nyc ava",
     "check": "npm run lint && npm test",
     "report": "nyc report --reporter=html",
     "preversion": "npm run check && npm run build && npm run git-commit",
@@ -47,6 +47,10 @@
     "src/**/*.js": [
       "eslint --fix",
       "git add"
+    ],
+    "test/**/*.js": [
+      "eslint --fix",
+      "git add"
     ]
   },
   "pre-commit": [
@@ -65,6 +69,7 @@
     "eslint-plugin-ava": "^4.2.0",
     "eslint-plugin-prettier": "^2.0.1",
     "lint-staged": "^3.4.0",
+    "lodash": "^4.17.4",
     "nyc": "^10.2.0",
     "pre-commit": "^1.2.2",
     "prettier": "^1.1.0",

@@ -1,6 +1,6 @@
 'use strict';
 
-const { inspect } = require('util');
+const isNil = require('lodash.isnil');
 
 const forEach = require('lodash.foreach'),
     head = require('lodash.head'),
@@ -8,7 +8,7 @@ const forEach = require('lodash.foreach'),
 
 const {
     Query,
-    util: { checkType, recursiveToJSON },
+    util: { checkType, invalidParam, recursiveToJSON },
     consts: { SCORE_MODE_SET, BOOST_MODE_SET }
 } = require('../../core');
 
@@ -16,6 +16,9 @@ const { ScoreFunction } = require('./score-functions');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html';
+
+const invalidScoreModeParam = invalidParam(ES_REF_URL, 'score_mode', SCORE_MODE_SET);
+const invalidBoostModeParam = invalidParam(ES_REF_URL, 'boost_mode', BOOST_MODE_SET);
 
 /**
  * The `function_score` allows you to modify the score of documents that are
@@ -58,12 +61,11 @@ class FunctionScoreQuery extends Query {
      * @returns {FunctionScoreQuery} returns `this` so that calls can be chained.
      */
     scoreMode(mode) {
-        if (!SCORE_MODE_SET.has(mode)) {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'score_mode' - ${mode}`);
-            throw new Error(
-                `The 'score_mode' parameter should belong to ${inspect(SCORE_MODE_SET)}`
-            );
+        if (isNil(mode)) invalidScoreModeParam(mode);
+
+        const modeLower = mode.toLowerCase();
+        if (!SCORE_MODE_SET.has(modeLower)) {
+            invalidScoreModeParam(mode);
         }
 
         this._queryOpts.score_mode = mode;
@@ -78,12 +80,9 @@ class FunctionScoreQuery extends Query {
      * @returns {FunctionScoreQuery} returns `this` so that calls can be chained.
      */
     boostMode(mode) {
+        if (isNil(mode)) invalidBoostModeParam(mode);
         if (!BOOST_MODE_SET.has(mode)) {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'boost_mode' - ${mode}`);
-            throw new Error(
-                `The 'boost_mode' parameter should belong to ${inspect(BOOST_MODE_SET)}`
-            );
+            invalidBoostModeParam(mode);
         }
 
         this._queryOpts.boost_mode = mode;

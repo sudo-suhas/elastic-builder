@@ -1,12 +1,18 @@
 'use strict';
 
+const isNil = require('lodash.isnil');
 const isObject = require('lodash.isobject');
 const has = require('lodash.has');
+
+const { util: { invalidParam } } = require('../../core');
 
 const MonoFieldQueryBase = require('./mono-field-query-base');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html';
+
+const invalidLowFreqOpParam = invalidParam(ES_REF_URL, 'low_freq_operator', "'and' or 'or'");
+const invalidHighFreqOpParam = invalidParam(ES_REF_URL, 'high_freq_operator', "'and' or 'or'");
 
 /**
  * The `common` terms query is a modern alternative to stopwords which
@@ -85,11 +91,11 @@ class CommonTermsQuery extends MonoFieldQueryBase {
      * @returns {MatchQuery} returns `this` so that calls can be chained.
      */
     lowFreqOperator(operator) {
+        if (isNil(operator)) invalidLowFreqOpParam(operator);
+
         const operatorLower = operator.toLowerCase();
         if (operatorLower !== 'and' && operatorLower !== 'or') {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'low_freq_operator' - ${operator}`);
-            throw new Error('The operator parameter can only be `and` or `or`');
+            invalidLowFreqOpParam(operator);
         }
 
         this._queryOpts.low_freq_operator = operatorLower;
@@ -105,11 +111,11 @@ class CommonTermsQuery extends MonoFieldQueryBase {
      * @returns {MatchQuery} returns `this` so that calls can be chained.
      */
     highFreqOperator(operator) {
+        if (isNil(operator)) invalidHighFreqOpParam(operator);
+
         const operatorLower = operator.toLowerCase();
         if (operatorLower !== 'and' && operatorLower !== 'or') {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'high_freq_operator' - ${operator}`);
-            throw new Error('The operator parameter can only be `and` or `or`');
+            invalidHighFreqOpParam(operator);
         }
 
         this._queryOpts.high_freq_operator = operatorLower;

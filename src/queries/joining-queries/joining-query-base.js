@@ -1,16 +1,15 @@
 'use strict';
 
-const { inspect } = require('util');
-
 const isNil = require('lodash.isnil');
 
 const {
     Query,
     InnerHits,
-    util: { checkType },
+    util: { checkType, invalidParam },
     consts: { NESTED_SCORE_MODE_SET }
 } = require('../../core');
 
+const invalidScoreModeParam = invalidParam('', 'score_mode', NESTED_SCORE_MODE_SET);
 /**
  * The `JoiningQueryBase` class provides support for common options used across
  * various joining query implementations.
@@ -60,15 +59,14 @@ class JoiningQueryBase extends Query {
      * @returns {JoiningQueryBase} returns `this` so that calls can be chained.
      */
     scoreMode(mode) {
-        if (!NESTED_SCORE_MODE_SET.has(mode)) {
-            console.log(`See ${this.refUrl}`);
-            console.warn(`Got 'score_mode' - ${mode}`);
-            throw new Error(
-                `The 'score_mode' parameter should belong to ${inspect(NESTED_SCORE_MODE_SET)}`
-            );
+        if (isNil(mode)) invalidScoreModeParam(mode);
+
+        const modeLower = mode.toLowerCase();
+        if (!NESTED_SCORE_MODE_SET.has(modeLower)) {
+            invalidScoreModeParam(mode);
         }
 
-        this._queryOpts.score_mode = mode;
+        this._queryOpts.score_mode = modeLower;
         return this;
     }
 

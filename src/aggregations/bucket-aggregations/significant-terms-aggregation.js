@@ -41,10 +41,10 @@ class SignificantTermsAggregation extends TermsAggregationBase {
     /**
      * Use `mutual_information` as significance score
      *
-     * @param {boolean} includeNegatives Default `true`. If set to `false`,
+     * @param {boolean=} includeNegatives Default `true`. If set to `false`,
      * filters out the terms that appear less often in the subset than in
      * documents outside the subset
-     * @param {boolean} backgroundIsSuperset `true`(default) if the documents in the bucket
+     * @param {boolean=} backgroundIsSuperset `true`(default) if the documents in the bucket
      * are also contained in the background. If instead you defined a custom background filter
      * that represents a different set of documents that you want to compare to, pass `false`
      * @returns {SignificantTermsAggregation} returns `this` so that calls can be chained
@@ -125,6 +125,7 @@ class SignificantTermsAggregation extends TermsAggregationBase {
      */
     backgroundFilter(filterQuery) {
         checkType(filterQuery, Query);
+
         this._aggsDef.background_filter = filterQuery;
         return this;
     }

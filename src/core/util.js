@@ -3,6 +3,7 @@
 const { inspect } = require('util');
 
 const isEmpty = require('lodash.isempty'),
+    isString = require('lodash.isstring'),
     isObject = require('lodash.isobject'),
     map = require('lodash.map'),
     hasIn = require('lodash.hasin');
@@ -77,18 +78,45 @@ exports.firstDigitPos = function firstDigitPos(str) {
  * @returns {Object} JSON representation of class.
  */
 exports.recursiveToJSON = function recursiveToJSON(obj) {
+    // Strings, numbers, booleans
     if (!isObject(obj)) return obj;
 
+    // Each element in array needs to be recursively JSONified
     if (Array.isArray(obj)) return map(obj, recursiveToJSON);
 
+    // If it is a native object, we'll not get anything different by calling toJSON
+    // If it is a custom object, toJSON needs to be called
+    // Custom object toJSON might return any datatype
+    // So let us handle it recursively
     if (hasIn(obj, 'toJSON') && obj.constructor !== Object) {
         return recursiveToJSON(obj.toJSON());
     }
 
+    // Custom object toJSON or native object might have values which need to be JSONified
     const json = {};
     for (const key of Object.keys(obj)) {
         json[key] = recursiveToJSON(obj[key]);
     }
 
     return json;
+};
+
+/**
+ * Helper function for creating function which will log warning and throw error
+ * on receiving invalid parameter
+ *
+ * @private
+ * @param {string} refUrl
+ * @param {string} paramName
+ * @param {*} validValues
+ * @returns {function}
+ */
+exports.invalidParam = function invalidParam(refUrl, paramName, validValues) {
+    return (paramVal, referenceUrl = refUrl) => {
+        referenceUrl && console.log(`See ${referenceUrl}`);
+        console.warn(`Got '${paramName}' - '${paramVal}'`);
+
+        const validValuesStr = isString(validValues) ? validValues : inspect(validValues);
+        throw new Error(`The '${paramName}' parameter should be one of ${validValuesStr}`);
+    };
 };

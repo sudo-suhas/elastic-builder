@@ -18,6 +18,7 @@ exports.validateRewiteMethod = function validateRewiteMethod(method, paramName, 
         const rewriteMethodName = `${method.substring(0, firstDigitPos(method))}N`;
         if (!REWRITE_METHOD_SET.has(rewriteMethodName)) {
             console.log(`See ${refUrl}`);
+            console.warn(`Got '${paramName}' - ${method}`);
             throw new Error(
                 `The '${paramName}' parameter should belong to ${inspect(REWRITE_METHOD_SET)}`
             );

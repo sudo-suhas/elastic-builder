@@ -2,12 +2,14 @@
 
 const isNil = require('lodash.isnil');
 
-const { GeoPoint, util: { checkType } } = require('../../core');
+const { GeoPoint, util: { checkType, invalidParam } } = require('../../core');
 
 const GeoQueryBase = require('./geo-query-base');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-query.html';
+
+const invalidDistanceTypeParam = invalidParam(ES_REF_URL, 'distance_type', "'plane' or 'arc'");
 
 /**
  * Filters documents that include only hits that exists within a specific distance from a geo point.
@@ -59,12 +61,10 @@ class GeoDistanceQuery extends GeoQueryBase {
      * @throws {Error} If `type` is neither `plane` nor `arc`.
      */
     distanceType(type) {
+        if (isNil(type)) invalidDistanceTypeParam(type);
+
         const typeLower = type.toLowerCase();
-        if (typeLower !== 'plane' && typeLower !== 'arc') {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'distance_type' - ${type}`);
-            throw new Error('The distance_type parameter can only be `plane` or `arc`');
-        }
+        if (typeLower !== 'plane' && typeLower !== 'arc') invalidDistanceTypeParam(type);
 
         this._queryOpts.distance_type = typeLower;
         return this;

@@ -1,10 +1,12 @@
 'use strict';
 
-const { inspect } = require('util');
+const isNil = require('lodash.isnil');
 
-const { consts: { EXECUTION_HINT_SET } } = require('../../core');
+const { util: { invalidParam }, consts: { EXECUTION_HINT_SET } } = require('../../core');
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
+
+const invalidExecutionHintParam = invalidParam('', 'execution_hint', EXECUTION_HINT_SET);
 
 /**
  * The `TermsAggregationBase` provides support for common options used across
@@ -141,11 +143,11 @@ class TermsAggregationBase extends BucketAggregationBase {
      * @throws {Error} If Execution Hint is outside the accepted set.
      */
     executionHint(hint) {
-        if (!EXECUTION_HINT_SET.has(hint)) {
-            console.log(`See ${this._refUrl}#_execution_hint`);
-            throw new Error(
-                `The 'execution_hint' parameter should belong to ${inspect(EXECUTION_HINT_SET)}`
-            );
+        if (isNil(hint)) invalidExecutionHintParam(hint, this._refUrl);
+
+        const hintLower = hint.toLowerCase();
+        if (!EXECUTION_HINT_SET.has(hintLower)) {
+            invalidExecutionHintParam(hint, this._refUrl);
         }
 
         this._aggsDef.execution_hint = hint;

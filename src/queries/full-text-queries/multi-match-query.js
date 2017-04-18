@@ -1,16 +1,18 @@
 'use strict';
 
-const { inspect } = require('util');
-
 const isNil = require('lodash.isnil');
 const concat = require('lodash.concat');
 
-const { util: { checkType }, consts: { MULTI_MATCH_TYPE } } = require('../../core');
+const { util: { checkType, invalidParam }, consts: { MULTI_MATCH_TYPE } } = require('../../core');
 const FullTextQueryBase = require('./full-text-query-base');
 const { validateRewiteMethod } = require('../helper');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html';
+
+const invalidTypeParam = invalidParam(ES_REF_URL, 'type', MULTI_MATCH_TYPE);
+const invalidOperatorParam = invalidParam(ES_REF_URL, 'operator', "'and' or 'or'");
+const invalidBehaviorParam = invalidParam(ES_REF_URL, 'behavior', "'all' or 'one'");
 
 /**
  * A `MultiMatchQuery` query builds further on top of the
@@ -99,14 +101,12 @@ class MultiMatchQuery extends FullTextQueryBase {
      * @returns {MultiMatchQuery} returns `this` so that calls can be chained.
      */
     type(type) {
-        const typeLower = type.toLowerCase();
-        if (!MULTI_MATCH_TYPE.has(typeLower)) {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'type' - ${type}`);
-            throw new Error(`The 'type' parameter should belong to ${inspect(MULTI_MATCH_TYPE)}`);
-        }
+        if (isNil(type)) invalidTypeParam(type);
 
-        this._queryOpts.type = type;
+        const typeLower = type.toLowerCase();
+        if (!MULTI_MATCH_TYPE.has(typeLower)) invalidTypeParam(type);
+
+        this._queryOpts.type = typeLower;
         return this;
     }
 
@@ -134,11 +134,11 @@ class MultiMatchQuery extends FullTextQueryBase {
      * @returns {MultiMatchQuery} returns `this` so that calls can be chained.
      */
     operator(operator) {
+        if (isNil(operator)) invalidOperatorParam(operator);
+
         const operatorLower = operator.toLowerCase();
         if (operatorLower !== 'and' && operatorLower !== 'or') {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'operator' - ${operator}`);
-            throw new Error('The operator parameter can only be `and` or `or`');
+            invalidOperatorParam(operator);
         }
 
         this._queryOpts.operator = operatorLower;
@@ -301,11 +301,11 @@ class MultiMatchQuery extends FullTextQueryBase {
      * @returns {MultiMatchQuery} returns `this` so that calls can be chained.
      */
     zeroTermsQuery(behavior) {
+        if (isNil(behavior)) invalidBehaviorParam(behavior);
+
         const behaviorLower = behavior.toLowerCase();
         if (behaviorLower !== 'all' && behaviorLower !== 'none') {
-            console.log(`See ${ES_REF_URL}`);
-            console.warn(`Got 'zero_terms_query' - ${behavior}`);
-            throw new Error('The `zero_terms_query` parameter can only be `all` or `one`');
+            invalidBehaviorParam(behavior);
         }
 
         this._queryOpts.zero_terms_query = behavior;
