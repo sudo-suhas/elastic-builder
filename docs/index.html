@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset='utf-8' />
-  <title>elastic-builder 0.1.2 | Documentation</title>
+  <title>elastic-builder 0.1.3 | Documentation</title>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' type='text/css' rel='stylesheet' />
   <link href='assets/style.css' type='text/css' rel='stylesheet' />
@@ -14,7 +14,7 @@
       <div class='fixed xs-hide fix-3 overflow-auto max-height-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>elastic-builder</h3>
-          <div class='mb1'><code>0.1.2</code></div>
+          <div class='mb1'><code>0.1.3</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -1613,6 +1613,40 @@
               
                 
                 <li><a
+                  href='#simplequerystringquery'
+                  class=" toggle-sibling">
+                  SimpleQueryStringQuery
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#SimpleQueryStringQuery#constructor'
+                        class='regular pre-open'>
+                        #constructor
+                      </a></li>
+                      
+                      <li><a
+                        href='#SimpleQueryStringQuery#flags'
+                        class='regular pre-open'>
+                        #flags
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
                   href='#querystringquerybase'
                   class=" toggle-sibling">
                   QueryStringQueryBase
@@ -1683,9 +1717,19 @@
               
                 
                 <li><a
-                  href='#simplequerystringquery'
+                  href='#multitermquerybase'
+                  class="">
+                  MultiTermQueryBase
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#termquery'
                   class=" toggle-sibling">
-                  SimpleQueryStringQuery
+                  TermQuery
                   <span class='icon'>▸</span>
                 </a>
                 
@@ -1696,15 +1740,9 @@
                       <li class='h5'><span>Instance members</span></li>
                       
                       <li><a
-                        href='#SimpleQueryStringQuery#constructor'
+                        href='#TermQuery#constructor'
                         class='regular pre-open'>
                         #constructor
-                      </a></li>
-                      
-                      <li><a
-                        href='#SimpleQueryStringQuery#flags'
-                        class='regular pre-open'>
-                        #flags
                       </a></li>
                       
                     </ul>
@@ -1712,16 +1750,6 @@
                   
                   
                 </div>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#multitermquerybase'
-                  class="">
-                  MultiTermQueryBase
-                  
-                </a>
                 
                 </li>
               
@@ -1761,34 +1789,6 @@
                         href='#ValueTermQueryBase#toJSON'
                         class='regular pre-open'>
                         #toJSON
-                      </a></li>
-                      
-                    </ul>
-                  
-                  
-                  
-                </div>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#termquery'
-                  class=" toggle-sibling">
-                  TermQuery
-                  <span class='icon'>▸</span>
-                </a>
-                
-                <div class='toggle-target display-none'>
-                  
-                  
-                    <ul class='list-reset py1-ul pl1'>
-                      <li class='h5'><span>Instance members</span></li>
-                      
-                      <li><a
-                        href='#TermQuery#constructor'
-                        class='regular pre-open'>
-                        #constructor
                       </a></li>
                       
                     </ul>
@@ -2847,58 +2847,6 @@
               
                 
                 <li><a
-                  href='#haschildquery'
-                  class=" toggle-sibling">
-                  HasChildQuery
-                  <span class='icon'>▸</span>
-                </a>
-                
-                <div class='toggle-target display-none'>
-                  
-                  
-                    <ul class='list-reset py1-ul pl1'>
-                      <li class='h5'><span>Instance members</span></li>
-                      
-                      <li><a
-                        href='#HasChildQuery#constructor'
-                        class='regular pre-open'>
-                        #constructor
-                      </a></li>
-                      
-                      <li><a
-                        href='#HasChildQuery#type'
-                        class='regular pre-open'>
-                        #type
-                      </a></li>
-                      
-                      <li><a
-                        href='#HasChildQuery#childType'
-                        class='regular pre-open'>
-                        #childType
-                      </a></li>
-                      
-                      <li><a
-                        href='#HasChildQuery#minChildren'
-                        class='regular pre-open'>
-                        #minChildren
-                      </a></li>
-                      
-                      <li><a
-                        href='#HasChildQuery#maxChildren'
-                        class='regular pre-open'>
-                        #maxChildren
-                      </a></li>
-                      
-                    </ul>
-                  
-                  
-                  
-                </div>
-                
-                </li>
-              
-                
-                <li><a
                   href='#joiningquerybase'
                   class=" toggle-sibling">
                   JoiningQueryBase
@@ -2939,6 +2887,58 @@
                         href='#JoiningQueryBase#innerHits'
                         class='regular pre-open'>
                         #innerHits
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#haschildquery'
+                  class=" toggle-sibling">
+                  HasChildQuery
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#HasChildQuery#constructor'
+                        class='regular pre-open'>
+                        #constructor
+                      </a></li>
+                      
+                      <li><a
+                        href='#HasChildQuery#type'
+                        class='regular pre-open'>
+                        #type
+                      </a></li>
+                      
+                      <li><a
+                        href='#HasChildQuery#childType'
+                        class='regular pre-open'>
+                        #childType
+                      </a></li>
+                      
+                      <li><a
+                        href='#HasChildQuery#minChildren'
+                        class='regular pre-open'>
+                        #minChildren
+                      </a></li>
+                      
+                      <li><a
+                        href='#HasChildQuery#maxChildren'
+                        class='regular pre-open'>
+                        #maxChildren
                       </a></li>
                       
                     </ul>
@@ -3607,6 +3607,16 @@
               
                 
                 <li><a
+                  href='#spanquerybase'
+                  class="">
+                  SpanQueryBase
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#spanmultitermquery'
                   class=" toggle-sibling">
                   SpanMultiTermQuery
@@ -3636,16 +3646,6 @@
                   
                   
                 </div>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#spanquerybase'
-                  class="">
-                  SpanQueryBase
-                  
-                </a>
                 
                 </li>
               
@@ -3987,46 +3987,6 @@
               
                 
                 <li><a
-                  href='#cardinalityaggregation'
-                  class=" toggle-sibling">
-                  CardinalityAggregation
-                  <span class='icon'>▸</span>
-                </a>
-                
-                <div class='toggle-target display-none'>
-                  
-                  
-                    <ul class='list-reset py1-ul pl1'>
-                      <li class='h5'><span>Instance members</span></li>
-                      
-                      <li><a
-                        href='#CardinalityAggregation#constructor'
-                        class='regular pre-open'>
-                        #constructor
-                      </a></li>
-                      
-                      <li><a
-                        href='#CardinalityAggregation#format'
-                        class='regular pre-open'>
-                        #format
-                      </a></li>
-                      
-                      <li><a
-                        href='#CardinalityAggregation#precisionThreshold'
-                        class='regular pre-open'>
-                        #precisionThreshold
-                      </a></li>
-                      
-                    </ul>
-                  
-                  
-                  
-                </div>
-                
-                </li>
-              
-                
-                <li><a
                   href='#metricsaggregationbase'
                   class=" toggle-sibling">
                   MetricsAggregationBase
@@ -4067,6 +4027,46 @@
                         href='#MetricsAggregationBase#format'
                         class='regular pre-open'>
                         #format
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#cardinalityaggregation'
+                  class=" toggle-sibling">
+                  CardinalityAggregation
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#CardinalityAggregation#constructor'
+                        class='regular pre-open'>
+                        #constructor
+                      </a></li>
+                      
+                      <li><a
+                        href='#CardinalityAggregation#format'
+                        class='regular pre-open'>
+                        #format
+                      </a></li>
+                      
+                      <li><a
+                        href='#CardinalityAggregation#precisionThreshold'
+                        class='regular pre-open'>
+                        #precisionThreshold
                       </a></li>
                       
                     </ul>
@@ -5761,6 +5761,40 @@
               
                 
                 <li><a
+                  href='#derivativeaggregation'
+                  class=" toggle-sibling">
+                  DerivativeAggregation
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#DerivativeAggregation#constructor'
+                        class='regular pre-open'>
+                        #constructor
+                      </a></li>
+                      
+                      <li><a
+                        href='#DerivativeAggregation#unit'
+                        class='regular pre-open'>
+                        #unit
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
                   href='#pipelineaggregationbase'
                   class=" toggle-sibling">
                   PipelineAggregationBase
@@ -5795,40 +5829,6 @@
                         href='#PipelineAggregationBase#format'
                         class='regular pre-open'>
                         #format
-                      </a></li>
-                      
-                    </ul>
-                  
-                  
-                  
-                </div>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#derivativeaggregation'
-                  class=" toggle-sibling">
-                  DerivativeAggregation
-                  <span class='icon'>▸</span>
-                </a>
-                
-                <div class='toggle-target display-none'>
-                  
-                  
-                    <ul class='list-reset py1-ul pl1'>
-                      <li class='h5'><span>Instance members</span></li>
-                      
-                      <li><a
-                        href='#DerivativeAggregation#constructor'
-                        class='regular pre-open'>
-                        #constructor
-                      </a></li>
-                      
-                      <li><a
-                        href='#DerivativeAggregation#unit'
-                        class='regular pre-open'>
-                        #unit
                       </a></li>
                       
                     </ul>
@@ -22665,6 +22665,251 @@ when in quoted text.</p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='simplequerystringquery'>
+      SimpleQueryStringQuery
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  <p>A query that uses the <code>SimpleQueryParser</code> to parse its context.
+Unlike the regular <code>query_string</code> query, the <code>simple_query_string</code> query
+will never throw an exception, and discards invalid parts of the query.</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html">Elasticsearch reference</a></p>
+
+
+  <div class='pre p1 fill-light mt0'>new SimpleQueryStringQuery()</div>
+  
+  
+    <p>
+      Extends
+      
+        <a href="#querystringquerybase">QueryStringQueryBase</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='SimpleQueryStringQuery#constructor'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>constructor(queryString?)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  <p>Creates an instance of <code>SimpleQueryStringQuery</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>constructor(queryString: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>queryString</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</code>
+	    The query string
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='SimpleQueryStringQuery#flags'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>flags(flags)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  <p><code>simple_query_string</code> support multiple flags to specify which parsing features
+should be enabled. It is specified as a <code>|</code>-delimited string.</p>
+
+
+  <div class='pre p1 fill-light mt0'>flags(flags: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="#simplequerystringquery">SimpleQueryStringQuery</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>flags</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    <code>|</code>
+ delimited string. The available flags are: 
+<code>ALL</code>
+, 
+<code>NONE</code>
+,
+
+<code>AND</code>
+, 
+<code>OR</code>
+, 
+<code>NOT</code>
+, 
+<code>PREFIX</code>
+, 
+<code>PHRASE</code>
+, 
+<code>PRECEDENCE</code>
+, 
+<code>ESCAPE</code>
+, 
+<code>WHITESPACE</code>
+,
+
+<code>FUZZY</code>
+, 
+<code>NEAR</code>
+, and 
+<code>SLOP</code>
+.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#simplequerystringquery">SimpleQueryStringQuery</a></code>:
+        returns 
+<code>this</code>
+ so that calls can be chained.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='querystringquerybase'>
       QueryStringQueryBase
     </h3>
@@ -23391,251 +23636,6 @@ in the request body) and no <code>fields</code> are specified.</p>
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='simplequerystringquery'>
-      SimpleQueryStringQuery
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  <p>A query that uses the <code>SimpleQueryParser</code> to parse its context.
-Unlike the regular <code>query_string</code> query, the <code>simple_query_string</code> query
-will never throw an exception, and discards invalid parts of the query.</p>
-<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html">Elasticsearch reference</a></p>
-
-
-  <div class='pre p1 fill-light mt0'>new SimpleQueryStringQuery()</div>
-  
-  
-    <p>
-      Extends
-      
-        <a href="#querystringquerybase">QueryStringQueryBase</a>
-      
-    </p>
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
-    <div class="clearfix">
-  
-    <div class='border-bottom' id='SimpleQueryStringQuery#constructor'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>constructor(queryString?)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  <p>Creates an instance of <code>SimpleQueryStringQuery</code></p>
-
-
-  <div class='pre p1 fill-light mt0'>constructor(queryString: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>queryString</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</code>
-	    The query string
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='SimpleQueryStringQuery#flags'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>flags(flags)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  <p><code>simple_query_string</code> support multiple flags to specify which parsing features
-should be enabled. It is specified as a <code>|</code>-delimited string.</p>
-
-
-  <div class='pre p1 fill-light mt0'>flags(flags: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="#simplequerystringquery">SimpleQueryStringQuery</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>flags</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    <code>|</code>
- delimited string. The available flags are: 
-<code>ALL</code>
-, 
-<code>NONE</code>
-,
-
-<code>AND</code>
-, 
-<code>OR</code>
-, 
-<code>NOT</code>
-, 
-<code>PREFIX</code>
-, 
-<code>PHRASE</code>
-, 
-<code>PRECEDENCE</code>
-, 
-<code>ESCAPE</code>
-, 
-<code>WHITESPACE</code>
-,
-
-<code>FUZZY</code>
-, 
-<code>NEAR</code>
-, and 
-<code>SLOP</code>
-.
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#simplequerystringquery">SimpleQueryStringQuery</a></code>:
-        returns 
-<code>this</code>
- so that calls can be chained.
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-</div>
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
     <h3 class='fl m0' id='multitermquerybase'>
       MultiTermQueryBase
     </h3>
@@ -23688,6 +23688,154 @@ multi term queries:</p>
   
 
   
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='termquery'>
+      TermQuery
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  <p>The <code>term</code> query finds documents that contain the <em>exact</em> term specified
+in the inverted index.</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html">Elasticsearch reference</a></p>
+
+
+  <div class='pre p1 fill-light mt0'>new TermQuery()</div>
+  
+  
+    <p>
+      Extends
+      
+        <a href="#valuetermquerybase">ValueTermQueryBase</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> termQry = bob.termQuery(<span class="hljs-string">'user'</span>, <span class="hljs-string">'Kimchy'</span>);</pre>
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='TermQuery#constructor'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>constructor(field?, queryVal?)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  <p>Creates an instance of <code>TermQuery</code>.</p>
+
+
+  <div class='pre p1 fill-light mt0'>constructor(field: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?, queryVal: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)?)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>field</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>queryVal</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)?)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
 
   
 
@@ -24042,154 +24190,6 @@ class instance.</p>
 
       
     
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-</div>
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='termquery'>
-      TermQuery
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  <p>The <code>term</code> query finds documents that contain the <em>exact</em> term specified
-in the inverted index.</p>
-<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html">Elasticsearch reference</a></p>
-
-
-  <div class='pre p1 fill-light mt0'>new TermQuery()</div>
-  
-  
-    <p>
-      Extends
-      
-        <a href="#valuetermquerybase">ValueTermQueryBase</a>
-      
-    </p>
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Example</div>
-    
-      
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> termQry = bob.termQuery(<span class="hljs-string">'user'</span>, <span class="hljs-string">'Kimchy'</span>);</pre>
-    
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
-    <div class="clearfix">
-  
-    <div class='border-bottom' id='TermQuery#constructor'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>constructor(field?, queryVal?)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  <p>Creates an instance of <code>TermQuery</code>.</p>
-
-
-  <div class='pre p1 fill-light mt0'>constructor(field: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?, queryVal: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)?)</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>field</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>queryVal</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)?)</code>
-	    
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
   
 
   
@@ -33583,475 +33583,6 @@ the nested objects / docs as if they were indexed as separate docs
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='haschildquery'>
-      HasChildQuery
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  <p>The <code>has_child</code> filter accepts a query and the child type to run against, and
-results in parent documents that have child docs matching the query.</p>
-<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html">Elasticsearch reference</a></p>
-
-
-  <div class='pre p1 fill-light mt0'>new HasChildQuery()</div>
-  
-  
-    <p>
-      Extends
-      
-        <a href="#joiningquerybase">JoiningQueryBase</a>
-      
-    </p>
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
-    <div class="clearfix">
-  
-    <div class='border-bottom' id='HasChildQuery#constructor'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>constructor(qry?, type?)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  <p>Creates an instance of <code>HasChildQuery</code></p>
-
-
-  <div class='pre p1 fill-light mt0'>constructor(qry: <a href="#query">Query</a>?, type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>qry</span> <code class='quiet'>(<a href="#query">Query</a>?)</code>
-	    A valid 
-<code>Query</code>
- object
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>type</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</code>
-	    The child type
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='HasChildQuery#type'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>type(type)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  <p>Sets the child document type to search against.
-Alias for method <code>childType</code>.</p>
-
-
-  <div class='pre p1 fill-light mt0'>type(type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="#haschildquery">HasChildQuery</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>type</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    A valid doc type name
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#haschildquery">HasChildQuery</a></code>:
-        returns 
-<code>this</code>
- so that calls can be chained.
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='HasChildQuery#childType'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>childType(type)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  <p>Sets the child document type to search against</p>
-
-
-  <div class='pre p1 fill-light mt0'>childType(type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="#haschildquery">HasChildQuery</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>type</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    A valid doc type name
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#haschildquery">HasChildQuery</a></code>:
-        returns 
-<code>this</code>
- so that calls can be chained.
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='HasChildQuery#minChildren'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>minChildren(limit)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  <p>Specify the minimum number of children are required to match
-for the parent doc to be considered a match</p>
-
-
-  <div class='pre p1 fill-light mt0'>minChildren(limit: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#nestedquery">NestedQuery</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>limit</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-	    A positive 
-<code>integer</code>
- value.
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#nestedquery">NestedQuery</a></code>:
-        returns 
-<code>this</code>
- so that calls can be chained.
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='HasChildQuery#maxChildren'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>maxChildren(limit)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  <p>Specify the maximum number of children are required to match
-for the parent doc to be considered a match</p>
-
-
-  <div class='pre p1 fill-light mt0'>maxChildren(limit: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#nestedquery">NestedQuery</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>limit</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-	    A positive 
-<code>integer</code>
- value.
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#nestedquery">NestedQuery</a></code>:
-        returns 
-<code>this</code>
- so that calls can be chained.
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-</div>
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
     <h3 class='fl m0' id='joiningquerybase'>
       JoiningQueryBase
     </h3>
@@ -34521,6 +34052,475 @@ will throw an exception if the path is not mapped.</p>
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="#joiningquerybase">JoiningQueryBase</a></code>:
+        returns 
+<code>this</code>
+ so that calls can be chained.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='haschildquery'>
+      HasChildQuery
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  <p>The <code>has_child</code> filter accepts a query and the child type to run against, and
+results in parent documents that have child docs matching the query.</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html">Elasticsearch reference</a></p>
+
+
+  <div class='pre p1 fill-light mt0'>new HasChildQuery()</div>
+  
+  
+    <p>
+      Extends
+      
+        <a href="#joiningquerybase">JoiningQueryBase</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='HasChildQuery#constructor'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>constructor(qry?, type?)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  <p>Creates an instance of <code>HasChildQuery</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>constructor(qry: <a href="#query">Query</a>?, type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>qry</span> <code class='quiet'>(<a href="#query">Query</a>?)</code>
+	    A valid 
+<code>Query</code>
+ object
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>type</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</code>
+	    The child type
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='HasChildQuery#type'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>type(type)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  <p>Sets the child document type to search against.
+Alias for method <code>childType</code>.</p>
+
+
+  <div class='pre p1 fill-light mt0'>type(type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="#haschildquery">HasChildQuery</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>type</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    A valid doc type name
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#haschildquery">HasChildQuery</a></code>:
+        returns 
+<code>this</code>
+ so that calls can be chained.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='HasChildQuery#childType'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>childType(type)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  <p>Sets the child document type to search against</p>
+
+
+  <div class='pre p1 fill-light mt0'>childType(type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="#haschildquery">HasChildQuery</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>type</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    A valid doc type name
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#haschildquery">HasChildQuery</a></code>:
+        returns 
+<code>this</code>
+ so that calls can be chained.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='HasChildQuery#minChildren'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>minChildren(limit)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  <p>Specify the minimum number of children are required to match
+for the parent doc to be considered a match</p>
+
+
+  <div class='pre p1 fill-light mt0'>minChildren(limit: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#nestedquery">NestedQuery</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>limit</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    A positive 
+<code>integer</code>
+ value.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#nestedquery">NestedQuery</a></code>:
+        returns 
+<code>this</code>
+ so that calls can be chained.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='HasChildQuery#maxChildren'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>maxChildren(limit)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  <p>Specify the maximum number of children are required to match
+for the parent doc to be considered a match</p>
+
+
+  <div class='pre p1 fill-light mt0'>maxChildren(limit: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#nestedquery">NestedQuery</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>limit</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    A positive 
+<code>integer</code>
+ value.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#nestedquery">NestedQuery</a></code>:
         returns 
 <code>this</code>
  so that calls can be chained.
@@ -40903,6 +40903,64 @@ class instance.</p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='spanquerybase'>
+      SpanQueryBase
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  <p>Interface-like class used to group and identify various implementations of Span queries.</p>
+
+
+  <div class='pre p1 fill-light mt0'>new SpanQueryBase()</div>
+  
+  
+    <p>
+      Extends
+      
+        <a href="#query">Query</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='spanmultitermquery'>
       SpanMultiTermQuery
     </h3>
@@ -41110,64 +41168,6 @@ fuzzy, prefix, range or regexp query) as a <code>span query</code>, so it can be
     </div>
   
 </div>
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='spanquerybase'>
-      SpanQueryBase
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  <p>Interface-like class used to group and identify various implementations of Span queries.</p>
-
-
-  <div class='pre p1 fill-light mt0'>new SpanQueryBase()</div>
-  
-  
-    <p>
-      Extends
-      
-        <a href="#query">Query</a>
-      
-    </p>
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
   
 
@@ -43576,296 +43576,6 @@ from the aggregated documents.</p>
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='cardinalityaggregation'>
-      CardinalityAggregation
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  <p>A single-value metrics aggregation that calculates an approximate count of
-distinct values. Values can be extracted either from specific fields in the
-document or generated by a script.</p>
-<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html">Elasticsearch reference</a></p>
-<p>Aggregation that calculates an approximate count of distinct values.</p>
-
-
-  <div class='pre p1 fill-light mt0'>new CardinalityAggregation()</div>
-  
-  
-    <p>
-      Extends
-      
-        <a href="#metricsaggregationbase">MetricsAggregationBase</a>
-      
-    </p>
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
-    <div class="clearfix">
-  
-    <div class='border-bottom' id='CardinalityAggregation#constructor'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>constructor(name, field?)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  <p>Creates an instance of <code>CardinalityAggregation</code></p>
-
-
-  <div class='pre p1 fill-light mt0'>constructor(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, field: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    The name which will be used to refer to this aggregation.
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>field</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</code>
-	    The field to aggregate on
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='CardinalityAggregation#format'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>format()</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  
-
-  <div class='pre p1 fill-light mt0'>format()</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Throws</div>
-    <ul>
-      
-        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>: This method cannot be called on CardinalityAggregation
-</li>
-      
-    </ul>
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='CardinalityAggregation#precisionThreshold'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>precisionThreshold(threshold)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  <p>The precision_threshold options allows to trade memory for accuracy,
-and defines a unique count below which counts are expected to be close to accurate.</p>
-
-
-  <div class='pre p1 fill-light mt0'>precisionThreshold(threshold: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#cardinalityaggregation">CardinalityAggregation</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>threshold</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-	    The threshold value.
-The maximum supported value is 40000, thresholds above this number
-will have the same effect as a threshold of 40000. The default values is 3000.
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#cardinalityaggregation">CardinalityAggregation</a></code>:
-        returns 
-<code>this</code>
- so that calls can be chained
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-</div>
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
     <h3 class='fl m0' id='metricsaggregationbase'>
       MetricsAggregationBase
     </h3>
@@ -44307,6 +44017,296 @@ that are missing a value should be treated.</p>
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="#metricsaggregationbase">MetricsAggregationBase</a></code>:
+        returns 
+<code>this</code>
+ so that calls can be chained
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='cardinalityaggregation'>
+      CardinalityAggregation
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  <p>A single-value metrics aggregation that calculates an approximate count of
+distinct values. Values can be extracted either from specific fields in the
+document or generated by a script.</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html">Elasticsearch reference</a></p>
+<p>Aggregation that calculates an approximate count of distinct values.</p>
+
+
+  <div class='pre p1 fill-light mt0'>new CardinalityAggregation()</div>
+  
+  
+    <p>
+      Extends
+      
+        <a href="#metricsaggregationbase">MetricsAggregationBase</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='CardinalityAggregation#constructor'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>constructor(name, field?)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  <p>Creates an instance of <code>CardinalityAggregation</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>constructor(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, field: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The name which will be used to refer to this aggregation.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>field</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</code>
+	    The field to aggregate on
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='CardinalityAggregation#format'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>format()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>format()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Throws</div>
+    <ul>
+      
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>: This method cannot be called on CardinalityAggregation
+</li>
+      
+    </ul>
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='CardinalityAggregation#precisionThreshold'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>precisionThreshold(threshold)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  <p>The precision_threshold options allows to trade memory for accuracy,
+and defines a unique count below which counts are expected to be close to accurate.</p>
+
+
+  <div class='pre p1 fill-light mt0'>precisionThreshold(threshold: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#cardinalityaggregation">CardinalityAggregation</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>threshold</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    The threshold value.
+The maximum supported value is 40000, thresholds above this number
+will have the same effect as a threshold of 40000. The default values is 3000.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#cardinalityaggregation">CardinalityAggregation</a></code>:
         returns 
 <code>this</code>
  so that calls can be chained
@@ -58655,6 +58655,234 @@ be numeric and the sibling aggregation must be a multi-bucket aggregation.</p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='derivativeaggregation'>
+      DerivativeAggregation
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  <p>A parent pipeline aggregation which calculates the derivative of a
+specified metric in a parent histogram (or date_histogram) aggregation.
+The specified metric must be numeric and the enclosing histogram must
+have min_doc_count set to 0 (default for histogram aggregations).</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-derivative-aggregation.html">Elasticsearch reference</a></p>
+
+
+  <div class='pre p1 fill-light mt0'>new DerivativeAggregation()</div>
+  
+  
+    <p>
+      Extends
+      
+        <a href="#pipelineaggregationbase">PipelineAggregationBase</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='DerivativeAggregation#constructor'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>constructor(name, bucketsPath?)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  <p>Creates an instance of <code>DerivativeAggregation</code></p>
+
+
+  <div class='pre p1 fill-light mt0'>constructor(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, bucketsPath: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The name which will be used to refer to this aggregation.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>bucketsPath</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</code>
+	    The relative path of metric to aggregate over
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='DerivativeAggregation#unit'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>unit(unit)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
+      <span></span>
+      </a>
+    
+  </div>
+  
+
+  <p>Set the units of the derivative values. <code>unit</code> specifies what unit to use for
+the x-axis of the derivative calculation</p>
+
+
+  <div class='pre p1 fill-light mt0'>unit(unit: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="#derivativeaggregation">DerivativeAggregation</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>unit</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    <code>unit</code>
+ specifies what unit to use for
+the x-axis of the derivative calculation
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#derivativeaggregation">DerivativeAggregation</a></code>:
+        returns 
+<code>this</code>
+ so that calls can be chained
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='pipelineaggregationbase'>
       PipelineAggregationBase
     </h3>
@@ -59016,234 +59244,6 @@ Required.</p>
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="#pipelineaggregationbase">PipelineAggregationBase</a></code>:
-        returns 
-<code>this</code>
- so that calls can be chained
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-</div>
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='derivativeaggregation'>
-      DerivativeAggregation
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  <p>A parent pipeline aggregation which calculates the derivative of a
-specified metric in a parent histogram (or date_histogram) aggregation.
-The specified metric must be numeric and the enclosing histogram must
-have min_doc_count set to 0 (default for histogram aggregations).</p>
-<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-derivative-aggregation.html">Elasticsearch reference</a></p>
-
-
-  <div class='pre p1 fill-light mt0'>new DerivativeAggregation()</div>
-  
-  
-    <p>
-      Extends
-      
-        <a href="#pipelineaggregationbase">PipelineAggregationBase</a>
-      
-    </p>
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
-    <div class="clearfix">
-  
-    <div class='border-bottom' id='DerivativeAggregation#constructor'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>constructor(name, bucketsPath?)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  <p>Creates an instance of <code>DerivativeAggregation</code></p>
-
-
-  <div class='pre p1 fill-light mt0'>constructor(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, bucketsPath: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    The name which will be used to refer to this aggregation.
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>bucketsPath</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</code>
-	    The relative path of metric to aggregate over
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='DerivativeAggregation#unit'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>unit(unit)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='[object Object]'>
-      <span></span>
-      </a>
-    
-  </div>
-  
-
-  <p>Set the units of the derivative values. <code>unit</code> specifies what unit to use for
-the x-axis of the derivative calculation</p>
-
-
-  <div class='pre p1 fill-light mt0'>unit(unit: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="#derivativeaggregation">DerivativeAggregation</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>unit</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    <code>unit</code>
- specifies what unit to use for
-the x-axis of the derivative calculation
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#derivativeaggregation">DerivativeAggregation</a></code>:
         returns 
 <code>this</code>
  so that calls can be chained
