@@ -1,6 +1,6 @@
 'use strict';
 
-const isNil = require('lodash.isNil');
+const isNil = require('lodash.isnil');
 const has = require('lodash.has');
 const concat = require('lodash.concat');
 
