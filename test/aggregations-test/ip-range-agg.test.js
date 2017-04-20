@@ -8,7 +8,7 @@ const getInstance = (...args) =>
 test(illegalCall, IpRangeAggregation, 'format');
 
 test('sets type as ip_range', t => {
-    const myAgg = getInstance().toJSON();
+    const value = getInstance().toJSON();
     const expected = {
         my_agg: {
             ip_range: {
@@ -16,11 +16,11 @@ test('sets type as ip_range', t => {
             }
         }
     };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 });
 
 test('constructor sets arguments', t => {
-    const myAgg = getInstance('ip').toJSON(),
+    const value = getInstance('ip').toJSON(),
         expected = {
             my_agg: {
                 ip_range: {
@@ -29,7 +29,7 @@ test('constructor sets arguments', t => {
                 }
             }
         };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 });
 
 test('range checks required keys', t => {

@@ -10,13 +10,13 @@ import { recursiveToJSON } from '../src/core/util';
  * @param {Object=} defaultDef
  */
 export function setsAggType(t, Cls, aggType, defaultDef) {
-    const myAgg = new Cls('my_agg').toJSON();
+    const value = new Cls('my_agg').toJSON();
     const expected = {
         my_agg: {
             [aggType]: Object.assign({}, defaultDef)
         }
     };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 }
 
 setsAggType.title = (ignore, Cls, aggType) => `sets type as ${aggType}`;
@@ -96,19 +96,20 @@ export function makeAggPropIsSetMacro(getInstance, name, type, defaultDef) {
      * @param {*=} options.propValue Optional argument for use when value passed is not the value set
      * @param {boolean=} options.spread If array is passed, to control spread
      */
-    function aggPropIsSet(t, methodName, { param, propValue = param, spread = true }) {
-        const myAgg = Array.isArray(param) && spread
+    function aggPropIsSet(
+        t,
+        methodName,
+        { param, propValue = param, spread = true, keyName = _.snakeCase(methodName) }
+    ) {
+        const value = Array.isArray(param) && spread
             ? getInstance()[methodName](...param).toJSON()
             : getInstance()[methodName](param).toJSON();
         const expected = {
             [name]: {
-                [type]: Object.assign(
-                    { [_.snakeCase(methodName)]: recursiveToJSON(propValue) },
-                    defaultDef
-                )
+                [type]: Object.assign({ [keyName]: recursiveToJSON(propValue) }, defaultDef)
             }
         };
-        t.deepEqual(myAgg, expected);
+        t.deepEqual(value, expected);
     }
 
     aggPropIsSet.title = (ignore, methodName) => `${_.snakeCase(methodName)} is set`;

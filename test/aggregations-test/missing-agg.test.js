@@ -6,7 +6,7 @@ test(setsAggType, MissingAggregation, 'missing');
 test(illegalCall, MissingAggregation, 'script');
 
 test('constructor sets arguments', t => {
-    const myAgg = new MissingAggregation('my_agg', 'my_field').toJSON();
+    const value = new MissingAggregation('my_agg', 'my_field').toJSON();
     const expected = {
         my_agg: {
             missing: {
@@ -14,5 +14,5 @@ test('constructor sets arguments', t => {
             }
         }
     };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 });

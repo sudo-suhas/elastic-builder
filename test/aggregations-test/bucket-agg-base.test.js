@@ -18,7 +18,7 @@ test(aggPropIsSet, 'script', {
 test(illegalParamType, getInstance(), 'script', 'Script');
 
 test('constructor sets arguments', t => {
-    const myAgg = getInstance('my_field').toJSON(),
+    const value = getInstance('my_field').toJSON(),
         myOtherAgg = getInstance().field('my_field').toJSON();
-    t.deepEqual(myAgg, myOtherAgg);
+    t.deepEqual(value, myOtherAgg);
 });

@@ -90,7 +90,7 @@ class ScriptedMetricAggregation extends MetricsAggregationBase {
      * @returns {ScriptedMetricAggregation} returns `this` so that calls can be chained
      */
     combineScript(combineScript) {
-        this._aggsDef.map_script = combineScript;
+        this._aggsDef.combine_script = combineScript;
         return this;
     }
 
@@ -106,7 +106,7 @@ class ScriptedMetricAggregation extends MetricsAggregationBase {
      * @returns {ScriptedMetricAggregation} returns `this` so that calls can be chained
      */
     reduceScript(reduceScript) {
-        this._aggsDef.map_script = reduceScript;
+        this._aggsDef.reduce_script = reduceScript;
         return this;
     }
 
@@ -116,10 +116,13 @@ class ScriptedMetricAggregation extends MetricsAggregationBase {
      * Optional object whose contents will be passed as variables to
      * the init_script, map_script and combine_script
      *
+     * If you specify script parameters then you must specify `"_agg": {}`.
+     *
      * @param {Object} params Object passed to init, map and combine script. Default value - `{ "_agg": {} }`
      * @returns {ScriptedMetricAggregation} returns `this` so that calls can be chained
      */
     params(params) {
+        // TODO: If sure, add validation to see that _agg: {} is present in params
         this._aggsDef.params = params;
         return this;
     }

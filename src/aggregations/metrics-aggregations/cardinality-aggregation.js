@@ -38,7 +38,7 @@ class CardinalityAggregation extends MetricsAggregationBase {
     }
 
     /**
-     * The precision_threshold options allows to trade memory for accuracy,
+     * The `precision_threshold` options allows to trade memory for accuracy,
      * and defines a unique count below which counts are expected to be close to accurate.
      *
      * @param {number} threshold The threshold value.

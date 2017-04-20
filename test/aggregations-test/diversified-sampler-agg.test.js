@@ -20,7 +20,7 @@ test(validatedCorrectly, getInstance, 'executionHint', [
 ]);
 
 test('constructor sets arguments', t => {
-    const myAgg = getInstance().toJSON();
+    const value = getInstance().toJSON();
     const expected = {
         my_samples: {
             diversified_sampler: {
@@ -28,5 +28,5 @@ test('constructor sets arguments', t => {
             }
         }
     };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 });

@@ -12,7 +12,7 @@ test(illegalCall, NestedAggregation, 'script');
 test(aggPropIsSet, 'path', { param: 'nested_path' });
 
 test('constructor sets arguments', t => {
-    const myAgg = getInstance('nested_path').toJSON();
+    const value = getInstance('nested_path').toJSON();
     const expected = {
         my_agg: {
             nested: {
@@ -20,5 +20,5 @@ test('constructor sets arguments', t => {
             }
         }
     };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 });

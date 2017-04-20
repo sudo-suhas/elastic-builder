@@ -12,7 +12,7 @@ test(illegalCall, ReverseNestedAggregation, 'script');
 test(aggPropIsSet, 'path', { param: 'reverse_nested_path' });
 
 test('constructor sets arguments', t => {
-    const myAgg = getInstance('reverse_nested_path').toJSON();
+    const value = getInstance('reverse_nested_path').toJSON();
     const expected = {
         my_agg: {
             reverse_nested: {
@@ -20,5 +20,5 @@ test('constructor sets arguments', t => {
             }
         }
     };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 });

@@ -100,6 +100,7 @@ class TopHitsAggregation extends MetricsAggregationBase {
      */
     sort(sort) {
         checkType(sort, Sort);
+
         if (!has(this._aggsDef, 'sort')) this._aggsDef.sort = [];
 
         this._aggsDef.sort.push(sort);
@@ -162,6 +163,7 @@ class TopHitsAggregation extends MetricsAggregationBase {
      */
     highlight(highlight) {
         checkType(highlight, Highlight);
+
         this._aggsDef.highlight = highlight;
         return this;
     }
@@ -207,6 +209,24 @@ class TopHitsAggregation extends MetricsAggregationBase {
         if (!has(this._aggsDef, 'script_fields')) this._aggsDef.script_fields = {};
 
         this._aggsDef.script_fields[scriptFieldName] = { script };
+        return this;
+    }
+
+    /**
+     * Sets given dynamic document properties to be computed using supplied `Script`s.
+     *
+     * Object should have `scriptFieldName` as key and `script` as the value.
+     *
+     * @param {Object} scriptFields Object with `scriptFieldName` as key and `script` as the value.
+     * @returns {TopHitsAggregation} returns `this` so that calls can be chained
+     */
+    scriptFields(scriptFields) {
+        checkType(scriptFields, Object);
+
+        forEach(Object.keys(scriptFields), scriptFieldName =>
+            this.scriptField(scriptFieldName, scriptFields[scriptFieldName])
+        );
+
         return this;
     }
 

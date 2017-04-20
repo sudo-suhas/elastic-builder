@@ -7,7 +7,7 @@ test(illegalCall, ChildrenAggregation, 'field');
 test(illegalCall, ChildrenAggregation, 'script');
 
 test('type is set', t => {
-    const myAgg = new ChildrenAggregation('to_answers').type('answer').toJSON();
+    const value = new ChildrenAggregation('to_answers').type('answer').toJSON();
     const expected = {
         to_answers: {
             children: {
@@ -15,5 +15,5 @@ test('type is set', t => {
             }
         }
     };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 });

@@ -22,7 +22,7 @@
     "report": "nyc report --reporter=html",
     "preversion": "npm run check && npm run build && npm run git-commit",
     "postversion": "npm run git-push",
-    "git-commit": "git add docs browser && git commit -m \"Commit built files\"",
+    "git-commit": "git add docs browser && git commit --no-verify -m \"Commit built files\"",
     "git-push": "cross-env \"git push origin master && git push origin v$npm_package_version\""
   },
   "repository": {

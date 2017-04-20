@@ -17,7 +17,7 @@ test(aggPropIsSet, 'order', { param: 'my_field', propValue: { my_field: 'desc' }
 test(aggPropIsSet, 'order', { param: ['my_field', 'asc'], propValue: { my_field: 'asc' } });
 
 test('constructor sets arguments', t => {
-    const myAgg = getInstance('my_field', 10).toJSON();
+    const value = getInstance('my_field', 10).toJSON();
     const expected = {
         my_agg: {
             my_type: {
@@ -26,7 +26,7 @@ test('constructor sets arguments', t => {
             }
         }
     };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 });
 
 test('order direction is validated', t => {

@@ -1,5 +1,7 @@
 'use strict';
 
+exports.MetricsAggregationBase = require('./metrics-aggregation-base');
+
 exports.AvgAggregation = require('./avg-aggregation');
 exports.CardinalityAggregation = require('./cardinality-aggregation');
 exports.ExtendedStatsAggregation = require('./extended-stats-aggregation');

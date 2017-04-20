@@ -15,7 +15,7 @@ const aggPropIsSet = makeAggPropIsSetMacro(getInstance, 'my_geo_agg', 'geo_dista
 });
 
 test('sets type as geo_distance', t => {
-    const myAgg = getInstance().toJSON();
+    const value = getInstance().toJSON();
     const expected = {
         my_geo_agg: {
             geo_distance: {
@@ -23,7 +23,7 @@ test('sets type as geo_distance', t => {
             }
         }
     };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 });
 
 test(illegalCall, GeoDistanceAggregation, 'format');

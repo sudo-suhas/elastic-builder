@@ -14,7 +14,7 @@ test(aggPropIsSet, 'order', { param: 'my_field', propValue: { my_field: 'desc' }
 test(aggPropIsSet, 'order', { param: ['my_field', 'asc'], propValue: { my_field: 'asc' } });
 
 test('include partition is set', t => {
-    const myAgg = getInstance('my_field').includePartition(0, 20).toJSON();
+    const value = getInstance('my_field').includePartition(0, 20).toJSON();
     const expected = {
         my_agg: {
             terms: {
@@ -23,7 +23,7 @@ test('include partition is set', t => {
             }
         }
     };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 });
 
 test('order direction is validated', t => {

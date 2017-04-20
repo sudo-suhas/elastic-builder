@@ -13,9 +13,9 @@ test(aggPropIsSet, 'mode', { param: 'avg' });
 test(aggPropIsSet, 'missing', { param: { income: 50000 } });
 
 test('constructor sets arguments', t => {
-    const myAggA = getInstance(['fieldA', 'fieldB']).toJSON();
-    const myAggB = getInstance().fields(['fieldA', 'fieldB']).toJSON();
-    t.deepEqual(myAggA, myAggB);
+    const valueA = getInstance(['fieldA', 'fieldB']).toJSON();
+    const valueB = getInstance().fields(['fieldA', 'fieldB']).toJSON();
+    t.deepEqual(valueA, valueB);
 
     const expected = {
         my_agg: {
@@ -24,5 +24,5 @@ test('constructor sets arguments', t => {
             }
         }
     };
-    t.deepEqual(myAggA, expected);
+    t.deepEqual(valueA, expected);
 });

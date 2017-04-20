@@ -5,7 +5,7 @@ const getInstance = (...args) =>
     new DateRangeAggregation('my_agg', ...args).range({ to: 'now-10M/M' });
 
 test('sets type as date_range', t => {
-    const myAgg = getInstance().toJSON();
+    const value = getInstance().toJSON();
     const expected = {
         my_agg: {
             date_range: {
@@ -13,11 +13,11 @@ test('sets type as date_range', t => {
             }
         }
     };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 });
 
 test('constructor sets arguments', t => {
-    const myAgg = getInstance('date').toJSON(),
+    const value = getInstance('date').toJSON(),
         expected = {
             my_agg: {
                 date_range: {
@@ -26,11 +26,11 @@ test('constructor sets arguments', t => {
                 }
             }
         };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 });
 
 test('time_zone is set', t => {
-    const myAgg = getInstance().timeZone('CET').toJSON();
+    const value = getInstance().timeZone('CET').toJSON();
     const expected = {
         my_agg: {
             date_range: {
@@ -39,5 +39,5 @@ test('time_zone is set', t => {
             }
         }
     };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 });

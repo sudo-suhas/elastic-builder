@@ -66,6 +66,25 @@ class PercentilesAggregation extends MetricsAggregationBase {
      * @param {number} compression Parameter to balance memory utilization with estimation accuracy.
      * @returns {PercentilesAggregation} returns `this` so that calls can be chained
      */
+    tdigest(compression) {
+        this._aggsDef.tdigest = { compression };
+        return this;
+    }
+
+    /**
+     * Compression controls memory usage and approximation error. The compression
+     * value limits the maximum number of nodes to 100 * compression. By
+     * increasing the compression value, you can increase the accuracy of your
+     * percentiles at the cost of more memory. Larger compression values also make
+     * the algorithm slower since the underlying tree data structure grows in
+     * size, resulting in more expensive operations. The default compression
+     * value is 100.
+     *
+     * Alias for `tdigest`
+     *
+     * @param {number} compression Parameter to balance memory utilization with estimation accuracy.
+     * @returns {PercentileRanksAggregation} returns `this` so that calls can be chained
+     */
     compression(compression) {
         this._aggsDef.tdigest = { compression };
         return this;

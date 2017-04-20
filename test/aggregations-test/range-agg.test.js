@@ -2,7 +2,7 @@ import test from 'ava';
 import { RangeAggregation } from '../../src';
 
 test('sets type as range', t => {
-    const myAgg = new RangeAggregation('my_agg', 'my_field').range({ from: 10, to: 20 }).toJSON();
+    const value = new RangeAggregation('my_agg', 'my_field').range({ from: 10, to: 20 }).toJSON();
     const expected = {
         my_agg: {
             range: {
@@ -11,5 +11,5 @@ test('sets type as range', t => {
             }
         }
     };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 });

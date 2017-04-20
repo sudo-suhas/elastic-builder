@@ -31,12 +31,12 @@ test('range checks required keys', t => {
 });
 
 test('ranges are set', t => {
-    const myAggA = getInstance()
+    const valueA = getInstance()
         .range({ from: 20, to: 30 })
         .range({ from: 30, to: 40 })
         .range({ from: 40, to: 50 })
         .toJSON();
-    const myAggB = getInstance()
+    const valueB = getInstance()
         .ranges([{ from: 20, to: 30 }, { from: 30, to: 40 }, { from: 40, to: 50 }])
         .toJSON();
     const expected = {
@@ -51,6 +51,6 @@ test('ranges are set', t => {
             }
         }
     };
-    t.deepEqual(myAggA, myAggB);
-    t.deepEqual(myAggA, expected);
+    t.deepEqual(valueA, valueB);
+    t.deepEqual(valueA, expected);
 });

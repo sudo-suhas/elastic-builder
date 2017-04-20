@@ -17,7 +17,7 @@ test(aggPropIsSet, 'otherBucket', { param: true });
 test(aggPropIsSet, 'otherBucketKey', { param: 'other_messages' });
 
 test('named filters are set', t => {
-    let myAgg = getInstance()
+    let value = getInstance()
         .filter('user_kimchy', filterQryA)
         .filter('company_elastic', filterQryB)
         .toJSON();
@@ -31,19 +31,19 @@ test('named filters are set', t => {
             }
         }
     };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 
-    myAgg = getInstance()
+    value = getInstance()
         .filters({
             user_kimchy: filterQryA,
             company_elastic: filterQryB
         })
         .toJSON();
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 });
 
 test('anonymous filters are set', t => {
-    let myAgg = getInstance().anonymousFilter(filterQryA).anonymousFilter(filterQryB).toJSON();
+    let value = getInstance().anonymousFilter(filterQryA).anonymousFilter(filterQryB).toJSON();
     const expected = {
         my_filters_agg: {
             filters: {
@@ -51,14 +51,14 @@ test('anonymous filters are set', t => {
             }
         }
     };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 
-    myAgg = getInstance().anonymousFilters([filterQryA, filterQryB]).toJSON();
-    t.deepEqual(myAgg, expected);
+    value = getInstance().anonymousFilters([filterQryA, filterQryB]).toJSON();
+    t.deepEqual(value, expected);
 });
 
 test('mixed representation', t => {
-    let myAgg = getInstance()
+    let value = getInstance()
         .filter('user_kimchy', filterQryA)
         .anonymousFilter(filterQryB)
         .toJSON();
@@ -69,9 +69,9 @@ test('mixed representation', t => {
             }
         }
     };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
 
-    myAgg = getInstance()
+    value = getInstance()
         .anonymousFilter(filterQryA)
         .filter('company_elastic', filterQryB)
         .toJSON();
@@ -82,7 +82,20 @@ test('mixed representation', t => {
             }
         }
     };
-    t.deepEqual(myAgg, expected);
+    t.deepEqual(value, expected);
+});
+
+test('other_bucket_key is set', t => {
+    const value = getInstance().otherBucket(true, 'other_messages').toJSON();
+    const expected = {
+        my_filters_agg: {
+            filters: {
+                other_bucket: true,
+                other_bucket_key: 'other_messages'
+            }
+        }
+    };
+    t.deepEqual(value, expected);
 });
 
 // TODO: Test warnings for mixed representation

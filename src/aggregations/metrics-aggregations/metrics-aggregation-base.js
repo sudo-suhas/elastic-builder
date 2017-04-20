@@ -49,6 +49,7 @@ class MetricsAggregationBase extends Aggregation {
      */
     script(script) {
         checkType(script, Script);
+
         this._aggsDef.script = script;
         return this;
     }
