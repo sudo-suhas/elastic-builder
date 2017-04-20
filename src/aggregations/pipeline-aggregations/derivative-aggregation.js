@@ -2,6 +2,9 @@
 
 const PipelineAggregationBase = require('./pipeline-aggregation-base');
 
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-derivative-aggregation.html';
+
 /**
  * A parent pipeline aggregation which calculates the derivative of a
  * specified metric in a parent histogram (or date_histogram) aggregation.
@@ -20,7 +23,7 @@ class DerivativeAggregation extends PipelineAggregationBase {
      * @param {string=} bucketsPath The relative path of metric to aggregate over
      */
     constructor(name, bucketsPath) {
-        super(name, 'derivative', bucketsPath);
+        super(name, 'derivative', ES_REF_URL, bucketsPath);
     }
 
     /**

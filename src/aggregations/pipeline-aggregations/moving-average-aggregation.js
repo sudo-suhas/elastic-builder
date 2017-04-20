@@ -30,7 +30,7 @@ class MovingAverageAggregation extends PipelineAggregationBase {
      * @param {string=} bucketsPath The relative path of metric to aggregate over
      */
     constructor(name, bucketsPath) {
-        super(name, 'moving_avg', bucketsPath);
+        super(name, 'moving_avg', ES_REF_URL, bucketsPath);
     }
 
     /**

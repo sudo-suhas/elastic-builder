@@ -2,6 +2,9 @@
 
 const PipelineAggregationBase = require('./pipeline-aggregation-base');
 
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-avg-bucket-aggregation.html';
+
 /**
  * A sibling pipeline aggregation which calculates the (mean) average value
  * of a specified metric in a sibling aggregation. The specified metric must
@@ -19,7 +22,7 @@ class AvgBucketAggregation extends PipelineAggregationBase {
      * @param {string=} bucketsPath The relative path of metric to aggregate over
      */
     constructor(name, bucketsPath) {
-        super(name, 'avg_bucket', bucketsPath);
+        super(name, 'avg_bucket', ES_REF_URL, bucketsPath);
     }
 }
 

@@ -2,6 +2,9 @@
 
 const PipelineAggregationBase = require('./pipeline-aggregation-base');
 
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-extended-stats-bucket-aggregation.html';
+
 /**
  * A sibling pipeline aggregation which calculates a variety of stats across
  * all bucket of a specified metric in a sibling aggregation. The specified
@@ -20,7 +23,7 @@ class ExtendedStatsBucketAggregation extends PipelineAggregationBase {
      * @param {string=} bucketsPath The relative path of metric to aggregate over
      */
     constructor(name, bucketsPath) {
-        super(name, 'extended_stats_bucket', bucketsPath);
+        super(name, 'extended_stats_bucket', ES_REF_URL, bucketsPath);
     }
 
     /**

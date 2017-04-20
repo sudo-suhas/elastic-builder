@@ -33,7 +33,7 @@ export function illegalCall(t, Cls, propKey) {
     t.is(err.message, `${propKey} is not supported in ${Cls.name}`);
 }
 
-illegalCall.title = (ignore, Cls, propKey) => `${_.snakeCase(propKey)} cannot be called`;
+illegalCall.title = (ignore, Cls, propKey) => `${_.snakeCase(propKey)} cannot be set`;
 
 /**
  * Check that calling method on instance with illegal param type throws error

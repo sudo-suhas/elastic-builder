@@ -2,7 +2,9 @@
 
 const isNil = require('lodash.isnil');
 
-const { Aggregation } = require('../../core');
+const { Aggregation, util: { invalidParam } } = require('../../core');
+
+const invalidGapPolicyParam = invalidParam('', 'gap_policy', "'skip' or 'insert_zeros'");
 
 /**
  * The `PipelineAggregationBase` provides support for common options used across
@@ -21,10 +23,13 @@ class PipelineAggregationBase extends Aggregation {
      *
      * @param {string} name a valid aggregation name
      * @param {string} aggType type of aggregation
+     * @param {string} refUrl Elasticsearch reference URL
      * @param {string|Object=} bucketsPath The relative path of metric to aggregate over
      */
-    constructor(name, aggType, bucketsPath) {
+    constructor(name, aggType, refUrl, bucketsPath) {
         super(name, aggType);
+
+        this._refUrl = refUrl;
 
         if (!isNil(bucketsPath)) this._aggsDef.buckets_path = bucketsPath;
     }
@@ -52,9 +57,11 @@ class PipelineAggregationBase extends Aggregation {
      * @returns {PipelineAggregationBase} returns `this` so that calls can be chained
      */
     gapPolicy(policy) {
-        const policyLower = policy;
+        if (isNil(policy)) invalidGapPolicyParam(policy, this._refUrl);
+
+        const policyLower = policy.toLowerCase();
         if (policyLower !== 'skip' && policyLower !== 'insert_zeros') {
-            throw new Error('`gap_policy` can only be `skip` or `insert_zeros`');
+            invalidGapPolicyParam(policy, this._refUrl);
         }
 
         this._aggsDef.gap_policy = policyLower;

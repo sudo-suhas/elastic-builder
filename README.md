@@ -171,6 +171,32 @@ const requestBody = bob.requestBodySearch()
 //       }
 //    }
 // }
+// If you prefer using the `new` keyword
+const agg = new TermsAggregation('countries', 'artist.country')
+        .order('rock>playback_stats.avg', 'desc')
+        .agg(
+            new FilterAggregation('rock', new TermQuery('genre', 'rock'))
+                .agg(new StatsAggregation('playback_stats', 'play_count'))
+        )
+        .toJSON();
+// agg.toJSON()
+// {
+//     "countries" : {
+//         "terms" : {
+//             "field" : "artist.country",
+//             "order" : { "rock>playback_stats.avg" : "desc" }
+//         },
+//         "aggs" : {
+//             "rock" : {
+//                 "filter" : { "term" : { "genre" :  "rock" }},
+//                 "aggs" : {
+//                     "playback_stats" : { "stats" : { "field" : "play_count" }}
+//                 }
+//             }
+//         }
+//     }
+// }
+
 
 // Sort
 const requestBody = bob.requestBodySearch()
@@ -248,6 +274,8 @@ Error: The 'type' parameter should belong to Set {
 
 ## Tests
 Tests are being added. See [roadmap](roadmap.md).
+
+**Aggregations are tested with 100% coverage now!**
 
 For running whatever tests _have_ been added:
 ```

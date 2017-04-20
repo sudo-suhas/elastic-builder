@@ -2,6 +2,9 @@
 
 const PipelineAggregationBase = require('./pipeline-aggregation-base');
 
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-max-bucket-aggregation.html';
+
 /**
  * A sibling pipeline aggregation which identifies the bucket(s) with
  * the maximum value of a specified metric in a sibling aggregation and
@@ -21,7 +24,7 @@ class MaxBucketAggregation extends PipelineAggregationBase {
      * @param {string=} bucketsPath The relative path of metric to aggregate over
      */
     constructor(name, bucketsPath) {
-        super(name, 'max_bucket', bucketsPath);
+        super(name, 'max_bucket', ES_REF_URL, bucketsPath);
     }
 }
 

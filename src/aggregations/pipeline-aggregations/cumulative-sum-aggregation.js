@@ -23,7 +23,7 @@ class CumulativeSumAggregation extends PipelineAggregationBase {
      * @param {string=} bucketsPath The relative path of metric to aggregate over
      */
     constructor(name, bucketsPath) {
-        super(name, 'cumulative_sum', bucketsPath);
+        super(name, 'cumulative_sum', ES_REF_URL, bucketsPath);
     }
 
     /**
@@ -32,7 +32,7 @@ class CumulativeSumAggregation extends PipelineAggregationBase {
      */
     gapPolicy() {
         console.log(`Please refer ${ES_REF_URL}`);
-        throw new Error('`gap_policy` is not supported in CumulativeSumAggregation');
+        throw new Error('gapPolicy is not supported in CumulativeSumAggregation');
     }
 }
 

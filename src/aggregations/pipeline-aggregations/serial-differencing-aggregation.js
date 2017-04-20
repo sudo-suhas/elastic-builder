@@ -2,6 +2,9 @@
 
 const PipelineAggregationBase = require('./pipeline-aggregation-base');
 
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-serialdiff-aggregation.html';
+
 /**
  * Serial differencing is a technique where values in a time series are
  * subtracted from itself at different time lags or periods.
@@ -20,7 +23,7 @@ class SerialDifferencingAggregation extends PipelineAggregationBase {
      * @param {string=} bucketsPath The relative path of metric to aggregate over
      */
     constructor(name, bucketsPath) {
-        super(name, 'serial_diff', bucketsPath);
+        super(name, 'serial_diff', ES_REF_URL, bucketsPath);
     }
 
     /**

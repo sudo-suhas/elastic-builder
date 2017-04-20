@@ -17,7 +17,7 @@
     "lint": "eslint src test",
     "lint:fix": "npm run lint -- --fix",
     "lint-staged": "lint-staged",
-    "test": "nyc ava",
+    "test": "nyc ava --concurrency 4",
     "check": "npm run lint && npm test",
     "report": "nyc report --reporter=html",
     "preversion": "npm run check && npm run build && npm run git-commit",
@@ -53,10 +53,13 @@
       "git add"
     ]
   },
-  "pre-commit": [
-    "lint-staged",
-    "test"
-  ],
+  "pre-commit": {
+    "colors": true,
+    "run":[
+      "lint-staged",
+      "test"
+    ]
+  },
   "devDependencies": {
     "ava": "^0.19.1",
     "babel-cli": "^6.24.1",

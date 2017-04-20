@@ -1,5 +1,7 @@
 'use strict';
 
+exports.PipelineAggregationBase = require('./pipeline-aggregation-base');
+
 exports.AvgBucketAggregation = require('./avg-bucket-aggregation');
 exports.DerivativeAggregation = require('./derivative-aggregation');
 exports.MaxBucketAggregation = require('./max-bucket-aggregation');

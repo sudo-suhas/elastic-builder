@@ -1,8 +1,9 @@
 'use strict';
 
-const { Script, util: { checkType } } = require('../../core');
-
 const PipelineAggregationBase = require('./pipeline-aggregation-base');
+
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-script-aggregation.html';
 
 /**
  * A parent pipeline aggregation which executes a script which can perform
@@ -22,7 +23,7 @@ class BucketScriptAggregation extends PipelineAggregationBase {
      * @param {string=} bucketsPath The relative path of metric to aggregate over
      */
     constructor(name, bucketsPath) {
-        super(name, 'bucket_script', bucketsPath);
+        super(name, 'bucket_script', ES_REF_URL, bucketsPath);
     }
 
     /**
@@ -33,7 +34,6 @@ class BucketScriptAggregation extends PipelineAggregationBase {
      * @throws {TypeError} If `script` is not an instance of `Script`
      */
     script(script) {
-        checkType(script, Script);
         this._aggsDef.script = script;
         return this;
     }

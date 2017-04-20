@@ -20,7 +20,7 @@ class MatchPhraseQueryBase extends MonoFieldQueryBase {
     constructor(queryType, refUrl, field, queryString) {
         super(queryType, field, queryString);
 
-        this.refUrl = refUrl;
+        this._refUrl = refUrl;
     }
 
     /**
@@ -28,7 +28,7 @@ class MatchPhraseQueryBase extends MonoFieldQueryBase {
      * @throws {Error} This method cannot be called on `MatchPhraseQueryBase`
      */
     minimumShouldMatch() {
-        console.log(`Please refer ${this.refUrl}`);
+        console.log(`Please refer ${this._refUrl}`);
         throw new Error('`minimum_should_match` is not supported in ${this.constructor.name}');
     }
 

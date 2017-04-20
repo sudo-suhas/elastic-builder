@@ -1,7 +1,5 @@
 'use strict';
 
-const { Script, util: { checkType } } = require('../../core');
-
 const PipelineAggregationBase = require('./pipeline-aggregation-base');
 
 const ES_REF_URL =
@@ -26,7 +24,7 @@ class BucketSelectorAggregation extends PipelineAggregationBase {
      * @param {string=} bucketsPath The relative path of metric to aggregate over
      */
     constructor(name, bucketsPath) {
-        super(name, 'bucket_selector', bucketsPath);
+        super(name, 'bucket_selector', ES_REF_URL, bucketsPath);
     }
 
     /**
@@ -46,7 +44,6 @@ class BucketSelectorAggregation extends PipelineAggregationBase {
      * @throws {TypeError} If `script` is not an instance of `Script`
      */
     script(script) {
-        checkType(script, Script);
         this._aggsDef.script = script;
         return this;
     }
