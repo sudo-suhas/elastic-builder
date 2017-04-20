@@ -6,15 +6,15 @@ const getInstance = (...args) => new HistogramAggregationBase('my_agg', 'my_type
 
 const aggPropIsSet = makeAggPropIsSetMacro(getInstance, 'my_agg', 'my_type');
 
-test(aggPropIsSet, 'interval', 'year');
-test(aggPropIsSet, 'format', '####.00');
-test(aggPropIsSet, 'offset', 10);
-test(aggPropIsSet, 'minDocCount', 1);
-test(aggPropIsSet, 'missing', 0);
-test(aggPropIsSet, 'keyed', true);
-test(aggPropIsSet, 'extendedBounds', [0, 500], { min: 0, max: 500 });
-test(aggPropIsSet, 'order', 'my_field', { my_field: 'desc' });
-test(aggPropIsSet, 'order', ['my_field', 'asc'], { my_field: 'asc' });
+test(aggPropIsSet, 'interval', { param: 'year' });
+test(aggPropIsSet, 'format', { param: '####.00' });
+test(aggPropIsSet, 'offset', { param: 10 });
+test(aggPropIsSet, 'minDocCount', { param: 1 });
+test(aggPropIsSet, 'missing', { param: 0 });
+test(aggPropIsSet, 'keyed', { param: true });
+test(aggPropIsSet, 'extendedBounds', { param: [0, 500], propValue: { min: 0, max: 500 } });
+test(aggPropIsSet, 'order', { param: 'my_field', propValue: { my_field: 'desc' } });
+test(aggPropIsSet, 'order', { param: ['my_field', 'asc'], propValue: { my_field: 'asc' } });
 
 test('constructor sets arguments', t => {
     const myAgg = getInstance('my_field', 10).toJSON();

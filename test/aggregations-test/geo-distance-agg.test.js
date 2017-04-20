@@ -29,9 +29,9 @@ test('sets type as geo_distance', t => {
 test(illegalCall, GeoDistanceAggregation, 'format');
 test(illegalCall, GeoDistanceAggregation, 'script');
 test(illegalParamType, getInstance(), 'origin', 'GeoPoint');
-test(aggPropIsSet, 'origin', geoPoint().object({ lat: 41.12, lon: -71.34 }));
-test(aggPropIsSet, 'unit', 'km');
-test(aggPropIsSet, 'distanceType', 'plane');
+test(aggPropIsSet, 'origin', { param: geoPoint().object({ lat: 41.12, lon: -71.34 }) });
+test(aggPropIsSet, 'unit', { param: 'km' });
+test(aggPropIsSet, 'distanceType', { param: 'plane' });
 // prettier-ignore
 test(validatedCorrectly, getInstance, 'unit', [
     'in', 'inch',

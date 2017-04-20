@@ -13,8 +13,8 @@ test(setsAggType, FiltersAggregation, 'filters');
 test(illegalCall, FiltersAggregation, 'field');
 test(illegalCall, FiltersAggregation, 'script');
 test(illegalParamType, getInstance(), 'filter', 'Query');
-test(aggPropIsSet, 'otherBucket', true);
-test(aggPropIsSet, 'otherBucketKey', 'other_messages');
+test(aggPropIsSet, 'otherBucket', { param: true });
+test(aggPropIsSet, 'otherBucketKey', { param: 'other_messages' });
 
 test('named filters are set', t => {
     let myAgg = getInstance()

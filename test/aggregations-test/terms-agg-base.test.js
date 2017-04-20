@@ -12,11 +12,11 @@ test(validatedCorrectly, getInstance, 'executionHint', [
     'global_ordinals_hash',
     'global_ordinals_low_cardinality'
 ]);
-test(aggPropIsSet, 'format', '####.00');
-test(aggPropIsSet, 'minDocCount', 5);
-test(aggPropIsSet, 'shardMinDocCount', 2);
-test(aggPropIsSet, 'size', 20);
-test(aggPropIsSet, 'shardSize', -1);
-test(aggPropIsSet, 'missing', 42);
-test(aggPropIsSet, 'include', '.*sport.*');
-test(aggPropIsSet, 'exclude', 'water_.*');
+test(aggPropIsSet, 'format', { param: '####.00' });
+test(aggPropIsSet, 'minDocCount', { param: 5 });
+test(aggPropIsSet, 'shardMinDocCount', { param: 2 });
+test(aggPropIsSet, 'size', { param: 20 });
+test(aggPropIsSet, 'shardSize', { param: -1 });
+test(aggPropIsSet, 'missing', { param: 42 });
+test(aggPropIsSet, 'include', { param: '.*sport.*' });
+test(aggPropIsSet, 'exclude', { param: 'water_.*' });

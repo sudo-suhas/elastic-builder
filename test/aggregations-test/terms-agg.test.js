@@ -8,10 +8,10 @@ const aggPropIsSet = makeAggPropIsSetMacro(getInstance, 'my_agg', 'terms');
 
 test(setsAggType, TermsAggregation, 'terms');
 test(validatedCorrectly, getInstance, 'collectMode', ['depth_first', 'breadth_first']);
-test(aggPropIsSet, 'showTermDocCountError', true);
-test(aggPropIsSet, 'collectMode', 'breadth_first');
-test(aggPropIsSet, 'order', 'my_field', { my_field: 'desc' });
-test(aggPropIsSet, 'order', ['my_field', 'asc'], { my_field: 'asc' });
+test(aggPropIsSet, 'showTermDocCountError', { param: true });
+test(aggPropIsSet, 'collectMode', { param: 'breadth_first' });
+test(aggPropIsSet, 'order', { param: 'my_field', propValue: { my_field: 'desc' } });
+test(aggPropIsSet, 'order', { param: ['my_field', 'asc'], propValue: { my_field: 'asc' } });
 
 test('include partition is set', t => {
     const myAgg = getInstance('my_field').includePartition(0, 20).toJSON();

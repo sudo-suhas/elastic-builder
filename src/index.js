@@ -464,7 +464,7 @@ exports.serialDifferencingAggregation = constructorWrapper(SerialDifferencingAgg
 /* ========= Matrix Aggregations ======== */
 /* ============ ============ ============ */
 exports.MatrixStatsAggregation = MatrixStatsAggregation;
-exports.MatrixStatsAggregation = constructorWrapper(MatrixStatsAggregation);
+exports.matrixStatsAggregation = constructorWrapper(MatrixStatsAggregation);
 
 /* ============ ============ ============ */
 /* ========== Score Functions ===========  */

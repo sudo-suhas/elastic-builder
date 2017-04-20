@@ -9,9 +9,9 @@ const aggPropIsSet = makeAggPropIsSetMacro(getInstance, 'my_geo_agg', 'geohash_g
 test(setsAggType, GeoHashGridAggregation, 'geohash_grid');
 test(illegalCall, GeoHashGridAggregation, 'format');
 test(illegalCall, GeoHashGridAggregation, 'script');
-test(aggPropIsSet, 'precision', 8);
-test(aggPropIsSet, 'size', 10000);
-test(aggPropIsSet, 'shardSize', 3);
+test(aggPropIsSet, 'precision', { param: 8 });
+test(aggPropIsSet, 'size', { param: 10000 });
+test(aggPropIsSet, 'shardSize', { param: 3 });
 
 test('precision correctly validated', t => {
     let err = t.throws(() => getInstance().precision(0), Error);

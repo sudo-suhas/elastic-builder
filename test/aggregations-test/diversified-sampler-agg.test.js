@@ -9,9 +9,9 @@ const aggPropIsSet = makeAggPropIsSetMacro(getInstance, 'my_samples', 'diversifi
 });
 
 test(setsAggType, DiversifiedSamplerAggregation, 'diversified_sampler');
-test(aggPropIsSet, 'shardSize', 200);
-test(aggPropIsSet, 'maxDocsPerValue', 3);
-test(aggPropIsSet, 'executionHint', 'map');
+test(aggPropIsSet, 'shardSize', { param: 200 });
+test(aggPropIsSet, 'maxDocsPerValue', { param: 3 });
+test(aggPropIsSet, 'executionHint', { param: 'map' });
 test(validatedCorrectly, getInstance, 'executionHint', [
     'map',
     'global_ordinals',

@@ -91,13 +91,15 @@ export function makeAggPropIsSetMacro(getInstance, name, type, defaultDef) {
      *
      * @param {*} t
      * @param {string} methodName
-     * @param {*} methodParam
-     * @param {*=} propValue Optional argument for use when value passed is not the value set
+     * @param {Object} options
+     * @param {*} options.param
+     * @param {*=} options.propValue Optional argument for use when value passed is not the value set
+     * @param {boolean=} options.spread If array is passed, to control spread
      */
-    function aggPropIsSet(t, methodName, methodParam, propValue = methodParam) {
-        const myAgg = Array.isArray(methodParam)
-            ? getInstance()[methodName](...methodParam).toJSON()
-            : getInstance()[methodName](methodParam).toJSON();
+    function aggPropIsSet(t, methodName, { param, propValue = param, spread = true }) {
+        const myAgg = Array.isArray(param) && spread
+            ? getInstance()[methodName](...param).toJSON()
+            : getInstance()[methodName](param).toJSON();
         const expected = {
             [name]: {
                 [type]: Object.assign(

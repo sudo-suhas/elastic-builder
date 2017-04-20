@@ -11,12 +11,10 @@ test('can be instantiated', t => {
     t.truthy(getInstance());
 });
 
-test(aggPropIsSet, 'field', 'my_field');
-test(
-    aggPropIsSet,
-    'script',
-    new Script().lang('groovy').file('calculate-score').params({ my_modifier: 2 })
-);
+test(aggPropIsSet, 'field', { param: 'my_field' });
+test(aggPropIsSet, 'script', {
+    param: new Script().lang('groovy').file('calculate-score').params({ my_modifier: 2 })
+});
 test(illegalParamType, getInstance(), 'script', 'Script');
 
 test('constructor sets arguments', t => {

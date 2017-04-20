@@ -11,9 +11,9 @@ const aggPropIsSet = makeAggPropIsSetMacro(getInstance, 'my_agg', 'my_type', {
 
 test(illegalParamType, getInstance(), 'range', 'Object');
 test(illegalParamType, getInstance(), 'ranges', 'Array');
-test(aggPropIsSet, 'format', 'MM-yyy');
-test(aggPropIsSet, 'missing', '01-1970');
-test(aggPropIsSet, 'keyed', true);
+test(aggPropIsSet, 'format', { param: 'MM-yyy' });
+test(aggPropIsSet, 'missing', { param: '01-1970' });
+test(aggPropIsSet, 'keyed', { param: true });
 
 test('empty ranges throws', t => {
     const err = t.throws(() => new RangeAggregationBase('my_agg', 'my_type').toJSON(), Error);
