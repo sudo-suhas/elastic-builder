@@ -63,6 +63,7 @@ class RequestBodySearch {
      */
     aggregation(agg) {
         checkType(agg, Aggregation);
+
         this._aggs.push(agg);
         return this;
     }
@@ -153,6 +154,18 @@ class RequestBodySearch {
     }
 
     /**
+     * When sorting on a field, scores are not computed. By setting `track_scores` to true,
+     * scores will still be computed and tracked.
+     *
+     * @param {boolean} enable
+     * @returns {RequestBodySearch} returns `this` so that calls can be chained
+     */
+    trackScores(enable) {
+        this._body.track_scores = enable;
+        return this;
+    }
+
+    /**
      * Allows to control how the `_source` field is returned with every hit.
      * You can turn off `_source` retrieval by passing `false`.
      * It also accepts one(string) or more wildcard(array) patterns to control
@@ -193,6 +206,24 @@ class RequestBodySearch {
         if (!has(this._body, 'script_fields')) this._body.script_fields = {};
 
         this._body.script_fields[scriptFieldName] = { script };
+        return this;
+    }
+
+    /**
+     * Sets given dynamic document properties to be computed using supplied `Script`s.
+     *
+     * Object should have `scriptFieldName` as key and `script` as the value.
+     *
+     * @param {Object} scriptFields Object with `scriptFieldName` as key and `script` as the value.
+     * @returns {TopHitsAggregation} returns `this` so that calls can be chained
+     */
+    scriptFields(scriptFields) {
+        checkType(scriptFields, Object);
+
+        forEach(Object.keys(scriptFields), scriptFieldName =>
+            this.scriptField(scriptFieldName, scriptFields[scriptFieldName])
+        );
+
         return this;
     }
 
@@ -290,11 +321,26 @@ class RequestBodySearch {
      * more than one indices. This is very handy when hits coming from one index
      * matter more than hits coming from another index.
      *
+     * Alias for method `indicesBoost`.
+     *
      * @param {string} index Index windcard expression or alias
      * @param {number} boost
      * @returns {RequestBodySearch} returns `this` so that calls can be chained.
      */
     indexBoost(index, boost) {
+        return this.indicesBoost(index, boost);
+    }
+
+    /**
+     * Allows to configure different boost level per index when searching across
+     * more than one indices. This is very handy when hits coming from one index
+     * matter more than hits coming from another index.
+     *
+     * @param {string} index Index windcard expression or alias
+     * @param {number} boost
+     * @returns {RequestBodySearch} returns `this` so that calls can be chained.
+     */
+    indicesBoost(index, boost) {
         if (!has(this._body, 'indices_boost')) this._body.indices_boost = [];
 
         this._body.indices_boost.push({

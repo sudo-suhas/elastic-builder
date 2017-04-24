@@ -1,16 +1,8 @@
 import test from 'ava';
-import { TopHitsAggregation, Sort, Highlight, Script } from '../../src';
-import {
-    setsAggType,
-    illegalCall,
-    illegalParamType,
-    aggsExpectStrategy,
-    makeSetsOptionMacro
-} from '../_macros';
+import { InnerHits, innerHits, Sort, Script, Highlight } from '../../src';
+import { illegalParamType, makeSetsOptionMacro } from '../_macros';
 
-const getInstance = () => new TopHitsAggregation('my_agg');
-
-const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'top_hits'));
+const setsOption = makeSetsOptionMacro(innerHits);
 
 const sortChannel = new Sort('channel', 'desc');
 const sortCategories = new Sort('categories', 'desc');
@@ -20,13 +12,8 @@ const scriptB = new Script('inline', "doc['my_field_name'].value * factor")
     .lang('painless')
     .params({ factor: 2.0 });
 
-test(setsAggType, TopHitsAggregation, 'top_hits');
-test(illegalCall, TopHitsAggregation, 'field');
-test(illegalCall, TopHitsAggregation, 'script');
-test(illegalCall, TopHitsAggregation, 'missing');
-test(illegalCall, TopHitsAggregation, 'format');
-test(illegalParamType, getInstance(), 'sort', 'Sort');
-test(illegalParamType, getInstance(), 'highlight', 'Highlight');
+test(illegalParamType, new InnerHits(), 'sort', 'Sort');
+test(illegalParamType, new InnerHits(), 'highlight', 'Highlight');
 test(setsOption, 'from', { param: 10 });
 test(setsOption, 'size', { param: 10 });
 test(setsOption, 'sort', {
@@ -38,24 +25,22 @@ test(setsOption, 'sorts', {
     spread: false,
     keyName: 'sort'
 });
-test(setsOption, 'trackScores', { param: true });
 test(setsOption, 'version', { param: true });
 test(setsOption, 'explain', { param: true });
 test(setsOption, 'highlight', { param: new Highlight(['content']).type('plain', 'content') });
-test(setsOption, 'source', { param: 'obj.*', keyName: '_source' });
-test(setsOption, 'source', { param: false, keyName: '_source' });
-test(setsOption, 'source', { param: ['obj1.*', 'obj2.*'], spread: false, keyName: '_source' });
-test(setsOption, 'source', {
+test('sets source(str) option', setsOption, 'source', { param: 'obj.*', keyName: '_source' });
+test('sets source(bool) option', setsOption, 'source', { param: false, keyName: '_source' });
+test('sets source(arr) option', setsOption, 'source', {
+    param: ['obj1.*', 'obj2.*'],
+    spread: false,
+    keyName: '_source'
+});
+test('sets source(obj) option', setsOption, 'source', {
     param: {
         includes: ['obj1.*', 'obj2.*'],
         excludes: ['*.description']
     },
     keyName: '_source'
-});
-test('sets stored_fields(str) option', setsOption, 'storedFields', { param: '_none_' });
-test('sets stored_fields(arr) option', setsOption, 'storedFields', {
-    param: ['user', 'postDate'],
-    spread: false
 });
 test(setsOption, 'scriptField', {
     param: ['test1', scriptA],
@@ -73,3 +58,11 @@ test(setsOption, 'scriptFields', {
     }
 });
 test(setsOption, 'docvalueFields', { param: ['test1', 'test2'], spread: false });
+
+test('constructor sets name', t => {
+    const value = new InnerHits('my_inner_hits').toJSON();
+    const expected = {
+        name: 'my_inner_hits'
+    };
+    t.deepEqual(value, expected);
+});

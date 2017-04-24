@@ -59,7 +59,7 @@ class Script {
      * @private
      */
     _warn(msg) {
-        console.warn(`[${this.constructor.name}] ${msg}`);
+        console.warn(`[Script] ${msg}`);
     }
 
     /**

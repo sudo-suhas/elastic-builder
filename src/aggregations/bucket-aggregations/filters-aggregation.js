@@ -55,7 +55,7 @@ class FiltersAggregation extends BucketAggregationBase {
      * @private
      */
     _warn(msg) {
-        console.warn(`[${this.constructor.name}] ${msg}`);
+        console.warn(`[FiltersAggregation] ${msg}`);
     }
 
     /**

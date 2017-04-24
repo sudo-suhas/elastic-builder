@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import { recursiveToJSON } from '../src/core/util';
 
+const ILLEGAL_PARAM = Object.create(null);
+
 /**
  * Macro for testing that aggregation type is set as expected.
  *
@@ -44,7 +46,10 @@ illegalCall.title = (ignore, Cls, propKey) => `${_.snakeCase(propKey)} cannot be
  * @param {string} clsName
  */
 export function illegalParamType(t, instance, method, clsName) {
-    const err = t.throws(() => instance[method](null), TypeError);
+    let err = t.throws(() => instance[method](null), TypeError);
+    t.is(err.message, `Argument must be an instance of ${clsName}`);
+
+    err = t.throws(() => instance[method](ILLEGAL_PARAM), TypeError);
     t.is(err.message, `Argument must be an instance of ${clsName}`);
 }
 
@@ -77,15 +82,52 @@ validatedCorrectly.title = (ignore, getInstance, method) =>
     `${_.snakeCase(method)} correctly validated`;
 
 /**
+ * Simple strategy for checking option is set for use with `makeSetsOptionMacro`
+ *
+ * @param {string} keyName
+ * @param {*} propValue
+ * @returns {function}
+ */
+export function simpleExpect(keyName, propValue) {
+    return { [keyName]: propValue };
+}
+
+/**
+ * Expect strategy for use with `makeSetsOptionMacro` for aggregations
+ *
+ * @param {string} name
+ * @param {string} type
+ * @param {Object} defaultDef
+ * @returns {function}
+ */
+export function aggsExpectStrategy(name, type, defaultDef) {
+    return (keyName, propValue) => ({
+        [name]: {
+            [type]: Object.assign({ [keyName]: propValue }, defaultDef)
+        }
+    });
+}
+
+/**
+ * Expect strategy for use with `makeSetsOptionMacro` for queries
+ *
+ * @param {string} type
+ * @returns {function}
+ */
+export function queryExpectStrategy(type) {
+    return (keyName, propValue) => ({
+        [type]: { [keyName]: propValue }
+    });
+}
+
+/**
  * Make macro for checking property is set.
  *
  * @param {function} getInstance
- * @param {string} name
- * @param {string} type
- * @param {Object=} defaultDef
+ * @param {function=} getExpected Set to `simpleExpect` by default
  * @returns {function}
  */
-export function makeAggPropIsSetMacro(getInstance, name, type, defaultDef) {
+export function makeSetsOptionMacro(getInstance, getExpected = simpleExpect) {
     /**
      * Macro for testing that property is being set
      *
@@ -95,8 +137,9 @@ export function makeAggPropIsSetMacro(getInstance, name, type, defaultDef) {
      * @param {*} options.param
      * @param {*=} options.propValue Optional argument for use when value passed is not the value set
      * @param {boolean=} options.spread If array is passed, to control spread
+     * @param {string=} options.keyName Optional override argument, default is `_.snakeCase(methodName)`
      */
-    function aggPropIsSet(
+    function setsOption(
         t,
         methodName,
         { param, propValue = param, spread = true, keyName = _.snakeCase(methodName) }
@@ -104,15 +147,12 @@ export function makeAggPropIsSetMacro(getInstance, name, type, defaultDef) {
         const value = Array.isArray(param) && spread
             ? getInstance()[methodName](...param).toJSON()
             : getInstance()[methodName](param).toJSON();
-        const expected = {
-            [name]: {
-                [type]: Object.assign({ [keyName]: recursiveToJSON(propValue) }, defaultDef)
-            }
-        };
+        const expected = getExpected(keyName, recursiveToJSON(propValue));
         t.deepEqual(value, expected);
     }
 
-    aggPropIsSet.title = (ignore, methodName) => `${_.snakeCase(methodName)} is set`;
+    setsOption.title = (providedTitle, methodName) =>
+        (!_.isEmpty(providedTitle) ? providedTitle : `sets ${_.snakeCase(methodName)} option`);
 
-    return aggPropIsSet;
+    return setsOption;
 }

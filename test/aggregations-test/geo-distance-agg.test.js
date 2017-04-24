@@ -3,16 +3,20 @@ import { GeoDistanceAggregation, geoPoint } from '../../src';
 import {
     illegalCall,
     illegalParamType,
-    makeAggPropIsSetMacro,
+    aggsExpectStrategy,
+    makeSetsOptionMacro,
     validatedCorrectly
 } from '../_macros';
 
 // eslint-disable-next-line arrow-body-style
 const getInstance = () => new GeoDistanceAggregation('my_geo_agg').range({ to: 100 });
 
-const aggPropIsSet = makeAggPropIsSetMacro(getInstance, 'my_geo_agg', 'geo_distance', {
-    ranges: [{ to: 100 }]
-});
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    aggsExpectStrategy('my_geo_agg', 'geo_distance', {
+        ranges: [{ to: 100 }]
+    })
+);
 
 test('sets type as geo_distance', t => {
     const value = getInstance().toJSON();
@@ -29,9 +33,9 @@ test('sets type as geo_distance', t => {
 test(illegalCall, GeoDistanceAggregation, 'format');
 test(illegalCall, GeoDistanceAggregation, 'script');
 test(illegalParamType, getInstance(), 'origin', 'GeoPoint');
-test(aggPropIsSet, 'origin', { param: geoPoint().object({ lat: 41.12, lon: -71.34 }) });
-test(aggPropIsSet, 'unit', { param: 'km' });
-test(aggPropIsSet, 'distanceType', { param: 'plane' });
+test(setsOption, 'origin', { param: geoPoint().object({ lat: 41.12, lon: -71.34 }) });
+test(setsOption, 'unit', { param: 'km' });
+test(setsOption, 'distanceType', { param: 'plane' });
 // prettier-ignore
 test(validatedCorrectly, getInstance, 'unit', [
     'in', 'inch',

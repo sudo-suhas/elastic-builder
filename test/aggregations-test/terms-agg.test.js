@@ -1,17 +1,22 @@
 import test from 'ava';
 import { TermsAggregation } from '../../src';
-import { setsAggType, validatedCorrectly, makeAggPropIsSetMacro } from '../_macros';
+import {
+    setsAggType,
+    validatedCorrectly,
+    aggsExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = field => new TermsAggregation('my_agg', field);
 
-const aggPropIsSet = makeAggPropIsSetMacro(getInstance, 'my_agg', 'terms');
+const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'terms'));
 
 test(setsAggType, TermsAggregation, 'terms');
 test(validatedCorrectly, getInstance, 'collectMode', ['depth_first', 'breadth_first']);
-test(aggPropIsSet, 'showTermDocCountError', { param: true });
-test(aggPropIsSet, 'collectMode', { param: 'breadth_first' });
-test(aggPropIsSet, 'order', { param: 'my_field', propValue: { my_field: 'desc' } });
-test(aggPropIsSet, 'order', { param: ['my_field', 'asc'], propValue: { my_field: 'asc' } });
+test(setsOption, 'showTermDocCountError', { param: true });
+test(setsOption, 'collectMode', { param: 'breadth_first' });
+test(setsOption, 'order', { param: 'my_field', propValue: { my_field: 'desc' } });
+test(setsOption, 'order', { param: ['my_field', 'asc'], propValue: { my_field: 'asc' } });
 
 test('include partition is set', t => {
     const value = getInstance('my_field').includePartition(0, 20).toJSON();

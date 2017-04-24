@@ -1,14 +1,14 @@
 import test from 'ava';
 import { CardinalityAggregation } from '../../src';
-import { setsAggType, illegalCall, makeAggPropIsSetMacro } from '../_macros';
+import { setsAggType, illegalCall, aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = field => new CardinalityAggregation('my_agg', field);
 
-const aggPropIsSet = makeAggPropIsSetMacro(getInstance, 'my_agg', 'cardinality');
+const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'cardinality'));
 
 test(setsAggType, CardinalityAggregation, 'cardinality');
 test(illegalCall, CardinalityAggregation, 'format');
-test(aggPropIsSet, 'precisionThreshold', { param: 5000 });
+test(setsOption, 'precisionThreshold', { param: 5000 });
 
 test('constructor sets field', t => {
     const value = getInstance('my_field').toJSON();

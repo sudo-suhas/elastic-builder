@@ -20,6 +20,16 @@ test('can be instantiated', t => {
     t.deepEqual(value, expected);
 });
 
+test('name cannot be empty', t => {
+    const err = t.throws(() => new Aggregation());
+    t.is(err.message, 'Aggregation `name` cannot be empty');
+});
+
+test('aggType cannot be empty', t => {
+    const err = t.throws(() => new Aggregation('my_agg'));
+    t.is(err.message, 'Aggregation `aggType` cannot be empty');
+});
+
 test('getDSL gets DSL', t => {
     const value = new TermsAggregation('countries', 'artist.country')
         .order('rock>playback_stats.avg', 'desc')

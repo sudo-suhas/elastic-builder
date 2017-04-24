@@ -29,7 +29,7 @@ class GeoPoint {
      * @private
      */
     _warn(msg) {
-        console.warn(`[${this.constructor.name}] ${msg}`);
+        console.warn(`[GeoPoint] ${msg}`);
     }
 
     /**

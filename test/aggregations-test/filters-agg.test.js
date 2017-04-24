@@ -1,10 +1,20 @@
 import test from 'ava';
+import sinon from 'sinon';
 import { FiltersAggregation, termQuery } from '../../src';
-import { illegalCall, illegalParamType, setsAggType, makeAggPropIsSetMacro } from '../_macros';
+import {
+    illegalCall,
+    illegalParamType,
+    setsAggType,
+    aggsExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = (...args) => new FiltersAggregation('my_filters_agg', ...args);
 
-const aggPropIsSet = makeAggPropIsSetMacro(getInstance, 'my_filters_agg', 'filters');
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    aggsExpectStrategy('my_filters_agg', 'filters')
+);
 
 const filterQryA = termQuery('user', 'kimchy');
 const filterQryB = termQuery('company', 'elastic');
@@ -13,8 +23,8 @@ test(setsAggType, FiltersAggregation, 'filters');
 test(illegalCall, FiltersAggregation, 'field');
 test(illegalCall, FiltersAggregation, 'script');
 test(illegalParamType, getInstance(), 'filter', 'Query');
-test(aggPropIsSet, 'otherBucket', { param: true });
-test(aggPropIsSet, 'otherBucketKey', { param: 'other_messages' });
+test(setsOption, 'otherBucket', { param: true });
+test(setsOption, 'otherBucketKey', { param: 'other_messages' });
 
 test('named filters are set', t => {
     let value = getInstance()
@@ -85,6 +95,20 @@ test('mixed representation', t => {
     t.deepEqual(value, expected);
 });
 
+test.serial('mixed representation logs warning', t => {
+    const spy = sinon.spy(console, 'warn');
+
+    getInstance().filter('user_kimchy', filterQryA).anonymousFilter(filterQryB).toJSON();
+
+    t.true(spy.calledTwice);
+    t.true(
+        spy.firstCall.calledWith('[FiltersAggregation] Do not mix named and anonymous filters!')
+    );
+    t.true(spy.secondCall.calledWith('[FiltersAggregation] Overwriting named filters.'));
+
+    console.warn.restore();
+});
+
 test('other_bucket_key is set', t => {
     const value = getInstance().otherBucket(true, 'other_messages').toJSON();
     const expected = {
@@ -97,5 +121,3 @@ test('other_bucket_key is set', t => {
     };
     t.deepEqual(value, expected);
 });
-
-// TODO: Test warnings for mixed representation

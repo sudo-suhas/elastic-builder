@@ -1,20 +1,20 @@
 import test from 'ava';
 import { HistogramAggregationBase } from '../../src/aggregations/bucket-aggregations';
-import { makeAggPropIsSetMacro } from '../_macros';
+import { aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = (...args) => new HistogramAggregationBase('my_agg', 'my_type', ...args);
 
-const aggPropIsSet = makeAggPropIsSetMacro(getInstance, 'my_agg', 'my_type');
+const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'my_type'));
 
-test(aggPropIsSet, 'interval', { param: 'year' });
-test(aggPropIsSet, 'format', { param: '####.00' });
-test(aggPropIsSet, 'offset', { param: 10 });
-test(aggPropIsSet, 'minDocCount', { param: 1 });
-test(aggPropIsSet, 'missing', { param: 0 });
-test(aggPropIsSet, 'keyed', { param: true });
-test(aggPropIsSet, 'extendedBounds', { param: [0, 500], propValue: { min: 0, max: 500 } });
-test(aggPropIsSet, 'order', { param: 'my_field', propValue: { my_field: 'desc' } });
-test(aggPropIsSet, 'order', { param: ['my_field', 'asc'], propValue: { my_field: 'asc' } });
+test(setsOption, 'interval', { param: 'year' });
+test(setsOption, 'format', { param: '####.00' });
+test(setsOption, 'offset', { param: 10 });
+test(setsOption, 'minDocCount', { param: 1 });
+test(setsOption, 'missing', { param: 0 });
+test(setsOption, 'keyed', { param: true });
+test(setsOption, 'extendedBounds', { param: [0, 500], propValue: { min: 0, max: 500 } });
+test(setsOption, 'order', { param: 'my_field', propValue: { my_field: 'desc' } });
+test(setsOption, 'order', { param: ['my_field', 'asc'], propValue: { my_field: 'asc' } });
 
 test('constructor sets arguments', t => {
     const value = getInstance('my_field', 10).toJSON();

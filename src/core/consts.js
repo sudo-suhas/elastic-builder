@@ -68,4 +68,16 @@ exports.FIELD_MODIFIER_SET = new Set([
 
 exports.NESTED_SCORE_MODE_SET = new Set(['none', 'sum', 'min', 'max', 'avg']);
 
+exports.GEO_SHAPE_TYPES = new Set([
+    'point',
+    'linestring',
+    'polygon',
+    'multipoint',
+    'multilinestring',
+    'multipolygon',
+    'geometrycollection',
+    'envelope',
+    'circle'
+]);
+
 exports.GEO_RELATION_SET = new Set(['WITHIN', 'CONTAINS', 'DISJOINT', 'INTERSECTS']);

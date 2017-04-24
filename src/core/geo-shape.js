@@ -1,12 +1,20 @@
 'use strict';
 
 const isNil = require('lodash.isnil');
+const has = require('lodash.has');
 
-const { checkType } = require('./util');
+const { checkType, invalidParam } = require('./util');
+const { GEO_SHAPE_TYPES } = require('./consts');
+
+const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-shape.html';
+
+const invalidTypeParam = invalidParam(ES_REF_URL, 'type', GEO_SHAPE_TYPES);
 
 /**
  * Shape object that can be used in queries and filters that
  * take a Shape. Shape uses the GeoJSON format.
+ *
+ * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-shape.html)
  *
  * @example
  * // Pass options using method
@@ -55,7 +63,7 @@ class GeoShape {
      * @example
      * bob.geoShape()
      *  .type('envelope')
-     *  .coordinates([ [-45.0, 45.0], [45.0, -45.0] ])
+     *  .coordinates([[-45.0, 45.0], [45.0, -45.0]])
      *
      * @param {string} type A valid shape type.
      * Can be one of `point`, `linestring`, `polygon`, `multipoint`, `multilinestring`,
@@ -63,12 +71,17 @@ class GeoShape {
      * @returns {GeoShape} returns `this` so that calls can be chained.
      */
     type(type) {
-        this._body.type = type;
+        if (isNil(type)) invalidTypeParam(type);
+
+        const typeLower = type.toLowerCase();
+        if (!GEO_SHAPE_TYPES.has(typeLower)) invalidTypeParam(type);
+
+        this._body.type = typeLower;
         return this;
     }
 
     /**
-     * Sets the coordinates for the shape definition.  Note, the coordinates
+     * Sets the coordinates for the shape definition. Note, the coordinates
      * are not validated in this api. Please see [GeoJSON](http://geojson.org/geojson-spec.html#geometry-objects)
      * and [ElasticSearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-shape.html#input-structure) for correct coordinate definitions.
      *
@@ -94,12 +107,13 @@ class GeoShape {
      * bob.geoShape()
      *  .type('circle')
      *  .coordinates([-45.0, 45.0])
-     *  .radius('100m)
+     *  .radius('100m')
      *
      * @param {string|number} radius The radius for shape circle.
      * @returns {GeoShape} returns `this` so that calls can be chained.
      */
     radius(radius) {
+        // Should this have a validation for circle shape type?
         this._body.radius = radius;
         return this;
     }
@@ -112,6 +126,11 @@ class GeoShape {
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON() {
+        if (!has(this._body, 'type') || !has(this._body, 'coordinates')) {
+            throw new Error(
+                'For all types, both the inner `type` and `coordinates` fields are required.'
+            );
+        }
         return this._body;
     }
 }

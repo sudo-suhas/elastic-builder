@@ -16,7 +16,7 @@ class Aggregation {
      */
     constructor(name, aggType) {
         if (isEmpty(name)) throw new Error('Aggregation `name` cannot be empty');
-        if (isEmpty(aggType)) throw new Error('Aggregation `type` cannot be empty');
+        if (isEmpty(aggType)) throw new Error('Aggregation `aggType` cannot be empty');
 
         this.name = name;
         this.aggType = aggType;

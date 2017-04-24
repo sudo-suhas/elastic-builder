@@ -1,12 +1,12 @@
 import test from 'ava';
 import { SamplerAggregation } from '../../src';
-import { setsAggType, illegalCall, makeAggPropIsSetMacro } from '../_macros';
+import { setsAggType, illegalCall, aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = (...args) => new SamplerAggregation('my_agg', ...args);
 
-const aggPropIsSet = makeAggPropIsSetMacro(getInstance, 'my_agg', 'sampler');
+const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'sampler'));
 
 test(setsAggType, SamplerAggregation, 'sampler');
 test(illegalCall, SamplerAggregation, 'field');
 test(illegalCall, SamplerAggregation, 'script');
-test(aggPropIsSet, 'shardSize', { param: 200 });
+test(setsOption, 'shardSize', { param: 200 });

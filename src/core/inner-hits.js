@@ -1,6 +1,7 @@
 'use strict';
 
 const has = require('lodash.has');
+const isNil = require('lodash.isnil');
 const forEach = require('lodash.foreach');
 
 const Sort = require('./sort');
@@ -19,14 +20,33 @@ const { checkType, recursiveToJSON } = require('./util');
 class InnerHits {
     /**
      * Creates an instance of `InnerHits`
+     *
+     * @param {string=} name The name to be used for the particular inner hit definition
+     * in the response. Useful when multiple inner hits have been defined in a single
+     * search request. The default depends in which query the inner hit is defined.
      */
-    constructor() {
+    constructor(name) {
         // Maybe accept some optional parameter?
         this._body = {};
+
+        if (!isNil(name)) this._body.name = name;
     }
 
     /**
-     * he offset from where the first hit to fetch for each `inner_hits` in the returned
+     * The name to be used for the particular inner hit definition
+     * in the response. Useful when multiple inner hits have been defined in a single
+     * search request. The default depends in which query the inner hit is defined.
+     *
+     * @param {number} name
+     * @returns {RequestBodySearch} returns `this` so that calls can be chained.
+     */
+    name(name) {
+        this._body.name = name;
+        return this;
+    }
+
+    /**
+     * The offset from where the first hit to fetch for each `inner_hits` in the returned
      * regular search hits.
      *
      * @param {number} from
@@ -131,6 +151,24 @@ class InnerHits {
         if (!has(this._body, 'script_fields')) this._body.script_fields = {};
 
         this._body.script_fields[scriptFieldName] = { script };
+        return this;
+    }
+
+    /**
+     * Sets given dynamic document properties to be computed using supplied `Script`s.
+     *
+     * Object should have `scriptFieldName` as key and `script` as the value.
+     *
+     * @param {Object} scriptFields Object with `scriptFieldName` as key and `script` as the value.
+     * @returns {TopHitsAggregation} returns `this` so that calls can be chained
+     */
+    scriptFields(scriptFields) {
+        checkType(scriptFields, Object);
+
+        forEach(Object.keys(scriptFields), scriptFieldName =>
+            this.scriptField(scriptFieldName, scriptFields[scriptFieldName])
+        );
+
         return this;
     }
 

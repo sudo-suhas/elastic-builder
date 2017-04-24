@@ -1,18 +1,18 @@
 import test from 'ava';
 import { PercentilesAggregation } from '../../src';
-import { setsAggType, illegalParamType, makeAggPropIsSetMacro } from '../_macros';
+import { setsAggType, illegalParamType, aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = field => new PercentilesAggregation('my_agg', field);
 
-const aggPropIsSet = makeAggPropIsSetMacro(getInstance, 'my_agg', 'percentiles');
+const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'percentiles'));
 
 test(setsAggType, PercentilesAggregation, 'percentiles');
 test(illegalParamType, getInstance(), 'percents', 'Array');
-test(aggPropIsSet, 'keyed', { param: true });
-test(aggPropIsSet, 'percents', { param: [95, 99, 99.9], spread: false });
-test(aggPropIsSet, 'keyed', { param: true });
-test(aggPropIsSet, 'tdigest', { param: 200, propValue: { compression: 200 } });
-test(aggPropIsSet, 'hdr', { param: 3, propValue: { number_of_significant_value_digits: 3 } });
+test(setsOption, 'keyed', { param: true });
+test(setsOption, 'percents', { param: [95, 99, 99.9], spread: false });
+test(setsOption, 'keyed', { param: true });
+test(setsOption, 'tdigest', { param: 200, propValue: { compression: 200 } });
+test(setsOption, 'hdr', { param: 3, propValue: { number_of_significant_value_digits: 3 } });
 
 test('compression same as tdigest', t => {
     t.deepEqual(getInstance().tdigest(3).toJSON(), getInstance().compression(3).toJSON());

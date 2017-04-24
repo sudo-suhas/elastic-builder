@@ -24,7 +24,7 @@ const invalidFragmenterParam = invalidParam(ES_REF_URL, 'fragmenter', "'simple' 
  * field will be extracted from it.
  *
  * If no term_vector information is provided (by setting it to
- * with_positions_offsets in the mapping), then the plain highlighter will be
+ * `with_positions_offsets` in the mapping), then the plain highlighter will be
  * used. If it is provided, then the fast vector highlighter will be used.
  * When term vectors are available, highlighting will be performed faster at
  * the cost of bigger index size.
@@ -130,18 +130,22 @@ class Highlight {
      * @returns {Highlight} returns `this` so that calls can be chained
      */
     styledTagsSchema() {
+        // This is a special case as it does not map directly to elasticsearch DSL
+        // This is written this way for ease of use
         this._highlight.tags_schema = 'styled';
         return this;
     }
 
     /**
-     * Sets the order of highlight fragments. You can apply the
+     * Sets the order of highlight fragments to be sorted by score. You can apply the
      * score order to a specific field by passing the optional field name parameter.
      *
      * @param {string=} field An optional field name
      * @returns {Highlight} returns `this` so that calls can be chained
      */
     scoreOrder(field) {
+        // This is a special case as it does not map directly to elasticsearch DSL
+        // This is written this way for ease of use
         this._setFieldOption(field, 'order', 'score');
         return this;
     }
@@ -303,6 +307,7 @@ class Highlight {
      */
     type(type, field) {
         if (isNil(type)) invalidTypeParam(type);
+
         const typeLower = type.toLowerCase();
         if (typeLower !== 'plain' && typeLower !== 'postings' && typeLower !== 'fvh') {
             invalidTypeParam(type);

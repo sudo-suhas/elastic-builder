@@ -76,6 +76,7 @@
     "nyc": "^10.2.0",
     "pre-commit": "^1.2.2",
     "prettier": "^1.1.0",
+    "sinon": "^2.1.0",
     "webpack": "^2.3.3"
   },
   "dependencies": {

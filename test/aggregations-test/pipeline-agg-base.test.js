@@ -1,16 +1,16 @@
 import test from 'ava';
 import { PipelineAggregationBase } from '../../src/aggregations/pipeline-aggregations';
-import { validatedCorrectly, makeAggPropIsSetMacro } from '../_macros';
+import { validatedCorrectly, aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = bucketsPath =>
     new PipelineAggregationBase('my_agg', 'my_type', '', bucketsPath);
 
-const aggPropIsSet = makeAggPropIsSetMacro(getInstance, 'my_agg', 'my_type');
+const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'my_type'));
 
 test(validatedCorrectly, getInstance, 'gapPolicy', ['skip', 'insert_zeros']);
-test(aggPropIsSet, 'bucketsPath', { param: 'my_buckets_path' });
-test(aggPropIsSet, 'gapPolicy', { param: 'insert_zeros' });
-test(aggPropIsSet, 'format', { param: 'my_format' });
+test(setsOption, 'bucketsPath', { param: 'my_buckets_path' });
+test(setsOption, 'gapPolicy', { param: 'insert_zeros' });
+test(setsOption, 'format', { param: 'my_format' });
 
 test('constructor sets buckets_path', t => {
     const value = getInstance('my_buckets_path').toJSON();

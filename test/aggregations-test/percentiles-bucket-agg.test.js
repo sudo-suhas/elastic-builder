@@ -1,14 +1,17 @@
 import test from 'ava';
 import { PercentilesBucketAggregation } from '../../src';
-import { setsAggType, illegalParamType, makeAggPropIsSetMacro } from '../_macros';
+import { setsAggType, illegalParamType, aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = bucketsPath => new PercentilesBucketAggregation('my_agg', bucketsPath);
 
-const aggPropIsSet = makeAggPropIsSetMacro(getInstance, 'my_agg', 'percentiles_bucket');
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    aggsExpectStrategy('my_agg', 'percentiles_bucket')
+);
 
 test(setsAggType, PercentilesBucketAggregation, 'percentiles_bucket');
 test(illegalParamType, getInstance(), 'percents', 'Array');
-test(aggPropIsSet, 'percents', { param: [25.0, 50.0, 75.0], spread: false });
+test(setsOption, 'percents', { param: [25.0, 50.0, 75.0], spread: false });
 
 test('constructor sets buckets_path', t => {
     const value = getInstance('my_buckets_path').toJSON();
