@@ -53,7 +53,7 @@ class DecayScoreFunction extends ScoreFunction {
             invalidModeParam(mode);
         }
 
-        this.name = mode;
+        this._name = mode;
         return this;
     }
 
@@ -64,7 +64,7 @@ class DecayScoreFunction extends ScoreFunction {
      * @returns {DecayScoreFunction} returns `this` so that calls can be chained.
      */
     linear() {
-        this.name = 'linear';
+        this._name = 'linear';
         return this;
     }
 
@@ -75,7 +75,7 @@ class DecayScoreFunction extends ScoreFunction {
      * @returns {DecayScoreFunction} returns `this` so that calls can be chained.
      */
     exp() {
-        this.name = 'exp';
+        this._name = 'exp';
         return this;
     }
 
@@ -86,7 +86,7 @@ class DecayScoreFunction extends ScoreFunction {
      * @returns {DecayScoreFunction} returns `this` so that calls can be chained.
      */
     gauss() {
-        this.name = 'gauss';
+        this._name = 'gauss';
         return this;
     }
 
@@ -163,15 +163,7 @@ class DecayScoreFunction extends ScoreFunction {
      */
     toJSON() {
         // TODO: If mode/field is not set throw an error.
-
-        const repr = Object.assign(
-            {
-                [this.name]: {
-                    [this._field]: this._opts
-                }
-            },
-            this._body
-        );
+        const repr = Object.assign({ [this._name]: { [this._field]: this._opts } }, this._body);
         return recursiveToJSON(repr);
     }
 }

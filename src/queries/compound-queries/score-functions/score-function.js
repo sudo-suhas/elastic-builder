@@ -15,7 +15,7 @@ class ScoreFunction {
      * @param {string} name
      */
     constructor(name) {
-        this.name = name;
+        this._name = name;
 
         // Filter, weight go here
         this._body = {};
@@ -55,7 +55,7 @@ class ScoreFunction {
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON() {
-        const repr = Object.assign({ [this.name]: this._opts }, this._body);
+        const repr = Object.assign({ [this._name]: this._opts }, this._body);
         return recursiveToJSON(repr);
     }
 }

@@ -1,10 +1,10 @@
 import test from 'ava';
 import { Query } from '../../src/core';
-import { queryExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import { nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = () => new Query('my_type');
 
-const setsOption = makeSetsOptionMacro(getInstance, queryExpectStrategy('my_type'));
+const setsOption = makeSetsOptionMacro(getInstance, nameExpectStrategy('my_type'));
 
 test(setsOption, 'boost', { param: 10 });
 test(setsOption, 'name', { param: 'my_name', keyName: '_name' });

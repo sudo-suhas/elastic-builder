@@ -109,14 +109,14 @@ export function aggsExpectStrategy(name, type, defaultDef) {
 }
 
 /**
- * Expect strategy for use with `makeSetsOptionMacro` for queries
+ * Expect strategy for use with `makeSetsOptionMacro` for queries, score functions
  *
- * @param {string} type
+ * @param {string} name
  * @returns {function}
  */
-export function queryExpectStrategy(type) {
+export function nameExpectStrategy(name) {
     return (keyName, propValue) => ({
-        [type]: { [keyName]: propValue }
+        [name]: { [keyName]: propValue }
     });
 }
 
