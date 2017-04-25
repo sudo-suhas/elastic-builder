@@ -1,5 +1,10 @@
 'use strict';
 
+exports.FullTextQueryBase = require('./full-text-query-base');
+exports.MatchPhraseQueryBase = require('./match-phrase-query-base');
+exports.MonoFieldQueryBase = require('./mono-field-query-base');
+exports.QueryStringQueryBase = require('./query-string-query-base');
+
 exports.MatchQuery = require('./match-query');
 exports.MatchPhraseQuery = require('./match-phrase-query');
 exports.MatchPhrasePrefixQuery = require('./match-phrase-prefix-query');

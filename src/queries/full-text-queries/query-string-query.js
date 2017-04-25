@@ -103,7 +103,7 @@ class QueryStringQuery extends QueryStringQueryBase {
      * - `scoring_boolean` - translates each term into boolean should and
      *  keeps the scores as computed by the query
      *
-     * - `constant_score_boolean` - same as scoring_boolean, expect no scores
+     * - `constant_score_boolean` - same as `scoring_boolean`, expect no scores
      *  are computed.
      *
      * - `constant_score_filter` - first creates a private Filter, by visiting
@@ -126,10 +126,9 @@ class QueryStringQuery extends QueryStringQueryBase {
      * @throws {Error} If the given `rewrite` method is not valid.
      */
     rewrite(method) {
-        const methodLower = method;
-        validateRewiteMethod(methodLower, 'rewrite', ES_REF_URL);
+        validateRewiteMethod(method, 'rewrite', ES_REF_URL);
 
-        this._queryOpts.rewrite = methodLower;
+        this._queryOpts.rewrite = method;
         return this;
     }
 
@@ -142,7 +141,7 @@ class QueryStringQuery extends QueryStringQueryBase {
      * - `scoring_boolean` - translates each term into boolean should and
      *  keeps the scores as computed by the query
      *
-     * - `constant_score_boolean` - same as scoring_boolean, expect no scores
+     * - `constant_score_boolean` - same as `scoring_boolean`, expect no scores
      *  are computed.
      *
      * - `constant_score_filter` - first creates a private Filter, by visiting
@@ -165,16 +164,15 @@ class QueryStringQuery extends QueryStringQueryBase {
      * @throws {Error} If the given `fuzzy_rewrite` method is not valid.
      */
     fuzzyRewrite(method) {
-        const methodLower = method;
-        validateRewiteMethod(methodLower, 'fuzzy_rewrite', ES_REF_URL);
+        validateRewiteMethod(method, 'fuzzy_rewrite', ES_REF_URL);
 
-        this._queryOpts.fuzzy_rewrite = methodLower;
+        this._queryOpts.fuzzy_rewrite = method;
         return this;
     }
 
     /**
      * Sets the default slop for phrases. If zero, then exact phrase matches are required.
-     *  Default value is 0.
+     * Default value is 0.
      *
      * @param {number} slop A positive integer value, defaults is 0.
      * @returns {QueryStringQuery} returns `this` so that calls can be chained.
@@ -186,6 +184,7 @@ class QueryStringQuery extends QueryStringQueryBase {
 
     /**
      * Auto generate phrase queries. Defaults to `false`.
+     *
      * @param {boolean} enable
      * @returns {QueryStringQuery} returns `this` so that calls can be chained.
      */

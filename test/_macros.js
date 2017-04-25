@@ -122,6 +122,21 @@ export function nameExpectStrategy(name, defaultDef) {
 }
 
 /**
+ * Expect strategy for use with `makeSetsOptionMacro` for full text queries
+ *
+ * @param {string} name
+ * @param {Object=} defaultDef
+ * @returns {function}
+ */
+export function fullTextQryExpectStrategy(name, defaultDef = { query: 'query str' }) {
+    return (keyName, propValue) => ({
+        [name]: {
+            my_field: Object.assign({}, defaultDef, { [keyName]: propValue })
+        }
+    });
+}
+
+/**
  * Make macro for checking property is set.
  *
  * @param {function} getInstance

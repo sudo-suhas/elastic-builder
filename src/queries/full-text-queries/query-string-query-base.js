@@ -10,7 +10,7 @@ const FullTextQueryBase = require('./full-text-query-base');
 const invalidOperatorParam = invalidParam('', 'operator', "'AND' or 'OR'");
 
 /**
- * The `MonoFieldQueryBase` provides support for common options used across
+ * The `QueryStringQueryBase` provides support for common options used across
  * full text query implementations `QueryStringQuery` and `SimpleQueryStringQuery`.
  * A query that uses a query parser in order to parse its content.
  *

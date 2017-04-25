@@ -18,6 +18,7 @@ const invalidHighFreqOpParam = invalidParam(ES_REF_URL, 'high_freq_operator', "'
  * The `common` terms query is a modern alternative to stopwords which
  * improves the precision and recall of search results (by taking
  * stopwords into account), without sacrificing performance.
+ *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html)
  *
  * @extends MonoFieldQueryBase

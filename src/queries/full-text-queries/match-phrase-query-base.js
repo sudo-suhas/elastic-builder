@@ -29,7 +29,7 @@ class MatchPhraseQueryBase extends MonoFieldQueryBase {
      */
     minimumShouldMatch() {
         console.log(`Please refer ${this._refUrl}`);
-        throw new Error('`minimum_should_match` is not supported in ${this.constructor.name}');
+        throw new Error(`minimumShouldMatch is not supported in ${this.constructor.name}`);
     }
 
     /**

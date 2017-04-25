@@ -48,7 +48,7 @@ class MonoFieldQueryBase extends FullTextQueryBase {
 
         // Revisit this.. Smells a little bit
         if (!has(this._queryOpts, 'query')) {
-            throw new Error('Query is required for full text query!');
+            throw new Error('Query string is required for full text query!');
         }
 
         const queryOptKeys = Object.keys(this._queryOpts);

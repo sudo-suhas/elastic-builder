@@ -36,7 +36,7 @@ class PrefixQuery extends MultiTermQueryBase {
      * - `scoring_boolean` - translates each term into boolean should and
      *  keeps the scores as computed by the query
      *
-     * - `constant_score_boolean` - same as scoring_boolean, expect no scores
+     * - `constant_score_boolean` - same as `scoring_boolean`, expect no scores
      *  are computed.
      *
      * - `constant_score_filter` - first creates a private Filter, by visiting
@@ -59,10 +59,9 @@ class PrefixQuery extends MultiTermQueryBase {
      * @throws {Error} If the given `rewrite` method is not valid.
      */
     rewrite(method) {
-        const methodLower = method;
-        validateRewiteMethod(methodLower, 'rewrite', ES_REF_URL);
+        validateRewiteMethod(method, 'rewrite', ES_REF_URL);
 
-        this._queryOpts.rewrite = methodLower;
+        this._queryOpts.rewrite = method;
         return this;
     }
 }
