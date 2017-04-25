@@ -112,11 +112,12 @@ export function aggsExpectStrategy(name, type, defaultDef) {
  * Expect strategy for use with `makeSetsOptionMacro` for queries, score functions
  *
  * @param {string} name
+ * @param {Object=} defaultDef
  * @returns {function}
  */
-export function nameExpectStrategy(name) {
+export function nameExpectStrategy(name, defaultDef) {
     return (keyName, propValue) => ({
-        [name]: { [keyName]: propValue }
+        [name]: Object.assign({}, defaultDef, { [keyName]: propValue })
     });
 }
 

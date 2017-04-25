@@ -75,17 +75,19 @@ class FunctionScoreQuery extends Query {
     /**
      * Controls the way the query and function scores are combined.
      *
-     * @param {string} mode Can be one of `multiply`, `sum`, `first`, `min`, `max`, `avg`.
+     * @param {string} mode Can be one of `multiply`, `replace`, `sum`, `avg`, `max`, `min`.
      * Defaults to `multiply`.
      * @returns {FunctionScoreQuery} returns `this` so that calls can be chained.
      */
     boostMode(mode) {
         if (isNil(mode)) invalidBoostModeParam(mode);
-        if (!BOOST_MODE_SET.has(mode)) {
+
+        const modeLower = mode.toLowerCase();
+        if (!BOOST_MODE_SET.has(modeLower)) {
             invalidBoostModeParam(mode);
         }
 
-        this._queryOpts.boost_mode = mode;
+        this._queryOpts.boost_mode = modeLower;
         return this;
     }
 

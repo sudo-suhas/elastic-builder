@@ -18,7 +18,7 @@ npm install elastic-builder --save
 
 ## Usage
 ```js
-const bob = require('elastic-builder');
+const bob = require('elastic-builder'); // the builder
 
 const requestBody = bob.requestBodySearch()
     .query(bob.matchQuery('message', 'this is a test'));
