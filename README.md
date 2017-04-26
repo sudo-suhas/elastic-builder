@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/sudo-suhas/elastic-builder.svg?branch=master)](https://travis-ci.org/sudo-suhas/elastic-builder)
+[![Coverage Status](https://coveralls.io/repos/github/sudo-suhas/elastic-builder/badge.svg?branch=master)](https://coveralls.io/github/sudo-suhas/elastic-builder?branch=master)
+
 # elastic-builder
 A Node.js implementation of the [Elasticsearch](http://www.elasticsearch.org/) DSL for use with the [official elasticsearch javascript client](http://www.elasticsearch.org/guide/en/elasticsearch/client/javascript-api/current/index.html) with builder syntax.
 
