@@ -17,7 +17,7 @@
     "lint": "eslint src test",
     "lint:fix": "npm run lint -- --fix",
     "lint-staged": "lint-staged",
-    "test": "cross-env NODE_ENV=test nyc --cache ava --concurrency 4",
+    "test": "cross-env NODE_ENV=test nyc --cache ava --concurrency 3",
     "check": "npm run lint && npm test",
     "report": "nyc report --reporter=html",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -66,8 +66,7 @@
   "pre-commit": {
     "colors": true,
     "run": [
-      "lint-staged",
-      "test"
+      "lint-staged"
     ]
   },
   "devDependencies": {

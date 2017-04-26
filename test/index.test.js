@@ -1,10 +1,5 @@
-import _ from 'lodash';
 import test from 'ava';
 import * as bob from '../src';
-
-test.before(() => {
-    console.warn = _.noop;
-});
 
 test('request body search is exported', t => {
     t.truthy(bob.RequestBodySearch);
