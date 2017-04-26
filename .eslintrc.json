@@ -309,7 +309,7 @@
     ],
     "prefer-arrow-callback": "error",
     "prefer-const": "warn",
-    "prefer-reflect": "warn",
+    "prefer-reflect": "off",
     "prefer-rest-params": "warn",
     "prefer-spread": "warn",
     "prefer-template": "error",

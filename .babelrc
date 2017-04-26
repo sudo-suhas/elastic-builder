@@ -1,6 +1,13 @@
 {
   "presets": ["es2015"],
-  "plugins": ["transform-runtime"],
+  "plugins": [
+    ["transform-runtime", {
+      "helpers": true,
+      "polyfill": false,
+      "regenerator": false,
+      "moduleName": "babel-runtime"
+    }]
+  ],
   "ignore": ["test/**/*.js"],
   "env": {
     "development": {

@@ -71,9 +71,9 @@ class Script {
             this._warn('Script source(`inline`/`stored`/`file`) was already specified!');
             this._warn('Overwriting.');
 
-            Reflect.deleteProperty(this._body, 'file');
-            Reflect.deleteProperty(this._body, 'stored');
-            Reflect.deleteProperty(this._body, 'file');
+            delete this._body.file;
+            delete this._body.stored;
+            delete this._body.file;
         }
     }
 
