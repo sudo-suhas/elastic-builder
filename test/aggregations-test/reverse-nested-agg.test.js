@@ -7,8 +7,8 @@ const getInstance = (...args) => new ReverseNestedAggregation('my_agg', ...args)
 const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'reverse_nested'));
 
 test(setsAggType, ReverseNestedAggregation, 'reverse_nested');
-test(illegalCall, ReverseNestedAggregation, 'field');
-test(illegalCall, ReverseNestedAggregation, 'script');
+test(illegalCall, ReverseNestedAggregation, 'field', 'my_agg');
+test(illegalCall, ReverseNestedAggregation, 'script', 'my_agg');
 test(setsOption, 'path', { param: 'reverse_nested_path' });
 
 test('constructor sets arguments', t => {

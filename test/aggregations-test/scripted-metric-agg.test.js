@@ -10,9 +10,9 @@ const setsOption = makeSetsOptionMacro(
 );
 
 test(setsAggType, ScriptedMetricAggregation, 'scripted_metric');
-test(illegalCall, ScriptedMetricAggregation, 'field');
-test(illegalCall, ScriptedMetricAggregation, 'script');
-test(illegalCall, ScriptedMetricAggregation, 'missing');
+test(illegalCall, ScriptedMetricAggregation, 'field', 'my_agg');
+test(illegalCall, ScriptedMetricAggregation, 'script', 'my_agg');
+test(illegalCall, ScriptedMetricAggregation, 'missing', 'my_agg');
 test(setsOption, 'initScript', { param: 'params._agg.transactions = []' });
 test(setsOption, 'mapScript', {
     param: "params._agg.transactions.add(doc.type.value == 'sale' ? doc.amount.value : -1 * doc.amount.value)"

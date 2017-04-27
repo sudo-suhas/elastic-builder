@@ -10,7 +10,7 @@ const setsOption = makeSetsOptionMacro(
 );
 
 test(setsAggType, BucketSelectorAggregation, 'bucket_selector');
-test(illegalCall, BucketSelectorAggregation, 'format');
+test(illegalCall, BucketSelectorAggregation, 'format', 'my_agg');
 test(setsOption, 'script', { param: 'params.my_var1 / params.my_var2' });
 test(setsOption, 'script', { param: new Script('inline', 'params.my_var1 / params.my_var2') });
 

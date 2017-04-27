@@ -21,10 +21,10 @@ const scriptB = new Script('inline', "doc['my_field_name'].value * factor")
     .params({ factor: 2.0 });
 
 test(setsAggType, TopHitsAggregation, 'top_hits');
-test(illegalCall, TopHitsAggregation, 'field');
-test(illegalCall, TopHitsAggregation, 'script');
-test(illegalCall, TopHitsAggregation, 'missing');
-test(illegalCall, TopHitsAggregation, 'format');
+test(illegalCall, TopHitsAggregation, 'field', 'my_agg');
+test(illegalCall, TopHitsAggregation, 'script', 'my_agg');
+test(illegalCall, TopHitsAggregation, 'missing', 'my_agg');
+test(illegalCall, TopHitsAggregation, 'format', 'my_agg');
 test(illegalParamType, getInstance(), 'sort', 'Sort');
 test(illegalParamType, getInstance(), 'highlight', 'Highlight');
 test(setsOption, 'from', { param: 10 });

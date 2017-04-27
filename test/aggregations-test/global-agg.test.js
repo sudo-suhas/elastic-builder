@@ -3,5 +3,5 @@ import { GlobalAggregation } from '../../src';
 import { illegalCall, setsAggType } from '../_macros';
 
 test(setsAggType, GlobalAggregation, 'global');
-test(illegalCall, GlobalAggregation, 'field');
-test(illegalCall, GlobalAggregation, 'script');
+test(illegalCall, GlobalAggregation, 'field', 'my_agg');
+test(illegalCall, GlobalAggregation, 'script', 'my_agg');

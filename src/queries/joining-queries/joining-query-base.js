@@ -90,7 +90,7 @@ class JoiningQueryBase extends Query {
      * @returns {JoiningQueryBase} returns `this` so that calls can be chained.
      */
     innerHits(innerHits) {
-        checkType(InnerHits);
+        checkType(innerHits, InnerHits);
 
         this._queryOpts.inner_hits = innerHits;
         return this;

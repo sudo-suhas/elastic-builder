@@ -5,7 +5,7 @@ import { setsAggType, illegalCall } from '../_macros';
 const getInstance = field => new GeoCentroidAggregation('my_agg', field);
 
 test(setsAggType, GeoCentroidAggregation, 'geo_centroid');
-test(illegalCall, GeoCentroidAggregation, 'format');
+test(illegalCall, GeoCentroidAggregation, 'format', 'my_agg');
 
 test('constructor sets field', t => {
     const value = getInstance('my_field').toJSON();

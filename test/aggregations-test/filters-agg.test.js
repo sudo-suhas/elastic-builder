@@ -20,8 +20,8 @@ const filterQryA = termQuery('user', 'kimchy');
 const filterQryB = termQuery('company', 'elastic');
 
 test(setsAggType, FiltersAggregation, 'filters');
-test(illegalCall, FiltersAggregation, 'field');
-test(illegalCall, FiltersAggregation, 'script');
+test(illegalCall, FiltersAggregation, 'field', 'my_agg');
+test(illegalCall, FiltersAggregation, 'script', 'my_agg');
 test(illegalParamType, getInstance(), 'filter', 'Query');
 test(setsOption, 'otherBucket', { param: true });
 test(setsOption, 'otherBucketKey', { param: 'other_messages' });

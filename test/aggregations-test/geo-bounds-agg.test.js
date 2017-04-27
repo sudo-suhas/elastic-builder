@@ -7,8 +7,8 @@ const getInstance = field => new GeoBoundsAggregation('my_agg', field);
 const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'geo_bounds'));
 
 test(setsAggType, GeoBoundsAggregation, 'geo_bounds');
-test(illegalCall, GeoBoundsAggregation, 'format');
-test(illegalCall, GeoBoundsAggregation, 'script');
+test(illegalCall, GeoBoundsAggregation, 'format', 'my_agg');
+test(illegalCall, GeoBoundsAggregation, 'script', 'my_agg');
 test(setsOption, 'wrapLongitude', { param: 'true' });
 
 test('constructor sets field', t => {

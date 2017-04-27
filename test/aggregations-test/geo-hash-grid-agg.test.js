@@ -10,8 +10,8 @@ const setsOption = makeSetsOptionMacro(
 );
 
 test(setsAggType, GeoHashGridAggregation, 'geohash_grid');
-test(illegalCall, GeoHashGridAggregation, 'format');
-test(illegalCall, GeoHashGridAggregation, 'script');
+test(illegalCall, GeoHashGridAggregation, 'format', 'my_agg');
+test(illegalCall, GeoHashGridAggregation, 'script', 'my_agg');
 test(setsOption, 'precision', { param: 8 });
 test(setsOption, 'size', { param: 10000 });
 test(setsOption, 'shardSize', { param: 3 });

@@ -5,7 +5,7 @@ import { illegalCall } from '../_macros';
 const getInstance = (...args) =>
     new IpRangeAggregation('my_agg', ...args).range({ to: '10.0.0.5' });
 
-test(illegalCall, IpRangeAggregation, 'format');
+test(illegalCall, IpRangeAggregation, 'format', 'my_agg');
 
 test('sets type as ip_range', t => {
     const value = getInstance().toJSON();

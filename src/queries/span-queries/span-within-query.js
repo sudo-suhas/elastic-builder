@@ -1,6 +1,6 @@
 'use strict';
 
-const SpanLittleBigQueryBase = require('./span-little-big-base');
+const SpanLittleBigQueryBase = require('./span-little-big-query-base');
 
 /**
  * Returns matches which are enclosed inside another span query. The span within

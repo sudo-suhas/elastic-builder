@@ -16,7 +16,7 @@ class ParentIdQuery extends Query {
      * Creates an instance of `ParentIdQuery`
      *
      * @param {string=} type The **child** type. This must be a type with `_parent` field.
-     * @param {string|number=} id The required parent id select documents must referr to.
+     * @param {string|number=} id The required parent id select documents must refer to.
      */
     constructor(type, id) {
         super('parent_id');
@@ -39,7 +39,7 @@ class ParentIdQuery extends Query {
     /**
      * Sets the id.
      *
-     * @param {string|number} id The required parent id select documents must referr to.
+     * @param {string|number} id The required parent id select documents must refer to.
      * @returns {ParentIdQuery} returns `this` so that calls can be chained.
      */
     id(id) {

@@ -7,7 +7,7 @@ const getInstance = field => new CardinalityAggregation('my_agg', field);
 const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'cardinality'));
 
 test(setsAggType, CardinalityAggregation, 'cardinality');
-test(illegalCall, CardinalityAggregation, 'format');
+test(illegalCall, CardinalityAggregation, 'format', 'my_agg');
 test(setsOption, 'precisionThreshold', { param: 5000 });
 
 test('constructor sets field', t => {

@@ -16,7 +16,7 @@ const setsOption = makeSetsOptionMacro(
 );
 
 test(setsAggType, PercentileRanksAggregation, 'percentile_ranks');
-test(illegalCall, PercentileRanksAggregation, 'format');
+test(illegalCall, PercentileRanksAggregation, 'format', 'my_agg');
 test(illegalParamType, getInstance(), 'values', 'Array');
 test(setsOption, 'keyed', { param: true });
 test(setsOption, 'values', { param: [15, 30], spread: false });

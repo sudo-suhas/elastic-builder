@@ -34,8 +34,9 @@ class HasParentQuery extends JoiningQueryBase {
      * @throws {Error} `score_mode` is deprecated. Use `score` instead.
      */
     scoreMode() {
+        console.log('`script_mode` is deprecated. Use `score` instead');
         console.log(`Please refer ${ES_REF_URL}`);
-        throw new Error('`script_mode` is deprecated. Use `score` instead');
+        throw new Error('scoreMode is not supported in HasParentQuery');
     }
 
     /**

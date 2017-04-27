@@ -30,8 +30,8 @@ test('sets type as geo_distance', t => {
     t.deepEqual(value, expected);
 });
 
-test(illegalCall, GeoDistanceAggregation, 'format');
-test(illegalCall, GeoDistanceAggregation, 'script');
+test(illegalCall, GeoDistanceAggregation, 'format', 'my_agg');
+test(illegalCall, GeoDistanceAggregation, 'script', 'my_agg');
 test(illegalParamType, getInstance(), 'origin', 'GeoPoint');
 test(setsOption, 'origin', { param: geoPoint().object({ lat: 41.12, lon: -71.34 }) });
 test(setsOption, 'unit', { param: 'km' });

@@ -278,8 +278,6 @@ Error: The 'type' parameter should belong to Set {
 ## Tests
 Tests are being added. See [roadmap](roadmap.md).
 
-**Aggregations are tested with 100% coverage now!**
-
 For running whatever tests _have_ been added:
 ```
 npm test

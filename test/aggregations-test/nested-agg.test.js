@@ -7,8 +7,8 @@ const getInstance = (...args) => new NestedAggregation('my_agg', ...args);
 const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'nested'));
 
 test(setsAggType, NestedAggregation, 'nested');
-test(illegalCall, NestedAggregation, 'field');
-test(illegalCall, NestedAggregation, 'script');
+test(illegalCall, NestedAggregation, 'field', 'my_agg');
+test(illegalCall, NestedAggregation, 'script', 'my_agg');
 test(setsOption, 'path', { param: 'nested_path' });
 
 test('constructor sets arguments', t => {

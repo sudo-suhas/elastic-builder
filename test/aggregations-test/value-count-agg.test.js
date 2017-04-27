@@ -3,7 +3,7 @@ import { ValueCountAggregation } from '../../src';
 import { setsAggType, illegalCall } from '../_macros';
 
 test(setsAggType, ValueCountAggregation, 'value_count');
-test(illegalCall, ValueCountAggregation, 'format');
+test(illegalCall, ValueCountAggregation, 'format', 'my_agg');
 
 test('constructor sets field', t => {
     const value = new ValueCountAggregation('my_agg', 'my_field').toJSON();

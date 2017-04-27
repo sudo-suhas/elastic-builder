@@ -30,8 +30,8 @@ setsAggType.title = (ignore, Cls, aggType) => `sets type as ${aggType}`;
  * @param {*} Cls constructor class
  * @param {string} propKey method name
  */
-export function illegalCall(t, Cls, propKey) {
-    const err = t.throws(() => new Cls('my_agg')[propKey](), Error);
+export function illegalCall(t, Cls, propKey, ...args) {
+    const err = t.throws(() => new Cls(...args)[propKey](), Error);
     t.is(err.message, `${propKey} is not supported in ${Cls.name}`);
 }
 

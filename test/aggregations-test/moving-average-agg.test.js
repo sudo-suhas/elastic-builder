@@ -13,7 +13,7 @@ const getInstance = bucketsPath => new MovingAverageAggregation('my_agg', bucket
 const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'moving_avg'));
 
 test(setsAggType, MovingAverageAggregation, 'moving_avg');
-test(illegalCall, MovingAverageAggregation, 'format');
+test(illegalCall, MovingAverageAggregation, 'format', 'my_agg');
 test(validatedCorrectly, getInstance, 'model', [
     'ewma',
     'holt',

@@ -13,8 +13,8 @@ test('constructor sets arguments', t => {
 });
 
 test(setsAggType, FilterAggregation, 'filter');
-test(illegalCall, FilterAggregation, 'field');
-test(illegalCall, FilterAggregation, 'script');
+test(illegalCall, FilterAggregation, 'field', 'my_agg');
+test(illegalCall, FilterAggregation, 'script', 'my_agg');
 test(illegalParamType, getInstance(), 'filter', 'Query');
 
 test('filter is set', t => {
