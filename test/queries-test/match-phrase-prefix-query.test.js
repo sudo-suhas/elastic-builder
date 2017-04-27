@@ -1,12 +1,12 @@
 import test from 'ava';
 import { MatchPhrasePrefixQuery } from '../../src';
-import { fullTextQryExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import { nameFieldExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = () => new MatchPhrasePrefixQuery('my_field', 'query str');
 
 const setsOption = makeSetsOptionMacro(
     getInstance,
-    fullTextQryExpectStrategy('match_phrase_prefix')
+    nameFieldExpectStrategy('match_phrase_prefix', { query: 'query str' })
 );
 
 test(setsOption, 'maxExpansions', { param: 50 });

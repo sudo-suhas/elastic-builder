@@ -20,7 +20,7 @@ const isEmpty = require('lodash.isempty'),
 exports.checkType = function checktype(instance, type) {
     if (!(instance instanceof type)) {
         if (isNil(instance)) {
-            console.warn(`Was expecting instance of ${typeof type} but got ${instance}!`);
+            console.warn(`Was expecting instance of ${type.name} but got ${instance}!`);
         } else console.warn(`${inspect(instance)} is of the type ${typeof instance}`);
 
         throw new TypeError(`Argument must be an instance of ${type.name}`);

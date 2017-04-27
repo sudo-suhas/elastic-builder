@@ -14,7 +14,6 @@ const invalidValidationMethod = invalidParam(
  * The `GeoQueryBase` provides support for common options used across
  * various geo query implementations.
  *
- * @borrows Query.boost
  * @extends Query
  */
 class GeoQueryBase extends Query {

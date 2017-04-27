@@ -1,11 +1,14 @@
 import test from 'ava';
 import sinon from 'sinon';
 import { CommonTermsQuery } from '../../src';
-import { validatedCorrectly, fullTextQryExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import { validatedCorrectly, nameFieldExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = () => new CommonTermsQuery('my_field', 'query str');
 
-const setsOption = makeSetsOptionMacro(getInstance, fullTextQryExpectStrategy('common'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameFieldExpectStrategy('common', { query: 'query str' })
+);
 
 test(validatedCorrectly, getInstance, 'lowFreqOperator', ['and', 'or']);
 test(validatedCorrectly, getInstance, 'highFreqOperator', ['and', 'or']);

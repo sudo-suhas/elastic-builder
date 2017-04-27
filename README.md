@@ -75,7 +75,7 @@ This library is a port of `elastic.js` to es6 with elasticsearch 5.3 compatibili
 ## API Reference
 API reference can be accessed here - http://elastic-builder.js.org/docs.
 
-API documentation was generated using [documentation.js](https://github.com/documentationjs/documentation)
+API documentation was generated using [documentation.js](https://github.com/documentationjs/documentation).
 It is being hosted with help from this awesome project - https://github.com/js-org/dns.js.org
 
 Documentation is a WIP. See [roadmap](roadmap.md).

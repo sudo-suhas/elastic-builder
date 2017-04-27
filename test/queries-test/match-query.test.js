@@ -1,10 +1,13 @@
 import test from 'ava';
 import { MatchQuery } from '../../src';
-import { validatedCorrectly, fullTextQryExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import { validatedCorrectly, nameFieldExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = () => new MatchQuery('my_field', 'query str');
 
-const setsOption = makeSetsOptionMacro(getInstance, fullTextQryExpectStrategy('match'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameFieldExpectStrategy('match', { query: 'query str' })
+);
 
 const validRewrites = [
     'constant_score',

@@ -62,7 +62,7 @@ class GeoShapeQuery extends GeoQueryBase {
      */
     validationMethod() {
         console.log(`Please refer ${ES_REF_URL}`);
-        throw new Error('`validationMethod` is not supported in GeoShapeQuery');
+        throw new Error('validationMethod is not supported in GeoShapeQuery');
     }
 
     /**

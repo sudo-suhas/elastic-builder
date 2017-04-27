@@ -128,7 +128,7 @@ export function nameExpectStrategy(name, defaultDef) {
  * @param {Object=} defaultDef
  * @returns {function}
  */
-export function fullTextQryExpectStrategy(name, defaultDef = { query: 'query str' }) {
+export function nameFieldExpectStrategy(name, defaultDef) {
     return (keyName, propValue) => ({
         [name]: {
             my_field: Object.assign({}, defaultDef, { [keyName]: propValue })
