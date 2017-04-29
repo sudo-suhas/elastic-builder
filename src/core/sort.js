@@ -59,8 +59,24 @@ class Sort {
     }
 
     /**
-     * The mode option controls what array value is picked for sorting the
+     * Elasticsearch supports sorting by array or multi-valued fields.
+     * The `mode` option controls what array value is picked for sorting the
      * document it belongs to.
+     *
+     * The `mode` option can have the following values:
+     *
+     * - `min` - Pick the lowest value.
+     * - `max` - Pick the highest value.
+     * - `sum` - Use the sum of all values as sort value.
+     *   Only applicable for number based array fields.
+     * - `avg` - Use the average of all values as sort value.
+     *   Only applicable for number based array fields.
+     * - `median` - Use the median of all values as sort value.
+     *   Only applicable for number based array fields.
+     *
+     * @example
+     * const sort = bob.sort('price', 'asc').mode('avg');
+     *
      * @param {string} mode One of `avg`, `min`, `max`, `sum` and `median`.
      * @returns {Sort} returns `this` so that calls can be chained.
      */
@@ -81,6 +97,11 @@ class Sort {
      * field inside this nested object. When sorting by nested field, this field
      * is mandatory.
      *
+     * @example
+     * const sort = bob.sort('offer.price', 'asc')
+     *     .nestedPath('offer')
+     *     .nestedFilter(bob.termQuery('offer.color', 'blue'));
+     *
      * @param {string} path Nested object to sort on
      * @returns {Sort} returns `this` so that calls can be chained.
      */
@@ -93,6 +114,11 @@ class Sort {
      * A filter that the inner objects inside the nested path should match with in order
      * for its field values to be taken into account by sorting. By default no
      * `nested_filter` is active.
+     *
+     * @example
+     * const sort = bob.sort('offer.price', 'asc')
+     *     .nestedPath('offer')
+     *     .nestedFilter(bob.termQuery('offer.color', 'blue'));
      *
      * @param {Query} filterQuery
      * @returns {Sort} returns `this` so that calls can be chained.
@@ -110,6 +136,9 @@ class Sort {
      * be treated: The missing value can be set to `_last`, `_first`, or a custom value
      * (that will be used for missing docs as the sort value). The default is `_last`.
      *
+     * @example
+     * const sort = bob.sort('price').missing('_last');
+     *
      * @param {string|number} value
      * @returns {Sort} returns `this` so that calls can be chained.
      */
@@ -124,6 +153,9 @@ class Sort {
      * and not sort by them. The value of this parameter is used to determine what sort
      * values to emit.
      *
+     * @example
+     * const sort = bob.sort('price').unmappedType('long');
+     *
      * @param {string} type
      * @returns {Sort} returns `this` so that calls can be chained.
      */
@@ -137,6 +169,13 @@ class Sort {
      * If multiple reference points are specified, the final distance for a
      * document will then be `min`/`max`/`avg` (defined via `mode`) distance of all
      * points contained in the document to all points given in the sort request.
+     *
+     * @example
+     * const sort = bob.sort('pin.location', 'asc')
+     *     .geoDistance([-70, 40])
+     *     .unit('km')
+     *     .mode('min')
+     *     .distanceType('arc');
      *
      * @param {GeoPoint|Object|Array|string} geoPoint Reference point or array of
      * points to calculate distance from. Can be expressed using the `GeoPoint` class,
@@ -191,6 +230,16 @@ class Sort {
 
     /**
      * Sorts based on custom script. When sorting on a field, scores are not computed.
+     *
+     * @example
+     * const sort = bob.sort()
+     *    .type('number')
+     *    .script(
+     *        bob.script('inline', "doc['field_name'].value * params.factor")
+     *            .lang('painless')
+     *            .params({ factor: 1.1 })
+     *    )
+     *    .order('asc');
      *
      * @param {Script} script
      * @returns {Sort} returns `this` so that calls can be chained

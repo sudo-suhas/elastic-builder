@@ -6,8 +6,6 @@ const { Query, util: { checkType, recursiveToJSON } } = require('../../../core')
  * `ScoreFunction` provides support for common options used across
  * various `ScoreFunction` implementations.
  *
- * The same class is also aliased as `WeightFunction`.
- *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#score-functions)
  *
  * @param {string} name

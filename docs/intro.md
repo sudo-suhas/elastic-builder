@@ -15,7 +15,7 @@ const bob = require('elastic-builder'); // the builder
 const requestBody = new bob.RequestBodySearch()
     .query(new bob.MatchQuery('message', 'this is a test'));
 
-// Or use helper methods which construct the object without need for the new keyword
+// Or use helper methods which construct the object without need for the `new` keyword
 const requestBody = bob.requestBodySearch()
     .query(bob.matchQuery('message', 'this is a test'));
 
