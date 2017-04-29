@@ -16,6 +16,8 @@ const invalidRelationParam = invalidParam(ES_REF_URL, 'relation', GEO_RELATION_S
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html)
  *
+ * @param {string=} field
+ *
  * @example
  * bob.rangeQuery('age')
  *  .gte(10)
@@ -24,11 +26,7 @@ const invalidRelationParam = invalidParam(ES_REF_URL, 'relation', GEO_RELATION_S
  * @extends MultiTermQueryBase
  */
 class RangeQuery extends MultiTermQueryBase {
-    /**
-     * Creates an instance of `RangeQuery`.
-     *
-     * @param {string=} field
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field) {
         super('range', field);
     }

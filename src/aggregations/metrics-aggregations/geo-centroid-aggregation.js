@@ -11,15 +11,13 @@ const ES_REF_URL =
  *
  * [Elasticsearchreference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geocentroid-aggregation.html)
  *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string=} field The field to aggregate on. field must be a Geo-point datatype type
+ *
  * @extends MetricsAggregationBase
  */
 class GeoCentroidAggregation extends MetricsAggregationBase {
-    /**
-     * Creates an instance of `GeoCentroidAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string=} field The field to aggregate on. field must be a Geo-point datatype type
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, field) {
         super(name, 'geo_centroid', field);
     }

@@ -11,14 +11,12 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html)
  *
+ * @param {string=} queryString The actual query to be parsed.
+ *
  * @extends QueryStringQueryBase
  */
 class QueryStringQuery extends QueryStringQueryBase {
-    /**
-     * Creates an instance of `QueryStringQuery`
-     *
-     * @param {string=} queryString The actual query to be parsed.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(queryString) {
         super('query_string', ES_REF_URL, queryString);
     }

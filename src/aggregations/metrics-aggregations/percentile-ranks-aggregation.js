@@ -20,6 +20,12 @@ const ES_REF_URL =
  * Aggregation that calculates one or more percentiles ranks over numeric values
  * extracted from the aggregated documents.
  *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string=} field The field to aggregate on. It must be a numeric field
+ * @param {Array=} values Values to compute percentiles from.
+ *
+ * @throws {TypeError} If `values` is not an instance of Array
+ *
  * @extends MetricsAggregationBase
  */
 class PercentileRanksAggregation extends MetricsAggregationBase {

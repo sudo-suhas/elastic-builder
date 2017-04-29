@@ -19,14 +19,12 @@ const invaliModifierdParam = invalidParam(ES_REF_URL, 'modifier', FIELD_MODIFIER
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-field-value-factor)
  *
+ * @param {string=} field the field to be extracted from the document.
+ *
  * @extends ScoreFunction
  */
 class FieldValueFactorFunction extends ScoreFunction {
-    /**
-     * Creates an instance of `FieldValueFactorFunction`
-     *
-     * @param {string=} field the field to be extracted from the document.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field) {
         super('field_value_factor');
 

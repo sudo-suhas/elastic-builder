@@ -11,15 +11,13 @@ const RangeAggregationBase = require('./range-aggregation-base');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-daterange-aggregation.html)
  *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string=} field The field to aggregate on
+ *
  * @extends RangeAggregationBase
  */
 class DateRangeAggregation extends RangeAggregationBase {
-    /**
-     * Creates an instance of `DateRangeAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string=} field The field to aggregate on
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, field) {
         super(name, 'date_range', field);
     }

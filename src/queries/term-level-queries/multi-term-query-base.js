@@ -12,6 +12,10 @@ const ValueTermQueryBase = require('./value-term-query-base');
  * - Range Query
  * - Regexp Query
  *
+ * **NOTE:** Instantiating this directly should not be required.
+ * However, if you wish to add a custom implementation for whatever reason,
+ * this class could be extended.
+ *
  * @extends ValueTermQueryBase
  */
 class MultiTermQueryBase extends ValueTermQueryBase {}

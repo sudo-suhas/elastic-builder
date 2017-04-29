@@ -1,0 +1,148 @@
+toc:
+  - name: elastic-builder
+    file: intro.md
+  - RequestBodySearch
+  - name: Queries
+    description: |
+      These classes allow creation and manipulation of objects which map to
+      elasticsearch DSL for queries.
+  - Query
+  - MatchAllQuery
+  - MatchNoneQuery
+  - name: Full Text Queries
+  - FullTextQueryBase
+  - MonoFieldQueryBase
+  - MatchQuery
+  - MatchPhraseQueryBase
+  - MatchPhraseQuery
+  - MatchPhrasePrefixQuery
+  - MultiMatchQuery
+  - CommonTermsQuery
+  - QueryStringQueryBase
+  - QueryStringQuery
+  - SimpleQueryStringQuery
+  - name: Term Level Queries
+  - ValueTermQueryBase
+  - TermQuery
+  - TermsQuery
+  - MultiTermQueryBase
+  - RangeQuery
+  - ExistsQuery
+  - PrefixQuery
+  - WildcardQuery
+  - RegexpQuery
+  - FuzzyQuery
+  - TypeQuery
+  - IdsQuery
+  - name: Compound Queries
+  - ConstantScoreQuery
+  - BoolQuery
+  - DisMaxQuery
+  - FunctionScoreQuery
+  - BoostingQuery
+  - name: Joining Queries
+  - JoiningQueryBase
+  - NestedQuery
+  - HasChildQuery
+  - HasParentQuery
+  - ParentIdQuery
+  - name: Geo Queries
+  - GeoQueryBase
+  - GeoShapeQuery
+  - GeoBoundingBoxQuery
+  - GeoDistanceQuery
+  - GeoPolygonQuery
+  - name: Specialized Queries
+  - MoreLikeThisQuery
+  - ScriptQuery
+  - PercolateQuery
+  - name: Span Queries
+  - SpanQueryBase
+  - SpanTermQuery
+  - SpanMultiTermQuery
+  - SpanFirstQuery
+  - SpanNearQuery
+  - SpanOrQuery
+  - SpanNotQuery
+  - SpanLittleBigQueryBase
+  - SpanContainingQuery
+  - SpanWithinQuery
+  - SpanFieldMaskingQuery
+  - name: Aggregations
+    description: |
+      These classes can be used to leverage the aggregations framework which helps provide
+      aggregated data based on a search query. They can be composed together with queries
+      and other aggregations in order to build complex summaries of the data.
+  - Aggregation
+  - name: Metrics Aggregations
+  - MetricsAggregationBase
+  - AvgAggregation
+  - CardinalityAggregation
+  - ExtendedStatsAggregation
+  - GeoBoundsAggregation
+  - GeoCentroidAggregation
+  - MaxAggregation
+  - MinAggregation
+  - PercentilesAggregation
+  - PercentileRanksAggregation
+  - ScriptedMetricAggregation
+  - StatsAggregation
+  - SumAggregation
+  - TopHitsAggregation
+  - ValueCountAggregation
+  - name: Bucket Aggregations
+  - BucketAggregationBase
+  - ChildrenAggregation
+  - HistogramAggregationBase
+  - DateHistogramAggregation
+  - RangeAggregationBase
+  - DateRangeAggregation
+  - DiversifiedSamplerAggregation
+  - FilterAggregation
+  - FiltersAggregation
+  - GeoDistanceAggregation
+  - GeoHashGridAggregation
+  - GlobalAggregation
+  - HistogramAggregation
+  - IpRangeAggregation
+  - MissingAggregation
+  - NestedAggregation
+  - RangeAggregation
+  - ReverseNestedAggregation
+  - SamplerAggregation
+  - TermsAggregationBase
+  - SignificantTermsAggregation
+  - TermsAggregation
+  - name: Pipeline Aggregations
+  - PipelineAggregationBase
+  - AvgBucketAggregation
+  - DerivativeAggregation
+  - MaxBucketAggregation
+  - MinBucketAggregation
+  - SumBucketAggregation
+  - StatsBucketAggregation
+  - ExtendedStatsBucketAggregation
+  - PercentilesBucketAggregation
+  - MovingAverageAggregation
+  - CumulativeSumAggregation
+  - BucketScriptAggregation
+  - BucketSelectorAggregation
+  - SerialDifferencingAggregation
+  - name: Matrix Aggregations
+  - MatrixStatsAggregation
+  - name: Score Functions
+  - ScoreFunction
+  - ScriptScoreFunction
+  - WeightScoreFunction
+  - RandomScoreFunction
+  - FieldValueFactorFunction
+  - DecayScoreFunction
+  - name: Miscellaneous
+  - Highlight
+  - Script
+  - GeoPoint
+  - GeoShape
+  - IndexedShape
+  - Sort
+  - Rescore
+  - InnerHits

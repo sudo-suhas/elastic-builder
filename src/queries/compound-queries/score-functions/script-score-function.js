@@ -13,14 +13,12 @@ const ScoreFunction = require('./score-function');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-script-score)
  *
+ * @param {Script} script
+ *
  * @extends ScoreFunction
  */
 class ScriptScoreFunction extends ScoreFunction {
-    /**
-     * Creates an instance of `ScriptScoreFunction`
-     *
-     * @param {Script} script
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(script) {
         super('script_score');
 

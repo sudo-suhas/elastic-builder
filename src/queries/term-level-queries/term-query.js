@@ -8,18 +8,16 @@ const ValueTermQueryBase = require('./value-term-query-base');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html)
  *
+ * @param {string=} field
+ * @param {string|number=} queryVal
+ *
  * @example
  * const termQry = bob.termQuery('user', 'Kimchy');
  *
  * @extends ValueTermQueryBase
  */
 class TermQuery extends ValueTermQueryBase {
-    /**
-     * Creates an instance of `TermQuery`.
-     *
-     * @param {string=} field
-     * @param {string|number=} queryVal
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field, queryVal) {
         super('term', field, queryVal);
     }

@@ -12,15 +12,13 @@ const MultiTermQueryBase = require('./multi-term-query-base');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html)
  *
+ * @param {string} field
+ * @param {string|number} value
+ *
  * @extends MultiTermQueryBase
  */
 class FuzzyQuery extends MultiTermQueryBase {
-    /**
-     * Creates an instance of `FuzzyQuery`.
-     *
-     * @param {string} field
-     * @param {string|number} value
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field, value) {
         super('fuzzy', field, value);
     }

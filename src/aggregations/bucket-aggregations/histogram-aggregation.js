@@ -9,16 +9,14 @@ const HistogramAggregationBase = require('./histogram-aggregation-base');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html)
  *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string=} field The field to aggregate on
+ * @param {number=} interval Interval to generate histogram over.
+ *
  * @extends HistogramAggregationBase
  */
 class HistogramAggregation extends HistogramAggregationBase {
-    /**
-     * Creates an instance of `HistogramAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string=} field The field to aggregate on
-     * @param {number=} interval Interval to generate histogram over.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, field, interval) {
         super(name, 'histogram', field, interval);
     }

@@ -13,14 +13,12 @@ const ES_REF_URL =
  * Aggregation that keeps track and returns the minimum value among numeric
  * values extracted from the aggregated documents.
  *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ *
  * @extends MetricsAggregationBase
  */
 class ScriptedMetricAggregation extends MetricsAggregationBase {
-    /**
-     * Creates an instance of `ScriptedMetricAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name) {
         super(name, 'scripted_metric');
     }

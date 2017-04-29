@@ -14,16 +14,18 @@ const hasOwnProp = Object.prototype.hasOwnProperty;
  * various range `Aggregation` implementations like Range Aggregation and
  * Date Range aggregation.
  *
+ * **NOTE:** Instantiating this directly should not be required.
+ * However, if you wish to add a custom implementation for whatever reason,
+ * this class could be extended.
+ *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string} aggType Type of aggregation
+ * @param {string=} field The field to aggregate on
+ *
  * @extends BucketAggregationBase
  */
 class RangeAggregationBase extends BucketAggregationBase {
-    /**
-     * Creates an instance of `RangeAggregationBase`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string} aggType Type of aggregation
-     * @param {string=} field The field to aggregate on
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, aggType, field) {
         super(name, aggType, field);
         // Variable name is misleading. Only one of these needs to be present.

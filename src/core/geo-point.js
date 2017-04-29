@@ -12,9 +12,7 @@ const { checkType } = require('./util');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html)
  */
 class GeoPoint {
-    /**
-     * Creates an instance of `GeoPoint`
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor() {
         // Take optional parameter and call appropriate method?
         // Will have to check for string, object and array.

@@ -11,15 +11,13 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html)
  *
+ * @param {string=} field
+ * @param {string=} value
+ *
  * @extends MultiTermQueryBase
  */
 class WildcardQuery extends MultiTermQueryBase {
-    /**
-     * Creates an instance of `WildcardQuery`.
-     *
-     * @param {string=} field
-     * @param {string=} value
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field, value) {
         super('wildcard', field, value);
     }

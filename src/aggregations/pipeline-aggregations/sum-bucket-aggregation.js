@@ -12,15 +12,13 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-sum-bucket-aggregation.html)
  *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string=} bucketsPath The relative path of metric to aggregate over
+ *
  * @extends PipelineAggregationBase
  */
 class SumBucketAggregation extends PipelineAggregationBase {
-    /**
-     * Creates an instance of `SumBucketAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string=} bucketsPath The relative path of metric to aggregate over
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, bucketsPath) {
         super(name, 'sum_bucket', ES_REF_URL, bucketsPath);
     }

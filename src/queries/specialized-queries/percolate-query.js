@@ -11,6 +11,9 @@ const { Query } = require('../../core');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-percolate-query.html)
  *
+ * @param {string} field The field of type `percolator` and that holds the indexed queries.
+ * @param {string} docType The type / mapping of the document being percolated.
+ *
  * @example
  * const percolateQry = bob.percolateQuery('query', 'doctype')
  *  .document({ message: 'A new bonsai tree in the office' });
@@ -26,12 +29,7 @@ const { Query } = require('../../core');
  * @extends Query
  */
 class PercolateQuery extends Query {
-    /**
-     * Creates an instance of `PercolateQuery`
-     *
-     * @param {string} field The field of type `percolator` and that holds the indexed queries.
-     * @param {string} docType The type / mapping of the document being percolated.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field, docType) {
         super('percolate');
 

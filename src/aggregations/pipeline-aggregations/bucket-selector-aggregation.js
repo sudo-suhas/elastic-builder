@@ -14,15 +14,13 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-selector-aggregation.html)
  *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string=} bucketsPath The relative path of metric to aggregate over
+ *
  * @extends PipelineAggregationBase
  */
 class BucketSelectorAggregation extends PipelineAggregationBase {
-    /**
-     * Creates an instance of `BucketSelectorAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string=} bucketsPath The relative path of metric to aggregate over
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, bucketsPath) {
         super(name, 'bucket_selector', ES_REF_URL, bucketsPath);
     }

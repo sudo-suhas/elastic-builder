@@ -6,18 +6,17 @@ const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-iprange-aggregation.html';
 
 /**
- * Dedicated range aggregation for IP typed fields
+ * Dedicated range aggregation for IP typed fields.
+ *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/5current/search-aggregations-bucket-iprange-aggregation.html)
+ *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string=} field The field to aggregate on
  *
  * @extends RangeAggregationBase
  */
 class IpRangeAggregation extends RangeAggregationBase {
-    /**
-     * Creates an instance of `IpRangeAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string=} field The field to aggregate on
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, field) {
         super(name, 'ip_range', field);
         // Variable name is misleading. Only one of these needs to be present.

@@ -10,6 +10,9 @@ const SpanQueryBase = require('./span-query-base');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-term-query.html)
  *
+ * @param {string=} field The document field to query against
+ * @param {string|number=} value The query string
+ *
  * @example
  * const spanQry = bob.spanTermQuery('user', 'kimchy');
  *
@@ -24,12 +27,7 @@ class SpanTermQuery extends SpanQueryBase {
     // This is extremely similar to ValueTermQueryBase
     // Maybe rename, move and reuse it?
 
-    /**
-     * Creates an instance of `SpanTermQuery`
-     *
-     * @param {string=} field The document field to query against
-     * @param {string|number=} value The query string
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field, value) {
         super('span_term');
 

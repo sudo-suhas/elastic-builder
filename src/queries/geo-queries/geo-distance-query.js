@@ -16,6 +16,9 @@ const invalidDistanceTypeParam = invalidParam(ES_REF_URL, 'distance_type', "'pla
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-query.html)
  *
+ * @param {string=} field
+ * @param {GeoPoint=} point Geo point used to measure and filter documents based on distance from it.
+ *
  * @example
  * const geoQry = bob.geoDistanceQuery('pin.location', bob.geoPoint().lat(40).lon(-70))
  *  .distance('12km');
@@ -26,12 +29,7 @@ const invalidDistanceTypeParam = invalidParam(ES_REF_URL, 'distance_type', "'pla
  *  .geoPoint(bob.geoPoint().lat(40).lon(-70));
  */
 class GeoDistanceQuery extends GeoQueryBase {
-    /**
-     * Creates an instance of `GeoDistanceQuery`
-     *
-     * @param {string=} field
-     * @param {GeoPoint=} point Geo point used to measure and filter documents based on distance from it.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field, point) {
         super('geo_distance', field);
 

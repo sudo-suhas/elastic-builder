@@ -14,14 +14,12 @@ const { Query, util: { checkType } } = require('../../core');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-constant-score-query.html)
  *
+ * @param {Query=} filterQuery Query to filter on.
+ *
  * @extends Query
  */
 class ConstantScoreQuery extends Query {
-    /**
-     * Creates an instance of `ConstantScoreQuery`
-     *
-     * @param {Query=} filterQuery Query to filter on.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(filterQuery) {
         super('constant_score');
 

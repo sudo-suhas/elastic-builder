@@ -276,9 +276,7 @@ Error: The 'type' parameter should belong to Set {
 ```
 
 ## Tests
-Tests are being added. See [roadmap](roadmap.md).
-
-For running whatever tests _have_ been added:
+Run unit tests:
 ```
 npm test
 ```

@@ -15,15 +15,13 @@ const MetricsAggregationBase = require('./metrics-aggregation-base');
  * Aggregation that computes stats over numeric values extracted from the
  * aggregated documents.
  *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string=} field The field to aggregate on
+ *
  * @extends MetricsAggregationBase
  */
 class StatsAggregation extends MetricsAggregationBase {
-    /**
-     * Creates an instance of `StatsAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string=} field The field to aggregate on
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, field) {
         super(name, 'stats', field);
     }

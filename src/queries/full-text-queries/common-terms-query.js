@@ -21,15 +21,13 @@ const invalidHighFreqOpParam = invalidParam(ES_REF_URL, 'high_freq_operator', "'
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html)
  *
+ * @param {string=} field The document field to query against
+ * @param {string=} queryString The query string
+ *
  * @extends MonoFieldQueryBase
  */
 class CommonTermsQuery extends MonoFieldQueryBase {
-    /**
-     * Creates an instance of `CommonTermsQuery`
-     *
-     * @param {string=} field The document field to query against
-     * @param {string=} queryString The query string
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field, queryString) {
         super('common', field, queryString);
     }

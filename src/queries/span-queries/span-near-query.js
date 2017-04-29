@@ -26,9 +26,7 @@ const SpanQueryBase = require('./span-query-base');
  * @extends SpanQueryBase
  */
 class SpanNearQuery extends SpanQueryBase {
-    /**
-     * Creates an instance of `SpanNearQuery`
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor() {
         super('span_near');
     }

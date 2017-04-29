@@ -5,15 +5,16 @@ const isNil = require('lodash.isnil');
 const { Aggregation, util: { checkType } } = require('../../core');
 
 /**
+ * The `matrix_stats` aggregation is a numeric aggregation that computes
+ * statistics over a set of document fields
+ *
+ * @param {string} name A valid aggregation name
+ * @param {Array=} fields Array of fields
+ *
  * @extends Aggregation
  */
 class MatrixStatsAggregation extends Aggregation {
-    /**
-     * Creates and instance of `MatrixStatsAggregation`
-     *
-     * @param {string} name A valid aggregation name
-     * @param {Array=} fields Array of fields
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, fields) {
         super(name, 'matrix_stats');
 

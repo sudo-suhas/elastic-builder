@@ -16,6 +16,11 @@ const invalidTypeParam = invalidParam(ES_REF_URL, 'type', GEO_SHAPE_TYPES);
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-shape.html)
  *
+ * @param {string=} type A valid shape type.
+ * Can be one of `point`, `linestring`, `polygon`, `multipoint`, `multilinestring`,
+ * `multipolygon`, `geometrycollection`, `envelope` and `circle`
+ * @param {Array=} coords A valid coordinat definition for the given shape.
+ *
  * @example
  * // Pass options using method
  * const shape = bob.geoShape()
@@ -41,15 +46,7 @@ const invalidTypeParam = invalidParam(ES_REF_URL, 'type', GEO_SHAPE_TYPES);
  * bob.geoShape('multipoint', [ [102.0, 2.0], [103.0, 2.0] ])
  */
 class GeoShape {
-    /**
-     * A Shape object that can be used in queries and filters that
-     * take a Shape.  Shape uses the GeoJSON format.
-     *
-     * @param {string=} type A valid shape type.
-     * Can be one of `point`, `linestring`, `polygon`, `multipoint`, `multilinestring`,
-     * `multipolygon`, `geometrycollection`, `envelope` and `circle`
-     * @param {Array=} coords A valid coordinat definition for the given shape.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(type, coords) {
         this._body = {};
 

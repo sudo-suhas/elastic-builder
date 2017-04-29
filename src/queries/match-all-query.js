@@ -10,9 +10,7 @@ const { Query } = require('../core');
  * @extends Query
  */
 class MatchAllQuery extends Query {
-    /**
-     * Creates an instance of `MatchAllQuery`
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor() {
         super('match_all');
     }

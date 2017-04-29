@@ -13,15 +13,13 @@ const MetricsAggregationBase = require('./metrics-aggregation-base');
  * Aggregation that keeps track and returns the maximum value among the
  * numeric values extracted from the aggregated documents.
  *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string=} field The field to aggregate on
+ *
  * @extends MetricsAggregationBase
  */
 class MaxAggregation extends MetricsAggregationBase {
-    /**
-     * Creates an instance of `MaxAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string=} field The field to aggregate on
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, field) {
         super(name, 'max', field);
     }

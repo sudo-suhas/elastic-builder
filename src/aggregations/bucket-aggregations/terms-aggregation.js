@@ -22,15 +22,13 @@ const invalidCollectModeParam = invalidParam(
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html)
  *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string=} field The field to aggregate on
+ *
  * @extends TermsAggregationBase
  */
 class TermsAggregation extends TermsAggregationBase {
-    /**
-     * Creates an instance of `TermsAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string=} field The field to aggregate on
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, field) {
         super(name, 'terms', ES_REF_URL, field);
     }

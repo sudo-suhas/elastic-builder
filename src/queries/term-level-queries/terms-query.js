@@ -12,17 +12,15 @@ const { Query } = require('../../core');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html)
  *
+ * @param {string=} field
+ * @param {Array|string|number=} values
+ *
  * @extends Query
  */
 class TermsQuery extends Query {
     // TODO: The DSL is a mess. Think about cleaning up some.
 
-    /**
-     * Creates an instance of `TermsQuery`.
-     *
-     * @param {string=} field
-     * @param {Array|string|number=} values
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field, values) {
         super('terms');
 

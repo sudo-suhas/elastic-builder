@@ -19,9 +19,7 @@ const { Query, util: { checkType, recursiveToJSON } } = require('../../core');
  * @extends Query
  */
 class BoolQuery extends Query {
-    /**
-     * Creates an instance of `BoolQuery`
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor() {
         super('bool');
     }

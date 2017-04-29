@@ -16,9 +16,7 @@ const { Query, util: { checkType } } = require('../../core');
  * @extends Query
  */
 class DisMaxQuery extends Query {
-    /**
-     * Creates an instance of `DisMaxQuery`
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor() {
         super('dis_max');
     }

@@ -16,15 +16,13 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html)
  *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {Query=} filterQuery Query to filter on. Example - term query.
+ *
  * @extends BucketAggregationBase
  */
 class FilterAggregation extends BucketAggregationBase {
-    /**
-     * Creates an instance of `FilterAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {Query=} filterQuery Query to filter on. Example - term query.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, filterQuery) {
         super(name, 'filter');
 

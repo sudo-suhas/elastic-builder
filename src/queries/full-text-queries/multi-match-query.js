@@ -23,6 +23,9 @@ const invalidBehaviorParam = invalidParam(ES_REF_URL, 'behavior', "'all' or 'one
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html)
  *
+ * @param {Array<string>|string} fields The fields to be queried
+ * @param {string=} queryString The query string
+ *
  * @extends FullTextQueryBase
  */
 class MultiMatchQuery extends FullTextQueryBase {
@@ -30,12 +33,7 @@ class MultiMatchQuery extends FullTextQueryBase {
     // mixins are one way to go about it.
     // repeating code for now
 
-    /**
-     * Creates an instance of `MultiMatchQuery`
-     *
-     * @param {Array<string>|string} fields The fields to be queried
-     * @param {string=} queryString The query string
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(fields, queryString) {
         super('multi_match', queryString);
 

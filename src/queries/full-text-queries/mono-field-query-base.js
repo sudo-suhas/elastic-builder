@@ -9,16 +9,18 @@ const FullTextQueryBase = require('./full-text-query-base');
  * The `MonoFieldQueryBase` provides support for common options used across
  * various full text query implementations with single search field.
  *
+ * **NOTE:** Instantiating this directly should not be required.
+ * However, if you wish to add a custom implementation for whatever reason,
+ * this class could be extended.
+ *
+ * @param {string} queryType
+ * @param {string=} field The document field to query against
+ * @param {string=} queryString The query string
+ *
  * @extends FullTextQueryBase
  */
 class MonoFieldQueryBase extends FullTextQueryBase {
-    /**
-     * Creates an instance of `MonoFieldQueryBase`
-     *
-     * @param {string} queryType
-     * @param {string=} field The document field to query against
-     * @param {string=} queryString The query string
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(queryType, field, queryString) {
         super(queryType, queryString);
 

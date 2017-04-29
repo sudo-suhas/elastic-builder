@@ -16,15 +16,13 @@ const { checkType, recursiveToJSON } = require('./util');
  * `nested`, `has_child` or `has_parent` query and filter.
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-inner-hits.html)
+ *
+ * @param {string=} name The name to be used for the particular inner hit definition
+ * in the response. Useful when multiple inner hits have been defined in a single
+ * search request. The default depends in which query the inner hit is defined.
  */
 class InnerHits {
-    /**
-     * Creates an instance of `InnerHits`
-     *
-     * @param {string=} name The name to be used for the particular inner hit definition
-     * in the response. Useful when multiple inner hits have been defined in a single
-     * search request. The default depends in which query the inner hit is defined.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name) {
         // Maybe accept some optional parameter?
         this._body = {};

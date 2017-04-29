@@ -14,18 +14,20 @@ const invalidOperatorParam = invalidParam('', 'operator', "'AND' or 'OR'");
  * full text query implementations `QueryStringQuery` and `SimpleQueryStringQuery`.
  * A query that uses a query parser in order to parse its content.
  *
+ * **NOTE:** Instantiating this directly should not be required.
+ * However, if you wish to add a custom implementation for whatever reason,
+ * this class could be extended.
+ *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html)
+ *
+ * @param {string} queryType
+ * @param {string} refUrl
+ * @param {string=} queryString The actual query to be parsed.
  *
  * @extends FullTextQueryBase
  */
 class QueryStringQueryBase extends FullTextQueryBase {
-    /**
-     * Creates an instance of `QueryStringQueryBase`
-     *
-     * @param {string} queryType
-     * @param {string} refUrl
-     * @param {string=} queryString The actual query to be parsed.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(queryType, refUrl, queryString) {
         super(queryType, queryString);
 

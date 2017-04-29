@@ -31,9 +31,7 @@ const invalidBoostModeParam = invalidParam(ES_REF_URL, 'boost_mode', BOOST_MODE_
  * @extends Query
  */
 class FunctionScoreQuery extends Query {
-    /**
-     * Creates an instance of `FunctionScoreQuery`
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor() {
         super('function_score');
 

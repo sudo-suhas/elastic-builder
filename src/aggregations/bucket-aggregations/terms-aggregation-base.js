@@ -13,17 +13,19 @@ const invalidExecutionHintParam = invalidParam('', 'execution_hint', EXECUTION_H
  * various terms `Aggregation` implementations like Significant terms and
  * Terms aggregation.
  *
+ * **NOTE:** Instantiating this directly should not be required.
+ * However, if you wish to add a custom implementation for whatever reason,
+ * this class could be extended.
+ *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string} aggType Type of aggregation
+ * @param {string} refUrl Elasticsearch reference URL.
+ * @param {string=} field The field to aggregate on
+ *
  * @extends BucketAggregationBase
  */
 class TermsAggregationBase extends BucketAggregationBase {
-    /**
-     * Creates an instance of `TermsAggregationBase`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string} aggType Type of aggregation
-     * @param {string} refUrl Elasticsearch reference URL.
-     * @param {string=} field The field to aggregate on
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, aggType, refUrl, field) {
         super(name, aggType, field);
 

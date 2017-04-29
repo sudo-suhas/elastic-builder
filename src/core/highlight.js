@@ -30,13 +30,11 @@ const invalidFragmenterParam = invalidParam(ES_REF_URL, 'fragmenter', "'simple' 
  * the cost of bigger index size.
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html)
+ *
+ * @param {String|Array=} fields An optional field or array of fields to highlight.
  */
 class Highlight {
-    /**
-     * Creates an instance of `Highlight` to highlight search results on one or more fields.
-     *
-     * @param {String|Array=} fields An optional field or array of fields to highlight.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(fields) {
         this._fields = {};
         this._highlight = { fields: this._fields };

@@ -21,6 +21,9 @@ const SpanQueryBase = require('./span-query-base');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-field-masking-query.html)
  *
+ * @param {string} field
+ * @param {SpanQueryBase} spanQry Any other span type query
+ *
  * @example
  * const spanQry = bob.spanNearQuery()
  *  .clauses([
@@ -35,12 +38,7 @@ const SpanQueryBase = require('./span-query-base');
  * @extends SpanQueryBase
  */
 class SpanFieldMaskingQuery extends SpanQueryBase {
-    /**
-     * Creates an instance of `SpanFieldMaskingQuery`
-     *
-     * @param {string} field
-     * @param {SpanQueryBase} spanQry Any other span type query
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field, spanQry) {
         super('field_masking_span');
 
@@ -51,7 +49,7 @@ class SpanFieldMaskingQuery extends SpanQueryBase {
     /**
      * Sets the span query.
      *
-     * @param {SpanQueryBase} spanQry
+     * @param {SpanFieldMaskingQuery} spanQry
      * @returns {SpanFirstQuery} returns `this` so that calls can be chained.
      */
     query(spanQry) {

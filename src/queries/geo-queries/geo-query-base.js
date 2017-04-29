@@ -14,15 +14,17 @@ const invalidValidationMethod = invalidParam(
  * The `GeoQueryBase` provides support for common options used across
  * various geo query implementations.
  *
+ * **NOTE:** Instantiating this directly should not be required.
+ * However, if you wish to add a custom implementation for whatever reason,
+ * this class could be extended.
+ *
+ * @param {string} queryType
+ * @param {string} field
+ *
  * @extends Query
  */
 class GeoQueryBase extends Query {
-    /**
-     * Creates an instance of `GeoQueryBase`
-     *
-     * @param {string} queryType
-     * @param {string} field
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(queryType, field) {
         super(queryType);
 

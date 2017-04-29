@@ -9,16 +9,14 @@ const { Query } = require('../../core');
  * The `ValueTermQueryBase` provides support for common options used across
  * various term level query implementations.
  *
+ * @param {string} queryType
+ * @param {string=} field The document field to query against
+ * @param {string=} value The query string
+ *
  * @extends Query
  */
 class ValueTermQueryBase extends Query {
-    /**
-     * Creates an instance of `ValueTermQueryBase`
-     *
-     * @param {string} queryType
-     * @param {string=} field The document field to query against
-     * @param {string=} value The query string
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(queryType, field, value) {
         super(queryType);
 

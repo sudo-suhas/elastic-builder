@@ -21,17 +21,16 @@ const invalidModeParam = invalidParam(ES_REF_URL, 'mode', "'linear', 'exp' or 'g
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-decay)
  *
+ * If no `mode` is supplied, `gauss` will be used.
+ *
+ * @param {string=} mode Can be one of `linear`, `exp`, and `gauss`.
+ * Defaults to `gauss`.
+ * @param {string=} field the document field to run decay function against.
+ *
  * @extends ScoreFunction
  */
 class DecayScoreFunction extends ScoreFunction {
-    /**
-     * Creates an instance of `DecayScoreFunction`.
-     * If no `mode` is supplied, `gauss` will be used.
-     *
-     * @param {string=} mode Can be one of `linear`, `exp`, and `gauss`.
-     * Defaults to `gauss`.
-     * @param {string=} field the document field to run decay function against.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(mode = 'gauss', field) {
         super(mode);
 

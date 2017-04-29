@@ -22,9 +22,7 @@ const SpanQueryBase = require('./span-query-base');
  * @extends SpanQueryBase
  */
 class SpanOrQuery extends SpanQueryBase {
-    /**
-     * Creates an instance of `SpanOrQuery`
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor() {
         super('span_or');
     }

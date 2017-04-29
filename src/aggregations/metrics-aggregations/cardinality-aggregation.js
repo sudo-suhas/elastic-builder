@@ -14,15 +14,13 @@ const ES_REF_URL =
  *
  * Aggregation that calculates an approximate count of distinct values.
  *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string=} field The field to aggregate on
+ *
  * @extends MetricsAggregationBase
  */
 class CardinalityAggregation extends MetricsAggregationBase {
-    /**
-     * Creates an instance of `CardinalityAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string=} field The field to aggregate on
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, field) {
         super(name, 'cardinality', field);
     }

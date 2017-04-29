@@ -12,14 +12,12 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-global-aggregation.html)
  *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ *
  * @extends BucketAggregationBase
  */
 class GlobalAggregation extends BucketAggregationBase {
-    /**
-     * Creates an instance of `GlobalAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name) {
         super(name, 'global');
     }

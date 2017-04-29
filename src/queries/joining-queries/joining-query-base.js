@@ -14,16 +14,18 @@ const invalidScoreModeParam = invalidParam('', 'score_mode', NESTED_SCORE_MODE_S
  * The `JoiningQueryBase` class provides support for common options used across
  * various joining query implementations.
  *
+ * **NOTE:** Instantiating this directly should not be required.
+ * However, if you wish to add a custom implementation for whatever reason,
+ * this class could be extended.
+ *
+ * @param {string} queryType
+ * @param {string} refUrl
+ * @param {Query=} qry A valid `Query` object
+ *
  * @extends Query
  */
 class JoiningQueryBase extends Query {
-    /**
-     * Creates an instance of `JoiningQueryBase`
-     *
-     * @param {string} queryType
-     * @param {string} refUrl
-     * @param {Query=} qry A valid `Query` object
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(queryType, refUrl, qry) {
         super(queryType);
         this.refUrl = refUrl;

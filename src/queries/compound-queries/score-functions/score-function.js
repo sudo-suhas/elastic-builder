@@ -6,14 +6,14 @@ const { Query, util: { checkType, recursiveToJSON } } = require('../../../core')
  * `ScoreFunction` provides support for common options used across
  * various `ScoreFunction` implementations.
  *
+ * The same class is also aliased as `WeightFunction`.
+ *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#score-functions)
+ *
+ * @param {string} name
  */
 class ScoreFunction {
-    /**
-     * Creates an instance of `ScoreFunction`
-     *
-     * @param {string} name
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name) {
         this._name = name;
 

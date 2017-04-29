@@ -20,9 +20,7 @@ const { checkType, recursiveToJSON } = require('./util');
  * which includes the Query DSL, within its body.
  */
 class RequestBodySearch {
-    /**
-     * Creates an instance of `RequestBodySearch`
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor() {
         // Maybe accept some optional parameter?
         this._body = {};

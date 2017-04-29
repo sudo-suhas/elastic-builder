@@ -7,6 +7,10 @@ const isNil = require('lodash.isnil');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/5.3/modules-scripting-using.html)
  *
+ * @param {string=} type One of `inline`, `stored`, `file`
+ * @param {string=} source Source of the script.
+ * This needs to be specified if optional argument `type` is passed.
+ *
  * @example
  * const script = bob.script('inline', "doc['my_field'] * multiplier")
  *  .lang('expression')
@@ -19,13 +23,7 @@ const isNil = require('lodash.isnil');
  *  .params({ my_modifier: 2 });
  */
 class Script {
-    /**
-     * Creates an instance of `Script`
-     *
-     * @param {string=} type One of `inline`, `stored`, `file`
-     * @param {string=} source Source of the script.
-     * This needs to be specified if optional argument `type` is passed.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(type, source) {
         this._isTypeSet = false;
         this._body = {};

@@ -21,14 +21,11 @@ const invalidScoreModeParam = invalidParam(ES_REF_URL, 'score_mode', RESCORE_MOD
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html)
  *
+ * @param {number=} windowSize
+ * @param {Query=} rescoreQuery
  */
 class Rescore {
-    /**
-     * Creates an instance of `Rescore`
-     *
-     * @param {number=} windowSize
-     * @param {Query=} rescoreQuery
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(windowSize, rescoreQuery) {
         this._body = {};
         this._rescoreOpts = this._body.query = {};

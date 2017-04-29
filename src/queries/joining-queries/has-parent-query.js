@@ -15,15 +15,13 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-query.html)
  *
+ * @param {Query} qry A valid `Query` object
+ * @param {string=} type The parent type
+ *
  * @extends JoiningQueryBase
  */
 class HasParentQuery extends JoiningQueryBase {
-    /**
-     * Creates an instance of `HasParentQuery`
-     *
-     * @param {Query} qry A valid `Query` object
-     * @param {string=} type The parent type
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(qry, type) {
         super('has_parent', ES_REF_URL, qry);
 

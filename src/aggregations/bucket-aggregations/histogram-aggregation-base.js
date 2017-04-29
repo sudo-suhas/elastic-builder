@@ -13,17 +13,19 @@ const invalidDirectionParam = invalidParam('', 'direction', "'asc' or 'desc'");
  * various histogram `Aggregation` implementations like Histogram Aggregation,
  * Date Histogram aggregation.
  *
+ * **NOTE:** Instantiating this directly should not be required.
+ * However, if you wish to add a custom implementation for whatever reason,
+ * this class could be extended.
+ *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string} aggType Type of aggregation
+ * @param {string=} field The field to aggregate on
+ * @param {string|number=} interval Interval to generate histogram over.
+ *
  * @extends BucketAggregationBase
  */
 class HistogramAggregationBase extends BucketAggregationBase {
-    /**
-     * Creates an instance of `HistogramAggregationBase`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string} aggType Type of aggregation
-     * @param {string=} field The field to aggregate on
-     * @param {string|number=} interval Interval to generate histogram over.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, aggType, field, interval) {
         super(name, aggType, field);
 

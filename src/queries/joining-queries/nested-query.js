@@ -14,15 +14,13 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html)
  *
+ * @param {Query=} qry A valid `Query` object
+ * @param {string=} path The nested object path.
+ *
  * @extends JoiningQueryBase
  */
 class NestedQuery extends JoiningQueryBase {
-    /**
-     * Creates an instance of `NestedQuery`
-     *
-     * @param {Query=} qry A valid `Query` object
-     * @param {string=} path The nested object path.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(qry, path) {
         super('nested', ES_REF_URL, qry);
 

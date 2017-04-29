@@ -15,15 +15,13 @@ const ES_REF_URL =
 
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html)
  *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string=} field The field to aggregate on
+ *
  * @extends BucketAggregationBase
  */
 class GeoHashGridAggregation extends BucketAggregationBase {
-    /**
-     * Creates an instance of `GeoHashGridAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string=} field The field to aggregate on
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, field) {
         super(name, 'geohash_grid', field);
     }

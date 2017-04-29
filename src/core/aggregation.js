@@ -6,14 +6,20 @@ const { checkType, recursiveToJSON } = require('./util');
 
 /**
  * Base class implementation for all aggregation types.
+ *
+ * **NOTE:** Instantiating this directly should not be required.
+ * However, if you wish to add a custom implementation for whatever reason,
+ * this class should be extended and used as validation against the class
+ * type is present in various places.
+ *
+ * @param {string} name
+ * @param {string} aggType Type of aggregation
+ *
+ * @throws {Error} if `name` is empty
+ * @throws {Error} if `aggType` is empty
  */
 class Aggregation {
-    /**
-     * Creates an instance of `Aggregation`
-     *
-     * @param {string} name
-     * @param {string} aggType Type of aggregation
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, aggType) {
         if (isEmpty(name)) throw new Error('Aggregation `name` cannot be empty');
         if (isEmpty(aggType)) throw new Error('Aggregation `aggType` cannot be empty');

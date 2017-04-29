@@ -14,6 +14,8 @@ const SpanQueryBase = require('./span-query-base');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-multi-term-query.html)
  *
+ * @param {MultiTermQueryBase} multiTermQry One of wildcard, fuzzy, prefix, range or regexp query
+ *
  * @example
  * const spanQry = bob.spanMultiTermQuery()
  *  .match(bob.prefixQuery('user', 'ki'));
@@ -21,11 +23,7 @@ const SpanQueryBase = require('./span-query-base');
  * @extends SpanQueryBase
  */
 class SpanMultiTermQuery extends SpanQueryBase {
-    /**
-     * Creates an instance of `SpanMultiTermQuery`
-     *
-     * @param {MultiTermQueryBase} multiTermQry One of wildcard, fuzzy, prefix, range or regexp query
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(multiTermQry) {
         super('span_multi');
 

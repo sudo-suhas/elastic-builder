@@ -9,6 +9,8 @@ const GeoQueryBase = require('./geo-query-base');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-polygon-query.html)
  *
+ * @param {string=} field
+ *
  * @example
  * const geoQry = bob.geoPolygonQuery('person.location')
  *  .points([
@@ -18,11 +20,7 @@ const GeoQueryBase = require('./geo-query-base');
  *  ]);
  */
 class GeoPolygonQuery extends GeoQueryBase {
-    /**
-     * Creates an instance of `GeoPolygonQuery`
-     *
-     * @param {string=} field
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field) {
         super('geo_polygon', field);
     }

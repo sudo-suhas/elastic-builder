@@ -11,6 +11,8 @@ const SpanQueryBase = require('./span-query-base');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-first-query.html)
  *
+ * @param {SpanQueryBase} spanQry Any other span type query
+ *
  * @example
  * const spanQry = bob.spanFirstQuery()
  *  .match(bob.spanTermQuery('user', 'kimchy'))
@@ -19,11 +21,7 @@ const SpanQueryBase = require('./span-query-base');
  * @extends SpanQueryBase
  */
 class SpanFirstQuery extends SpanQueryBase {
-    /**
-     * Creates an instance of `SpanFirstQuery`
-     *
-     * @param {SpanQueryBase} spanQry Any other span type query
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(spanQry) {
         super('span_first');
 

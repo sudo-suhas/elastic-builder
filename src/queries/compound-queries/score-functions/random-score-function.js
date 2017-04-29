@@ -11,9 +11,7 @@ const ScoreFunction = require('./score-function');
  * @extends ScoreFunction
  */
 class RandomScoreFunction extends ScoreFunction {
-    /**
-     * Creates an instance of `RandomScoreFunction`
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor() {
         super('random_score');
     }

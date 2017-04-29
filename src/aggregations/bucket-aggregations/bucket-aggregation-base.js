@@ -8,16 +8,18 @@ const { Aggregation, Script, util: { checkType } } = require('../../core');
  * The `BucketAggregationBase` provides support for common options used across
  * various bucket `Aggregation` implementations.
  *
+ * **NOTE:** Instantiating this directly should not be required.
+ * However, if you wish to add a custom implementation for whatever reason,
+ * this class could be extended.
+ *
+ * @param {string} name a valid aggregation name
+ * @param {string} aggType type of aggregation
+ * @param {string=} field The field to aggregate on
+ *
  * @extends Aggregation
  */
 class BucketAggregationBase extends Aggregation {
-    /**
-     * Creates an instance of `BucketAggregationBase`
-     *
-     * @param {string} name a valid aggregation name
-     * @param {string} aggType type of aggregation
-     * @param {string=} field The field to aggregate on
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, aggType, field) {
         super(name, aggType);
 

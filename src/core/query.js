@@ -4,13 +4,16 @@ const { recursiveToJSON } = require('./util');
 
 /**
  * Base class implementation for all query types.
+ *
+ * **NOTE:** Instantiating this directly should not be required.
+ * However, if you wish to add a custom implementation for whatever reason,
+ * this class should be extended and used as validation against the class
+ * type is present in various places.
+ *
+ * @param {string} queryType
  */
 class Query {
-    /**
-     * Creates an instance of `Query`.
-     *
-     * @param {string} queryType
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(queryType) {
         this.queryType = queryType;
 

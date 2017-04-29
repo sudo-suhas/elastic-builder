@@ -13,15 +13,13 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html)
  *
+ * @param {string=} field
+ * @param {string|number=} value
+ *
  * @extends MultiTermQueryBase
  */
 class RegexpQuery extends MultiTermQueryBase {
-    /**
-     * Creates an instance of `RegexpQuery`.
-     *
-     * @param {string=} field
-     * @param {string|number=} value
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field, value) {
         super('regexp', field, value);
     }

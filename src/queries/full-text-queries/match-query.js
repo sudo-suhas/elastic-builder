@@ -17,6 +17,9 @@ const invalidZeroTermsQueryParam = invalidParam(ES_REF_URL, 'zero_terms_query', 
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html)
  *
+ * @param {string=} field The document field to query against
+ * @param {string=} queryString The query string
+ *
  * @example
  * const matchQry = bob.matchQuery('message', 'to be or not to be');
  *
@@ -26,12 +29,7 @@ class MatchQuery extends MonoFieldQueryBase {
     // NOTE: Did not add methods for `slop`, `phrase_slop` and `type`.
     // These are deprecated.
 
-    /**
-     * Creates an instance of `MatchQuery`
-     *
-     * @param {string=} field The document field to query against
-     * @param {string=} queryString The query string
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field, queryString) {
         super('match', field, queryString);
     }

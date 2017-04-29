@@ -13,15 +13,13 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-nested-aggregation.html)
  *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string=} path `path` of the nested document
+ *
  * @extends BucketAggregationBase
  */
 class NestedAggregation extends BucketAggregationBase {
-    /**
-     * Creates an instance of `NestedAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string=} path `path` of the nested document
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, path) {
         super(name, 'nested');
 

@@ -12,16 +12,14 @@ const { Query, util: { checkType } } = require('../../core');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html)
  *
+ * @param {Query=} positiveQry A valid `Query` object.
+ * @param {Query=} negativeQry A valid `Query` object.
+ * @param {number=} negativeBoost A positive `double` value where `0 < n < 1`.
+ *
  * @extends Query
  */
 class BoostingQuery extends Query {
-    /**
-     * Creates an instance of `BoostingQuery`
-     *
-     * @param {Query=} positiveQry A valid `Query` object.
-     * @param {Query=} negativeQry A valid `Query` object.
-     * @param {number=} negativeBoost A positive `double` value where `0 < n < 1`.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(positiveQry, negativeQry, negativeBoost) {
         super('boosting');
 

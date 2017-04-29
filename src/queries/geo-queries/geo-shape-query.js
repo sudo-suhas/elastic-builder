@@ -31,6 +31,8 @@ const invalidRelationParam = invalidParam(ES_REF_URL, 'relation', GEO_RELATION_S
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-query.html)
  *
+ * @param {string} field
+ *
  * @example
  * const geoQry = bob.geoShapeQuery('location')
  *  .shape(bob.geoShape()
@@ -47,11 +49,7 @@ const invalidRelationParam = invalidParam(ES_REF_URL, 'relation', GEO_RELATION_S
  *      .path('location'))
  */
 class GeoShapeQuery extends GeoQueryBase {
-    /**
-     * Creates an instance of `GeoShapeQuery`
-     *
-     * @param {string} field
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field) {
         super('geo_shape', field);
     }

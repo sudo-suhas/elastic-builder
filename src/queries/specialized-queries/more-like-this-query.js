@@ -41,9 +41,7 @@ const { Query, util: { checkType } } = require('../../core');
  * @extends Query
  */
 class MoreLikeThisQuery extends Query {
-    /**
-     * Creates an instance of `MoreLikeThisQuery`
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor() {
         super('more_like_this');
     }

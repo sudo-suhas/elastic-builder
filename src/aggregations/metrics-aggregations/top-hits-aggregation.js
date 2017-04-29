@@ -9,23 +9,21 @@ const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html';
 
 /**
- * A top_hits metric aggregator keeps track of the most relevant document being
+ * A `top_hits` metric aggregator keeps track of the most relevant document being
  * aggregated. This aggregator is intended to be used as a sub aggregator, so that
  * the top matching documents can be aggregated per bucket.
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html)
  *
- * top_hits metric aggregator keeps track of the most relevant document being
+ * `top_hits` metric aggregator keeps track of the most relevant document being
  * aggregated.
+ *
+ * @param {string} name The name which will be used to refer to this aggregation.
  *
  * @extends MetricsAggregationBase
  */
 class TopHitsAggregation extends MetricsAggregationBase {
-    /**
-     * Creates an instance of `TopHitsAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name) {
         super(name, 'top_hits');
     }

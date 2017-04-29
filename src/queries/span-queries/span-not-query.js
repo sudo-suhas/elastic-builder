@@ -24,9 +24,7 @@ const SpanQueryBase = require('./span-query-base');
  * @extends SpanQueryBase
  */
 class SpanNotQuery extends SpanQueryBase {
-    /**
-     * Creates an instance of `SpanNotQuery`
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor() {
         super('span_not');
     }

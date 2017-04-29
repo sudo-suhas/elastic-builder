@@ -72,7 +72,7 @@ const {
         scoreFunctions: {
             ScoreFunction,
             ScriptScoreFunction,
-            WeightFunction,
+            WeightScoreFunction,
             RandomScoreFunction,
             FieldValueFactorFunction,
             DecayScoreFunction
@@ -150,15 +150,6 @@ const {
 } = require('./aggregations');
 
 exports.RequestBodySearch = RequestBodySearch;
-
-// TODO: Deal with this
-/**
- * Creates an instance of `RequestBodySearch`
- *
- * @function
- *
- * @returns {RequestBodySearch} new instance.
- */
 exports.requestBodySearch = constructorWrapper(RequestBodySearch);
 
 /* ============ ============ ============ */
@@ -475,8 +466,8 @@ exports.scoreFunction = constructorWrapper(ScoreFunction);
 exports.ScriptScoreFunction = ScriptScoreFunction;
 exports.scriptScoreFunction = constructorWrapper(ScriptScoreFunction);
 
-exports.WeightFunction = WeightFunction; // Alias for ScoreFunction
-exports.weightFunction = constructorWrapper(WeightFunction); // Alias for ScoreFunction
+exports.WeightScoreFunction = WeightScoreFunction;
+exports.WeightScoreFunction = constructorWrapper(WeightScoreFunction);
 
 exports.RandomScoreFunction = RandomScoreFunction;
 exports.randomScoreFunction = constructorWrapper(RandomScoreFunction);

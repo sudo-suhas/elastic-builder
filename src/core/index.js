@@ -1,12 +1,5 @@
 'use strict';
 
-// TODO: Deal with this!
-/**
- * Core class modules
- *
- * @module elastic-builder/core
- */
-
 // Base classes
 
 exports.RequestBodySearch = require('./request-body-search');

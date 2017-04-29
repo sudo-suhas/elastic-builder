@@ -24,9 +24,7 @@ const SpanLittleBigQueryBase = require('./span-little-big-query-base');
  * @extends SpanLittleBigQueryBase
  */
 class SpanContainingQuery extends SpanLittleBigQueryBase {
-    /**
-     * Creates an instance of `SpanContainingQuery`
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor() {
         super('span_containing');
     }

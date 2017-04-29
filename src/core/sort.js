@@ -21,15 +21,13 @@ const invalidUnitParam = invalidParam(ES_REF_URL, 'unit', UNIT_SET);
  * Allows creating and configuring sort on specified field.
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html)
+ *
+ * @param {string} field The field to sort on
+ * @param {string=} order The `order` option can have the following values.
+ * `asc`, `desc` to sort in ascending, descending order respectively.
  */
 class Sort {
-    /**
-     * Creates an instance of `Sort`
-     *
-     * @param {string} field The field to sort on
-     * @param {string=} order The `order` option can have the following values.
-     * `asc`, `desc` to sort in ascending, descending order respectively.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field, order) {
         this._field = field;
 

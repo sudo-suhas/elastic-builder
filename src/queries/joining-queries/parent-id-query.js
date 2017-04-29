@@ -9,15 +9,13 @@ const { Query } = require('../../core');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-parent-id-query.html)
  *
+ * @param {string=} type The **child** type. This must be a type with `_parent` field.
+ * @param {string|number=} id The required parent id select documents must refer to.
+ *
  * @extends Query
  */
 class ParentIdQuery extends Query {
-    /**
-     * Creates an instance of `ParentIdQuery`
-     *
-     * @param {string=} type The **child** type. This must be a type with `_parent` field.
-     * @param {string|number=} id The required parent id select documents must refer to.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(type, id) {
         super('parent_id');
 

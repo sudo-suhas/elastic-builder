@@ -23,15 +23,13 @@ const invalidDistanceTypeParam = invalidParam(ES_REF_URL, 'distance_type', "'pla
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geodistance-aggregation.html)
  *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string=} field The field to aggregate on
+ *
  * @extends RangeAggregationBase
  */
 class GeoDistanceAggregation extends RangeAggregationBase {
-    /**
-     * Creates an instance of `GeoDistanceAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string=} field The field to aggregate on
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, field) {
         super(name, 'geo_distance', field);
     }

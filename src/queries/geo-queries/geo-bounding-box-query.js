@@ -16,6 +16,8 @@ const invalidTypeParam = invalidParam(ES_REF_URL, 'type', "'memory' or 'indexed'
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-bounding-box-query.html)
  *
+ * @param {string=} field
+ *
  * @example
  * const geoQry = bob.geoBoundingBoxQuery('pin.location')
  *  .topLeft(bob.geoPoint().string('dr5r9ydj2y73'))
@@ -32,11 +34,7 @@ const invalidTypeParam = invalidParam(ES_REF_URL, 'type', "'memory' or 'indexed'
  *  .type('indexed');
  */
 class GeoBoundingBoxQuery extends GeoQueryBase {
-    /**
-     * Creates an instance of `GeoBoundingBoxQuery`
-     *
-     * @param {string=} field
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field) {
         super('geo_bounding_box', field);
     }

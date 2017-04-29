@@ -24,9 +24,7 @@ const SpanLittleBigQueryBase = require('./span-little-big-query-base');
  * @extends SpanLittleBigQueryBase
  */
 class SpanWithinQuery extends SpanLittleBigQueryBase {
-    /**
-     * Creates an instance of `SpanWithinQuery`
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor() {
         super('span_within');
     }

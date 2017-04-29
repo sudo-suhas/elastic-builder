@@ -9,14 +9,12 @@ const { Query } = require('../../core');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html)
  *
+ * @param {string=} field
+ *
  * @extends Query
  */
 class ExistsQuery extends Query {
-    /**
-     * Creates an instance of `ExistsQuery`.
-     *
-     * @param {string=} field
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field) {
         super('exists');
 

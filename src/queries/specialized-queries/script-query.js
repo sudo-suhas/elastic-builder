@@ -9,6 +9,8 @@ const { Query, Script, util: { checkType } } = require('../../core');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-script-query.html)
  *
+ * @param {Script=} script
+ *
  * @example
  * const scriptQry = bob.scriptQuery(bob.script()
  *  .lang('painless')
@@ -17,11 +19,7 @@ const { Query, Script, util: { checkType } } = require('../../core');
  * @extends Query
  */
 class ScriptQuery extends Query {
-    /**
-     * Creates an instance of `ScriptQuery`
-     *
-     * @param {Script=} script
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(script) {
         super('script');
 

@@ -9,14 +9,12 @@ const { Query } = require('../../core');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-type-query.html)
  *
+ * @param {string} type The elasticsearch doc type
+ *
  * @extends Query
  */
 class TypeQuery extends Query {
-    /**
-     * Creates an instance of `TypeQuery`.
-     *
-     * @param {string} type The elasticsearch doc type
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(type) {
         super('type');
 

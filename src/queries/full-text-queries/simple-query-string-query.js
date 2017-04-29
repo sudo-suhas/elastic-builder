@@ -12,14 +12,12 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html)
  *
+ * @param {string=} queryString The query string
+ *
  * @extends QueryStringQueryBase
  */
 class SimpleQueryStringQuery extends QueryStringQueryBase {
-    /**
-     * Creates an instance of `SimpleQueryStringQuery`
-     *
-     * @param {string=} queryString The query string
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(queryString) {
         super('simple_query_string', ES_REF_URL, queryString);
     }

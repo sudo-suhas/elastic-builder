@@ -8,6 +8,13 @@ const { Query } = require('../../core');
  * The `FullTextQueryBase` provides support for common options used across
  * various full text query implementations.
  *
+ * **NOTE:** Instantiating this directly should not be required.
+ * However, if you wish to add a custom implementation for whatever reason,
+ * this class could be extended.
+ *
+ * @param {string} queryType
+ * @param {string=} queryString The query string
+ *
  * @extends Query
  */
 class FullTextQueryBase extends Query {
@@ -18,12 +25,7 @@ class FullTextQueryBase extends Query {
         query - applicable on all
     */
 
-    /**
-     * Creates and instance of `FullTextQueryBase`
-     *
-     * @param {string} queryType
-     * @param {string=} queryString The query string
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(queryType, queryString) {
         super(queryType);
 

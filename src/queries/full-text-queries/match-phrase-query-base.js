@@ -6,17 +6,19 @@ const MonoFieldQueryBase = require('./mono-field-query-base');
  * The `MatchPhraseQueryBase` provides support for common options used across
  * various bucket match phrase query implementations.
  *
+ * **NOTE:** Instantiating this directly should not be required.
+ * However, if you wish to add a custom implementation for whatever reason,
+ * this class could be extended.
+ *
+ * @param {string} queryType
+ * @param {string} refUrl
+ * @param {string=} field The document field to query against
+ * @param {string=} queryString The query string
+ *
  * @extends MonoFieldQueryBase
  */
 class MatchPhraseQueryBase extends MonoFieldQueryBase {
-    /**
-     * Creates an instance of `MatchPhraseQueryBase`
-     *
-     * @param {string} queryType
-     * @param {string} refUrl
-     * @param {string=} field The document field to query against
-     * @param {string=} queryString The query string
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(queryType, refUrl, field, queryString) {
         super(queryType, field, queryString);
 

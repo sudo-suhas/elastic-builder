@@ -10,15 +10,13 @@ const { Query, util: { checkType } } = require('../../core');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html)
  *
+ * @param {Array|string=} type The elasticsearch doc type
+ * @param {Array=} ids List of ids to fiter on.
+ *
  * @extends Query
  */
 class IdsQuery extends Query {
-    /**
-     * Creates an instance of `IdsQuery`.
-     *
-     * @param {Array|string=} type The elasticsearch doc type
-     * @param {Array=} ids List of ids to fiter on.
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(type, ids) {
         super('ids');
 

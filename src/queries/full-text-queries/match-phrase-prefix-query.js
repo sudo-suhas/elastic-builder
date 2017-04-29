@@ -8,15 +8,13 @@ const ES_REF_URL =
 /**
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase-prefix.html)
  *
+ * @param {string=} field The document field to query against
+ * @param {string=} queryString The query string
+ *
  * @extends MatchPhraseQueryBase
  */
 class MatchPhrasePrefixQuery extends MatchPhraseQueryBase {
-    /**
-     * Creates an instance of `MatchPhrasePrefixQuery`
-     *
-     * @param {string=} field The document field to query against
-     * @param {string=} queryString The query string
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field, queryString) {
         super('match_phrase_prefix', ES_REF_URL, field, queryString);
     }

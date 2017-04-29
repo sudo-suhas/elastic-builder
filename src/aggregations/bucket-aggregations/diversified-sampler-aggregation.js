@@ -18,15 +18,13 @@ const invalidExecutionHintParam = invalidParam(ES_REF_URL, 'execution_hint', EXE
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-diversified-sampler-aggregation.html)
  *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string=} field The field to aggregate on
+ *
  * @extends BucketAggregationBase
  */
 class DiversifiedSamplerAggregation extends BucketAggregationBase {
-    /**
-     * Creates an instance of `DiversifiedSamplerAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string=} field The field to aggregate on
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, field) {
         super(name, 'diversified_sampler', field);
     }

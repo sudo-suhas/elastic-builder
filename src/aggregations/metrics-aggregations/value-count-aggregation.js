@@ -17,15 +17,13 @@ const ES_REF_URL =
  * Aggregation that counts the number of values that are extracted from the
  * aggregated documents.
  *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string=} field The field to aggregate on
+ *
  * @extends MetricsAggregationBase
  */
 class ValueCountAggregation extends MetricsAggregationBase {
-    /**
-     * Creates an instance of `ValueCountAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string=} field The field to aggregate on
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, field) {
         super(name, 'value_count', field);
     }

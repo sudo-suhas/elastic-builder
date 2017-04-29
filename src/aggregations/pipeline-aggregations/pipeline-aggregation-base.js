@@ -15,17 +15,19 @@ const invalidGapPolicyParam = invalidParam('', 'gap_policy', "'skip' or 'insert_
  * aggregations to be chained. For example, you can chain together two derivatives
  * to calculate the second derivative (i.e. a derivative of a derivative).
  *
+ * **NOTE:** Instantiating this directly should not be required.
+ * However, if you wish to add a custom implementation for whatever reason,
+ * this class could be extended.
+ *
+ * @param {string} name a valid aggregation name
+ * @param {string} aggType type of aggregation
+ * @param {string} refUrl Elasticsearch reference URL
+ * @param {string|Object=} bucketsPath The relative path of metric to aggregate over
+ *
  * @extends Aggregation
  */
 class PipelineAggregationBase extends Aggregation {
-    /**
-     * Creates an instance of `PipelineAggregationBase`
-     *
-     * @param {string} name a valid aggregation name
-     * @param {string} aggType type of aggregation
-     * @param {string} refUrl Elasticsearch reference URL
-     * @param {string|Object=} bucketsPath The relative path of metric to aggregate over
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, aggType, refUrl, bucketsPath) {
         super(name, aggType);
 

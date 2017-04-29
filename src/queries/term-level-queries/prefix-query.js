@@ -11,18 +11,16 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html)
  *
+ * @param {string=} field
+ * @param {string|number=} value
+ *
  * @example
  * const prefixQry = bob.prefixQuery('user', 'ki');
  *
  * @extends MultiTermQueryBase
  */
 class PrefixQuery extends MultiTermQueryBase {
-    /**
-     * Creates an instance of `PrefixQuery`.
-     *
-     * @param {string=} field
-     * @param {string|number=} value
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(field, value) {
         super('prefix', field, value);
     }
