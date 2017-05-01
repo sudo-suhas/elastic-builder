@@ -18,6 +18,21 @@ const { checkType, recursiveToJSON } = require('./util');
  * The `RequestBodySearch` object provides methods generating an elasticsearch
  * search request body. The search request can be executed with a search DSL,
  * which includes the Query DSL, within its body.
+ *
+ * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
+ *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .query(bob.termQuery('user', 'kimchy'))
+ *     .from(0)
+ *     .size(10);
+ *
+ * reqBody.toJSON();
+ * {
+ *   "query": { "term": { "user": "kimchy" } },
+ *   "from": 0,
+ *   "size": 10
+ * }
  */
 class RequestBodySearch {
     // eslint-disable-next-line require-jsdoc
@@ -125,6 +140,17 @@ class RequestBodySearch {
      * The sort is defined on a per field level, with special field name for `_score` to
      * sort by score, and `_doc` to sort by index order.
      *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.termQuery('user', 'kimchy'))
+     *     .sort(bob.sort('post_date', 'asc'))
+     *     .sort(bob.sort('user'))
+     *     .sorts([
+     *         bob.sort('name', 'desc'),
+     *         bob.sort('age', 'desc'),
+     *         bob.sort('_score')
+     *     ]);
+     *
      * @param {Sort} sort
      * @returns {RequestBodySearch} returns `this` so that calls can be chained.
      * @throws {TypeError} If parameter `sort` is not an instance of `Sort`.
@@ -142,6 +168,17 @@ class RequestBodySearch {
      * The sort is defined on a per field level, with special field name for _score to
      * sort by score, and _doc to sort by index order.
      *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.termQuery('user', 'kimchy'))
+     *     .sort(bob.sort('post_date', 'asc'))
+     *     .sort(bob.sort('user'))
+     *     .sorts([
+     *         bob.sort('name', 'desc'),
+     *         bob.sort('age', 'desc'),
+     *         bob.sort('_score')
+     *     ]);
+     *
      * @param {Array<Sort>} sorts Arry of sort
      * @returns {RequestBodySearch} returns `this` so that calls can be chained.
      * @throws {TypeError} If any item in parameter `sorts` is not an instance of `Sort`.
@@ -154,6 +191,17 @@ class RequestBodySearch {
     /**
      * When sorting on a field, scores are not computed. By setting `track_scores` to true,
      * scores will still be computed and tracked.
+     *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .trackScores(true)
+     *     .sorts([
+     *         bob.sort('post_date', 'desc'),
+     *         bob.sort('name', 'desc'),
+     *         bob.sort('age', 'desc')
+     *     ])
+     *     .query(bob.termQuery('user', 'kimchy'));
+
      *
      * @param {boolean} enable
      * @returns {RequestBodySearch} returns `this` so that calls can be chained
@@ -170,6 +218,33 @@ class RequestBodySearch {
      * what parts of the `_source` should be returned
      * An object can also be used to specify the wildcard patterns for `includes` and `excludes`.
      *
+     * @example
+     * // To disable `_source` retrieval set to `false`:
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.termQuery('user', 'kimchy'))
+     *     .source(false);
+     *
+     * @example
+     * // The `_source` also accepts one or more wildcard patterns to control what
+     * // parts of the `_source` should be returned:
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.termQuery('user', 'kimchy'))
+     *     .source('obj.*');
+     *
+     * // OR
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.termQuery('user', 'kimchy'))
+     *     .source([ 'obj1.*', 'obj2.*' ]);
+     *
+     * @example
+     * // For complete control, you can specify both `includes` and `excludes` patterns:
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.termQuery('user', 'kimchy'))
+     *     .source({
+     *         'includes': [ 'obj1.*', 'obj2.*' ],
+     *         'excludes': [ '*.description' ]
+     *     });
+     *
      * @param {boolean|string|Array|Object} source
      * @returns {RequestBodySearch} returns `this` so that calls can be chained
      */
@@ -179,11 +254,29 @@ class RequestBodySearch {
     }
 
     /**
-     * The stored_fields parameter is about fields that are explicitly marked as stored in the mapping.
+     * The `stored_fields` parameter is about fields that are explicitly marked as stored in the mapping.
      * Selectively load specific stored fields for each document represented by a search hit
      * using array of stored fields.
-     * An empty array will cause only the _id and _type for each hit to be returned.
-     * To disable the stored fields (and metadata fields) entirely use: '_none_'
+     * An empty array will cause only the `_id` and `_type` for each hit to be returned.
+     * To disable the stored fields (and metadata fields) entirely use: `_none_`
+     *
+     * @example
+     * // Selectively load specific stored fields for each document represented by a search hit
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.termQuery('user', 'kimchy'))
+     *     .storedFields(['user', 'postDate']);
+     *
+     * @example
+     * // Return only the `_id` and `_type` to be returned:
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.termQuery('user', 'kimchy'))
+     *     .storedFields([]);
+     *
+     * @example
+     * // Disable the stored fields (and metadata fields) entirely
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.termQuery('user', 'kimchy'))
+     *     .storedFields('_none_');
      *
      * @param {Array|string} fields
      * @returns {RequestBodySearch} returns `this` so that calls can be chained
@@ -195,6 +288,27 @@ class RequestBodySearch {
 
     /**
      * Computes a document property dynamically based on the supplied `Script`.
+     *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.matchAllQuery())
+     *     .scriptField(
+     *         'test1',
+     *         bob.script('inline', "doc['my_field_name'].value * 2").lang('painless')
+     *     )
+     *     .scriptField(
+     *         'test2',
+     *         bob.script('inline', "doc['my_field_name'].value * factor")
+     *             .lang('painless')
+     *             .params({ factor: 2.0 })
+     *     );
+     *
+     * @example
+     * // Script fields can also access the actual `_source` document and extract
+     * // specific elements to be returned from it by using `params['_source']`.
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.matchAllQuery())
+     *     .scriptField('test1', "params['_source']['message']");
      *
      * @param {string} scriptFieldName
      * @param {string|Script} script string or instance of `Script`
@@ -212,6 +326,25 @@ class RequestBodySearch {
      *
      * Object should have `scriptFieldName` as key and `script` as the value.
      *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.matchAllQuery())
+     *     .scriptFields({
+     *         test1: bob
+     *             .script('inline', "doc['my_field_name'].value * 2")
+     *             .lang('painless'),
+     *         test2: bob
+     *             .script('inline', "doc['my_field_name'].value * factor")
+     *             .lang('painless')
+     *             .params({ factor: 2.0 })
+     *     });
+     *
+     * @example
+     * // Script fields can also access the actual `_source` document and extract
+     * // specific elements to be returned from it by using `params['_source']`.
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.matchAllQuery())
+     *     .scriptFields({ test1: "params['_source']['message']" });
      * @param {Object} scriptFields Object with `scriptFieldName` as key and `script` as the value.
      * @returns {TopHitsAggregation} returns `this` so that calls can be chained
      */
@@ -229,6 +362,11 @@ class RequestBodySearch {
      * Allows to return the doc value representation of a field for each hit.
      * Doc value fields can work on fields that are not stored.
      *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.matchAllQuery())
+     *     .docvalueFields(['test1', 'test2']);
+     *
      * @param {Array} fields
      * @returns {RequestBodySearch} returns `this` so that calls can be chained
      */
@@ -240,6 +378,18 @@ class RequestBodySearch {
     /**
      * The `post_filter` is applied to the search hits at the very end of a search request,
      * after aggregations have already been calculated.
+     *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.boolQuery().filter(bob.termQuery('brand', 'gucci')))
+     *     .agg(bob.termsAggregation('colors', 'color'))
+     *     .agg(
+     *         bob.filterAggregation(
+     *             'color_red',
+     *             bob.termQuery('color', 'red')
+     *         ).agg(bob.termsAggregation('models', 'model'))
+     *     )
+     *     .postFilter(bob.termQuery('color', 'red'));
      *
      * @param {Query} filterQuery The filter to be applied after aggregation.
      * @returns {RequestBodySearch} returns `this` so that calls can be chained
@@ -255,6 +405,11 @@ class RequestBodySearch {
      * Allows to highlight search results on one or more fields. The implementation
      * uses either the lucene `plain` highlighter, the fast vector highlighter (`fvh`)
      * or `postings` highlighter.
+     *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.matchAllQuery())
+     *     .highlight(bob.highlight('content'));
      *
      * @param {Highlight} highlight
      * @returns {RequestBodySearch} returns `this` so that calls can be chained

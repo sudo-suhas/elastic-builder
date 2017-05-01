@@ -22,6 +22,11 @@ const invalidUnitParam = invalidParam(ES_REF_URL, 'unit', UNIT_SET);
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html)
  *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .query(bob.termQuery('user', 'kimchy'))
+ *     .sort(bob.sort('post_date', 'asc'))
+ *
  * @param {string} field The field to sort on
  * @param {string=} order The `order` option can have the following values.
  * `asc`, `desc` to sort in ascending, descending order respectively.

@@ -31,6 +31,35 @@ const invalidFragmenterParam = invalidParam(ES_REF_URL, 'fragmenter', "'simple' 
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html)
  *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .query(bob.matchAllQuery())
+ *     .highlight(bob.highlight('content'));
+ *
+ * @example
+ * const highlight = bob.highlight()
+ *     .numberOfFragments(3)
+ *     .fragmentSize(150)
+ *     .fields(['_all', 'bio.title', 'bio.author', 'bio.content'])
+ *     .preTags('<em>', '_all')
+ *     .postTags('</em>', '_all')
+ *     .numberOfFragments(0, 'bio.title')
+ *     .numberOfFragments(0, 'bio.author')
+ *     .numberOfFragments(5, 'bio.content')
+ *     .scoreOrder('bio.content');
+ *
+ * highlight.toJSON()
+ * {
+ *     "number_of_fragments" : 3,
+ *     "fragment_size" : 150,
+ *     "fields" : {
+ *         "_all" : { "pre_tags" : ["<em>"], "post_tags" : ["</em>"] },
+ *         "bio.title" : { "number_of_fragments" : 0 },
+ *         "bio.author" : { "number_of_fragments" : 0 },
+ *         "bio.content" : { "number_of_fragments" : 5, "order" : "score" }
+ *     }
+ *  }
+ *
  * @param {String|Array=} fields An optional field or array of fields to highlight.
  */
 class Highlight {
@@ -98,6 +127,16 @@ class Highlight {
      * Sets the pre tags for highlighted fragments. You can apply the
      * tags to a specific field by passing the optional field name parameter.
      *
+     * @example
+     * const highlight = bob.highlight('_all')
+     *     .preTags('<tag1>')
+     *     .postTags('</tag1>');
+     *
+     * @example
+     * const highlight = bob.highlight('_all')
+     *     .preTags(['<tag1>', '<tag2>'])
+     *     .postTags(['</tag1>', '</tag2>']);
+     *
      * @param {string|Array} tags
      * @param {string=} field
      * @returns {Highlight} returns `this` so that calls can be chained
@@ -110,6 +149,16 @@ class Highlight {
     /**
      * Sets the post tags for highlighted fragments. You can apply the
      * tags to a specific field by passing the optional field name parameter.
+     *
+     * @example
+     * const highlight = bob.highlight('_all')
+     *     .preTags('<tag1>')
+     *     .postTags('</tag1>');
+     *
+     * @example
+     * const highlight = bob.highlight('_all')
+     *     .preTags(['<tag1>', '<tag2>'])
+     *     .postTags(['</tag1>', '</tag2>']);
      *
      * @param {string|Array} tags
      * @param {string=} field
@@ -125,6 +174,9 @@ class Highlight {
      *
      * styled - 10 `<em>` pre tags with css class of hltN, where N is 1-10
      *
+     * @example
+     * const highlight = bob.highlight('content').styledTagsSchema();
+     *
      * @returns {Highlight} returns `this` so that calls can be chained
      */
     styledTagsSchema() {
@@ -138,12 +190,15 @@ class Highlight {
      * Sets the order of highlight fragments to be sorted by score. You can apply the
      * score order to a specific field by passing the optional field name parameter.
      *
+     * @example
+     * const highlight = bob.highlight('content').scoreOrder()
+     *
      * @param {string=} field An optional field name
      * @returns {Highlight} returns `this` so that calls can be chained
      */
     scoreOrder(field) {
         // This is a special case as it does not map directly to elasticsearch DSL
-        // This is written this way for ease of use
+        // It is written this way for ease of use
         this._setFieldOption(field, 'order', 'score');
         return this;
     }
@@ -151,6 +206,11 @@ class Highlight {
     /**
      * Sets the size of each highlight fragment in characters. You can apply the
      * option to a specific field by passing the optional field name parameter.
+     *
+     * @example
+     * const highlight = bob.highlight('content')
+     *     .fragmentSize(150, 'content')
+     *     .numberOfFragments(3, 'content');
      *
      * @param {number} size The fragment size in characters. Defaults to 100.
      * @param {string=} field An optional field name
@@ -164,6 +224,15 @@ class Highlight {
      * Sets the maximum number of fragments to return. You can apply the
      * option to a specific field by passing the optional field name parameter.
      *
+     * @example
+     * const highlight = bob.highlight('content')
+     *     .fragmentSize(150, 'content')
+     *     .numberOfFragments(3, 'content');
+     *
+     * @example
+     * const highlight = bob.highlight(['_all', 'bio.title'])
+     *     .numberOfFragments(0, 'bio.title');
+     *
      * @param {number} count The maximum number of fragments to return
      * @param {string=} field An optional field name
      * @returns {Highlight} returns `this` so that calls can be chained
@@ -174,9 +243,47 @@ class Highlight {
     }
 
     /**
+     * If `no_match_size` is set, in the case where there is no matching fragment
+     * to highlight, a snippet of text, with the specified length, from the beginning
+     * of the field will be returned.
+     *
+     * The actual length may be shorter than specified as it tries to break on a word boundary.
+     *
+     * Default is `0`.
+     *
+     * @example
+     * const highlight = bob.highlight('content')
+     *     .fragmentSize(150, 'content')
+     *     .numberOfFragments(3, 'content')
+     *     .noMatchSize(150, 'content');
+     *
+     * @param {number} size
+     * @param {string} field
+     * @returns {Highlight} returns `this` so that calls can be chained
+     */
+    noMatchSize(size, field) {
+        this._setFieldOption(field, 'no_match_size', size);
+        return this;
+    }
+
+    /**
      * Highlight against a query other than the search query.
      * Useful if you use a rescore query because those
      * are not taken into account by highlighting by default.
+     *
+     * @example
+     * const highlight = bob.highlight('content')
+     *     .fragmentSize(150, 'content')
+     *     .numberOfFragments(3, 'content')
+     *     .highlightQuery(
+     *         bob.boolQuery()
+     *             .must(bob.matchQuery('content', 'foo bar'))
+     *             .should(
+     *                 bob.matchPhraseQuery('content', 'foo bar').slop(1).boost(10)
+     *             )
+     *             .minimumShouldMatch(0),
+     *         'content'
+     *     );
      *
      * @param {Query} query
      * @param {string=} field An optional field name
@@ -193,7 +300,23 @@ class Highlight {
     /**
      * Combine matches on multiple fields to highlight a single field.
      * Useful for multifields that analyze the same string in different ways.
-     * Sets the highlight type to Fast Vector Highlighter(fvh).
+     * Sets the highlight type to Fast Vector Highlighter(`fvh`).
+     *
+     * @example
+     * const highlight = new bob.Highlight('content')
+     *     .scoreOrder('content')
+     *     .matchedFields(['content', 'content.plain'], 'content');
+     *
+     * highlight.toJSON();
+     * {
+     *     "order": "score",
+     *     "fields": {
+     *         "content": {
+     *             "matched_fields": ["content", "content.plain"],
+     *             "type" : "fvh"
+     *         }
+     *     }
+     * }
      *
      * @param {Array} fields
      * @param {string} field Field name
@@ -255,6 +378,12 @@ class Highlight {
      * the query matched specifically on them. You can apply the
      * option to a specific field by passing the optional field name parameter.
      *
+     * @example
+     * const highlight = bob.highlight('_all')
+     *     .preTags('<em>', '_all')
+     *     .postTags('</em>', '_all')
+     *     .requireFieldMatch(false);
+     *
      * @param {boolean} requireFieldMatch
      * @param {string=} field An optional field name
      * @returns {Highlight} returns `this` so that calls can be chained
@@ -298,6 +427,9 @@ class Highlight {
      * the plain highlighter on a field that has term_vectors enabled.
      * You can apply the option to a specific field by passing the optional field name parameter.
      *
+     * @example
+     * const highlight = bob.highlight('content').type('plain', 'content');
+     *
      * @param {string} type The allowed values are: `plain`, `postings` and `fvh`.
      * @param {string=} field An optional field name
      * @returns {Highlight} returns `this` so that calls can be chained
@@ -319,6 +451,9 @@ class Highlight {
      * Forces the highlighting to highlight fields based on the source
      * even if fields are stored separately. Defaults to false.
      *
+     * @example
+     * const highlight = bob.highlight('content').forceSource(true, 'content');
+     *
      * @param {boolean} forceSource
      * @param {string=} field An optional field name
      * @returns {Highlight} returns `this` so that calls can be chained
@@ -336,6 +471,12 @@ class Highlight {
      *      over spotting sentence boundaries.
      *  - `span` - breaks text up into same-size fragments but does not split
      *      up Spans.
+     *
+     * @example
+     * const highlight = bob.highlight('message')
+     *     .fragmentSize(15, 'message')
+     *     .numberOfFragments(3, 'message')
+     *     .fragmenter('simple', 'message');
      *
      * @param {string} fragmenter The fragmenter.
      * @param {string=} field An optional field name

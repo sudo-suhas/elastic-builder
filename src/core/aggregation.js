@@ -9,7 +9,7 @@ const { checkType, recursiveToJSON } = require('./util');
  *
  * **NOTE:** Instantiating this directly should not be required.
  * However, if you wish to add a custom implementation for whatever reason,
- * this class should be extended and used as validation against the class
+ * this class should be extended and used, as validation against the class
  * type is present in various places.
  *
  * @param {string} name
