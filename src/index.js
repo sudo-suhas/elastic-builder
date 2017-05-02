@@ -2,30 +2,6 @@
 
 'use strict';
 
-/*
-    DON'T LOOK AT ME!!! I AM HIDEOUS :-{ I USED TO BE SHORT AND CONSISE
-
-    const aggregations = require('./aggregations'),
-        queries = require('./queries'),
-        scriptTypes = require('./script-types'),
-        { Highlight, GeoPoint, util: { constructorWrapper } } = require('./core');
-
-    // The builder
-    const bob = {
-        Highlight,
-        highlight: constructorWrapper(Highlight),
-        GeoPoint,
-        geoPoint: constructorWrapper(GeoPoint)
-    };
-
-    Object.assign(bob, aggregations, queries, scriptTypes);
-
-    module.exports = bob;
-
-    BUT THEN IDE WAS LIKE 'I HAVE NO IDEA WHAT YOU ARE TALKING ABOUT'
-    SO I ENDED UP LIKE THIS. OH IDE.. THE THINGS I DO FOR YOU...
-*/
-
 const {
     RequestBodySearch,
     Highlight,
@@ -148,6 +124,8 @@ const {
     },
     matrixAggregations: { MatrixStatsAggregation }
 } = require('./aggregations');
+
+const recipes = require('./recipes');
 
 exports.RequestBodySearch = RequestBodySearch;
 exports.requestBodySearch = constructorWrapper(RequestBodySearch);
@@ -479,7 +457,37 @@ exports.DecayScoreFunction = DecayScoreFunction;
 exports.decayScoreFunction = constructorWrapper(DecayScoreFunction);
 
 /* ============ ============ ============ */
-/* ============ Miscellaneous ===========  */
+/* ============== Recipes =============== */
+/* ============ ============ ============ */
+
+/**
+ * Helper recipes for common query use cases.
+ *
+ * If you have any recipes, please do share or better yet, create a [pull request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
+ *
+ * Recipes:
+ * - [`missingQuery`](/#missingquery)
+ * - [`randomSortQuery`](/#randomsortquery)
+ * - [`filterQuery`](/#filterquery)
+ *
+ * These can be accessed under the `recipes` namespace or
+ * using the `cook[Recipe Name]` alias for ease of use.
+ *
+ * @example
+ * // `recipes` namespace
+ * const qry = bob.recipes.missingQuery('user');
+ *
+ * @example
+ * // `cookMissingQuery` alias
+ * const qry = bob.cookMissingQuery('user');
+ */
+exports.recipes = recipes;
+exports.cookMissingQuery = recipes.missingQuery;
+exports.cookRandomSortQuery = recipes.randomSortQuery;
+exports.cookFilterQuery = recipes.filterQuery;
+
+/* ============ ============ ============ */
+/* ============ Miscellaneous =========== */
 /* ============ ============ ============ */
 exports.Highlight = Highlight;
 exports.highlight = constructorWrapper(Highlight);
@@ -505,12 +513,6 @@ exports.rescore = constructorWrapper(Rescore);
 exports.InnerHits = InnerHits;
 exports.innerHits = constructorWrapper(InnerHits);
 
-/**
- * Utility function to pretty print objects to console.
- * To be used in development.
- *
- * @param {Object} obj
- */
 exports.prettyPrint = function prettyPrint(obj) {
     console.log(JSON.stringify(obj, null, 2));
 };

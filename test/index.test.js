@@ -343,6 +343,14 @@ test('misc are exported', t => {
     /* ============ ============ ============ */
     /* ============ Miscellaneous ===========  */
     /* ============ ============ ============ */
+    t.truthy(bob.recipes);
+    t.truthy(bob.recipes.missingQuery);
+    t.truthy(bob.recipes.randomSortQuery);
+    t.truthy(bob.recipes.filterQuery);
+    t.truthy(bob.cookMissingQuery);
+    t.truthy(bob.cookRandomSortQuery);
+    t.truthy(bob.cookFilterQuery);
+
     t.truthy(bob.Highlight);
     t.truthy(bob.highlight);
 

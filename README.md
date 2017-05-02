@@ -80,6 +80,29 @@ It is being hosted with help from this awesome project - https://github.com/js-o
 
 Documentation is a WIP. See [roadmap](roadmap.md).
 
+## Recipes
+The library has a few helper recipes:
+- [Missing query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html#_literal_missing_literal_query)
+- [Random sort query](https://www.elastic.co/guide/en/elasticsearch/reference/5.3/query-dsl-function-score-query.html#function-random)
+- [Filter query](https://www.elastic.co/guide/en/elasticsearch/reference/5.3/query-dsl-bool-query.html)
+
+```js
+const qry = bob.cookMissingQuery('user');
+
+qry.toJSON();
+{
+  "bool": {
+    "must_not": {
+      "exists": { "field": "user" }
+    }
+  }
+}
+```
+
+Check out the [docs](http://elastic-builder.js.org/docs#recipes) for more examples.
+
+If you have any recipes, please do share or better yet, create a [pull request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/) :smile:.
+
 ## Examples
 
 ```js
