@@ -1,0 +1,18 @@
+{
+  "verbose": true,
+  "buildCommand": "npm run build",
+  "requireCleanWorkingDir": true,
+  "src": {
+    "tagName": "v%s",
+    "beforeStartCommand": "npm run check"
+  },
+  "dist": {
+    "baseDir": false
+  },
+  "github": {
+    "release": true
+  },
+  "npm": {
+    "publish": true
+  }
+}
