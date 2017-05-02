@@ -42,6 +42,7 @@ test('sets source(obj) option', setsOption, 'source', {
     },
     keyName: '_source'
 });
+test(setsOption, 'storedFields', { param: ['comments.text'], spread: false });
 test(setsOption, 'scriptField', {
     param: ['test1', scriptA],
     propValue: { test1: { script: scriptA } },

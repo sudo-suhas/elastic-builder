@@ -139,6 +139,17 @@ class InnerHits {
     }
 
     /**
+     * Include specific stored fields
+     *
+     * @param {Array|string} fields
+     * @returns {RequestBodySearch} returns `this` so that calls can be chained
+     */
+    storedFields(fields) {
+        this._body.stored_fields = fields;
+        return this;
+    }
+
+    /**
      * Computes a document property dynamically based on the supplied `Script`.
      *
      * @param {string} scriptFieldName
