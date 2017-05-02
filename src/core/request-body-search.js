@@ -261,7 +261,8 @@ class RequestBodySearch {
      * To disable the stored fields (and metadata fields) entirely use: `_none_`
      *
      * @example
-     * // Selectively load specific stored fields for each document represented by a search hit
+     * // Selectively load specific stored fields for each document
+     * // represented by a search hit
      * const reqBody = bob.requestBodySearch()
      *     .query(bob.termQuery('user', 'kimchy'))
      *     .storedFields(['user', 'postDate']);
@@ -427,6 +428,40 @@ class RequestBodySearch {
      * (usually more costly) algorithm, instead of applying the costly algorithm to
      * all documents in the index.
      *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.matchQuery('message', 'the quick brown').operator('or'))
+     *     .rescore(
+     *         bob.rescore(
+     *             50,
+     *             bob.matchPhraseQuery('message', 'the quick brown').slop(2)
+     *         )
+     *             .queryWeight(0.7)
+     *             .rescoreQueryWeight(1.2)
+     *     );
+     *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.matchQuery('message', 'the quick brown').operator('or'))
+     *     .rescore(
+     *         bob.rescore(
+     *             100,
+     *             bob.matchPhraseQuery('message', 'the quick brown').slop(2)
+     *         )
+     *             .queryWeight(0.7)
+     *             .rescoreQueryWeight(1.2)
+     *     )
+     *     .rescore(
+     *         bob.rescore(
+     *             10,
+     *             bob.functionScoreQuery().function(
+     *                 bob.scriptScoreFunction(
+     *                     bob.script('inline', 'Math.log10(doc.likes.value + 2)')
+     *                 )
+     *             )
+     *         ).scoreMode('multiply')
+     *     );
+     *
      * @param {Rescore} rescore
      * @returns {RequestBodySearch} returns `this` so that calls can be chained
      * @throws {TypeError} If `query` is not an instance of `Rescore`
@@ -451,6 +486,11 @@ class RequestBodySearch {
     /**
      * Enables explanation for each hit on how its score was computed.
      *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.termQuery('user', 'kimchy'))
+     *     .explain(true);
+     *
      * @param {boolean} enable
      * @returns {RequestBodySearch} returns `this` so that calls can be chained
      */
@@ -461,6 +501,12 @@ class RequestBodySearch {
 
     /**
      * Returns a version for each search hit.
+     *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.termQuery('user', 'kimchy'))
+     *     .version(true);
+     *
      * @param {boolean} enable
      * @returns {RequestBodySearch} returns `this` so that calls can be chained.
      */
@@ -476,6 +522,11 @@ class RequestBodySearch {
      *
      * Alias for method `indicesBoost`.
      *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .indexBoost('alias1', 1.4)
+     *     .indexBoost('index*', 1.3);
+     *
      * @param {string} index Index windcard expression or alias
      * @param {number} boost
      * @returns {RequestBodySearch} returns `this` so that calls can be chained.
@@ -488,6 +539,11 @@ class RequestBodySearch {
      * Allows to configure different boost level per index when searching across
      * more than one indices. This is very handy when hits coming from one index
      * matter more than hits coming from another index.
+     *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .indicesBoost('alias1', 1.4)
+     *     .indicesBoost('index*', 1.3);
      *
      * @param {string} index Index windcard expression or alias
      * @param {number} boost
@@ -505,6 +561,11 @@ class RequestBodySearch {
     /**
      * Exclude documents which have a `_score` less than the minimum specified in `min_score`.
      *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.termQuery('user', 'kimchy'))
+     *     .minScore(0.5);
+     *
      * @param {number} score
      * @returns {RequestBodySearch} returns `this` so that calls can be chained.
      */
@@ -519,6 +580,27 @@ class RequestBodySearch {
      *
      * The field used for collapsing must be a single valued `keyword` or `numeric`
      * field with `doc_values` activated
+     *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.matchQuery('message', 'elasticsearch'))
+     *     .collapse('user')
+     *     .sort(bob.sort('likes'))
+     *     .from(10);
+     *
+     * @example
+     * // Wxpand each collapsed top hits with the `inner_hits` option:
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.matchQuery('message', 'elasticsearch'))
+     *     .collapse(
+     *         'user',
+     *         bob.innerHits('last_tweets')
+     *             .size(5)
+     *             .sort(bob.sort('date', 'asc')),
+     *         4
+     *     )
+     *     .sort(bob.sort('likes'))
+     *     .from(10);
      *
      * @param {string} field
      * @param {InnerHits=} innerHits Allows to expand each collapsed top hits.
@@ -544,7 +626,14 @@ class RequestBodySearch {
      * Allows to use the results from the previous page to help the retrieval
      * of the next page. The `search_after` parameter provides a live cursor.
      *
-     * The parameter `from` must be set to 0 (or -1) when `search_after` is used.
+     * The parameter `from` must be set to `0` (or `-1`) when `search_after` is used.
+     *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .size(10)
+     *     .query(bob.matchQuery('message', 'elasticsearch'))
+     *     .searchAfter(1463538857, 'tweet#654323')
+     *     .sorts([bob.sort('date', 'asc'), bob.sort('_uid', 'desc')]);
      *
      * @param {Array} values The `sort values` of the last document to retrieve
      * the next page of results
