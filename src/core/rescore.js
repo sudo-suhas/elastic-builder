@@ -21,6 +21,28 @@ const invalidScoreModeParam = invalidParam(ES_REF_URL, 'score_mode', RESCORE_MOD
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html)
  *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .query(bob.matchQuery('message', 'the quick brown').operator('or'))
+ *     .rescore(
+ *         bob.rescore(
+ *             50,
+ *             bob.matchPhraseQuery('message', 'the quick brown').slop(2)
+ *         )
+ *             .queryWeight(0.7)
+ *             .rescoreQueryWeight(1.2)
+ *     );
+ *
+ * @example
+ * const rescore = bob.rescore(
+ *     10,
+ *     bob.functionScoreQuery().function(
+ *         bob.scriptScoreFunction(
+ *             bob.script('inline', 'Math.log10(doc.likes.value + 2)')
+ *         )
+ *     )
+ * ).scoreMode('multiply');
+ *
  * @param {number=} windowSize
  * @param {Query=} rescoreQuery
  */
