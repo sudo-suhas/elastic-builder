@@ -31,23 +31,14 @@ const requestBody = bob.requestBodySearch()
 const requestBody = new bob.RequestBodySearch()
     .query(new bob.MatchQuery('message', 'this is a test'));
 
-// bob.prettyPrint(requestBody)
-// {
-//   "query": {
-//     "match": {
-//       "message": "this is a test"
-//     }
-//   }
-// }
-
-// requestBody.toJSON()
-// {
-//   "query": {
-//     "match": {
-//       "message": "this is a test"
-//     }
-//   }
-// }
+requestBody.toJSON() // or print to console - bob.prettyPrint(requestBody)
+{
+  "query": {
+    "match": {
+      "message": "this is a test"
+    }
+  }
+}
 ```
 
 For each class, `MyClass`, a utility function `myClass` has been provided which
@@ -113,23 +104,20 @@ const requestBody = bob.requestBodySearch()
             .must(bob.matchQuery('last_name', 'smith'))
             .filter(bob.rangeQuery('age').gt(30))
     )
-// requestBody.toJSON()
-// {
-//     "query" : {
-//         "bool" : {
-//             "must" : {
-//                 "match" : {
-//                     "last_name" : "smith"
-//                 }
-//             },
-//             "filter" : {
-//                 "range" : {
-//                     "age" : { "gt" : 30 }
-//                 }
-//             }
-//         }
-//     }
-// }
+requestBody.toJSON()
+{
+  "query": {
+    "bool": {
+      "must": {
+        "match": { "last_name": "smith" }
+      },
+      "filter": {
+        "range": { "age": { "gt": 30 } }
+      }
+    }
+  }
+}
+
 
 // Multi Match Query
 const requestBody = bob.requestBodySearch()
@@ -139,32 +127,30 @@ const requestBody = bob.requestBodySearch()
             .tieBreaker(0.3)
             .minimumShouldMatch('30%')
     );
-// requestBody.toJSON()
-// {
-//     "multi_match": {
-//         "query": "Quick brown fox",
-//         "type":  "best_fields",
-//         "fields": [ "title", "body" ],
-//         "tie_breaker": 0.3,
-//         "minimum_should_match": "30%"
-//     }
-// }
+requestBody.toJSON()
+{
+  "multi_match": {
+    "query": "Quick brown fox",
+    "type": "best_fields",
+    "fields": ["title", "body"],
+    "tie_breaker": 0.3,
+    "minimum_should_match": "30%"
+  }
+}
 
 // Aggregation
 const requestBody = bob.requestBodySearch()
     .size(0)
     .agg(bob.termsAggregation('popular_colors', 'color'));
-// requestBody.toJSON()
-// {
-//     "size" : 0,
-//     "aggs" : {
-//         "popular_colors" : {
-//             "terms" : {
-//               "field" : "color"
-//             }
-//         }
-//     }
-// }
+requestBody.toJSON()
+{
+  "size": 0,
+  "aggs": {
+    "popular_colors": {
+      "terms": { "field": "color" }
+    }
+  }
+}
 
 // Nested Aggregation
 const requestBody = bob.requestBodySearch()
@@ -174,29 +160,24 @@ const requestBody = bob.requestBodySearch()
             .agg(bob.avgAggregation('avg_price', 'price'))
             .agg(bob.termsAggregation('make', 'make'))
     );
-// requestBody.toJSON()
-// {
-//    "size" : 0,
-//    "aggs": {
-//       "colors": {
-//          "terms": {
-//             "field": "color"
-//          },
-//          "aggs": {
-//             "avg_price": {
-//                "avg": {
-//                   "field": "price"
-//                }
-//             },
-//             "make": {
-//                 "terms": {
-//                     "field": "make"
-//                 }
-//             }
-//          }
-//       }
-//    }
-// }
+requestBody.toJSON()
+{
+  "size": 0,
+  "aggs": {
+    "colors": {
+      "terms": { "field": "color" },
+      "aggs": {
+        "avg_price": {
+          "avg": { "field": "price" }
+        },
+        "make": {
+          "terms": { "field": "make" }
+        }
+      }
+    }
+  }
+}
+
 // If you prefer using the `new` keyword
 const agg = new TermsAggregation('countries', 'artist.country')
         .order('rock>playback_stats.avg', 'desc')
@@ -205,24 +186,27 @@ const agg = new TermsAggregation('countries', 'artist.country')
                 .agg(new StatsAggregation('playback_stats', 'play_count'))
         )
         .toJSON();
-// agg.toJSON()
-// {
-//     "countries" : {
-//         "terms" : {
-//             "field" : "artist.country",
-//             "order" : { "rock>playback_stats.avg" : "desc" }
-//         },
-//         "aggs" : {
-//             "rock" : {
-//                 "filter" : { "term" : { "genre" :  "rock" }},
-//                 "aggs" : {
-//                     "playback_stats" : { "stats" : { "field" : "play_count" }}
-//                 }
-//             }
-//         }
-//     }
-// }
-
+agg.toJSON()
+{
+  "countries": {
+    "terms": {
+      "field": "artist.country",
+      "order": { "rock>playback_stats.avg": "desc" }
+    },
+    "aggs": {
+      "rock": {
+        "filter": {
+          "term": { "genre": "rock" }
+        },
+        "aggs": {
+          "playback_stats": {
+            "stats": { "field": "play_count" }
+          }
+        }
+      }
+    }
+  }
+}
 
 // Sort
 const requestBody = bob.requestBodySearch()
@@ -239,44 +223,42 @@ const requestBody = bob.requestBodySearch()
         bob.sort('content'),
         bob.sort('price').order('desc').mode('avg')
     ]);
-// requestBody.toJSON()
-// {
-//   "query": {
-//     "bool": {
-//       "filter": {
-//         "term": { "message": "test" }
-//       }
-//     }
-//   },
-//   "sort": [
-//     { "timestamp": { "order": "desc" } },
-//     { "channel": { "order": "desc" } },
-//     { "categories": { "order": "desc" } },
-//     "content",
-//     { "price": { "order": "desc", "mode": "avg" } }
-//   ]
-// }
+requestBody.toJSON()
+{
+  "query": {
+    "bool": {
+      "filter": {
+        "term": { "message": "test" }
+      }
+    }
+  },
+  "sort": [
+    { "timestamp": { "order": "desc" } },
+    { "channel": { "order": "desc" } },
+    { "categories": { "order": "desc" } },
+    "content",
+    { "price": { "order": "desc", "mode": "avg" } }
+  ]
+}
 
 // From / size
 const requestBody = bob.requestBodySearch()
     .query(bob.matchAllQuery())
     .size(5)
     .from(10);
-// requestBody.toJSON()
-// {
-//   "query": {
-//     "match_all": {}
-//   },
-//   "size": 5,
-//   "from": 10
-// }
+requestBody.toJSON()
+{
+  "query": { "match_all": {} },
+  "size": 5,
+  "from": 10
+}
 ```
 
 ## Validation
 `elastic-builder` provides lightweight validation where ever possible:
 
 ```
-$ node repl.js
+$ node ./node_modules/elastic-builder/repl.js
 elastic-builder > bob.multiMatchQuery().field('title').field('body').query('Quick brown fox').type('bwst_fields')
 See https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
 Got 'type' - bwst_fields
