@@ -96,6 +96,7 @@ test(setHighlightOption, 'postTags', ['</tag1>', '</tag2>']);
 test('sets post_tags(str) option', setHighlightOption, 'postTags', '</tag1>', ['</tag1>']);
 test(setHighlightOption, 'fragmentSize', 150);
 test(setHighlightOption, 'numberOfFragments', 3);
+test(setHighlightOption, 'noMatchSize', 150);
 test(
     setHighlightOption,
     'highlightQuery',
