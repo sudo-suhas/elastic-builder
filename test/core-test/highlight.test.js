@@ -82,7 +82,7 @@ function setHighlightOption(t, methodName, param, paramValue = recursiveToJSON(p
 }
 
 setHighlightOption.title = (providedTitle, methodName) =>
-    (!_.isEmpty(providedTitle) ? providedTitle : `sets ${_.snakeCase(methodName)} option`);
+    !_.isEmpty(providedTitle) ? providedTitle : `sets ${_.snakeCase(methodName)} option`;
 
 test(illegalParamType, new Highlight(), 'fields', 'Array');
 test(illegalParamType, new Highlight(), 'highlightQuery', 'Query');

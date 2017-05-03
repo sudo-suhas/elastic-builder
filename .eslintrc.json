@@ -25,6 +25,7 @@
   },
   "rules": {
     // Possible Errors
+    "no-extra-semi": "off",
     "no-empty": [
       "error",
       {
@@ -82,10 +83,7 @@
     "no-proto": "error",
     "no-sequences": "error",
     "no-with": "error",
-    "wrap-iife": [
-      "error",
-      "any"
-    ],
+    "wrap-iife": "off",
     "default-case": [
       "warn",
       {
@@ -292,7 +290,7 @@
     "arrow-parens": "off", // let prettier handle it
     "arrow-spacing": "off", // let prettier handle it
     "generator-star-spacing": "off", // let prettier handle it
-    "no-confusing-arrow": ["error", {"allowParens": true}],
+    "no-confusing-arrow": "off", // let prettier handle it
     "no-duplicate-imports": [
       "error",
       {

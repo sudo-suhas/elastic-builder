@@ -78,8 +78,11 @@ export function validatedCorrectly(t, getInstance, method, validValues, toggleCa
     t.throws(() => getInstance()[method](`invalid_${_.snakeCase(method)}`));
 }
 
-validatedCorrectly.title = (ignore, getInstance, method) =>
-    `${_.snakeCase(method)} correctly validated`;
+validatedCorrectly.title = (
+    ignore,
+    getInstance,
+    method
+) => `${_.snakeCase(method)} correctly validated`;
 
 /**
  * Simple strategy for checking option is set for use with `makeSetsOptionMacro`
@@ -168,7 +171,7 @@ export function makeSetsOptionMacro(getInstance, getExpected = simpleExpect) {
     }
 
     setsOption.title = (providedTitle, methodName) =>
-        (!_.isEmpty(providedTitle) ? providedTitle : `sets ${_.snakeCase(methodName)} option`);
+        !_.isEmpty(providedTitle) ? providedTitle : `sets ${_.snakeCase(methodName)} option`;
 
     return setsOption;
 }
