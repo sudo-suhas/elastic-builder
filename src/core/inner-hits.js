@@ -17,6 +17,15 @@ const { checkType, recursiveToJSON } = require('./util');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-inner-hits.html)
  *
+ * @example
+ * const reqBody = bob.requestBodySearch().query(
+ *     bob.nestedQuery(
+ *         bob.matchQuery('comments.message', '[actual query]')
+ *     ).innerHits(
+ *         bob.innerHits().source(false).storedFields(['comments.text'])
+ *     )
+ * );
+ *
  * @param {string=} name The name to be used for the particular inner hit definition
  * in the response. Useful when multiple inner hits have been defined in a single
  * search request. The default depends in which query the inner hit is defined.
