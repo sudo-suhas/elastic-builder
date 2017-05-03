@@ -37,8 +37,17 @@ class QueryStringQueryBase extends FullTextQueryBase {
     /**
      * Appends given field to the list of fields to search against.
      * Fields can be specified with wildcards.
+     *
      * Individual fields can be boosted with the caret (^) notation.
      * Example - `"subject^3"`
+     *
+     * @example
+     * const qry = bob.queryStringQuery('this AND that OR thus')
+     *     .field('city.*')
+     *     .useDisMax(true);
+     *
+     * @example
+     * const qry = bob.simpleQueryStringQuery('foo bar -baz').field('content');
      *
      * @param {string} field One of the fields to be queried
      * @returns {QueryStringQueryBase} returns `this` so that calls can be chained.
@@ -51,10 +60,19 @@ class QueryStringQueryBase extends FullTextQueryBase {
     }
 
     /**
-     * Appends givven fields to the list of fields to search against.
+     * Appends given fields to the list of fields to search against.
      * Fields can be specified with wildcards.
+     *
      * Individual fields can be boosted with the caret (^) notation.
      * Example - `[ "subject^3", "message" ]`
+     *
+     * @example
+     * const qry = bob.queryStringQuery('this AND that')
+     *     .fields(['content', 'name'])
+     *
+     * @example
+     * const qry = bob.simpleQueryStringQuery('foo bar baz')
+     *     .fields(['content', 'name.*^5']);
      *
      * @param {Array<string>} fields The fields to be queried
      * @returns {QueryStringQueryBase} returns `this` so that calls can be chained.

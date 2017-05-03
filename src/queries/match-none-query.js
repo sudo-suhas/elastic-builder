@@ -7,6 +7,9 @@ const { Query } = require('../core');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-all-query.html)
  *
+ * @example
+ * const qry = bob.matchNoneQuery();
+ *
  * @extends Query
  */
 class MatchNoneQuery extends Query {

@@ -11,6 +11,23 @@ const ScoreFunction = require('./score-function');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-script-score)
  *
+ * @example
+ * const scoreFunc = bob.scriptScoreFunction(
+ *     bob.script('inline', "_score * doc['my_numeric_field'].value")
+ *         .lang('painless')
+ * );
+ *
+ * @example
+ * // Script with parameters
+ * const scoreFunc = bob.scriptScoreFunction(
+ *     bob.script(
+ *         'inline',
+ *         "_score * doc['my_numeric_field'].value / Math.pow(params.param1, params.param2)"
+ *     )
+ *         .lang('painless')
+ *         .params({ param1: 'value1', param2: 'value2' })
+ * );
+ *
  * @param {Script|string} script
  *
  * @extends ScoreFunction

@@ -11,20 +11,20 @@ const { Query } = require('../../core');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-percolate-query.html)
  *
- * @param {string} field The field of type `percolator` and that holds the indexed queries.
- * @param {string} docType The type / mapping of the document being percolated.
- *
  * @example
  * const percolateQry = bob.percolateQuery('query', 'doctype')
- *  .document({ message: 'A new bonsai tree in the office' });
+ *     .document({ message: 'A new bonsai tree in the office' });
  *
  * const percolateQry = bob.percolateQuery()
- *  .field('query')
- *  .documentType('doctype')
- *  .index('my-index')
- *  .type('message')
- *  .id('1')
- *  .version(1);
+ *     .field('query')
+ *     .documentType('doctype')
+ *     .index('my-index')
+ *     .type('message')
+ *     .id('1')
+ *     .version(1);
+ *
+ * @param {string} field The field of type `percolator` and that holds the indexed queries.
+ * @param {string} docType The type / mapping of the document being percolated.
  *
  * @extends Query
  */

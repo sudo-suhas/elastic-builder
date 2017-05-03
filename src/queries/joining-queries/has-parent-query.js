@@ -15,6 +15,20 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-query.html)
  *
+ * @example
+ * const qry = bob.hasParentQuery(bob.termQuery('tag', 'something'), 'blog');
+ *
+ * @example
+ * // Sorting tags by parent documents' `view_count` field
+ * const qry = bob.hasParentQuery()
+ *     .parentType('blog')
+ *     .score(true)
+ *     .query(
+ *         bob.functionScoreQuery().function(
+ *             bob.scriptScoreFunction("_score * doc['view_count'].value")
+ *         )
+ *     );
+ *
  * @param {Query} qry A valid `Query` object
  * @param {string=} type The parent type
  *
@@ -64,6 +78,12 @@ class HasParentQuery extends JoiningQueryBase {
      * The score is in this case equal to the boost on the `has_parent` query (Defaults to 1).
      * If the score is set to `true`, then the score of the matching parent document is
      * aggregated into the child documents belonging to the matching parent document.
+     *
+     * @example
+     * const qry = bob.hasParentQuery(
+     *     bob.termQuery('tag', 'something'),
+     *     'blog'
+     * ).score(true);
      *
      * @param {boolean} enable `true` to enable scoring, `false` to disable.
      * `false` by default.

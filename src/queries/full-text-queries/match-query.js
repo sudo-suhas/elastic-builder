@@ -72,6 +72,9 @@ class MatchQuery extends MonoFieldQueryBase {
      * the number of one character changes that need to be made to one string to make it
      * the same as another string.
      *
+     * @example
+     * const qry = bob.matchQuery('message', 'this is a test').operator('and');
+     *
      * @param {number|string} factor Can be specified either as a number, or the maximum
      * number of edits, or as `AUTO` which generates an edit distance based on the length
      * of the term.
@@ -197,6 +200,11 @@ class MatchQuery extends MonoFieldQueryBase {
      * the `zero_terms_query` option can be used, which accepts `none` (default) and `all`
      * which corresponds to a `match_all` query.
      *
+     * @example
+     * const qry = bob.matchQuery('message', 'to be or not to be')
+     *     .operator('and')
+     *     .zeroTermsQuery('all');
+     *
      * @param {string} behavior A no match action, `all` or `none`. Default is `none`.
      * @returns {MatchQuery} returns `this` so that calls can be chained.
      */
@@ -217,6 +225,10 @@ class MatchQuery extends MonoFieldQueryBase {
      * terms are moved into an optional subquery and are only scored if one of the
      * low frequency (below the cutoff) terms in the case of an `or` operator or
      * all of the low frequency terms in the case of an `and` operator match.
+     *
+     * @example
+     * const qry = bob.matchQuery('message', 'to be or not to be')
+     *     .cutoffFrequency(0.001);
      *
      * @param {number} frequency It can either be relative to the total number of documents
      * if in the range `[0..1)` or absolute if greater or equal to `1.0`.

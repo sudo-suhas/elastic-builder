@@ -35,6 +35,14 @@ class Query {
     /**
      * Sets the query name.
      *
+     * @example
+     * const boolQry = bob.boolQuery()
+     *     .should([
+     *         bob.matchQuery('name.first', 'shay').name('first'),
+     *         bob.matchQuery('name.last', 'banon').name('last')
+     *     ])
+     *     .filter(bob.termsQuery('name.last', ['banon', 'kimchy']).name('test'));
+     *
      * @param {string} name
      * @returns {Query} returns `this` so that calls can be chained.
      */

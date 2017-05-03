@@ -12,14 +12,14 @@ const SpanLittleBigQueryBase = require('./span-little-big-query-base');
  *
  * @example
  * const spanQry = bob.spanContainingQuery()
- *  .little(bob.spanTermQuery('field1', 'foo'))
- *  .big(bob.spanNearQuery()
- *      .clauses([
- *          bob.spanTermQuery('field1', 'bar'),
- *          bob.spanTermQuery('field1', 'baz')
- *      ])
- *      .slop(5)
- *      .inOrder(true))
+ *     .little(bob.spanTermQuery('field1', 'foo'))
+ *     .big(bob.spanNearQuery()
+ *         .clauses([
+ *             bob.spanTermQuery('field1', 'bar'),
+ *             bob.spanTermQuery('field1', 'baz')
+ *         ])
+ *         .slop(5)
+ *         .inOrder(true))
  *
  * @extends SpanLittleBigQueryBase
  */

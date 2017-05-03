@@ -19,9 +19,13 @@ const invalidRelationParam = invalidParam(ES_REF_URL, 'relation', GEO_RELATION_S
  * @param {string=} field
  *
  * @example
- * bob.rangeQuery('age')
- *  .gte(10)
- *  .lte(20);
+ * const qry = bob.rangeQuery('age')
+ *     .gte(10)
+ *     .lte(20)
+ *     .boost(2.0);
+ *
+ * @example
+ * const qry = bob.rangeQuery('date').gte('now-1d/d').lt('now/d');
  *
  * @extends MultiTermQueryBase
  */
@@ -142,6 +146,12 @@ class RangeQuery extends MultiTermQueryBase {
     /**
      * Sets the format expression for parsing the upper and lower bounds.
      * If no format is specified, then it will use the first format specified in the field mapping.
+     *
+     * @example
+     * const qry = bob.rangeQuery('born')
+     *     .gte('01/01/2012')
+     *     .lte('2013')
+     *     .format('dd/MM/yyyy||yyyy');
      *
      * @param {string} fmt Format for parsing upper and lower bounds.
      * @returns {RangeQuery} returns `this` so that calls can be chained

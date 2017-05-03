@@ -28,6 +28,44 @@ const invalidBoostModeParam = invalidParam(ES_REF_URL, 'boost_mode', BOOST_MODE_
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html)
  *
+ * @example
+ * // `function_score` with only one function
+ * const qry = bob.functionScoreQuery()
+ *     .query(bob.matchAllQuery)
+ *     .function(bob.randomScoreFunction())
+ *     .boostMode('multiply')
+ *     .boost('5');
+ *
+ * @example
+ * // Several functions combined
+ * const qry = bob.functionScoreQuery()
+ *     .query(bob.matchAllQuery)
+ *     .functions([
+ *         bob.randomScoreFunction()
+ *             .filter(bob.matchQuery('test', 'bar'))
+ *             .weight(23),
+ *         bob.weightScoreFunction()
+ *             .filter(bob.matchQuery('test', 'cat'))
+ *             .weight(42)
+ *     ])
+ *     .maxBoost(42)
+ *     .scoreMode('max')
+ *     .boostMode('multiply')
+ *     .minScore(42)
+ *     .boost('5');
+ *
+ * @example
+ * // Combine decay functions
+ * const qry = bob.functionScoreQuery()
+ *     .functions([
+ *         bob.decayScoreFunction('gauss', 'price').origin('0').scale('20'),
+ *         bob.decayScoreFunction('gauss', 'location')
+ *             .origin('11, 12')
+ *             .scale('2km')
+ *     ])
+ *     .query(bob.matchQuery('properties', 'balcony'))
+ *     .scoreMode('multiply');
+ *
  * @extends Query
  */
 class FunctionScoreQuery extends Query {

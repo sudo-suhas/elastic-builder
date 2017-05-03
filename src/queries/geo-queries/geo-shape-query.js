@@ -31,22 +31,26 @@ const invalidRelationParam = invalidParam(ES_REF_URL, 'relation', GEO_RELATION_S
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-query.html)
  *
- * @param {string} field
- *
  * @example
  * const geoQry = bob.geoShapeQuery('location')
- *  .shape(bob.geoShape()
- *      .type('envelope')
- *      .coordinates([[13.0, 53.0], [14.0, 52.0]]))
- *  .relation('within');
+ *     .shape(bob.geoShape()
+ *         .type('envelope')
+ *         .coordinates([[13.0, 53.0], [14.0, 52.0]]))
+ *     .relation('within');
  *
+ * @example
+ * // Pre-indexed shape
  * const geoQry = bob.geoShapeQuery()
- *  .field('location')
- *  .indexedShape(bob.indexedShape()
- *      .id('DEU')
- *      .type('countries')
- *      .index('shapes')
- *      .path('location'))
+ *     .field('location')
+ *     .indexedShape(bob.indexedShape()
+ *         .id('DEU')
+ *         .type('countries')
+ *         .index('shapes')
+ *         .path('location'))
+ *
+ * @param {string} field
+ *
+ * @extends GeoQueryBase
  */
 class GeoShapeQuery extends GeoQueryBase {
     // eslint-disable-next-line require-jsdoc

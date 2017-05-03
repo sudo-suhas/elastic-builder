@@ -8,6 +8,9 @@ const ES_REF_URL =
 /**
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase-prefix.html)
  *
+ * @example
+ * const qry = bob.matchPhrasePrefixQuery('message', 'quick brown f');
+ *
  * @param {string=} field The document field to query against
  * @param {string=} queryString The query string
  *
@@ -21,6 +24,10 @@ class MatchPhrasePrefixQuery extends MatchPhraseQueryBase {
 
     /**
      * Control to how many prefixes the last term will be expanded.
+     *
+     * @example
+     * const qry = bob.matchPhrasePrefixQuery('message', 'quick brown f')
+     *     .maxExpansions(10);
      *
      * @param {number} limit Defaults to 50.
      * @returns {MatchPhrasePrefixQuery} returns `this` so that calls can be chained.

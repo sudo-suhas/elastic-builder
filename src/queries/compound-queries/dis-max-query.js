@@ -13,6 +13,20 @@ const { Query, util: { checkType } } = require('../../core');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-dis-max-query.html)
  *
+ * @example
+ * const qry = bob.disMaxQuery()
+ *     .queries([bob.termQuery('age', 34), bob.termQuery('age', 35)])
+ *     .tieBreaker(0.7)
+ *     .boost(1.2);
+ *
+ * @example
+ * const qry = bob.disMaxQuery()
+ *     .queries([
+ *         bob.matchQuery('subject', 'brown fox'),
+ *         bob.matchQuery('message', 'brown fox')
+ *     ])
+ *     .tieBreaker(0.3);
+ *
  * @extends Query
  */
 class DisMaxQuery extends Query {

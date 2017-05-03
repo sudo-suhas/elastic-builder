@@ -56,6 +56,12 @@ class JoiningQueryBase extends Query {
      * - `sum` - the sum the all the matched child documents is used
      * - `avg` - the default, the average of all matched child documents is used
      *
+     * @example
+     * const qry = bob.hasChildQuery(
+     *     bob.termQuery('tag', 'something'),
+     *     'blog_tag'
+     * ).scoreMode('min');
+     *
      * @param {string} mode Can be one of `none`, `sum`, `min`, `max`, `avg`.
      * Defaults to `avg` for `NestedQuery`, `none` for `HasChildQuery`.
      * @returns {JoiningQueryBase} returns `this` so that calls can be chained.

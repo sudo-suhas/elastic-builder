@@ -15,13 +15,13 @@ const SpanQueryBase = require('./span-query-base');
  *
  * @example
  * const spanQry = bob.spanNearQuery()
- *  .clauses([
- *      bob.spanTermQuery('field', 'value1'),
- *      bob.spanTermQuery('field', 'value2'),
- *      bob.spanTermQuery('field', 'value3')
- *  ])
- *  .slop(12)
- *  .inOrder(false);
+ *     .clauses([
+ *         bob.spanTermQuery('field', 'value1'),
+ *         bob.spanTermQuery('field', 'value2'),
+ *         bob.spanTermQuery('field', 'value3')
+ *     ])
+ *     .slop(12)
+ *     .inOrder(false);
  *
  * @extends SpanQueryBase
  */

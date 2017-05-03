@@ -9,6 +9,9 @@ const { Query } = require('../../core');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-parent-id-query.html)
  *
+ * @example
+ * const qry = bob.parentIdQuery('blog_tag', 1);
+ *
  * @param {string=} type The **child** type. This must be a type with `_parent` field.
  * @param {string|number=} id The required parent id select documents must refer to.
  *

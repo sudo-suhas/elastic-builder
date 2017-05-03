@@ -19,6 +19,13 @@ const invaliModifierdParam = invalidParam(ES_REF_URL, 'modifier', FIELD_MODIFIER
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-field-value-factor)
  *
+ * @example
+ * // Scoring formula - sqrt(1.2 * doc['popularity'].value)
+ * const scoreFunc = bob.fieldValueFactorFunction('popularity')
+ *     .factor(1.2)
+ *     .modifier('sqrt')
+ *     .missing(1);
+ *
  * @param {string=} field the field to be extracted from the document.
  *
  * @extends ScoreFunction

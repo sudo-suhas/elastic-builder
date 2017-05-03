@@ -23,6 +23,22 @@ const invalidModeParam = invalidParam(ES_REF_URL, 'mode', "'linear', 'exp' or 'g
  *
  * If no `mode` is supplied, `gauss` will be used.
  *
+ * @example
+ * // Defaults to decay function `gauss`
+ * const decayFunc = bob.decayScoreFunction()
+ *     .field('location') // field is a geo_point
+ *     .origin('11, 12') // geo format
+ *     .scale('2km')
+ *     .offset('0km')
+ *     .decay(0.33);
+ *
+ * @example
+ * const decayFunc = bob.decayScoreFunction('gauss', 'date')
+ *     .origin('2013-09-17')
+ *     .scale('10d')
+ *     .offset('5d')
+ *     .decay(0.5);
+ *
  * @param {string=} mode Can be one of `linear`, `exp`, and `gauss`.
  * Defaults to `gauss`.
  * @param {string=} field the document field to run decay function against.

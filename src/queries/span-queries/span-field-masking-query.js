@@ -26,14 +26,14 @@ const SpanQueryBase = require('./span-query-base');
  *
  * @example
  * const spanQry = bob.spanNearQuery()
- *  .clauses([
- *      bob.spanTermQuery('text', 'quick brown'),
- *      bob.spanFieldMaskingQuery()
- *          .field('text')
- *          .query(bob.spanTermQuery('text.stems', 'fox'))
- *  ])
- *  .slop(5)
- *  .inOrder(false);
+ *     .clauses([
+ *         bob.spanTermQuery('text', 'quick brown'),
+ *         bob.spanFieldMaskingQuery()
+ *             .field('text')
+ *             .query(bob.spanTermQuery('text.stems', 'fox'))
+ *     ])
+ *     .slop(5)
+ *     .inOrder(false);
  *
  * @extends SpanQueryBase
  */
@@ -49,8 +49,8 @@ class SpanFieldMaskingQuery extends SpanQueryBase {
     /**
      * Sets the span query.
      *
-     * @param {SpanFieldMaskingQuery} spanQry
-     * @returns {SpanFirstQuery} returns `this` so that calls can be chained.
+     * @param {SpanQueryBase} spanQry
+     * @returns {SpanFieldMaskingQuery} returns `this` so that calls can be chained.
      */
     query(spanQry) {
         checkType(spanQry, SpanQueryBase);
@@ -63,7 +63,7 @@ class SpanFieldMaskingQuery extends SpanQueryBase {
      * Sets the field to mask.
      *
      * @param {string} field
-     * @returns {SpanFirstQuery} returns `this` so that calls can be chained.
+     * @returns {SpanFieldMaskingQuery} returns `this` so that calls can be chained.
      */
     field(field) {
         this._queryOpts.field = field;

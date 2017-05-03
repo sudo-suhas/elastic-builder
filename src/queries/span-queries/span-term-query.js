@@ -10,16 +10,17 @@ const SpanQueryBase = require('./span-query-base');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-term-query.html)
  *
- * @param {string=} field The document field to query against
- * @param {string|number=} value The query string
+ * @example
+ * const qry = bob.spanTermQuery('user', 'kimchy');
  *
  * @example
- * const spanQry = bob.spanTermQuery('user', 'kimchy');
+ * const qry = bob.spanTermQuery()
+ *     .field('user')
+ *     .value('kimchy')
+ *     .boost(2.0);
  *
- * const spanQry = bob.spanTermQuery()
- *  .field('user')
- *  .value('kimchy')
- *  .boost(2.0);
+ * @param {string=} field The document field to query against
+ * @param {string|number=} value The query string
  *
  * @extends SpanQueryBase
  */

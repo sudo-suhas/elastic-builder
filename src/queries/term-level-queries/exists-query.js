@@ -9,6 +9,12 @@ const { Query } = require('../../core');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html)
  *
+ * @example
+ * const qry = bob.existsQuery('user');
+ *
+ * @example
+ * const qry = bob.boolQuery().mustNot(bob.existsQuery('user'));
+ *
  * @param {string=} field
  *
  * @extends Query

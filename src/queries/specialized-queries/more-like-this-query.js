@@ -14,29 +14,40 @@ const { Query, util: { checkType } } = require('../../core');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-mlt-query.html)
  *
  * @example
- * const mltQry = bob.moreLikeThisQuery()
- *  .fields(['title', 'description'])
- *  .like('Once upon a time')
- *  .minTermFreq(1)
- *  .maxQueryTerms(12);
+ * // Ask for documents that are similar to a provided piece of text
+ * const qry = bob.moreLikeThisQuery()
+ *     .fields(['title', 'description'])
+ *     .like('Once upon a time')
+ *     .minTermFreq(1)
+ *     .maxQueryTerms(12);
  *
- * const mltQry = bob.moreLikeThisQuery()
- *  .fields(['title', 'description'])
- *  .like({ _index: 'imdb', _type: 'movies', _id: '1' })
- *  .like({ _index: 'imdb', _type: 'movies', _id: '2' })
- *  .like('and potentially some more text here as well')
- *  .minTermFreq(1)
- *  .maxQueryTerms(12);
+ * @example
+ * // Mixing texts with documents already existing in the index
+ * const qry = bob.moreLikeThisQuery()
+ *     .fields(['title', 'description'])
+ *     .like({ _index: 'imdb', _type: 'movies', _id: '1' })
+ *     .like({ _index: 'imdb', _type: 'movies', _id: '2' })
+ *     .like('and potentially some more text here as well')
+ *     .minTermFreq(1)
+ *     .maxQueryTerms(12);
  *
- * const mltQry = bob.moreLikeThisQuery()
- *  .fields(['title', 'description'])
- *  .like([
- *      { _index: 'imdb', _type: 'movies', _id: '1' },
- *      { _index: 'imdb', _type: 'movies', _id: '2' },
- *      'and potentially some more text here as well'
- *  ])
- *  .minTermFreq(1)
- *  .maxQueryTerms(12);
+ * @example
+ * // Provide documents not present in the index
+ * const qry = bob.moreLikeThisQuery()
+ *     .fields(['name.first', 'name.last'])
+ *     .like([
+ *         {
+ *             _index: 'marvel',
+ *             _type: 'quotes',
+ *             doc: {
+ *                 name: { first: 'Ben', last: 'Grimm' },
+ *                 tweet: "You got no idea what I'd... what I'd give to be invisible."
+ *             }
+ *         },
+ *         { _index: 'marvel', _type: 'quotes', _id: '2' }
+ *     ])
+ *     .minTermFreq(1)
+ *     .maxQueryTerms(12);
  *
  * @extends Query
  */

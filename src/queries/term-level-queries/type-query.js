@@ -9,6 +9,9 @@ const { Query } = require('../../core');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-type-query.html)
  *
+ * @example
+ * const qry = bob.typeQuery('my_type');
+ *
  * @param {string} type The elasticsearch doc type
  *
  * @extends Query

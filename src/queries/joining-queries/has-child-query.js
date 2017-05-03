@@ -13,6 +13,24 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html)
  *
+ * @example
+ * // Scoring support
+ * const qry = bob.hasChildQuery(
+ *     bob.termQuery('tag', 'something'),
+ *     'blog_tag'
+ * ).scoreMode('min');
+ *
+ * @example
+ * // Sort by child documents' `click_count` field
+ * const qry = bob.hasChildQuery()
+ *     .query(
+ *         bob.functionScoreQuery().function(
+ *             bob.scriptScoreFunction("_score * doc['click_count'].value")
+ *         )
+ *     )
+ *     .type('blog_tag')
+ *     .scoreMode('max');
+ *
  * @param {Query=} qry A valid `Query` object
  * @param {string=} type The child type
  *
@@ -52,6 +70,12 @@ class HasChildQuery extends JoiningQueryBase {
      * Specify the minimum number of children are required to match
      * for the parent doc to be considered a match
      *
+     * @example
+     * const qry = bob.hasChildQuery(bob.termQuery('tag', 'something'), 'blog_tag')
+     *     .minChildren(2)
+     *     .maxChildren(10)
+     *     .scoreMode('min');
+     *
      * @param {number} limit A positive `integer` value.
      * @returns {NestedQuery} returns `this` so that calls can be chained.
      */
@@ -63,6 +87,12 @@ class HasChildQuery extends JoiningQueryBase {
     /**
      * Specify the maximum number of children are required to match
      * for the parent doc to be considered a match
+     *
+     * @example
+     * const qry = bob.hasChildQuery(bob.termQuery('tag', 'something'), 'blog_tag')
+     *     .minChildren(2)
+     *     .maxChildren(10)
+     *     .scoreMode('min');
      *
      * @param {number} limit A positive `integer` value.
      * @returns {NestedQuery} returns `this` so that calls can be chained.

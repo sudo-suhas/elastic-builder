@@ -11,6 +11,9 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html)
  *
+ * @example
+ * const qry = bob.wildcardQuery('user', 'ki*y').boost(2.0);
+ *
  * @param {string=} field
  * @param {string=} value
  *

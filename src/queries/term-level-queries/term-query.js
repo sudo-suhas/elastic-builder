@@ -8,11 +8,11 @@ const ValueTermQueryBase = require('./value-term-query-base');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html)
  *
- * @param {string=} field
- * @param {string|number=} queryVal
- *
  * @example
  * const termQry = bob.termQuery('user', 'Kimchy');
+ *
+ * @param {string=} field
+ * @param {string|number=} queryVal
  *
  * @extends ValueTermQueryBase
  */

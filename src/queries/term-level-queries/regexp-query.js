@@ -13,6 +13,9 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html)
  *
+ * @example
+ * const qry = bob.regexpQuery('name.first', 's.*y').boost(1.2);
+ *
  * @param {string=} field
  * @param {string|number=} value
  *
@@ -28,6 +31,10 @@ class RegexpQuery extends MultiTermQueryBase {
      * Set special flags. Possible flags are `ALL` (default),
      * `ANYSTRING`, `COMPLEMENT`, `EMPTY`, `INTERSECTION`, `INTERVAL`, or `NONE`.
      *
+     * @example
+     * const qry = bob.regexpQuery('name.first', 's.*y')
+     *     .flags('INTERSECTION|COMPLEMENT|EMPTY');
+     *
      * @param {string} flags `|` separated flags. Possible flags are `ALL` (default),
      * `ANYSTRING`, `COMPLEMENT`, `EMPTY`, `INTERSECTION`, `INTERVAL`, or `NONE`.
      * @returns {RegexpQuery} returns `this` so that calls can be chained.
@@ -41,6 +48,11 @@ class RegexpQuery extends MultiTermQueryBase {
      * Limit on how many automaton states regexp queries are allowed to create.
      * This protects against too-difficult (e.g. exponentially hard) regexps.
      * Defaults to 10000.
+     *
+     * @example
+     * const qry = bob.regexpQuery('name.first', 's.*y')
+     *     .flags('INTERSECTION|COMPLEMENT|EMPTY')
+     *     .maxDeterminizedStates(20000);
      *
      * @param {number} limit
      * @returns {RegexpQuery} returns `this` so that calls can be chained.

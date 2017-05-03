@@ -12,6 +12,14 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html)
  *
+ * @example
+ * const qry = bob.simpleQueryStringQuery(
+ *     '"fried eggs" +(eggplant | potato) -frittata'
+ * )
+ *     .analyzer('snowball')
+ *     .fields(['body^5', '_all'])
+ *     .defaultOperator();
+ *
  * @param {string=} queryString The query string
  *
  * @extends QueryStringQueryBase
@@ -25,6 +33,10 @@ class SimpleQueryStringQuery extends QueryStringQueryBase {
     /**
      * `simple_query_string` support multiple flags to specify which parsing features
      * should be enabled. It is specified as a `|`-delimited string.
+     *
+     * @example
+     * const qry = bob.simpleQueryStringQuery('foo | bar + baz*')
+     *     .flags('OR|AND|PREFIX');
      *
      * @param {string} flags `|` delimited string. The available flags are: `ALL`, `NONE`,
      * `AND`, `OR`, `NOT`, `PREFIX`, `PHRASE`, `PRECEDENCE`, `ESCAPE`, `WHITESPACE`,

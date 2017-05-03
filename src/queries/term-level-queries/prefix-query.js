@@ -11,11 +11,11 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html)
  *
+ * @example
+ * const qry = bob.prefixQuery('user', 'ki').boost(2.0);
+ *
  * @param {string=} field
  * @param {string|number=} value
- *
- * @example
- * const prefixQry = bob.prefixQuery('user', 'ki');
  *
  * @extends MultiTermQueryBase
  */

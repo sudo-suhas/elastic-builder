@@ -16,22 +16,34 @@ const invalidTypeParam = invalidParam(ES_REF_URL, 'type', "'memory' or 'indexed'
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-bounding-box-query.html)
  *
- * @param {string=} field
+ * @example
+ * // Format of point in Geohash
+ * const qry = bob.geoBoundingBoxQuery('pin.location')
+ *     .topLeft(bob.geoPoint().string('dr5r9ydj2y73'))
+ *     .bottomRight(bob.geoPoint().string('drj7teegpus6'));
  *
  * @example
- * const geoQry = bob.geoBoundingBoxQuery('pin.location')
- *  .topLeft(bob.geoPoint().string('dr5r9ydj2y73'))
- *  .bottomRight(bob.geoPoint().string('drj7teegpus6'));
+ * // Format of point with lat lon as properties
+ * const qry = bob.geoBoundingBoxQuery()
+ *     .field('pin.location')
+ *     .topLeft(bob.geoPoint()
+ *         .lat(40.73)
+ *         .lon(-74.1))
+ *     .bottomRight(bob.geoPoint()
+ *         .lat(40.10)
+ *         .lon(-71.12));
  *
- * const geoQry = bob.geoBoundingBoxQuery()
- *  .field('pin.location')
- *  .topLeft(bob.geoPoint()
- *      .lat(40.73)
- *      .lon(-74.1))
- *  .bottomRight(bob.geoPoint()
- *      .lat(40.10)
- *      .lon(-71.12))
- *  .type('indexed');
+ * @example
+ * // Set bounding box values separately
+ * const qry = bob.geoBoundingBoxQuery('pin.location')
+ *     .top(40.73)
+ *     .left(-74.1)
+ *     .bottom(40.01)
+ *     .right(-71.12);
+ *
+ * @param {string=} field
+ *
+ * @extends GeoQueryBase
  */
 class GeoBoundingBoxQuery extends GeoQueryBase {
     // eslint-disable-next-line require-jsdoc
@@ -145,6 +157,18 @@ class GeoBoundingBoxQuery extends GeoQueryBase {
      * which means in memory checks if the doc falls within the bounding
      * box range. In some cases, an indexed option will perform faster
      * (but note that the geo_point type must have lat and lon indexed in this case)
+     *
+     * @example
+     *
+     * const geoQry = bob.geoBoundingBoxQuery()
+     *     .field('pin.location')
+     *     .topLeft(bob.geoPoint()
+     *         .lat(40.73)
+     *         .lon(-74.1))
+     *     .bottomRight(bob.geoPoint()
+     *         .lat(40.10)
+     *         .lon(-71.12))
+     *     .type('indexed');
      *
      * @param {string} type Can either `memory` or `indexed`
      * @returns {GeoBoundingBoxQuery} returns `this` so that calls can be chained.

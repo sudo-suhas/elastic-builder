@@ -10,6 +10,9 @@ const ScoreFunction = require('./score-function');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-weight)
  *
+ * @example
+ * const scoreFunc = bob.weightScoreFunction().weight(42);
+ *
  * @param {string} name
  */
 class WeightScoreFunction extends ScoreFunction {}

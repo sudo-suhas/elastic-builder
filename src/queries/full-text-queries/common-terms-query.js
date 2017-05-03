@@ -21,6 +21,10 @@ const invalidHighFreqOpParam = invalidParam(ES_REF_URL, 'high_freq_operator', "'
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html)
  *
+ * @example
+ * const qry = bob.commonTermsQuery('body','this is bonsai cool')
+ *     .cutoffFrequency(0.001);
+ *
  * @param {string=} field The document field to query against
  * @param {string=} queryString The query string
  *
@@ -86,6 +90,11 @@ class CommonTermsQuery extends MonoFieldQueryBase {
      * which is constructed by analyzing the text provided. The `operator` flag
      * can be set to `or` or `and` to control the boolean clauses (defaults to `or`).
      *
+     * @example
+     * const qry = bob.commonTermsQuery('body', 'nelly the elephant as a cartoon')
+     *     .lowFreqOperator('and')
+     *     .cutoffFrequency(0.001);
+     *
      * @param {string} operator Can be `and`/`or`. Default is `or`.
      * @returns {MatchQuery} returns `this` so that calls can be chained.
      */
@@ -126,6 +135,12 @@ class CommonTermsQuery extends MonoFieldQueryBase {
      * query should match for low frequency terms. It can be an absolute value (2),
      * a percentage (30%) or a combination of both.
      *
+     * @example
+     * const qry = bob.commonTermsQuery('body', 'nelly the elephant as a cartoon')
+     *     .lowFreq(2)
+     *     .highFreq(3)
+     *     .cutoffFrequency(0.001);
+     *
      * @param {string|number} lowFreqMinMatch
      * @returns {CommonTermsQuery} returns `this` so that calls can be chained.
      */
@@ -140,6 +155,12 @@ class CommonTermsQuery extends MonoFieldQueryBase {
      * Sets the value controlling how many "should" clauses in the resulting boolean
      * query should match for high frequency terms. It can be an absolute value (2),
      * a percentage (30%) or a combination of both.
+     *
+     * @example
+     * const qry = bob.commonTermsQuery('body', 'nelly the elephant as a cartoon')
+     *     .lowFreq(2)
+     *     .highFreq(3)
+     *     .cutoffFrequency(0.001);
      *
      * @param {string|number} highFreqMinMatch
      * @returns {CommonTermsQuery} returns `this` so that calls can be chained.

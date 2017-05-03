@@ -6,15 +6,19 @@ const { Query, Script, util: { checkType } } = require('../../core');
 
 /**
  * A query allowing to define scripts as queries.
+ * They are typically used in a filter context.
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-script-query.html)
- *
- * @param {Script=} script
  *
  * @example
  * const scriptQry = bob.scriptQuery(bob.script()
  *  .lang('painless')
  *  .inline("doc['num1'].value > 1"))
+ *
+ * // Use in filter context
+ * const qry = bob.boolQuery().must(scriptQry);
+ *
+ * @param {Script=} script
  *
  * @extends Query
  */

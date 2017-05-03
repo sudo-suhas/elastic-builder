@@ -14,6 +14,17 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html)
  *
+ * @exampl
+ * const qry = bob.nestedQuery()
+ *     .path('obj1')
+ *     .scoreMode('avg')
+ *     .query(
+ *         bob.boolQuery().must([
+ *             bob.matchQuery('obj1.name', 'blue'),
+ *             bob.rangeQuery('obj1.count').gt(5)
+ *         ])
+ *     );
+ *
  * @param {Query=} qry A valid `Query` object
  * @param {string=} path The nested object path.
  *

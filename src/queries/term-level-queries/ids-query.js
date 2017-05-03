@@ -10,6 +10,9 @@ const { Query, util: { checkType } } = require('../../core');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html)
  *
+ * @example
+ * const qry = bob.idsQuery('my_type', ['1', '4', '100']);
+ *
  * @param {Array|string=} type The elasticsearch doc type
  * @param {Array=} ids List of ids to fiter on.
  *
@@ -29,7 +32,7 @@ class IdsQuery extends Query {
      * The type is optional and can be omitted, and can also accept an array of values.
      * If no type is specified, all types defined in the index mapping are tried.
      *
-     * @param {Array|string} type The elasticsearch doc type
+     * @param {Array<String>|string} type The elasticsearch doc type
      * @returns {IdsQuery} returns `this` so that calls can be chained.
      */
     type(type) {

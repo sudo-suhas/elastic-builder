@@ -11,6 +11,10 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html)
  *
+ * @example
+ * const qry = bob.queryStringQuery('this AND that OR thus')
+ *     .defaultField('content');
+ *
  * @param {string=} queryString The actual query to be parsed.
  *
  * @extends QueryStringQueryBase
@@ -25,6 +29,7 @@ class QueryStringQuery extends QueryStringQueryBase {
      * The default field for query terms if no prefix field is specified.
      * Defaults to the `index.query.default_field` index settings, which
      * in turn defaults to `_all`.
+     *
      * @param {string} field
      * @returns {QueryStringQuery} returns `this` so that calls can be chained.
      */
@@ -233,6 +238,11 @@ class QueryStringQuery extends QueryStringQueryBase {
      * Should the queries be combined using `dis_max` (set it to `true`),
      * or a bool query (set it to `false`). Defaults to `true`.
      *
+     * @example
+     * const qry = bob.queryStringQuery('this AND that OR thus')
+     *     .fields(['content', 'name^5'])
+     *     .useDisMax(true);
+     *
      * @param {boolean} enable
      * @returns {QueryStringQuery} returns `this` so that calls can be chained.
      */
@@ -242,7 +252,7 @@ class QueryStringQuery extends QueryStringQueryBase {
     }
 
     /**
-     * When using `dis_max`, the disjunction max tie breaker. Defaults to 0.
+     * When using `dis_max`, the disjunction max tie breaker. Defaults to `0`.
      *
      * @param {number} factor
      * @returns {QueryStringQuery} returns `this` so that calls can be chained.

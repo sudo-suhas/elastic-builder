@@ -35,6 +35,15 @@ class FullTextQueryBase extends Query {
     /**
      * Set the analyzer to control which analyzer will perform the analysis process on the text
      *
+     * @example
+     * const qry = bob.matchPhraseQuery('message', 'this is a test')
+     *     .analyzer('my_analyzer');
+     *
+     * @example
+     * const qry = bob.multiMatchQuery(['first', 'last', '*.edge'], 'Jon')
+     *     .type('cross_fields')
+     *     .analyzer('standard');
+     *
      * @param {string} analyzer
      * @returns {FullTextQueryBase} returns `this` so that calls can be chained.
      */
@@ -50,6 +59,11 @@ class FullTextQueryBase extends Query {
      * `minimum_should_match` for low and high frequency terms, an object with the
      * keys `low_freq` and `high_freq` can be used.
      *
+     * @example
+     * const qry = bob.commonTermsQuery('body', 'nelly the elephant as a cartoon')
+     *     .minimumShouldMatch(2)
+     *     .cutoffFrequency(0.001);
+     *
      * @param {string|number|Object} minimumShouldMatch
      * Note: Object notation can only be used with Common Terms Query.
      * @returns {FullTextQueryBase} returns `this` so that calls can be chained.
@@ -61,6 +75,11 @@ class FullTextQueryBase extends Query {
 
     /**
      * Sets the query string.
+     *
+     * @example
+     * const qry = bob.queryStringQuery()
+     *     .query('city.\\*:(this AND that OR thus)')
+     *     .useDisMax(true);
      *
      * @param {string} queryString
      * @returns {FullTextQueryBase} returns `this` so that calls can be chained.
