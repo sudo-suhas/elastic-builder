@@ -13,14 +13,14 @@ const isNil = require('lodash.isnil');
  *
  * @example
  * const script = bob.script('inline', "doc['my_field'] * multiplier")
- *  .lang('expression')
- *  .params({ multiplier: 2 });
+ *     .lang('expression')
+ *     .params({ multiplier: 2 });
  *
  * // cat "log(_score * 2) + my_modifier" > config/scripts/calculate-score.groovy
  * const script = bob.script()
- *  .lang('groovy')
- *  .file('calculate-score')
- *  .params({ my_modifier: 2 });
+ *     .lang('groovy')
+ *     .file('calculate-score')
+ *     .params({ my_modifier: 2 });
  */
 class Script {
     // eslint-disable-next-line require-jsdoc

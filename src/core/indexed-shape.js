@@ -9,19 +9,19 @@ const isNil = require('lodash.isnil');
  * using a logical name (for example 'New Zealand') rather than having to
  * provide their coordinates each time.
  *
- * @param {string} id The document id of the shape.
- * @param {string} type The name of the type where the shape is indexed.
- *
  * @example
  * const shape = bob.indexedShape('DEU', 'countries')
- *  .index('shapes')
- *  .path('location');
+ *     .index('shapes')
+ *     .path('location');
  *
  * const shape = bob.indexedShape()
- *  .id('DEU')
- *  .type('countries')
- *  .index('shapes')
- *  .path('location');
+ *     .id('DEU')
+ *     .type('countries')
+ *     .index('shapes')
+ *     .path('location');
+ *
+ * @param {string} id The document id of the shape.
+ * @param {string} type The name of the type where the shape is indexed.
  */
 class IndexedShape {
     // eslint-disable-next-line require-jsdoc

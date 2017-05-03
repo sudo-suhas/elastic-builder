@@ -16,20 +16,20 @@ const invalidTypeParam = invalidParam(ES_REF_URL, 'type', GEO_SHAPE_TYPES);
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-shape.html)
  *
+ * @example
+ * // Pass options using method
+ * const shape = bob.geoShape()
+ *     .type('linestring')
+ *     .coordinates([[-77.03653, 38.897676], [-77.009051, 38.889939]]);
+ *
+ * @example
+ * // Pass parameters using contructor
+ * const shape = bob.geoShape('multipoint', [[102.0, 2.0], [103.0, 2.0]])
+ *
  * @param {string=} type A valid shape type.
  * Can be one of `point`, `linestring`, `polygon`, `multipoint`, `multilinestring`,
  * `multipolygon`, `geometrycollection`, `envelope` and `circle`
  * @param {Array=} coords A valid coordinat definition for the given shape.
- *
- * @example
- * // Pass options using method
- * const shape = bob.geoShape()
- *  .type('linestring')
- *  .coordinates([ [-77.03653, 38.897676], [-77.009051, 38.889939] ]);
- *
- *
- * // Pass parameters using contructor
- * const shape = bob.geoShape('multipoint', [[102.0, 2.0], [103.0, 2.0]])
  */
 class GeoShape {
     // eslint-disable-next-line require-jsdoc
@@ -45,8 +45,8 @@ class GeoShape {
      *
      * @example
      * const shape = bob.geoShape()
-     *  .type('envelope')
-     *  .coordinates([[-45.0, 45.0], [45.0, -45.0]])
+     *     .type('envelope')
+     *     .coordinates([[-45.0, 45.0], [45.0, -45.0]])
      *
      * @param {string} type A valid shape type.
      * Can be one of `point`, `linestring`, `polygon`, `multipoint`, `multilinestring`,
@@ -70,8 +70,8 @@ class GeoShape {
      *
      * @example
      * const shape = bob.geoShape()
-     *  .type('point')
-     *  .coordinates([-77.03653, 38.897676])
+     *     .type('point')
+     *     .coordinates([-77.03653, 38.897676])
      *
      * @param {Array} coords
      * @returns {GeoShape} returns `this` so that calls can be chained.
@@ -88,9 +88,9 @@ class GeoShape {
      *
      * @example
      * const shape = bob.geoShape()
-     *  .type('circle')
-     *  .coordinates([-45.0, 45.0])
-     *  .radius('100m')
+     *     .type('circle')
+     *     .coordinates([-45.0, 45.0])
+     *     .radius('100m')
      *
      * @param {string|number} radius The radius for shape circle.
      * @returns {GeoShape} returns `this` so that calls can be chained.
