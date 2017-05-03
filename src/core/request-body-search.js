@@ -412,6 +412,15 @@ class RequestBodySearch {
      *     .query(bob.matchAllQuery())
      *     .highlight(bob.highlight('content'));
      *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .query(
+     *         bob.percolateQuery('query', 'doctype').document({
+     *             message: 'The quick brown fox jumps over the lazy dog'
+     *         })
+     *     )
+     *     .highlight(bob.highlight('message'));
+     *
      * @param {Highlight} highlight
      * @returns {RequestBodySearch} returns `this` so that calls can be chained
      */
