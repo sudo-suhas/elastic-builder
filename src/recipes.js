@@ -97,6 +97,7 @@ exports.randomSortQuery = function randomSortQuery(query = new MatchAllQuery(), 
  *
  * @param {Query} query The query to fetch documents for.
  * @param {boolean=} scoring Optional flag for enabling/disabling scoring. Disabled by default.
+ * If enabled, a score of `1.0` will be assigned to all documents.
  * @returns {BoolQuery} A `bool` query with a `filter` clause is returned.
  * @throws {TypeError} If `query` is not an instance of `Query`.
  */
