@@ -303,7 +303,7 @@ class Highlight {
      * Sets the highlight type to Fast Vector Highlighter(`fvh`).
      *
      * @example
-     * const highlight = new bob.Highlight('content')
+     * const highlight = bob.highlight('content')
      *     .scoreOrder('content')
      *     .matchedFields(['content', 'content.plain'], 'content');
      *
