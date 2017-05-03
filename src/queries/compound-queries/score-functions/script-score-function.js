@@ -2,8 +2,6 @@
 
 const isNil = require('lodash.isnil');
 
-const { Script, util: { checkType } } = require('../../../core');
-
 const ScoreFunction = require('./score-function');
 
 /**
@@ -13,7 +11,7 @@ const ScoreFunction = require('./score-function');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-script-score)
  *
- * @param {Script} script
+ * @param {Script|string} script
  *
  * @extends ScoreFunction
  */
@@ -22,17 +20,15 @@ class ScriptScoreFunction extends ScoreFunction {
     constructor(script) {
         super('script_score');
 
-        if (!isNil(script)) this.script(script);
+        if (!isNil(script)) this._opts.script = script;
     }
 
     /**
      *
-     * @param {Script} script
+     * @param {Script|string} script
      * @returns {ScriptScoreFunction} returns `this` so that calls can be chained.
      */
     script(script) {
-        checkType(script, Script);
-
         this._opts.script = script;
         return this;
     }
