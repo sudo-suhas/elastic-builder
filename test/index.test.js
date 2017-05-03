@@ -327,7 +327,7 @@ test('score functions are exported', t => {
     t.truthy(bob.scriptScoreFunction);
 
     t.truthy(bob.WeightScoreFunction);
-    t.truthy(bob.WeightScoreFunction);
+    t.truthy(bob.weightScoreFunction);
 
     t.truthy(bob.RandomScoreFunction);
     t.truthy(bob.randomScoreFunction);

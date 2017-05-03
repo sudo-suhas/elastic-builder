@@ -445,7 +445,7 @@ exports.ScriptScoreFunction = ScriptScoreFunction;
 exports.scriptScoreFunction = constructorWrapper(ScriptScoreFunction);
 
 exports.WeightScoreFunction = WeightScoreFunction;
-exports.WeightScoreFunction = constructorWrapper(WeightScoreFunction);
+exports.weightScoreFunction = constructorWrapper(WeightScoreFunction);
 
 exports.RandomScoreFunction = RandomScoreFunction;
 exports.randomScoreFunction = constructorWrapper(RandomScoreFunction);
