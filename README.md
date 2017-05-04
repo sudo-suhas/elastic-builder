@@ -65,11 +65,10 @@ This library is a port of `elastic.js` to es6 with elasticsearch 5.3 compatibili
 
 ## API Reference
 API reference can be accessed here - http://elastic-builder.js.org/docs.
+The docs include examples ported from the [official elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html).
 
 API documentation was generated using [documentation.js](https://github.com/documentationjs/documentation).
 It is being hosted with help from this awesome project - https://github.com/js-org/dns.js.org
-
-Documentation is a WIP. See [roadmap](roadmap.md).
 
 ## Recipes
 The library has a few helper recipes:
@@ -90,7 +89,7 @@ qry.toJSON();
 }
 ```
 
-Check out the [docs](http://elastic-builder.js.org/docs#recipes) for more examples.
+Check out the [reference docs](http://elastic-builder.js.org/docs#recipes) for more examples.
 
 If you have any recipes, please do share or better yet, create a [pull request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/) :smile:.
 
@@ -253,6 +252,7 @@ requestBody.toJSON()
   "from": 10
 }
 ```
+For more examples, check out the [reference docs](https://elastic-builder.js.org/docs/).
 
 ## Validation
 `elastic-builder` provides lightweight validation where ever possible:
