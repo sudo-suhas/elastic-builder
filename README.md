@@ -178,13 +178,15 @@ requestBody.toJSON()
 }
 
 // If you prefer using the `new` keyword
-const agg = new TermsAggregation('countries', 'artist.country')
-        .order('rock>playback_stats.avg', 'desc')
-        .agg(
-            new FilterAggregation('rock', new TermQuery('genre', 'rock'))
-                .agg(new StatsAggregation('playback_stats', 'play_count'))
-        )
-        .toJSON();
+const agg = new bob.TermsAggregation('countries', 'artist.country')
+    .order('rock>playback_stats.avg', 'desc')
+    .agg(
+        new bob.FilterAggregation(
+            'rock',
+            new bob.TermQuery('genre', 'rock')
+        ).agg(new bob.StatsAggregation('playback_stats', 'play_count'))
+    )
+    .toJSON();
 agg.toJSON()
 {
   "countries": {
