@@ -45,6 +45,20 @@ class MetricsAggregationBase extends Aggregation {
     /**
      * Sets script parameter for aggregation.
      *
+     * @example
+     * // Compute the average grade based on a script
+     * const agg = bob.avgAggregation('avg_grade').script(
+     *     bob.script('inline', "doc['grade'].value").lang('painless')
+     * );
+     *
+     * @example
+     * // Value script, apply grade correction
+     * const agg = bob.avgAggregation('avg_grade', 'grade').script(
+     *     bob.script('inline', '_value * params.correction')
+     *         .lang('painless')
+     *         .params({ correction: 1.2 })
+     * );
+     *
      * @param {Script} script
      * @returns {MetricsAggregationBase} returns `this` so that calls can be chained
      * @throws {TypeError} If `script` is not an instance of `Script`
@@ -59,6 +73,9 @@ class MetricsAggregationBase extends Aggregation {
     /**
      * Sets the missing parameter ehich defines how documents
      * that are missing a value should be treated.
+     *
+     * @example
+     * const agg = bob.avgAggregation('avg_grade', 'grade').missing(10);
      *
      * @param {string} value
      * @returns {MetricsAggregationBase} returns `this` so that calls can be chained

@@ -15,6 +15,25 @@ const MetricsAggregationBase = require('./metrics-aggregation-base');
  * Aggregation that computes stats over numeric values extracted from the
  * aggregated documents.
  *
+ * @example
+ * const agg = bob.statsAggregation('grades_stats', 'grade');
+ *
+ *
+ * @example
+ * // Use a file script
+ * const agg = bob.statsAggregation('grades_stats').script(
+ *     bob.script('file', 'my_script').params({ field: 'price' })
+ * );
+ *
+ * @example
+ * // Value script to apply the conversion rate to every value
+ * // before it is aggregated
+ * const agg = bob.statsAggregation('grades_stats').script(
+ *     bob.script('inline', '_value * params.conversion_rate').params({
+ *         conversion_rate: 1.2
+ *     })
+ * );
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on
  *

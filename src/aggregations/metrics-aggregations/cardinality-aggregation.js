@@ -14,6 +14,17 @@ const ES_REF_URL =
  *
  * Aggregation that calculates an approximate count of distinct values.
  *
+ * @example
+ * const agg = bob.cardinalityAggregation('author_count', 'author');
+ *
+ * @example
+ * const agg = bob.cardinalityAggregation('author_count').script(
+ *     bob.script(
+ *         'inline',
+ *         "doc['author.first_name'].value + ' ' + doc['author.last_name'].value"
+ *     ).lang('painless')
+ * );
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on
  *
@@ -38,6 +49,12 @@ class CardinalityAggregation extends MetricsAggregationBase {
     /**
      * The `precision_threshold` options allows to trade memory for accuracy,
      * and defines a unique count below which counts are expected to be close to accurate.
+     *
+     * @example
+     * const agg = bob.cardinalityAggregation(
+     *     'author_count',
+     *     'author_hash'
+     * ).precisionThreshold(100);
      *
      * @param {number} threshold The threshold value.
      * The maximum supported value is 40000, thresholds above this number

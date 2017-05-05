@@ -11,6 +11,19 @@ const ES_REF_URL =
  *
  * [Elasticsearchreference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geocentroid-aggregation.html)
  *
+ * @example
+ * const agg = bob.geoCentroidAggregation('centroid', 'location');
+ *
+ * @example
+ * // Combined as a sub-aggregation to other bucket aggregations
+ * const reqBody = bob.requestBodySearch()
+ *     .query(bob.matchQuery('crime', 'burglary'))
+ *     .agg(
+ *         bob.termsAggregation('towns', 'town').agg(
+ *             bob.geoCentroidAggregation('centroid', 'location')
+ *         )
+ *     );
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on. field must be a Geo-point datatype type
  *

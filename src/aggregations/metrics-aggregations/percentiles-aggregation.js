@@ -15,6 +15,17 @@ const MetricsAggregationBase = require('./metrics-aggregation-base');
  * Aggregation that calculates one or more percentiles over numeric values
  * extracted from the aggregated documents.
  *
+ * @example
+ * const agg = bob.percentilesAggregation('load_time_outlier', 'load_time');
+ *
+ * @example
+ * // Convert load time from mills to seconds on-the-fly using script
+ * const agg = bob.percentilesAggregation('load_time_outlier').script(
+ *     bob.script('inline', "doc['load_time'].value / params.timeUnit")
+ *         .lang('painless')
+ *         .params({ timeUnit: 1000 })
+ * );
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on
  *
@@ -30,6 +41,12 @@ class PercentilesAggregation extends MetricsAggregationBase {
      * Enable the response to be returned as a keyed object where the key is the
      * bucket interval.
      *
+     * @example
+     * // Return the ranges as an array rather than a hash
+     * const agg = bob.percentilesAggregation('balance_outlier', 'balance').keyed(
+     *     false
+     * );
+     *
      * @param {boolean} keyed To enable keyed response or not. True by default
      * @returns {PercentilesAggregation} returns `this` so that calls can be chained
      */
@@ -41,6 +58,13 @@ class PercentilesAggregation extends MetricsAggregationBase {
     /**
      * Specifies the percents of interest.
      * Requested percentiles must be a value between 0-100 inclusive
+     *
+     * @example
+     * // Specify particular percentiles to calculate
+     * const agg = bob.percentilesAggregation(
+     *     'load_time_outlier',
+     *     'load_time'
+     * ).percents([95, 99, 99.9]);
      *
      * @param {Array} percents Parameter to specify particular percentiles to calculate
      * @returns {PercentilesAggregation} returns `this` so that calls can be chained
@@ -61,6 +85,12 @@ class PercentilesAggregation extends MetricsAggregationBase {
      * size, resulting in more expensive operations. The default compression
      * value is 100.
      *
+     * @example
+     * const agg = bob.percentilesAggregation(
+     *     'load_time_outlier',
+     *     'load_time'
+     * ).tdigest(200);
+     *
      * @param {number} compression Parameter to balance memory utilization with estimation accuracy.
      * @returns {PercentilesAggregation} returns `this` so that calls can be chained
      */
@@ -80,6 +110,12 @@ class PercentilesAggregation extends MetricsAggregationBase {
      *
      * Alias for `tdigest`
      *
+     * @example
+     * const agg = bob.percentilesAggregation(
+     *     'load_time_outlier',
+     *     'load_time'
+     * ).compression(200);
+     *
      * @param {number} compression Parameter to balance memory utilization with estimation accuracy.
      * @returns {PercentileRanksAggregation} returns `this` so that calls can be chained
      */
@@ -95,6 +131,11 @@ class PercentilesAggregation extends MetricsAggregationBase {
      * with the trade-off of a larger memory footprint.
      *
      * The HDR Histogram can be used by specifying the method parameter in the request.
+     *
+     * @example
+     * const agg = bob.percentilesAggregation('load_time_outlier', 'load_time')
+     *     .percents([95, 99, 99.9])
+     *     .hdr(3);
      *
      * @param {number} numberOfSigDigits The resolution of values
      * for the histogram in number of significant digits

@@ -17,6 +17,14 @@ const ES_REF_URL =
  * Aggregation that counts the number of values that are extracted from the
  * aggregated documents.
  *
+ * @example
+ * const agg = bob.valueCountAggregation('types_count', 'type');
+ *
+ * @example
+ * const agg = bob.valueCountAggregation('types_count').script(
+ *     bob.script('inline', "doc['type'].value")
+ * );
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on
  *

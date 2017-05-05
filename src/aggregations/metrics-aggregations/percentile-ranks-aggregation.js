@@ -20,6 +20,23 @@ const ES_REF_URL =
  * Aggregation that calculates one or more percentiles ranks over numeric values
  * extracted from the aggregated documents.
  *
+ * @example
+ * const agg = bob.percentileRanksAggregation(
+ *     'load_time_outlier',
+ *     'load_time',
+ *     [15, 30]
+ * );
+ *
+ * @example
+ * // Convert load time from mills to seconds on-the-fly using script
+ * const agg = bob.percentileRanksAggregation('load_time_outlier')
+ *     .values([3, 5])
+ *     .script(
+ *         bob.script('inline', "doc['load_time'].value / params.timeUnit")
+ *             .lang('painless')
+ *             .params({ timeUnit: 1000 })
+ *     );
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on. It must be a numeric field
  * @param {Array=} values Values to compute percentiles from.
@@ -29,14 +46,7 @@ const ES_REF_URL =
  * @extends MetricsAggregationBase
  */
 class PercentileRanksAggregation extends MetricsAggregationBase {
-    /**
-     * Creates an instance of `PercentileRanksAggregation`
-     *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string=} field The field to aggregate on. It must be a numeric field
-     * @param {Array=} values Values to compute percentiles from.
-     * @throws {TypeError} If `values` is not an instance of Array
-     */
+    // eslint-disable-next-line require-jsdoc
     constructor(name, field, values) {
         super(name, 'percentile_ranks', field);
 
@@ -56,6 +66,12 @@ class PercentileRanksAggregation extends MetricsAggregationBase {
     /**
      * Enable the response to be returned as a keyed object where the key is the
      * bucket interval.
+     *
+     * @example
+     * // Return the ranges as an array rather than a hash
+     * const agg = bob.percentileRanksAggregation('balance_outlier', 'balance')
+     *     .values([25000, 50000])
+     *     .keyed(false);
      *
      * @param {boolean} keyed To enable keyed response or not.
      * @returns {PercentilesAggregation} returns `this` so that calls can be chained
@@ -120,6 +136,12 @@ class PercentileRanksAggregation extends MetricsAggregationBase {
      * with the trade-off of a larger memory footprint.
      *
      * The HDR Histogram can be used by specifying the method parameter in the request.
+     *
+     * const agg = bob.percentileRanksAggregation(
+     *     'load_time_outlier',
+     *     'load_time',
+     *     [15, 30]
+     * ).hdr(3);
      *
      * @param {number} numberOfSigDigits The resolution of values
      * for the histogram in number of significant digits

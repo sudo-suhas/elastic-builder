@@ -13,6 +13,24 @@ const MetricsAggregationBase = require('./metrics-aggregation-base');
  * Aggregation that keeps track and returns the minimum value among numeric
  * values extracted from the aggregated documents.
  *
+ * @example
+ * const agg = bob.minAggregation('min_price', 'price');
+ *
+ * @example
+ * // Use a file script
+ * const agg = bob.minAggregation('min_price').script(
+ *     bob.script('file', 'my_script').params({ field: 'price' })
+ * );
+ *
+ * @example
+ * // Value script to apply the conversion rate to every value
+ * // before it is aggregated
+ * const agg = bob.minAggregation('min_price').script(
+ *     bob.script('inline', '_value * params.conversion_rate').params({
+ *         conversion_rate: 1.2
+ *     })
+ * );
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on
  *

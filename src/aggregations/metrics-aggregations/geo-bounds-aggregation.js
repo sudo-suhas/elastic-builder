@@ -11,6 +11,9 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geobounds-aggregation.html)
  *
+ * @example
+ * const agg = new bob.GeoBoundsAggregation('viewport', 'location').wrapLongitude(true);
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on
  *

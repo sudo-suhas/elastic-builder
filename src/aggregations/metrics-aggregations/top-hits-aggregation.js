@@ -18,6 +18,36 @@ const ES_REF_URL =
  * `top_hits` metric aggregator keeps track of the most relevant document being
  * aggregated.
  *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .agg(
+ *         bob.termsAggregation('top_tags', 'type')
+ *             .size(3)
+ *             .agg(
+ *                 bob.topHitsAggregation('top_sales_hits')
+ *                     .sort(bob.sort('date', 'desc'))
+ *                     .source({ includes: ['date', 'price'] })
+ *                     .size(1)
+ *             )
+ *     )
+ *     .size(0);
+ *
+ * @example
+ * // Field collapsing(logically groups a result set into
+ * // groups and per group returns top documents)
+ * const reqBody = bob.requestBodySearch()
+ *     .query(bob.matchQuery('body', 'elections'))
+ *     .agg(
+ *         bob.termsAggregation('top-sites', 'domain')
+ *             .order('top_hit', 'desc')
+ *             .agg(bob.topHitsAggregation('top_tags_hits'))
+ *             .agg(
+ *                 bob.maxAggregation('top_hit').script(
+ *                     bob.script('inline', '_score')
+ *                 )
+ *             )
+ *     );
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  *
  * @extends MetricsAggregationBase

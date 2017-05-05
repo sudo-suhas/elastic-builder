@@ -13,6 +13,31 @@ const ES_REF_URL =
  * Aggregation that keeps track and returns the minimum value among numeric
  * values extracted from the aggregated documents.
  *
+ * @example
+ * const agg = bob.scriptedMetricAggregation('profit')
+ *     .initScript('params._agg.transactions = []')
+ *     .mapScript(
+ *         "params._agg.transactions.add(doc.type.value == 'sale' ? doc.amount.value : -1 * doc.amount.value)"
+ *     )
+ *     .combineScript(
+ *         'double profit = 0; for (t in params._agg.transactions) { profit += t } return profit'
+ *     )
+ *     .reduceScript(
+ *         'double profit = 0; for (a in params._aggs) { profit += a } return profit'
+ *     );
+ *
+ * @example
+ * // Specify using file scripts
+ * const agg = bob.scriptedMetricAggregation('profit')
+ *     .initScript(bob.script('file', 'my_init_script'))
+ *     .mapScript(bob.script('file', 'my_map_script'))
+ *     .combineScript(bob.script('file', 'my_combine_script'))
+ *     // script parameters for `init`, `map` and `combine` scripts must be
+ *     // specified in a global params object so that
+ *     // it can be shared between the scripts
+ *     .params({ field: 'amount', _agg: {} })
+ *     .reduceScript(bob.script('file', 'my_reduce_script'));
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  *
  * @extends MetricsAggregationBase
