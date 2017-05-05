@@ -38,7 +38,7 @@ class HistogramAggregationBase extends BucketAggregationBase {
      * @param {string} interval Interval to generate histogram over.
      * For date histograms, available expressions for interval:
      * year, quarter, month, week, day, hour, minute, second
-     * @returns {DateHistogramAggregation} returns `this` so that calls can be chained
+     * @returns {HistogramAggregationBase} returns `this` so that calls can be chained
      */
     interval(interval) {
         this._aggsDef.interval = interval;
@@ -51,7 +51,7 @@ class HistogramAggregationBase extends BucketAggregationBase {
      *
      * @param {string} fmt Format mask to apply on aggregation response. Example: ####.00.
      * For Date Histograms, supports expressive [date format pattern](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-daterange-aggregation.html#date-format-pattern)
-     * @returns {DateHistogramAggregation} returns `this` so that calls can be chained
+     * @returns {HistogramAggregationBase} returns `this` so that calls can be chained
      */
     format(fmt) {
         this._aggsDef.format = fmt;
