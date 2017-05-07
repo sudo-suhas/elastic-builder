@@ -18,6 +18,19 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filters-aggregation.html)
  *
+ * @example
+ * const agg = bob.filtersAggregation('messages')
+ *     .filter('errors', bob.matchQuery('body', 'error'))
+ *     .filter('warnings', bob.matchQuery('body', 'warning'));
+ *
+ *
+ * @example
+ * const agg = bob.filtersAggregation('messages')
+ *     .anonymousFilters([
+ *         bob.matchQuery('body', 'error'),
+ *         bob.matchQuery('body', 'warning')
+ *     ])
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  *
  * @extends BucketAggregationBase
@@ -189,6 +202,12 @@ class FiltersAggregation extends BucketAggregationBase {
      * Sets the key for the other bucket to a value other than the default `_other_`.
      * Setting this parameter will implicitly set the other_bucket parameter to true.
      * If anonymous filters are being used, setting this parameter will not make sense.
+     *
+     * @example
+     * const agg = bob.filtersAggregation('messages')
+     *     .filter('errors', bob.matchQuery('body', 'error'))
+     *     .filter('warnings', bob.matchQuery('body', 'warning'))
+     *     .otherBucketKey('other_messages');
      *
      * @param {string} otherBucketKey
      * @returns {FiltersAggregation} returns `this` so that calls can be chained

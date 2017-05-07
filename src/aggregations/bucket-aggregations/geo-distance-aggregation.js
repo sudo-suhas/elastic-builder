@@ -23,6 +23,11 @@ const invalidDistanceTypeParam = invalidParam(ES_REF_URL, 'distance_type', "'pla
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geodistance-aggregation.html)
  *
+ * @example
+ * const agg = bob.geoDistanceAggregation('rings_around_amsterdam', 'location')
+ *     .origin(bob.geoPoint().string('52.3760, 4.894'))
+ *     .ranges([{ to: 100000 }, { from: 100000, to: 300000 }, { from: 300000 }]);
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on
  *
@@ -72,6 +77,12 @@ class GeoDistanceAggregation extends RangeAggregationBase {
      * km (kilometers), cm (centimeters), mm (millimeters),
      * ft(feet), NM(nauticalmiles)
      *
+     * @example
+     * const agg = bob.geoDistanceAggregation('rings_around_amsterdam', 'location')
+     *     .origin(bob.geoPoint().string('52.3760, 4.894'))
+     *     .unit('km')
+     *     .ranges([{ to: 100 }, { from: 100, to: 300 }, { from: 300 }]);
+     *
      * @param {string} unit Distance unit, default is `m`(meters).
      * @returns {GeoDistanceAggregation} returns `this` so that calls can be chained
      * @throws {Error} If Unit is outside the accepted set.
@@ -89,6 +100,13 @@ class GeoDistanceAggregation extends RangeAggregationBase {
      * Sets the distance calculation mode, `arc` or `plane`.
      * The `arc` calculation is the more accurate.
      * The `plane` is the faster but least accurate.
+     *
+     * @exampl
+     * const agg = bob.geoDistanceAggregation('rings_around_amsterdam', 'location')
+     *     .origin(bob.geoPoint().string('52.3760, 4.894'))
+     *     .unit('km')
+     *     .distanceType('plane')
+     *     .ranges([{ to: 100 }, { from: 100, to: 300 }, { from: 300 }]);
      *
      * @param {string} type
      * @returns {GeoDistanceAggregation} returns `this` so that calls can be chained

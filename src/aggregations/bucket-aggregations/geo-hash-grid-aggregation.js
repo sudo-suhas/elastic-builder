@@ -15,6 +15,9 @@ const ES_REF_URL =
 
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html)
  *
+ * @example
+ * const agg = bob.geoHashGridAggregation('large-grid', 'location').precision(3);
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on
  *

@@ -49,6 +49,13 @@ class HistogramAggregationBase extends BucketAggregationBase {
      * Sets the format expression for `key_as_string` in response buckets.
      * If no format is specified, then it will use the first format specified in the field mapping.
      *
+     * @example
+     * const agg = bob.dateHistogramAggregation(
+     *     'sales_over_time',
+     *     'date',
+     *     '1M'
+     * ).format('yyyy-MM-dd');
+     *
      * @param {string} fmt Format mask to apply on aggregation response. Example: ####.00.
      * For Date Histograms, supports expressive [date format pattern](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-daterange-aggregation.html#date-format-pattern)
      * @returns {HistogramAggregationBase} returns `this` so that calls can be chained
@@ -65,6 +72,9 @@ class HistogramAggregationBase extends BucketAggregationBase {
      * In case of DateHistogramAggregation, duration can be
      * a value such as 1h for an hour, or 1d for a day.
      *
+     * @example
+     * const agg = bob.dateHistogramAggregation('by_day', 'date', 'day').offset('6h');
+     *
      * @param {string} offset Time or bucket key offset for bucketing.
      * @returns {HistogramAggregationBase} returns `this` so that calls can be chained
      */
@@ -75,6 +85,19 @@ class HistogramAggregationBase extends BucketAggregationBase {
 
     /**
      * Sets the ordering for buckets
+     *
+     * @example
+     * const agg = bob.histogramAggregation('prices', 'price', 50)
+     *     .order('_count', 'desc');
+     *
+     * @example
+     * const agg = bob.histogramAggregation('prices', 'price', 50)
+     *     .order('promoted_products>rating_stats.avg', 'desc')
+     *     .agg(
+     *         bob.filterAggregation('promoted_products')
+     *             .filter(bob.termQuery('promoted', 'true'))
+     *             .agg(bob.statsAggregation('rating_stats', 'rating'))
+     *     );
      *
      * @param {string} key
      * @param {string} direction `asc` or `desc`
@@ -98,6 +121,9 @@ class HistogramAggregationBase extends BucketAggregationBase {
     /**
      * Sets the minimum number of matching documents in range to return the bucket.
      *
+     * @example
+     * const agg = bob.histogramAggregation('prices', 'price', 50).minDocCount(1);
+     *
      * @param {number} minDocCnt Integer value for minimum number of documents
      * required to return bucket in response
      * @returns {HistogramAggregationBase} returns `this` so that calls can be chained
@@ -111,6 +137,9 @@ class HistogramAggregationBase extends BucketAggregationBase {
      * Set's the range/bounds for the histogram aggregation.
      * Useful when you want to include buckets that might be
      * outside the bounds of indexed documents.
+     *
+     * @example
+     * const agg = bob.histogramAggregation('prices', 'price', 50).extendedBounds(0, 500);
      *
      * @param {number|string} min Start bound / minimum bound value
      * For histogram aggregation, Integer value can be used.
@@ -133,6 +162,9 @@ class HistogramAggregationBase extends BucketAggregationBase {
      * Sets the missing parameter which defines how documents
      * that are missing a value should be treated.
      *
+     * @example
+     * const agg = bob.histogramAggregation('quantity', 'quantity', 10).missing(0);
+     *
      * @param {string} value
      * @returns {HistogramAggregationBase} returns `this` so that calls can be chained
      */
@@ -144,6 +176,11 @@ class HistogramAggregationBase extends BucketAggregationBase {
     /**
      * Enable the response to be returned as a keyed object where the key is the
      * bucket interval.
+     *
+     * @example
+     * const agg = bob.dateHistogramAggregation('sales_over_time', 'date', '1M')
+     *     .keyed(true)
+     *     .format('yyyy-MM-dd');
      *
      * @param {boolean} keyed To enable keyed response or not.
      * @returns {PercentilesAggregation} returns `this` so that calls can be chained

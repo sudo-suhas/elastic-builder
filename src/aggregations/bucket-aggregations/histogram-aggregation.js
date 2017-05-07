@@ -13,6 +13,19 @@ const HistogramAggregationBase = require('./histogram-aggregation-base');
  * @param {string=} field The field to aggregate on
  * @param {number=} interval Interval to generate histogram over.
  *
+ * @example
+ * const agg = bob.histogramAggregation('prices', 'price', 50);
+ *
+ * @example
+ * const agg = bob.histogramAggregation('prices', 'price', 50).minDocCount(1);
+ *
+ * @example
+ * const agg = bob.histogramAggregation('prices', 'price', 50)
+ *     .extendedBounds(0, 500);
+ *
+ * @example
+ * const agg = bob.histogramAggregation('quantity', 'quantity', 10).missing(0);
+ *
  * @extends HistogramAggregationBase
  */
 class HistogramAggregation extends HistogramAggregationBase {

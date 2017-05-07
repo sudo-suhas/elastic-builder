@@ -11,6 +11,11 @@ const RangeAggregationBase = require('./range-aggregation-base');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-daterange-aggregation.html)
  *
+ * @example
+ * const agg = bob.dateRangeAggregation('range', 'date')
+ *     .format('MM-yyy')
+ *     .ranges([{ to: 'now-10M/M' }, { from: 'now-10M/M' }]);
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on
  *
@@ -23,10 +28,20 @@ class DateRangeAggregation extends RangeAggregationBase {
     }
 
     /**
+     * Sets the date time zone.
      * Date-times are stored in Elasticsearch in UTC.
      * By default, all bucketing and rounding is also done in UTC.
-     * The `time_zone` parameter can be used to indicate that bucketing should use a different time zone.
-     * Sets the date time zone
+     * The `time_zone` parameter can be used to indicate that
+     * bucketing should use a different time zone.
+     *
+     * @example
+     * const agg = bob.dateRangeAggregation('range', 'date')
+     *     .timeZone('CET')
+     *     .ranges([
+     *         { to: '2016/02/01' },
+     *         { from: '2016/02/01', to: 'now/d' },
+     *         { from: 'now/d' }
+     *     ]);
      *
      * @param {string} tz Time zone. Time zones may either be specified
      * as an ISO 8601 UTC offset (e.g. +01:00 or -08:00) or as a timezone id,

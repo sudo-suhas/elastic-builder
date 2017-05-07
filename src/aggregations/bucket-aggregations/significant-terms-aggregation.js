@@ -13,6 +13,22 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-significantterms-aggregation.html)
  *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .query(bob.termsQuery('force', 'British Transport Police'))
+ *     .agg(
+ *         bob.significantTermsAggregation(
+ *             'significantCrimeTypes',
+ *             'crime_type'
+ *         )
+ *     );
+ *
+ * @example
+ * // Use parent aggregation for segregated data analysis
+ * const agg = bob.termsAggregation('forces', 'force').agg(
+ *     bob.significantTermsAggregation('significantCrimeTypes', 'crime_type')
+ * );
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on
  *
@@ -117,6 +133,15 @@ class SignificantTermsAggregation extends TermsAggregationBase {
     /**
      * Sets the `background_filter` to narrow the scope of statistical information
      * for background term frequencies instead of using the entire index.
+     *
+     * @example
+     * const reqBody = bob.requestBodySearch()
+     *     .query(bob.matchQuery('text', 'madrid'))
+     *     .agg(
+     *         bob.significantTermsAggregation('tags', 'tag').backgroundFilter(
+     *             bob.termQuery('text', 'spain')
+     *         )
+     *     );
      *
      * @param {Query} filterQuery Filter query
      * @returns {SignificantTermsAggregation} returns `this` so that calls can be chained

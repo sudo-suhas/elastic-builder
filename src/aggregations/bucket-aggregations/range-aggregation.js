@@ -13,6 +13,35 @@ const RangeAggregationBase = require('./range-aggregation-base');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-range-aggregation.html)
  *
+ * @example
+ * const agg = new bob.RangeAggregation('price_ranges', 'price').ranges([
+ *     { to: 50 },
+ *     { from: 50, to: 100 },
+ *     { from: 100 }
+ * ]);
+ *
+ * @example
+ * const agg = new bob.RangeAggregation('price_ranges')
+ *     .script(new bob.Script('inline', "doc['price'].value").lang('painless'))
+ *     .ranges([{ to: 50 }, { from: 50, to: 100 }, { from: 100 }]);
+ *
+ * @example
+ * // Value script for on-the-fly conversion before aggregation
+ * const agg = new bob.RangeAggregation('price_ranges', 'price')
+ *     .script(
+ *         new bob.Script('inline', '_value * params.conversion_rate')
+ *             .lang('painless')
+ *             .params({ conversion_rate: 0.8 })
+ *     )
+ *     .ranges([{ to: 50 }, { from: 50, to: 100 }, { from: 100 }]);
+ *
+ * @example
+ * // Compute statistics over the prices in each price range
+ * const agg = new bob.RangeAggregation('price_ranges', 'price')
+ *     .ranges([{ to: 50 }, { from: 50, to: 100 }, { from: 100 }])
+ *     // Passing price to Stats Aggregation is optional(same value source)
+ *     .agg(new bob.StatsAggregation('price_stats', 'price'));
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on
  *

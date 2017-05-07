@@ -13,6 +13,15 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-nested-aggregation.html)
  *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .query(bob.matchQuery('name', 'led tv'))
+ *     .agg(
+ *         bob.nestedAggregation('resellers', 'resellers').agg(
+ *             bob.minAggregation('min_price', 'resellers.price')
+ *         )
+ *     );
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} path `path` of the nested document
  *

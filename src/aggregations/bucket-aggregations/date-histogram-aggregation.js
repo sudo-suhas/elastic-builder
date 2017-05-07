@@ -8,6 +8,16 @@ const HistogramAggregationBase = require('./histogram-aggregation-base');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-datehistogram-aggregation.html#_scripts)
  *
+ * @example
+ * const agg = bob.dateHistogramAggregation('sales_over_time', 'date', 'month');
+ *
+ * @example
+ * const agg = bob.dateHistogramAggregation(
+ *     'sales_over_time',
+ *     'date',
+ *     '1M'
+ * ).format('yyyy-MM-dd');
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on
  * @param {string=} interval Interval to generate histogram over.
@@ -26,6 +36,11 @@ class DateHistogramAggregation extends HistogramAggregationBase {
      * By default, all bucketing and rounding is also done in UTC.
      * The `time_zone` parameter can be used to indicate that bucketing should use a different time zone.
      * Sets the date time zone
+     *
+     * @example
+     * const agg = bob.dateHistogramAggregation('by_day', 'date', 'day').timeZone(
+     *     '-01:00'
+     * );
      *
      * @param {string} tz Time zone. Time zones may either be specified
      * as an ISO 8601 UTC offset (e.g. +01:00 or -08:00) or as a timezone id,

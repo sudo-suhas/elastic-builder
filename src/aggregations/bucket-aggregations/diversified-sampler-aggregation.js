@@ -18,6 +18,39 @@ const invalidExecutionHintParam = invalidParam(ES_REF_URL, 'execution_hint', EXE
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-diversified-sampler-aggregation.html)
  *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .query(bob.queryStringQuery('tags:elasticsearch'))
+ *     .agg(
+ *         bob.diversifiedSamplerAggregation('my_unbiased_sample', 'author')
+ *             .shardSize(200)
+ *             .agg(
+ *                 bob.significantTermsAggregation(
+ *                     'keywords',
+ *                     'tags'
+ *                 ).exclude(['elasticsearch'])
+ *             )
+ *     );
+ *
+ * @example
+ * // Use a script to produce a hash of the multiple values in a tags field
+ * // to ensure we don't have a sample that consists of the same repeated
+ * // combinations of tags
+ * const reqBody = bob.requestBodySearch()
+ *     .query(bob.queryStringQuery('tags:kibana'))
+ *     .agg(
+ *         bob.diversifiedSamplerAggregation('my_unbiased_sample')
+ *             .shardSize(200)
+ *             .maxDocsPerValue(3)
+ *             .script(bob.script('inline', "doc['tags'].values.hashCode()"))
+ *             .agg(
+ *                 bob.significantTermsAggregation(
+ *                     'keywords',
+ *                     'tags'
+ *                 ).exclude(['kibana'])
+ *             )
+ *     );
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on
  *

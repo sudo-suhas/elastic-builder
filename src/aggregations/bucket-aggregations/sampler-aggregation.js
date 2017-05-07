@@ -11,6 +11,20 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-sampler-aggregation.html)
  *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .query(bob.queryStringQuery('tags:kibana OR tags:javascript'))
+ *     .agg(
+ *         bob.samplerAggregation('sample')
+ *             .shardSize(200)
+ *             .agg(
+ *                 bob.significantTermsAggregation(
+ *                     'keywords',
+ *                     'tags'
+ *                 ).exclude(['kibana', 'javascript'])
+ *             )
+ *     );
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on
  *

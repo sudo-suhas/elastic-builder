@@ -13,6 +13,24 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-children-aggregation.html)
  *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .agg(
+ *         bob.termsAggregation('top-tags', 'tags.keyword')
+ *             .size(10)
+ *             .agg(
+ *                 bob.childrenAggregation('to-answers')
+ *                     .type('answer')
+ *                     .agg(
+ *                         bob.termsAggregation(
+ *                             'top-names',
+ *                             'owner.display_name.keyword'
+ *                         ).size(10)
+ *                     )
+ *             )
+ *     )
+ *     .size(0);
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  *
  * @extends BucketAggregationBase

@@ -19,6 +19,19 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html)
  *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .query(bob.matchQuery('name', 'led tv'))
+ *     .agg(
+ *         bob.nestedAggregation('comments', 'comments').agg(
+ *             bob.termsAggregation('top_usernames', 'comments.username').agg(
+ *                 bob.reverseNestedAggregation('comment_to_issue').agg(
+ *                     bob.termsAggregation('top_tags_per_comment', 'tags')
+ *                 )
+ *             )
+ *         )
+ *     );
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} path Defines to what nested object field should be joined back.
  * The default is empty, which means that it joins back to the root / main document

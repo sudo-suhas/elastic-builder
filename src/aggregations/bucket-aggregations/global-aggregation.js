@@ -12,6 +12,16 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-global-aggregation.html)
  *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .query(bob.matchQuery('type', 't-shirt'))
+ *     .agg(
+ *         bob.globalAggregation('all_products').agg(
+ *             bob.avgAggregation('avg_price', 'price')
+ *         )
+ *     )
+ *     .agg(bob.avgAggregation('t_shirts', 'price'));
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  *
  * @extends BucketAggregationBase

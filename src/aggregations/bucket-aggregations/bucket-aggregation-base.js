@@ -42,6 +42,18 @@ class BucketAggregationBase extends Aggregation {
     /**
      * Sets script parameter for aggregation.
      *
+     * @example
+     * // Generating the terms using a script
+     * const agg = bob.termsAggregation('genres').script(
+     *     bob.script('file', 'my_script').params({ field: 'genre' })
+     * );
+     *
+     * @example
+     * // Value script
+     * const agg = bob.termsAggregation('genres', 'genre').script(
+     *     bob.script('inline', "'Genre: ' +_value").lang('painless')
+     * );
+     *
      * @param {Script} script
      * @returns {BucketAggregationBase} returns `this` so that calls can be chained
      * @throws {TypeError} If `script` is not an instance of `Script`

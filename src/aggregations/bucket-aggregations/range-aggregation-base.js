@@ -103,6 +103,22 @@ class RangeAggregationBase extends BucketAggregationBase {
      * Enable the response to be returned as a keyed object where the key is the
      * bucket interval.
      *
+     * @example
+     * const agg = bob.dateRangeAggregation('range', 'date')
+     *     .format('MM-yyy')
+     *     .ranges([{ to: 'now-10M/M' }, { from: 'now-10M/M' }])
+     *     .keyed(true);
+     *
+     * @example
+     * const agg = bob.geoDistanceAggregation('rings_around_amsterdam', 'location')
+     *     .origin(bob.geoPoint().string('52.3760, 4.894'))
+     *     .ranges([
+     *         { to: 100000, key: 'first_ring' },
+     *         { from: 100000, to: 300000, key: 'second_ring' },
+     *         { from: 300000, key: 'third_ring' }
+     *     ])
+     *     .keyed(true);
+     *
      * @param {boolean} keyed To enable keyed response or not.
      * @returns {RangeAggregationBase} returns `this` so that calls can be chained
      */
