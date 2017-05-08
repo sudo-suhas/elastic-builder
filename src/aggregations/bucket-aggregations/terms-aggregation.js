@@ -131,6 +131,18 @@ class TermsAggregation extends TermsAggregationBase {
      *     .order('playback_stats.max', 'desc')
      *     .agg(bob.statsAggregation('playback_stats', 'play_count'));
      *
+     * @example
+     * // Multiple order criteria
+     * const agg = bob.termsAggregation('countries')
+     *     .field('artist.country')
+     *     .order('rock>playback_stats.avg', 'desc')
+     *     .order('_count', 'desc')
+     *     .agg(
+     *         bob.filterAggregation('rock')
+     *             .filter(bob.termQuery('genre', 'rock'))
+     *             .agg(bob.statsAggregation('playback_stats', 'play_count'))
+     *     );
+     *
      * @param {string} key
      * @param {string} direction `asc` or `desc`
      * @returns {TermsAggregation} returns `this` so that calls can be chained
