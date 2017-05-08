@@ -14,6 +14,34 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-selector-aggregation.html)
  *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .agg(
+ *         bob.dateHistogramAggregation('histo', 'date')
+ *             .interval('day')
+ *             .agg(bob.termsAggregation('categories', 'category'))
+ *             .agg(
+ *                 bob.bucketSelectorAggregation('min_bucket_selector')
+ *                     .bucketsPath({ count: 'categories._bucket_count' })
+ *                     .script(bob.script('inline', 'params.count != 0'))
+ *             )
+ *     )
+ *     .size(0);
+ *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .agg(
+ *         bob.dateHistogramAggregation('sales_per_month', 'date')
+ *             .interval('month')
+ *             .agg(bob.sumAggregation('sales', 'price'))
+ *             .agg(
+ *                 bob.bucketSelectorAggregation('sales_bucket_filter')
+ *                     .bucketsPath({ totalSales: 'total_sales' })
+ *                     .script('params.totalSales > 200')
+ *             )
+ *     )
+ *     .size(0);
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} bucketsPath The relative path of metric to aggregate over
  *
@@ -37,7 +65,7 @@ class BucketSelectorAggregation extends PipelineAggregationBase {
     /**
      * Sets script parameter for aggregation. Required.
      *
-     * @param {Script} script
+     * @param {Script|string} script
      * @returns {BucketScriptAggregation} returns `this` so that calls can be chained
      * @throws {TypeError} If `script` is not an instance of `Script`
      */

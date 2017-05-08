@@ -14,6 +14,24 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-min-bucket-aggregation.html)
  *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .agg(
+ *         bob.dateHistogramAggregation('sales_per_month', 'date')
+ *             .interval('month')
+ *             .agg(bob.sumAggregation('sales', 'price'))
+ *     )
+ *     .agg(
+ *         // Metric embedded in sibling aggregation
+ *         // Get the minimum value of `sales` aggregation in
+ *         // `sales_per_month` histogram
+ *         bob.minBucketAggregation(
+ *             'min_monthly_sales',
+ *             'sales_per_month>sales'
+ *         )
+ *     )
+ *     .size(0);
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} bucketsPath The relative path of metric to aggregate over
  *

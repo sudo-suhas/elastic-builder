@@ -13,6 +13,27 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-script-aggregation.html)
  *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .agg(
+ *         bob.dateHistogramAggregation('sales_per_month', 'date', 'month')
+ *             .agg(bob.sumAggregation('total_sales', 'price'))
+ *             .agg(
+ *                 bob.filterAggregation('t-shirts')
+ *                     .filter(bob.termQuery('type', 't-shirt'))
+ *                     .agg(bob.sumAggregation('sales', 'price'))
+ *             )
+ *             .agg(
+ *                 bob.bucketScriptAggregation('t-shirt-percentage')
+ *                     .bucketsPath({
+ *                         tShirtSales: 't-shirts>sales',
+ *                         totalSales: 'total_sales'
+ *                     })
+ *                     .script('params.tShirtSales / params.totalSales * 100')
+ *             )
+ *     )
+ *     .size(0);
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} bucketsPath The relative path of metric to aggregate over
  *
@@ -27,7 +48,7 @@ class BucketScriptAggregation extends PipelineAggregationBase {
     /**
      * Sets script parameter for aggregation.
      *
-     * @param {Script} script
+     * @param {Script|string} script
      * @returns {BucketScriptAggregation} returns `this` so that calls can be chained
      * @throws {TypeError} If `script` is not an instance of `Script`
      */

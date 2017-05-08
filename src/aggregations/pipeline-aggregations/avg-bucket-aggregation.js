@@ -12,6 +12,21 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-avg-bucket-aggregation.html)
  *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .agg(
+ *         bob.dateHistogramAggregation('sales_per_month', 'date')
+ *             .interval('month')
+ *             .agg(bob.sumAggregation('sales', 'price'))
+ *     )
+ *     .agg(
+ *         bob.avgBucketAggregation(
+ *             'avg_monthly_sales',
+ *             'sales_per_month>sales'
+ *         )
+ *     )
+ *     .size(0);
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} bucketsPath The relative path of metric to aggregate over
  *

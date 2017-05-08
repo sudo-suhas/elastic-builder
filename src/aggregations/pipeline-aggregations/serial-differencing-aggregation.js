@@ -9,9 +9,24 @@ const ES_REF_URL =
  * Serial differencing is a technique where values in a time series are
  * subtracted from itself at different time lags or periods.
  *
- * Serial differences are built by first specifying a histogram or date_histogram over a field.
+ * Serial differences are built by first specifying a `histogram` or `date_histogram` over a field.
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-serialdiff-aggregation.html)
+ *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .agg(
+ *         bob.dateHistogramAggregation('my_date_histo', 'timestamp')
+ *             .interval('day')
+ *             .agg(bob.sumAggregation('the_sum', 'lemmings'))
+ *             .agg(
+ *                 bob.serialDifferencingAggregation(
+ *                     'thirtieth_difference',
+ *                     'the_sum'
+ *                 ).lag(30)
+ *             )
+ *     )
+ *     .size(0);
  *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} bucketsPath The relative path of metric to aggregate over

@@ -20,6 +20,34 @@ const invalidModelParam = invalidParam(ES_REF_URL, 'model', MODEL_SET);
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-movavg-aggregation.html)
  *
+ * @example
+ * const agg = bob.movingAverageAggregation('the_movavg', 'the_sum')
+ *     .model('holt')
+ *     .window(5)
+ *     .gapPolicy('insert_zeros')
+ *     .settings({ alpha: 0.8 });
+ *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .agg(
+ *         bob.dateHistogramAggregation('my_date_histo', 'timestamp')
+ *             .interval('day')
+ *             .agg(bob.sumAggregation('the_sum', 'lemmings'))
+ *             // Relative path to sibling metric `the_sum`
+ *             .agg(bob.movingAverageAggregation('the_movavg', 'the_sum'))
+ *     )
+ *     .size(0);
+ *
+ * @example
+ * const reqBody = bob.requestBodySearch()
+ *     .agg(
+ *         bob.dateHistogramAggregation('my_date_histo', 'timestamp')
+ *             .interval('day')
+ *             // Use the document count as it's input
+ *             .agg(bob.movingAverageAggregation('the_movavg', '_count'))
+ *     )
+ *     .size(0);
+ *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} bucketsPath The relative path of metric to aggregate over
  *
@@ -43,6 +71,17 @@ class MovingAverageAggregation extends PipelineAggregationBase {
     /**
      * Sets the moving average weighting model that we wish to use. Optional.
      *
+     * @example
+     * const agg = bob.movingAverageAggregation('the_movavg', 'the_sum')
+     *     .model('simple')
+     *     .window(30);
+     *
+     * @example
+     * const agg = bob.movingAverageAggregation('the_movavg', 'the_sum')
+     *     .model('ewma')
+     *     .window(30)
+     *     .settings({ alpha: 0.8 });
+     *
      * @param {string} model Can be `simple`, `linear`,
      * `ewma` (aka "single-exponential"), `holt` (aka "double exponential")
      * or `holt_winters` (aka "triple exponential").
@@ -62,6 +101,11 @@ class MovingAverageAggregation extends PipelineAggregationBase {
     /**
      * Sets the size of window to "slide" across the histogram. Optional.
      *
+     * @example
+     * const agg = bob.movingAverageAggregation('the_movavg', 'the_sum')
+     *     .model('simple')
+     *     .window(30)
+     *
      * @param {number} window Default is 5
      * @returns {MovingAverageAggregation} returns `this` so that calls can be chained
      */
@@ -76,6 +120,13 @@ class MovingAverageAggregation extends PipelineAggregationBase {
      * Minimization is disabled by default for `ewma` and `holt_linear`,
      * while it is enabled by default for `holt_winters`.
      *
+     * @example
+     * const agg = bob.movingAverageAggregation('the_movavg', 'the_sum')
+     *     .model('holt_winters')
+     *     .window(30)
+     *     .minimize(true)
+     *     .settings({ period: 7 });
+     *
      * @param {boolean} enable `false` for most models
      * @returns {MovingAverageAggregation} returns `this` so that calls can be chained
      */
@@ -88,6 +139,12 @@ class MovingAverageAggregation extends PipelineAggregationBase {
      * Model-specific settings, contents which differ depending on the model specified.
      * Optional.
      *
+     * @example
+     * const agg = bob.movingAverageAggregation('the_movavg', 'the_sum')
+     *     .model('ewma')
+     *     .window(30)
+     *     .settings({ alpha: 0.8 });
+     *
      * @param {Object} settings
      * @returns {MovingAverageAggregation} returns `this` so that calls can be chaineds
      */
@@ -99,6 +156,13 @@ class MovingAverageAggregation extends PipelineAggregationBase {
     /**
      * Enable "prediction" mode, which will attempt to extrapolate into the future given
      * the current smoothed, moving average
+     *
+     * @example
+     * const agg = bob.movingAverageAggregation('the_movavg', 'the_sum')
+     *     .model('simple')
+     *     .window(30)
+     *     .predict(10);
+     *
      * @param {number} predict the number of predictions you would like appended to the
      * end of the series
      * @returns {MovingAverageAggregation} returns `this` so that calls can be chained
