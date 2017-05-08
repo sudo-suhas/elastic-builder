@@ -1,7 +1,6 @@
 {
   "verbose": true,
   "buildCommand": "npm run build",
-  "changelogCommand": "git log --pretty=format:\"* %s (%h)\" [REV_RANGE]",
   "requireCleanWorkingDir": true,
   "src": {
     "tagName": "v%s",
