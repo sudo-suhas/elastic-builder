@@ -8,6 +8,11 @@ const { Aggregation, util: { checkType } } = require('../../core');
  * The `matrix_stats` aggregation is a numeric aggregation that computes
  * statistics over a set of document fields
  *
+ * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-matrix-stats-aggregation.html)
+ *
+ * @example
+ * const agg = bob.matrixStatsAggregation('matrixstats', ['poverty', 'income']);
+ *
  * @param {string} name A valid aggregation name
  * @param {Array=} fields Array of fields
  *
@@ -24,6 +29,10 @@ class MatrixStatsAggregation extends Aggregation {
     /**
      * The `fields` setting defines the set of fields (as an array) for computing
      * the statistics.
+     *
+     * @example
+     * const agg = bob.matrixStatsAggregation('matrixstats')
+     *     .fields(['poverty', 'income']);
      *
      * @param {Array} fields Array of fields
      * @returns {MatrixStatsAggregation} returns `this` so that calls can be chained
@@ -51,6 +60,11 @@ class MatrixStatsAggregation extends Aggregation {
      * The missing parameter defines how documents that are missing a value should
      * be treated. By default they will be ignored but it is also possible to treat
      * them as if they had a value.
+     *
+     * @example
+     * const agg = bob.matrixStatsAggregation('matrixstats')
+     *     .fields(['poverty', 'income'])
+     *     .missing({ income: 50000 });
      *
      * @param {Object} missing Set of fieldname : value mappings to specify default
      * values per field
