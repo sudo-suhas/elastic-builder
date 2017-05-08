@@ -121,21 +121,21 @@ class TermsAggregationBase extends BucketAggregationBase {
      * Filter the values for which buckets will be created.
      *
      * @example
-     * const agg = new bob.TermsAggregation('tags', 'tags')
+     * const agg = bob.termsAggregation('tags', 'tags')
      *     .include('.*sport.*')
      *     .exclude('water_.*');
      *
      * @example
      * // Match on exact values
-     * const reqBody = new bob.RequestBodySearch()
+     * const reqBody = bob.requestBodySearch()
      *     .agg(
-     *         new bob.TermsAggregation('JapaneseCars', 'make').include([
+     *         bob.termsAggregation('JapaneseCars', 'make').include([
      *             'mazda',
      *             'honda'
      *         ])
      *     )
      *     .agg(
-     *         new bob.TermsAggregation('ActiveCarManufacturers', 'make').exclude([
+     *         bob.termsAggregation('ActiveCarManufacturers', 'make').exclude([
      *             'rover',
      *             'jensen'
      *         ])
@@ -153,21 +153,21 @@ class TermsAggregationBase extends BucketAggregationBase {
      * Filter the values for which buckets will be created.
      *
      * @example
-     * const agg = new bob.TermsAggregation('tags', 'tags')
+     * const agg = bob.termsAggregation('tags', 'tags')
      *     .include('.*sport.*')
      *     .exclude('water_.*');
      *
      * @example
      * // Match on exact values
-     * const reqBody = new bob.RequestBodySearch()
+     * const reqBody = bob.requestBodySearch()
      *     .agg(
-     *         new bob.TermsAggregation('JapaneseCars', 'make').include([
+     *         bob.termsAggregation('JapaneseCars', 'make').include([
      *             'mazda',
      *             'honda'
      *         ])
      *     )
      *     .agg(
-     *         new bob.TermsAggregation('ActiveCarManufacturers', 'make').exclude([
+     *         bob.termsAggregation('ActiveCarManufacturers', 'make').exclude([
      *             'rover',
      *             'jensen'
      *         ])
@@ -191,7 +191,7 @@ class TermsAggregationBase extends BucketAggregationBase {
      * const agg = bob.significantTermsAggregation('tags', 'tag').executionHint('map');
      *
      * @example
-     * const agg = new bob.TermsAggregation('tags', 'tags').executionHint('map');
+     * const agg = bob.termsAggregation('tags', 'tags').executionHint('map');
      *
      * @param {string} hint the possible values are `map`, `global_ordinals`,
      * `global_ordinals_hash` and `global_ordinals_low_cardinality`
