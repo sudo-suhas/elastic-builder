@@ -1,5 +1,6 @@
 'use strict';
 
+const has = require('lodash.has');
 const isNil = require('lodash.isnil');
 
 const { util: { invalidParam } } = require('../../core');
@@ -142,9 +143,15 @@ class TermsAggregation extends TermsAggregationBase {
             invalidDirectionParam(direction);
         }
 
-        this._aggsDef.order = {
-            [key]: directionLower
-        };
+        if (has(this._aggsDef, 'order')) {
+            if (!Array.isArray(this._aggsDef.order)) {
+                this._aggsDef.order = [this._aggsDef.order];
+            }
+
+            this._aggsDef.order.push({ [key]: directionLower });
+        } else {
+            this._aggsDef.order = { [key]: directionLower };
+        }
 
         return this;
     }
