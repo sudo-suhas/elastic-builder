@@ -61,7 +61,7 @@ However, this project is not being maintained nor is the [fork](https://github.c
 There were [several changes](https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking_50_search_changes.html)
 in the 5.0 release which make the older libraries unusable.
 
-This library is a port of `elastic.js` to es6 with elasticsearch 5.3 compatibility.
+This library is a port of `elastic.js` to es6 with elasticsearch 5.x compatibility.
 
 ## API Reference
 API reference can be accessed here - http://elastic-builder.js.org/docs.
