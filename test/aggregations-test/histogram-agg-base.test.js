@@ -42,3 +42,38 @@ test('order direction is validated', t => {
     err = t.throws(() => getInstance().order('my_field', null), Error);
     t.is(err.message, "The 'direction' parameter should be one of 'asc' or 'desc'");
 });
+
+test('multiple order criteria can be set', t => {
+    const value = getInstance('my_field').order('my_field_a', 'asc');
+    let expected = {
+        my_agg: {
+            my_type: {
+                field: 'my_field',
+                order: { my_field_a: 'asc' }
+            }
+        }
+    };
+    t.deepEqual(value.toJSON(), expected);
+
+    value.order('my_field_b', 'desc');
+    expected = {
+        my_agg: {
+            my_type: {
+                field: 'my_field',
+                order: [{ my_field_a: 'asc' }, { my_field_b: 'desc' }]
+            }
+        }
+    };
+    t.deepEqual(value.toJSON(), expected);
+
+    value.order('my_field_c', 'asc');
+    expected = {
+        my_agg: {
+            my_type: {
+                field: 'my_field',
+                order: [{ my_field_a: 'asc' }, { my_field_b: 'desc' }, { my_field_c: 'asc' }]
+            }
+        }
+    };
+    t.deepEqual(value.toJSON(), expected);
+});
