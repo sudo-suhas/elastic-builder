@@ -33,6 +33,24 @@ const { checkType, recursiveToJSON } = require('./util');
  *   "from": 0,
  *   "size": 10
  * }
+ *
+ * @example
+ * // Query and aggregation
+ * const reqBody = bob.requestBodySearch()
+ *     .query(bob.matchQuery('business_type', 'shop'))
+ *     .agg(
+ *         bob.geoBoundsAggregation('viewport', 'location').wrapLongitude(true)
+ *     );
+ *
+ * @example
+ * // Query, aggregation with nested
+ * const reqBody = bob.requestBodySearch()
+ *     .query(bob.matchQuery('crime', 'burglary'))
+ *     .agg(
+ *         bob.termsAggregation('towns', 'town').agg(
+ *             bob.geoCentroidAggregation('centroid', 'location')
+ *         )
+ *     );
  */
 class RequestBodySearch {
     // eslint-disable-next-line require-jsdoc
