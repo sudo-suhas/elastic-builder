@@ -45,7 +45,7 @@ class InnerHits {
      * search request. The default depends in which query the inner hit is defined.
      *
      * @param {number} name
-     * @returns {RequestBodySearch} returns `this` so that calls can be chained.
+     * @returns {InnerHits} returns `this` so that calls can be chained.
      */
     name(name) {
         this._body.name = name;
@@ -57,7 +57,7 @@ class InnerHits {
      * regular search hits.
      *
      * @param {number} from
-     * @returns {RequestBodySearch} returns `this` so that calls can be chained.
+     * @returns {InnerHits} returns `this` so that calls can be chained.
      */
     from(from) {
         this._body.from = from;
@@ -69,7 +69,7 @@ class InnerHits {
      * By default the top three matching hits are returned.
      *
      * @param {number} size Defaults to 10.
-     * @returns {RequestBodySearch} returns `this` so that calls can be chained.
+     * @returns {InnerHits} returns `this` so that calls can be chained.
      */
     size(size) {
         this._body.size = size;
@@ -81,7 +81,7 @@ class InnerHits {
      * By default the hits are sorted by the score.
      *
      * @param {Sort} sort
-     * @returns {RequestBodySearch} returns `this` so that calls can be chained.
+     * @returns {InnerHits} returns `this` so that calls can be chained.
      * @throws {TypeError} If parameter `sort` is not an instance of `Sort`.
      */
     sort(sort) {
@@ -98,7 +98,7 @@ class InnerHits {
      * sort by score, and _doc to sort by index order.
      *
      * @param {Array<Sort>} sorts Arry of sort
-     * @returns {RequestBodySearch} returns `this` so that calls can be chained.
+     * @returns {InnerHits} returns `this` so that calls can be chained.
      * @throws {TypeError} If any item in parameter `sorts` is not an instance of `Sort`.
      */
     sorts(sorts) {
@@ -112,7 +112,7 @@ class InnerHits {
      * or `postings` highlighter.
      *
      * @param {Highlight} highlight
-     * @returns {RequestBodySearch} returns `this` so that calls can be chained
+     * @returns {InnerHits} returns `this` so that calls can be chained
      */
     highlight(highlight) {
         checkType(highlight, Highlight);
@@ -125,7 +125,7 @@ class InnerHits {
      * Enables explanation for each hit on how its score was computed.
      *
      * @param {boolean} enable
-     * @returns {RequestBodySearch} returns `this` so that calls can be chained
+     * @returns {InnerHits} returns `this` so that calls can be chained
      */
     explain(enable) {
         this._body.explain = enable;
@@ -140,7 +140,7 @@ class InnerHits {
      * An object can also be used to specify the wildcard patterns for `includes` and `excludes`.
      *
      * @param {boolean|string|Array|Object} source
-     * @returns {RequestBodySearch} returns `this` so that calls can be chained
+     * @returns {InnerHits} returns `this` so that calls can be chained
      */
     source(source) {
         this._body._source = source;
@@ -151,7 +151,7 @@ class InnerHits {
      * Include specific stored fields
      *
      * @param {Array|string} fields
-     * @returns {RequestBodySearch} returns `this` so that calls can be chained
+     * @returns {InnerHits} returns `this` so that calls can be chained
      */
     storedFields(fields) {
         this._body.stored_fields = fields;
@@ -163,7 +163,7 @@ class InnerHits {
      *
      * @param {string} scriptFieldName
      * @param {string|Script} script string or instance of `Script`
-     * @returns {RequestBodySearch} returns `this` so that calls can be chained
+     * @returns {InnerHits} returns `this` so that calls can be chained
      */
     scriptField(scriptFieldName, script) {
         if (!has(this._body, 'script_fields')) this._body.script_fields = {};
@@ -178,7 +178,7 @@ class InnerHits {
      * Object should have `scriptFieldName` as key and `script` as the value.
      *
      * @param {Object} scriptFields Object with `scriptFieldName` as key and `script` as the value.
-     * @returns {TopHitsAggregation} returns `this` so that calls can be chained
+     * @returns {InnerHits} returns `this` so that calls can be chained
      */
     scriptFields(scriptFields) {
         checkType(scriptFields, Object);
@@ -195,7 +195,7 @@ class InnerHits {
      * Doc value fields can work on fields that are not stored.
      *
      * @param {Array} fields
-     * @returns {RequestBodySearch} returns `this` so that calls can be chained
+     * @returns {InnerHits} returns `this` so that calls can be chained
      */
     docvalueFields(fields) {
         this._body.docvalue_fields = fields;
@@ -206,7 +206,7 @@ class InnerHits {
      * Returns a version for each search hit.
      *
      * @param {boolean} enable
-     * @returns {RequestBodySearch} returns `this` so that calls can be chained.
+     * @returns {InnerHits} returns `this` so that calls can be chained.
      */
     version(enable) {
         this._body.version = enable;
