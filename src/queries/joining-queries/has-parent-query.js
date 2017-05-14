@@ -29,7 +29,7 @@ const ES_REF_URL =
  *         )
  *     );
  *
- * @param {Query} qry A valid `Query` object
+ * @param {Query=} qry A valid `Query` object
  * @param {string=} type The parent type
  *
  * @extends JoiningQueryBase
