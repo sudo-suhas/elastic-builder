@@ -137,6 +137,7 @@ class PercentileRanksAggregation extends MetricsAggregationBase {
      *
      * The HDR Histogram can be used by specifying the method parameter in the request.
      *
+     * @example
      * const agg = bob.percentileRanksAggregation(
      *     'load_time_outlier',
      *     'load_time',
