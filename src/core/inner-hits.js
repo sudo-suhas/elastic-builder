@@ -97,7 +97,7 @@ class InnerHits {
      * The sort is defined on a per field level, with special field name for _score to
      * sort by score, and _doc to sort by index order.
      *
-     * @param {Array<Sort>} sorts Arry of sort
+     * @param {Array<Sort>} sorts Array of sort
      * @returns {InnerHits} returns `this` so that calls can be chained.
      * @throws {TypeError} If any item in parameter `sorts` is not an instance of `Sort`.
      */
