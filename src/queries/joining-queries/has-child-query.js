@@ -77,7 +77,7 @@ class HasChildQuery extends JoiningQueryBase {
      *     .scoreMode('min');
      *
      * @param {number} limit A positive `integer` value.
-     * @returns {NestedQuery} returns `this` so that calls can be chained.
+     * @returns {HasChildQuery} returns `this` so that calls can be chained.
      */
     minChildren(limit) {
         this._queryOpts.min_children = limit;
@@ -95,7 +95,7 @@ class HasChildQuery extends JoiningQueryBase {
      *     .scoreMode('min');
      *
      * @param {number} limit A positive `integer` value.
-     * @returns {NestedQuery} returns `this` so that calls can be chained.
+     * @returns {HasChildQuery} returns `this` so that calls can be chained.
      */
     maxChildren(limit) {
         this._queryOpts.max_children = limit;
