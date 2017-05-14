@@ -32,7 +32,7 @@ class IdsQuery extends Query {
      * The type is optional and can be omitted, and can also accept an array of values.
      * If no type is specified, all types defined in the index mapping are tried.
      *
-     * @param {Array<String>|string} type The elasticsearch doc type
+     * @param {Array<string>|string} type The elasticsearch doc type
      * @returns {IdsQuery} returns `this` so that calls can be chained.
      */
     type(type) {
