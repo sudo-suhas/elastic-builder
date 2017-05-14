@@ -26,7 +26,7 @@ const invalidBehaviorParam = invalidParam(ES_REF_URL, 'behavior', "'all' or 'one
  * @example
  * const qry = bob.multiMatchQuery(['subject', 'message'], 'this is a test');
  *
- * @param {Array<string>|string} fields The fields to be queried
+ * @param {Array<string>|string=} fields The fields to be queried
  * @param {string=} queryString The query string
  *
  * @extends FullTextQueryBase
