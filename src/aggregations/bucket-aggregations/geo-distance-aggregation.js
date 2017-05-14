@@ -101,7 +101,7 @@ class GeoDistanceAggregation extends RangeAggregationBase {
      * The `arc` calculation is the more accurate.
      * The `plane` is the faster but least accurate.
      *
-     * @exampl
+     * @example
      * const agg = bob.geoDistanceAggregation('rings_around_amsterdam', 'location')
      *     .origin(bob.geoPoint().string('52.3760, 4.894'))
      *     .unit('km')
