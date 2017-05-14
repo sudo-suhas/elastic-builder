@@ -14,7 +14,7 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html)
  *
- * @exampl
+ * @example
  * const qry = bob.nestedQuery()
  *     .path('obj1')
  *     .scoreMode('avg')
