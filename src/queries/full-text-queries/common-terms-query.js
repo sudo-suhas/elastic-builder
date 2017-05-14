@@ -96,7 +96,7 @@ class CommonTermsQuery extends MonoFieldQueryBase {
      *     .cutoffFrequency(0.001);
      *
      * @param {string} operator Can be `and`/`or`. Default is `or`.
-     * @returns {MatchQuery} returns `this` so that calls can be chained.
+     * @returns {CommonTermsQuery} returns `this` so that calls can be chained.
      */
     lowFreqOperator(operator) {
         if (isNil(operator)) invalidLowFreqOpParam(operator);
@@ -116,7 +116,7 @@ class CommonTermsQuery extends MonoFieldQueryBase {
      * can be set to `or` or `and` to control the boolean clauses (defaults to `or`).
      *
      * @param {string} operator Can be `and`/`or`. Default is `or`.
-     * @returns {MatchQuery} returns `this` so that calls can be chained.
+     * @returns {CommonTermsQuery} returns `this` so that calls can be chained.
      */
     highFreqOperator(operator) {
         if (isNil(operator)) invalidHighFreqOpParam(operator);
