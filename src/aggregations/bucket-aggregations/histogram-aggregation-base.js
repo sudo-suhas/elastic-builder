@@ -190,7 +190,7 @@ class HistogramAggregationBase extends BucketAggregationBase {
      *     .format('yyyy-MM-dd');
      *
      * @param {boolean} keyed To enable keyed response or not.
-     * @returns {PercentilesAggregation} returns `this` so that calls can be chained
+     * @returns {HistogramAggregationBase} returns `this` so that calls can be chained
      */
     keyed(keyed) {
         this._aggsDef.keyed = keyed;
