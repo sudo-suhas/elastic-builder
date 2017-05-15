@@ -66,7 +66,7 @@ class BucketSelectorAggregation extends PipelineAggregationBase {
      * Sets script parameter for aggregation. Required.
      *
      * @param {Script|string} script
-     * @returns {BucketScriptAggregation} returns `this` so that calls can be chained
+     * @returns {BucketSelectorAggregation} returns `this` so that calls can be chained
      * @throws {TypeError} If `script` is not an instance of `Script`
      */
     script(script) {
