@@ -23,8 +23,8 @@ const { Query } = require('../../core');
  *     .id('1')
  *     .version(1);
  *
- * @param {string} field The field of type `percolator` and that holds the indexed queries.
- * @param {string} docType The type / mapping of the document being percolated.
+ * @param {string=} field The field of type `percolator` and that holds the indexed queries.
+ * @param {string=} docType The type / mapping of the document being percolated.
  *
  * @extends Query
  */
