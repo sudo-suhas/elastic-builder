@@ -12,7 +12,7 @@ const ES_REF_URL =
 
 const invalidTypeParam = invalidParam(ES_REF_URL, 'type', MULTI_MATCH_TYPE);
 const invalidOperatorParam = invalidParam(ES_REF_URL, 'operator', "'and' or 'or'");
-const invalidBehaviorParam = invalidParam(ES_REF_URL, 'behavior', "'all' or 'one'");
+const invalidBehaviorParam = invalidParam(ES_REF_URL, 'behavior', "'all' or 'none'");
 
 /**
  * A `MultiMatchQuery` query builds further on top of the

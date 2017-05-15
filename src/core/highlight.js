@@ -356,7 +356,7 @@ class Highlight {
      * Can be used to define how highlighted text will be encoded.
      *
      * @param {string} encoder It can be either default (no encoding)
-     * or html (will escape html, if you use html highlighting tags)
+     * or `html` (will escape `html`, if you use html highlighting tags)
      * @returns {Highlight} returns `this` so that calls can be chained
      * @throws {Error} Encoder can be either `default` or `html`
      */
