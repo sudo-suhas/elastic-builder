@@ -74,7 +74,7 @@ class PercentileRanksAggregation extends MetricsAggregationBase {
      *     .keyed(false);
      *
      * @param {boolean} keyed To enable keyed response or not.
-     * @returns {PercentilesAggregation} returns `this` so that calls can be chained
+     * @returns {PercentilesRanksAggregation} returns `this` so that calls can be chained
      */
     keyed(keyed) {
         this._aggsDef.keyed = keyed;
