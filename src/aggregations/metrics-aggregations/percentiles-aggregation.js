@@ -117,7 +117,7 @@ class PercentilesAggregation extends MetricsAggregationBase {
      * ).compression(200);
      *
      * @param {number} compression Parameter to balance memory utilization with estimation accuracy.
-     * @returns {PercentileRanksAggregation} returns `this` so that calls can be chained
+     * @returns {PercentilesAggregation} returns `this` so that calls can be chained
      */
     compression(compression) {
         this._aggsDef.tdigest = { compression };
