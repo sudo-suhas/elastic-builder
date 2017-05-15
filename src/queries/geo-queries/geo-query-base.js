@@ -19,7 +19,7 @@ const invalidValidationMethod = invalidParam(
  * this class could be extended.
  *
  * @param {string} queryType
- * @param {string} field
+ * @param {string=} field
  *
  * @extends Query
  */

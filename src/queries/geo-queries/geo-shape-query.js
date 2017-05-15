@@ -48,7 +48,7 @@ const invalidRelationParam = invalidParam(ES_REF_URL, 'relation', GEO_RELATION_S
  *         .index('shapes')
  *         .path('location'))
  *
- * @param {string} field
+ * @param {string=} field
  *
  * @extends GeoQueryBase
  */
