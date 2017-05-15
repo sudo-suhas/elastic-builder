@@ -7,6 +7,10 @@ const SpanQueryBase = require('./span-query-base');
 /**
  * Base class for span queries with `little`, `big` clauses.
  *
+ * **NOTE:** Instantiating this directly should not be required.
+ * However, if you wish to add a custom implementation for whatever reason,
+ * this class could be extended.
+ *
  * @extends SpanQueryBase
  */
 class SpanLittleBigQueryBase extends SpanQueryBase {
