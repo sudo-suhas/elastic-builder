@@ -21,8 +21,8 @@ const SpanQueryBase = require('./span-query-base');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-field-masking-query.html)
  *
- * @param {string} field
- * @param {SpanQueryBase} spanQry Any other span type query
+ * @param {string=} field
+ * @param {SpanQueryBase=} spanQry Any other span type query
  *
  * @example
  * const spanQry = bob.spanNearQuery()

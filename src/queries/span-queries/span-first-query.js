@@ -16,7 +16,7 @@ const SpanQueryBase = require('./span-query-base');
  *     .match(bob.spanTermQuery('user', 'kimchy'))
  *     .end(3);
  *
- * @param {SpanQueryBase} spanQry Any other span type query
+ * @param {SpanQueryBase=} spanQry Any other span type query
  *
  * @extends SpanQueryBase
  */
