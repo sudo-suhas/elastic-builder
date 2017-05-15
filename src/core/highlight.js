@@ -60,7 +60,7 @@ const invalidFragmenterParam = invalidParam(ES_REF_URL, 'fragmenter', "'simple' 
  *     }
  *  }
  *
- * @param {String|Array=} fields An optional field or array of fields to highlight.
+ * @param {string|Array=} fields An optional field or array of fields to highlight.
  */
 class Highlight {
     // eslint-disable-next-line require-jsdoc
