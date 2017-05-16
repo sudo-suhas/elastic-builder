@@ -13,7 +13,7 @@ export class RequestBodySearch {
      *
      * @param {Query} query
      */
-    query(query: this): this;
+    query(query: Query): this;
 
     /**
      * Sets aggregation on the request body.
@@ -149,7 +149,7 @@ export class RequestBodySearch {
      *
      * @param {Query} filterQuery The filter to be applied after aggregation.
      */
-    postFilter(filterQuery: this): this;
+    postFilter(filterQuery: Query): this;
 
     /**
      * Allows to highlight search results on one or more fields. The implementation
@@ -244,7 +244,6 @@ export class RequestBodySearch {
      * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object;
-
 }
 
 /**
