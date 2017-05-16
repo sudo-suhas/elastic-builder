@@ -8,6 +8,10 @@ const { Query, util: { checkType, recursiveToJSON } } = require('../../../core')
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#score-functions)
  *
+ * **NOTE:** Instantiating this directly should not be required.
+ * However, if you wish to add a custom implementation for whatever reason,
+ * this class could be extended.
+ *
  * @param {string} name
  */
 class ScoreFunction {
