@@ -1,5 +1,6 @@
 import test from 'ava';
-import { ScoreFunction, BoolQuery, TermQuery } from '../../src';
+import { ScoreFunction } from '../../src/queries/compound-queries/score-functions';
+import { BoolQuery, TermQuery } from '../../src';
 import { illegalParamType, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = () => new ScoreFunction('my_score_func');

@@ -318,11 +318,8 @@ test('aggregations are exported', t => {
 
 test('score functions are exported', t => {
     /* ============ ============ ============ */
-    /* ========== Score Functions ===========  */
+    /* ========== Score Functions =========== */
     /* ============ ============ ============ */
-    t.truthy(bob.ScoreFunction);
-    t.truthy(bob.scoreFunction);
-
     t.truthy(bob.ScriptScoreFunction);
     t.truthy(bob.scriptScoreFunction);
 
