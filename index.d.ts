@@ -6949,3 +6949,11 @@ export function cookRandomSortQuery(query?: Query, seed?: number): FunctionScore
  * @throws {TypeError} If `query` is not an instance of `Query`.
  */
 export function cookFilterQuery(query: Query, scoring?: boolean): BoolQuery;
+
+/**
+ * Utility function to pretty print objects to console.
+ * To be used in development.
+ *
+ * @param {Object} obj
+ */
+export function prettyPrint(obj: any): void;
