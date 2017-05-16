@@ -18,6 +18,7 @@ const { util: { recursiveToJSON } } = require('../../../core');
  * const scoreFunc = bob.weightScoreFunction(42);
  *
  * @param {number=} weight The weight of this score function.
+ * @extends ScoreFunction
  */
 class WeightScoreFunction extends ScoreFunction {
     // eslint-disable-next-line require-jsdoc
