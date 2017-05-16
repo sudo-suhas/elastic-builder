@@ -46,7 +46,6 @@ const {
         FunctionScoreQuery,
         BoostingQuery,
         scoreFunctions: {
-            ScoreFunction,
             ScriptScoreFunction,
             WeightScoreFunction,
             RandomScoreFunction,
@@ -438,9 +437,6 @@ exports.matrixStatsAggregation = constructorWrapper(MatrixStatsAggregation);
 /* ============ ============ ============ */
 /* ========== Score Functions ===========  */
 /* ============ ============ ============ */
-exports.ScoreFunction = ScoreFunction;
-exports.scoreFunction = constructorWrapper(ScoreFunction);
-
 exports.ScriptScoreFunction = ScriptScoreFunction;
 exports.scriptScoreFunction = constructorWrapper(ScriptScoreFunction);
 
