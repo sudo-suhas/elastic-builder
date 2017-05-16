@@ -31,7 +31,7 @@ const invalidBoostModeParam = invalidParam(ES_REF_URL, 'boost_mode', BOOST_MODE_
  * @example
  * // `function_score` with only one function
  * const qry = bob.functionScoreQuery()
- *     .query(bob.matchAllQuery)
+ *     .query(bob.matchAllQuery())
  *     .function(bob.randomScoreFunction())
  *     .boostMode('multiply')
  *     .boost('5');
@@ -39,7 +39,7 @@ const invalidBoostModeParam = invalidParam(ES_REF_URL, 'boost_mode', BOOST_MODE_
  * @example
  * // Several functions combined
  * const qry = bob.functionScoreQuery()
- *     .query(bob.matchAllQuery)
+ *     .query(bob.matchAllQuery())
  *     .functions([
  *         bob.randomScoreFunction()
  *             .filter(bob.matchQuery('test', 'bar'))
