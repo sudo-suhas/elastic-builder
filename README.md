@@ -9,6 +9,8 @@ A Node.js implementation of the [Elasticsearch](http://www.elasticsearch.org/) D
 
 **Check out the [API reference documentation](http://elastic-builder.js.org/docs).**
 
+elastic-builder includes TypeScript definition for superior development experience.
+
 ## Elasticsearch compatibility
 `elastic-builder` was built for 5.x query DSL. However, the library should be usable with
 2.x as well. For older versions of the DSL, you can try

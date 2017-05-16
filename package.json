@@ -7,8 +7,10 @@
     "browser/",
     "lib/",
     "src/",
-    "repl.js"
+    "repl.js",
+    "index.d.ts"
   ],
+  "types": "./index.d.ts",
   "scripts": {
     "build:babel": "cross-env BABEL_ENV=production babel src --out-dir lib",
     "build:umd": "webpack lib browser/elastic-builder.min.js",

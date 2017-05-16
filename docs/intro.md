@@ -33,8 +33,7 @@ requestBody.toJSON()
 **Demo** - https://elastic-builder.js.org/
 
 **ProTip:** The source is transpiled using babel for compatibility with older versions of node and used by default.
-But this is not required in node env 6 and above. You can directly use the `src` files.
-This will have better intellisense in vscode:
+But this is not required in node env 6 and above. You can directly use the `src` files:
 
 ```js
 const bob = require('elastic-builder/src');
