@@ -20,8 +20,8 @@ const isNil = require('lodash.isnil');
  *     .index('shapes')
  *     .path('location');
  *
- * @param {string} id The document id of the shape.
- * @param {string} type The name of the type where the shape is indexed.
+ * @param {string=} id The document id of the shape.
+ * @param {string=} type The name of the type where the shape is indexed.
  */
 class IndexedShape {
     // eslint-disable-next-line require-jsdoc
