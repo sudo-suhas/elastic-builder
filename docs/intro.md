@@ -1,4 +1,4 @@
-https://github.com/sudo-suhas-elastic-builder
+https://github.com/sudo-suhas/elastic-builder
 
 `elastic-builder` is a library for easily building elasticsearch request body for search.
 It implements the builder syntax for building complex queries combining queries and aggregations.
