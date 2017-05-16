@@ -44,6 +44,7 @@ class HasParentQuery extends JoiningQueryBase {
 
     /**
      * @throws {Error} `score_mode` is deprecated. Use `score` instead.
+     * @override
      */
     scoreMode() {
         console.log('`score_mode` is deprecated. Use `score` instead');
