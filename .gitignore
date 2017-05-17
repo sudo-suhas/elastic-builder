@@ -41,3 +41,6 @@ experiment.js
 
 # babel generated files
 lib
+
+# files generated for tests(pre compilation)
+_build
