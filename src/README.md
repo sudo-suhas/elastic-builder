@@ -17,7 +17,7 @@ cross-env BABEL_ENV=production babel src --out-dir lib
 
 This is not tracked in git but is present in the npm package which the end user gets.
 
-```json
+```js
 // package.json snippet
 {
   // ...
