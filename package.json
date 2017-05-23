@@ -47,7 +47,7 @@
   "bugs": {
     "url": "https://github.com/sudo-suhas/elastic-builder/issues"
   },
-  "homepage": "https://github.com/sudo-suhas/elastic-builder#readme",
+  "homepage": "https://elastic-builder.js.org",
   "lint-staged": {
     "src/**/*.js": [
       "eslint --fix",
