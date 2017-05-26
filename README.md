@@ -17,6 +17,10 @@ elastic-builder includes TypeScript definition for superior development experien
 [`elastic.js`](https://github.com/ErwanPigneul/elastic.js)
 or [`bodybuilder`](https://github.com/danpaz/bodybuilder)
 
+`elastic-builder` is also 100% compatible with elasticsearch 6.0(alpha).
+Although there were [breaking changes](https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking_60_search_changes.html),
+all deprecated queries, features in 5.0 were avoided or not implemented.
+
 ## Install
 ```
 npm install elastic-builder --save
