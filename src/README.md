@@ -51,7 +51,7 @@ thereby avoiding the `new` keyword. This means there are 2 ways of doing the sam
 the reason for doing so because the documentation, type definitions declare classes and
 it might be confusing to access them using only functions. I am open to rethinking this approach.
 `recipes.js` has a few helper methods for augmenting the base queries and aggregations.
-For example, although elasticsearch no longer supports the `exists` query, there is a helper recipe for that.
+For example, although elasticsearch no longer supports the `missing` query, there is a helper recipe for that.
 I am also considering adding a `bodybuilder` style bool query builder to the recipes.
 
 The library uses inheritance and es6 class syntax quite heavily. The base classes for
