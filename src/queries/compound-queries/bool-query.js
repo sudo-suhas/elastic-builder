@@ -136,8 +136,11 @@ class BoolQuery extends Query {
 
     /**
      * Enables or disables similarity coordinate scoring of documents
-     * commoning the `CommonTermsQuery`. Default: false.
-
+     * commoning the `CommonTermsQuery`. Default: `false`.
+     *
+     * **NOTE**: This has been removed in elasticsearch 6.0. If provided,
+     * it will be ignored and a deprecation warning will be issued.
+     *
      * @param {boolean} enable
      * @returns {BoolQuery} returns `this` so that calls can be chained.
      */
