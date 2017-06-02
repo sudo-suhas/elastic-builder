@@ -25,8 +25,8 @@
     "check": "npm run lint && npm test",
     "report": "nyc report --reporter=html",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "preversion": "npm run check && npm run build && npm run git-commit",
-    "postversion": "npm run git-push",
+    "preversion-deprecated": "npm run check && npm run build && npm run git-commit",
+    "postversion-deprecated": "npm run git-push",
     "git-commit": "git add docs browser && git commit --no-verify -m \"Commit built files\"",
     "git-push": "cross-env \"git push origin master && git push origin v$npm_package_version\""
   },
