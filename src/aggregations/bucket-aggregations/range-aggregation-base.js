@@ -1,7 +1,6 @@
 'use strict';
 
 const isEmpty = require('lodash.isempty');
-const forEach = require('lodash.foreach');
 
 const { util: { checkType } } = require('../../core');
 
@@ -83,7 +82,7 @@ class RangeAggregationBase extends BucketAggregationBase {
     ranges(ranges) {
         checkType(ranges, Array);
 
-        forEach(ranges, range => this.range(range));
+        ranges.forEach(range => this.range(range));
         return this;
     }
 

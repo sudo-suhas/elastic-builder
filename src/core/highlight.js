@@ -1,7 +1,6 @@
 'use strict';
 
 const has = require('lodash.has'),
-    forEach = require('lodash.foreach'),
     isEmpty = require('lodash.isempty'),
     isNil = require('lodash.isnil'),
     isString = require('lodash.isstring');
@@ -119,7 +118,7 @@ class Highlight {
     fields(fields) {
         checkType(fields, Array);
 
-        forEach(fields, field => this.field(field));
+        fields.forEach(field => this.field(field));
         return this;
     }
 

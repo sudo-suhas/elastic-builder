@@ -1,8 +1,7 @@
 'use strict';
 
-const isEmpty = require('lodash.isempty'),
-    has = require('lodash.has'),
-    concat = require('lodash.concat');
+const isEmpty = require('lodash.isempty');
+const has = require('lodash.has');
 
 const { Query, util: { checkType } } = require('../../core');
 
@@ -173,7 +172,7 @@ class FiltersAggregation extends BucketAggregationBase {
 
         this._checkAnonymousFilters();
 
-        this._aggsDef.filters = concat(this._aggsDef.filters, filterQueries);
+        this._aggsDef.filters = this._aggsDef.filters.concat(filterQueries);
         return this;
     }
 

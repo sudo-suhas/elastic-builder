@@ -6,7 +6,6 @@ const isEmpty = require('lodash.isempty'),
     isNil = require('lodash.isnil'),
     isString = require('lodash.isstring'),
     isObject = require('lodash.isobject'),
-    map = require('lodash.map'),
     hasIn = require('lodash.hasin');
 
 /**
@@ -17,7 +16,7 @@ const isEmpty = require('lodash.isempty'),
  * @param {Class} type
  * @throws {TypeError} Object must be an instance of class type
  */
-exports.checkType = function checktype(instance, type) {
+exports.checkType = function checkType(instance, type) {
     if (!(instance instanceof type)) {
         if (isNil(instance)) {
             console.warn(`Was expecting instance of ${type.name} but got ${instance}!`);
@@ -86,7 +85,7 @@ exports.recursiveToJSON = function recursiveToJSON(obj) {
     if (!isObject(obj)) return obj;
 
     // Each element in array needs to be recursively JSONified
-    if (Array.isArray(obj)) return map(obj, recursiveToJSON);
+    if (Array.isArray(obj)) return obj.map(recursiveToJSON);
 
     // If it is a native object, we'll not get anything different by calling toJSON
     // If it is a custom object, toJSON needs to be called

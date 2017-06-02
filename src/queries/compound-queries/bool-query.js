@@ -1,11 +1,8 @@
 'use strict';
 
-const has = require('lodash.has'),
-    forEach = require('lodash.foreach'),
-    reduce = require('lodash.reduce'),
-    filter = require('lodash.filter'),
-    head = require('lodash.head'),
-    omit = require('lodash.omit');
+const has = require('lodash.has');
+const head = require('lodash.head');
+const omit = require('lodash.omit');
 
 const { Query, util: { checkType, recursiveToJSON } } = require('../../core');
 
@@ -61,7 +58,7 @@ class BoolQuery extends Query {
     _addQueries(clause, queries) {
         if (!has(this._queryOpts, clause)) this._queryOpts[clause] = [];
 
-        if (Array.isArray(queries)) forEach(queries, qry => this._addQuery(clause, qry));
+        if (Array.isArray(queries)) queries.forEach(qry => this._addQuery(clause, qry));
         else this._addQuery(clause, queries);
     }
 
@@ -187,9 +184,8 @@ class BoolQuery extends Query {
     toJSON() {
         const clauseKeys = ['must', 'filter', 'must_not', 'should'];
 
-        const cleanQryOpts = reduce(
-            // Pick the clauses which have some queries
-            filter(clauseKeys, clause => has(this._queryOpts, clause)),
+        // Pick the clauses which have some queries
+        const cleanQryOpts = clauseKeys.filter(clause => has(this._queryOpts, clause)).reduce(
             // Unwrap array and put into qryOpts if required
             (qryOpts, clause) => {
                 const clauseQueries = this._queryOpts[clause];

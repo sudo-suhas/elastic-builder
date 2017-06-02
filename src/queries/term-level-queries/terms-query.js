@@ -1,7 +1,6 @@
 'use strict';
 
 const isNil = require('lodash.isnil');
-const concat = require('lodash.concat');
 
 const { util: { checkType } } = require('../../core');
 
@@ -92,7 +91,7 @@ class TermsQuery extends Query {
     values(values) {
         checkType(values, Array);
 
-        this._values = concat(this._values, values);
+        this._values = this._values.concat(values);
         return this;
     }
 

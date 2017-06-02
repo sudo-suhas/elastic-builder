@@ -2,9 +2,8 @@
 
 const isNil = require('lodash.isnil');
 
-const forEach = require('lodash.foreach'),
-    head = require('lodash.head'),
-    omit = require('lodash.omit');
+const head = require('lodash.head');
+const omit = require('lodash.omit');
 
 const {
     Query,
@@ -171,7 +170,7 @@ class FunctionScoreQuery extends Query {
     functions(funcs) {
         checkType(funcs, Array);
 
-        forEach(funcs, func => this.function(func));
+        funcs.forEach(func => this.function(func));
         return this;
     }
 

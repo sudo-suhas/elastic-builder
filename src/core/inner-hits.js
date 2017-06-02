@@ -2,7 +2,6 @@
 
 const has = require('lodash.has');
 const isNil = require('lodash.isnil');
-const forEach = require('lodash.foreach');
 
 const Sort = require('./sort');
 const Highlight = require('./highlight');
@@ -102,7 +101,7 @@ class InnerHits {
      * @throws {TypeError} If any item in parameter `sorts` is not an instance of `Sort`.
      */
     sorts(sorts) {
-        forEach(sorts, sort => this.sort(sort));
+        sorts.forEach(sort => this.sort(sort));
         return this;
     }
 
@@ -183,7 +182,7 @@ class InnerHits {
     scriptFields(scriptFields) {
         checkType(scriptFields, Object);
 
-        forEach(Object.keys(scriptFields), scriptFieldName =>
+        Object.keys(scriptFields).forEach(scriptFieldName =>
             this.scriptField(scriptFieldName, scriptFields[scriptFieldName])
         );
 

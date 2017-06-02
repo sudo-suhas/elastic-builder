@@ -1,7 +1,6 @@
 'use strict';
 
 const isNil = require('lodash.isnil');
-const concat = require('lodash.concat');
 
 const { util: { checkType, invalidParam }, consts: { MULTI_MATCH_TYPE } } = require('../../core');
 const FullTextQueryBase = require('./full-text-query-base');
@@ -83,7 +82,7 @@ class MultiMatchQuery extends FullTextQueryBase {
     fields(fields) {
         checkType(fields, Array);
 
-        this._queryOpts.fields = concat(this._queryOpts.fields, fields);
+        this._queryOpts.fields = this._queryOpts.fields.concat(fields);
         return this;
     }
 

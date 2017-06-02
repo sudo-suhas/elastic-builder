@@ -1,7 +1,6 @@
 'use strict';
 
 const has = require('lodash.has');
-const forEach = require('lodash.foreach');
 
 const { Query, util: { checkType } } = require('../../core');
 
@@ -72,7 +71,7 @@ class DisMaxQuery extends Query {
     queries(queries) {
         if (!has(this._queryOpts, 'queries')) this._queryOpts.queries = [];
 
-        if (Array.isArray(queries)) forEach(queries, qry => this._addQuery(qry));
+        if (Array.isArray(queries)) queries.forEach(qry => this._addQuery(qry));
         else this._addQuery(queries);
 
         return this;

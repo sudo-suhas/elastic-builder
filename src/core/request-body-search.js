@@ -2,8 +2,7 @@
 
 const has = require('lodash.has'),
     isNil = require('lodash.isnil'),
-    isEmpty = require('lodash.isempty'),
-    forEach = require('lodash.foreach');
+    isEmpty = require('lodash.isempty');
 
 const Query = require('./query'),
     Aggregation = require('./aggregation'),
@@ -202,7 +201,7 @@ class RequestBodySearch {
      * @throws {TypeError} If any item in parameter `sorts` is not an instance of `Sort`.
      */
     sorts(sorts) {
-        forEach(sorts, sort => this.sort(sort));
+        sorts.forEach(sort => this.sort(sort));
         return this;
     }
 
@@ -370,7 +369,7 @@ class RequestBodySearch {
     scriptFields(scriptFields) {
         checkType(scriptFields, Object);
 
-        forEach(Object.keys(scriptFields), scriptFieldName =>
+        Object.keys(scriptFields).forEach(scriptFieldName =>
             this.scriptField(scriptFieldName, scriptFields[scriptFieldName])
         );
 

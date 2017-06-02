@@ -2,7 +2,6 @@
 
 const isNil = require('lodash.isnil');
 const has = require('lodash.has');
-const concat = require('lodash.concat');
 
 const { util: { checkType, invalidParam } } = require('../../core');
 const FullTextQueryBase = require('./full-text-query-base');
@@ -81,7 +80,7 @@ class QueryStringQueryBase extends FullTextQueryBase {
         checkType(fields, Array);
         if (!has(this._queryOpts, 'fields')) this._queryOpts.fields = [];
 
-        this._queryOpts.fields = concat(this._queryOpts.fields, fields);
+        this._queryOpts.fields = this._queryOpts.fields.concat(fields);
         return this;
     }
 

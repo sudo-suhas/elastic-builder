@@ -1,6 +1,6 @@
 'use strict';
 
-const has = require('lodash.has'), forEach = require('lodash.foreach');
+const has = require('lodash.has');
 
 const MetricsAggregationBase = require('./metrics-aggregation-base'),
     { Highlight, Sort, util: { checkType } } = require('../../core');
@@ -145,7 +145,7 @@ class TopHitsAggregation extends MetricsAggregationBase {
      * @throws {TypeError} If any item in parameter `sorts` is not an instance of `Sort`.
      */
     sorts(sorts) {
-        forEach(sorts, sort => this.sort(sort));
+        sorts.forEach(sort => this.sort(sort));
         return this;
     }
 
@@ -251,7 +251,7 @@ class TopHitsAggregation extends MetricsAggregationBase {
     scriptFields(scriptFields) {
         checkType(scriptFields, Object);
 
-        forEach(Object.keys(scriptFields), scriptFieldName =>
+        Object.keys(scriptFields).forEach(scriptFieldName =>
             this.scriptField(scriptFieldName, scriptFields[scriptFieldName])
         );
 

@@ -1,7 +1,5 @@
 'use strict';
 
-const forEach = require('lodash.foreach');
-
 const { util: { checkType } } = require('../../core');
 
 const SpanQueryBase = require('./span-query-base');
@@ -37,7 +35,7 @@ class SpanOrQuery extends SpanQueryBase {
      */
     clauses(clauses) {
         checkType(clauses, Array);
-        forEach(clauses, clause => checkType(clause, SpanQueryBase));
+        clauses.forEach(clause => checkType(clause, SpanQueryBase));
 
         this._queryOpts.clauses = clauses;
         return this;
