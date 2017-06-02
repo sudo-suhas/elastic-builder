@@ -93,7 +93,4 @@ For the project prod dependencies, I am using the modularised `lodash` libraries
 along with `babel-runtime`. The reason for doing this, although quite unlikely,
 is because if someone does use it, they shouldn't have to load 100 kb worth of `lodash`.
 There are plugins available for only exporting what you use but the end user may not be aware of that.
-Another thing I am _not_ doing is having specific version of dependency.
-The reason for doing this is so that if the user specifies a newer version of some dependant library,
-he shouldn't end up exporting 2 versions. If you think I am wrong about this or I am missing something,
-let me know.
+
