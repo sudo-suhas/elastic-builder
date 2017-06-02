@@ -100,6 +100,9 @@ Check out the [reference docs](http://elastic-builder.js.org/docs#recipes) for m
 
 If you have any recipes, please do share or better yet, create a [pull request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/) :smile:.
 
+## Changelog
+[releases](https://github.com/sudo-suhas/elastic-builder/releases)
+
 ## Examples
 
 ```js
