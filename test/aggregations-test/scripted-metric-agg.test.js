@@ -15,7 +15,8 @@ test(illegalCall, ScriptedMetricAggregation, 'script', 'my_agg');
 test(illegalCall, ScriptedMetricAggregation, 'missing', 'my_agg');
 test(setsOption, 'initScript', { param: 'params._agg.transactions = []' });
 test(setsOption, 'mapScript', {
-    param: "params._agg.transactions.add(doc.type.value == 'sale' ? doc.amount.value : -1 * doc.amount.value)"
+    param:
+        "params._agg.transactions.add(doc.type.value == 'sale' ? doc.amount.value : -1 * doc.amount.value)"
 });
 test(setsOption, 'combineScript', {
     param: 'double profit = 0; for (t in params._agg.transactions) { profit += t } return profit'

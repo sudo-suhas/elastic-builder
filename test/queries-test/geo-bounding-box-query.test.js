@@ -21,7 +21,7 @@ const setsFieldOption = makeSetsOptionMacro(
 );
 
 const pt1 = new GeoPoint().lat(40.73).lon(-74.1);
-const pt2 = new GeoPoint().lat(40.10).lon(-71.12);
+const pt2 = new GeoPoint().lat(40.1).lon(-71.12);
 
 const instance = getInstance();
 
@@ -36,6 +36,6 @@ test(setsFieldOption, 'topRight', { param: pt1 });
 test(setsFieldOption, 'bottomLeft', { param: pt2 });
 test(setsFieldOption, 'top', { param: 40.73 });
 test(setsFieldOption, 'left', { param: -74.1 });
-test(setsFieldOption, 'bottom', { param: 40.10 });
+test(setsFieldOption, 'bottom', { param: 40.1 });
 test(setsFieldOption, 'right', { param: -71.12 });
 test(setsQryOption, 'type', { param: 'indexed' });
