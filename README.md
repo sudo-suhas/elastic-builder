@@ -7,9 +7,11 @@ A Node.js implementation of the [Elasticsearch](http://www.elasticsearch.org/) D
 
 ![elastic-builder](assets/elastic-builder.png)
 
-**Check out the [API reference documentation](http://elastic-builder.js.org/docs).**
+**Check out the [API reference documentation](https://elastic-builder.js.org/docs).**
 
 elastic-builder includes TypeScript definition for superior development experience.
+
+For a zero DSL way to build elasticsearch queries, checkout [`elastic-muto`](https://github.com/booleanapp/elastic-muto)
 
 ## Elasticsearch compatibility
 `elastic-builder` was built for 5.x query DSL. However, the library should be usable with
@@ -303,6 +305,9 @@ npm test
 and the [fork](https://github.com/ErwanPigneul/elastic.js) by Erwan Pigneul.
 
 [bodybuilder](https://github.com/danpaz/bodybuilder) for documentation style, build setup, demo page.
+
+## Related
+[elastic-muto](https://github.com/booleanapp/elastic-muto) - Easy expressive search queries for Elasticsearch
 
 ## License
 MIT
