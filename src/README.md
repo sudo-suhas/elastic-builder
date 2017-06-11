@@ -40,9 +40,6 @@ This is also used by the demo hosted on https://elastic-builder.js.org
 The code in `src` folder doesn't use es6 imports. So it can be directly used without the transpiled code.
 Earlier, the transpiled code used to jumble the documentation so there was an advantage to using
 from `elastic-builder/src`. But now I have added the type definition so that advantage no longer applies.
-In fact, mainly because I don't know how, you won't get the superior intellisense from the type definition
-for it. There must be some way to tell typescript that the type definitions are the same if you use either.
-If you do know, please contact me either with a pull request, issue or even a mail. I'd be very grateful.
 
 Starting from the base folder `src`, `index.js` simply pulls in all the concrete classes and re-exports
 them under the same object so that you can access all queries and aggregations. It also adds
