@@ -17,7 +17,10 @@ module.exports = {
         rules: [
             {
                 test: /\.(js|jsx)$/,
-                use: 'babel-loader'
+                use: {
+                    loader: 'babel-loader',
+                    options: { cacheDirectory: true }
+                }
             }
         ]
     }
