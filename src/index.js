@@ -87,6 +87,7 @@ const {
         ValueCountAggregation
     },
     bucketAggregations: {
+        AdjacencyMatrixAggregation,
         ChildrenAggregation,
         DateHistogramAggregation,
         DateRangeAggregation,
@@ -332,6 +333,9 @@ exports.valueCountAggregation = constructorWrapper(ValueCountAggregation);
 /* ============ ============ ============ */
 /* ========= Bucket Aggregations ======== */
 /* ============ ============ ============ */
+exports.AdjacencyMatrixAggregation = AdjacencyMatrixAggregation;
+exports.adjacencyMatrixAggregation = constructorWrapper(AdjacencyMatrixAggregation);
+
 exports.ChildrenAggregation = ChildrenAggregation;
 exports.childrenAggregation = constructorWrapper(ChildrenAggregation);
 

@@ -5,6 +5,7 @@ exports.HistogramAggregationBase = require('./histogram-aggregation-base');
 exports.RangeAggregationBase = require('./range-aggregation-base');
 exports.TermsAggregationBase = require('./terms-aggregation-base');
 
+exports.AdjacencyMatrixAggregation = require('./adjacency-matrix-aggregation');
 exports.ChildrenAggregation = require('./children-aggregation');
 exports.DateHistogramAggregation = require('./date-histogram-aggregation');
 exports.DateRangeAggregation = require('./date-range-aggregation');
