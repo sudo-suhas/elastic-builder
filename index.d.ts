@@ -1234,7 +1234,7 @@ class ValueTermQueryBase extends Query {
  * @extends ValueTermQueryBase
  */
 export class TermQuery extends ValueTermQueryBase {
-    constructor(field?: string, queryVal: string | number);
+    constructor(field?: string, queryVal?: string | number);
 }
 
 /**
@@ -1244,7 +1244,7 @@ export class TermQuery extends ValueTermQueryBase {
  * @param {string=} field
  * @param {string|number=} queryVal
  */
-export function termQuery(field?: string, queryVal: string | number): TermQuery;
+export function termQuery(field?: string, queryVal?: string | number): TermQuery;
 
 /**
  * Filters documents that have fields that match any of the provided terms (**not analyzed**).
@@ -1254,7 +1254,7 @@ export function termQuery(field?: string, queryVal: string | number): TermQuery;
  * @extends Query
  */
 export class TermsQuery extends Query {
-    constructor(field?: string, values: object | string | number);
+    constructor(field?: string, values?: string[] | string | number);
 
     /**
      * Sets the field to search on.
@@ -1324,7 +1324,7 @@ export class TermsQuery extends Query {
     routing(routing: string): this;
 }
 
-export function termsQuery(field?: string, values: object | string | number): TermsQuery;
+export function termsQuery(field?: string, values?: string[] | string | number): TermsQuery;
 
 /**
  * Interface-like class used to group and identify various implementations of
@@ -1484,7 +1484,7 @@ export function existsQuery(field?: string): ExistsQuery;
  * @extends MultiTermQueryBase
  */
 export class PrefixQuery extends MultiTermQueryBase {
-    constructor(field?: string, value: string | number);
+    constructor(field?: string, value?: string | number);
 
     /**
      * Sets the rewrite method. Valid values are:
@@ -1519,7 +1519,7 @@ export class PrefixQuery extends MultiTermQueryBase {
  * @param {string=} field
  * @param {string|number=} value
  */
-export function prefixQuery(field?: string, value: string | number): PrefixQuery;
+export function prefixQuery(field?: string, value?: string | number): PrefixQuery;
 
 /**
  * Matches documents that have fields matching a wildcard expression (**not analyzed**).
@@ -1576,7 +1576,7 @@ export function wildcardQuery(field?: string, value?: string): WildcardQuery;
  * @extends MultiTermQueryBase
  */
 export class RegexpQuery extends MultiTermQueryBase {
-    constructor(field?: string, value: string | number);
+    constructor(field?: string, value?: string | number);
 
     /**
      * Set special flags. Possible flags are `ALL` (default),
@@ -1631,7 +1631,7 @@ export class RegexpQuery extends MultiTermQueryBase {
  * @param {string=} field
  * @param {string|number=} value
  */
-export function regexpQuery(field?: string, value: string | number): RegexpQuery;
+export function regexpQuery(field?: string, value?: string | number): RegexpQuery;
 
 /**
  * The fuzzy query generates all possible matching terms that are within
@@ -1640,12 +1640,12 @@ export function regexpQuery(field?: string, value: string | number): RegexpQuery
  * actually exist in the index.
  * The fuzzy query uses similarity based on Levenshtein edit distance.
  *
- * @param {string} field
- * @param {string|number} value
+ * @param {string=} field
+ * @param {string|number=} value
  * @extends MultiTermQueryBase
  */
 export class FuzzyQuery extends MultiTermQueryBase {
-    constructor(field: string, value: string | number);
+    constructor(field?: string, value?: string | number);
 
     /**
      * Sets the `fuzziness` parameter which is interpreted as a Levenshtein Edit Distance —
@@ -1689,19 +1689,19 @@ export class FuzzyQuery extends MultiTermQueryBase {
  * actually exist in the index.
  * The fuzzy query uses similarity based on Levenshtein edit distance.
  *
- * @param {string} field
- * @param {string|number} value
+ * @param {string=} field
+ * @param {string|number=} value
  */
-export function fuzzyQuery(field: string, value: string | number): FuzzyQuery;
+export function fuzzyQuery(field?: string, value?: string | number): FuzzyQuery;
 
 /**
  * Filters documents matching the provided document / mapping type.
  *
- * @param {string} type The elasticsearch doc type
+ * @param {string=} type The elasticsearch doc type
  * @extends Query
  */
 export class TypeQuery extends Query {
-    constructor(type: string);
+    constructor(type?: string);
 
     /**
      * Sets the elasticsearch doc type to query on.
@@ -1722,9 +1722,9 @@ export class TypeQuery extends Query {
 /**
  * Filters documents matching the provided document / mapping type.
  *
- * @param {string} type The elasticsearch doc type
+ * @param {string=} type The elasticsearch doc type
  */
-export function typeQuery(type: string): TypeQuery;
+export function typeQuery(type?: string): TypeQuery;
 
 /**
  * Filters documents that only have the provided ids.

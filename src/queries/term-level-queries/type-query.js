@@ -12,7 +12,7 @@ const { Query } = require('../../core');
  * @example
  * const qry = bob.typeQuery('my_type');
  *
- * @param {string} type The elasticsearch doc type
+ * @param {string=} type The elasticsearch doc type
  *
  * @extends Query
  */

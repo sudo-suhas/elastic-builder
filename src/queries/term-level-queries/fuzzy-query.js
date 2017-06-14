@@ -23,8 +23,8 @@ const MultiTermQueryBase = require('./multi-term-query-base');
  *     .maxExpansions(100)
  *     .boost(1.0);
  *
- * @param {string} field
- * @param {string|number} value
+ * @param {string=} field
+ * @param {string|number=} value
  *
  * @extends MultiTermQueryBase
  */
