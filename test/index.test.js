@@ -213,6 +213,9 @@ test('aggregations are exported', t => {
     /* ============ ============ ============ */
     /* ========= Bucket Aggregations ======== */
     /* ============ ============ ============ */
+    t.truthy(bob.AdjacencyMatrixAggregation);
+    t.truthy(bob.adjacencyMatrixAggregation);
+
     t.truthy(bob.ChildrenAggregation);
     t.truthy(bob.childrenAggregation);
 
