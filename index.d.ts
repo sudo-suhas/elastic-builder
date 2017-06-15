@@ -301,7 +301,7 @@ class Query {
  *
  * @extends Query
  */
-export class MatchAllQuery extends Query { }
+export class MatchAllQuery extends Query {}
 
 /**
  * The most simple query, which matches all documents, giving them all a `_score` of `1.0`.
@@ -313,7 +313,7 @@ export function matchAllQuery(): MatchAllQuery;
  *
  * @extends Query
  */
-export class MatchNoneQuery extends Query { }
+export class MatchNoneQuery extends Query {}
 
 /**
  * The inverse of the `match_all` query, which matches no documents.
@@ -393,7 +393,6 @@ class MonoFieldQueryBase extends FullTextQueryBase {
      * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object;
-
 }
 
 /**
@@ -609,7 +608,10 @@ export class MatchPhrasePrefixQuery extends MatchPhraseQueryBase {
  * @param {string=} field The document field to query against
  * @param {string=} queryString The query string
  */
-export function matchPhrasePrefixQuery(field?: string, queryString?: string): MatchPhrasePrefixQuery;
+export function matchPhrasePrefixQuery(
+    field?: string,
+    queryString?: string
+): MatchPhrasePrefixQuery;
 
 /**
  * A `MultiMatchQuery` query builds further on top of the
@@ -660,9 +662,7 @@ export class MultiMatchQuery extends FullTextQueryBase {
      * @param {string} type Can be one of `best_fields`, `most_fields`,
      * `cross_fields`, `phrase`, and `phrase_prefix`. Default is `best_fields`.
      */
-    type(
-        type: 'best_fields' | 'most_fields' | 'cross_fields' | 'phrase' | 'phrase_prefix'
-    ): this;
+    type(type: 'best_fields' | 'most_fields' | 'cross_fields' | 'phrase' | 'phrase_prefix'): this;
 
     /**
      * The tie breaker value. The tie breaker capability allows results
@@ -1234,7 +1234,7 @@ class ValueTermQueryBase extends Query {
  * @extends ValueTermQueryBase
  */
 export class TermQuery extends ValueTermQueryBase {
-    constructor(field?: string, queryVal: string | number);
+    constructor(field?: string, queryVal?: string | number);
 }
 
 /**
@@ -1244,7 +1244,7 @@ export class TermQuery extends ValueTermQueryBase {
  * @param {string=} field
  * @param {string|number=} queryVal
  */
-export function termQuery(field?: string, queryVal: string | number): TermQuery;
+export function termQuery(field?: string, queryVal?: string | number): TermQuery;
 
 /**
  * Filters documents that have fields that match any of the provided terms (**not analyzed**).
@@ -1254,7 +1254,7 @@ export function termQuery(field?: string, queryVal: string | number): TermQuery;
  * @extends Query
  */
 export class TermsQuery extends Query {
-    constructor(field?: string, values: object | string | number);
+    constructor(field?: string, values?: string[] | string | number);
 
     /**
      * Sets the field to search on.
@@ -1324,7 +1324,7 @@ export class TermsQuery extends Query {
     routing(routing: string): this;
 }
 
-export function termsQuery(field?: string, values: object | string | number): TermsQuery;
+export function termsQuery(field?: string, values?: string[] | string | number): TermsQuery;
 
 /**
  * Interface-like class used to group and identify various implementations of
@@ -1340,8 +1340,7 @@ export function termsQuery(field?: string, values: object | string | number): Te
  * this class could be extended.
  * @extends ValueTermQueryBase
  */
-class MultiTermQueryBase extends ValueTermQueryBase {
-}
+class MultiTermQueryBase extends ValueTermQueryBase {}
 
 /**
  * Matches documents with fields that have terms within a certain range.
@@ -1484,7 +1483,7 @@ export function existsQuery(field?: string): ExistsQuery;
  * @extends MultiTermQueryBase
  */
 export class PrefixQuery extends MultiTermQueryBase {
-    constructor(field?: string, value: string | number);
+    constructor(field?: string, value?: string | number);
 
     /**
      * Sets the rewrite method. Valid values are:
@@ -1519,7 +1518,7 @@ export class PrefixQuery extends MultiTermQueryBase {
  * @param {string=} field
  * @param {string|number=} value
  */
-export function prefixQuery(field?: string, value: string | number): PrefixQuery;
+export function prefixQuery(field?: string, value?: string | number): PrefixQuery;
 
 /**
  * Matches documents that have fields matching a wildcard expression (**not analyzed**).
@@ -1576,7 +1575,7 @@ export function wildcardQuery(field?: string, value?: string): WildcardQuery;
  * @extends MultiTermQueryBase
  */
 export class RegexpQuery extends MultiTermQueryBase {
-    constructor(field?: string, value: string | number);
+    constructor(field?: string, value?: string | number);
 
     /**
      * Set special flags. Possible flags are `ALL` (default),
@@ -1631,7 +1630,7 @@ export class RegexpQuery extends MultiTermQueryBase {
  * @param {string=} field
  * @param {string|number=} value
  */
-export function regexpQuery(field?: string, value: string | number): RegexpQuery;
+export function regexpQuery(field?: string, value?: string | number): RegexpQuery;
 
 /**
  * The fuzzy query generates all possible matching terms that are within
@@ -1640,12 +1639,12 @@ export function regexpQuery(field?: string, value: string | number): RegexpQuery
  * actually exist in the index.
  * The fuzzy query uses similarity based on Levenshtein edit distance.
  *
- * @param {string} field
- * @param {string|number} value
+ * @param {string=} field
+ * @param {string|number=} value
  * @extends MultiTermQueryBase
  */
 export class FuzzyQuery extends MultiTermQueryBase {
-    constructor(field: string, value: string | number);
+    constructor(field?: string, value?: string | number);
 
     /**
      * Sets the `fuzziness` parameter which is interpreted as a Levenshtein Edit Distance —
@@ -1689,19 +1688,19 @@ export class FuzzyQuery extends MultiTermQueryBase {
  * actually exist in the index.
  * The fuzzy query uses similarity based on Levenshtein edit distance.
  *
- * @param {string} field
- * @param {string|number} value
+ * @param {string=} field
+ * @param {string|number=} value
  */
-export function fuzzyQuery(field: string, value: string | number): FuzzyQuery;
+export function fuzzyQuery(field?: string, value?: string | number): FuzzyQuery;
 
 /**
  * Filters documents matching the provided document / mapping type.
  *
- * @param {string} type The elasticsearch doc type
+ * @param {string=} type The elasticsearch doc type
  * @extends Query
  */
 export class TypeQuery extends Query {
-    constructor(type: string);
+    constructor(type?: string);
 
     /**
      * Sets the elasticsearch doc type to query on.
@@ -1722,9 +1721,9 @@ export class TypeQuery extends Query {
 /**
  * Filters documents matching the provided document / mapping type.
  *
- * @param {string} type The elasticsearch doc type
+ * @param {string=} type The elasticsearch doc type
  */
-export function typeQuery(type: string): TypeQuery;
+export function typeQuery(type?: string): TypeQuery;
 
 /**
  * Filters documents that only have the provided ids.
@@ -1810,7 +1809,6 @@ export class ConstantScoreQuery extends Query {
  * @param {Query=} filterQuery Query to filter on.
  */
 export function constantScoreQuery(filterQuery?: Query): ConstantScoreQuery;
-
 
 /**
  * A query that matches documents matching boolean combinations of other queries.
@@ -2048,7 +2046,11 @@ export class BoostingQuery extends Query {
  * @param {Query=} negativeQry A valid `Query` object.
  * @param {number=} negativeBoost A positive `double` value where `0 < n < 1`.
  */
-export function boostingQuery(positiveQry?: Query, negativeQry?: Query, negativeBoost?: number): BoostingQuery;
+export function boostingQuery(
+    positiveQry?: Query,
+    negativeQry?: Query,
+    negativeBoost?: number
+): BoostingQuery;
 
 /**
  * The `JoiningQueryBase` class provides support for common options used across
@@ -2519,7 +2521,6 @@ export class GeoDistanceQuery extends GeoQueryBase {
      * @throws {TypeError} If parameter `point` is not an instance of `GeoPoint`
      */
     geoPoint(point: GeoPoint): this;
-
 }
 
 /**
@@ -2857,8 +2858,7 @@ export function percolateQuery(field?: string, docType?: string): PercolateQuery
  *
  * @extends Query
  */
-export class SpanQueryBase extends Query {
-}
+export class SpanQueryBase extends Query {}
 
 /**
  * Matches spans containing a term. The span term query maps to Lucene `SpanTermQuery`.
@@ -3102,8 +3102,7 @@ export class SpanLittleBigQueryBase extends SpanQueryBase {
  *
  * @extends SpanLittleBigQueryBase
  */
-export class SpanContainingQuery extends SpanLittleBigQueryBase {
-}
+export class SpanContainingQuery extends SpanLittleBigQueryBase {}
 
 /**
  * Returns matches which enclose another span query. The span containing query
@@ -3119,8 +3118,7 @@ export function spanContainingQuery(): SpanContainingQuery;
  *
  * @extends SpanLittleBigQueryBase
  */
-export class SpanWithinQuery extends SpanLittleBigQueryBase {
-}
+export class SpanWithinQuery extends SpanLittleBigQueryBase {}
 
 /**
  * Returns matches which are enclosed inside another span query. The span within
@@ -3180,7 +3178,10 @@ export class SpanFieldMaskingQuery extends SpanQueryBase {
  * @param {string=} field
  * @param {SpanQueryBase=} spanQry Any other span type query
  */
-export function spanFieldMaskingQuery(field?: string, spanQry?: SpanQueryBase): SpanFieldMaskingQuery;
+export function spanFieldMaskingQuery(
+    field?: string,
+    spanQry?: SpanQueryBase
+): SpanFieldMaskingQuery;
 
 /**
  * Base class implementation for all aggregation types.
@@ -3683,7 +3684,9 @@ export class PercentileRanksAggregation extends MetricsAggregationBase {
 }
 
 export function percentileRanksAggregation(
-    name: string, field?: string, values?: number[]
+    name: string,
+    field?: string,
+    values?: number[]
 ): PercentileRanksAggregation;
 
 /**
@@ -4243,7 +4246,11 @@ export class DateHistogramAggregation extends HistogramAggregationBase {
  * @param {string=} interval Interval to generate histogram over.
  * Available expressions for interval: year, quarter, month, week, day, hour, minute, second
  */
-export function dateHistogramAggregation(name: string, field?: string, interval?: string): DateHistogramAggregation;
+export function dateHistogramAggregation(
+    name: string,
+    field?: string,
+    interval?: string
+): DateHistogramAggregation;
 
 /**
  * The `RangeAggregationBase` provides support for common options used across
@@ -4403,7 +4410,10 @@ export class DiversifiedSamplerAggregation extends BucketAggregationBase {
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on
  */
-export function diversifiedSamplerAggregation(name: string, field?: string): DiversifiedSamplerAggregation;
+export function diversifiedSamplerAggregation(
+    name: string,
+    field?: string
+): DiversifiedSamplerAggregation;
 
 /**
  * Defines a single bucket of all the documents in the current document set
@@ -4739,7 +4749,11 @@ export class HistogramAggregation extends HistogramAggregationBase {
  * @param {string=} field The field to aggregate on
  * @param {number=} interval Interval to generate histogram over.
  */
-export function histogramAggregation(name: string, field?: string, interval?: number): HistogramAggregation;
+export function histogramAggregation(
+    name: string,
+    field?: string,
+    interval?: number
+): HistogramAggregation;
 
 /**
  * Dedicated range aggregation for IP typed fields.
@@ -5076,7 +5090,10 @@ export class TermsAggregationBase extends BucketAggregationBase {
  * @param {string=} field The field to aggregate on
  */
 export function termsAggregationBase(
-    name: string, aggType: string, refUrl: string, field?: string
+    name: string,
+    aggType: string,
+    refUrl: string,
+    field?: string
 ): TermsAggregationBase;
 
 /**
@@ -5158,7 +5175,10 @@ export class SignificantTermsAggregation extends TermsAggregationBase {
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on
  */
-export function significantTermsAggregation(name: string, field?: string): SignificantTermsAggregation;
+export function significantTermsAggregation(
+    name: string,
+    field?: string
+): SignificantTermsAggregation;
 
 /**
  * A multi-bucket value source based aggregation where buckets are dynamically
@@ -5455,7 +5475,10 @@ export class ExtendedStatsBucketAggregation extends PipelineAggregationBase {
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} bucketsPath The relative path of metric to aggregate over
  */
-export function extendedStatsBucketAggregation(name: string, bucketsPath?: string): ExtendedStatsBucketAggregation;
+export function extendedStatsBucketAggregation(
+    name: string,
+    bucketsPath?: string
+): ExtendedStatsBucketAggregation;
 
 /**
  * A sibling pipeline aggregation which calculates percentiles across all
@@ -5487,7 +5510,10 @@ export class PercentilesBucketAggregation extends PipelineAggregationBase {
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} bucketsPath The relative path of metric to aggregate over
  */
-export function percentilesBucketAggregation(name: string, bucketsPath?: string): PercentilesBucketAggregation;
+export function percentilesBucketAggregation(
+    name: string,
+    bucketsPath?: string
+): PercentilesBucketAggregation;
 
 /**
  * Given an ordered series of data, the Moving Average aggregation will
@@ -5562,7 +5588,10 @@ export class MovingAverageAggregation extends PipelineAggregationBase {
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} bucketsPath The relative path of metric to aggregate over
  */
-export function movingAverageAggregation(name: string, bucketsPath?: string): MovingAverageAggregation;
+export function movingAverageAggregation(
+    name: string,
+    bucketsPath?: string
+): MovingAverageAggregation;
 
 /**
  * A parent pipeline aggregation which calculates the cumulative sum of
@@ -5593,7 +5622,10 @@ export class CumulativeSumAggregation extends PipelineAggregationBase {
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} bucketsPath The relative path of metric to aggregate over
  */
-export function cumulativeSumAggregation(name: string, bucketsPath?: string): CumulativeSumAggregation;
+export function cumulativeSumAggregation(
+    name: string,
+    bucketsPath?: string
+): CumulativeSumAggregation;
 
 /**
  * A parent pipeline aggregation which executes a script which can perform
@@ -5626,7 +5658,10 @@ export class BucketScriptAggregation extends PipelineAggregationBase {
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} bucketsPath The relative path of metric to aggregate over
  */
-export function bucketScriptAggregation(name: string, bucketsPath?: string): BucketScriptAggregation;
+export function bucketScriptAggregation(
+    name: string,
+    bucketsPath?: string
+): BucketScriptAggregation;
 
 /**
  * A parent pipeline aggregation which executes a script which determines whether
@@ -5666,7 +5701,10 @@ export class BucketSelectorAggregation extends PipelineAggregationBase {
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} bucketsPath The relative path of metric to aggregate over
  */
-export function bucketSelectorAggregation(name: string, bucketsPath?: string): BucketSelectorAggregation;
+export function bucketSelectorAggregation(
+    name: string,
+    bucketsPath?: string
+): BucketSelectorAggregation;
 
 /**
  * Serial differencing is a technique where values in a time series are
@@ -5697,7 +5735,10 @@ export class SerialDifferencingAggregation extends PipelineAggregationBase {
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} bucketsPath The relative path of metric to aggregate over
  */
-export function serialDifferencingAggregation(name: string, bucketsPath?: string): SerialDifferencingAggregation;
+export function serialDifferencingAggregation(
+    name: string,
+    bucketsPath?: string
+): SerialDifferencingAggregation;
 
 /**
  * The `matrix_stats` aggregation is a numeric aggregation that computes
@@ -5898,7 +5939,17 @@ export class FieldValueFactorFunction extends ScoreFunction {
      * Defaults to `none`.
      */
     modifier(
-        mod: 'none' | 'log' | 'log1p' | 'log2p' | 'ln' | 'ln1p' | 'ln2p' | 'square' | 'sqrt' | 'reciprocal'
+        mod:
+            | 'none'
+            | 'log'
+            | 'log1p'
+            | 'log2p'
+            | 'ln'
+            | 'ln1p'
+            | 'ln2p'
+            | 'square'
+            | 'sqrt'
+            | 'reciprocal'
     ): this;
 
     /**
@@ -6022,7 +6073,10 @@ export class DecayScoreFunction extends ScoreFunction {
  * Defaults to `gauss`.
  * @param {string=} field the document field to run decay function against.
  */
-export function decayScoreFunction(mode?: 'linear' | 'exp' | 'gauss', field?: string): DecayScoreFunction;
+export function decayScoreFunction(
+    mode?: 'linear' | 'exp' | 'gauss',
+    field?: string
+): DecayScoreFunction;
 
 /**
  * Allows to highlight search results on one or more fields. In order to
@@ -6402,9 +6456,19 @@ export function geoPoint(): GeoPoint;
  * @param {Array=} coords A valid coordinat definition for the given shape.
  */
 export class GeoShape {
-    constructor(type?: 'point' | 'linestring' | 'polygon' | 'multipoint' |
-        'multilinestring' | 'multipolygon' | 'geometrycollection' |
-        'envelope' | 'circle', coords?: object);
+    constructor(
+        type?:
+            | 'point'
+            | 'linestring'
+            | 'polygon'
+            | 'multipoint'
+            | 'multilinestring'
+            | 'multipolygon'
+            | 'geometrycollection'
+            | 'envelope'
+            | 'circle',
+        coords?: object
+    );
 
     /**
      * Sets the GeoJSON format type used to represent shape.
@@ -6414,9 +6478,16 @@ export class GeoShape {
      * `multipolygon`, `geometrycollection`, `envelope`, `circle`
      */
     type(
-        type: 'point' | 'linestring' | 'polygon' | 'multipoint' |
-            'multilinestring' | 'multipolygon' | 'geometrycollection' |
-            'envelope' | 'circle'
+        type:
+            | 'point'
+            | 'linestring'
+            | 'polygon'
+            | 'multipoint'
+            | 'multilinestring'
+            | 'multipolygon'
+            | 'geometrycollection'
+            | 'envelope'
+            | 'circle'
     ): this;
 
     /**
@@ -6454,9 +6525,19 @@ export class GeoShape {
  * `multipolygon`, `geometrycollection`, `envelope` and `circle`
  * @param {Array=} coords A valid coordinat definition for the given shape.
  */
-export function geoShape(type?: 'point' | 'linestring' | 'polygon' | 'multipoint' |
-    'multilinestring' | 'multipolygon' | 'geometrycollection' |
-    'envelope' | 'circle', coords?: object): GeoShape;
+export function geoShape(
+    type?:
+        | 'point'
+        | 'linestring'
+        | 'polygon'
+        | 'multipoint'
+        | 'multilinestring'
+        | 'multipolygon'
+        | 'geometrycollection'
+        | 'envelope'
+        | 'circle',
+    coords?: object
+): GeoShape;
 
 /**
  * A shape which has already been indexed in another index and/or index
