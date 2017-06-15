@@ -4075,6 +4075,74 @@ export class BucketAggregationBase extends Aggregation {
 }
 
 /**
+ * A bucket aggregation returning a form of adjacency matrix.
+ * The request provides a collection of named filter expressions,
+ * similar to the `filters` aggregation request. Each bucket in the response
+ * represents a non-empty cell in the matrix of intersecting filters.
+ *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ *
+ * @extends BucketAggregationBase
+ */
+export class AdjacencyMatrixAggregation extends BucketAggregationBase {
+    constructor(name: string);
+
+    /**
+     * @override
+     * @throws {Error} This method cannot be called on AdjacencyMatrixAggregation
+     */
+    field(): never;
+
+    /**
+     * @override
+     * @throws {Error} This method cannot be called on AdjacencyMatrixAggregation
+     */
+    script(): never;
+
+    /**
+     * Sets a named filter query.
+     *
+     * @param {string} filterName Name for the filter.
+     * @param {Query} filterQuery Query to filter on. Example - term query.
+     * @throws {TypeError} If `filterQuery` is not an instance of `Query`
+     */
+    filter(filterName: string, filterQuery: Query): this;
+
+    /**
+     * Assigns filters to already added filters.
+     * Does not mix with anonymous filters.
+     * If anonymous filters are present, they will be overwritten.
+     *
+     * @param {Object} filterQueries Object with multiple key value pairs
+     * where filter name is the key and filter query is the value.
+     * @throws {TypeError} If `filterQueries` is not an instance of object
+     */
+    filters(filterQueries: object): this;
+
+    /**
+     * Sets the `separator` parameter to use a separator string other than
+     * the default of the ampersand.
+     *
+     * @param {string} sep the string used to separate keys in intersections buckets
+     * e.g. & character for keyed filters A and B would return an
+     * intersection bucket named A&B
+     */
+    separator(sep: string): this;
+}
+
+/**
+ * A bucket aggregation returning a form of adjacency matrix.
+ * The request provides a collection of named filter expressions,
+ * similar to the `filters` aggregation request. Each bucket in the response
+ * represents a non-empty cell in the matrix of intersecting filters.
+ *
+ * @param {string} name The name which will be used to refer to this aggregation.
+ *
+ * @extends BucketAggregationBase
+ */
+export function adjacencyMatrixAggregation(name: string): AdjacencyMatrixAggregation;
+
+/**
  * A special single bucket aggregation that enables aggregating
  * from buckets on parent document types to buckets on child documents.
  * This aggregation relies on the `_parent` field in the mapping.
