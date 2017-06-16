@@ -1,7 +1,5 @@
 # elastic-builder
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/sudo-suhas/elastic-builder.svg)](https://greenkeeper.io/)
-
 [![Build Status](https://travis-ci.org/sudo-suhas/elastic-builder.svg?branch=master)](https://travis-ci.org/sudo-suhas/elastic-builder)
 [![Coverage Status](https://coveralls.io/repos/github/sudo-suhas/elastic-builder/badge.svg?branch=master)](https://coveralls.io/github/sudo-suhas/elastic-builder?branch=master)
 
