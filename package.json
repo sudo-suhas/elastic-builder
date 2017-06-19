@@ -84,7 +84,7 @@
     "eslint-plugin-ava": "^4.2.0",
     "eslint-plugin-prettier": "^2.1.2",
     "glob": "^7.1.1",
-    "lint-staged": "^3.6.1",
+    "lint-staged": "^4.0.0",
     "lodash": "^4.17.4",
     "nyc": "^11.0.2",
     "pre-commit": "^1.2.2",
