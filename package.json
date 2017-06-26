@@ -36,11 +36,15 @@
   },
   "keywords": [
     "elasticsearch",
+    "elastic-builder",
+    "querying",
+    "queries",
+    "query",
+    "elastic",
     "search",
     "elasticjs",
-    "elastic search",
-    "elastic-builder",
-    "ejs"
+    "ejs",
+    "dsl"
   ],
   "author": "Suhas Karanth <sudo.suhas@gmail.com>",
   "license": "MIT",
