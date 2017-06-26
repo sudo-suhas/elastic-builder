@@ -7034,6 +7034,87 @@ export class InnerHits {
  */
 export function innerHits(name?: string): InnerHits;
 
+/**
+ * Class supporting the Elasticsearch search template API.
+ *
+ * The `/_search/template` endpoint allows to use the mustache language to
+ * pre render search requests, before they are executed and fill existing
+ * templates with template parameters.
+ *
+ * @param {string=} type One of `inline`, `id`, `file`. `id` is also
+ * aliased as `indexed`
+ * @param {string|Object=} source Source of the search template.
+ * This needs to be specified if optional argument `type` is passed.
+ */
+export class SearchTemplate {
+    constructor(type?: string, source?: string | object);
+
+    /**
+     * Sets the type of search template to be `inline` and specifies the query.
+     *
+     * @param {string|Query} query Either a `Query` object or a string.
+     */
+    inline(query: string | object): this;
+
+    /**
+     * Specify the indexed search template by `templateName` which will be
+     * retrieved from cluster state.
+     *
+     * @param {string} templId The unique identifier for the indexed template
+     */
+    id(templId: string): this;
+
+    /**
+     * Specify the indexed search template by `templateName` which will be
+     * retrieved from cluster state.
+     *
+     * Alias for `SearchTemplate.id`
+     *
+     * @param {string} templId The unique identifier for the indexed template
+     */
+    indexed(templId: string): this;
+
+    /**
+     * Specify the search template by filename stored in the scripts folder,
+     * with `mustache` extension.
+     *
+     * @param {string} fileName The name of the search template stored as a file
+     * in the scripts folder.
+     * For file `config/scripts/storedTemplate.mustache`,
+     * `fileName` should be `storedTemplate`
+     */
+    file(fileName: string): this;
+
+    /**
+     * Specifies any named parameters that are used to render the search template.
+     *
+     * @param {Object} params Named parameters to be used for rendering.
+     */
+    params(params: object): this;
+
+    /**
+     * Override default `toJSON` to return DSL representation for the Search Template.
+     *
+     * @override
+     * @returns {Object} returns an Object which maps to the elasticsearch query DSL
+     */
+    toJSON(): object;
+}
+
+/**
+ * Class supporting the Elasticsearch search template API.
+ *
+ * The `/_search/template` endpoint allows to use the mustache language to
+ * pre render search requests, before they are executed and fill existing
+ * templates with template parameters.
+ *
+ * @param {string=} type One of `inline`, `id`, `file`. `id` is also
+ * aliased as `indexed`
+ * @param {string|Object=} source Source of the search template.
+ * This needs to be specified if optional argument `type` is passed.
+ */
+export function searchTemplate(type?: string, source?: string | object): SearchTemplate;
+
 export namespace recipes {
     /**
      * Recipe for the now removed `missing` query.
