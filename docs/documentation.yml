@@ -92,6 +92,7 @@ toc:
   - ValueCountAggregation
   - name: Bucket Aggregations
   - BucketAggregationBase
+  - AdjacencyMatrixAggregation
   - ChildrenAggregation
   - HistogramAggregationBase
   - DateHistogramAggregation
@@ -146,3 +147,4 @@ toc:
   - Sort
   - Rescore
   - InnerHits
+  - SearchTemplate

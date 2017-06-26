@@ -24,6 +24,8 @@ exports.Rescore = require('./rescore');
 
 exports.InnerHits = require('./inner-hits');
 
+exports.SearchTemplate = require('./search-template');
+
 exports.consts = require('./consts');
 
 exports.util = require('./util');

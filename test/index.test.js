@@ -375,6 +375,9 @@ test('misc are exported', t => {
     t.truthy(bob.InnerHits);
     t.truthy(bob.innerHits);
 
+    t.truthy(bob.SearchTemplate);
+    t.truthy(bob.searchTemplate);
+
     t.truthy(bob.prettyPrint);
 });
 
