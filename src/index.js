@@ -12,6 +12,7 @@ const {
     Sort,
     Rescore,
     InnerHits,
+    SearchTemplate,
     util: { constructorWrapper }
 } = require('./core');
 
@@ -512,6 +513,9 @@ exports.rescore = constructorWrapper(Rescore);
 
 exports.InnerHits = InnerHits;
 exports.innerHits = constructorWrapper(InnerHits);
+
+exports.SearchTemplate = SearchTemplate;
+exports.searchTemplate = constructorWrapper(SearchTemplate);
 
 exports.prettyPrint = function prettyPrint(obj) {
     console.log(JSON.stringify(obj, null, 2));
