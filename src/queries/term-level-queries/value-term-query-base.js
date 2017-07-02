@@ -61,9 +61,8 @@ class ValueTermQueryBase extends Query {
             throw new Error('Value is required for term level query!');
         }
 
-        const qryOpts = Object.keys(this._queryOpts).length === 1
-            ? this._queryOpts.value
-            : this._queryOpts;
+        const qryOpts =
+            Object.keys(this._queryOpts).length === 1 ? this._queryOpts.value : this._queryOpts;
         return {
             [this.queryType]: {
                 [this._field]: qryOpts

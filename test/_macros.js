@@ -160,9 +160,10 @@ export function makeSetsOptionMacro(getInstance, getExpected = simpleExpect) {
         methodName,
         { param, propValue = param, spread = true, keyName = _.snakeCase(methodName) }
     ) {
-        const value = Array.isArray(param) && spread
-            ? getInstance()[methodName](...param).toJSON()
-            : getInstance()[methodName](param).toJSON();
+        const value =
+            Array.isArray(param) && spread
+                ? getInstance()[methodName](...param).toJSON()
+                : getInstance()[methodName](param).toJSON();
         const expected = getExpected(keyName, recursiveToJSON(propValue));
         t.deepEqual(value, expected);
     }
