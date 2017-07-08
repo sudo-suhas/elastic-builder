@@ -88,13 +88,13 @@
     "eslint-plugin-ava": "^4.2.0",
     "eslint-plugin-prettier": "^2.1.2",
     "glob": "^7.1.1",
-    "lint-staged": "^4.0.0",
+    "lint-staged": "^4.0.1",
     "lodash": "^4.17.4",
     "nyc": "^11.0.3",
     "pre-commit": "^1.2.2",
     "prettier": "^1.5.2",
     "sinon": "^2.3.6",
-    "webpack": "^3.0.0",
+    "webpack": "^3.1.0",
     "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {
