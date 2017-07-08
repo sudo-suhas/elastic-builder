@@ -1,10 +1,13 @@
 import test from 'ava';
 import { BucketScriptAggregation, Script } from '../../src';
-import { setsAggType, aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import { setsAggType, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = bucketsPath => new BucketScriptAggregation('my_agg', bucketsPath);
 
-const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'bucket_script'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameTypeExpectStrategy('my_agg', 'bucket_script')
+);
 
 test(setsAggType, BucketScriptAggregation, 'bucket_script');
 test(setsOption, 'script', { param: 'params.my_var1 / params.my_var2' });

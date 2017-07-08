@@ -1,10 +1,10 @@
 import test from 'ava';
 import { GeoBoundsAggregation } from '../../src';
-import { setsAggType, illegalCall, aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import { setsAggType, illegalCall, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = field => new GeoBoundsAggregation('my_agg', field);
 
-const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'geo_bounds'));
+const setsOption = makeSetsOptionMacro(getInstance, nameTypeExpectStrategy('my_agg', 'geo_bounds'));
 
 test(setsAggType, GeoBoundsAggregation, 'geo_bounds');
 test(illegalCall, GeoBoundsAggregation, 'format', 'my_agg');

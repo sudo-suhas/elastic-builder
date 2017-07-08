@@ -5,7 +5,7 @@ import {
     illegalCall,
     illegalParamType,
     setsAggType,
-    aggsExpectStrategy,
+    nameTypeExpectStrategy,
     makeSetsOptionMacro
 } from '../_macros';
 
@@ -13,7 +13,7 @@ const getInstance = (...args) => new FiltersAggregation('my_filters_agg', ...arg
 
 const setsOption = makeSetsOptionMacro(
     getInstance,
-    aggsExpectStrategy('my_filters_agg', 'filters')
+    nameTypeExpectStrategy('my_filters_agg', 'filters')
 );
 
 const filterQryA = termQuery('user', 'kimchy');

@@ -1,13 +1,13 @@
 import test from 'ava';
 import { RangeAggregationBase } from '../../src/aggregations/bucket-aggregations';
-import { illegalParamType, aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import { illegalParamType, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = (...args) =>
     new RangeAggregationBase('my_agg', 'my_type', ...args).range({ from: 10, to: 20 });
 
 const setsOption = makeSetsOptionMacro(
     getInstance,
-    aggsExpectStrategy('my_agg', 'my_type', {
+    nameTypeExpectStrategy('my_agg', 'my_type', {
         ranges: [{ from: 10, to: 20 }]
     })
 );

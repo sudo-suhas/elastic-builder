@@ -8,6 +8,7 @@ import {
     BoolQuery,
     FunctionScoreQuery,
     TermsAggregation,
+    TermSuggester,
     ScriptScoreFunction,
     Sort,
     Script,
@@ -26,6 +27,8 @@ const filterQry = new BoolQuery()
 
 const aggA = new TermsAggregation('user_term_agg', 'user');
 const aggB = new TermsAggregation('keyword_term_agg', 'keyword');
+
+const suggest = new TermSuggester('my-suggestion', 'message', 'tring out Elasticsearch');
 
 const sortChannel = new Sort('channel', 'desc');
 const sortCategories = new Sort('categories', 'desc');
@@ -54,6 +57,7 @@ const instance = new RequestBodySearch();
 test(illegalParamType, instance, 'query', 'Query');
 test(illegalParamType, instance, 'aggregation', 'Aggregation');
 test(illegalParamType, instance, 'agg', 'Aggregation');
+test(illegalParamType, instance, 'suggest', 'Suggester');
 test(illegalParamType, instance, 'sort', 'Sort');
 test(illegalParamType, instance, 'scriptFields', 'Object');
 test(illegalParamType, instance, 'highlight', 'Highlight');
@@ -62,6 +66,12 @@ test(illegalParamType, instance, 'postFilter', 'Query');
 test(setsOption, 'query', { param: searchQry });
 test(setsOption, 'aggregation', { param: aggA, keyName: 'aggs' });
 test(setsOption, 'agg', { param: aggA, keyName: 'aggs' });
+test(setsOption, 'suggest', { param: suggest });
+test(setsOption, 'suggestText', {
+    param: 'suggest-text',
+    keyName: 'suggest',
+    propValue: { text: 'suggest-text' }
+});
 test(setsOption, 'timeout', { param: '5s' });
 test(setsOption, 'from', { param: 10 });
 test(setsOption, 'size', { param: 10 });

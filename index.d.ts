@@ -33,6 +33,21 @@ export class RequestBodySearch {
     aggregation(agg: Aggregation): this;
 
     /**
+     * Sets suggester on the request body.
+     *
+     * @param {Suggester} suggest Any valid `Suggester`
+     * @throws {TypeError} If `suggest` is not an instance of `Suggester`
+     */
+    suggest(suggest: Suggester): this;
+
+    /**
+     * Sets the global suggest text to avoid repetition for multiple suggestions.
+     *
+     * @param {string} txt Global suggest text
+     */
+    suggestText(txt: string): this;
+
+    /**
      * Sets a search timeout, bounding the search request to be executed within
      * the specified time value and bail with the hits accumulated up to that
      * point when expired.
@@ -241,7 +256,6 @@ export class RequestBodySearch {
      * Override default `toJSON` to return DSL representation for the request body search
      *
      * @override
-     * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object;
 }
@@ -283,7 +297,6 @@ class Query {
     /**
      * Build and returns DSL representation of the `Query` class instance.
      *
-     * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     getDSL(): object;
 
@@ -291,7 +304,6 @@ class Query {
      * Override default `toJSON` to return DSL representation for the `query`
      *
      * @override
-     * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object;
 }
@@ -390,7 +402,6 @@ class MonoFieldQueryBase extends FullTextQueryBase {
      * class instance.
      *
      * @override
-     * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object;
 }
@@ -1441,7 +1452,6 @@ export class RangeQuery extends MultiTermQueryBase {
      * class instance.
      *
      * @override
-     * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object;
 }
@@ -2889,7 +2899,6 @@ export class SpanTermQuery extends SpanQueryBase {
      * class instance.
      *
      * @override
-     * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object;
 }
@@ -3227,7 +3236,6 @@ class Aggregation {
     /**
      * Build and returns DSL representation of the `Aggregation` class instance.
      *
-     * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     getDSL(): object;
 
@@ -3235,7 +3243,6 @@ class Aggregation {
      * Override default `toJSON` to return DSL representation for the `aggregation` query.
      *
      * @override
-     * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object;
 }
@@ -5887,7 +5894,6 @@ class ScoreFunction {
      * class instance.
      *
      * @override
-     * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object;
 }
@@ -5935,7 +5941,6 @@ export class WeightScoreFunction extends ScoreFunction {
      * class instance.
      *
      * @override
-     * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object;
 }
@@ -6145,6 +6150,727 @@ export function decayScoreFunction(
     mode?: 'linear' | 'exp' | 'gauss',
     field?: string
 ): DecayScoreFunction;
+
+/**
+ * Base class implementation for all suggester types.
+ *
+ * **NOTE:** Instantiating this directly should not be required.
+ * However, if you wish to add a custom implementation for whatever reason,
+ * this class should be extended and used, as validation against the class
+ * type is present in various places.
+ *
+ * @param {string} suggesterType The type of suggester.
+ * Can be one of `term`, `phrase`, `completion`
+ * @param {string} name The name of the Suggester, an arbitrary identifier
+ * @param {string=} field The field to fetch the candidate suggestions from.
+ *
+ * @throws {Error} if `name` is empty
+ * @throws {Error} if `suggesterType` is empty
+ */
+class Suggester {
+    constructor(suggesterType: string, name: string, field?: string);
+
+    /**
+     * Sets field to fetch the candidate suggestions from. This is a required option
+     * that either needs to be set globally or per suggestion.
+     *
+     * @param {string} field a valid field name
+     */
+    field(field: string): this;
+
+    /**
+     * Sets the number of suggestions to return (defaults to `5`).
+     *
+     * @param {number} size
+     */
+    size(size: number): this;
+
+    /**
+     * Override default `toJSON` to return DSL representation for the `suggester`
+     *
+     * @override
+     */
+    toJSON(): object;
+}
+
+/**
+ * The `AnalyzedSuggesterBase` provides support for common options used
+ * in `TermSuggester` and `PhraseSuggester`.
+ *
+ * **NOTE:** Instantiating this directly should not be required.
+ * However, if you wish to add a custom implementation for whatever reason,
+ * this class could be extended.
+ *
+ * @param {string} suggesterType The type of suggester.
+ * Can be one of `term`, `phrase`
+ * @param {string} name The name of the Suggester, an arbitrary identifier
+ * @param {string=} field The field to fetch the candidate suggestions from.
+ * @param {string=} txt A string to get suggestions for.
+ *
+ * @throws {Error} if `name` is empty
+ * @throws {Error} if `suggesterType` is empty
+ *
+ * @extends Suggester
+ */
+class AnalyzedSuggesterBase extends Suggester {
+    constructor(suggesterType: string, name: string, field?: string, txt?: string);
+
+    /**
+     * Sets the text to get suggestions for. If not set, the global
+     * suggestion text will be used.
+     *
+     * @param {string} txt A string to get suggestions for.
+     */
+    text(txt: string): this;
+
+    /**
+     * Sets the analyzer to analyse the suggest text with. Defaults to
+     * the search analyzer of the suggest field.
+     *
+     * @param {string} analyzer The analyzer to analyse the suggest text with.
+     */
+    analyzer(analyzer: string): this;
+
+    /**
+     * Sets the maximum number of suggestions to be retrieved from each individual shard.
+     * During the reduce phase only the top N suggestions are returned based on the `size`
+     * option. Defaults to the `size` option. Setting this to a value higher than the `size`
+     * can be useful in order to get a more accurate document frequency for spelling
+     * corrections at the cost of performance. Due to the fact that terms are partitioned
+     * amongst shards, the shard level document frequencies of spelling corrections
+     * may not be precise. Increasing this will make these document frequencies
+     * more precise.
+     *
+     * @param {number} size
+     */
+    shardSize(size: number): this;
+}
+
+/**
+ * The term suggester suggests terms based on edit distance.
+ * The provided suggest text is analyzed before terms are suggested.
+ * The suggested terms are provided per analyzed suggest text token.
+ * The term suggester doesn’t take the query into account that is part of request.
+ *
+ * @param {string} name The name of the Suggester, an arbitrary identifier
+ * @param {string=} field The field to fetch the candidate suggestions from.
+ * @param {string=} txt A string to get suggestions for.
+ *
+ * @throws {Error} if `name` is empty
+ *
+ * @extends AnalyzedSuggesterBase
+ */
+export class TermSuggester extends AnalyzedSuggesterBase {
+    constructor(name: string, field?: string, txt?: string);
+
+    /**
+     * Sets the sort to control how suggestions should be sorted per
+     * suggest text term.
+     * Two possible values:
+     *   - `score`: Sort by score first, then document frequency and
+     *     then the term itself.
+     *   - `frequency`: Sort by document frequency first, then similarity
+     *     score and then the term itself.
+     * @param {string} sort Can be `score` or `frequency`
+     * @throws {Error} If `sort` is neither `score` nor `frequency`.
+     */
+    sort(sort: 'score' | 'frequency'): this;
+
+    /**
+     * Sets the suggest mode which controls what suggestions are included
+     * or controls for what suggest text terms, suggestions should be suggested.
+     *
+     * Three possible values can be specified:
+     *   - `missing`: Only provide suggestions for suggest text terms that
+     *     are not in the index. This is the default.
+     *   - `popular`:  Only suggest suggestions that occur in more docs
+     *     than the original suggest text term.
+     *   - `always`: Suggest any matching suggestions based on terms in the suggest text.
+     *
+     * @param {string} mode Can be `missing`, `popular` or `always`
+     * @throws {Error} If `mode` is not one of `missing`, `popular` or `always`.
+     */
+    suggestMode(mode: 'missing' | 'popular' | 'always'): this;
+
+    /**
+     * Sets the maximum edit distance candidate suggestions can have
+     * in order to be considered as a suggestion. Can only be a value
+     * between 1 and 2. Any other value result in an bad request
+     * error being thrown. Defaults to 2.
+     *
+     * @param {number} maxEdits Value between 1 and 2. Defaults to 2.
+     */
+    maxEdits(maxEdits: number): this;
+
+    /**
+     * Sets the number of minimal prefix characters that must match in order
+     * to be a candidate suggestions. Defaults to 1.
+     * Increasing this number improves spellcheck performance.
+     * Usually misspellings don't occur in the beginning of terms.
+     *
+     * @param {number} len The number of minimal prefix characters that must match in order
+     * to be a candidate suggestions. Defaults to 1.
+     */
+    prefixLength(len: number): this;
+
+    /**
+     * Sets the minimum length a suggest text term must have in order to be included.
+     * Defaults to 4.
+     *
+     * @param {number} len The minimum length a suggest text term must have in order
+     * to be included. Defaults to 4.
+     */
+    minWordLength(len: number): this;
+
+    /**
+     * Sets factor that is used to multiply with the `shards_size` in order to inspect
+     * more candidate spell corrections on the shard level.
+     * Can improve accuracy at the cost of performance. Defaults to 5.
+     *
+     * @param {number} maxInspections Factor used to multiple with `shards_size` in
+     * order to inspect more candidate spell corrections on the shard level.
+     * Defaults to 5
+     */
+    maxInspections(maxInspections: number): this;
+
+    /**
+     * Sets the minimal threshold in number of documents a suggestion should appear in.
+     * This can be specified as an absolute number or as a relative percentage of
+     * number of documents. This can improve quality by only suggesting high
+     * frequency terms. Defaults to 0f and is not enabled. If a value higher than 1
+     * is specified then the number cannot be fractional. The shard level document
+     * frequencies are used for this option.
+     *
+     * @param {number} limit Threshold in number of documents a suggestion
+     * should appear in. Defaults to 0f and is not enabled.
+     */
+    minDocFreq(limit: number): this;
+
+    /**
+     * Sets the maximum threshold in number of documents a suggest text token can
+     * exist in order to be included. Can be a relative percentage number (e.g 0.4)
+     * or an absolute number to represent document frequencies. If an value higher
+     * than 1 is specified then fractional can not be specified. Defaults to 0.01f.
+     * This can be used to exclude high frequency terms from being spellchecked.
+     * High frequency terms are usually spelled correctly on top of this also
+     * improves the spellcheck performance. The shard level document frequencies are
+     * used for this option.
+     *
+     * @param {number} limit Maximum threshold in number of documents a suggest text
+     * token can exist in order to be included. Defaults to 0.01f.
+     */
+    maxTermFreq(limit: number): this;
+
+    /**
+     * Sets the string distance implementation to use for comparing how similar
+     * suggested terms are.
+     *
+     * Five possible values can be specified:
+     *   - `internal`: The default based on `damerau_levenshtein` but highly optimized for
+     *     comparing string distance for terms inside the index.
+     *   - `damerau_levenshtein`: String distance algorithm based on Damerau-Levenshtein
+     *     algorithm.
+     *   - `levenstein`: String distance algorithm based on Levenstein edit distance
+     *     algorithm.
+     *   - `jarowinkler`: String distance algorithm based on Jaro-Winkler algorithm.
+     *   - `ngram`: String distance algorithm based on character n-grams.
+     *
+     * @param {string} implMethod One of `internal`, `damerau_levenshtein`, `levenstein`,
+     * `jarowinkler`, `ngram`
+     *
+     * @throws {Error} If `implMethod` is not one of `internal`, `damerau_levenshtein`,
+     * `levenstein`, `jarowinkler` or ngram`.
+     */
+    stringDistance(
+        implMethod: 'internal' | 'damerau_levenshtein' | 'levenstein' | 'jarowinkler' | 'ngram'
+    ): this;
+}
+
+/**
+ * The term suggester suggests terms based on edit distance.
+ * The provided suggest text is analyzed before terms are suggested.
+ * The suggested terms are provided per analyzed suggest text token.
+ * The term suggester doesn’t take the query into account that is part of request.
+ *
+ * @param {string} name The name of the Suggester, an arbitrary identifier
+ * @param {string=} field The field to fetch the candidate suggestions from.
+ * @param {string=} txt A string to get suggestions for.
+ *
+ * @throws {Error} if `name` is empty
+ */
+export function termSuggester(name: string, field?: string, txt?: string): TermSuggester;
+
+/**
+ * The `phrase` suggester uses candidate generators to produce a list of possible
+ * terms per term in the given text. A single candidate generator is similar
+ * to a `term` suggester called for each individual term in the text. The output
+ * of the generators is subsequently scored in combination with the candidates
+ * from the other terms to for suggestion candidates.
+ * The Phrase suggest API accepts a list of generators under the key `direct_generator`
+ * each of the generators in the list are called per term in the original text.
+ *
+ * @param {string=} field The field to fetch the candidate suggestions from.
+ */
+export class DirectGenerator {
+    constructor(field?: string);
+
+    /**
+     * Sets field to fetch the candidate suggestions from. This is a required option
+     * that either needs to be set globally or per suggestion.
+     *
+     * @param {string} field a valid field name
+     */
+    field(field: string): this;
+
+    /**
+     * Sets the number of suggestions to return (defaults to `5`).
+     *
+     * @param {number} size
+     */
+    size(size: number): this;
+
+    /**
+     * Sets the suggest mode which controls what suggestions are included
+     * or controls for what suggest text terms, suggestions should be suggested.
+     *
+     * All values other than `always` can be thought of as an optimization to
+     * generate fewer suggestions to test on each shard and are not rechecked
+     * when combining the suggestions generated on each shard. Thus `missing`
+     * will generate suggestions for terms on shards that do not contain them
+     * even other shards do contain them. Those should be filtered out
+     * using `confidence`.
+     *
+     * Three possible values can be specified:
+     *   - `missing`: Only provide suggestions for suggest text terms that
+     *     are not in the index. This is the default.
+     *   - `popular`:  Only suggest suggestions that occur in more docs
+     *     than the original suggest text term.
+     *   - `always`: Suggest any matching suggestions based on terms in the suggest text.
+     *
+     * @param {string} mode Can be `missing`, `popular` or `always`
+     *
+     * @throws {Error} If `mode` is not one of `missing`, `popular` or `always`.
+     */
+    suggestMode(mode: 'missing' | 'popular' | 'always'): this;
+
+    /**
+     * Sets the maximum edit distance candidate suggestions can have
+     * in order to be considered as a suggestion. Can only be a value
+     * between 1 and 2. Any other value result in an bad request
+     * error being thrown. Defaults to 2.
+     *
+     * @param {number} maxEdits Value between 1 and 2. Defaults to 2.
+     */
+    maxEdits(maxEdits: number): this;
+
+    /**
+     * Sets the number of minimal prefix characters that must match in order
+     * to be a candidate suggestions. Defaults to 1.
+     * Increasing this number improves spellcheck performance.
+     * Usually misspellings don't occur in the beginning of terms.
+     *
+     * @param {number} len The number of minimal prefix characters that must match in order
+     * to be a candidate suggestions. Defaults to 1.
+     */
+    prefixLength(len: number): this;
+
+    /**
+     * Sets the minimum length a suggest text term must have in order to be included.
+     * Defaults to 4.
+     *
+     * @param {number} len The minimum length a suggest text term must have in order
+     * to be included. Defaults to 4.
+     */
+    minWordLength(len: number): this;
+
+    /**
+     * Sets factor that is used to multiply with the `shards_size` in order to inspect
+     * more candidate spell corrections on the shard level.
+     * Can improve accuracy at the cost of performance. Defaults to 5.
+     *
+     * @param {number} maxInspections Factor used to multiple with `shards_size` in
+     * order to inspect more candidate spell corrections on the shard level.
+     * Defaults to 5
+     */
+    maxInspections(maxInspections: number): this;
+
+    /**
+     * Sets the minimal threshold in number of documents a suggestion should appear in.
+     * This can be specified as an absolute number or as a relative percentage of
+     * number of documents. This can improve quality by only suggesting high
+     * frequency terms. Defaults to 0f and is not enabled. If a value higher than 1
+     * is specified then the number cannot be fractional. The shard level document
+     * frequencies are used for this option.
+     *
+     * @param {number} limit Threshold in number of documents a suggestion
+     * should appear in. Defaults to 0f and is not enabled.
+     */
+    minDocFreq(limit: number): this;
+
+    /**
+     * Sets the maximum threshold in number of documents a suggest text token can
+     * exist in order to be included. Can be a relative percentage number (e.g 0.4)
+     * or an absolute number to represent document frequencies. If an value higher
+     * than 1 is specified then fractional can not be specified. Defaults to 0.01f.
+     * This can be used to exclude high frequency terms from being spellchecked.
+     * High frequency terms are usually spelled correctly on top of this also
+     * improves the spellcheck performance. The shard level document frequencies are
+     * used for this option.
+     *
+     * @param {number} limit Maximum threshold in number of documents a suggest text
+     * token can exist in order to be included. Defaults to 0.01f.
+     */
+    maxTermFreq(limit: number): this;
+
+    /**
+     * Sets the filter (analyzer) that is applied to each of the tokens passed to this
+     * candidate generator. This filter is applied to the original token before
+     * candidates are generated.
+     *
+     * @param {string} filter a filter (analyzer) that is applied to each of the
+     * tokens passed to this candidate generator.
+     */
+    preFilter(filter: string): this;
+
+    /**
+     * Sets the filter (analyzer) that is applied to each of the generated tokens
+     * before they are passed to the actual phrase scorer.
+     *
+     * @param {string} filter a filter (analyzer) that is applied to each of the
+     * generated tokens before they are passed to the actual phrase scorer.
+     */
+    postFilter(filter: string): this;
+
+    /**
+     * Override default `toJSON` to return DSL representation for the `direct_generator`
+     *
+     * @override
+     */
+    toJSON(): object;
+}
+
+/**
+ * The `phrase` suggester uses candidate generators to produce a list of possible
+ * terms per term in the given text. A single candidate generator is similar
+ * to a `term` suggester called for each individual term in the text. The output
+ * of the generators is subsequently scored in combination with the candidates
+ * from the other terms to for suggestion candidates.
+ * The Phrase suggest API accepts a list of generators under the key `direct_generator`
+ * each of the generators in the list are called per term in the original text.
+ *
+ * @param {string=} field The field to fetch the candidate suggestions from.
+ */
+export function directGenerator(field?: string): DirectGenerator;
+
+/**
+ * The phrase suggester adds additional logic on top of the `term` suggester
+ * to select entire corrected phrases instead of individual tokens weighted
+ * based on `ngram-language` models. In practice this suggester will be able
+ * to make better decisions about which tokens to pick based on co-occurrence
+ * and frequencies.
+ *
+ * @param {string} name The name of the Suggester, an arbitrary identifier
+ * @param {string=} field The field to fetch the candidate suggestions from.
+ * @param {string=} txt A string to get suggestions for.
+ *
+ * @throws {Error} if `name` is empty
+ *
+ * @extends AnalyzedSuggesterBase
+ */
+export class PhraseSuggester extends AnalyzedSuggesterBase {
+    constructor(name: string, field?: string, txt?: string);
+
+    /**
+     * Sets max size of the n-grams (shingles) in the `field`. If the field
+     * doesn't contain n-grams (shingles) this should be omitted or set to `1`.
+     * Note: Elasticsearch tries to detect the gram size based on
+     * the specified `field`. If the field uses a `shingle` filter the `gram_size`
+     * is set to the `max_shingle_size` if not explicitly set.
+     *
+     * @param {number} size Max size of the n-grams (shingles) in the `field`.
+     */
+    gramSize(size: number): this;
+
+    /**
+     * Sets the likelihood of a term being a misspelled even if the term exists
+     * in the dictionary. The default is `0.95` corresponding to 5% of the
+     * real words are misspelled.
+     *
+     * @param {number} factor Likelihood of a term being misspelled. Defaults to `0.95`
+     */
+    realWordErrorLikelihood(factor: number): this;
+
+    /**
+     * Sets the confidence level defines a factor applied to the input phrases score
+     * which is used as a threshold for other suggest candidates. Only candidates
+     * that score higher than the threshold will be included in the result.
+     * For instance a confidence level of `1.0` will only return suggestions
+     * that score higher than the input phrase. If set to `0.0` the top N candidates
+     * are returned. The default is `1.0`.
+     *
+     * @param {number} level Factor applied to the input phrases score, used as
+     * a threshold for other suggest candidates.
+     */
+    confidence(level: number): this;
+
+    /**
+     * Sets the maximum percentage of the terms that at most considered to be
+     * misspellings in order to form a correction. This method accepts a float
+     * value in the range `[0..1)` as a fraction of the actual query terms or a
+     * number `>=1` as an absolute number of query terms. The default is set
+     * to `1.0` which corresponds to that only corrections with at most
+     * 1 misspelled term are returned. Note that setting this too high can
+     * negatively impact performance. Low values like 1 or 2 are recommended
+     * otherwise the time spend in suggest calls might exceed the time spend
+     * in query execution.
+     *
+     * @param {number} limit The maximum percentage of the terms that at most considered
+     * to be misspellings in order to form a correction.
+     */
+    maxErrors(limit: number): this;
+
+    /**
+     * Sets the separator that is used to separate terms in the bigram field.
+     * If not set the whitespace character is used as a separator.
+     *
+     * @param {string} sep The separator that is used to separate terms in the
+     * bigram field.
+     */
+    separator(sep: string): this;
+
+    /**
+     * Sets up suggestion highlighting. If not provided then no `highlighted` field
+     * is returned. If provided must contain exactly `pre_tag` and `post_tag` which
+     * are wrapped around the changed tokens. If multiple tokens in a row are changed
+     * the entire phrase of changed tokens is wrapped rather than each token.
+     *
+     * @param {string} preTag Pre-tag to wrap token
+     * @param {string} postTag Post-tag to wrap token
+     */
+    highlight(preTag: string, postTag: string): this;
+
+    /**
+     * Checks each suggestion against the specified `query` to prune suggestions
+     * for which no matching docs exist in the index. The collate query for
+     * a suggestion is run only on the local shard from which the suggestion
+     * has been generated from. The `query` must be specified, and it is run
+     * as a `template` query.
+     *
+     * The current suggestion is automatically made available as the
+     * `{{suggestion}}` variable, which should be used in your query.
+     * Additionally, you can specify a `prune` to control if all phrase
+     * suggestions will be returned, when set to `true` the suggestions will
+     * have an additional option `collate_match`, which will be true if matching
+     * documents for the phrase was found, `false` otherwise. The default value
+     * for prune is `false`.
+     *
+     * @param {object} opts The options for `collate`. Can include the following:
+     *   - `query`: The `query` to prune suggestions for which
+     *      no matching docs exist in the index. It is run as a `template` query.
+     *   - `params`: The parameters to be passed to the template. The suggestion
+     *      value will be added to the variables you specify.
+     *   - `prune`: When set to `true`, the suggestions will
+     *      have an additional option `collate_match`, which will be true if matching
+     *      documents for the phrase was found, `false` otherwise. The default value
+     *      for prune is `false`.
+     */
+    collate(opts: object): this;
+
+    /**
+     * Sets the smoothing model to balance weight between infrequent grams
+     * (grams (shingles) are not existing in the index) and frequent grams
+     * (appear at least once in the index).
+     *
+     * Three possible values can be specified:
+     *   - `stupid_backoff`: a simple backoff model that backs off to lower order
+     *     n-gram models if the higher order count is 0 and discounts the lower order
+     *     n-gram model by a constant factor. The default `discount` is `0.4`.
+     *     Stupid Backoff is the default model
+     *   - `laplace`: a smoothing model that uses an additive smoothing where a
+     *     constant (typically `1.0` or smaller) is added to all counts to balance weights,
+     *     The default `alpha` is `0.5`.
+     *   - `linear_interpolation`: a smoothing model that takes the weighted mean of the
+     *     unigrams, bigrams and trigrams based on user supplied weights (lambdas).
+     *     Linear Interpolation doesn’t have any default values.
+     *     All parameters (`trigram_lambda`, `bigram_lambda`, `unigram_lambda`)
+     *     must be supplied.
+     *
+     * @param {string} model One of `stupid_backoff`, `laplace`, `linear_interpolation`
+     */
+    smoothing(model: 'stupid_backoff' | 'laplace' | 'linear_interpolation'): this;
+
+    /**
+     * Sets the given list of candicate generators which produce a list of possible terms
+     * per term in the given text. Each of the generators in the list are
+     * called per term in the original text.
+     * The output of the generators is subsequently scored in combination with the
+     * candidates from the other terms to for suggestion candidates.
+     *
+     * @param {Array<DirectGenerator>|DirectGenerator} dirGen Array of `DirectGenerator`
+     * instances or a single instance of `DirectGenerator`
+     */
+    directGenerator(dirGen: DirectGenerator[] | DirectGenerator): this;
+}
+
+/**
+ * The phrase suggester adds additional logic on top of the `term` suggester
+ * to select entire corrected phrases instead of individual tokens weighted
+ * based on `ngram-language` models. In practice this suggester will be able
+ * to make better decisions about which tokens to pick based on co-occurrence
+ * and frequencies.
+ *
+ * @param {string} name The name of the Suggester, an arbitrary identifier
+ * @param {string=} field The field to fetch the candidate suggestions from.
+ * @param {string=} txt A string to get suggestions for.
+ *
+ * @throws {Error} if `name` is empty
+ */
+export function phraseSuggester(name: string, field?: string, txt?: string): PhraseSuggester;
+
+/**
+ * The completion suggester provides auto-complete/search-as-you-type
+ * functionality. This is a navigational feature to guide users to relevant
+ * results as they are typing, improving search precision. It is not meant
+ * for spell correction or did-you-mean functionality like the term or
+ * phrase suggesters.
+ *
+ * Ideally, auto-complete functionality should be as fast as a user types to
+ * provide instant feedback relevant to what a user has already typed in.
+ * Hence, completion suggester is optimized for speed. The suggester uses
+ * data structures that enable fast lookups, but are costly to build
+ * and are stored in-memory.
+ *
+ * @param {string} name The name of the Suggester, an arbitrary identifier
+ * @param {string=} field The field to fetch the candidate suggestions from.
+ *
+ * @throws {Error} if `name` is empty
+ *
+ * @extends Suggester
+ */
+export class CompletionSuggester extends Suggester {
+    constructor(name: string, field?: string);
+
+    /**
+     * Sets the `prefix` for the `CompletionSuggester` query.
+     *
+     * @param {string} prefix
+     */
+    prefix(prefix: string): this;
+
+    /**
+     * Sets the `fuzzy` parameter. Can be customised with specific fuzzy parameters.
+     *
+     * @param {boolean|Object=} fuzzy Enable/disable `fuzzy` using boolean or
+     * object(with params)
+     */
+    fuzzy(fuzzy?: boolean | object): this;
+
+    /**
+     * Sets the `fuzziness` parameter which is interpreted as a Levenshtein Edit Distance —
+     * the number of one character changes that need to be made to one string to make it
+     * the same as another string.
+     *
+     * @param {number|string} factor Can be specified either as a number, or the maximum
+     * number of edits, or as `AUTO` which generates an edit distance based on the length
+     * of the term.
+     */
+    fuzziness(factor: number | string): this;
+
+    /**
+     * Transpositions (`ab` → `ba`) are allowed by default but can be disabled
+     * by setting `transpositions` to false.
+     *
+     * @param {boolean} enable
+     */
+    transpositions(enable: boolean): this;
+
+    /**
+     * Sets the minimum length of the input before fuzzy suggestions are returned,
+     * defaults 3
+     *
+     * @param {number} len Minimum length of the input before fuzzy suggestions
+     * are returned, defaults 3
+     */
+    minLength(len: number): this;
+
+    /**
+     * The number of initial characters which will not be "fuzzified".
+     * This helps to reduce the number of terms which must be examined. Defaults to `1`.
+     *
+     * @param {number} len Characters to skip fuzzy for. Defaults to `1`.
+     */
+    prefixLength(len: number): this;
+
+    /**
+     * If `true`, all measurements (like fuzzy edit distance, transpositions,
+     * and lengths) are measured in Unicode code points instead of in bytes.
+     * This is slightly slower than raw bytes, so it is set to `false` by default.
+     *
+     * @param {boolean} enable Measure in Unicode code points instead of in bytes.
+     * `false` by default.
+     */
+    unicodeAware(enable: boolean): this;
+
+    /**
+     * Sets the regular expression for completion suggester which supports regex queries.
+     *
+     * @param {string} expr Regular expression
+     */
+    regex(expr: string): this;
+
+    /**
+     * Set special flags. Possible flags are `ALL` (default),
+     * `ANYSTRING`, `COMPLEMENT`, `EMPTY`, `INTERSECTION`, `INTERVAL`, or `NONE`.
+     *
+     * @param {string} flags `|` separated flags. Possible flags are `ALL` (default),
+     * `ANYSTRING`, `COMPLEMENT`, `EMPTY`, `INTERSECTION`, `INTERVAL`, or `NONE`.
+     */
+    flags(flags: string): this;
+
+    /**
+     * Limit on how many automaton states regexp queries are allowed to create.
+     * This protects against too-difficult (e.g. exponentially hard) regexps.
+     * Defaults to 10000. You can raise this limit to allow more complex regular
+     * expressions to execute.
+     *
+     * @param {number} limit
+     */
+    maxDeterminizedStates(limit: number): this;
+
+    /**
+     * The completion suggester considers all documents in the index, but it is often
+     * desirable to serve suggestions filtered and/or boosted by some criteria.
+     * To achieve suggestion filtering and/or boosting, you can add context mappings
+     * while configuring a completion field. You can define multiple context mappings
+     * for a completion field. Every context mapping has a unique name and a type.
+     *
+     * @param {string} name
+     * @param {Array|Object} ctx
+     */
+    contexts(name: string, ctx: object[] | string[] | object): this;
+}
+
+/**
+ * The completion suggester provides auto-complete/search-as-you-type
+ * functionality. This is a navigational feature to guide users to relevant
+ * results as they are typing, improving search precision. It is not meant
+ * for spell correction or did-you-mean functionality like the term or
+ * phrase suggesters.
+ *
+ * Ideally, auto-complete functionality should be as fast as a user types to
+ * provide instant feedback relevant to what a user has already typed in.
+ * Hence, completion suggester is optimized for speed. The suggester uses
+ * data structures that enable fast lookups, but are costly to build
+ * and are stored in-memory.
+ *
+ * @param {string} name The name of the Suggester, an arbitrary identifier
+ * @param {string=} field The field to fetch the candidate suggestions from.
+ *
+ * @throws {Error} if `name` is empty
+ *
+ * @extends Suggester
+ */
+export function completionSuggester(name: string, field?: string): CompletionSuggester;
 
 /**
  * Allows to highlight search results on one or more fields. In order to
@@ -6359,7 +7085,6 @@ export class Highlight {
      * Override default `toJSON` to return DSL representation for the `highlight` request
      *
      * @override
-     * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object;
 }
@@ -6440,7 +7165,6 @@ export class Script {
      * Override default `toJSON` to return DSL representation for the `script`.
      *
      * @override
-     * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object;
 }
@@ -6503,7 +7227,6 @@ export class GeoPoint {
      * Override default `toJSON` to return DSL representation for the `GeoPoint`
      *
      * @override
-     * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object;
 }
@@ -6579,7 +7302,6 @@ export class GeoShape {
      * class instance.
      *
      * @override
-     * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object;
 }
@@ -6654,7 +7376,6 @@ export class IndexedShape {
      * class instance.
      *
      * @override
-     * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object;
 }
@@ -6806,7 +7527,6 @@ export class Sort {
      * Override default `toJSON` to return DSL representation for `sort` parameter.
      *
      * @override
-     * @returns {Object|string} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object | string;
 }
@@ -6875,7 +7595,6 @@ export class Rescore {
      * Override default `toJSON` to return DSL representation for `rescore` request
      *
      * @override
-     * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object;
 }
@@ -7017,7 +7736,6 @@ export class InnerHits {
      * Override default `toJSON` to return DSL representation for the inner hits request
      *
      * @override
-     * @returns {object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object;
 }
@@ -7096,7 +7814,6 @@ export class SearchTemplate {
      * Override default `toJSON` to return DSL representation for the Search Template.
      *
      * @override
-     * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON(): object;
 }
@@ -7121,7 +7838,6 @@ export namespace recipes {
      * Can be accessed using `bob.recipes.missingQuery` OR `bob.cookMissingQuery`.
      *
      * @param {string} field The field which should be missing the value.
-     * @returns {BoolQuery} A boolean query with a `must_not` `exists` clause is returned.
      */
     export function missingQuery(field: string): BoolQuery;
 
@@ -7132,7 +7848,6 @@ export namespace recipes {
      *
      * @param {Query=} query The query to fetch documents for. Defaults to `match_all` query.
      * @param {number=} seed A seed value for the random score function.
-     * @returns {FunctionScoreQuery} A `function_score` query with random sort applied
      * @throws {TypeError} If `query` is not an instance of `Query`.
      */
     export function randomSortQuery(query?: Query, seed?: number): FunctionScoreQuery;
@@ -7145,7 +7860,6 @@ export namespace recipes {
      * @param {Query} query The query to fetch documents for.
      * @param {boolean=} scoring Optional flag for enabling/disabling scoring. Disabled by default.
      * If enabled, a score of `1.0` will be assigned to all documents.
-     * @returns {BoolQuery} A `bool` query with a `filter` clause is returned.
      * @throws {TypeError} If `query` is not an instance of `Query`.
      */
     export function filterQuery(query: Query, scoring?: boolean): BoolQuery;
@@ -7158,7 +7872,6 @@ export namespace recipes {
  * Can be accessed using `bob.recipes.missingQuery` OR `bob.cookMissingQuery`.
  *
  * @param {string} field The field which should be missing the value.
- * @returns {BoolQuery} A boolean query with a `must_not` `exists` clause is returned.
  */
 export function cookMissingQuery(field: string): BoolQuery;
 
@@ -7169,7 +7882,6 @@ export function cookMissingQuery(field: string): BoolQuery;
  *
  * @param {Query=} query The query to fetch documents for. Defaults to `match_all` query.
  * @param {number=} seed A seed value for the random score function.
- * @returns {FunctionScoreQuery} A `function_score` query with random sort applied
  * @throws {TypeError} If `query` is not an instance of `Query`.
  */
 export function cookRandomSortQuery(query?: Query, seed?: number): FunctionScoreQuery;
@@ -7182,7 +7894,6 @@ export function cookRandomSortQuery(query?: Query, seed?: number): FunctionScore
  * @param {Query} query The query to fetch documents for.
  * @param {boolean=} scoring Optional flag for enabling/disabling scoring. Disabled by default.
  * If enabled, a score of `1.0` will be assigned to all documents.
- * @returns {BoolQuery} A `bool` query with a `filter` clause is returned.
  * @throws {TypeError} If `query` is not an instance of `Query`.
  */
 export function cookFilterQuery(query: Query, scoring?: boolean): BoolQuery;

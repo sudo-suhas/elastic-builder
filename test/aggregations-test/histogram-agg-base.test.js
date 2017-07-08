@@ -1,10 +1,10 @@
 import test from 'ava';
 import { HistogramAggregationBase } from '../../src/aggregations/bucket-aggregations';
-import { aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import { nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = (...args) => new HistogramAggregationBase('my_agg', 'my_type', ...args);
 
-const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'my_type'));
+const setsOption = makeSetsOptionMacro(getInstance, nameTypeExpectStrategy('my_agg', 'my_type'));
 
 test(setsOption, 'interval', { param: 'year' });
 test(setsOption, 'format', { param: '####.00' });

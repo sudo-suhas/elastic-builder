@@ -1,10 +1,13 @@
 import test from 'ava';
 import { SerialDifferencingAggregation } from '../../src';
-import { setsAggType, aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import { setsAggType, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = bucketsPath => new SerialDifferencingAggregation('my_agg', bucketsPath);
 
-const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'serial_diff'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameTypeExpectStrategy('my_agg', 'serial_diff')
+);
 
 test(setsAggType, SerialDifferencingAggregation, 'serial_diff');
 test(setsOption, 'lag', { param: 2 });

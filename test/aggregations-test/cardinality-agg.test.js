@@ -1,10 +1,13 @@
 import test from 'ava';
 import { CardinalityAggregation } from '../../src';
-import { setsAggType, illegalCall, aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import { setsAggType, illegalCall, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = field => new CardinalityAggregation('my_agg', field);
 
-const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'cardinality'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameTypeExpectStrategy('my_agg', 'cardinality')
+);
 
 test(setsAggType, CardinalityAggregation, 'cardinality');
 test(illegalCall, CardinalityAggregation, 'format', 'my_agg');

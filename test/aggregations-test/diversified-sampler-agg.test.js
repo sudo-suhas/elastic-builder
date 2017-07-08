@@ -3,7 +3,7 @@ import { DiversifiedSamplerAggregation } from '../../src';
 import {
     setsAggType,
     validatedCorrectly,
-    aggsExpectStrategy,
+    nameTypeExpectStrategy,
     makeSetsOptionMacro
 } from '../_macros';
 
@@ -11,7 +11,7 @@ const getInstance = () => new DiversifiedSamplerAggregation('my_samples', 'my_fi
 
 const setsOption = makeSetsOptionMacro(
     getInstance,
-    aggsExpectStrategy('my_samples', 'diversified_sampler', {
+    nameTypeExpectStrategy('my_samples', 'diversified_sampler', {
         field: 'my_field'
     })
 );

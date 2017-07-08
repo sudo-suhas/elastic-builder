@@ -100,7 +100,7 @@ export function simpleExpect(keyName, propValue) {
  * @param {Object} defaultDef
  * @returns {function}
  */
-export function aggsExpectStrategy(name, type, defaultDef) {
+export function nameTypeExpectStrategy(name, type, defaultDef) {
     return (keyName, propValue) => ({
         [name]: {
             [type]: Object.assign({ [keyName]: propValue }, defaultDef)

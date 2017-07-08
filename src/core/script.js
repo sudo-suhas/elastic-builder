@@ -61,7 +61,8 @@ class Script {
     }
 
     /**
-     * Print warning messages to not mix Geo Point representations
+     * Print warning messages to not mix `Script` source
+     *
      * @private
      */
     _checkMixedRepr() {
@@ -104,7 +105,7 @@ class Script {
     }
 
     /**
-     * Specify the `stored` script by `id` which will be retrieved from cluster state.
+     * Specify the `file` script by stored as a file in the scripts folder.
      *
      * @param {string} fileName The name of the script stored as a file in the scripts folder.
      * For script file `config/scripts/calculate-score.groovy`,

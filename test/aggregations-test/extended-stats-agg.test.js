@@ -1,10 +1,13 @@
 import test from 'ava';
 import { ExtendedStatsAggregation } from '../../src';
-import { setsAggType, aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import { setsAggType, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = field => new ExtendedStatsAggregation('my_agg', field);
 
-const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'extended_stats'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameTypeExpectStrategy('my_agg', 'extended_stats')
+);
 
 test(setsAggType, ExtendedStatsAggregation, 'extended_stats');
 test(setsOption, 'sigma', { param: 3 });

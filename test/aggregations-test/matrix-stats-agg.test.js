@@ -1,10 +1,18 @@
 import test from 'ava';
 import { MatrixStatsAggregation } from '../../src';
-import { setsAggType, illegalParamType, aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    setsAggType,
+    illegalParamType,
+    nameTypeExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = fields => new MatrixStatsAggregation('my_agg', fields);
 
-const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'matrix_stats'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameTypeExpectStrategy('my_agg', 'matrix_stats')
+);
 
 test(setsAggType, MatrixStatsAggregation, 'matrix_stats');
 test(illegalParamType, getInstance(), 'fields', 'Array');

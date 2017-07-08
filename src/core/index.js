@@ -8,6 +8,8 @@ exports.Aggregation = require('./aggregation');
 
 exports.Query = require('./query');
 
+exports.Suggester = require('./suggester');
+
 exports.Script = require('./script');
 
 exports.Highlight = require('./highlight');
