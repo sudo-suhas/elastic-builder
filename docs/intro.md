@@ -3,6 +3,13 @@ https://github.com/sudo-suhas/elastic-builder
 `elastic-builder` is a library for easily building elasticsearch request body for search.
 It implements the builder syntax for building complex queries combining queries and aggregations.
 
+What's Included:
+  * [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
+  * [Queries](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html)
+  * [Aggregations](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html)
+  * [Suggesters](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters.html)
+  * [Search Template](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html)
+
 The complete library documentation is present here.
 
 There are two ways to use the classes for constructing queries:
