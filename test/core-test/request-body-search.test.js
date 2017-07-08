@@ -60,8 +60,8 @@ test(illegalParamType, instance, 'highlight', 'Highlight');
 test(illegalParamType, instance, 'rescore', 'Rescore');
 test(illegalParamType, instance, 'postFilter', 'Query');
 test(setsOption, 'query', { param: searchQry });
-test(setsOption, 'aggregation', { param: aggA, keyName: 'aggregations' });
-test(setsOption, 'agg', { param: aggA, keyName: 'aggregations' });
+test(setsOption, 'aggregation', { param: aggA, keyName: 'aggs' });
+test(setsOption, 'agg', { param: aggA, keyName: 'aggs' });
 test(setsOption, 'timeout', { param: '5s' });
 test(setsOption, 'from', { param: 10 });
 test(setsOption, 'size', { param: 10 });
@@ -134,7 +134,7 @@ test(setsOption, 'searchAfter', { param: [1463538857, 'tweet#654323'], spread: f
 test('sets multiple aggs', t => {
     const value = new RequestBodySearch().agg(aggA).agg(aggB).toJSON();
     const expected = {
-        aggregations: {
+        aggs: {
             user_term_agg: {
                 terms: { field: 'user' }
             },
@@ -150,7 +150,7 @@ test('sets aggs with nested', t => {
     const nestedAgg = new TermsAggregation('user_term_agg', 'user').agg(aggB);
     const value = new RequestBodySearch().agg(nestedAgg).toJSON();
     const expected = {
-        aggregations: {
+        aggs: {
             user_term_agg: {
                 terms: { field: 'user' },
                 aggs: {

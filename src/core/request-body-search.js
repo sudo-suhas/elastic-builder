@@ -679,8 +679,8 @@ class RequestBodySearch {
     toJSON() {
         if (isEmpty(this._aggs)) return recursiveToJSON(this._body);
 
-        const aggregations = Object.assign({}, ...recursiveToJSON(this._aggs));
-        return Object.assign({}, recursiveToJSON(this._body), { aggregations });
+        const aggs = Object.assign({}, ...recursiveToJSON(this._aggs));
+        return Object.assign({}, recursiveToJSON(this._body), { aggs });
     }
 }
 
