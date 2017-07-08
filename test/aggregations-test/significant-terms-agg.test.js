@@ -1,12 +1,17 @@
 import test from 'ava';
 import { SignificantTermsAggregation, TermQuery, Script } from '../../src';
-import { setsAggType, illegalParamType, aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    setsAggType,
+    illegalParamType,
+    nameTypeExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = (...args) => new SignificantTermsAggregation('my_agg', ...args);
 
 const setsOption = makeSetsOptionMacro(
     getInstance,
-    aggsExpectStrategy('my_agg', 'significant_terms')
+    nameTypeExpectStrategy('my_agg', 'significant_terms')
 );
 
 const script = new Script().lang('groovy').file('calculate-score').params({ my_modifier: 2 });

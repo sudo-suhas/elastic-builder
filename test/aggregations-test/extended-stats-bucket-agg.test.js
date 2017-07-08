@@ -1,12 +1,12 @@
 import test from 'ava';
 import { ExtendedStatsBucketAggregation } from '../../src';
-import { setsAggType, aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import { setsAggType, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = bucketsPath => new ExtendedStatsBucketAggregation('my_agg', bucketsPath);
 
 const setsOption = makeSetsOptionMacro(
     getInstance,
-    aggsExpectStrategy('my_agg', 'extended_stats_bucket')
+    nameTypeExpectStrategy('my_agg', 'extended_stats_bucket')
 );
 
 test(setsAggType, ExtendedStatsBucketAggregation, 'extended_stats_bucket');

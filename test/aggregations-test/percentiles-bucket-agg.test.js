@@ -1,12 +1,17 @@
 import test from 'ava';
 import { PercentilesBucketAggregation } from '../../src';
-import { setsAggType, illegalParamType, aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    setsAggType,
+    illegalParamType,
+    nameTypeExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = bucketsPath => new PercentilesBucketAggregation('my_agg', bucketsPath);
 
 const setsOption = makeSetsOptionMacro(
     getInstance,
-    aggsExpectStrategy('my_agg', 'percentiles_bucket')
+    nameTypeExpectStrategy('my_agg', 'percentiles_bucket')
 );
 
 test(setsAggType, PercentilesBucketAggregation, 'percentiles_bucket');

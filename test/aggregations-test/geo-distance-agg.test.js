@@ -3,7 +3,7 @@ import { GeoDistanceAggregation, geoPoint } from '../../src';
 import {
     illegalCall,
     illegalParamType,
-    aggsExpectStrategy,
+    nameTypeExpectStrategy,
     makeSetsOptionMacro,
     validatedCorrectly
 } from '../_macros';
@@ -13,7 +13,7 @@ const getInstance = () => new GeoDistanceAggregation('my_geo_agg').range({ to: 1
 
 const setsOption = makeSetsOptionMacro(
     getInstance,
-    aggsExpectStrategy('my_geo_agg', 'geo_distance', {
+    nameTypeExpectStrategy('my_geo_agg', 'geo_distance', {
         ranges: [{ to: 100 }]
     })
 );

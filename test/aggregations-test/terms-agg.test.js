@@ -3,13 +3,13 @@ import { TermsAggregation } from '../../src';
 import {
     setsAggType,
     validatedCorrectly,
-    aggsExpectStrategy,
+    nameTypeExpectStrategy,
     makeSetsOptionMacro
 } from '../_macros';
 
 const getInstance = field => new TermsAggregation('my_agg', field);
 
-const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'terms'));
+const setsOption = makeSetsOptionMacro(getInstance, nameTypeExpectStrategy('my_agg', 'terms'));
 
 test(setsAggType, TermsAggregation, 'terms');
 test(validatedCorrectly, getInstance, 'collectMode', ['depth_first', 'breadth_first']);

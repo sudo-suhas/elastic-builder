@@ -1,12 +1,12 @@
 import test from 'ava';
 import { ScriptedMetricAggregation } from '../../src';
-import { setsAggType, illegalCall, aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import { setsAggType, illegalCall, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = () => new ScriptedMetricAggregation('my_agg');
 
 const setsOption = makeSetsOptionMacro(
     getInstance,
-    aggsExpectStrategy('my_agg', 'scripted_metric')
+    nameTypeExpectStrategy('my_agg', 'scripted_metric')
 );
 
 test(setsAggType, ScriptedMetricAggregation, 'scripted_metric');

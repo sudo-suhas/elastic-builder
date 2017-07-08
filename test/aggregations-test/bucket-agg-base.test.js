@@ -1,11 +1,11 @@
 import test from 'ava';
 import { Script } from '../../src';
 import { BucketAggregationBase } from '../../src/aggregations/bucket-aggregations';
-import { illegalParamType, aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import { illegalParamType, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = (...args) => new BucketAggregationBase('my_agg', 'my_type', ...args);
 
-const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'my_type'));
+const setsOption = makeSetsOptionMacro(getInstance, nameTypeExpectStrategy('my_agg', 'my_type'));
 
 test('can be instantiated', t => {
     t.truthy(getInstance());

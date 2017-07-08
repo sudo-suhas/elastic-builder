@@ -4,13 +4,13 @@ import {
     setsAggType,
     illegalCall,
     illegalParamType,
-    aggsExpectStrategy,
+    nameTypeExpectStrategy,
     makeSetsOptionMacro
 } from '../_macros';
 
 const getInstance = () => new TopHitsAggregation('my_agg');
 
-const setsOption = makeSetsOptionMacro(getInstance, aggsExpectStrategy('my_agg', 'top_hits'));
+const setsOption = makeSetsOptionMacro(getInstance, nameTypeExpectStrategy('my_agg', 'top_hits'));
 
 const sortChannel = new Sort('channel', 'desc');
 const sortCategories = new Sort('categories', 'desc');

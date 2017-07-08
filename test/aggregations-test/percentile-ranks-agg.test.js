@@ -4,7 +4,7 @@ import {
     setsAggType,
     illegalCall,
     illegalParamType,
-    aggsExpectStrategy,
+    nameTypeExpectStrategy,
     makeSetsOptionMacro
 } from '../_macros';
 
@@ -12,7 +12,7 @@ const getInstance = (field, values) => new PercentileRanksAggregation('my_agg', 
 
 const setsOption = makeSetsOptionMacro(
     getInstance,
-    aggsExpectStrategy('my_agg', 'percentile_ranks')
+    nameTypeExpectStrategy('my_agg', 'percentile_ranks')
 );
 
 test(setsAggType, PercentileRanksAggregation, 'percentile_ranks');

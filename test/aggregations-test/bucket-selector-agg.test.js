@@ -1,12 +1,12 @@
 import test from 'ava';
 import { BucketSelectorAggregation, Script } from '../../src';
-import { setsAggType, illegalCall, aggsExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import { setsAggType, illegalCall, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = bucketsPath => new BucketSelectorAggregation('my_agg', bucketsPath);
 
 const setsOption = makeSetsOptionMacro(
     getInstance,
-    aggsExpectStrategy('my_agg', 'bucket_selector')
+    nameTypeExpectStrategy('my_agg', 'bucket_selector')
 );
 
 test(setsAggType, BucketSelectorAggregation, 'bucket_selector');
