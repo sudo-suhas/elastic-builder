@@ -6,12 +6,25 @@ const has = require('lodash.has'),
 
 const Query = require('./query'),
     Aggregation = require('./aggregation'),
+    Suggester = require('./suggester'),
     Rescore = require('./rescore'),
     Sort = require('./sort'),
     Highlight = require('./highlight'),
     InnerHits = require('./inner-hits');
 
 const { checkType, recursiveToJSON } = require('./util');
+
+/**
+ * Helper function to call `recursiveToJSON` on elements of array and assign to object.
+ *
+ * @private
+ *
+ * @param {Array} arr
+ * @returns {Object}
+ */
+function recMerge(arr) {
+    return Object.assign({}, ...recursiveToJSON(arr));
+}
 
 /**
  * The `RequestBodySearch` object provides methods generating an elasticsearch
@@ -57,6 +70,8 @@ class RequestBodySearch {
         // Maybe accept some optional parameter?
         this._body = {};
         this._aggs = [];
+        this._suggests = [];
+        this._suggestText = null;
     }
 
     /**
@@ -95,6 +110,48 @@ class RequestBodySearch {
         checkType(agg, Aggregation);
 
         this._aggs.push(agg);
+        return this;
+    }
+
+    /**
+     * Sets suggester on the request body.
+     *
+     * @example
+     * const req = bob.requestBodySearch()
+     *     .query(bob.matchQuery('message', 'trying out elasticsearch'))
+     *     .suggest(
+     *         bob.termSuggester(
+     *             'my-suggestion',
+     *             'message',
+     *             'tring out Elasticsearch'
+     *         )
+     *     );
+     *
+     * @param {Suggester} suggest Any valid `Suggester`
+     * @returns {RequestBodySearch} returns `this` so that calls can be chained.
+     * @throws {TypeError} If `suggest` is not an instance of `Suggester`
+     */
+    suggest(suggest) {
+        checkType(suggest, Suggester);
+
+        this._suggests.push(suggest);
+        return this;
+    }
+
+    /**
+     * Sets the global suggest text to avoid repetition for multiple suggestions.
+     *
+     * @example
+     * const req = bob.requestBodySearch()
+     *     .suggestText('tring out elasticsearch')
+     *     .suggest(bob.termSuggester('my-suggest-1', 'message'))
+     *     .suggest(bob.termSuggester('my-suggest-2', 'user'));
+     *
+     * @param {string} txt Global suggest text
+     * @returns {RequestBodySearch} returns `this` so that calls can be chained.
+     */
+    suggestText(txt) {
+        this._suggestText = txt;
         return this;
     }
 
@@ -615,7 +672,7 @@ class RequestBodySearch {
      *     .from(10);
      *
      * @example
-     * // Wxpand each collapsed top hits with the `inner_hits` option:
+     * // Expand each collapsed top hits with the `inner_hits` option:
      * const reqBody = bob.requestBodySearch()
      *     .query(bob.matchQuery('message', 'elasticsearch'))
      *     .collapse(
@@ -677,10 +734,19 @@ class RequestBodySearch {
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON() {
-        if (isEmpty(this._aggs)) return recursiveToJSON(this._body);
+        const dsl = recursiveToJSON(this._body);
 
-        const aggs = Object.assign({}, ...recursiveToJSON(this._aggs));
-        return Object.assign({}, recursiveToJSON(this._body), { aggs });
+        if (!isEmpty(this._aggs)) dsl.aggs = recMerge(this._aggs);
+
+        if (!isEmpty(this._suggests) || !isNil(this._suggestText)) {
+            dsl.suggest = recMerge(this._suggests);
+
+            if (!isNil(this._suggestText)) {
+                dsl.suggest.text = this._suggestText;
+            }
+        }
+
+        return dsl;
     }
 }
 

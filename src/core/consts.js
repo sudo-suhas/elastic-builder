@@ -81,3 +81,15 @@ exports.GEO_SHAPE_TYPES = new Set([
 ]);
 
 exports.GEO_RELATION_SET = new Set(['WITHIN', 'CONTAINS', 'DISJOINT', 'INTERSECTS']);
+
+exports.SUGGEST_MODE_SET = new Set(['missing', 'popular', 'always']);
+
+exports.STRING_DISTANCE_SET = new Set([
+    'internal',
+    'damerau_levenshtein',
+    'levenstein',
+    'jarowinkler',
+    'ngram'
+]);
+
+exports.SMOOTHING_MODEL_SET = new Set(['stupid_backoff', 'laplace', 'linear_interpolation']);

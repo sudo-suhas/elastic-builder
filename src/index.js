@@ -126,6 +126,13 @@ const {
     matrixAggregations: { MatrixStatsAggregation }
 } = require('./aggregations');
 
+const {
+    TermSuggester,
+    DirectGenerator,
+    PhraseSuggester,
+    CompletionSuggester
+} = require('./suggesters');
+
 const recipes = require('./recipes');
 
 exports.RequestBodySearch = RequestBodySearch;
@@ -440,7 +447,7 @@ exports.MatrixStatsAggregation = MatrixStatsAggregation;
 exports.matrixStatsAggregation = constructorWrapper(MatrixStatsAggregation);
 
 /* ============ ============ ============ */
-/* ========== Score Functions ===========  */
+/* ========== Score Functions =========== */
 /* ============ ============ ============ */
 exports.ScriptScoreFunction = ScriptScoreFunction;
 exports.scriptScoreFunction = constructorWrapper(ScriptScoreFunction);
@@ -456,6 +463,22 @@ exports.fieldValueFactorFunction = constructorWrapper(FieldValueFactorFunction);
 
 exports.DecayScoreFunction = DecayScoreFunction;
 exports.decayScoreFunction = constructorWrapper(DecayScoreFunction);
+
+/* ============ ============ ============ */
+/* ============= Suggesters ============= */
+/* ============ ============ ============ */
+
+exports.TermSuggester = TermSuggester;
+exports.termSuggester = constructorWrapper(TermSuggester);
+
+exports.DirectGenerator = DirectGenerator;
+exports.directGenerator = constructorWrapper(DirectGenerator);
+
+exports.PhraseSuggester = PhraseSuggester;
+exports.phraseSuggester = constructorWrapper(PhraseSuggester);
+
+exports.CompletionSuggester = CompletionSuggester;
+exports.completionSuggester = constructorWrapper(CompletionSuggester);
 
 /* ============ ============ ============ */
 /* ============== Recipes =============== */
