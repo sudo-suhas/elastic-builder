@@ -319,6 +319,20 @@ test('aggregations are exported', t => {
     t.truthy(bob.matrixStatsAggregation);
 });
 
+test('suggesters are exported', t => {
+    t.truthy(bob.TermSuggester);
+    t.truthy(bob.termSuggester);
+
+    t.truthy(bob.DirectGenerator);
+    t.truthy(bob.directGenerator);
+
+    t.truthy(bob.PhraseSuggester);
+    t.truthy(bob.phraseSuggester);
+
+    t.truthy(bob.CompletionSuggester);
+    t.truthy(bob.completionSuggester);
+});
+
 test('score functions are exported', t => {
     /* ============ ============ ============ */
     /* ========== Score Functions =========== */
