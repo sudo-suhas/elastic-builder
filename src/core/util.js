@@ -8,6 +8,8 @@ const isEmpty = require('lodash.isempty'),
     isObject = require('lodash.isobject'),
     hasIn = require('lodash.hasin');
 
+const has = require('lodash.has');
+
 /**
  * Check if the object is instance of class type
  *
@@ -122,4 +124,19 @@ exports.invalidParam = function invalidParam(refUrl, paramName, validValues) {
         const validValuesStr = isString(validValues) ? validValues : inspect(validValues);
         throw new Error(`The '${paramName}' parameter should be one of ${validValuesStr}`);
     };
+};
+
+/**
+ * Set given default value on object if key is not present.
+ *
+ * @private
+ * @param {Object} obj
+ * @param {string} key
+ * @param {*} value
+ * @returns {boolean} `true` if the given object did not have `key` and `false` otherwise.
+ */
+exports.setDefault = function setDefault(obj, key, value) {
+    const itHasNot = !has(obj, key);
+    if (itHasNot) obj[key] = value;
+    return itHasNot;
 };

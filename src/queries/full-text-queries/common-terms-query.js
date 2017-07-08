@@ -2,9 +2,8 @@
 
 const isNil = require('lodash.isnil');
 const isObject = require('lodash.isobject');
-const has = require('lodash.has');
 
-const { util: { invalidParam } } = require('../../core');
+const { util: { invalidParam, setDefault } } = require('../../core');
 
 const MonoFieldQueryBase = require('./mono-field-query-base');
 
@@ -62,9 +61,10 @@ class CommonTermsQuery extends MonoFieldQueryBase {
      * @private
      */
     _checkMinMatchRepr() {
-        if (!has(this._queryOpts, 'minimum_should_match')) {
-            this._queryOpts.minimum_should_match = {};
-        } else if (!isObject(this._queryOpts.minimum_should_match)) {
+        if (
+            !setDefault(this._queryOpts, 'minimum_should_match', {}) &&
+            !isObject(this._queryOpts.minimum_should_match)
+        ) {
             this._warnMixedRepr();
             this._queryOpts.minimum_should_match = {};
         }

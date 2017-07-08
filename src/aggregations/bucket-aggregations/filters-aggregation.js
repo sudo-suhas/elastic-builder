@@ -1,9 +1,8 @@
 'use strict';
 
 const isEmpty = require('lodash.isempty');
-const has = require('lodash.has');
 
-const { Query, util: { checkType } } = require('../../core');
+const { Query, util: { checkType, setDefault } } = require('../../core');
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
@@ -76,8 +75,7 @@ class FiltersAggregation extends BucketAggregationBase {
      * @private
      */
     _checkNamedFilters() {
-        if (!has(this._aggsDef, 'filters')) this._aggsDef.filters = {};
-        else if (Array.isArray(this._aggsDef.filters)) {
+        if (!setDefault(this._aggsDef, 'filters', {}) && Array.isArray(this._aggsDef.filters)) {
             this._warn('Do not mix named and anonymous filters!');
             this._warn('Overwriting anonymous filters.');
             this._aggsDef.filters = {};
@@ -92,8 +90,7 @@ class FiltersAggregation extends BucketAggregationBase {
      * @private
      */
     _checkAnonymousFilters() {
-        if (!has(this._aggsDef, 'filters')) this._aggsDef.filters = [];
-        else if (!Array.isArray(this._aggsDef.filters)) {
+        if (!setDefault(this._aggsDef, 'filters', []) && !Array.isArray(this._aggsDef.filters)) {
             this._warn('Do not mix named and anonymous filters!');
             this._warn('Overwriting named filters.');
             this._aggsDef.filters = [];

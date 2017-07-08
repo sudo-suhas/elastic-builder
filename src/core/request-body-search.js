@@ -12,7 +12,7 @@ const Query = require('./query'),
     Highlight = require('./highlight'),
     InnerHits = require('./inner-hits');
 
-const { checkType, recursiveToJSON } = require('./util');
+const { checkType, setDefault, recursiveToJSON } = require('./util');
 
 /**
  * Helper function to call `recursiveToJSON` on elements of array and assign to object.
@@ -231,7 +231,7 @@ class RequestBodySearch {
      */
     sort(sort) {
         checkType(sort, Sort);
-        if (!has(this._body, 'sort')) this._body.sort = [];
+        setDefault(this._body, 'sort', []);
 
         this._body.sort.push(sort);
         return this;
@@ -390,7 +390,7 @@ class RequestBodySearch {
      * @returns {RequestBodySearch} returns `this` so that calls can be chained
      */
     scriptField(scriptFieldName, script) {
-        if (!has(this._body, 'script_fields')) this._body.script_fields = {};
+        setDefault(this._body, 'script_fields', {});
 
         this._body.script_fields[scriptFieldName] = { script };
         return this;
@@ -633,7 +633,7 @@ class RequestBodySearch {
      * @returns {RequestBodySearch} returns `this` so that calls can be chained.
      */
     indicesBoost(index, boost) {
-        if (!has(this._body, 'indices_boost')) this._body.indices_boost = [];
+        setDefault(this._body, 'indices_boost', []);
 
         this._body.indices_boost.push({
             [index]: boost

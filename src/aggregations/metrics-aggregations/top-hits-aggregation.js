@@ -1,9 +1,7 @@
 'use strict';
 
-const has = require('lodash.has');
-
 const MetricsAggregationBase = require('./metrics-aggregation-base'),
-    { Highlight, Sort, util: { checkType } } = require('../../core');
+    { Highlight, Sort, util: { checkType, setDefault } } = require('../../core');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html';
@@ -129,7 +127,7 @@ class TopHitsAggregation extends MetricsAggregationBase {
     sort(sort) {
         checkType(sort, Sort);
 
-        if (!has(this._aggsDef, 'sort')) this._aggsDef.sort = [];
+        setDefault(this._aggsDef, 'sort', []);
 
         this._aggsDef.sort.push(sort);
         return this;
@@ -234,7 +232,7 @@ class TopHitsAggregation extends MetricsAggregationBase {
      * @returns {TopHitsAggregation} returns `this` so that calls can be chained
      */
     scriptField(scriptFieldName, script) {
-        if (!has(this._aggsDef, 'script_fields')) this._aggsDef.script_fields = {};
+        setDefault(this._aggsDef, 'script_fields', {});
 
         this._aggsDef.script_fields[scriptFieldName] = { script };
         return this;

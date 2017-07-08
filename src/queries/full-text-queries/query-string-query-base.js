@@ -1,9 +1,8 @@
 'use strict';
 
 const isNil = require('lodash.isnil');
-const has = require('lodash.has');
 
-const { util: { checkType, invalidParam } } = require('../../core');
+const { util: { checkType, setDefault, invalidParam } } = require('../../core');
 const FullTextQueryBase = require('./full-text-query-base');
 
 const invalidOperatorParam = invalidParam('', 'operator', "'AND' or 'OR'");
@@ -52,7 +51,7 @@ class QueryStringQueryBase extends FullTextQueryBase {
      * @returns {QueryStringQueryBase} returns `this` so that calls can be chained.
      */
     field(field) {
-        if (!has(this._queryOpts, 'fields')) this._queryOpts.fields = [];
+        setDefault(this._queryOpts, 'fields', []);
 
         this._queryOpts.fields.push(field);
         return this;
@@ -78,7 +77,7 @@ class QueryStringQueryBase extends FullTextQueryBase {
      */
     fields(fields) {
         checkType(fields, Array);
-        if (!has(this._queryOpts, 'fields')) this._queryOpts.fields = [];
+        setDefault(this._queryOpts, 'fields', []);
 
         this._queryOpts.fields = this._queryOpts.fields.concat(fields);
         return this;

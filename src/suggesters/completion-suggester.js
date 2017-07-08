@@ -1,20 +1,8 @@
 'use strict';
 
 const isObject = require('lodash.isobject');
-const has = require('lodash.has');
 
-const { Suggester } = require('../core');
-
-/**
- * Set given default value on object if key is not present.
- *
- * @param {Object} obj
- * @param {string} key
- * @param {*} value
- */
-function setDefault(obj, key, value) {
-    if (!has(obj, key)) obj[key] = value;
-}
+const { Suggester, util: { setDefault } } = require('../core');
 
 /**
  * The completion suggester provides auto-complete/search-as-you-type

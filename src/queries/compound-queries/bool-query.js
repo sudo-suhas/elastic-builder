@@ -4,7 +4,7 @@ const has = require('lodash.has');
 const head = require('lodash.head');
 const omit = require('lodash.omit');
 
-const { Query, util: { checkType, recursiveToJSON } } = require('../../core');
+const { Query, util: { checkType, setDefault, recursiveToJSON } } = require('../../core');
 
 /**
  * A query that matches documents matching boolean combinations of other queries.
@@ -56,7 +56,7 @@ class BoolQuery extends Query {
      * @throws {TypeError} If Array item or query is not an instance of `Query`
      */
     _addQueries(clause, queries) {
-        if (!has(this._queryOpts, clause)) this._queryOpts[clause] = [];
+        setDefault(this._queryOpts, clause, []);
 
         if (Array.isArray(queries)) queries.forEach(qry => this._addQuery(clause, qry));
         else this._addQuery(clause, queries);

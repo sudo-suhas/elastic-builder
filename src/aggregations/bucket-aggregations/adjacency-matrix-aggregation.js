@@ -1,8 +1,6 @@
 'use strict';
 
-const has = require('lodash.has');
-
-const { Query, util: { checkType } } = require('../../core');
+const { Query, util: { checkType, setDefault } } = require('../../core');
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
@@ -63,7 +61,7 @@ class AdjacencyMatrixAggregation extends BucketAggregationBase {
     filter(filterName, filterQuery) {
         checkType(filterQuery, Query);
 
-        if (!has(this._aggsDef, 'filters')) this._aggsDef.filters = {};
+        setDefault(this._aggsDef, 'filters', {});
 
         this._aggsDef.filters[filterName] = filterQuery;
         return this;
@@ -82,7 +80,7 @@ class AdjacencyMatrixAggregation extends BucketAggregationBase {
     filters(filterQueries) {
         checkType(filterQueries, Object);
 
-        if (!has(this._aggsDef, 'filters')) this._aggsDef.filters = {};
+        setDefault(this._aggsDef, 'filters', {});
 
         Object.assign(this._aggsDef.filters, filterQueries);
         return this;
