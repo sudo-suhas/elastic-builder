@@ -138,6 +138,13 @@ toc:
   - RandomScoreFunction
   - FieldValueFactorFunction
   - DecayScoreFunction
+  - name: Suggesters
+  - Suggester
+  - AnalyzedSuggesterBase
+  - TermSuggester
+  - DirectGenerator
+  - PhaseSuggester
+  - CompletionSuggester
   - name: Miscellaneous
   - Highlight
   - Script
