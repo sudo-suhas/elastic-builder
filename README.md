@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/sudo-suhas/elastic-builder.svg?branch=master)](https://travis-ci.org/sudo-suhas/elastic-builder)
 [![Coverage Status](https://coveralls.io/repos/github/sudo-suhas/elastic-builder/badge.svg?branch=master)](https://coveralls.io/github/sudo-suhas/elastic-builder?branch=master)
 
-A Node.js implementation of the [Elasticsearch](http://www.elasticsearch.org/) DSL for use with the [official elasticsearch javascript client](http://www.elasticsearch.org/guide/en/elasticsearch/client/javascript-api/current/index.html) with builder syntax.
+A Node.js implementation of the [Elasticsearch](https://www.elasticsearch.org/) DSL for use with the [official elasticsearch javascript client](https://www.elasticsearch.org/guide/en/elasticsearch/client/javascript-api/current/index.html) with builder syntax.
 
 ![elastic-builder](assets/elastic-builder.png)
 
@@ -80,7 +80,7 @@ in the 5.0 release which make the older libraries unusable.
 This library is a port of `elastic.js` to es6 with elasticsearch 5.x compatibility.
 
 ## API Reference
-API reference can be accessed here - http://elastic-builder.js.org/docs.
+API reference can be accessed here - https://elastic-builder.js.org/docs.
 The docs include examples ported from the [official elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html).
 
 API documentation was generated using [documentation.js](https://github.com/documentationjs/documentation).
@@ -105,7 +105,7 @@ qry.toJSON();
 }
 ```
 
-Check out the [reference docs](http://elastic-builder.js.org/docs#recipes) for more examples.
+Check out the [reference docs](https://elastic-builder.js.org/docs#recipes) for more examples.
 
 If you have any recipes, please do share or better yet, create a [pull request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/) :smile:.
 
