@@ -41,7 +41,7 @@ class HasChildQuery extends JoiningQueryBase {
     constructor(qry, type) {
         super('has_child', ES_REF_URL, qry);
 
-        if (!isNil(type)) this._queryOpts.child_type = type;
+        if (!isNil(type)) this._queryOpts.type = type;
     }
 
     /**
@@ -52,7 +52,8 @@ class HasChildQuery extends JoiningQueryBase {
      * @returns {HasChildQuery} returns `this` so that calls can be chained.
      */
     type(type) {
-        return this.childType(type);
+        this._queryOpts.type = type;
+        return this;
     }
 
     /**
@@ -62,8 +63,8 @@ class HasChildQuery extends JoiningQueryBase {
      * @returns {HasChildQuery} returns `this` so that calls can be chained.
      */
     childType(type) {
-        this._queryOpts.child_type = type;
-        return this;
+        console.warn('[HasChildQuery] Field `child_type` is deprecated. Use `type` instead.');
+        return this.type(type);
     }
 
     /**
