@@ -6,8 +6,8 @@ const setsOption = makeSetsOptionMacro(hasChildQuery, nameExpectStrategy('has_ch
 
 const qry = new TermQuery('user', 'kimchy');
 
-test(setsOption, 'type', { param: 'blog_tag', keyName: 'child_type' });
-test(setsOption, 'childType', { param: 'blog_tag' });
+test(setsOption, 'type', { param: 'blog_tag' });
+test(setsOption, 'childType', { param: 'blog_tag', keyName: 'type' });
 test(setsOption, 'minChildren', { param: 2 });
 test(setsOption, 'maxChildren', { param: 10 });
 
@@ -19,7 +19,7 @@ test('constructor sets argumetns', t => {
     const expected = {
         has_child: {
             query: { term: { user: 'kimchy' } },
-            child_type: 'my_type'
+            type: 'my_type'
         }
     };
     t.deepEqual(valueA, expected);
