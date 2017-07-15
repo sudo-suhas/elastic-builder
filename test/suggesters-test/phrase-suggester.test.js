@@ -46,9 +46,9 @@ test(setsOption, 'collate', {
 });
 test(setsOption, 'smoothing', { param: 'stupid_backoff' });
 
-test.failing(setsOption, 'directGenerator', { param: dirGenA, propValue: [dirGenA] });
-test.failing(setsOption, 'directGenerator', {
+test(setsOption, 'directGenerator', { param: dirGenA, propValue: [dirGenA] });
+test(setsOption, 'directGenerator', {
     param: [dirGenA, dirGenB],
     spread: false,
-    propValue: [dirGenA]
+    propValue: [dirGenA, dirGenB]
 });
