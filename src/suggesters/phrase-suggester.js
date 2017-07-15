@@ -2,7 +2,10 @@
 
 const isNil = require('lodash.isnil');
 
-const { consts: { SMOOTHING_MODEL_SET }, util: { invalidParam } } = require('../core');
+const {
+    consts: { SMOOTHING_MODEL_SET },
+    util: { recursiveToJSON, invalidParam }
+} = require('../core');
 
 const AnalyzedSuggesterBase = require('./analyzed-suggester-base');
 
@@ -255,6 +258,16 @@ class PhraseSuggester extends AnalyzedSuggesterBase {
         this._suggestOpts.direct_generator = Array.isArray(dirGen) ? dirGen : [dirGen];
 
         return this;
+    }
+
+    /**
+     * Override default `toJSON` to return DSL representation for the `phrase suggester`
+     *
+     * @override
+     * @returns {Object} returns an Object which maps to the elasticsearch DSL
+     */
+    toJSON() {
+        return recursiveToJSON(this._body);
     }
 }
 
