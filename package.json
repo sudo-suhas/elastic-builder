@@ -1,6 +1,6 @@
 {
   "name": "elastic-builder",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A JavaScript implementation of the elasticsearch Query DSL",
   "main": "lib/index.js",
   "files": [
