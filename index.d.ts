@@ -6710,6 +6710,13 @@ export class PhraseSuggester extends AnalyzedSuggesterBase {
      * instances or a single instance of `DirectGenerator`
      */
     directGenerator(dirGen: DirectGenerator[] | DirectGenerator): this;
+
+    /**
+     * Override default `toJSON` to return DSL representation for the `phrase suggester`
+     *
+     * @override
+     */
+    toJSON(): object;
 }
 
 /**
