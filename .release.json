@@ -1,6 +1,6 @@
 {
   "verbose": true,
-  "pkgFiles": ["package.json", "package-lock.json"],
+  "pkgFiles": ["package.json"],
   "buildCommand": "npm run build",
   "requireCleanWorkingDir": true,
   "src": {

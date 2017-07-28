@@ -1,8 +1,6 @@
 language: node_js
 
-cache:
-  directories:
-    - node_modules
+cache: yarn
 
 node_js:
   - '8'
@@ -14,16 +12,13 @@ branches:
   except:
     - /^v\d+\.\d+\.\d+$/
 
-before_install:
-# package-lock.json was introduced in npm@5
-  - npm install -g npm@5
-  - npm install -g greenkeeper-lockfile@1
+before_install: yarn global add greenkeeper-lockfile@1
 
 before_script: greenkeeper-lockfile-update
 
-script: npm run check
+script: yarn run check
 
 # Only the node version 8 job will upload the lockfile
 after_script:
   - greenkeeper-lockfile-upload
-  - npm run coverage
+  - yarn run coverage
