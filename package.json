@@ -21,7 +21,9 @@
     "lint-staged": "lint-staged",
     "precompile-tests": "cross-env NODE_ENV=test webpack --config webpack.config.test.js",
     "exec-tests": "cross-env NODE_ENV=test nyc --cache ava _build --concurrency 3",
-    "test": "npm run precompile-tests && npm run exec-tests",
+    "test:src": "npm run precompile-tests && npm run exec-tests",
+    "test:typedef": "tsc --noEmit ./test/typedef.test.ts",
+    "test": "npm run test:src && npm run test:typedef",
     "check": "npm run lint && npm test",
     "report": "nyc report --reporter=html",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -94,6 +96,7 @@
     "pre-commit": "^1.2.2",
     "prettier": "^1.5.2",
     "sinon": "^2.3.6",
+    "typescript": "^2.4.2",
     "webpack": "^3.1.0",
     "webpack-node-externals": "^1.6.0"
   },
