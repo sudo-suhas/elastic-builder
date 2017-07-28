@@ -4,6 +4,7 @@
   "buildCommand": "npm run build",
   "requireCleanWorkingDir": true,
   "src": {
+    "commitMessage": "chore(package): Release %s",
     "tagName": "v%s",
     "beforeStartCommand": "npm run check"
   },
