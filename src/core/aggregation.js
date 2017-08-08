@@ -65,7 +65,7 @@ class Aggregation {
     }
 
     /**
-     * Sets multiple nested aggregations.
+     * Sets multiple nested aggregation items.
      * This method accepts an array to set multiple nested aggregations in one call.
      *
      * @param {Array} aggs Array of valid {@link Aggregation} items
@@ -81,7 +81,7 @@ class Aggregation {
     }
 
     /**
-     * Sets multiple nested aggregation.
+     * Sets multiple nested aggregation items.
      * This method accepts an array to set multiple nested aggregations in one call.
      *
      * @param {Array} aggs Array of valid {@link Aggregation} items
