@@ -90,6 +90,37 @@ test('deep nested aggs', t => {
     t.deepEqual(value, expected);
 });
 
+test('multiple nested aggs', t => {
+    const aggsArray = [
+        new TermsAggregation('countries', 'country'),
+        new TermsAggregation('users', 'user')
+    ];
+
+    const valueA = getInstance().aggs(aggsArray).toJSON();
+    const valueB = getInstance().aggregations(aggsArray).toJSON();
+
+    t.deepEqual(valueA, valueB);
+
+    const expected = {
+        my_agg: {
+            my_type: {},
+            aggs: {
+                countries: {
+                    terms: {
+                        field: 'country'
+                    }
+                },
+                users: {
+                    terms: {
+                        field: 'user'
+                    }
+                }
+            }
+        }
+    };
+    t.deepEqual(valueA, expected);
+});
+
 test('meta is set', t => {
     const value = getInstance().meta({ color: 'blue' }).toJSON();
     const expected = {
