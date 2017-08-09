@@ -114,6 +114,34 @@ class RequestBodySearch {
     }
 
     /**
+     * Sets multiple nested aggregation items.
+     * Alias for method `aggregations`
+     *
+     * @param {Array} aggs Array of valid {@link Aggregation} items
+     * @returns {Aggregation} returns `this` so that calls can be chained.
+     * @throws {TypeError} If `aggs` is not an instance of `Array`
+     */
+    aggs(aggs) {
+        return this.aggregations(aggs);
+    }
+
+    /**
+     * Sets multiple nested aggregation items.
+     * This method accepts an array to set multiple nested aggregations in one call.
+     *
+     * @param {Array} aggs Array of valid {@link Aggregation} items
+     * @returns {Aggregation} returns `this` so that calls can be chained.
+     * @throws {TypeError} If `aggs` is not an instance of `Array`
+     */
+    aggregations(aggs) {
+        checkType(aggs, Array);
+
+        aggs.forEach(agg => this.aggregation(agg));
+
+        return this;
+    }
+
+    /**
      * Sets suggester on the request body.
      *
      * @example

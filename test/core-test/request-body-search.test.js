@@ -156,6 +156,21 @@ test('sets multiple aggs', t => {
     t.deepEqual(value, expected);
 });
 
+test('sets multiple aggs in a single call', t => {
+    const value = new RequestBodySearch().aggs([aggA, aggB]).toJSON();
+    const expected = {
+        aggs: {
+            user_term_agg: {
+                terms: { field: 'user' }
+            },
+            keyword_term_agg: {
+                terms: { field: 'keyword' }
+            }
+        }
+    };
+    t.deepEqual(value, expected);
+});
+
 test('sets aggs with nested', t => {
     const nestedAgg = new TermsAggregation('user_term_agg', 'user').agg(aggB);
     const value = new RequestBodySearch().agg(nestedAgg).toJSON();

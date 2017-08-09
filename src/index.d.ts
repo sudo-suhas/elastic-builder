@@ -36,6 +36,23 @@ declare namespace bob {
         aggregation(agg: Aggregation): this;
 
         /**
+         * Sets multiple aggregation items on the request body.
+         * Alias for method `aggregations`
+         *
+         * @param {Array<Aggregation>} aggs Array of valid `Aggregation` items
+         * @throws {TypeError} If `aggs` is not an instance of `Array`
+         */
+        aggs(aggs: Aggregation[]): this;
+
+        /**
+         * Sets aggregation on the request body.
+         *
+         * @param {Array<Aggregation>} aggs Array of valid `Aggregation` items
+         * @throws {TypeError} If `aggs` is not an instance of `Array`
+         */
+        aggregations(aggs: Aggregation[]): this;
+
+        /**
          * Sets suggester on the request body.
          *
          * @param {Suggester} suggest Any valid `Suggester`
@@ -3245,6 +3262,14 @@ declare namespace bob {
         agg(agg: Aggregation): this;
 
         /**
+         * Sets aggregation on the request body.
+         *
+         * @param {Array<Aggregation>} aggs Array of valid `Aggregation` items
+         * @throws {TypeError} If `aggs` is not an instance of `Array`
+         */
+        aggregations(aggs: Aggregation[]): this;
+
+        /**
          * Sets multiple aggregation items on the request body.
          * Alias for method `aggregations`
          *
@@ -3252,14 +3277,6 @@ declare namespace bob {
          * @throws {TypeError} If `aggs` is not an instance of `Array`
          */
         aggs(aggs: Aggregation[]): this;
-
-        /**
-         * Sets aggregation on the request body.
-         *
-         * @param {Array<Aggregation>} aggs Array of valid `Aggregation` items
-         * @throws {TypeError} If `aggs` is not an instance of `Array`
-         */
-        aggregations(aggs: Aggregation[]): this;
 
         /**
          * You can associate a piece of metadata with individual aggregations at request time
