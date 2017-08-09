@@ -36,6 +36,25 @@ declare namespace bob {
         aggregation(agg: Aggregation): this;
 
         /**
+         * Sets multiple aggregation items on the request body.
+         * Alias for method `aggregations`
+         *
+         * @param {Array<Aggregation>} aggs Array of valid `Aggregation` items
+         * @throws {TypeError} If `aggs` is not an instance of `Array`
+         * @throws {TypeError} If `aggs` contains instances not of type `Aggregation`
+         */
+        aggs(aggs: Aggregation[]): this;
+
+        /**
+         * Sets multiple aggregation items on the request body.
+         *
+         * @param {Array<Aggregation>} aggs Array of valid `Aggregation` items
+         * @throws {TypeError} If `aggs` is not an instance of `Array`
+         * @throws {TypeError} If `aggs` contains instances not of type `Aggregation`
+         */
+        aggregations(aggs: Aggregation[]): this;
+
+        /**
          * Sets suggester on the request body.
          *
          * @param {Suggester} suggest Any valid `Suggester`
@@ -3243,6 +3262,25 @@ declare namespace bob {
          * @param {Aggregation} agg Any valid {@link Aggregation}
          */
         agg(agg: Aggregation): this;
+
+        /**
+         * Sets multiple aggregation items on the request body.
+         *
+         * @param {Array<Aggregation>} aggs Array of valid `Aggregation` items
+         * @throws {TypeError} If `aggs` is not an instance of `Array`
+         * @throws {TypeError} If `aggs` contains instances not of type `Aggregation`
+         */
+        aggregations(aggs: Aggregation[]): this;
+
+        /**
+         * Sets multiple aggregation items on the request body.
+         * Alias for method `aggregations`
+         *
+         * @param {Array<Aggregation>} aggs Array of valid `Aggregation` items
+         * @throws {TypeError} If `aggs` is not an instance of `Array`
+         * @throws {TypeError} If `aggs` contains instances not of type `Aggregation`
+         */
+        aggs(aggs: Aggregation[]): this;
 
         /**
          * You can associate a piece of metadata with individual aggregations at request time

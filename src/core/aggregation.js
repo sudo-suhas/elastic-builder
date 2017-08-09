@@ -65,6 +65,36 @@ class Aggregation {
     }
 
     /**
+     * Sets multiple nested aggregation items.
+     * This method accepts an array to set multiple nested aggregations in one call.
+     *
+     * @param {Array} aggs Array of valid {@link Aggregation} items
+     * @returns {Aggregation} returns `this` so that calls can be chained.
+     * @throws {TypeError} If `aggs` is not an instance of `Array`
+     * @throws {TypeError} If `aggs` contains instances not of type `Aggregation`
+     */
+    aggregations(aggs) {
+        checkType(aggs, Array);
+
+        aggs.forEach(agg => this.aggregation(agg));
+
+        return this;
+    }
+
+    /**
+     * Sets multiple nested aggregation items.
+     * Alias for method `aggregations`
+     *
+     * @param {Array} aggs Array of valid {@link Aggregation} items
+     * @returns {Aggregation} returns `this` so that calls can be chained.
+     * @throws {TypeError} If `aggs` is not an instance of `Array`
+     * @throws {TypeError} If `aggs` contains instances not of type `Aggregation`
+     */
+    aggs(aggs) {
+        return this.aggregations(aggs);
+    }
+
+    /**
      * You can associate a piece of metadata with individual aggregations at request time
      * that will be returned in place at response time.
      *
