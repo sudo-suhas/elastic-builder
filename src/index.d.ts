@@ -45,7 +45,7 @@ declare namespace bob {
         aggs(aggs: Aggregation[]): this;
 
         /**
-         * Sets aggregation on the request body.
+         * Sets multiple aggregation items on the request body.
          *
          * @param {Array<Aggregation>} aggs Array of valid `Aggregation` items
          * @throws {TypeError} If `aggs` is not an instance of `Array`
@@ -3262,7 +3262,7 @@ declare namespace bob {
         agg(agg: Aggregation): this;
 
         /**
-         * Sets aggregation on the request body.
+         * Sets multiple aggregation items on the request body.
          *
          * @param {Array<Aggregation>} aggs Array of valid `Aggregation` items
          * @throws {TypeError} If `aggs` is not an instance of `Array`
