@@ -120,6 +120,7 @@ class RequestBodySearch {
      * @param {Array} aggs Array of valid {@link Aggregation} items
      * @returns {Aggregation} returns `this` so that calls can be chained.
      * @throws {TypeError} If `aggs` is not an instance of `Array`
+     * @throws {TypeError} If `aggs` contains instances not of type `Aggregation`
      */
     aggs(aggs) {
         return this.aggregations(aggs);
@@ -132,6 +133,7 @@ class RequestBodySearch {
      * @param {Array} aggs Array of valid {@link Aggregation} items
      * @returns {Aggregation} returns `this` so that calls can be chained.
      * @throws {TypeError} If `aggs` is not an instance of `Array`
+     * @throws {TypeError} If `aggs` contains instances not of type `Aggregation`
      */
     aggregations(aggs) {
         checkType(aggs, Array);

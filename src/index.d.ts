@@ -41,6 +41,7 @@ declare namespace bob {
          *
          * @param {Array<Aggregation>} aggs Array of valid `Aggregation` items
          * @throws {TypeError} If `aggs` is not an instance of `Array`
+         * @throws {TypeError} If `aggs` contains instances not of type `Aggregation`
          */
         aggs(aggs: Aggregation[]): this;
 
@@ -49,6 +50,7 @@ declare namespace bob {
          *
          * @param {Array<Aggregation>} aggs Array of valid `Aggregation` items
          * @throws {TypeError} If `aggs` is not an instance of `Array`
+         * @throws {TypeError} If `aggs` contains instances not of type `Aggregation`
          */
         aggregations(aggs: Aggregation[]): this;
 
@@ -3266,6 +3268,7 @@ declare namespace bob {
          *
          * @param {Array<Aggregation>} aggs Array of valid `Aggregation` items
          * @throws {TypeError} If `aggs` is not an instance of `Array`
+         * @throws {TypeError} If `aggs` contains instances not of type `Aggregation`
          */
         aggregations(aggs: Aggregation[]): this;
 
@@ -3275,6 +3278,7 @@ declare namespace bob {
          *
          * @param {Array<Aggregation>} aggs Array of valid `Aggregation` items
          * @throws {TypeError} If `aggs` is not an instance of `Array`
+         * @throws {TypeError} If `aggs` contains instances not of type `Aggregation`
          */
         aggs(aggs: Aggregation[]): this;
 
