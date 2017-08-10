@@ -1,0 +1,22 @@
+root: true
+extends: chatur
+rules:
+  class-methods-use-this:
+    - error
+    - exceptMethods:
+      # These methods are often overridden to hide implementation
+      # in parent class and throw error on invokation.
+      - field
+      - script
+      - missing
+      - format
+      - gapPolicy
+      - validationMethod
+      - scoreMode
+      - value
+      - _warn
+  node/no-unsupported-features:
+    - error
+    # We use babel. So change the version
+    # instead of inheriting from package.json#engines
+    - version: 6
