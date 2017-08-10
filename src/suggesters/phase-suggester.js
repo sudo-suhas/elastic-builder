@@ -2,14 +2,21 @@
 
 const isNil = require('lodash.isnil');
 
-const { consts: { SMOOTHING_MODEL_SET }, util: { invalidParam } } = require('../core');
+const {
+    consts: { SMOOTHING_MODEL_SET },
+    util: { invalidParam }
+} = require('../core');
 
 const AnalyzedSuggesterBase = require('./analyzed-suggester-base');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html';
 
-const invalidSmoothingModeParam = invalidParam(ES_REF_URL, 'suggest_mode', SMOOTHING_MODEL_SET);
+const invalidSmoothingModeParam = invalidParam(
+    ES_REF_URL,
+    'suggest_mode',
+    SMOOTHING_MODEL_SET
+);
 
 /**
  * The phrase suggester adds additional logic on top of the `term` suggester

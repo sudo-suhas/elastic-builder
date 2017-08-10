@@ -1,11 +1,19 @@
 import test from 'ava';
 import { Script } from '../../src';
 import { BucketAggregationBase } from '../../src/aggregations/bucket-aggregations';
-import { illegalParamType, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    illegalParamType,
+    nameTypeExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
-const getInstance = (...args) => new BucketAggregationBase('my_agg', 'my_type', ...args);
+const getInstance = (...args) =>
+    new BucketAggregationBase('my_agg', 'my_type', ...args);
 
-const setsOption = makeSetsOptionMacro(getInstance, nameTypeExpectStrategy('my_agg', 'my_type'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameTypeExpectStrategy('my_agg', 'my_type')
+);
 
 test('can be instantiated', t => {
     t.truthy(getInstance());
@@ -13,7 +21,10 @@ test('can be instantiated', t => {
 
 test(setsOption, 'field', { param: 'my_field' });
 test(setsOption, 'script', {
-    param: new Script().lang('groovy').file('calculate-score').params({ my_modifier: 2 })
+    param: new Script()
+        .lang('groovy')
+        .file('calculate-score')
+        .params({ my_modifier: 2 })
 });
 test(illegalParamType, getInstance(), 'script', 'Script');
 

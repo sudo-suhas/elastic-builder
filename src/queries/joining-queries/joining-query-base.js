@@ -9,7 +9,11 @@ const {
     consts: { NESTED_SCORE_MODE_SET }
 } = require('../../core');
 
-const invalidScoreModeParam = invalidParam('', 'score_mode', NESTED_SCORE_MODE_SET);
+const invalidScoreModeParam = invalidParam(
+    '',
+    'score_mode',
+    NESTED_SCORE_MODE_SET
+);
 /**
  * The `JoiningQueryBase` class provides support for common options used across
  * various joining query implementations.

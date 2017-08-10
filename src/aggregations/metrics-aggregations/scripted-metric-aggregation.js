@@ -72,7 +72,9 @@ class ScriptedMetricAggregation extends MetricsAggregationBase {
      */
     missing() {
         console.log(`Please refer ${ES_REF_URL}`);
-        throw new Error('missing is not supported in ScriptedMetricAggregation');
+        throw new Error(
+            'missing is not supported in ScriptedMetricAggregation'
+        );
     }
 
     /**

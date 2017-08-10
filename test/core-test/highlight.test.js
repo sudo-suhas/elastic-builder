@@ -1,6 +1,12 @@
 import _ from 'lodash';
 import test from 'ava';
-import { Highlight, highlight, BoolQuery, MatchQuery, MatchPhraseQuery } from '../../src';
+import {
+    Highlight,
+    highlight,
+    BoolQuery,
+    MatchQuery,
+    MatchPhraseQuery
+} from '../../src';
 import { recursiveToJSON } from '../../src/core/util';
 import { illegalParamType, validatedCorrectly } from '../_macros';
 
@@ -12,7 +18,13 @@ import { illegalParamType, validatedCorrectly } from '../_macros';
  * @param {*} param
  * @param {*} paramValue
  */
-function setHighlightOption(t, methodName, param, paramValue = recursiveToJSON(param)) {
+function setHighlightOption(
+    t,
+    methodName,
+    param,
+    paramValue = recursiveToJSON(param)
+) {
+    /* eslint-disable no-unexpected-multiline */
     const keyName = _.snakeCase(methodName);
 
     let value = new Highlight()[methodName](param).toJSON();
@@ -38,7 +50,9 @@ function setHighlightOption(t, methodName, param, paramValue = recursiveToJSON(p
     };
     t.deepEqual(value, expected);
 
-    value = new Highlight(['my_field_a', 'my_field_b'])[methodName](param, 'my_field_a').toJSON();
+    value = new Highlight(['my_field_a', 'my_field_b'])
+        [methodName](param, 'my_field_a')
+        .toJSON();
     expected = {
         fields: {
             my_field_a: { [keyName]: paramValue },
@@ -71,7 +85,10 @@ function setHighlightOption(t, methodName, param, paramValue = recursiveToJSON(p
     };
     t.deepEqual(value.toJSON(), expected);
 
-    value = new Highlight()[methodName](param, 'my_field')[methodName](param).toJSON();
+    value = new Highlight()
+        [methodName](param, 'my_field')
+        [methodName](param)
+        .toJSON();
     expected = {
         fields: {
             my_field: { [keyName]: paramValue }
@@ -79,10 +96,13 @@ function setHighlightOption(t, methodName, param, paramValue = recursiveToJSON(p
         [keyName]: paramValue
     };
     t.deepEqual(value, expected);
+    /* eslint-enable */
 }
 
 setHighlightOption.title = (providedTitle, methodName) =>
-    !_.isEmpty(providedTitle) ? providedTitle : `sets ${_.snakeCase(methodName)} option`;
+    !_.isEmpty(providedTitle)
+        ? providedTitle
+        : `sets ${_.snakeCase(methodName)} option`;
 
 test(illegalParamType, new Highlight(), 'fields', 'Array');
 test(illegalParamType, new Highlight(), 'highlightQuery', 'Query');
@@ -91,9 +111,13 @@ test(validatedCorrectly, highlight, 'encoder', ['default', 'html']);
 test(validatedCorrectly, highlight, 'type', ['plain', 'postings', 'fvh']);
 test(validatedCorrectly, highlight, 'fragmenter', ['simple', 'span']);
 test(setHighlightOption, 'preTags', ['<tag1>', '<tag2>']);
-test('sets pre_tags(str) option', setHighlightOption, 'preTags', '<tag1>', ['<tag1>']);
+test('sets pre_tags(str) option', setHighlightOption, 'preTags', '<tag1>', [
+    '<tag1>'
+]);
 test(setHighlightOption, 'postTags', ['</tag1>', '</tag2>']);
-test('sets post_tags(str) option', setHighlightOption, 'postTags', '</tag1>', ['</tag1>']);
+test('sets post_tags(str) option', setHighlightOption, 'postTags', '</tag1>', [
+    '</tag1>'
+]);
 test(setHighlightOption, 'fragmentSize', 150);
 test(setHighlightOption, 'numberOfFragments', 3);
 test(setHighlightOption, 'noMatchSize', 150);
@@ -183,7 +207,9 @@ test('sets order as score', t => {
     };
     t.deepEqual(value, expected);
 
-    value = new Highlight(['my_field_a', 'my_field_b']).scoreOrder('my_field_a').toJSON();
+    value = new Highlight(['my_field_a', 'my_field_b'])
+        .scoreOrder('my_field_a')
+        .toJSON();
     expected = {
         fields: {
             my_field_a: { order: 'score' },
@@ -227,7 +253,9 @@ test('sets order as score', t => {
 });
 
 test('sets matched_fields option', t => {
-    const value = new Highlight().matchedFields(['content', 'content.plain'], 'content').toJSON();
+    const value = new Highlight()
+        .matchedFields(['content', 'content.plain'], 'content')
+        .toJSON();
     const expected = {
         fields: {
             content: {
@@ -240,7 +268,10 @@ test('sets matched_fields option', t => {
 });
 
 test('set matched_fields throws on no field', t => {
-    const err = t.throws(() => new Highlight().matchedFields(['content', 'content.plain']), Error);
+    const err = t.throws(
+        () => new Highlight().matchedFields(['content', 'content.plain']),
+        Error
+    );
     t.is(err.message, '`matched_fields` requires field name to be passed');
 });
 

@@ -1,6 +1,10 @@
 import test from 'ava';
 import { PrefixQuery } from '../../src';
-import { validatedCorrectly, nameFieldExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    validatedCorrectly,
+    nameFieldExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = () => new PrefixQuery('my_field', 'my-value');
 

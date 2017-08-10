@@ -6,6 +6,7 @@ test('request body search is exported', t => {
     t.truthy(bob.requestBodySearch);
 });
 
+/* eslint-disable max-statements */
 test('queries are exported', t => {
     /* ============ ============ ============ */
     /* ============== Queries =============== */
@@ -397,12 +398,12 @@ test('misc are exported', t => {
 
 test('pretty print calls toJSON', t => {
     bob.prettyPrint({
-        // eslint-disable-next-line require-jsdoc
         toJSON() {
             t.pass();
             return true;
         }
     });
 });
+/* eslint-enable */
 
 // TODO: Test prettyPrint logs to console

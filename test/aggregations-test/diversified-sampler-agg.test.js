@@ -7,7 +7,8 @@ import {
     makeSetsOptionMacro
 } from '../_macros';
 
-const getInstance = () => new DiversifiedSamplerAggregation('my_samples', 'my_field');
+const getInstance = () =>
+    new DiversifiedSamplerAggregation('my_samples', 'my_field');
 
 const setsOption = makeSetsOptionMacro(
     getInstance,

@@ -10,8 +10,16 @@ const MonoFieldQueryBase = require('./mono-field-query-base');
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html';
 
-const invalidLowFreqOpParam = invalidParam(ES_REF_URL, 'low_freq_operator', "'and' or 'or'");
-const invalidHighFreqOpParam = invalidParam(ES_REF_URL, 'high_freq_operator', "'and' or 'or'");
+const invalidLowFreqOpParam = invalidParam(
+    ES_REF_URL,
+    'low_freq_operator',
+    "'and' or 'or'"
+);
+const invalidHighFreqOpParam = invalidParam(
+    ES_REF_URL,
+    'high_freq_operator',
+    "'and' or 'or'"
+);
 
 /**
  * The `common` terms query is a modern alternative to stopwords which

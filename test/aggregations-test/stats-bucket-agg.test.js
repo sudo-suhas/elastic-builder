@@ -2,7 +2,8 @@ import test from 'ava';
 import { StatsBucketAggregation } from '../../src';
 import { setsAggType } from '../_macros';
 
-const getInstance = bucketsPath => new StatsBucketAggregation('my_agg', bucketsPath);
+const getInstance = bucketsPath =>
+    new StatsBucketAggregation('my_agg', bucketsPath);
 
 test(setsAggType, StatsBucketAggregation, 'stats_bucket');
 

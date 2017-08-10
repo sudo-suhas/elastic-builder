@@ -1,6 +1,11 @@
 import test from 'ava';
 import { CardinalityAggregation } from '../../src';
-import { setsAggType, illegalCall, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    setsAggType,
+    illegalCall,
+    nameTypeExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = field => new CardinalityAggregation('my_agg', field);
 

@@ -2,7 +2,8 @@ import test from 'ava';
 import { SumBucketAggregation } from '../../src';
 import { setsAggType } from '../_macros';
 
-const getInstance = bucketsPath => new SumBucketAggregation('my_agg', bucketsPath);
+const getInstance = bucketsPath =>
+    new SumBucketAggregation('my_agg', bucketsPath);
 
 test(setsAggType, SumBucketAggregation, 'sum_bucket');
 

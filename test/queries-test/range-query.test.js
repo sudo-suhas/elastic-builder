@@ -9,10 +9,18 @@ import {
 
 const getInstance = () => new RangeQuery('my_field');
 
-const setsOption = makeSetsOptionMacro(getInstance, nameFieldExpectStrategy('range'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameFieldExpectStrategy('range')
+);
 
 test(illegalCall, RangeQuery, 'value');
-test(validatedCorrectly, getInstance, 'relation', ['WITHIN', 'CONTAINS', 'DISJOINT', 'INTERSECTS']);
+test(validatedCorrectly, getInstance, 'relation', [
+    'WITHIN',
+    'CONTAINS',
+    'DISJOINT',
+    'INTERSECTS'
+]);
 test(setsOption, 'gte', { param: 10 });
 test(setsOption, 'lte', { param: 20 });
 test(setsOption, 'gt', { param: 10 });

@@ -1,8 +1,15 @@
 import test from 'ava';
 import { SpanFirstQuery, spanFirstQuery, SpanTermQuery } from '../../src';
-import { illegalParamType, nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    illegalParamType,
+    nameExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
-const setsOption = makeSetsOptionMacro(spanFirstQuery, nameExpectStrategy('span_first'));
+const setsOption = makeSetsOptionMacro(
+    spanFirstQuery,
+    nameExpectStrategy('span_first')
+);
 
 const qry = new SpanTermQuery('text.stems', 'fox');
 

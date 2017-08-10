@@ -2,7 +2,10 @@
 
 const { inspect } = require('util');
 
-const { util: { firstDigitPos }, consts: { REWRITE_METHOD_SET } } = require('../core');
+const {
+    util: { firstDigitPos },
+    consts: { REWRITE_METHOD_SET }
+} = require('../core');
 
 /**
  * Validate the rewrite method.
@@ -13,15 +16,24 @@ const { util: { firstDigitPos }, consts: { REWRITE_METHOD_SET } } = require('../
  * @param {string} refUrl
  * @throws {Error} If the given rewrite method is not valid.
  */
-exports.validateRewiteMethod = function validateRewiteMethod(method, paramName, refUrl) {
+exports.validateRewiteMethod = function validateRewiteMethod(
+    method,
+    paramName,
+    refUrl
+) {
     // NOTE: This does not check for lower case comparison.
     if (!REWRITE_METHOD_SET.has(method)) {
-        const rewriteMethodName = `${method.substring(0, firstDigitPos(method))}N`;
+        const rewriteMethodName = `${method.substring(
+            0,
+            firstDigitPos(method)
+        )}N`;
         if (!REWRITE_METHOD_SET.has(rewriteMethodName)) {
             console.log(`See ${refUrl}`);
             console.warn(`Got '${paramName}' - ${method}`);
             throw new Error(
-                `The '${paramName}' parameter should belong to ${inspect(REWRITE_METHOD_SET)}`
+                `The '${paramName}' parameter should belong to ${inspect(
+                    REWRITE_METHOD_SET
+                )}`
             );
         }
     }

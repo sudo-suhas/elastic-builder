@@ -2,11 +2,16 @@ import test from 'ava';
 import { PercolateQuery, percolateQuery } from '../../src';
 import { nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
-const setsOption = makeSetsOptionMacro(percolateQuery, nameExpectStrategy('percolate'));
+const setsOption = makeSetsOptionMacro(
+    percolateQuery,
+    nameExpectStrategy('percolate')
+);
 
 test(setsOption, 'field', { param: 'query' });
 test(setsOption, 'documentType', { param: 'doctype' });
-test(setsOption, 'document', { param: { message: 'A new bonsai tree in the office' } });
+test(setsOption, 'document', {
+    param: { message: 'A new bonsai tree in the office' }
+});
 test(setsOption, 'index', { param: 'my-index' });
 test(setsOption, 'type', { param: 'message' });
 test(setsOption, 'id', { param: '1' });

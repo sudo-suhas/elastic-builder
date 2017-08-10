@@ -23,7 +23,8 @@ const isEmpty = require('lodash.isempty');
 class Suggester {
     // eslint-disable-next-line require-jsdoc
     constructor(suggesterType, name, field) {
-        if (isEmpty(suggesterType)) throw new Error('Suggester `suggesterType` cannot be empty');
+        if (isEmpty(suggesterType))
+            throw new Error('Suggester `suggesterType` cannot be empty');
         if (isEmpty(name)) throw new Error('Suggester `name` cannot be empty');
 
         this.name = name;

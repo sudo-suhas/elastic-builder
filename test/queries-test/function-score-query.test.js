@@ -44,10 +44,15 @@ test(setsOption, 'scoreMode', { param: 'multiply' });
 test(setsOption, 'boostMode', { param: 'multiply' });
 test(setsOption, 'maxBoost', { param: 999.9 });
 test(setsOption, 'minScore', { param: 9.999 });
-test(setsOption, 'functions', { param: [scriptScoreFunc, randScoreFunc], spread: false });
+test(setsOption, 'functions', {
+    param: [scriptScoreFunc, randScoreFunc],
+    spread: false
+});
 
 test('checks array items', t => {
-    t.notThrows(() => new FunctionScoreQuery().functions([scriptScoreFunc, randScoreFunc]));
+    t.notThrows(() =>
+        new FunctionScoreQuery().functions([scriptScoreFunc, randScoreFunc])
+    );
     const err = t.throws(
         () => new FunctionScoreQuery().functions([scriptScoreFunc, {}]),
         TypeError

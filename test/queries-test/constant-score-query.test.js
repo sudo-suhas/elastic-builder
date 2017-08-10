@@ -1,8 +1,15 @@
 import test from 'ava';
 import { ConstantScoreQuery, constantScoreQuery, TermQuery } from '../../src';
-import { illegalParamType, nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    illegalParamType,
+    nameExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
-const setsOption = makeSetsOptionMacro(constantScoreQuery, nameExpectStrategy('constant_score'));
+const setsOption = makeSetsOptionMacro(
+    constantScoreQuery,
+    nameExpectStrategy('constant_score')
+);
 
 const termQry = new TermQuery('user', 'kimchy');
 

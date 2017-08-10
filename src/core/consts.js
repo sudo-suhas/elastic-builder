@@ -24,7 +24,13 @@ exports.UNIT_SET = new Set(
     ]
 );
 
-exports.MODEL_SET = new Set(['simple', 'linear', 'ewma', 'holt', 'holt_winters']);
+exports.MODEL_SET = new Set([
+    'simple',
+    'linear',
+    'ewma',
+    'holt',
+    'holt_winters'
+]);
 
 exports.SORT_MODE_SET = new Set(['min', 'max', 'sum', 'avg', 'median']);
 
@@ -49,9 +55,23 @@ exports.MULTI_MATCH_TYPE = new Set([
     'phrase_prefix'
 ]);
 
-exports.SCORE_MODE_SET = new Set(['multiply', 'sum', 'first', 'min', 'max', 'avg']);
+exports.SCORE_MODE_SET = new Set([
+    'multiply',
+    'sum',
+    'first',
+    'min',
+    'max',
+    'avg'
+]);
 
-exports.BOOST_MODE_SET = new Set(['multiply', 'sum', 'replace', 'min', 'max', 'avg']);
+exports.BOOST_MODE_SET = new Set([
+    'multiply',
+    'sum',
+    'replace',
+    'min',
+    'max',
+    'avg'
+]);
 
 exports.FIELD_MODIFIER_SET = new Set([
     'none',
@@ -80,7 +100,12 @@ exports.GEO_SHAPE_TYPES = new Set([
     'circle'
 ]);
 
-exports.GEO_RELATION_SET = new Set(['WITHIN', 'CONTAINS', 'DISJOINT', 'INTERSECTS']);
+exports.GEO_RELATION_SET = new Set([
+    'WITHIN',
+    'CONTAINS',
+    'DISJOINT',
+    'INTERSECTS'
+]);
 
 exports.SUGGEST_MODE_SET = new Set(['missing', 'popular', 'always']);
 
@@ -92,4 +117,8 @@ exports.STRING_DISTANCE_SET = new Set([
     'ngram'
 ]);
 
-exports.SMOOTHING_MODEL_SET = new Set(['stupid_backoff', 'laplace', 'linear_interpolation']);
+exports.SMOOTHING_MODEL_SET = new Set([
+    'stupid_backoff',
+    'laplace',
+    'linear_interpolation'
+]);

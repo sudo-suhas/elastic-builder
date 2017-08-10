@@ -1,6 +1,9 @@
 'use strict';
 
-const { Query, util: { checkType, recursiveToJSON } } = require('../../../core');
+const {
+    Query,
+    util: { checkType, recursiveToJSON }
+} = require('../../../core');
 
 /**
  * `ScoreFunction` provides support for common options used across

@@ -2,7 +2,10 @@ import test from 'ava';
 import { HasChildQuery, hasChildQuery, TermQuery } from '../../src';
 import { nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
-const setsOption = makeSetsOptionMacro(hasChildQuery, nameExpectStrategy('has_child'));
+const setsOption = makeSetsOptionMacro(
+    hasChildQuery,
+    nameExpectStrategy('has_child')
+);
 
 const qry = new TermQuery('user', 'kimchy');
 

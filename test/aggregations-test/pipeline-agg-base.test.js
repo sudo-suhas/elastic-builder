@@ -1,11 +1,18 @@
 import test from 'ava';
 import { PipelineAggregationBase } from '../../src/aggregations/pipeline-aggregations';
-import { validatedCorrectly, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    validatedCorrectly,
+    nameTypeExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = bucketsPath =>
     new PipelineAggregationBase('my_agg', 'my_type', '', bucketsPath);
 
-const setsOption = makeSetsOptionMacro(getInstance, nameTypeExpectStrategy('my_agg', 'my_type'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameTypeExpectStrategy('my_agg', 'my_type')
+);
 
 test(validatedCorrectly, getInstance, 'gapPolicy', ['skip', 'insert_zeros']);
 test(setsOption, 'bucketsPath', { param: 'my_buckets_path' });

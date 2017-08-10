@@ -1,7 +1,11 @@
 import test from 'ava';
 import sinon from 'sinon';
 import { CommonTermsQuery } from '../../src';
-import { validatedCorrectly, nameFieldExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    validatedCorrectly,
+    nameFieldExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = () => new CommonTermsQuery('my_field', 'query str');
 
@@ -29,7 +33,10 @@ test(setsOption, 'disableCoord', { param: true });
 
 test('constructor sets arguments', t => {
     const valueA = getInstance().toJSON();
-    const valueB = new CommonTermsQuery().field('my_field').query('query str').toJSON();
+    const valueB = new CommonTermsQuery()
+        .field('my_field')
+        .query('query str')
+        .toJSON();
     t.deepEqual(valueA, valueB);
 
     const expected = {
@@ -41,7 +48,11 @@ test('constructor sets arguments', t => {
 });
 
 test('mixed minimum_should_match repr', t => {
-    const value = getInstance().minimumShouldMatch('30%').lowFreq('50%').highFreq('10%').toJSON();
+    const value = getInstance()
+        .minimumShouldMatch('30%')
+        .lowFreq('50%')
+        .highFreq('10%')
+        .toJSON();
     const expected = {
         common: {
             my_field: {
@@ -56,10 +67,18 @@ test('mixed minimum_should_match repr', t => {
 test.serial('mixed representation logs warning', t => {
     const spy = sinon.spy(console, 'warn');
 
-    getInstance().minimumShouldMatch('30%').lowFreq('50%').highFreq('10%').toJSON();
+    getInstance()
+        .minimumShouldMatch('30%')
+        .lowFreq('50%')
+        .highFreq('10%')
+        .toJSON();
 
     t.true(spy.calledTwice);
-    t.true(spy.firstCall.calledWith('[CommonTermsQuery] Do not mix with other representation!'));
+    t.true(
+        spy.firstCall.calledWith(
+            '[CommonTermsQuery] Do not mix with other representation!'
+        )
+    );
     t.true(spy.secondCall.calledWith('[CommonTermsQuery] Overwriting.'));
 
     console.warn.restore();

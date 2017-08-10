@@ -1,8 +1,15 @@
 import test from 'ava';
 import { BoostingQuery, boostingQuery, MatchQuery } from '../../src';
-import { illegalParamType, nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    illegalParamType,
+    nameExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
-const setsOption = makeSetsOptionMacro(boostingQuery, nameExpectStrategy('boosting'));
+const setsOption = makeSetsOptionMacro(
+    boostingQuery,
+    nameExpectStrategy('boosting')
+);
 
 const matchQryA = new MatchQuery('message', 'this is a test');
 const matchQryB = new MatchQuery('message', 'this is also a test');

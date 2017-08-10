@@ -9,7 +9,11 @@ const GeoQueryBase = require('./geo-query-base');
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-bounding-box-query.html';
 
-const invalidTypeParam = invalidParam(ES_REF_URL, 'type', "'memory' or 'indexed'");
+const invalidTypeParam = invalidParam(
+    ES_REF_URL,
+    'type',
+    "'memory' or 'indexed'"
+);
 
 /**
  * A query allowing to filter hits based on a point location using a bounding box.

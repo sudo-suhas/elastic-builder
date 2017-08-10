@@ -39,11 +39,18 @@ test('mixed representation', t => {
     let expected = [-71.34, 41.12];
     t.deepEqual(value, expected);
 
-    value = new GeoPoint().string('41.12,-71.34').lat(41.12).lon(-71.34).toJSON();
+    value = new GeoPoint()
+        .string('41.12,-71.34')
+        .lat(41.12)
+        .lon(-71.34)
+        .toJSON();
     expected = { lat: 41.12, lon: -71.34 };
     t.deepEqual(value, expected);
 
-    value = new GeoPoint().array([-71.34, 41.12]).object({ lat: 41.12, lon: -71.34 }).toJSON();
+    value = new GeoPoint()
+        .array([-71.34, 41.12])
+        .object({ lat: 41.12, lon: -71.34 })
+        .toJSON();
     expected = { lat: 41.12, lon: -71.34 };
     t.deepEqual(value, expected);
 
@@ -57,7 +64,11 @@ test.serial('mixed representation logs warnings', t => {
 
     const checkAndReset = () => {
         t.true(spy.calledTwice);
-        t.true(spy.firstCall.calledWith('[GeoPoint] Do not mix with other representation!'));
+        t.true(
+            spy.firstCall.calledWith(
+                '[GeoPoint] Do not mix with other representation!'
+            )
+        );
         t.true(spy.secondCall.calledWith('[GeoPoint] Overwriting.'));
         spy.reset();
     };
@@ -65,7 +76,10 @@ test.serial('mixed representation logs warnings', t => {
     new GeoPoint().lat(41.12).array([-71.34, 41.12]).toJSON();
     checkAndReset();
 
-    new GeoPoint().array([-71.34, 41.12]).object({ lat: 41.12, lon: -71.34 }).toJSON();
+    new GeoPoint()
+        .array([-71.34, 41.12])
+        .object({ lat: 41.12, lon: -71.34 })
+        .toJSON();
     checkAndReset();
 
     new GeoPoint().lat(41.12).string('41.12,-71.34').toJSON();

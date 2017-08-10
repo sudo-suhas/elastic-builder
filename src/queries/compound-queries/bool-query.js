@@ -4,7 +4,10 @@ const has = require('lodash.has');
 const head = require('lodash.head');
 const omit = require('lodash.omit');
 
-const { Query, util: { checkType, setDefault, recursiveToJSON } } = require('../../core');
+const {
+    Query,
+    util: { checkType, setDefault, recursiveToJSON }
+} = require('../../core');
 
 /**
  * A query that matches documents matching boolean combinations of other queries.
@@ -58,7 +61,8 @@ class BoolQuery extends Query {
     _addQueries(clause, queries) {
         setDefault(this._queryOpts, clause, []);
 
-        if (Array.isArray(queries)) queries.forEach(qry => this._addQuery(clause, qry));
+        if (Array.isArray(queries))
+            queries.forEach(qry => this._addQuery(clause, qry));
         else this._addQuery(clause, queries);
     }
 
@@ -185,18 +189,22 @@ class BoolQuery extends Query {
         const clauseKeys = ['must', 'filter', 'must_not', 'should'];
 
         // Pick the clauses which have some queries
-        const cleanQryOpts = clauseKeys.filter(clause => has(this._queryOpts, clause)).reduce(
-            // Unwrap array and put into qryOpts if required
-            (qryOpts, clause) => {
-                const clauseQueries = this._queryOpts[clause];
-                qryOpts[clause] = recursiveToJSON(
-                    clauseQueries.length === 1 ? head(clauseQueries) : clauseQueries
-                );
-                return qryOpts;
-            },
-            // initial value - all key-value except clauses
-            omit(this._queryOpts, clauseKeys)
-        );
+        const cleanQryOpts = clauseKeys
+            .filter(clause => has(this._queryOpts, clause))
+            .reduce(
+                // Unwrap array and put into qryOpts if required
+                (qryOpts, clause) => {
+                    const clauseQueries = this._queryOpts[clause];
+                    qryOpts[clause] = recursiveToJSON(
+                        clauseQueries.length === 1
+                            ? head(clauseQueries)
+                            : clauseQueries
+                    );
+                    return qryOpts;
+                },
+                // initial value - all key-value except clauses
+                omit(this._queryOpts, clauseKeys)
+            );
 
         return {
             [this.queryType]: cleanQryOpts

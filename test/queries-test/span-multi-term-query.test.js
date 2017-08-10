@@ -1,8 +1,15 @@
 import test from 'ava';
 import { SpanMultiTermQuery, spanMultiTermQuery, PrefixQuery } from '../../src';
-import { illegalParamType, nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    illegalParamType,
+    nameExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
-const setsOption = makeSetsOptionMacro(spanMultiTermQuery, nameExpectStrategy('span_multi'));
+const setsOption = makeSetsOptionMacro(
+    spanMultiTermQuery,
+    nameExpectStrategy('span_multi')
+);
 
 const qry = new PrefixQuery('user', 'ki');
 

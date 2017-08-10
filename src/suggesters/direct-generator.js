@@ -2,12 +2,19 @@
 
 const isNil = require('lodash.isnil');
 
-const { consts: { SUGGEST_MODE_SET }, util: { invalidParam } } = require('../core');
+const {
+    consts: { SUGGEST_MODE_SET },
+    util: { invalidParam }
+} = require('../core');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html#_direct_generators';
 
-const invalidSuggestModeParam = invalidParam(ES_REF_URL, 'suggest_mode', SUGGEST_MODE_SET);
+const invalidSuggestModeParam = invalidParam(
+    ES_REF_URL,
+    'suggest_mode',
+    SUGGEST_MODE_SET
+);
 
 /**
  * The `phrase` suggester uses candidate generators to produce a list of possible

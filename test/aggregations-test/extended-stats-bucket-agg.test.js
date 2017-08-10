@@ -1,8 +1,13 @@
 import test from 'ava';
 import { ExtendedStatsBucketAggregation } from '../../src';
-import { setsAggType, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    setsAggType,
+    nameTypeExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
-const getInstance = bucketsPath => new ExtendedStatsBucketAggregation('my_agg', bucketsPath);
+const getInstance = bucketsPath =>
+    new ExtendedStatsBucketAggregation('my_agg', bucketsPath);
 
 const setsOption = makeSetsOptionMacro(
     getInstance,

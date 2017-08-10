@@ -2,14 +2,21 @@
 
 const isNil = require('lodash.isnil');
 
-const { util: { invalidParam }, consts: { EXECUTION_HINT_SET } } = require('../../core');
+const {
+    util: { invalidParam },
+    consts: { EXECUTION_HINT_SET }
+} = require('../../core');
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-diversified-sampler-aggregation.html';
 
-const invalidExecutionHintParam = invalidParam(ES_REF_URL, 'execution_hint', EXECUTION_HINT_SET);
+const invalidExecutionHintParam = invalidParam(
+    ES_REF_URL,
+    'execution_hint',
+    EXECUTION_HINT_SET
+);
 
 /**
  * A filtering aggregation used to limit any sub aggregations' processing

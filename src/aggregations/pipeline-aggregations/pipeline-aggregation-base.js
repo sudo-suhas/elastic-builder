@@ -4,7 +4,11 @@ const isNil = require('lodash.isnil');
 
 const { Aggregation, util: { invalidParam } } = require('../../core');
 
-const invalidGapPolicyParam = invalidParam('', 'gap_policy', "'skip' or 'insert_zeros'");
+const invalidGapPolicyParam = invalidParam(
+    '',
+    'gap_policy',
+    "'skip' or 'insert_zeros'"
+);
 
 /**
  * The `PipelineAggregationBase` provides support for common options used across

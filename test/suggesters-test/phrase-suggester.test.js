@@ -1,6 +1,10 @@
 import test from 'ava';
 import { PhraseSuggester, DirectGenerator } from '../../src';
-import { validatedCorrectly, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    validatedCorrectly,
+    nameTypeExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = () => new PhraseSuggester('my_suggester');
 

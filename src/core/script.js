@@ -45,7 +45,9 @@ class Script {
                     break;
 
                 default:
-                    throw new Error('`type` must be one of `inline`, `stored`, `file`');
+                    throw new Error(
+                        '`type` must be one of `inline`, `stored`, `file`'
+                    );
             }
         }
     }
@@ -67,7 +69,9 @@ class Script {
      */
     _checkMixedRepr() {
         if (this._isTypeSet) {
-            this._warn('Script source(`inline`/`stored`/`file`) was already specified!');
+            this._warn(
+                'Script source(`inline`/`stored`/`file`) was already specified!'
+            );
             this._warn('Overwriting.');
 
             delete this._body.file;

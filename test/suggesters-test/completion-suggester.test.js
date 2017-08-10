@@ -22,15 +22,31 @@ test('prefix is set', t => {
 
 test(setsOption, 'fuzzy', { param: true });
 test(setsOption, 'fuzzy', { propValue: true });
-test(setsOption, 'fuzziness', { param: 2, keyName: 'fuzzy', propValue: { fuzziness: 2 } });
+test(setsOption, 'fuzziness', {
+    param: 2,
+    keyName: 'fuzzy',
+    propValue: { fuzziness: 2 }
+});
 test(setsOption, 'transpositions', {
     param: true,
     keyName: 'fuzzy',
     propValue: { transpositions: true }
 });
-test(setsOption, 'minLength', { param: 2, keyName: 'fuzzy', propValue: { min_length: 2 } });
-test(setsOption, 'prefixLength', { param: 2, keyName: 'fuzzy', propValue: { prefix_length: 2 } });
-test(setsOption, 'fuzziness', { param: 2, keyName: 'fuzzy', propValue: { fuzziness: 2 } });
+test(setsOption, 'minLength', {
+    param: 2,
+    keyName: 'fuzzy',
+    propValue: { min_length: 2 }
+});
+test(setsOption, 'prefixLength', {
+    param: 2,
+    keyName: 'fuzzy',
+    propValue: { prefix_length: 2 }
+});
+test(setsOption, 'fuzziness', {
+    param: 2,
+    keyName: 'fuzzy',
+    propValue: { fuzziness: 2 }
+});
 test(setsOption, 'unicodeAware', {
     param: true,
     keyName: 'fuzzy',

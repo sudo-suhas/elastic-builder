@@ -9,7 +9,11 @@ const { RESCORE_MODE_SET } = require('./consts');
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html';
 
-const invalidScoreModeParam = invalidParam(ES_REF_URL, 'score_mode', RESCORE_MODE_SET);
+const invalidScoreModeParam = invalidParam(
+    ES_REF_URL,
+    'score_mode',
+    RESCORE_MODE_SET
+);
 
 /**
  * A `rescore` request can help to improve precision by reordering just

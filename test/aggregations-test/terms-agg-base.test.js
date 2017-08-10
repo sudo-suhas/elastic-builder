@@ -1,10 +1,18 @@
 import test from 'ava';
 import { TermsAggregationBase } from '../../src/aggregations/bucket-aggregations';
-import { validatedCorrectly, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    validatedCorrectly,
+    nameTypeExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
-const getInstance = (...args) => new TermsAggregationBase('my_agg', 'my_type', '', ...args);
+const getInstance = (...args) =>
+    new TermsAggregationBase('my_agg', 'my_type', '', ...args);
 
-const setsOption = makeSetsOptionMacro(getInstance, nameTypeExpectStrategy('my_agg', 'my_type'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameTypeExpectStrategy('my_agg', 'my_type')
+);
 
 test(validatedCorrectly, getInstance, 'executionHint', [
     'map',

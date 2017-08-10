@@ -12,8 +12,13 @@ test(setsOption, 'lang', { param: 'painless' });
 test(setsOption, 'params', { param: { my_modifier: 2 } });
 
 test('constructor sets arguments', t => {
-    let valueA = new Script('inline', 'params.my_var1 / params.my_var2').toJSON();
-    let valueB = new Script().inline('params.my_var1 / params.my_var2').toJSON();
+    let valueA = new Script(
+        'inline',
+        'params.my_var1 / params.my_var2'
+    ).toJSON();
+    let valueB = new Script()
+        .inline('params.my_var1 / params.my_var2')
+        .toJSON();
     t.deepEqual(valueA, valueB);
 
     let expected = {
@@ -46,7 +51,10 @@ test('constructor sets arguments', t => {
 test.serial('mixed representaion', t => {
     const spy = sinon.spy(console, 'warn');
 
-    const value = new Script().file('calculate-score').stored('calculate-score').toJSON();
+    const value = new Script()
+        .file('calculate-score')
+        .stored('calculate-score')
+        .toJSON();
     const expected = {
         stored: 'calculate-score'
     };

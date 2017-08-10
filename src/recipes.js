@@ -5,7 +5,11 @@ const isNil = require('lodash.isnil');
 const {
     MatchAllQuery,
     termLevelQueries: { ExistsQuery },
-    compoundQueries: { BoolQuery, FunctionScoreQuery, scoreFunctions: { RandomScoreFunction } }
+    compoundQueries: {
+        BoolQuery,
+        FunctionScoreQuery,
+        scoreFunctions: { RandomScoreFunction }
+    }
 } = require('./queries');
 
 const { Query, util: { checkType } } = require('./core');
@@ -69,10 +73,15 @@ exports.missingQuery = function missingQuery(field) {
  * @returns {FunctionScoreQuery} A `function_score` query with random sort applied
  * @throws {TypeError} If `query` is not an instance of `Query`.
  */
-exports.randomSortQuery = function randomSortQuery(query = new MatchAllQuery(), seed) {
+exports.randomSortQuery = function randomSortQuery(
+    query = new MatchAllQuery(),
+    seed
+) {
     checkType(query, Query);
     const func = new RandomScoreFunction();
-    return new FunctionScoreQuery().query(query).function(isNil(seed) ? func : func.seed(seed));
+    return new FunctionScoreQuery()
+        .query(query)
+        .function(isNil(seed) ? func : func.seed(seed));
 };
 
 /**

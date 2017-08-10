@@ -2,9 +2,13 @@ import test from 'ava';
 import { FullTextQueryBase } from '../../src/queries/full-text-queries';
 import { nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
-const getInstance = queryString => new FullTextQueryBase('my_qry_type', queryString);
+const getInstance = queryString =>
+    new FullTextQueryBase('my_qry_type', queryString);
 
-const setsOption = makeSetsOptionMacro(getInstance, nameExpectStrategy('my_qry_type'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameExpectStrategy('my_qry_type')
+);
 
 test(setsOption, 'analyzer', { param: 'snowball' });
 test(setsOption, 'minimumShouldMatch', { param: 2 });

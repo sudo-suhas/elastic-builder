@@ -28,18 +28,27 @@ const filterQry = new BoolQuery()
 const aggA = new TermsAggregation('user_term_agg', 'user');
 const aggB = new TermsAggregation('keyword_term_agg', 'keyword');
 
-const suggest = new TermSuggester('my-suggestion', 'message', 'tring out Elasticsearch');
+const suggest = new TermSuggester(
+    'my-suggestion',
+    'message',
+    'tring out Elasticsearch'
+);
 
 const sortChannel = new Sort('channel', 'desc');
 const sortCategories = new Sort('categories', 'desc');
 
-const scriptA = new Script('inline', "doc['my_field_name'].value * 2").lang('painless');
+const scriptA = new Script('inline', "doc['my_field_name'].value * 2").lang(
+    'painless'
+);
 const scriptB = new Script('inline', "doc['my_field_name'].value * factor")
     .lang('painless')
     .params({ factor: 2.0 });
 const scoreScript = new Script('inline', 'Math.log10(doc.likes.value + 2)');
 
-const rescoreA = new Rescore(50, new MatchPhraseQuery('message', 'the quick brown').slop(2))
+const rescoreA = new Rescore(
+    50,
+    new MatchPhraseQuery('message', 'the quick brown').slop(2)
+)
     .queryWeight(0.7)
     .rescoreQueryWeight(1.2);
 const rescoreB = new Rescore(
@@ -50,7 +59,10 @@ const rescoreC = new Rescore(25, new MatchPhraseQuery('message', 'fox').slop(2))
     .queryWeight(0.9)
     .rescoreQueryWeight(1.5);
 
-const innerHits = new InnerHits().name('last_tweets').size(5).sort(new Sort('date', 'desc'));
+const innerHits = new InnerHits()
+    .name('last_tweets')
+    .size(5)
+    .sort(new Sort('date', 'desc'));
 
 const instance = new RequestBodySearch();
 
@@ -88,9 +100,17 @@ test(setsOption, 'sorts', {
 test(setsOption, 'trackScores', { param: true });
 test(setsOption, 'version', { param: true });
 test(setsOption, 'explain', { param: true });
-test(setsOption, 'highlight', { param: new Highlight(['content']).type('plain', 'content') });
-test('sets source(str) option', setsOption, 'source', { param: 'obj.*', keyName: '_source' });
-test('sets source(bool) option', setsOption, 'source', { param: false, keyName: '_source' });
+test(setsOption, 'highlight', {
+    param: new Highlight(['content']).type('plain', 'content')
+});
+test('sets source(str) option', setsOption, 'source', {
+    param: 'obj.*',
+    keyName: '_source'
+});
+test('sets source(bool) option', setsOption, 'source', {
+    param: false,
+    keyName: '_source'
+});
 test('sets source(arr) option', setsOption, 'source', {
     param: ['obj1.*', 'obj2.*'],
     spread: false,
@@ -103,7 +123,9 @@ test('sets source(obj) option', setsOption, 'source', {
     },
     keyName: '_source'
 });
-test('sets stored_fields(str) option', setsOption, 'storedFields', { param: '_none_' });
+test('sets stored_fields(str) option', setsOption, 'storedFields', {
+    param: '_none_'
+});
 test('sets stored_fields(arr) option', setsOption, 'storedFields', {
     param: ['user', 'postDate'],
     spread: false
@@ -123,10 +145,16 @@ test(setsOption, 'scriptFields', {
         test2: { script: scriptB }
     }
 });
-test(setsOption, 'docvalueFields', { param: ['test1', 'test2'], spread: false });
+test(setsOption, 'docvalueFields', {
+    param: ['test1', 'test2'],
+    spread: false
+});
 test(setsOption, 'postFilter', { param: filterQry });
 test(setsOption, 'rescore', { param: rescoreA });
-test(setsOption, 'indicesBoost', { param: ['alias1', 1.4], propValue: [{ alias1: 1.4 }] });
+test(setsOption, 'indicesBoost', {
+    param: ['alias1', 1.4],
+    propValue: [{ alias1: 1.4 }]
+});
 test(setsOption, 'indexBoost', {
     param: ['alias1', 1.4],
     propValue: [{ alias1: 1.4 }],
@@ -135,10 +163,24 @@ test(setsOption, 'indexBoost', {
 test(setsOption, 'minScore', { param: 0.5 });
 test(setsOption, 'collapse', { param: 'user', propValue: { field: 'user' } });
 test('sets collapse with inner_hits option', setsOption, 'collapse', {
-    param: ['user', new InnerHits().name('last_tweets').size(5).sort(new Sort('date', 'desc')), 4],
-    propValue: { field: 'user', inner_hits: innerHits, max_concurrent_group_searches: 4 }
+    param: [
+        'user',
+        new InnerHits()
+            .name('last_tweets')
+            .size(5)
+            .sort(new Sort('date', 'desc')),
+        4
+    ],
+    propValue: {
+        field: 'user',
+        inner_hits: innerHits,
+        max_concurrent_group_searches: 4
+    }
 });
-test(setsOption, 'searchAfter', { param: [1463538857, 'tweet#654323'], spread: false });
+test(setsOption, 'searchAfter', {
+    param: [1463538857, 'tweet#654323'],
+    spread: false
+});
 
 // agg, aggregation
 test('sets multiple aggs', t => {
@@ -213,7 +255,9 @@ test('sets multiple rescore', t => {
                     rescore_query: {
                         function_score: {
                             script_score: {
-                                script: { inline: 'Math.log10(doc.likes.value + 2)' }
+                                script: {
+                                    inline: 'Math.log10(doc.likes.value + 2)'
+                                }
                             }
                         }
                     },

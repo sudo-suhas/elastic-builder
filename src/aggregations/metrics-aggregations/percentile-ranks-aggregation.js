@@ -60,7 +60,9 @@ class PercentileRanksAggregation extends MetricsAggregationBase {
     format() {
         // Not 100% sure about this.
         console.log(`Please refer ${ES_REF_URL}`);
-        throw new Error('format is not supported in PercentileRanksAggregation');
+        throw new Error(
+            'format is not supported in PercentileRanksAggregation'
+        );
     }
 
     /**
@@ -149,7 +151,9 @@ class PercentileRanksAggregation extends MetricsAggregationBase {
      * @returns {PercentileRanksAggregation} returns `this` so that calls can be chained
      */
     hdr(numberOfSigDigits) {
-        this._aggsDef.hdr = { number_of_significant_value_digits: numberOfSigDigits };
+        this._aggsDef.hdr = {
+            number_of_significant_value_digits: numberOfSigDigits
+        };
         return this;
     }
 }

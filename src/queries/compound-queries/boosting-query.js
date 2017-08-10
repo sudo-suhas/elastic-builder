@@ -32,7 +32,8 @@ class BoostingQuery extends Query {
 
         if (!isNil(positiveQry)) this.positive(positiveQry);
         if (!isNil(negativeQry)) this.negative(negativeQry);
-        if (!isNil(negativeBoost)) this._queryOpts.negative_boost = negativeBoost;
+        if (!isNil(negativeBoost))
+            this._queryOpts.negative_boost = negativeBoost;
     }
 
     /**

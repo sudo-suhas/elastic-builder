@@ -1,6 +1,10 @@
 import test from 'ava';
 import { BoolQuery, boolQuery, TermQuery, MatchQuery } from '../../src';
-import { illegalParamType, nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    illegalParamType,
+    nameExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const setsOption = makeSetsOptionMacro(boolQuery, nameExpectStrategy('bool'));
 
@@ -19,7 +23,10 @@ const matchQryB = new MatchQuery('message', 'this is also a test');
  */
 function checksArrayItems(t, clause) {
     t.notThrows(() => new BoolQuery()[clause]([termQryA, matchQryA]));
-    const err = t.throws(() => new BoolQuery()[clause]([termQryA, {}]), TypeError);
+    const err = t.throws(
+        () => new BoolQuery()[clause]([termQryA, {}]),
+        TypeError
+    );
     t.is(err.message, 'Argument must be an instance of Query');
 }
 

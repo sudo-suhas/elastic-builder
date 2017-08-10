@@ -65,7 +65,9 @@ class SearchTemplate {
                 typeLower !== 'indexed' && // alias for id
                 typeLower !== 'file'
             ) {
-                throw new Error('`type` must be one of `inline`, `id`, `indexed`, `file`');
+                throw new Error(
+                    '`type` must be one of `inline`, `id`, `indexed`, `file`'
+                );
             }
 
             this[typeLower](source);
@@ -89,7 +91,9 @@ class SearchTemplate {
      */
     _checkMixedRepr() {
         if (this._isTypeSet) {
-            this._warn('Search template source(`inline`/`id`/`file`) was already specified!');
+            this._warn(
+                'Search template source(`inline`/`id`/`file`) was already specified!'
+            );
             this._warn('Overwriting.');
 
             delete this._body.file;

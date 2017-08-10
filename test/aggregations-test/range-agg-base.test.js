@@ -1,9 +1,16 @@
 import test from 'ava';
 import { RangeAggregationBase } from '../../src/aggregations/bucket-aggregations';
-import { illegalParamType, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    illegalParamType,
+    nameTypeExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = (...args) =>
-    new RangeAggregationBase('my_agg', 'my_type', ...args).range({ from: 10, to: 20 });
+    new RangeAggregationBase('my_agg', 'my_type', ...args).range({
+        from: 10,
+        to: 20
+    });
 
 const setsOption = makeSetsOptionMacro(
     getInstance,
@@ -19,7 +26,10 @@ test(setsOption, 'missing', { param: '01-1970' });
 test(setsOption, 'keyed', { param: true });
 
 test('empty ranges throws', t => {
-    const err = t.throws(() => new RangeAggregationBase('my_agg', 'my_type').toJSON(), Error);
+    const err = t.throws(
+        () => new RangeAggregationBase('my_agg', 'my_type').toJSON(),
+        Error
+    );
     t.is(err.message, '`ranges` cannot be empty.');
 });
 
@@ -40,7 +50,11 @@ test('ranges are set', t => {
         .range({ from: 40, to: 50 })
         .toJSON();
     const valueB = getInstance()
-        .ranges([{ from: 20, to: 30 }, { from: 30, to: 40 }, { from: 40, to: 50 }])
+        .ranges([
+            { from: 20, to: 30 },
+            { from: 30, to: 40 },
+            { from: 40, to: 50 }
+        ])
         .toJSON();
     const expected = {
         my_agg: {

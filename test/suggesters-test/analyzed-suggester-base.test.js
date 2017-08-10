@@ -2,7 +2,8 @@ import test from 'ava';
 import { AnalyzedSuggesterBase } from '../../src/suggesters';
 import { nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
-const getInstance = (...args) => new AnalyzedSuggesterBase('my_type', 'my_suggester', ...args);
+const getInstance = (...args) =>
+    new AnalyzedSuggesterBase('my_type', 'my_suggester', ...args);
 
 const setsOption = makeSetsOptionMacro(
     getInstance,

@@ -54,8 +54,18 @@ const {
             DecayScoreFunction
         }
     },
-    joiningQueries: { NestedQuery, HasChildQuery, HasParentQuery, ParentIdQuery },
-    geoQueries: { GeoShapeQuery, GeoBoundingBoxQuery, GeoDistanceQuery, GeoPolygonQuery },
+    joiningQueries: {
+        NestedQuery,
+        HasChildQuery,
+        HasParentQuery,
+        ParentIdQuery
+    },
+    geoQueries: {
+        GeoShapeQuery,
+        GeoBoundingBoxQuery,
+        GeoDistanceQuery,
+        GeoPolygonQuery
+    },
     specializedQueries: { MoreLikeThisQuery, ScriptQuery, PercolateQuery },
     spanQueries: {
         SpanTermQuery,
@@ -321,10 +331,14 @@ exports.PercentilesAggregation = PercentilesAggregation;
 exports.percentilesAggregation = constructorWrapper(PercentilesAggregation);
 
 exports.PercentileRanksAggregation = PercentileRanksAggregation;
-exports.percentileRanksAggregation = constructorWrapper(PercentileRanksAggregation);
+exports.percentileRanksAggregation = constructorWrapper(
+    PercentileRanksAggregation
+);
 
 exports.ScriptedMetricAggregation = ScriptedMetricAggregation;
-exports.scriptedMetricAggregation = constructorWrapper(ScriptedMetricAggregation);
+exports.scriptedMetricAggregation = constructorWrapper(
+    ScriptedMetricAggregation
+);
 
 exports.StatsAggregation = StatsAggregation;
 exports.statsAggregation = constructorWrapper(StatsAggregation);
@@ -342,7 +356,9 @@ exports.valueCountAggregation = constructorWrapper(ValueCountAggregation);
 /* ========= Bucket Aggregations ======== */
 /* ============ ============ ============ */
 exports.AdjacencyMatrixAggregation = AdjacencyMatrixAggregation;
-exports.adjacencyMatrixAggregation = constructorWrapper(AdjacencyMatrixAggregation);
+exports.adjacencyMatrixAggregation = constructorWrapper(
+    AdjacencyMatrixAggregation
+);
 
 exports.ChildrenAggregation = ChildrenAggregation;
 exports.childrenAggregation = constructorWrapper(ChildrenAggregation);
@@ -354,7 +370,9 @@ exports.DateRangeAggregation = DateRangeAggregation;
 exports.dateRangeAggregation = constructorWrapper(DateRangeAggregation);
 
 exports.DiversifiedSamplerAggregation = DiversifiedSamplerAggregation;
-exports.diversifiedSamplerAggregation = constructorWrapper(DiversifiedSamplerAggregation);
+exports.diversifiedSamplerAggregation = constructorWrapper(
+    DiversifiedSamplerAggregation
+);
 
 exports.FilterAggregation = FilterAggregation;
 exports.filterAggregation = constructorWrapper(FilterAggregation);
@@ -393,7 +411,9 @@ exports.SamplerAggregation = SamplerAggregation;
 exports.samplerAggregation = constructorWrapper(SamplerAggregation);
 
 exports.SignificantTermsAggregation = SignificantTermsAggregation;
-exports.significantTermsAggregation = constructorWrapper(SignificantTermsAggregation);
+exports.significantTermsAggregation = constructorWrapper(
+    SignificantTermsAggregation
+);
 
 exports.TermsAggregation = TermsAggregation;
 exports.termsAggregation = constructorWrapper(TermsAggregation);
@@ -420,10 +440,14 @@ exports.StatsBucketAggregation = StatsBucketAggregation;
 exports.statsBucketAggregation = constructorWrapper(StatsBucketAggregation);
 
 exports.ExtendedStatsBucketAggregation = ExtendedStatsBucketAggregation;
-exports.extendedStatsBucketAggregation = constructorWrapper(ExtendedStatsBucketAggregation);
+exports.extendedStatsBucketAggregation = constructorWrapper(
+    ExtendedStatsBucketAggregation
+);
 
 exports.PercentilesBucketAggregation = PercentilesBucketAggregation;
-exports.percentilesBucketAggregation = constructorWrapper(PercentilesBucketAggregation);
+exports.percentilesBucketAggregation = constructorWrapper(
+    PercentilesBucketAggregation
+);
 
 exports.MovingAverageAggregation = MovingAverageAggregation;
 exports.movingAverageAggregation = constructorWrapper(MovingAverageAggregation);
@@ -435,10 +459,14 @@ exports.BucketScriptAggregation = BucketScriptAggregation;
 exports.bucketScriptAggregation = constructorWrapper(BucketScriptAggregation);
 
 exports.BucketSelectorAggregation = BucketSelectorAggregation;
-exports.bucketSelectorAggregation = constructorWrapper(BucketSelectorAggregation);
+exports.bucketSelectorAggregation = constructorWrapper(
+    BucketSelectorAggregation
+);
 
 exports.SerialDifferencingAggregation = SerialDifferencingAggregation;
-exports.serialDifferencingAggregation = constructorWrapper(SerialDifferencingAggregation);
+exports.serialDifferencingAggregation = constructorWrapper(
+    SerialDifferencingAggregation
+);
 
 /* ============ ============ ============ */
 /* ========= Matrix Aggregations ======== */
@@ -543,3 +571,5 @@ exports.searchTemplate = constructorWrapper(SearchTemplate);
 exports.prettyPrint = function prettyPrint(obj) {
     console.log(JSON.stringify(obj, null, 2));
 };
+
+/* eslint-enable */

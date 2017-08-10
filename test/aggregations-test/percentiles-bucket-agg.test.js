@@ -7,7 +7,8 @@ import {
     makeSetsOptionMacro
 } from '../_macros';
 
-const getInstance = bucketsPath => new PercentilesBucketAggregation('my_agg', bucketsPath);
+const getInstance = bucketsPath =>
+    new PercentilesBucketAggregation('my_agg', bucketsPath);
 
 const setsOption = makeSetsOptionMacro(
     getInstance,

@@ -20,10 +20,16 @@ test(setsOption, 'keyed', { param: true });
 test(setsOption, 'percents', { param: [95, 99, 99.9], spread: false });
 test(setsOption, 'keyed', { param: true });
 test(setsOption, 'tdigest', { param: 200, propValue: { compression: 200 } });
-test(setsOption, 'hdr', { param: 3, propValue: { number_of_significant_value_digits: 3 } });
+test(setsOption, 'hdr', {
+    param: 3,
+    propValue: { number_of_significant_value_digits: 3 }
+});
 
 test('compression same as tdigest', t => {
-    t.deepEqual(getInstance().tdigest(3).toJSON(), getInstance().compression(3).toJSON());
+    t.deepEqual(
+        getInstance().tdigest(3).toJSON(),
+        getInstance().compression(3).toJSON()
+    );
 });
 
 test('constructor sets field', t => {

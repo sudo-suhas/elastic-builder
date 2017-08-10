@@ -2,7 +2,11 @@
 
 const isNil = require('lodash.isnil');
 
-const { GeoPoint, util: { checkType, invalidParam }, consts: { UNIT_SET } } = require('../../core');
+const {
+    GeoPoint,
+    util: { checkType, invalidParam },
+    consts: { UNIT_SET }
+} = require('../../core');
 
 const RangeAggregationBase = require('./range-aggregation-base');
 
@@ -10,7 +14,11 @@ const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geodistance-aggregation.html';
 
 const invalidUnitParam = invalidParam(ES_REF_URL, 'unit', UNIT_SET);
-const invalidDistanceTypeParam = invalidParam(ES_REF_URL, 'distance_type', "'plane' or 'arc'");
+const invalidDistanceTypeParam = invalidParam(
+    ES_REF_URL,
+    'distance_type',
+    "'plane' or 'arc'"
+);
 
 /**
  * A multi-bucket aggregation that works on geo_point fields and conceptually
@@ -116,7 +124,8 @@ class GeoDistanceAggregation extends RangeAggregationBase {
         if (isNil(type)) invalidDistanceTypeParam(type);
 
         const typeLower = type.toLowerCase();
-        if (typeLower !== 'plane' && typeLower !== 'arc') invalidDistanceTypeParam(type);
+        if (typeLower !== 'plane' && typeLower !== 'arc')
+            invalidDistanceTypeParam(type);
 
         this._aggsDef.distance_type = typeLower;
         return this;

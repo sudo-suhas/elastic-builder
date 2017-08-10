@@ -16,8 +16,16 @@ const { ScoreFunction } = require('./score-functions');
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html';
 
-const invalidScoreModeParam = invalidParam(ES_REF_URL, 'score_mode', SCORE_MODE_SET);
-const invalidBoostModeParam = invalidParam(ES_REF_URL, 'boost_mode', BOOST_MODE_SET);
+const invalidScoreModeParam = invalidParam(
+    ES_REF_URL,
+    'score_mode',
+    SCORE_MODE_SET
+);
+const invalidBoostModeParam = invalidParam(
+    ES_REF_URL,
+    'boost_mode',
+    BOOST_MODE_SET
+);
 
 /**
  * The `function_score` allows you to modify the score of documents that are

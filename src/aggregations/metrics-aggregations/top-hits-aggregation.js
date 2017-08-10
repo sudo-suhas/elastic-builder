@@ -1,7 +1,11 @@
 'use strict';
 
 const MetricsAggregationBase = require('./metrics-aggregation-base'),
-    { Highlight, Sort, util: { checkType, setDefault } } = require('../../core');
+    {
+        Highlight,
+        Sort,
+        util: { checkType, setDefault }
+    } = require('../../core');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html';

@@ -1,8 +1,15 @@
 import test from 'ava';
 import { SpanOrQuery, spanOrQuery, SpanTermQuery } from '../../src';
-import { illegalParamType, nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    illegalParamType,
+    nameExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
-const setsOption = makeSetsOptionMacro(spanOrQuery, nameExpectStrategy('span_or'));
+const setsOption = makeSetsOptionMacro(
+    spanOrQuery,
+    nameExpectStrategy('span_or')
+);
 
 const qry1 = new SpanTermQuery('field', 'value1');
 const qry2 = new SpanTermQuery('field', 'value2');

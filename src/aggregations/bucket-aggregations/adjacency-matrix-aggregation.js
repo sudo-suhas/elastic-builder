@@ -47,7 +47,9 @@ class AdjacencyMatrixAggregation extends BucketAggregationBase {
      */
     script() {
         console.log(`Please refer ${ES_REF_URL}`);
-        throw new Error('script is not supported in AdjacencyMatrixAggregation');
+        throw new Error(
+            'script is not supported in AdjacencyMatrixAggregation'
+        );
     }
 
     /**

@@ -1,13 +1,24 @@
 import test from 'ava';
 import { TermSuggester } from '../../src';
-import { validatedCorrectly, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    validatedCorrectly,
+    nameTypeExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = () => new TermSuggester('my_suggester');
 
-const setsOption = makeSetsOptionMacro(getInstance, nameTypeExpectStrategy('my_suggester', 'term'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameTypeExpectStrategy('my_suggester', 'term')
+);
 
 test(validatedCorrectly, getInstance, 'sort', ['score', 'frequency']);
-test(validatedCorrectly, getInstance, 'suggestMode', ['missing', 'popular', 'always']);
+test(validatedCorrectly, getInstance, 'suggestMode', [
+    'missing',
+    'popular',
+    'always'
+]);
 test(validatedCorrectly, getInstance, 'stringDistance', [
     'internal',
     'damerau_levenshtein',

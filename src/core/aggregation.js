@@ -21,8 +21,10 @@ const { checkType, recursiveToJSON } = require('./util');
 class Aggregation {
     // eslint-disable-next-line require-jsdoc
     constructor(name, aggType) {
-        if (isEmpty(name)) throw new Error('Aggregation `name` cannot be empty');
-        if (isEmpty(aggType)) throw new Error('Aggregation `aggType` cannot be empty');
+        if (isEmpty(name))
+            throw new Error('Aggregation `name` cannot be empty');
+        if (isEmpty(aggType))
+            throw new Error('Aggregation `aggType` cannot be empty');
 
         this.name = name;
         this.aggType = aggType;
@@ -125,7 +127,10 @@ class Aggregation {
         const mainAggs = recursiveToJSON(this._aggs);
 
         if (!isEmpty(this._nestedAggs)) {
-            mainAggs.aggs = Object.assign({}, ...recursiveToJSON(this._nestedAggs));
+            mainAggs.aggs = Object.assign(
+                {},
+                ...recursiveToJSON(this._nestedAggs)
+            );
         }
 
         return {

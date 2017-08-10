@@ -1,10 +1,18 @@
 import test from 'ava';
 import { NestedAggregation } from '../../src';
-import { setsAggType, illegalCall, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    setsAggType,
+    illegalCall,
+    nameTypeExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = (...args) => new NestedAggregation('my_agg', ...args);
 
-const setsOption = makeSetsOptionMacro(getInstance, nameTypeExpectStrategy('my_agg', 'nested'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameTypeExpectStrategy('my_agg', 'nested')
+);
 
 test(setsAggType, NestedAggregation, 'nested');
 test(illegalCall, NestedAggregation, 'field', 'my_agg');

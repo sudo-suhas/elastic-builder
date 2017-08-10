@@ -14,7 +14,11 @@ const ES_REF_URL =
 
 const invalidOrderParam = invalidParam(ES_REF_URL, 'order', "'asc' or 'desc'");
 const invalidModeParam = invalidParam(ES_REF_URL, 'mode', SORT_MODE_SET);
-const invalidDistanceTypeParam = invalidParam(ES_REF_URL, 'distance_type', "'plane' or 'arc'");
+const invalidDistanceTypeParam = invalidParam(
+    ES_REF_URL,
+    'distance_type',
+    "'plane' or 'arc'"
+);
 const invalidUnitParam = invalidParam(ES_REF_URL, 'unit', UNIT_SET);
 
 /**
@@ -292,7 +296,10 @@ class Sort {
         if (geoPointIsNil && scriptIsNil) {
             if (isEmpty(this._opts)) return this._field;
 
-            if (Object.keys(this._opts).length === 1 && has(this._opts, 'order')) {
+            if (
+                Object.keys(this._opts).length === 1 &&
+                has(this._opts, 'order')
+            ) {
                 return { [this._field]: this._opts.order };
             }
         }
@@ -301,9 +308,16 @@ class Sort {
 
         // Should I pick only the accepted properties here?
         if (!geoPointIsNil) {
-            repr = { _geo_distance: Object.assign({ [this._field]: this._geoPoint }, this._opts) };
+            repr = {
+                _geo_distance: Object.assign(
+                    { [this._field]: this._geoPoint },
+                    this._opts
+                )
+            };
         } else if (!scriptIsNil) {
-            repr = { _script: Object.assign({ script: this._script }, this._opts) };
+            repr = {
+                _script: Object.assign({ script: this._script }, this._opts)
+            };
         } else {
             repr = { [this._field]: this._opts };
         }
