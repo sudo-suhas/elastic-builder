@@ -34,7 +34,9 @@ test('random sort query', t => {
     t.deepEqual(value.toJSON(), expected);
 
     const seed = Date.now();
-    value = bob.recipes.randomSortQuery(new bob.RangeQuery('age').gte(10), seed).toJSON();
+    value = bob.recipes
+        .randomSortQuery(new bob.RangeQuery('age').gte(10), seed)
+        .toJSON();
     expected = {
         function_score: {
             query: {

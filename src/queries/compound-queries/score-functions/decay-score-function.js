@@ -9,7 +9,11 @@ const ES_REF_URL =
 
 const ScoreFunction = require('./score-function');
 
-const invalidModeParam = invalidParam(ES_REF_URL, 'mode', "'linear', 'exp' or 'gauss'");
+const invalidModeParam = invalidParam(
+    ES_REF_URL,
+    'mode',
+    "'linear', 'exp' or 'gauss'"
+);
 
 /**
  * Decay functions score a document with a function that decays depending on
@@ -64,7 +68,11 @@ class DecayScoreFunction extends ScoreFunction {
         if (isNil(mode)) invalidModeParam(mode);
 
         const modeLower = mode.toLowerCase();
-        if (modeLower !== 'linear' && modeLower !== 'exp' && modeLower !== 'gauss') {
+        if (
+            modeLower !== 'linear' &&
+            modeLower !== 'exp' &&
+            modeLower !== 'gauss'
+        ) {
             invalidModeParam(mode);
         }
 
@@ -178,7 +186,10 @@ class DecayScoreFunction extends ScoreFunction {
      */
     toJSON() {
         // TODO: If mode/field is not set throw an error.
-        const repr = Object.assign({ [this._name]: { [this._field]: this._opts } }, this._body);
+        const repr = Object.assign(
+            { [this._name]: { [this._field]: this._opts } },
+            this._body
+        );
         return recursiveToJSON(repr);
     }
 }

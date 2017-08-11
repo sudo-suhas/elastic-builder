@@ -1,11 +1,19 @@
 import test from 'ava';
 import { Script } from '../../src';
 import { MetricsAggregationBase } from '../../src/aggregations/metrics-aggregations';
-import { illegalParamType, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    illegalParamType,
+    nameTypeExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
-const getInstance = field => new MetricsAggregationBase('my_agg', 'my_type', field);
+const getInstance = field =>
+    new MetricsAggregationBase('my_agg', 'my_type', field);
 
-const setsOption = makeSetsOptionMacro(getInstance, nameTypeExpectStrategy('my_agg', 'my_type'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameTypeExpectStrategy('my_agg', 'my_type')
+);
 
 test('can be instantiated', t => {
     t.truthy(getInstance());
@@ -14,7 +22,10 @@ test('can be instantiated', t => {
 test(illegalParamType, getInstance(), 'script', 'Script');
 test(setsOption, 'field', { param: 'my_field' });
 test(setsOption, 'script', {
-    param: new Script().lang('groovy').file('calculate-score').params({ my_modifier: 2 })
+    param: new Script()
+        .lang('groovy')
+        .file('calculate-score')
+        .params({ my_modifier: 2 })
 });
 test(setsOption, 'missing', { param: 1 });
 test(setsOption, 'format', { param: '####.00' });

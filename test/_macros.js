@@ -35,7 +35,8 @@ export function illegalCall(t, Cls, propKey, ...args) {
     t.is(err.message, `${propKey} is not supported in ${Cls.name}`);
 }
 
-illegalCall.title = (ignore, Cls, propKey) => `${_.snakeCase(propKey)} cannot be set`;
+illegalCall.title = (ignore, Cls, propKey) =>
+    `${_.snakeCase(propKey)} cannot be set`;
 
 /**
  * Check that calling method on instance with illegal param type throws error
@@ -53,7 +54,8 @@ export function illegalParamType(t, instance, method, clsName) {
     t.is(err.message, `Argument must be an instance of ${clsName}`);
 }
 
-illegalParamType.title = (ignore, instance, method, clsName) => `checks ${clsName} class`;
+illegalParamType.title = (ignore, instance, method, clsName) =>
+    `checks ${clsName} class`;
 
 /**
  * Macro for testing method validation
@@ -64,7 +66,13 @@ illegalParamType.title = (ignore, instance, method, clsName) => `checks ${clsNam
  * @param {Array} validValues
  * @param {boolean=} toggleCase
  */
-export function validatedCorrectly(t, getInstance, method, validValues, toggleCase = true) {
+export function validatedCorrectly(
+    t,
+    getInstance,
+    method,
+    validValues,
+    toggleCase = true
+) {
     _.forEach(validValues, val => {
         t.notThrows(() => getInstance()[method](val));
 
@@ -158,7 +166,12 @@ export function makeSetsOptionMacro(getInstance, getExpected = simpleExpect) {
     function setsOption(
         t,
         methodName,
-        { param, propValue = param, spread = true, keyName = _.snakeCase(methodName) }
+        {
+            param,
+            propValue = param,
+            spread = true,
+            keyName = _.snakeCase(methodName)
+        }
     ) {
         const value =
             Array.isArray(param) && spread
@@ -169,7 +182,9 @@ export function makeSetsOptionMacro(getInstance, getExpected = simpleExpect) {
     }
 
     setsOption.title = (providedTitle, methodName) =>
-        !_.isEmpty(providedTitle) ? providedTitle : `sets ${_.snakeCase(methodName)} option`;
+        !_.isEmpty(providedTitle)
+            ? providedTitle
+            : `sets ${_.snakeCase(methodName)} option`;
 
     return setsOption;
 }

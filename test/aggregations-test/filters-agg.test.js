@@ -9,7 +9,8 @@ import {
     makeSetsOptionMacro
 } from '../_macros';
 
-const getInstance = (...args) => new FiltersAggregation('my_filters_agg', ...args);
+const getInstance = (...args) =>
+    new FiltersAggregation('my_filters_agg', ...args);
 
 const setsOption = makeSetsOptionMacro(
     getInstance,
@@ -53,11 +54,17 @@ test('named filters are set', t => {
 });
 
 test('anonymous filters are set', t => {
-    let value = getInstance().anonymousFilter(filterQryA).anonymousFilter(filterQryB).toJSON();
+    let value = getInstance()
+        .anonymousFilter(filterQryA)
+        .anonymousFilter(filterQryB)
+        .toJSON();
     const expected = {
         my_filters_agg: {
             filters: {
-                filters: [{ term: { user: 'kimchy' } }, { term: { company: 'elastic' } }]
+                filters: [
+                    { term: { user: 'kimchy' } },
+                    { term: { company: 'elastic' } }
+                ]
             }
         }
     };
@@ -98,13 +105,22 @@ test('mixed representation', t => {
 test.serial('mixed representation logs warning', t => {
     const spy = sinon.spy(console, 'warn');
 
-    getInstance().filter('user_kimchy', filterQryA).anonymousFilter(filterQryB).toJSON();
+    getInstance()
+        .filter('user_kimchy', filterQryA)
+        .anonymousFilter(filterQryB)
+        .toJSON();
 
     t.true(spy.calledTwice);
     t.true(
-        spy.firstCall.calledWith('[FiltersAggregation] Do not mix named and anonymous filters!')
+        spy.firstCall.calledWith(
+            '[FiltersAggregation] Do not mix named and anonymous filters!'
+        )
     );
-    t.true(spy.secondCall.calledWith('[FiltersAggregation] Overwriting named filters.'));
+    t.true(
+        spy.secondCall.calledWith(
+            '[FiltersAggregation] Overwriting named filters.'
+        )
+    );
 
     console.warn.restore();
 });

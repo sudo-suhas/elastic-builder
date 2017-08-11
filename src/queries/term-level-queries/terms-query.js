@@ -178,7 +178,9 @@ class TermsQuery extends Query {
         // recursiveToJSON doesn't seem to be required here.
         return {
             [this.queryType]: Object.assign({}, this._queryOpts, {
-                [this._field]: this._isTermsLookup ? this._termsLookupOpts : this._values
+                [this._field]: this._isTermsLookup
+                    ? this._termsLookupOpts
+                    : this._values
             })
         };
     }

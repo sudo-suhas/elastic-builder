@@ -39,7 +39,9 @@ class CumulativeSumAggregation extends PipelineAggregationBase {
      */
     gapPolicy() {
         console.log(`Please refer ${ES_REF_URL}`);
-        throw new Error('gapPolicy is not supported in CumulativeSumAggregation');
+        throw new Error(
+            'gapPolicy is not supported in CumulativeSumAggregation'
+        );
     }
 }
 

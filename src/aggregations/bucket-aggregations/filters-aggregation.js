@@ -75,7 +75,10 @@ class FiltersAggregation extends BucketAggregationBase {
      * @private
      */
     _checkNamedFilters() {
-        if (!setDefault(this._aggsDef, 'filters', {}) && Array.isArray(this._aggsDef.filters)) {
+        if (
+            !setDefault(this._aggsDef, 'filters', {}) &&
+            Array.isArray(this._aggsDef.filters)
+        ) {
             this._warn('Do not mix named and anonymous filters!');
             this._warn('Overwriting anonymous filters.');
             this._aggsDef.filters = {};
@@ -90,7 +93,10 @@ class FiltersAggregation extends BucketAggregationBase {
      * @private
      */
     _checkAnonymousFilters() {
-        if (!setDefault(this._aggsDef, 'filters', []) && !Array.isArray(this._aggsDef.filters)) {
+        if (
+            !setDefault(this._aggsDef, 'filters', []) &&
+            !Array.isArray(this._aggsDef.filters)
+        ) {
             this._warn('Do not mix named and anonymous filters!');
             this._warn('Overwriting named filters.');
             this._aggsDef.filters = [];

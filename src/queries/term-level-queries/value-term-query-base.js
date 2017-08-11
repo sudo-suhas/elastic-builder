@@ -62,7 +62,9 @@ class ValueTermQueryBase extends Query {
         }
 
         const qryOpts =
-            Object.keys(this._queryOpts).length === 1 ? this._queryOpts.value : this._queryOpts;
+            Object.keys(this._queryOpts).length === 1
+                ? this._queryOpts.value
+                : this._queryOpts;
         return {
             [this.queryType]: {
                 [this._field]: qryOpts

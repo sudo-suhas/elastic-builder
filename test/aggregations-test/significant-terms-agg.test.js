@@ -7,14 +7,18 @@ import {
     makeSetsOptionMacro
 } from '../_macros';
 
-const getInstance = (...args) => new SignificantTermsAggregation('my_agg', ...args);
+const getInstance = (...args) =>
+    new SignificantTermsAggregation('my_agg', ...args);
 
 const setsOption = makeSetsOptionMacro(
     getInstance,
     nameTypeExpectStrategy('my_agg', 'significant_terms')
 );
 
-const script = new Script().lang('groovy').file('calculate-score').params({ my_modifier: 2 });
+const script = new Script()
+    .lang('groovy')
+    .file('calculate-score')
+    .params({ my_modifier: 2 });
 
 test(setsAggType, SignificantTermsAggregation, 'significant_terms');
 test(illegalParamType, getInstance(), 'scriptHeuristic', 'Script');
@@ -41,4 +45,6 @@ test(setsOption, 'gnd', {
 });
 test(setsOption, 'percentage', { propValue: {} });
 test(setsOption, 'scriptHeuristic', { param: script, propValue: { script } });
-test(setsOption, 'backgroundFilter', { param: new TermQuery('user', 'kimchy') });
+test(setsOption, 'backgroundFilter', {
+    param: new TermQuery('user', 'kimchy')
+});

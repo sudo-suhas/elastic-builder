@@ -8,8 +8,8 @@ import {
     validatedCorrectly
 } from '../_macros';
 
-// eslint-disable-next-line arrow-body-style
-const getInstance = () => new GeoDistanceAggregation('my_geo_agg').range({ to: 100 });
+const getInstance = () =>
+    new GeoDistanceAggregation('my_geo_agg').range({ to: 100 });
 
 const setsOption = makeSetsOptionMacro(
     getInstance,
@@ -33,7 +33,9 @@ test('sets type as geo_distance', t => {
 test(illegalCall, GeoDistanceAggregation, 'format', 'my_agg');
 test(illegalCall, GeoDistanceAggregation, 'script', 'my_agg');
 test(illegalParamType, getInstance(), 'origin', 'GeoPoint');
-test(setsOption, 'origin', { param: geoPoint().object({ lat: 41.12, lon: -71.34 }) });
+test(setsOption, 'origin', {
+    param: geoPoint().object({ lat: 41.12, lon: -71.34 })
+});
 test(setsOption, 'unit', { param: 'km' });
 test(setsOption, 'distanceType', { param: 'plane' });
 // prettier-ignore

@@ -2,7 +2,10 @@ import test from 'ava';
 import { ParentIdQuery, parentIdQuery } from '../../src';
 import { nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
-const setsOption = makeSetsOptionMacro(parentIdQuery, nameExpectStrategy('parent_id'));
+const setsOption = makeSetsOptionMacro(
+    parentIdQuery,
+    nameExpectStrategy('parent_id')
+);
 
 test(setsOption, 'type', { param: 'blog_tag' });
 test(setsOption, 'id', { param: '1' });

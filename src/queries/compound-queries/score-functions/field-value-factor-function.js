@@ -2,14 +2,21 @@
 
 const isNil = require('lodash.isnil');
 
-const { util: { invalidParam }, consts: { FIELD_MODIFIER_SET } } = require('../../../core');
+const {
+    util: { invalidParam },
+    consts: { FIELD_MODIFIER_SET }
+} = require('../../../core');
 
 const ScoreFunction = require('./score-function');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-field-value-factor';
 
-const invaliModifierdParam = invalidParam(ES_REF_URL, 'modifier', FIELD_MODIFIER_SET);
+const invaliModifierdParam = invalidParam(
+    ES_REF_URL,
+    'modifier',
+    FIELD_MODIFIER_SET
+);
 
 /**
  * The `field_value_factor` function allows you to use a field from a document

@@ -2,7 +2,10 @@
 
 const isNil = require('lodash.isnil');
 
-const { Query, util: { invalidParam, recursiveToJSON } } = require('../../core');
+const {
+    Query,
+    util: { invalidParam, recursiveToJSON }
+} = require('../../core');
 
 const invalidValidationMethod = invalidParam(
     '',
@@ -79,7 +82,10 @@ class GeoQueryBase extends Query {
      */
     toJSON() {
         return recursiveToJSON({
-            [this.queryType]: Object.assign({ [this._field]: this._fieldOpts }, this._queryOpts)
+            [this.queryType]: Object.assign(
+                { [this._field]: this._fieldOpts },
+                this._queryOpts
+            )
         });
     }
 }

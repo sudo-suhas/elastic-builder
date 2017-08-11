@@ -6,7 +6,8 @@ const has = require('lodash.has');
 const { checkType, invalidParam } = require('./util');
 const { GEO_SHAPE_TYPES } = require('./consts');
 
-const ES_REF_URL = 'https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-shape.html';
+const ES_REF_URL =
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-shape.html';
 
 const invalidTypeParam = invalidParam(ES_REF_URL, 'type', GEO_SHAPE_TYPES);
 

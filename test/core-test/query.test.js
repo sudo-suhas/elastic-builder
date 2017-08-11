@@ -4,7 +4,10 @@ import { nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = () => new Query('my_type');
 
-const setsOption = makeSetsOptionMacro(getInstance, nameExpectStrategy('my_type'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameExpectStrategy('my_type')
+);
 
 test(setsOption, 'boost', { param: 10 });
 test(setsOption, 'name', { param: 'my_name', keyName: '_name' });

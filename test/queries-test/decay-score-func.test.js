@@ -2,7 +2,8 @@ import test from 'ava';
 import { DecayScoreFunction } from '../../src';
 import { validatedCorrectly, makeSetsOptionMacro } from '../_macros';
 
-const getInstance = (mode, field = 'my_field') => new DecayScoreFunction(mode, field);
+const getInstance = (mode, field = 'my_field') =>
+    new DecayScoreFunction(mode, field);
 
 const decayExpectStrategy = (keyName, propValue) => ({
     gauss: { my_field: { [keyName]: propValue } }

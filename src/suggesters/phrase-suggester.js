@@ -12,7 +12,11 @@ const AnalyzedSuggesterBase = require('./analyzed-suggester-base');
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html';
 
-const invalidSmoothingModeParam = invalidParam(ES_REF_URL, 'smoothing', SMOOTHING_MODEL_SET);
+const invalidSmoothingModeParam = invalidParam(
+    ES_REF_URL,
+    'smoothing',
+    SMOOTHING_MODEL_SET
+);
 
 /**
  * The phrase suggester adds additional logic on top of the `term` suggester
@@ -176,7 +180,7 @@ class PhraseSuggester extends AnalyzedSuggesterBase {
      *         prune: true
      *     });
      *
-     * @param {object} opts The options for `collate`. Can include the following:
+     * @param {Object} opts The options for `collate`. Can include the following:
      *   - `query`: The `query` to prune suggestions for which
      *      no matching docs exist in the index. It is run as a `template` query.
      *   - `params`: The parameters to be passed to the template. The suggestion
@@ -255,7 +259,9 @@ class PhraseSuggester extends AnalyzedSuggesterBase {
      */
     directGenerator(dirGen) {
         // TODO: Do instance checks on `dirGen`
-        this._suggestOpts.direct_generator = Array.isArray(dirGen) ? dirGen : [dirGen];
+        this._suggestOpts.direct_generator = Array.isArray(dirGen)
+            ? dirGen
+            : [dirGen];
 
         return this;
     }

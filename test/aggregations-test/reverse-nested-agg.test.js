@@ -1,8 +1,14 @@
 import test from 'ava';
 import { ReverseNestedAggregation } from '../../src';
-import { setsAggType, illegalCall, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    setsAggType,
+    illegalCall,
+    nameTypeExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
-const getInstance = (...args) => new ReverseNestedAggregation('my_agg', ...args);
+const getInstance = (...args) =>
+    new ReverseNestedAggregation('my_agg', ...args);
 
 const setsOption = makeSetsOptionMacro(
     getInstance,

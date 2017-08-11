@@ -8,7 +8,8 @@ import {
     makeSetsOptionMacro
 } from '../_macros';
 
-const getInstance = (field, values) => new PercentileRanksAggregation('my_agg', field, values);
+const getInstance = (field, values) =>
+    new PercentileRanksAggregation('my_agg', field, values);
 
 const setsOption = makeSetsOptionMacro(
     getInstance,
@@ -22,10 +23,16 @@ test(setsOption, 'keyed', { param: true });
 test(setsOption, 'values', { param: [15, 30], spread: false });
 test(setsOption, 'keyed', { param: true });
 test(setsOption, 'tdigest', { param: 200, propValue: { compression: 200 } });
-test(setsOption, 'hdr', { param: 3, propValue: { number_of_significant_value_digits: 3 } });
+test(setsOption, 'hdr', {
+    param: 3,
+    propValue: { number_of_significant_value_digits: 3 }
+});
 
 test('compression same as tdigest', t => {
-    t.deepEqual(getInstance().tdigest(3).toJSON(), getInstance().compression(3).toJSON());
+    t.deepEqual(
+        getInstance().tdigest(3).toJSON(),
+        getInstance().compression(3).toJSON()
+    );
 });
 
 test('constructor sets arguments', t => {

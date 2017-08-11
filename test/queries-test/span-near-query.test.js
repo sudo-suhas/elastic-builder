@@ -1,8 +1,15 @@
 import test from 'ava';
 import { SpanNearQuery, spanNearQuery, SpanTermQuery } from '../../src';
-import { illegalParamType, nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    illegalParamType,
+    nameExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
-const setsOption = makeSetsOptionMacro(spanNearQuery, nameExpectStrategy('span_near'));
+const setsOption = makeSetsOptionMacro(
+    spanNearQuery,
+    nameExpectStrategy('span_near')
+);
 
 const qry1 = new SpanTermQuery('field', 'value1');
 const qry2 = new SpanTermQuery('field', 'value2');

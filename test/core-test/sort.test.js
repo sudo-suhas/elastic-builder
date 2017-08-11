@@ -1,10 +1,16 @@
 import test from 'ava';
 import { Sort, BoolQuery, TermQuery, Script } from '../../src';
-import { illegalParamType, validatedCorrectly, makeSetsOptionMacro } from '../_macros';
+import {
+    illegalParamType,
+    validatedCorrectly,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = order => new Sort('my_field', order);
 
-const sortExpectStrategy = (keyName, propValue) => ({ my_field: { [keyName]: propValue } });
+const sortExpectStrategy = (keyName, propValue) => ({
+    my_field: { [keyName]: propValue }
+});
 
 const setsOption = makeSetsOptionMacro(getInstance, sortExpectStrategy);
 
@@ -15,7 +21,13 @@ const filterQry = new BoolQuery()
 test(illegalParamType, new Sort(), 'nestedFilter', 'Query');
 test(illegalParamType, new Sort(), 'script', 'Script');
 test(validatedCorrectly, getInstance, 'order', ['asc', 'desc']);
-test(validatedCorrectly, getInstance, 'mode', ['avg', 'min', 'max', 'sum', 'median']);
+test(validatedCorrectly, getInstance, 'mode', [
+    'avg',
+    'min',
+    'max',
+    'sum',
+    'median'
+]);
 test(validatedCorrectly, getInstance, 'distanceType', ['plane', 'arc']);
 // prettier-ignore
 test(validatedCorrectly, getInstance, 'unit', [

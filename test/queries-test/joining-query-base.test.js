@@ -10,13 +10,22 @@ import {
 
 const getInstance = qry => new JoiningQueryBase('my_qry_type', '', qry);
 
-const setsOption = makeSetsOptionMacro(getInstance, nameExpectStrategy('my_qry_type'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameExpectStrategy('my_qry_type')
+);
 
 const qry = new TermQuery('user', 'kimchy');
 
 test(illegalParamType, getInstance(), 'query', 'Query');
 test(illegalParamType, getInstance(), 'innerHits', 'InnerHits');
-test(validatedCorrectly, getInstance, 'scoreMode', ['none', 'sum', 'min', 'max', 'avg']);
+test(validatedCorrectly, getInstance, 'scoreMode', [
+    'none',
+    'sum',
+    'min',
+    'max',
+    'avg'
+]);
 test(setsOption, 'query', { param: qry });
 test(setsOption, 'scoreMode', { param: 'sum' });
 test(setsOption, 'ignoreUnmapped', { param: true });

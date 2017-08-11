@@ -1,10 +1,17 @@
 import test from 'ava';
 import { FieldValueFactorFunction } from '../../src';
-import { validatedCorrectly, nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    validatedCorrectly,
+    nameExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = field => new FieldValueFactorFunction(field);
 
-const setsOption = makeSetsOptionMacro(getInstance, nameExpectStrategy('field_value_factor'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameExpectStrategy('field_value_factor')
+);
 
 test(validatedCorrectly, getInstance, 'modifier', [
     'none',

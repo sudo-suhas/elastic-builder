@@ -1,6 +1,11 @@
 import test from 'ava';
 import { AdjacencyMatrixAggregation, termQuery } from '../../src';
-import { illegalCall, setsAggType, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    illegalCall,
+    setsAggType,
+    nameTypeExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = () => new AdjacencyMatrixAggregation('my_adj_mat_agg');
 

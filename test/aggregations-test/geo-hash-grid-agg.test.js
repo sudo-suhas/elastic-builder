@@ -1,6 +1,11 @@
 import test from 'ava';
 import { GeoHashGridAggregation } from '../../src';
-import { illegalCall, setsAggType, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    illegalCall,
+    setsAggType,
+    nameTypeExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = () => new GeoHashGridAggregation('my_geo_agg');
 
@@ -26,6 +31,6 @@ test('precision correctly validated', t => {
     err = t.throws(() => getInstance().precision(null), Error);
     t.is(err.message, '`precision` can only be value from 1 to 12.');
 
-    err = t.throws(() => getInstance().precision(void 0), Error);
+    err = t.throws(() => getInstance().precision(undefined), Error);
     t.is(err.message, '`precision` can only be value from 1 to 12.');
 });

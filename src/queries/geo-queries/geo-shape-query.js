@@ -14,7 +14,11 @@ const GeoQueryBase = require('./geo-query-base');
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-query.html';
 
-const invalidRelationParam = invalidParam(ES_REF_URL, 'relation', GEO_RELATION_SET);
+const invalidRelationParam = invalidParam(
+    ES_REF_URL,
+    'relation',
+    GEO_RELATION_SET
+);
 
 /**
  * Filter documents indexed using the `geo_shape` type. Requires

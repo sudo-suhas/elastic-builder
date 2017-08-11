@@ -1,6 +1,11 @@
 import test from 'ava';
 import sinon from 'sinon';
-import { SearchTemplate, searchTemplate, matchQuery, termQuery } from '../../src';
+import {
+    SearchTemplate,
+    searchTemplate,
+    matchQuery,
+    termQuery
+} from '../../src';
 import { makeSetsOptionMacro } from '../_macros';
 
 const setsOption = makeSetsOptionMacro(searchTemplate);
@@ -55,14 +60,23 @@ test('constructor sets arguments', t => {
     };
     t.deepEqual(valueA, expected);
 
-    const err = t.throws(() => new SearchTemplate('invalid_script_type', 'src'), Error);
-    t.is(err.message, '`type` must be one of `inline`, `id`, `indexed`, `file`');
+    const err = t.throws(
+        () => new SearchTemplate('invalid_script_type', 'src'),
+        Error
+    );
+    t.is(
+        err.message,
+        '`type` must be one of `inline`, `id`, `indexed`, `file`'
+    );
 });
 
 test.serial('mixed representaion', t => {
     const spy = sinon.spy(console, 'warn');
 
-    const value = new SearchTemplate().file('storedTemplate').id('indexedTemplate').toJSON();
+    const value = new SearchTemplate()
+        .file('storedTemplate')
+        .id('indexedTemplate')
+        .toJSON();
     const expected = {
         id: 'indexedTemplate'
     };
@@ -88,7 +102,8 @@ test('toJSON can handle elastic-builder objs', t => {
         })
         .toJSON();
     const expected = {
-        inline: '{ "query": { "bool": { "must": {{#toJson}}clauses{{/toJson}} } } }',
+        inline:
+            '{ "query": { "bool": { "must": {{#toJson}}clauses{{/toJson}} } } }',
         params: {
             clauses: [{ term: { user: 'foo' } }, { term: { user: 'bar' } }]
         }

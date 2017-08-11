@@ -2,7 +2,10 @@ import test from 'ava';
 import { NestedQuery, nestedQuery, TermQuery } from '../../src';
 import { nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
-const setsOption = makeSetsOptionMacro(nestedQuery, nameExpectStrategy('nested'));
+const setsOption = makeSetsOptionMacro(
+    nestedQuery,
+    nameExpectStrategy('nested')
+);
 
 const qry = new TermQuery('user', 'kimchy');
 

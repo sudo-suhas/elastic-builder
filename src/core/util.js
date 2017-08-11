@@ -21,8 +21,13 @@ const has = require('lodash.has');
 exports.checkType = function checkType(instance, type) {
     if (!(instance instanceof type)) {
         if (isNil(instance)) {
-            console.warn(`Was expecting instance of ${type.name} but got ${instance}!`);
-        } else console.warn(`${inspect(instance)} is of the type ${typeof instance}`);
+            console.warn(
+                `Was expecting instance of ${type.name} but got ${instance}!`
+            );
+        } else
+            console.warn(
+                `${inspect(instance)} is of the type ${typeof instance}`
+            );
 
         throw new TypeError(`Argument must be an instance of ${type.name}`);
     }
@@ -48,7 +53,7 @@ exports.constructorWrapper = function constructorWrapper(Cls) {
  * @param {number} num
  * @param {number} min
  * @param {number} max
- * @returns {Boolean} `true` if in range, `false` otherwise
+ * @returns {boolean} `true` if in range, `false` otherwise
  */
 function between(num, min, max) {
     return num >= min && num <= max;
@@ -121,8 +126,12 @@ exports.invalidParam = function invalidParam(refUrl, paramName, validValues) {
         referenceUrl && console.log(`See ${referenceUrl}`);
         console.warn(`Got '${paramName}' - '${paramVal}'`);
 
-        const validValuesStr = isString(validValues) ? validValues : inspect(validValues);
-        throw new Error(`The '${paramName}' parameter should be one of ${validValuesStr}`);
+        const validValuesStr = isString(validValues)
+            ? validValues
+            : inspect(validValues);
+        throw new Error(
+            `The '${paramName}' parameter should be one of ${validValuesStr}`
+        );
     };
 };
 

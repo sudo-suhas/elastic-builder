@@ -9,8 +9,16 @@ const { validateRewiteMethod } = require('../helper');
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html';
 
-const invalidOperatorParam = invalidParam(ES_REF_URL, 'operator', "'and' or 'or'");
-const invalidZeroTermsQueryParam = invalidParam(ES_REF_URL, 'zero_terms_query', "'all' or 'none'");
+const invalidOperatorParam = invalidParam(
+    ES_REF_URL,
+    'operator',
+    "'and' or 'or'"
+);
+const invalidZeroTermsQueryParam = invalidParam(
+    ES_REF_URL,
+    'zero_terms_query',
+    "'all' or 'none'"
+);
 
 /**
  * `match` query accepts text/numerics/dates, analyzes them, and constructs a query.

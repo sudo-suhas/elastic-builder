@@ -1,6 +1,10 @@
 import test from 'ava';
 import { ExtendedStatsAggregation } from '../../src';
-import { setsAggType, nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    setsAggType,
+    nameTypeExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = field => new ExtendedStatsAggregation('my_agg', field);
 

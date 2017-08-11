@@ -16,14 +16,19 @@ test(validatedCorrectly, geoShape, 'type', [
 ]);
 
 test('constructor sets arguments', t => {
-    let value = new GeoShape('multipoint', [[102.0, 2.0], [103.0, 2.0]]).toJSON();
+    let value = new GeoShape('multipoint', [
+        [102.0, 2.0],
+        [103.0, 2.0]
+    ]).toJSON();
     const expected = {
         type: 'multipoint',
         coordinates: [[102.0, 2.0], [103.0, 2.0]]
     };
     t.deepEqual(value, expected);
 
-    value = new GeoShape('multipoint').coordinates([[102.0, 2.0], [103.0, 2.0]]).toJSON();
+    value = new GeoShape('multipoint')
+        .coordinates([[102.0, 2.0], [103.0, 2.0]])
+        .toJSON();
     t.deepEqual(value, expected);
 });
 
@@ -40,7 +45,11 @@ test('sets type and coordinates', t => {
 });
 
 test('sets radius', t => {
-    const value = new GeoShape().type('circle').coordinates([-45.0, 45.0]).radius('100m').toJSON();
+    const value = new GeoShape()
+        .type('circle')
+        .coordinates([-45.0, 45.0])
+        .radius('100m')
+        .toJSON();
     const expected = {
         type: 'circle',
         coordinates: [-45.0, 45.0],

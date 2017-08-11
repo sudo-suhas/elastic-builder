@@ -1,14 +1,29 @@
 import test from 'ava';
 import { QueryStringQueryBase } from '../../src/queries/full-text-queries';
-import { validatedCorrectly, nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    validatedCorrectly,
+    nameExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
-const getInstance = queryStr => new QueryStringQueryBase('my_qry_type', '', queryStr);
+const getInstance = queryStr =>
+    new QueryStringQueryBase('my_qry_type', '', queryStr);
 
-const setsOption = makeSetsOptionMacro(getInstance, nameExpectStrategy('my_qry_type'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameExpectStrategy('my_qry_type')
+);
 
 test(validatedCorrectly, getInstance, 'defaultOperator', ['and', 'or']);
-test(setsOption, 'field', { param: 'my_field', propValue: ['my_field'], keyName: 'fields' });
-test(setsOption, 'fields', { param: ['my_field_a', 'my_field_b'], spread: false });
+test(setsOption, 'field', {
+    param: 'my_field',
+    propValue: ['my_field'],
+    keyName: 'fields'
+});
+test(setsOption, 'fields', {
+    param: ['my_field_a', 'my_field_b'],
+    spread: false
+});
 test(setsOption, 'defaultOperator', { param: 'AND' });
 test(setsOption, 'lenient', { param: true });
 test(setsOption, 'analyzeWildcard', { param: true });

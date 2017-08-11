@@ -1,7 +1,8 @@
 import test from 'ava';
 import { MonoFieldQueryBase } from '../../src/queries/full-text-queries';
 
-const getInstance = (field, queryStr) => new MonoFieldQueryBase('my_qry_type', field, queryStr);
+const getInstance = (field, queryStr) =>
+    new MonoFieldQueryBase('my_qry_type', field, queryStr);
 
 test('constructor sets arguments', t => {
     const valueA = getInstance('my_field', 'query str').toJSON();

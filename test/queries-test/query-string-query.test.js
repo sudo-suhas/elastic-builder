@@ -1,10 +1,17 @@
 import test from 'ava';
 import { QueryStringQuery } from '../../src';
-import { validatedCorrectly, nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    validatedCorrectly,
+    nameExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = queryStr => new QueryStringQuery(queryStr);
 
-const setsOption = makeSetsOptionMacro(getInstance, nameExpectStrategy('query_string'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameExpectStrategy('query_string')
+);
 
 const validRewrites = [
     'constant_score',

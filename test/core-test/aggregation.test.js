@@ -1,6 +1,11 @@
 import test from 'ava';
 import { Aggregation } from '../../src/core';
-import { TermsAggregation, FilterAggregation, StatsAggregation, TermQuery } from '../../src';
+import {
+    TermsAggregation,
+    FilterAggregation,
+    StatsAggregation,
+    TermQuery
+} from '../../src';
 import { illegalParamType } from '../_macros';
 
 const getInstance = () => new Aggregation('my_agg', 'my_type');

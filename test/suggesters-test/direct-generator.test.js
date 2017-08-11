@@ -14,7 +14,11 @@ test('constructor sets field', t => {
     t.deepEqual(value, expected);
 });
 
-test(validatedCorrectly, getInstance, 'suggestMode', ['missing', 'popular', 'always']);
+test(validatedCorrectly, getInstance, 'suggestMode', [
+    'missing',
+    'popular',
+    'always'
+]);
 
 test(setsOption, 'field', { param: 'my_field' });
 test(setsOption, 'size', { param: 7 });

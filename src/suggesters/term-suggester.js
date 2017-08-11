@@ -12,9 +12,21 @@ const AnalyzedSuggesterBase = require('./analyzed-suggester-base');
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-term.html';
 
-const invalidSortParam = invalidParam(ES_REF_URL, 'sort', "'score' or 'frequency'");
-const invalidSuggestModeParam = invalidParam(ES_REF_URL, 'suggest_mode', SUGGEST_MODE_SET);
-const invalidStringDistanceParam = invalidParam(ES_REF_URL, 'string_distance', STRING_DISTANCE_SET);
+const invalidSortParam = invalidParam(
+    ES_REF_URL,
+    'sort',
+    "'score' or 'frequency'"
+);
+const invalidSuggestModeParam = invalidParam(
+    ES_REF_URL,
+    'suggest_mode',
+    SUGGEST_MODE_SET
+);
+const invalidStringDistanceParam = invalidParam(
+    ES_REF_URL,
+    'string_distance',
+    STRING_DISTANCE_SET
+);
 
 /**
  * The term suggester suggests terms based on edit distance.

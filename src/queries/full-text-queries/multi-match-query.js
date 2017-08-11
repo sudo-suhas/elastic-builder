@@ -2,7 +2,10 @@
 
 const isNil = require('lodash.isnil');
 
-const { util: { checkType, invalidParam }, consts: { MULTI_MATCH_TYPE } } = require('../../core');
+const {
+    util: { checkType, invalidParam },
+    consts: { MULTI_MATCH_TYPE }
+} = require('../../core');
 const FullTextQueryBase = require('./full-text-query-base');
 const { validateRewiteMethod } = require('../helper');
 
@@ -10,8 +13,16 @@ const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html';
 
 const invalidTypeParam = invalidParam(ES_REF_URL, 'type', MULTI_MATCH_TYPE);
-const invalidOperatorParam = invalidParam(ES_REF_URL, 'operator', "'and' or 'or'");
-const invalidBehaviorParam = invalidParam(ES_REF_URL, 'behavior', "'all' or 'none'");
+const invalidOperatorParam = invalidParam(
+    ES_REF_URL,
+    'operator',
+    "'and' or 'or'"
+);
+const invalidBehaviorParam = invalidParam(
+    ES_REF_URL,
+    'behavior',
+    "'all' or 'none'"
+);
 
 /**
  * A `MultiMatchQuery` query builds further on top of the

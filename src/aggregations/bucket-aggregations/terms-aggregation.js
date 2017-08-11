@@ -10,7 +10,11 @@ const TermsAggregationBase = require('./terms-aggregation-base');
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html';
 
-const invalidDirectionParam = invalidParam(ES_REF_URL, 'direction', "'asc' or 'desc'");
+const invalidDirectionParam = invalidParam(
+    ES_REF_URL,
+    'direction',
+    "'asc' or 'desc'"
+);
 const invalidCollectModeParam = invalidParam(
     ES_REF_URL,
     'mode',

@@ -63,7 +63,9 @@ class HasChildQuery extends JoiningQueryBase {
      * @returns {HasChildQuery} returns `this` so that calls can be chained.
      */
     childType(type) {
-        console.warn('[HasChildQuery] Field `child_type` is deprecated. Use `type` instead.');
+        console.warn(
+            '[HasChildQuery] Field `child_type` is deprecated. Use `type` instead.'
+        );
         return this.type(type);
     }
 

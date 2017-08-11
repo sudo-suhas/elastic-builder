@@ -54,7 +54,8 @@ class MonoFieldQueryBase extends FullTextQueryBase {
         }
 
         const queryOptKeys = Object.keys(this._queryOpts);
-        const qryOpts = queryOptKeys.length === 1 ? this._queryOpts.query : this._queryOpts;
+        const qryOpts =
+            queryOptKeys.length === 1 ? this._queryOpts.query : this._queryOpts;
 
         const repr = {
             [this.queryType]: {

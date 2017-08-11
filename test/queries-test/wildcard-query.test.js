@@ -1,6 +1,10 @@
 import test from 'ava';
 import { WildcardQuery } from '../../src';
-import { validatedCorrectly, nameFieldExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    validatedCorrectly,
+    nameFieldExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = () => new WildcardQuery('my_field', 'my-value');
 

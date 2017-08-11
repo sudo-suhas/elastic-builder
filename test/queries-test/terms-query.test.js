@@ -1,14 +1,25 @@
 import test from 'ava';
 import { TermsQuery } from '../../src';
-import { illegalParamType, nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    illegalParamType,
+    nameExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = () => new TermsQuery('my_field');
 
-const setsOption = makeSetsOptionMacro(getInstance, nameExpectStrategy('terms', { my_field: [] }));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameExpectStrategy('terms', { my_field: [] })
+);
 
 test(illegalParamType, getInstance(), 'values', 'Array');
 test(illegalParamType, getInstance(), 'termsLookup', 'Object');
-test(setsOption, 'value', { param: 'my-value', propValue: ['my-value'], keyName: 'my_field' });
+test(setsOption, 'value', {
+    param: 'my-value',
+    propValue: ['my-value'],
+    keyName: 'my_field'
+});
 test(setsOption, 'values', {
     param: ['my-value-1', 'my-value-2'],
     spread: false,
@@ -23,9 +34,21 @@ test(setsOption, 'termsLookup', {
     },
     keyName: 'my_field'
 });
-test(setsOption, 'type', { param: 'user', propValue: { type: 'user' }, keyName: 'my_field' });
-test(setsOption, 'index', { param: 'users', propValue: { index: 'users' }, keyName: 'my_field' });
-test(setsOption, 'id', { param: '2', propValue: { id: '2' }, keyName: 'my_field' });
+test(setsOption, 'type', {
+    param: 'user',
+    propValue: { type: 'user' },
+    keyName: 'my_field'
+});
+test(setsOption, 'index', {
+    param: 'users',
+    propValue: { index: 'users' },
+    keyName: 'my_field'
+});
+test(setsOption, 'id', {
+    param: '2',
+    propValue: { id: '2' },
+    keyName: 'my_field'
+});
 test(setsOption, 'path', {
     param: 'followers',
     propValue: { path: 'followers' },
@@ -46,7 +69,10 @@ test('constructor sets arguments', t => {
     t.deepEqual(valueA, expected);
 
     valueA = new TermsQuery('my_field', ['my-value-1', 'my-value-2']).toJSON();
-    valueB = new TermsQuery().field('my_field').values(['my-value-1', 'my-value-2']).toJSON();
+    valueB = new TermsQuery()
+        .field('my_field')
+        .values(['my-value-1', 'my-value-2'])
+        .toJSON();
     t.deepEqual(valueA, valueB);
 
     expected = { terms: { my_field: ['my-value-1', 'my-value-2'] } };

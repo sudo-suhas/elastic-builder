@@ -1,6 +1,10 @@
 import test from 'ava';
 import { MultiMatchQuery } from '../../src';
-import { validatedCorrectly, nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    validatedCorrectly,
+    nameExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
 const getInstance = (fields, queryStr) => new MultiMatchQuery(fields, queryStr);
 
@@ -26,8 +30,15 @@ test(validatedCorrectly, getInstance, 'type', [
 ]);
 test(validatedCorrectly, getInstance, 'rewrite', validRewrites, false);
 test(validatedCorrectly, getInstance, 'fuzzyRewrite', validRewrites, false);
-test(setsOption, 'field', { param: 'my_field', propValue: ['my_field'], keyName: 'fields' });
-test(setsOption, 'fields', { param: ['my_field_a', 'my_field_b'], spread: false });
+test(setsOption, 'field', {
+    param: 'my_field',
+    propValue: ['my_field'],
+    keyName: 'fields'
+});
+test(setsOption, 'fields', {
+    param: ['my_field_a', 'my_field_b'],
+    spread: false
+});
 test(setsOption, 'type', { param: 'best_fields' });
 test(setsOption, 'tieBreaker', { param: 0.3 });
 test(setsOption, 'operator', { param: 'and' });
@@ -56,7 +67,10 @@ test('constructor sets arguments', t => {
     t.deepEqual(valueA, expected);
 
     valueA = getInstance(['my_field_a', 'my_field_b'], 'query str').toJSON();
-    valueB = getInstance().fields(['my_field_a', 'my_field_b']).query('query str').toJSON();
+    valueB = getInstance()
+        .fields(['my_field_a', 'my_field_b'])
+        .query('query str')
+        .toJSON();
     t.deepEqual(valueA, valueB);
 
     const valueC = getInstance()

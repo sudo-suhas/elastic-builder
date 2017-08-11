@@ -6,7 +6,10 @@ test(setsAggType, CumulativeSumAggregation, 'cumulative_sum');
 test(illegalCall, CumulativeSumAggregation, 'gapPolicy', 'my_agg');
 
 test('constructor sets buckets_path', t => {
-    const value = new CumulativeSumAggregation('my_agg', 'my_buckets_path').toJSON();
+    const value = new CumulativeSumAggregation(
+        'my_agg',
+        'my_buckets_path'
+    ).toJSON();
     const expected = {
         my_agg: {
             cumulative_sum: {

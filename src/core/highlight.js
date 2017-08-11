@@ -11,9 +11,21 @@ const { checkType, invalidParam, recursiveToJSON } = require('./util');
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html';
 
-const invalidEncoderParam = invalidParam(ES_REF_URL, 'encoder', "'default' or 'html'");
-const invalidTypeParam = invalidParam(ES_REF_URL, 'type', "'plain', 'postings' or 'fvh'");
-const invalidFragmenterParam = invalidParam(ES_REF_URL, 'fragmenter', "'simple' or 'span'");
+const invalidEncoderParam = invalidParam(
+    ES_REF_URL,
+    'encoder',
+    "'default' or 'html'"
+);
+const invalidTypeParam = invalidParam(
+    ES_REF_URL,
+    'type',
+    "'plain', 'postings' or 'fvh'"
+);
+const invalidFragmenterParam = invalidParam(
+    ES_REF_URL,
+    'fragmenter',
+    "'simple' or 'span'"
+);
 
 /**
  * Allows to highlight search results on one or more fields. In order to
@@ -164,7 +176,11 @@ class Highlight {
      * @returns {Highlight} returns `this` so that calls can be chained
      */
     postTags(tags, field) {
-        this._setFieldOption(field, 'post_tags', isString(tags) ? [tags] : tags);
+        this._setFieldOption(
+            field,
+            'post_tags',
+            isString(tags) ? [tags] : tags
+        );
         return this;
     }
 
@@ -326,7 +342,9 @@ class Highlight {
     matchedFields(fields, field) {
         checkType(fields, Array);
         if (isEmpty(field)) {
-            throw new Error('`matched_fields` requires field name to be passed');
+            throw new Error(
+                '`matched_fields` requires field name to be passed'
+            );
         }
 
         this.type('fvh', field);
@@ -438,7 +456,11 @@ class Highlight {
         if (isNil(type)) invalidTypeParam(type);
 
         const typeLower = type.toLowerCase();
-        if (typeLower !== 'plain' && typeLower !== 'postings' && typeLower !== 'fvh') {
+        if (
+            typeLower !== 'plain' &&
+            typeLower !== 'postings' &&
+            typeLower !== 'fvh'
+        ) {
             invalidTypeParam(type);
         }
 

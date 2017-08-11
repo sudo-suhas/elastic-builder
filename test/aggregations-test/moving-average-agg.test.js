@@ -8,9 +8,13 @@ import {
     makeSetsOptionMacro
 } from '../_macros';
 
-const getInstance = bucketsPath => new MovingAverageAggregation('my_agg', bucketsPath);
+const getInstance = bucketsPath =>
+    new MovingAverageAggregation('my_agg', bucketsPath);
 
-const setsOption = makeSetsOptionMacro(getInstance, nameTypeExpectStrategy('my_agg', 'moving_avg'));
+const setsOption = makeSetsOptionMacro(
+    getInstance,
+    nameTypeExpectStrategy('my_agg', 'moving_avg')
+);
 
 test(setsAggType, MovingAverageAggregation, 'moving_avg');
 test(illegalCall, MovingAverageAggregation, 'format', 'my_agg');

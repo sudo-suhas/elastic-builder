@@ -1,8 +1,15 @@
 import test from 'ava';
 import { MoreLikeThisQuery, moreLikeThisQuery } from '../../src';
-import { illegalParamType, nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
+import {
+    illegalParamType,
+    nameExpectStrategy,
+    makeSetsOptionMacro
+} from '../_macros';
 
-const setsOption = makeSetsOptionMacro(moreLikeThisQuery, nameExpectStrategy('more_like_this'));
+const setsOption = makeSetsOptionMacro(
+    moreLikeThisQuery,
+    nameExpectStrategy('more_like_this')
+);
 
 const doc1 = { _index: 'imdb', _type: 'movies', _id: '1' };
 const doc2 = { _index: 'imdb', _type: 'movies', _id: '2' };
@@ -15,6 +22,7 @@ const doc3 = 'and potentially some more text here as well';
  * @param {string} clause
  */
 function setsClause(t, clause) {
+    /* eslint-disable no-unexpected-multiline */
     let value = new MoreLikeThisQuery()[clause](doc3).toJSON();
     let expected = {
         more_like_this: {
@@ -31,7 +39,11 @@ function setsClause(t, clause) {
     };
     t.deepEqual(value, expected);
 
-    value = new MoreLikeThisQuery()[clause](doc1)[clause](doc2)[clause](doc3).toJSON();
+    value = new MoreLikeThisQuery()
+        [clause](doc1)
+        [clause](doc2)
+        [clause](doc3)
+        .toJSON();
     expected = {
         more_like_this: {
             [clause]: [doc1, doc2, doc3]
@@ -47,13 +59,17 @@ function setsClause(t, clause) {
     };
     t.deepEqual(value, expected);
 
-    value = new MoreLikeThisQuery()[clause](doc1)[clause]([doc1, doc2, doc3]).toJSON();
+    value = new MoreLikeThisQuery()
+        [clause](doc1)
+        [clause]([doc1, doc2, doc3])
+        .toJSON();
     expected = {
         more_like_this: {
             [clause]: [doc1, doc2, doc3]
         }
     };
     t.deepEqual(value, expected);
+    /* eslint-enable */
 }
 
 const instance = new MoreLikeThisQuery();
@@ -63,9 +79,15 @@ test(illegalParamType, instance, 'ids', 'Array');
 test(illegalParamType, instance, 'docs', 'Array');
 test(setsOption, 'fields', { param: ['title', 'description'], spread: false });
 test(setsOption, 'like', { param: doc1 });
-test('sets like(arr) option', setsOption, 'like', { param: [doc1, doc2, doc3], spread: false });
+test('sets like(arr) option', setsOption, 'like', {
+    param: [doc1, doc2, doc3],
+    spread: false
+});
 test(setsOption, 'unlike', { param: doc1 });
-test('sets unlike(arr) option', setsOption, 'unlike', { param: [doc1, doc2, doc3], spread: false });
+test('sets unlike(arr) option', setsOption, 'unlike', {
+    param: [doc1, doc2, doc3],
+    spread: false
+});
 test(setsOption, 'likeText', { param: 'my text' });
 test(setsOption, 'ids', { param: ['1', '2'], spread: false });
 test(setsOption, 'docs', {

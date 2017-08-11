@@ -142,7 +142,9 @@ class PercentilesAggregation extends MetricsAggregationBase {
      * @returns {PercentilesAggregation} returns `this` so that calls can be chained
      */
     hdr(numberOfSigDigits) {
-        this._aggsDef.hdr = { number_of_significant_value_digits: numberOfSigDigits };
+        this._aggsDef.hdr = {
+            number_of_significant_value_digits: numberOfSigDigits
+        };
         return this;
     }
 }

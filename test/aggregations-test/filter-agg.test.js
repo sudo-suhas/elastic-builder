@@ -2,7 +2,8 @@ import test from 'ava';
 import { FilterAggregation, TermQuery } from '../../src';
 import { illegalCall, illegalParamType, setsAggType } from '../_macros';
 
-const getInstance = (...args) => new FilterAggregation('my_filter_agg', ...args);
+const getInstance = (...args) =>
+    new FilterAggregation('my_filter_agg', ...args);
 
 const filterQry = new TermQuery('user', 'kimchy');
 

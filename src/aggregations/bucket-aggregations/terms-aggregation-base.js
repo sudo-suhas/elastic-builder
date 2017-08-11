@@ -2,11 +2,18 @@
 
 const isNil = require('lodash.isnil');
 
-const { util: { invalidParam }, consts: { EXECUTION_HINT_SET } } = require('../../core');
+const {
+    util: { invalidParam },
+    consts: { EXECUTION_HINT_SET }
+} = require('../../core');
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
-const invalidExecutionHintParam = invalidParam('', 'execution_hint', EXECUTION_HINT_SET);
+const invalidExecutionHintParam = invalidParam(
+    '',
+    'execution_hint',
+    EXECUTION_HINT_SET
+);
 
 /**
  * The `TermsAggregationBase` provides support for common options used across

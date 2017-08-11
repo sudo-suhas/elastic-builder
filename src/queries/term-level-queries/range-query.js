@@ -2,14 +2,21 @@
 
 const isNil = require('lodash.isnil');
 
-const { util: { invalidParam }, consts: { GEO_RELATION_SET } } = require('../../core');
+const {
+    util: { invalidParam },
+    consts: { GEO_RELATION_SET }
+} = require('../../core');
 
 const MultiTermQueryBase = require('./multi-term-query-base');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html';
 
-const invalidRelationParam = invalidParam(ES_REF_URL, 'relation', GEO_RELATION_SET);
+const invalidRelationParam = invalidParam(
+    ES_REF_URL,
+    'relation',
+    GEO_RELATION_SET
+);
 
 /**
  * Matches documents with fields that have terms within a certain range.

@@ -9,7 +9,11 @@ const GeoQueryBase = require('./geo-query-base');
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-query.html';
 
-const invalidDistanceTypeParam = invalidParam(ES_REF_URL, 'distance_type', "'plane' or 'arc'");
+const invalidDistanceTypeParam = invalidParam(
+    ES_REF_URL,
+    'distance_type',
+    "'plane' or 'arc'"
+);
 
 /**
  * Filters documents that include only hits that exists within a specific distance from a geo point.
@@ -64,7 +68,8 @@ class GeoDistanceQuery extends GeoQueryBase {
         if (isNil(type)) invalidDistanceTypeParam(type);
 
         const typeLower = type.toLowerCase();
-        if (typeLower !== 'plane' && typeLower !== 'arc') invalidDistanceTypeParam(type);
+        if (typeLower !== 'plane' && typeLower !== 'arc')
+            invalidDistanceTypeParam(type);
 
         this._queryOpts.distance_type = typeLower;
         return this;
