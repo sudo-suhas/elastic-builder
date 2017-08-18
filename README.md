@@ -3,6 +3,7 @@
 [![npm version](https://badge.fury.io/js/elastic-builder.svg)](https://badge.fury.io/js/elastic-builder)
 [![Build Status](https://travis-ci.org/sudo-suhas/elastic-builder.svg?branch=master)](https://travis-ci.org/sudo-suhas/elastic-builder)
 [![Coverage Status](https://coveralls.io/repos/github/sudo-suhas/elastic-builder/badge.svg?branch=master)](https://coveralls.io/github/sudo-suhas/elastic-builder?branch=master)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 A Node.js implementation of the [Elasticsearch](https://www.elasticsearch.org/) DSL for use with the [official elasticsearch javascript client](https://www.elasticsearch.org/guide/en/elasticsearch/client/javascript-api/current/index.html) with builder syntax.
 
