@@ -1,5 +1,6 @@
 # elastic-builder
 
+[![npm version](https://badge.fury.io/js/elastic-builder.svg)](https://badge.fury.io/js/elastic-builder)
 [![Build Status](https://travis-ci.org/sudo-suhas/elastic-builder.svg?branch=master)](https://travis-ci.org/sudo-suhas/elastic-builder)
 [![Coverage Status](https://coveralls.io/repos/github/sudo-suhas/elastic-builder/badge.svg?branch=master)](https://coveralls.io/github/sudo-suhas/elastic-builder?branch=master)
 
