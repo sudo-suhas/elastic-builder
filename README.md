@@ -124,24 +124,24 @@ const elasticsearch = require('elasticsearch');
 const bob = require('elastic-builder');
 
 const client = new elasticsearch.Client({
-  host: 'localhost:9200',
-  log: 'trace'
+    host: 'localhost:9200',
+    log: 'trace'
 });
 
 const requestBody = bob.requestBodySearch()
-  .query(bob.matchQuery('body', 'elasticsearch'));
+    .query(bob.matchQuery('body', 'elasticsearch'));
 
 client.search({
     index: 'twitter',
     type: 'tweets',
     body: requestBody.toJSON()
-  })
-  .then(resp => {
-    const hits = resp.hits.hits;
-  })
-  .catch(err => {
-    console.trace(err.message);
-  });
+})
+    .then(resp => {
+        const hits = resp.hits.hits;
+    })
+    .catch(err => {
+        console.trace(err.message);
+    });
 
 ```
 
