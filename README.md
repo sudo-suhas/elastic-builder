@@ -116,6 +116,35 @@ If you have any recipes, please do share or better yet, create a [pull request](
 
 ## Examples
 
+**Usage with official elasticsearch client:**
+```js
+'use strict';
+
+const elasticsearch = require('elasticsearch');
+const bob = require('elastic-builder');
+
+const client = new elasticsearch.Client({
+  host: 'localhost:9200',
+  log: 'trace'
+});
+
+const requestBody = bob.requestBodySearch()
+  .query(bob.matchQuery('body', 'elasticsearch'));
+
+client.search({
+    index: 'twitter',
+    type: 'tweets',
+    body: requestBody.toJSON()
+  })
+  .then(resp => {
+    const hits = resp.hits.hits;
+  })
+  .catch(err => {
+    console.trace(err.message);
+  });
+
+```
+
 ```js
 // Bool query
 const requestBody = bob.requestBodySearch()
@@ -137,7 +166,6 @@ requestBody.toJSON()
     }
   }
 }
-
 
 // Multi Match Query
 const requestBody = bob.requestBodySearch()
