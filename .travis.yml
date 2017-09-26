@@ -25,4 +25,5 @@ after_script:
   - yarn run coverage
 
 after_success:
-  - yarn run semantic-release
+  - yarn global add semantic-release
+  - semantic-release pre && npm run push-assets && npm publish && semantic-release post
