@@ -28,10 +28,8 @@
     "check": "npm run lint && npm test",
     "report": "nyc report --reporter=html",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "pregit-commit": "git add docs browser",
-    "git-commit": "cross-env git commit --no-verify -m \"docs: Build docs for v$npm_package_version\"",
-    "postgit-commit": "git push origin master",
-    "push-assets": "npm run build && npm run git-commit"
+    "precommit-docs": "npm run build && git checkout master && git add docs browser",
+    "commit-docs": "cross-env git commit --no-verify -m \"docs: Build docs for v$npm_package_version\""
   },
   "repository": {
     "type": "git",

@@ -26,4 +26,4 @@ after_script:
 
 after_success:
   - yarn global add semantic-release
-  - semantic-release pre && npm run push-assets && npm publish && semantic-release post
+  - semantic-release pre && npm run commit-docs && npm publish && semantic-release post
