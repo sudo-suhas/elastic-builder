@@ -1,5 +1,6 @@
 'use strict';
 
+const has = require('lodash.has');
 const isEmpty = require('lodash.isempty');
 
 const { checkType, recursiveToJSON } = require('./util');
@@ -21,12 +22,10 @@ const { checkType, recursiveToJSON } = require('./util');
 class Aggregation {
     // eslint-disable-next-line require-jsdoc
     constructor(name, aggType) {
-        if (isEmpty(name))
-            throw new Error('Aggregation `name` cannot be empty');
         if (isEmpty(aggType))
             throw new Error('Aggregation `aggType` cannot be empty');
 
-        this.name = name;
+        this._name = name;
         this.aggType = aggType;
 
         this._aggs = {};
@@ -35,6 +34,17 @@ class Aggregation {
     }
 
     // TODO: Investigate case when getter for aggregation will be required
+
+    /**
+     * Sets name for aggregation.
+     *
+     * @param {string} name returns `this` so that calls can be chained.
+     * @returns {Aggregation}
+     */
+    name(name) {
+        this._name = name;
+        return this;
+    }
 
     /**
      * Sets nested aggregations.
@@ -109,6 +119,24 @@ class Aggregation {
     }
 
     /**
+     * Internal helper function for determining the aggregation name.
+     *
+     * @returns {string} Aggregation name
+     * @private
+     */
+    _aggsName() {
+        if (!isEmpty(this._name)) return this._name;
+
+        if (has(this._aggsDef, 'field')) {
+            return `agg_${this.aggType}_${this._aggsDef.field}`;
+        }
+
+        // At this point, it would be difficult to construct a unique
+        // aggregation name. Error out.
+        throw new Error('Aggregation name could not be determined');
+    }
+
+    /**
      * Build and returns DSL representation of the `Aggregation` class instance.
      *
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL
@@ -133,9 +161,7 @@ class Aggregation {
             );
         }
 
-        return {
-            [this.name]: mainAggs
-        };
+        return { [this._aggsName()]: mainAggs };
     }
 }
 

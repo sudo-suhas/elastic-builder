@@ -30,6 +30,18 @@ test(setsOption, 'order', {
     propValue: { my_field: 'asc' }
 });
 
+test('tries to construct agg name if not given', t => {
+    const value = new TermsAggregation(null, 'myfield').toJSON();
+    const expected = {
+        agg_terms_myfield: {
+            terms: {
+                field: 'myfield'
+            }
+        }
+    };
+    t.deepEqual(value, expected);
+});
+
 test('include partition is set', t => {
     const value = getInstance('my_field').includePartition(0, 20).toJSON();
     const expected = {

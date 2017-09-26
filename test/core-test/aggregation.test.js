@@ -26,8 +26,8 @@ test('can be instantiated', t => {
 });
 
 test('name cannot be empty', t => {
-    const err = t.throws(() => new Aggregation());
-    t.is(err.message, 'Aggregation `name` cannot be empty');
+    const err = t.throws(() => new Aggregation(null, 'my_agg').toJSON());
+    t.is(err.message, 'Aggregation name could not be determined');
 });
 
 test('aggType cannot be empty', t => {
@@ -124,6 +124,16 @@ test('multiple nested aggs', t => {
         }
     };
     t.deepEqual(valueA, expected);
+});
+
+test('name is set', t => {
+    const value = new Aggregation(null, 'my_type').name('my_agg').toJSON();
+    const expected = {
+        my_agg: {
+            my_type: {}
+        }
+    };
+    t.deepEqual(value, expected);
 });
 
 test('meta is set', t => {
