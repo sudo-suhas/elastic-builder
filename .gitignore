@@ -44,3 +44,8 @@ lib
 
 # files generated for tests(pre compilation)
 _build
+
+# generated docs
+browser/
+docs/assets/
+docs/index.html

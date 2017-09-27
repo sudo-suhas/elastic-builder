@@ -24,9 +24,7 @@
     "test": "npm run test:src && npm run test:typedef",
     "check": "npm run lint && npm test",
     "report": "nyc report --reporter=html",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "precommit-docs": "npm run build && git checkout master && git add docs browser",
-    "commit-docs": "cross-env git commit --no-verify -m \"docs: Build docs for v$npm_package_version\""
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",

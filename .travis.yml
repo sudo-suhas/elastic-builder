@@ -25,5 +25,13 @@ after_script:
   - yarn run coverage
 
 after_success:
-  - yarn global add semantic-release
-  - semantic-release pre && npm run commit-docs && npm publish && semantic-release post
+  - yarn global add semantic-release gh-pages
+  - 'semantic-release pre &&
+    npm run -s build &&
+    gh-pages --add
+      --dist .
+      --src docs/* --src browser/*
+      --repo https://$GH_TOKEN@github.com/sudo-suhas/elastic-builder.git
+      --message "docs: Build docs" &&
+    npm publish &&
+    semantic-release post'
