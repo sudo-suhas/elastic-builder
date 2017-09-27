@@ -7,7 +7,7 @@
 
 A Node.js implementation of the [Elasticsearch](https://www.elasticsearch.org/) DSL for use with the [official elasticsearch javascript client](https://www.elasticsearch.org/guide/en/elasticsearch/client/javascript-api/current/index.html) with builder syntax.
 
-![elastic-builder](assets/elastic-builder.png)
+![elastic-builder](elastic-builder.png)
 
 **Check out the [API reference documentation](https://elastic-builder.js.org/docs).**
 
