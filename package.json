@@ -18,7 +18,7 @@
     "build": "npm run build:babel && npm run build:umd && npm run build:docs",
     "lint": "eslint src test",
     "lint:fix": "npm run lint -- --fix",
-    "lint-staged": "lint-staged",
+    "precommit": "lint-staged",
     "pretest:src": "cross-env NODE_ENV=test webpack --config webpack.config.test.js",
     "test:src": "cross-env NODE_ENV=test nyc --cache ava _build --concurrency 3",
     "test:typedef": "tsc --noEmit ./test/typedef.test.ts",
@@ -65,12 +65,6 @@
     "sourceMap": false,
     "instrument": false
   },
-  "pre-commit": {
-    "colors": true,
-    "run": [
-      "lint-staged"
-    ]
-  },
   "devDependencies": {
     "ava": "^0.22.0",
     "babel-cli": "^6.24.1",
@@ -89,10 +83,10 @@
     "eslint-plugin-ava": "^4.2.1",
     "eslint-plugin-prettier": "^2.1.2",
     "glob": "^7.1.1",
+    "husky": "^0.14.3",
     "lint-staged": "^4.0.1",
     "lodash": "^4.17.4",
     "nyc": "^11.0.3",
-    "pre-commit": "^1.2.2",
     "prettier": "^1.5.3",
     "sinon": "^3.1.0",
     "typescript": "^2.4.2",
