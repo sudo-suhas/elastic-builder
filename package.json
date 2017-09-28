@@ -24,7 +24,8 @@
     "test": "npm run test:src && npm run test:typedef",
     "check": "npm run lint && npm test",
     "report": "nyc report --reporter=html",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "print-version": "cross-env-shell echo v$npm_package_version"
   },
   "repository": {
     "type": "git",
