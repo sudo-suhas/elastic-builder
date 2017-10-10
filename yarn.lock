@@ -2310,9 +2310,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-chatur@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-chatur/-/eslint-config-chatur-1.2.0.tgz#d8ed9d98dd5c58685c955b74f2152eab7deb20bd"
+eslint-config-chatur@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-chatur/-/eslint-config-chatur-2.0.0.tgz#e06f93f0e50b84a1b6f9b91d8a636061c4958686"
   dependencies:
     app-root-path "^2.0.1"
     eslint-plugin-eslint-comments "^1.0.3"
