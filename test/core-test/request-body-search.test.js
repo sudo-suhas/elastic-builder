@@ -184,7 +184,10 @@ test(setsOption, 'searchAfter', {
 
 // agg, aggregation
 test('sets multiple aggs', t => {
-    const value = new RequestBodySearch().agg(aggA).agg(aggB).toJSON();
+    const value = new RequestBodySearch()
+        .agg(aggA)
+        .agg(aggB)
+        .toJSON();
     const expected = {
         aggs: {
             user_term_agg: {

@@ -24,7 +24,9 @@ test(setsOption, 'geoPoint', { param: pt, keyName: 'my_field' });
 
 test('constructor sets point', t => {
     const valueA = getInstance(pt).toJSON();
-    const valueB = getInstance().geoPoint(pt).toJSON();
+    const valueB = getInstance()
+        .geoPoint(pt)
+        .toJSON();
     t.deepEqual(valueA, valueB);
 
     const expected = {

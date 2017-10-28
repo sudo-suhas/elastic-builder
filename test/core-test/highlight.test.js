@@ -24,7 +24,6 @@ function setHighlightOption(
     param,
     paramValue = recursiveToJSON(param)
 ) {
-    /* eslint-disable no-unexpected-multiline */
     const keyName = _.snakeCase(methodName);
 
     let value = new Highlight()[methodName](param).toJSON();
@@ -96,7 +95,6 @@ function setHighlightOption(
         [keyName]: paramValue
     };
     t.deepEqual(value, expected);
-    /* eslint-enable */
 }
 
 setHighlightOption.title = (providedTitle, methodName) =>
@@ -242,7 +240,10 @@ test('sets order as score', t => {
     };
     t.deepEqual(value.toJSON(), expected);
 
-    value = new Highlight().scoreOrder('my_field').scoreOrder().toJSON();
+    value = new Highlight()
+        .scoreOrder('my_field')
+        .scoreOrder()
+        .toJSON();
     expected = {
         fields: {
             my_field: { order: 'score' }

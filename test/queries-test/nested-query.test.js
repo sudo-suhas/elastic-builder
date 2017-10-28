@@ -13,7 +13,10 @@ test(setsOption, 'path', { param: 'obj1' });
 
 test('constructor sets arguments', t => {
     const valueA = new NestedQuery(qry, 'obj1').toJSON();
-    const valueB = new NestedQuery().path('obj1').query(qry).toJSON();
+    const valueB = new NestedQuery()
+        .path('obj1')
+        .query(qry)
+        .toJSON();
     t.deepEqual(valueA, valueB);
 
     const expected = {

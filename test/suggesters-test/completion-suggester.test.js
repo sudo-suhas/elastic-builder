@@ -10,7 +10,9 @@ const setsOption = makeSetsOptionMacro(
 );
 
 test('prefix is set', t => {
-    const value = getInstance().prefix('nir').toJSON();
+    const value = getInstance()
+        .prefix('nir')
+        .toJSON();
     const expected = {
         my_suggester: {
             prefix: 'nir',
@@ -53,7 +55,9 @@ test(setsOption, 'unicodeAware', {
     propValue: { unicode_aware: true }
 });
 test('regex is set', t => {
-    const value = getInstance().regex('nir').toJSON();
+    const value = getInstance()
+        .regex('nir')
+        .toJSON();
     const expected = {
         my_suggester: {
             regex: 'nir',
@@ -96,7 +100,10 @@ test('multiple contexts can be set', t => {
 });
 
 test('multiple fuzzy options can be set', t => {
-    const value = getInstance().fuzziness(2).transpositions(true).toJSON();
+    const value = getInstance()
+        .fuzziness(2)
+        .transpositions(true)
+        .toJSON();
     const expected = {
         my_suggester: {
             completion: {

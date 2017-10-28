@@ -24,7 +24,9 @@ test('constructor sets txt', t => {
 });
 
 test('text can be set', t => {
-    const value = getInstance().text('my-text').toJSON();
+    const value = getInstance()
+        .text('my-text')
+        .toJSON();
     const expected = {
         my_suggester: {
             text: 'my-text',

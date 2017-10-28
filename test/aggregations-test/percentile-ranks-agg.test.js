@@ -30,14 +30,21 @@ test(setsOption, 'hdr', {
 
 test('compression same as tdigest', t => {
     t.deepEqual(
-        getInstance().tdigest(3).toJSON(),
-        getInstance().compression(3).toJSON()
+        getInstance()
+            .tdigest(3)
+            .toJSON(),
+        getInstance()
+            .compression(3)
+            .toJSON()
     );
 });
 
 test('constructor sets arguments', t => {
     const valueA = getInstance('my_field', [15, 30]).toJSON();
-    const valueB = getInstance().field('my_field').values([15, 30]).toJSON();
+    const valueB = getInstance()
+        .field('my_field')
+        .values([15, 30])
+        .toJSON();
     t.deepEqual(valueA, valueB);
 
     const expected = {

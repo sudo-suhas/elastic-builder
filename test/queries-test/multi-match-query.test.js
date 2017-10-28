@@ -55,7 +55,10 @@ test(setsOption, 'cutoffFrequency', { param: 10 });
 // constructor, fields can be str or arr
 test('constructor sets arguments', t => {
     let valueA = getInstance('my_field', 'query str').toJSON();
-    let valueB = getInstance().field('my_field').query('query str').toJSON();
+    let valueB = getInstance()
+        .field('my_field')
+        .query('query str')
+        .toJSON();
     t.deepEqual(valueA, valueB);
 
     let expected = {

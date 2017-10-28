@@ -1,2 +1,4 @@
 root: true
 extends: chatur/test
+rules:
+  no-unexpected-multiline: off

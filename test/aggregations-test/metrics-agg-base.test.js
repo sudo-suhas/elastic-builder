@@ -32,7 +32,9 @@ test(setsOption, 'format', { param: '####.00' });
 
 test('constructor sets field', t => {
     const valueA = getInstance('my_field').toJSON();
-    const valueB = getInstance().field('my_field').toJSON();
+    const valueB = getInstance()
+        .field('my_field')
+        .toJSON();
     t.deepEqual(valueA, valueB);
 
     const expected = {

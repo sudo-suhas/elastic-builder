@@ -22,7 +22,6 @@ const doc3 = 'and potentially some more text here as well';
  * @param {string} clause
  */
 function setsClause(t, clause) {
-    /* eslint-disable no-unexpected-multiline */
     let value = new MoreLikeThisQuery()[clause](doc3).toJSON();
     let expected = {
         more_like_this: {
@@ -69,7 +68,6 @@ function setsClause(t, clause) {
         }
     };
     t.deepEqual(value, expected);
-    /* eslint-enable */
 }
 
 const instance = new MoreLikeThisQuery();

@@ -43,7 +43,9 @@ test('tries to construct agg name if not given', t => {
 });
 
 test('include partition is set', t => {
-    const value = getInstance('my_field').includePartition(0, 20).toJSON();
+    const value = getInstance('my_field')
+        .includePartition(0, 20)
+        .toJSON();
     const expected = {
         my_agg: {
             terms: {

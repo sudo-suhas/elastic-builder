@@ -16,7 +16,9 @@ test(setsOption, 'query', { param: 'query str' });
 
 test('constructor sets query str', t => {
     const valueA = getInstance('query str').toJSON();
-    const valueB = getInstance().query('query str').toJSON();
+    const valueB = getInstance()
+        .query('query str')
+        .toJSON();
     t.deepEqual(valueA, valueB);
 
     const expected = {
