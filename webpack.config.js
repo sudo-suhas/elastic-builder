@@ -1,6 +1,6 @@
 'use strict';
 
-const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     output: {
@@ -8,19 +8,28 @@ module.exports = {
         libraryTarget: 'umd'
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            beautify: false,
-            mangle: {
-                screw_ie8: true,
-                keep_fnames: false
-            },
-            compress: {
-                screw_ie8: true,
-                warnings: false,
-                // Drop console statements
-                drop_console: true
-            },
-            comments: false
+        new UglifyJSPlugin({
+            sourceMap: false,
+            uglifyOptions: {
+                beautify: false,
+                mangle: {
+                    toplevel: true,
+                    keep_fnames: false
+                },
+                compressor: {
+                    warnings: false,
+                    conditionals: true,
+                    unused: true,
+                    comparisons: true,
+                    sequences: true,
+                    dead_code: true,
+                    evaluate: true,
+                    if_return: true,
+                    join_vars: true,
+                    negate_iife: false
+                },
+                comments: false
+            }
         })
     ]
 };
