@@ -2,7 +2,7 @@
 // Project: https://elastic-builder.js.org
 // Definitions by: Suhas Karanth <sudo.suhas@gmail.com>
 
-export = bob
+export = bob;
 
 declare namespace bob {
     /**
@@ -262,7 +262,11 @@ declare namespace bob {
          * requests allowed to retrieve the inner_hits' per group
          * @throws {TypeError} If `innerHits` is not an instance of `InnerHits`
          */
-        collapse(field: string, innerHits?: InnerHits, maxConcurrentGroupRequests?: number): this;
+        collapse(
+            field: string,
+            innerHits?: InnerHits,
+            maxConcurrentGroupRequests?: number
+        ): this;
 
         /**
          * Allows to use the results from the previous page to help the retrieval
@@ -571,7 +575,10 @@ declare namespace bob {
      * @param {string=} field The document field to query against
      * @param {string=} queryString The query string
      */
-    export function matchQuery(field?: string, queryString?: string): MatchQuery;
+    export function matchQuery(
+        field?: string,
+        queryString?: string
+    ): MatchQuery;
 
     /**
      * The `MatchPhraseQueryBase` provides support for common options used across
@@ -588,7 +595,12 @@ declare namespace bob {
      * @extends MonoFieldQueryBase
      */
     class MatchPhraseQueryBase extends MonoFieldQueryBase {
-        constructor(queryType: string, refUrl: string, field?: string, queryString?: string);
+        constructor(
+            queryType: string,
+            refUrl: string,
+            field?: string,
+            queryString?: string
+        );
 
         /**
          * @override
@@ -623,7 +635,10 @@ declare namespace bob {
      * @param {string=} field The document field to query against
      * @param {string=} queryString The query string
      */
-    export function matchPhraseQuery(field?: string, queryString?: string): MatchPhraseQuery;
+    export function matchPhraseQuery(
+        field?: string,
+        queryString?: string
+    ): MatchPhraseQuery;
 
     /**
      * @param {string=} field The document field to query against
@@ -699,7 +714,14 @@ declare namespace bob {
          * @param {string} type Can be one of `best_fields`, `most_fields`,
          * `cross_fields`, `phrase`, and `phrase_prefix`. Default is `best_fields`.
          */
-        type(type: 'best_fields' | 'most_fields' | 'cross_fields' | 'phrase' | 'phrase_prefix'): this;
+        type(
+            type:
+                | 'best_fields'
+                | 'most_fields'
+                | 'cross_fields'
+                | 'phrase'
+                | 'phrase_prefix'
+        ): this;
 
         /**
          * The tie breaker value. The tie breaker capability allows results
@@ -849,7 +871,10 @@ declare namespace bob {
      * @param {Array<string>|string=} fields The fields to be queried
      * @param {string=} queryString The query string
      */
-    export function multiMatchQuery(fields?: string[] | string, queryString?: string): MultiMatchQuery;
+    export function multiMatchQuery(
+        fields?: string[] | string,
+        queryString?: string
+    ): MultiMatchQuery;
 
     /**
      * The `common` terms query is a modern alternative to stopwords which
@@ -930,7 +955,10 @@ declare namespace bob {
      * @param {string=} field The document field to query against
      * @param {string=} queryString The query string
      */
-    export function commonTermsQuery(field?: string, queryString?: string): CommonTermsQuery;
+    export function commonTermsQuery(
+        field?: string,
+        queryString?: string
+    ): CommonTermsQuery;
 
     /**
      * The `QueryStringQueryBase` provides support for common options used across
@@ -1233,7 +1261,9 @@ declare namespace bob {
      *
      * @param {string=} queryString The query string
      */
-    export function simpleQueryStringQuery(queryString?: string): SimpleQueryStringQuery;
+    export function simpleQueryStringQuery(
+        queryString?: string
+    ): SimpleQueryStringQuery;
 
     /**
      * The `ValueTermQueryBase` provides support for common options used across
@@ -1281,7 +1311,10 @@ declare namespace bob {
      * @param {string=} field
      * @param {string|number=} queryVal
      */
-    export function termQuery(field?: string, queryVal?: string | number): TermQuery;
+    export function termQuery(
+        field?: string,
+        queryVal?: string | number
+    ): TermQuery;
 
     /**
      * Filters documents that have fields that match any of the provided terms (**not analyzed**).
@@ -1361,7 +1394,10 @@ declare namespace bob {
         routing(routing: string): this;
     }
 
-    export function termsQuery(field?: string, values?: string[] | string | number): TermsQuery;
+    export function termsQuery(
+        field?: string,
+        values?: string[] | string | number
+    ): TermsQuery;
 
     /**
      * Interface-like class used to group and identify various implementations of
@@ -1471,7 +1507,9 @@ declare namespace bob {
          * @param {string} relation Can be one of `WITHIN`, `CONTAINS`, `DISJOINT`
          * or `INTERSECTS`(default)
          */
-        relation(relation: 'WITHIN' | 'CONTAINS' | 'DISJOINT' | 'INTERSECTS'): this;
+        relation(
+            relation: 'WITHIN' | 'CONTAINS' | 'DISJOINT' | 'INTERSECTS'
+        ): this;
 
         /**
          * Override default `toJSON` to return DSL representation of the `range` query
@@ -1554,7 +1592,10 @@ declare namespace bob {
      * @param {string=} field
      * @param {string|number=} value
      */
-    export function prefixQuery(field?: string, value?: string | number): PrefixQuery;
+    export function prefixQuery(
+        field?: string,
+        value?: string | number
+    ): PrefixQuery;
 
     /**
      * Matches documents that have fields matching a wildcard expression (**not analyzed**).
@@ -1599,7 +1640,10 @@ declare namespace bob {
      * @param {string=} field
      * @param {string=} value
      */
-    export function wildcardQuery(field?: string, value?: string): WildcardQuery;
+    export function wildcardQuery(
+        field?: string,
+        value?: string
+    ): WildcardQuery;
 
     /**
      * Query for regular expression term queries. Elasticsearch will apply the regexp
@@ -1666,7 +1710,10 @@ declare namespace bob {
      * @param {string=} field
      * @param {string|number=} value
      */
-    export function regexpQuery(field?: string, value?: string | number): RegexpQuery;
+    export function regexpQuery(
+        field?: string,
+        value?: string | number
+    ): RegexpQuery;
 
     /**
      * The fuzzy query generates all possible matching terms that are within
@@ -1727,7 +1774,10 @@ declare namespace bob {
      * @param {string=} field
      * @param {string|number=} value
      */
-    export function fuzzyQuery(field?: string, value?: string | number): FuzzyQuery;
+    export function fuzzyQuery(
+        field?: string,
+        value?: string | number
+    ): FuzzyQuery;
 
     /**
      * Filters documents matching the provided document / mapping type.
@@ -1996,14 +2046,18 @@ declare namespace bob {
          * @param {string} mode Can be one of `multiply`, `sum`, `first`, `min`, `max`, `avg`.
          * Defaults to `multiply`.
          */
-        scoreMode(mode: 'multiply' | 'sum' | 'first' | 'min' | 'max' | 'avg'): this;
+        scoreMode(
+            mode: 'multiply' | 'sum' | 'first' | 'min' | 'max' | 'avg'
+        ): this;
 
         /**
          * Controls the way the query and function scores are combined.
          * @param {string} mode Can be one of `multiply`, `replace`, `sum`, `avg`, `max`, `min`.
          * Defaults to `multiply`.
          */
-        boostMode(mode: 'multiply' | 'sum' | 'replace' | 'min' | 'max' | 'avg'): this;
+        boostMode(
+            mode: 'multiply' | 'sum' | 'replace' | 'min' | 'max' | 'avg'
+        ): this;
 
         /**
          * Restricts new score to not exceed given limit. The default for `max_boost` is `FLT_MAX`.
@@ -2050,7 +2104,11 @@ declare namespace bob {
      * @extends Query
      */
     export class BoostingQuery extends Query {
-        constructor(positiveQry?: Query, negativeQry?: Query, negativeBoost?: number);
+        constructor(
+            positiveQry?: Query,
+            negativeQry?: Query,
+            negativeBoost?: number
+        );
 
         /**
          * Sets the "master" query that determines which results are returned.
@@ -2324,7 +2382,10 @@ declare namespace bob {
      * @param {string=} type The **child** type. This must be a type with `_parent` field.
      * @param {string|number=} id The required parent id select documents must refer to.
      */
-    export function parentIdQuery(type?: string, id?: string | number): ParentIdQuery;
+    export function parentIdQuery(
+        type?: string,
+        id?: string | number
+    ): ParentIdQuery;
 
     /**
      * The `GeoQueryBase` provides support for common options used across
@@ -2356,7 +2417,9 @@ declare namespace bob {
          * @param {string} method One of `IGNORE_MALFORMED`, `COERCE` or `STRICT`(default)
          * @throws {Error} If `method` parameter is not one of `IGNORE_MALFORMED`, `COERCE` or `STRICT`
          */
-        validationMethod(method: 'IGNORE_MALFORMED' | 'COERCE' | 'STRICT'): this;
+        validationMethod(
+            method: 'IGNORE_MALFORMED' | 'COERCE' | 'STRICT'
+        ): this;
     }
 
     /**
@@ -2407,7 +2470,9 @@ declare namespace bob {
          * @param {string} relation Can be one of `WITHIN`, `CONTAINS`, `DISJOINT`
          * or `INTERSECTS`(default)
          */
-        relation(relation: 'WITHIN' | 'CONTAINS' | 'DISJOINT' | 'INTERSECTS'): this;
+        relation(
+            relation: 'WITHIN' | 'CONTAINS' | 'DISJOINT' | 'INTERSECTS'
+        ): this;
 
         /**
          * When set to `true` will ignore an unmapped `path` and will not match any
@@ -2568,7 +2633,10 @@ declare namespace bob {
      * @param {string=} field
      * @param {GeoPoint=} point Geo point used to measure and filter documents based on distance from it.
      */
-    export function geoDistanceQuery(field?: string, point?: GeoPoint): GeoDistanceQuery;
+    export function geoDistanceQuery(
+        field?: string,
+        point?: GeoPoint
+    ): GeoDistanceQuery;
 
     /**
      * A query allowing to include hits that only fall within a polygon of points.
@@ -2887,7 +2955,10 @@ declare namespace bob {
      * @param {string=} field The field of type `percolator` and that holds the indexed queries.
      * @param {string=} docType The type / mapping of the document being percolated.
      */
-    export function percolateQuery(field?: string, docType?: string): PercolateQuery;
+    export function percolateQuery(
+        field?: string,
+        docType?: string
+    ): PercolateQuery;
 
     /**
      * Interface-like class used to group and identify various implementations of Span queries.
@@ -2939,7 +3010,10 @@ declare namespace bob {
      * @param {string=} field The document field to query against
      * @param {string|number=} value The query string
      */
-    export function spanTermQuery(field?: string, value?: string | number): SpanTermQuery;
+    export function spanTermQuery(
+        field?: string,
+        value?: string | number
+    ): SpanTermQuery;
 
     /**
      * The `span_multi` query allows you to wrap a `multi term query` (one of wildcard,
@@ -2965,7 +3039,9 @@ declare namespace bob {
      *
      * @param {MultiTermQueryBase=} multiTermQry One of wildcard, fuzzy, prefix, range or regexp query
      */
-    export function spanMultiTermQuery(multiTermQry?: MultiTermQueryBase): SpanMultiTermQuery;
+    export function spanMultiTermQuery(
+        multiTermQry?: MultiTermQueryBase
+    ): SpanMultiTermQuery;
 
     /**
      * Matches spans near the beginning of a field. The span first query maps to Lucene `SpanFirstQuery`.
@@ -3374,7 +3450,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
      */
-    export function avgAggregation(name: string, field?: string): AvgAggregation;
+    export function avgAggregation(
+        name: string,
+        field?: string
+    ): AvgAggregation;
 
     /**
      * A single-value metrics aggregation that calculates an approximate count of
@@ -3413,7 +3492,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
      */
-    export function cardinalityAggregation(name: string, field?: string): CardinalityAggregation;
+    export function cardinalityAggregation(
+        name: string,
+        field?: string
+    ): CardinalityAggregation;
 
     /**
      * A multi-value metrics aggregation that computes stats over numeric values
@@ -3448,7 +3530,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
      */
-    export function extendedStatsAggregation(name: string, field?: string): ExtendedStatsAggregation;
+    export function extendedStatsAggregation(
+        name: string,
+        field?: string
+    ): ExtendedStatsAggregation;
 
     /**
      * A metric aggregation that computes the bounding box
@@ -3488,7 +3573,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
      */
-    export function geoBoundsAggregation(name: string, field?: string): GeoBoundsAggregation;
+    export function geoBoundsAggregation(
+        name: string,
+        field?: string
+    ): GeoBoundsAggregation;
 
     /**
      * A metric aggregation that computes the weighted centroid
@@ -3515,7 +3603,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on. field must be a Geo-point datatype type
      */
-    export function geoCentroidAggregation(name: string, field?: string): GeoCentroidAggregation;
+    export function geoCentroidAggregation(
+        name: string,
+        field?: string
+    ): GeoCentroidAggregation;
 
     /**
      * A single-value metrics aggregation that keeps track and returns the
@@ -3546,7 +3637,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
      */
-    export function maxAggregation(name: string, field?: string): MaxAggregation;
+    export function maxAggregation(
+        name: string,
+        field?: string
+    ): MaxAggregation;
 
     /**
      * A single-value metrics aggregation that keeps track and returns the
@@ -3577,7 +3671,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
      */
-    export function minAggregation(name: string, field?: string): MinAggregation;
+    export function minAggregation(
+        name: string,
+        field?: string
+    ): MinAggregation;
 
     /**
      * A multi-value metrics aggregation that calculates one or more percentiles
@@ -3664,7 +3761,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
      */
-    export function percentilesAggregation(name: string, field?: string): PercentilesAggregation;
+    export function percentilesAggregation(
+        name: string,
+        field?: string
+    ): PercentilesAggregation;
 
     /**
      * A multi-value metrics aggregation that calculates one or more percentile ranks
@@ -3840,7 +3940,9 @@ declare namespace bob {
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      */
-    export function scriptedMetricAggregation(name: string): ScriptedMetricAggregation;
+    export function scriptedMetricAggregation(
+        name: string
+    ): ScriptedMetricAggregation;
 
     /**
      * A multi-value metrics aggregation that computes stats over numeric values
@@ -3873,7 +3975,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
      */
-    export function statsAggregation(name: string, field?: string): StatsAggregation;
+    export function statsAggregation(
+        name: string,
+        field?: string
+    ): StatsAggregation;
 
     /**
      * A single-value metrics aggregation that sums up numeric values that are
@@ -3904,7 +4009,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
      */
-    export function sumAggregation(name: string, field?: string): SumAggregation;
+    export function sumAggregation(
+        name: string,
+        field?: string
+    ): SumAggregation;
 
     /**
      * A `top_hits` metric aggregator keeps track of the most relevant document being
@@ -4104,7 +4212,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
      */
-    export function valueCountAggregation(name: string, field?: string): ValueCountAggregation;
+    export function valueCountAggregation(
+        name: string,
+        field?: string
+    ): ValueCountAggregation;
 
     /**
      * The `BucketAggregationBase` provides support for common options used across
@@ -4204,7 +4315,9 @@ declare namespace bob {
      *
      * @extends BucketAggregationBase
      */
-    export function adjacencyMatrixAggregation(name: string): AdjacencyMatrixAggregation;
+    export function adjacencyMatrixAggregation(
+        name: string
+    ): AdjacencyMatrixAggregation;
 
     /**
      * A special single bucket aggregation that enables aggregating
@@ -4261,7 +4374,12 @@ declare namespace bob {
      * @extends BucketAggregationBase
      */
     export class HistogramAggregationBase extends BucketAggregationBase {
-        constructor(name: string, aggType: string, field?: string, interval?: string | number);
+        constructor(
+            name: string,
+            aggType: string,
+            field?: string,
+            interval?: string | number
+        );
 
         /**
          * Sets the histogram interval. Buckets are generated based on this interval value.
@@ -4488,7 +4606,10 @@ declare namespace bob {
      * @extends RangeAggregationBase
      */
 
-    export function dateRangeAggregation(name: string, field?: string): DateRangeAggregation;
+    export function dateRangeAggregation(
+        name: string,
+        field?: string
+    ): DateRangeAggregation;
 
     /**
      * A filtering aggregation used to limit any sub aggregations' processing
@@ -4530,7 +4651,11 @@ declare namespace bob {
          * @throws {Error} If Execution Hint is outside the accepted set.
          */
         executionHint(
-            hint: 'map' | 'global_ordinals' | 'global_ordinals_hash' | 'global_ordinals_low_cardinality'
+            hint:
+                | 'map'
+                | 'global_ordinals'
+                | 'global_ordinals_hash'
+                | 'global_ordinals_low_cardinality'
         ): this;
     }
 
@@ -4588,7 +4713,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {Query=} filterQuery Query to filter on. Example - term query.
      */
-    export function filterAggregation(name: string, filterQuery?: Query): FilterAggregation;
+    export function filterAggregation(
+        name: string,
+        filterQuery?: Query
+    ): FilterAggregation;
 
     /**
      * Defines a single bucket of all the documents in the current document set
@@ -4760,7 +4888,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
      */
-    export function geoDistanceAggregation(name: string, field?: string): GeoDistanceAggregation;
+    export function geoDistanceAggregation(
+        name: string,
+        field?: string
+    ): GeoDistanceAggregation;
 
     /**
      * A multi-bucket aggregation that works on geo_point fields and groups points
@@ -4823,7 +4954,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
      */
-    export function geoHashGridAggregation(name: string, field?: string): GeoHashGridAggregation;
+    export function geoHashGridAggregation(
+        name: string,
+        field?: string
+    ): GeoHashGridAggregation;
 
     /**
      * Defines a single bucket of all the documents within the search execution
@@ -4910,7 +5044,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
      */
-    export function ipRangeAggregation(name: string, field?: string): IpRangeAggregation;
+    export function ipRangeAggregation(
+        name: string,
+        field?: string
+    ): IpRangeAggregation;
 
     /**
      * A field data based single bucket aggregation, that creates a bucket of all
@@ -4939,7 +5076,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
      */
-    export function missingAggregation(name: string, field?: string): MissingAggregation;
+    export function missingAggregation(
+        name: string,
+        field?: string
+    ): MissingAggregation;
 
     /**
      * A special single bucket aggregation that enables aggregating nested
@@ -4979,7 +5119,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} path `path` of the nested document
      */
-    export function nestedAggregation(name: string, path?: string): NestedAggregation;
+    export function nestedAggregation(
+        name: string,
+        path?: string
+    ): NestedAggregation;
 
     /**
      * A multi-bucket value source based aggregation that enables the user to
@@ -5008,7 +5151,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
      */
-    export function rangeAggregation(name: string, field?: string): RangeAggregation;
+    export function rangeAggregation(
+        name: string,
+        field?: string
+    ): RangeAggregation;
 
     /**
      * A special single bucket aggregation that enables aggregating
@@ -5065,7 +5211,10 @@ declare namespace bob {
      * The default is empty, which means that it joins back to the root / main document
      * level.
      */
-    export function reverseNestedAggregation(name: string, path?: string): ReverseNestedAggregation;
+    export function reverseNestedAggregation(
+        name: string,
+        path?: string
+    ): ReverseNestedAggregation;
 
     /**
      * A filtering aggregation used to limit any sub aggregations'
@@ -5106,7 +5255,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
      */
-    export function samplerAggregation(name: string, field?: string): SamplerAggregation;
+    export function samplerAggregation(
+        name: string,
+        field?: string
+    ): SamplerAggregation;
 
     /**
      * The `TermsAggregationBase` provides support for common options used across
@@ -5124,7 +5276,12 @@ declare namespace bob {
      * @extends BucketAggregationBase
      */
     export class TermsAggregationBase extends BucketAggregationBase {
-        constructor(name: string, aggType: string, refUrl: string, field?: string);
+        constructor(
+            name: string,
+            aggType: string,
+            refUrl: string,
+            field?: string
+        );
 
         /**
          * Sets the format expression for `key_as_string` in response buckets.
@@ -5205,7 +5362,11 @@ declare namespace bob {
          * @throws {Error} If Execution Hint is outside the accepted set.
          */
         executionHint(
-            hint: 'map' | 'global_ordinals' | 'global_ordinals_hash' | 'global_ordinals_low_cardinality'
+            hint:
+                | 'map'
+                | 'global_ordinals'
+                | 'global_ordinals_hash'
+                | 'global_ordinals_low_cardinality'
         ): this;
     }
 
@@ -5254,7 +5415,10 @@ declare namespace bob {
          * are also contained in the background. If instead you defined a custom background filter
          * that represents a different set of documents that you want to compare to, pass `false`
          */
-        mutualInformation(includeNegatives?: boolean, backgroundIsSuperset?: boolean): this;
+        mutualInformation(
+            includeNegatives?: boolean,
+            backgroundIsSuperset?: boolean
+        ): this;
 
         /**
          * Use `chi_square` as significance score
@@ -5266,7 +5430,10 @@ declare namespace bob {
          * are also contained in the background. If instead you defined a custom background filter
          * that represents a different set of documents that you want to compare to, pass `false`
          */
-        chiSquare(includeNegatives?: boolean, backgroundIsSuperset?: boolean): this;
+        chiSquare(
+            includeNegatives?: boolean,
+            backgroundIsSuperset?: boolean
+        ): this;
 
         /**
          * Sets `gnd`, google normalized score to be used as significance score.
@@ -5371,7 +5538,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
      */
-    export function termsAggregation(name: string, field?: string): TermsAggregation;
+    export function termsAggregation(
+        name: string,
+        field?: string
+    ): TermsAggregation;
 
     /**
      * The `PipelineAggregationBase` provides support for common options used across
@@ -5392,7 +5562,12 @@ declare namespace bob {
      * @extends Aggregation
      */
     export class PipelineAggregationBase extends Aggregation {
-        constructor(name: string, aggType: string, refUrl: string, bucketsPath?: string | object);
+        constructor(
+            name: string,
+            aggType: string,
+            refUrl: string,
+            bucketsPath?: string | object
+        );
 
         /**
          * Sets the relative path, `buckets_path`, which refers to the metric to aggregate over.
@@ -5438,7 +5613,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} bucketsPath The relative path of metric to aggregate over
      */
-    export function avgBucketAggregation(name: string, bucketsPath?: string): AvgBucketAggregation;
+    export function avgBucketAggregation(
+        name: string,
+        bucketsPath?: string
+    ): AvgBucketAggregation;
 
     /**
      * A parent pipeline aggregation which calculates the derivative of a
@@ -5472,7 +5650,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} bucketsPath The relative path of metric to aggregate over
      */
-    export function derivativeAggregation(name: string, bucketsPath?: string): DerivativeAggregation;
+    export function derivativeAggregation(
+        name: string,
+        bucketsPath?: string
+    ): DerivativeAggregation;
 
     /**
      * A sibling pipeline aggregation which identifies the bucket(s) with
@@ -5499,7 +5680,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} bucketsPath The relative path of metric to aggregate over
      */
-    export function maxBucketAggregation(name: string, bucketsPath?: string): MaxBucketAggregation;
+    export function maxBucketAggregation(
+        name: string,
+        bucketsPath?: string
+    ): MaxBucketAggregation;
 
     /**
      * A sibling pipeline aggregation which identifies the bucket(s) with
@@ -5526,7 +5710,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} bucketsPath The relative path of metric to aggregate over
      */
-    export function minBucketAggregation(name: string, bucketsPath?: string): MinBucketAggregation;
+    export function minBucketAggregation(
+        name: string,
+        bucketsPath?: string
+    ): MinBucketAggregation;
 
     /**
      * A sibling pipeline aggregation which calculates the sum across all bucket
@@ -5549,7 +5736,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} bucketsPath The relative path of metric to aggregate over
      */
-    export function sumBucketAggregation(name: string, bucketsPath?: string): SumBucketAggregation;
+    export function sumBucketAggregation(
+        name: string,
+        bucketsPath?: string
+    ): SumBucketAggregation;
 
     /**
      * A sibling pipeline aggregation which calculates a variety of stats across
@@ -5574,7 +5764,10 @@ declare namespace bob {
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} bucketsPath The relative path of metric to aggregate over
      */
-    export function statsBucketAggregation(name: string, bucketsPath?: string): StatsBucketAggregation;
+    export function statsBucketAggregation(
+        name: string,
+        bucketsPath?: string
+    ): StatsBucketAggregation;
 
     /**
      * A sibling pipeline aggregation which calculates a variety of stats across
@@ -5674,7 +5867,9 @@ declare namespace bob {
          * or `holt_winters` (aka "triple exponential").
          * Default is `simple`
          */
-        model(model: 'simple' | 'linear' | 'ewma' | 'holt' | 'holt_winters'): this;
+        model(
+            model: 'simple' | 'linear' | 'ewma' | 'holt' | 'holt_winters'
+        ): this;
 
         /**
          * Sets the size of window to "slide" across the histogram. Optional.
@@ -5917,7 +6112,10 @@ declare namespace bob {
      * @param {string} name A valid aggregation name
      * @param {Array=} fields Array of fields
      */
-    export function matrixStatsAggregation(name: string, fields?: object): MatrixStatsAggregation;
+    export function matrixStatsAggregation(
+        name: string,
+        fields?: object
+    ): MatrixStatsAggregation;
 
     /**
      * `ScoreFunction` provides support for common options used across
@@ -5979,7 +6177,9 @@ declare namespace bob {
      *
      * @param {Script|string} script
      */
-    export function scriptScoreFunction(script: Script | string): ScriptScoreFunction;
+    export function scriptScoreFunction(
+        script: Script | string
+    ): ScriptScoreFunction;
 
     /**
      * The `weight` score allows you to multiply the score by the provided `weight`.
@@ -6100,7 +6300,9 @@ declare namespace bob {
      *
      * @param {string=} field the field to be extracted from the document.
      */
-    export function fieldValueFactorFunction(field?: string): FieldValueFactorFunction;
+    export function fieldValueFactorFunction(
+        field?: string
+    ): FieldValueFactorFunction;
 
     /**
      * Decay functions score a document with a function that decays depending on
@@ -6271,7 +6473,12 @@ declare namespace bob {
      * @extends Suggester
      */
     class AnalyzedSuggesterBase extends Suggester {
-        constructor(suggesterType: string, name: string, field?: string, txt?: string);
+        constructor(
+            suggesterType: string,
+            name: string,
+            field?: string,
+            txt?: string
+        );
 
         /**
          * Sets the text to get suggestions for. If not set, the global
@@ -6440,7 +6647,12 @@ declare namespace bob {
          * `levenstein`, `jarowinkler` or ngram`.
          */
         stringDistance(
-            implMethod: 'internal' | 'damerau_levenshtein' | 'levenstein' | 'jarowinkler' | 'ngram'
+            implMethod:
+                | 'internal'
+                | 'damerau_levenshtein'
+                | 'levenstein'
+                | 'jarowinkler'
+                | 'ngram'
         ): this;
     }
 
@@ -6456,7 +6668,11 @@ declare namespace bob {
      *
      * @throws {Error} if `name` is empty
      */
-    export function termSuggester(name: string, field?: string, txt?: string): TermSuggester;
+    export function termSuggester(
+        name: string,
+        field?: string,
+        txt?: string
+    ): TermSuggester;
 
     /**
      * The `phrase` suggester uses candidate generators to produce a list of possible
@@ -6755,7 +6971,9 @@ declare namespace bob {
          *
          * @param {string} model One of `stupid_backoff`, `laplace`, `linear_interpolation`
          */
-        smoothing(model: 'stupid_backoff' | 'laplace' | 'linear_interpolation'): this;
+        smoothing(
+            model: 'stupid_backoff' | 'laplace' | 'linear_interpolation'
+        ): this;
 
         /**
          * Sets the given list of candicate generators which produce a list of possible terms
@@ -6790,7 +7008,11 @@ declare namespace bob {
      *
      * @throws {Error} if `name` is empty
      */
-    export function phraseSuggester(name: string, field?: string, txt?: string): PhraseSuggester;
+    export function phraseSuggester(
+        name: string,
+        field?: string,
+        txt?: string
+    ): PhraseSuggester;
 
     /**
      * The completion suggester provides auto-complete/search-as-you-type
@@ -6935,7 +7157,10 @@ declare namespace bob {
      *
      * @extends Suggester
      */
-    export function completionSuggester(name: string, field?: string): CompletionSuggester;
+    export function completionSuggester(
+        name: string,
+        field?: string
+    ): CompletionSuggester;
 
     /**
      * Allows to highlight search results on one or more fields. In order to
@@ -7895,7 +8120,10 @@ declare namespace bob {
      * @param {string|Object=} source Source of the search template.
      * This needs to be specified if optional argument `type` is passed.
      */
-    export function searchTemplate(type?: string, source?: string | object): SearchTemplate;
+    export function searchTemplate(
+        type?: string,
+        source?: string | object
+    ): SearchTemplate;
 
     export namespace recipes {
         /**
@@ -7915,7 +8143,10 @@ declare namespace bob {
          * @param {number=} seed A seed value for the random score function.
          * @throws {TypeError} If `query` is not an instance of `Query`.
          */
-        export function randomSortQuery(query?: Query, seed?: number): FunctionScoreQuery;
+        export function randomSortQuery(
+            query?: Query,
+            seed?: number
+        ): FunctionScoreQuery;
 
         /**
          * Recipe for constructing a filter query using `bool` query.
@@ -7949,7 +8180,10 @@ declare namespace bob {
      * @param {number=} seed A seed value for the random score function.
      * @throws {TypeError} If `query` is not an instance of `Query`.
      */
-    export function cookRandomSortQuery(query?: Query, seed?: number): FunctionScoreQuery;
+    export function cookRandomSortQuery(
+        query?: Query,
+        seed?: number
+    ): FunctionScoreQuery;
 
     /**
      * Recipe for constructing a filter query using `bool` query.
