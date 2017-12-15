@@ -48,7 +48,7 @@ exports.missingQuery = function missingQuery(field) {
  *
  * Can be accessed using `bob.recipes.randomSortQuery` OR `bob.cookRandomSortQuery`.
  *
- * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/5.3/query-dsl-function-score-query.html#function-random)
+ * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-random)
  *
  * @example
  * const reqBody = bob.requestBodySearch()
@@ -90,7 +90,7 @@ exports.randomSortQuery = function randomSortQuery(
  *
  * Can be accessed using `bob.recipes.filterQuery` OR `bob.cookFilterQuery`.
  *
- * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/5.3/query-dsl-bool-query.html)
+ * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html)
  *
  * @example
  * const boolQry = bob.cookFilterQuery(bob.termQuery('status', 'active'), true);

@@ -5,7 +5,7 @@ const isNil = require('lodash.isnil');
 /**
  * Class supporting the Elasticsearch scripting API.
  *
- * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/5.3/modules-scripting-using.html)
+ * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting-using.html)
  *
  * @param {string=} type One of `inline`, `stored`, `file`
  * @param {string=} source Source of the script.
@@ -111,6 +111,9 @@ class Script {
     /**
      * Specify the `file` script by stored as a file in the scripts folder.
      *
+     * Note: File scripts have been removed in elasticsearch v6. Instead, use
+     * stored scripts.
+     *
      * @param {string} fileName The name of the script stored as a file in the scripts folder.
      * For script file `config/scripts/calculate-score.groovy`,
      * `fileName` should be `calculate-score`
@@ -126,7 +129,7 @@ class Script {
 
     /**
      * Specifies the language the script is written in. Defaults to `painless` but
-     * may be set to any of languages listed in [Scripting](https://www.elastic.co/guide/en/elasticsearch/reference/5.3/modules-scripting.html).
+     * may be set to any of languages listed in [Scripting](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html).
      * The default language may be changed in the `elasticsearch.yml` config file by setting
      * `script.default_lang` to the appropriate language.
      *
@@ -137,6 +140,10 @@ class Script {
      * @returns {Script} returns `this` so that calls can be chained.
      */
     lang(lang) {
+        // TODO: Add warning.
+        // The Groovy, JavaScript, and Python scripting languages were
+        // deprecated in elasticsearch 5.0 and have now been removed. Use
+        // painless instead.
         this._body.lang = lang;
         return this;
     }

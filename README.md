@@ -91,8 +91,8 @@ It is being hosted with help from this awesome project - https://github.com/js-o
 ## Recipes
 The library has a few helper recipes:
 - [Missing query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html#_literal_missing_literal_query)
-- [Random sort query](https://www.elastic.co/guide/en/elasticsearch/reference/5.3/query-dsl-function-score-query.html#function-random)
-- [Filter query](https://www.elastic.co/guide/en/elasticsearch/reference/5.3/query-dsl-bool-query.html)
+- [Random sort query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-random)
+- [Filter query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html)
 
 ```js
 const qry = bob.cookMissingQuery('user');
