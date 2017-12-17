@@ -1,55 +1,63 @@
 # elastic-builder
 
-[![npm version](https://badge.fury.io/js/elastic-builder.svg)](https://badge.fury.io/js/elastic-builder)
-[![Build Status](https://travis-ci.org/sudo-suhas/elastic-builder.svg?branch=master)](https://travis-ci.org/sudo-suhas/elastic-builder)
-[![Coverage Status](https://coveralls.io/repos/github/sudo-suhas/elastic-builder/badge.svg?branch=master)](https://coveralls.io/github/sudo-suhas/elastic-builder?branch=master)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![npm version][version-badge]][package]
+[![Build Status][build-badge]][build]
+[![Coverage Status][coverage-badge]][coverage]
+[![semantic-release][semantic-release-badge]][semantic-release]
 
-A Node.js implementation of the [Elasticsearch](https://www.elasticsearch.org/) DSL for use with the [official elasticsearch javascript client](https://www.elasticsearch.org/guide/en/elasticsearch/client/javascript-api/current/index.html) with builder syntax.
+A Node.js implementation of the [Elasticsearch][elasticsearch] DSL for use with
+the [official elasticsearch javascript client][es-js-client] with builder
+syntax.
 
 ![elastic-builder](elastic-builder.png)
 
-**Check out the [API reference documentation](https://elastic-builder.js.org/docs).**
+**Check out the [API reference documentation][api-docs].**
 
-elastic-builder includes TypeScript definition for superior development experience.
+elastic-builder includes TypeScript definition for superior development
+experience.
 
-For a zero DSL way to build elasticsearch queries, checkout [`elastic-muto`](https://github.com/booleanapp/elastic-muto)
+For a zero DSL way to build elasticsearch queries, checkout
+[`elastic-muto`][elastic-muto]
 
 ## Elasticsearch compatibility
-`elastic-builder` was built for 5.x query DSL. However, the library should be usable with
-2.x as well. For older versions of the DSL, you can try
-[`elastic.js`](https://github.com/ErwanPigneul/elastic.js)
-or [`bodybuilder`](https://github.com/danpaz/bodybuilder)
+
+`elastic-builder` was built for 5.x query DSL. However, the library should be
+usable with 2.x as well. For older versions of the DSL, you can try
+[`elastic.js`][elastic-js-fork] or [`bodybuilder`][bodybuilder]
 
 `elastic-builder` is also 100% compatible with elasticsearch 6.0(alpha).
-Although there were [breaking changes](https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking_60_search_changes.html),
-all deprecated queries, features in 5.0 were avoided or not implemented.
+Although there were [breaking changes][es-6-breaking-changes], all deprecated
+queries, features in 5.0 were avoided or not implemented.
 
 What's Included:
-  * [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
-  * [Queries](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html)
-  * [Aggregations](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html)
-  * [Suggesters](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters.html)
-  * [Search Template](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html)
+
+* [Request Body Search][es-search-request-body]
+* [Queries][es-query-dsl]
+* [Aggregations][es-search-aggregations]
+* [Suggesters][es-search-suggesters]
+* [Search Template][es-search-template.html]
 
 ## Install
+
 ```
 npm install elastic-builder --save
 ```
 
 ## Usage
+
 ```js
 const bob = require('elastic-builder'); // the builder
 
 const requestBody = bob.requestBodySearch()
-    .query(bob.matchQuery('message', 'this is a test'));
+  .query(bob.matchQuery('message', 'this is a test'));
 
 // OR
 
-const requestBody = new bob.RequestBodySearch()
-    .query(new bob.MatchQuery('message', 'this is a test'));
+const requestBody = new bob.RequestBodySearch().query(
+  new bob.MatchQuery('message', 'this is a test')
+);
 
-requestBody.toJSON() // or print to console - bob.prettyPrint(requestBody)
+requestBody.toJSON(); // or print to console - bob.prettyPrint(requestBody)
 {
   "query": {
     "match": {
@@ -63,6 +71,7 @@ For each class, `MyClass`, a utility function `myClass` has been provided which
 contructs the object for us without the need for `new` keyword.
 
 ## REPL
+
 Try it out on the command line using the node REPL:
 
 ```
@@ -73,26 +82,33 @@ elastic-builder > bob.prettyPrint(bob.requestBodySearch().query(bob.matchQuery('
 ```
 
 ## Motivation
-Elasticsearch only provides a low level client for making requests.
-[`elastic.js`](https://github.com/fullscale/elastic.js) was a relatively popular library for building the request search body.
-However, this project is not being maintained nor is the [fork](https://github.com/ErwanPigneul/elastic.js).
-There were [several changes](https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking_50_search_changes.html)
-in the 5.0 release which make the older libraries unusable.
 
-This library is a port of `elastic.js` to es6 with elasticsearch 5.x compatibility.
+Elasticsearch only provides a low level client for making requests.
+[`elastic.js`][elastic-js] was a relatively popular library for building the
+request search body. However, this project is not being maintained nor is the
+[fork][elastic-js-fork]. There were [several changes][es-5-breaking-changes] in
+the 5.0 release which make the older libraries unusable.
+
+This library is a port of `elastic.js` to es6 with elasticsearch 5.x
+compatibility.
 
 ## API Reference
-API reference can be accessed here - https://elastic-builder.js.org/docs.
-The docs include examples ported from the [official elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html).
 
-API documentation was generated using [documentation.js](https://github.com/documentationjs/documentation).
-It is being hosted with help from this awesome project - https://github.com/js-org/dns.js.org
+API reference can be accessed here - https://elastic-builder.js.org/docs. The
+docs include examples ported from the [official elasticsearch
+reference][es-reference].
+
+API documentation was generated using [documentation.js][documentation-js]. It
+is being hosted with help from this awesome project -
+https://github.com/js-org/dns.js.org
 
 ## Recipes
+
 The library has a few helper recipes:
-- [Missing query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html#_literal_missing_literal_query)
-- [Random sort query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-random)
-- [Filter query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html)
+
+* [Missing query][es-missing-query]
+* [Random sort query][es-random-score-query]
+* [Filter query][es-filter-query]
 
 ```js
 const qry = bob.cookMissingQuery('user');
@@ -107,16 +123,19 @@ qry.toJSON();
 }
 ```
 
-Check out the [reference docs](https://elastic-builder.js.org/docs#recipes) for more examples.
+Check out the [reference docs][api-docs-recipes] for more examples.
 
-If you have any recipes, please do share or better yet, create a [pull request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/) :smile:.
+If you have any recipes, please do share or better yet, create a [pull
+request][create-pull-request] :smile:.
 
 ## Changelog
-[releases](https://github.com/sudo-suhas/elastic-builder/releases)
+
+[releases][releases]
 
 ## Examples
 
 **Usage with official elasticsearch client:**
+
 ```js
 'use strict';
 
@@ -124,36 +143,34 @@ const elasticsearch = require('elasticsearch');
 const bob = require('elastic-builder');
 
 const client = new elasticsearch.Client({
-    host: 'localhost:9200',
-    log: 'trace'
+  host: 'localhost:9200',
+  log: 'trace'
 });
 
 const requestBody = bob.requestBodySearch()
-    .query(bob.matchQuery('body', 'elasticsearch'));
+  .query(bob.matchQuery('body', 'elasticsearch'));
 
 client.search({
     index: 'twitter',
     type: 'tweets',
     body: requestBody.toJSON()
-})
-    .then(resp => {
-        const hits = resp.hits.hits;
-    })
-    .catch(err => {
-        console.trace(err.message);
-    });
-
+  })
+  .then(resp => {
+    const hits = resp.hits.hits;
+  })
+  .catch(err => {
+    console.trace(err.message);
+  });
 ```
 
 ```js
 // Bool query
-const requestBody = bob.requestBodySearch()
-    .query(
-        bob.boolQuery()
-            .must(bob.matchQuery('last_name', 'smith'))
-            .filter(bob.rangeQuery('age').gt(30))
-    )
-requestBody.toJSON()
+const requestBody = bob.requestBodySearch().query(
+  bob.boolQuery()
+    .must(bob.matchQuery('last_name', 'smith'))
+    .filter(bob.rangeQuery('age').gt(30))
+);
+requestBody.toJSON();
 {
   "query": {
     "bool": {
@@ -168,14 +185,13 @@ requestBody.toJSON()
 }
 
 // Multi Match Query
-const requestBody = bob.requestBodySearch()
-    .query(
-        bob.multiMatchQuery(['title', 'body'], 'Quick brown fox')
-            .type('best_fields')
-            .tieBreaker(0.3)
-            .minimumShouldMatch('30%')
-    );
-requestBody.toJSON()
+const requestBody = bob.requestBodySearch().query(
+  bob.multiMatchQuery(['title', 'body'], 'Quick brown fox')
+    .type('best_fields')
+    .tieBreaker(0.3)
+    .minimumShouldMatch('30%')
+);
+requestBody.toJSON();
 {
   "multi_match": {
     "query": "Quick brown fox",
@@ -188,9 +204,9 @@ requestBody.toJSON()
 
 // Aggregation
 const requestBody = bob.requestBodySearch()
-    .size(0)
-    .agg(bob.termsAggregation('popular_colors', 'color'));
-requestBody.toJSON()
+  .size(0)
+  .agg(bob.termsAggregation('popular_colors', 'color'));
+requestBody.toJSON();
 {
   "size": 0,
   "aggs": {
@@ -202,13 +218,13 @@ requestBody.toJSON()
 
 // Nested Aggregation
 const requestBody = bob.requestBodySearch()
-    .size(0)
-    .agg(
-        bob.termsAggregation('colors', 'color')
-            .agg(bob.avgAggregation('avg_price', 'price'))
-            .agg(bob.termsAggregation('make', 'make'))
-    );
-requestBody.toJSON()
+  .size(0)
+  .agg(
+    bob.termsAggregation('colors', 'color')
+      .agg(bob.avgAggregation('avg_price', 'price'))
+      .agg(bob.termsAggregation('make', 'make'))
+  );
+requestBody.toJSON();
 {
   "size": 0,
   "aggs": {
@@ -228,15 +244,14 @@ requestBody.toJSON()
 
 // If you prefer using the `new` keyword
 const agg = new bob.TermsAggregation('countries', 'artist.country')
-    .order('rock>playback_stats.avg', 'desc')
-    .agg(
-        new bob.FilterAggregation(
-            'rock',
-            new bob.TermQuery('genre', 'rock')
-        ).agg(new bob.StatsAggregation('playback_stats', 'play_count'))
+  .order('rock>playback_stats.avg', 'desc')
+  .agg(
+    new bob.FilterAggregation('rock', new bob.TermQuery('genre', 'rock')).agg(
+      new bob.StatsAggregation('playback_stats', 'play_count')
     )
-    .toJSON();
-agg.toJSON()
+  )
+  .toJSON();
+agg.toJSON();
 {
   "countries": {
     "terms": {
@@ -260,20 +275,17 @@ agg.toJSON()
 
 // Sort
 const requestBody = bob.requestBodySearch()
-    .query(
-        bob.boolQuery()
-            .filter(bob.termQuery('message', 'test'))
-    )
-    .sort(bob.sort('timestamp', 'desc'))
-    .sorts([
-        bob.sort('channel', 'desc'),
-        bob.sort('categories', 'desc'),
-        // The order defaults to desc when sorting on the _score,
-        // and defaults to asc when sorting on anything else.
-        bob.sort('content'),
-        bob.sort('price').order('desc').mode('avg')
-    ]);
-requestBody.toJSON()
+  .query(bob.boolQuery().filter(bob.termQuery('message', 'test')))
+  .sort(bob.sort('timestamp', 'desc'))
+  .sorts([
+    bob.sort('channel', 'desc'),
+    bob.sort('categories', 'desc'),
+    // The order defaults to desc when sorting on the _score,
+    // and defaults to asc when sorting on anything else.
+    bob.sort('content'),
+    bob.sort('price').order('desc').mode('avg')
+  ]);
+requestBody.toJSON();
 {
   "query": {
     "bool": {
@@ -293,19 +305,21 @@ requestBody.toJSON()
 
 // From / size
 const requestBody = bob.requestBodySearch()
-    .query(bob.matchAllQuery())
-    .size(5)
-    .from(10);
-requestBody.toJSON()
+  .query(bob.matchAllQuery())
+  .size(5)
+  .from(10);
+requestBody.toJSON();
 {
   "query": { "match_all": {} },
   "size": 5,
   "from": 10
 }
 ```
-For more examples, check out the [reference docs](https://elastic-builder.js.org/docs/).
+
+For more examples, check out the [reference docs][api-docs].
 
 ## Validation
+
 `elastic-builder` provides lightweight validation where ever possible:
 
 ```
@@ -332,19 +346,61 @@ Error: The 'type' parameter should belong to Set {
 ```
 
 ## Tests
+
 Run unit tests:
+
 ```
 npm test
 ```
 
 ## Credits
-`elastic-builder` is heavily inspired by [`elastic.js`](https://github.com/fullscale/elastic.js)
-and the [fork](https://github.com/ErwanPigneul/elastic.js) by Erwan Pigneul.
 
-[bodybuilder](https://github.com/danpaz/bodybuilder) for documentation style, build setup, demo page.
+`elastic-builder` is heavily inspired by [`elastic.js`][elastic-js] and the
+[fork][elastic-js-fork] by Erwan Pigneul.
+
+[`bodybuilder`][bodybuilder] for documentation style, build setup, demo page.
 
 ## Related
-[elastic-muto](https://github.com/booleanapp/elastic-muto) - Easy expressive search queries for Elasticsearch
+
+[`elastic-muto`][elastic-muto] - Easy expressive search queries for
+Elasticsearch
 
 ## License
-MIT
+
+MIT © [Suhas Karanth][sudo-suhas]
+
+[version-badge]: https://badge.fury.io/js/elastic-builder.svg
+[package]: https://www.npmjs.com/package/elastic-builder
+[build-badge]: https://travis-ci.org/sudo-suhas/elastic-builder.svg?branch=master
+[build]: https://travis-ci.org/sudo-suhas/elastic-builder
+[coverage-badge]: https://coveralls.io/repos/github/sudo-suhas/elastic-builder/badge.svg?branch=master
+[coverage]: https://coveralls.io/github/sudo-suhas/elastic-builder?branch=master
+[semantic-release-badge]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+[semantic-release]: https://github.com/semantic-release/semantic-release
+
+[elasticsearch]: https://www.elasticsearch.org/
+[es-js-client]: https://www.elasticsearch.org/guide/en/elasticsearch/client/javascript-api/current/index.html
+[es-reference]: https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
+[es-5-breaking-changes]: https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking_50_search_changes.html
+[es-6-breaking-changes]: https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking_60_search_changes.html
+[es-search-request-body]: https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
+[es-query-dsl]: https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html
+[es-missing-query]: https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html#_literal_missing_literal_query
+[es-random-score-query]: https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-random
+[es-filter-query]: https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html
+[es-search-aggregations]: https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html
+[es-search-suggesters]: https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters.html
+[es-search-template.html]: https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html
+
+[api-docs]: https://elastic-builder.js.org/docs
+[api-docs-recipes]: https://elastic-builder.js.org/docs#recipes
+[releases]: https://github.com/sudo-suhas/elastic-builder/releases
+
+[elastic-js]: https://github.com/fullscale/elastic.js
+[elastic-js-fork]: https://github.com/ErwanPigneul/elastic.js
+[bodybuilder]: https://github.com/danpaz/bodybuilder
+[elastic-muto]: https://github.com/booleanapp/elastic-muto
+[documentation-js]: https://github.com/documentationjs/documentation
+
+[create-pull-request]: https://help.github.com/articles/creating-a-pull-request-from-a-fork/
+[sudo-suhas]: https://github.com/sudo-suhas
