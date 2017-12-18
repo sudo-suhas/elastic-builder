@@ -137,6 +137,9 @@ class MoreLikeThisQuery extends Query {
     /**
      * Sets the text to find documents like it.
      *
+     * Note: This parameter has been removed in elasticsearch 6.0. Use `like`
+     * instead.
+     *
      * @param {string} txt The text to find documents like it.
      * @returns {MoreLikeThisQuery} returns `this` so that calls can be chained
      */
@@ -148,6 +151,9 @@ class MoreLikeThisQuery extends Query {
     /**
      * Sets the list of `ids` for the documents with syntax similar to
      * the [Multi GET API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-multi-get.html).
+     *
+     * Note: This parameter has been removed in elasticsearch 6.0. Use `like`
+     * instead.
      *
      * @param {Array<string>} ids
      * @returns {MoreLikeThisQuery} returns `this` so that calls can be chained
@@ -162,6 +168,9 @@ class MoreLikeThisQuery extends Query {
     /**
      * Sets the list of `docs` for the documents with syntax similar to
      * the [Multi GET API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-multi-get.html).
+     *
+     * Note: This parameter has been removed in elasticsearch 6.0. Use `like`
+     * instead.
      *
      * @param {Array<Object>} docs
      * @returns {MoreLikeThisQuery} returns `this` so that calls can be chained

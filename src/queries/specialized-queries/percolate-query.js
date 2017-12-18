@@ -34,6 +34,7 @@ class PercolateQuery extends Query {
         super('percolate');
 
         if (!isNil(field)) this._queryOpts.field = field;
+        // Delegate this to method:
         if (!isNil(docType)) this._queryOpts.document_type = docType;
     }
 
@@ -50,6 +51,9 @@ class PercolateQuery extends Query {
 
     /**
      * Sets the type / mapping of the document being percolated.
+     *
+     * Note: This param has been deprecated in elasticsearch 6.0. From 6.0 and
+     * later, it is no longer required to specify the `document_type` parameter.
      *
      * @param {string} docType The type / mapping of the document being percolated.
      * @returns {PercolateQuery} returns `this` so that calls can be chained.

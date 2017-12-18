@@ -114,6 +114,11 @@ class TermsQuery extends Query {
     /**
      * The index to fetch the term values from. Defaults to the current index.
      *
+     * Note: The `index` parameter in the terms filter, used to look up terms in
+     * a dedicated index is mandatory in elasticsearch 6.0. Previously, the
+     * index defaulted to the index the query was executed on. In 6.0, this
+     * index must be explicitly set in the request.
+     *
      * @param {string} idx The index to fetch the term values from.
      * Defaults to the current index.
      * @returns {TermsQuery} returns `this` so that calls can be chained

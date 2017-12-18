@@ -53,6 +53,10 @@ class GeoQueryBase extends Query {
      * geo points with invalid latitude or longitude, `COERCE` to try and infer correct latitude
      * or longitude, or `STRICT` (default is `STRICT`).
      *
+     * Note: The `ignore_malformed` and `coerce` parameters have been removed
+     * from `geo_bounding_box`, `geo_polygon`, and `geo_distance` queries in
+     * elasticsearch 6.0.
+     *
      * @param {string} method One of `IGNORE_MALFORMED`, `COERCE` or `STRICT`(default)
      * @returns {GeoQueryBase} returns `this` so that calls can be chained.
      * @throws {Error} If `method` parameter is not one of `IGNORE_MALFORMED`, `COERCE` or `STRICT`

@@ -25,9 +25,9 @@ For a zero DSL way to build elasticsearch queries, checkout
 usable with 2.x as well. For older versions of the DSL, you can try
 [`elastic.js`][elastic-js-fork] or [`bodybuilder`][bodybuilder]
 
-`elastic-builder` is also 100% compatible with elasticsearch 6.0(alpha).
-Although there were [breaking changes][es-6-breaking-changes], all deprecated
-queries, features in 5.0 were avoided or not implemented.
+`elastic-builder` is also compatible with elasticsearch 6.0(alpha) for the most
+part. However, there are some [breaking changes][es-6-breaking-changes] which
+have been called out in the docs(ex: [`Script.file`][api-docs-script-file].
 
 What's Included:
 
@@ -394,6 +394,7 @@ MIT © [Suhas Karanth][sudo-suhas]
 
 [api-docs]: https://elastic-builder.js.org/docs
 [api-docs-recipes]: https://elastic-builder.js.org/docs#recipes
+[api-docs-script-file]: https://elastic-builder.js.org/docs/#scriptfile
 [releases]: https://github.com/sudo-suhas/elastic-builder/releases
 
 [elastic-js]: https://github.com/fullscale/elastic.js

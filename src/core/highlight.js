@@ -442,7 +442,12 @@ class Highlight {
      * Allows to force a specific highlighter type.
      * This is useful for instance when needing to use
      * the plain highlighter on a field that has term_vectors enabled.
-     * You can apply the option to a specific field by passing the optional field name parameter.
+     * You can apply the option to a specific field by passing the optional
+     * field name parameter.
+     *
+     * Note: The `postings` highlighter has been removed in elasticsearch 6.0.
+     * The `unified` highlighter outputs the same highlighting when
+     * `index_options` is set to `offsets`.
      *
      * @example
      * const highlight = bob.highlight('content').type('plain', 'content');

@@ -193,6 +193,9 @@ declare namespace bob {
          * uses either the lucene `plain` highlighter, the fast vector highlighter (`fvh`)
          * or `postings` highlighter.
          *
+         * Note: The `postings` highlighter has been removed in elasticsearch 6.0. The `unified`
+         * highlighter outputs the same highlighting when `index_options` is set to `offsets`.
+         *
          * @param {Highlight} highlight
          */
         highlight(highlight: Highlight): this;
@@ -509,6 +512,10 @@ declare namespace bob {
          * Default is `constant_score`.
          * This is an advanced option, use with care.
          *
+         * Note: The deprecated multi term rewrite parameters `constant_score_auto`,
+         * `constant_score_filter` (synonyms for `constant_score`) have been removed in
+         * elasticsearch 6.0.
+         *
          * @param {string} method The rewrite method as a string.
          * @throws {Error} If the given `rewrite` method is not valid.
          */
@@ -533,6 +540,10 @@ declare namespace bob {
          *  scoring terms are used. Replace N with an integer value.
          * Default is `constant_score`.
          * This is an advanced option, use with care.
+         *
+         * Note: The deprecated multi term rewrite parameters `constant_score_auto`,
+         * `constant_score_filter` (synonyms for `constant_score`) have been removed in
+         * elasticsearch 6.0.
          *
          * @param {string} method The rewrite method as a string.
          * @throws {Error} If the given `fuzzy_rewrite` method is not valid.
@@ -808,6 +819,10 @@ declare namespace bob {
          * Default is `constant_score`.
          * This is an advanced option, use with care.
          *
+         * Note: The deprecated multi term rewrite parameters `constant_score_auto`,
+         * `constant_score_filter` (synonyms for `constant_score`) have been removed in
+         * elasticsearch 6.0.
+         *
          * @param {string} method The rewrite method as a string.
          * @throws {Error} If the given `rewrite` method is not valid.
          */
@@ -833,6 +848,10 @@ declare namespace bob {
          *
          * Default is `constant_score`.
          * This is an advanced option, use with care.
+         *
+         * Note: The deprecated multi term rewrite parameters `constant_score_auto`,
+         * `constant_score_filter` (synonyms for `constant_score`) have been removed in
+         * elasticsearch 6.0.
          *
          * @param {string} method The rewrite method as a string.
          * @throws {Error} If the given `fuzzy_rewrite` method is not valid.
@@ -1122,6 +1141,10 @@ declare namespace bob {
          * Default is `constant_score`.
          * This is an advanced option, use with care.
          *
+         * Note: The deprecated multi term rewrite parameters `constant_score_auto`,
+         * `constant_score_filter` (synonyms for `constant_score`) have been removed in
+         * elasticsearch 6.0.
+         *
          * @param {string} method The rewrite method as a string.
          * @throws {Error} If the given `rewrite` method is not valid.
          */
@@ -1148,6 +1171,10 @@ declare namespace bob {
          * Default is `constant_score`.
          * This is an advanced option, use with care.
          *
+         * Note: The deprecated multi term rewrite parameters `constant_score_auto`,
+         * `constant_score_filter` (synonyms for `constant_score`) have been removed in
+         * elasticsearch 6.0.
+         *
          * @param {string} method The rewrite method as a string.
          * @throws {Error} If the given `fuzzy_rewrite` method is not valid.
          */
@@ -1163,6 +1190,9 @@ declare namespace bob {
 
         /**
          * Auto generate phrase queries. Defaults to `false`.
+         *
+         * Note: This parameter has been removed in elasticsearch 6.0. If provided, it will be
+         * ignored and issue a deprecation warning.
          *
          * @param {boolean} enable
          */
@@ -1190,6 +1220,10 @@ declare namespace bob {
          * Default is `false`. It is not allowed to set this option to `false`
          * if `auto_generate_phrase_queries` is already set to `true`.
          *
+         * Note: This parameter has been removed in elasticsearch 6.0. If provided, it will be
+         * ignored and issue a deprecation warning. The `query_string` query now splits on operator
+         * only.
+         *
          * @param {string} enable
          */
         splitOnWhitespace(enable: string): this;
@@ -1197,6 +1231,10 @@ declare namespace bob {
         /**
          * Should the queries be combined using `dis_max` (set it to `true`),
          * or a bool query (set it to `false`). Defaults to `true`.
+         *
+         * Note: This parameter has been removed in elasticsearch 6.0. If provided, it will be
+         * ignored and issue a deprecation warning. The `tie_breaker` parameter must be used
+         * instead.
          *
          * @param {boolean} enable
          */
@@ -1359,6 +1397,10 @@ declare namespace bob {
 
         /**
          * The index to fetch the term values from. Defaults to the current index.
+         *
+         * Note: The `index` parameter in the terms filter, used to look up terms in a dedicated
+         * index is mandatory in elasticsearch 6.0. Previously, the index defaulted to the index
+         * the query was executed on. In 6.0, this index must be explicitly set in the request.
          *
          * @param {string} idx The index to fetch the term values from.
          * Defaults to the current index.
@@ -1580,6 +1622,10 @@ declare namespace bob {
          * Default is `constant_score`.
          * This is an advanced option, use with care.
          *
+         * Note: The deprecated multi term rewrite parameters `constant_score_auto`,
+         * `constant_score_filter` (synonyms for `constant_score`) have been removed in
+         * elasticsearch 6.0.
+         *
          * @param {string} method The rewrite method as a string.
          * @throws {Error} If the given `rewrite` method is not valid.
          */
@@ -1627,6 +1673,10 @@ declare namespace bob {
          *
          * Default is `constant_score`.
          * This is an advanced option, use with care.
+         *
+         * Note: The deprecated multi term rewrite parameters `constant_score_auto`,
+         * `constant_score_filter` (synonyms for `constant_score`) have been removed in
+         * elasticsearch 6.0.
          *
          * @param {string} method The rewrite method as a string.
          * @throws {Error} If the given `rewrite` method is not valid.
@@ -1695,6 +1745,10 @@ declare namespace bob {
          *
          * Default is `constant_score`.
          * This is an advanced option, use with care.
+         *
+         * Note: The deprecated multi term rewrite parameters `constant_score_auto`,
+         * `constant_score_filter` (synonyms for `constant_score`) have been removed in
+         * elasticsearch 6.0.
          *
          * @param {string} method The rewrite method as a string.
          * @throws {Error} If the given `rewrite` method is not valid.
@@ -1879,6 +1933,8 @@ declare namespace bob {
         /**
          * Adds the query to apply a constant score to.
          * Alias for method `filter`.
+         *
+         * Note: This parameter has been removed in elasticsearch 6.0. Use `filter` instead.
          *
          * @param {Query} filterQuery  Query to filter on.
          */
@@ -2414,6 +2470,9 @@ declare namespace bob {
          * geo points with invalid latitude or longitude, `COERCE` to try and infer correct latitude
          * or longitude, or `STRICT` (default is `STRICT`).
          *
+         * Note: The `ignore_malformed` and `coerce` parameters have been removed from
+         * `geo_bounding_box`, `geo_polygon`, and `geo_distance` queries in elasticsearch 6.0.
+         *
          * @param {string} method One of `IGNORE_MALFORMED`, `COERCE` or `STRICT`(default)
          * @throws {Error} If `method` parameter is not one of `IGNORE_MALFORMED`, `COERCE` or `STRICT`
          */
@@ -2718,6 +2777,8 @@ declare namespace bob {
         /**
          * Sets the text to find documents like it.
          *
+         * Note: This parameter has been removed in elasticsearch 6.0. Use `like` instead.
+         *
          * @param {string} txt The text to find documents like it.
          */
         likeText(txt: string): this;
@@ -2726,6 +2787,8 @@ declare namespace bob {
          * Sets the list of `ids` for the documents with syntax similar to
          * the Multi GET API.
          *
+         * Note: This parameter has been removed in elasticsearch 6.0. Use `like` instead.
+         *
          * @param {Array<string>} ids
          */
         ids(ids: string[]): this;
@@ -2733,6 +2796,8 @@ declare namespace bob {
         /**
          * Sets the list of `docs` for the documents with syntax similar to
          * the Multi GET API.
+         *
+         * Note: This parameter has been removed in elasticsearch 6.0. Use `like` instead.
          *
          * @param {Array<Object>} docs
          */
@@ -2885,6 +2950,9 @@ declare namespace bob {
 
         /**
          * Sets the type / mapping of the document being percolated.
+         *
+         * Note: This param has been deprecated in elasticsearch 6.0. From 6.0 and later, it is no
+         * longer required to specify the `document_type` parameter.
          *
          * @param {string} docType The type / mapping of the document being percolated.
          */
@@ -7341,6 +7409,9 @@ declare namespace bob {
          * the plain highlighter on a field that has term_vectors enabled.
          * You can apply the option to a specific field by passing the optional field name parameter.
          *
+         * Note: The `postings` highlighter has been removed in elasticsearch 6.0. The `unified`
+         * highlighter outputs the same highlighting when `index_options` is set to `offsets`.
+         *
          * @param {string} type The allowed values are: `plain`, `postings` and `fvh`.
          * @param {string=} field An optional field name
          * @throws {Error} Type can be one of `plain`, `postings` or `fvh`.
@@ -7425,7 +7496,9 @@ declare namespace bob {
          * Specify the `stored` script by `id` which will be retrieved from cluster state.
          *
          * For script file `config/scripts/calculate-score.groovy`,
-         * `fileName` should be `calculate-score`
+         * `fileName` should be `calculate-score`.
+         *
+         * Note: File scripts have been removed in elasticsearch 6.0. Instead, use stored scripts.
          *
          * @param {string} fileName The name of the script stored as a file in the scripts folder.
          */
@@ -7439,6 +7512,9 @@ declare namespace bob {
          *
          * For a `file` script,  it should correspond with the script file suffix.
          * `groovy` for `config/scripts/calculate-score.groovy`.
+         *
+         * Note: The Groovy, JavaScript, and Python scripting languages were deprecated in
+         * elasticsearch 5.0 and removed in 6.0. Use painless instead.
          *
          * @param {string} lang The language for the script.
          */
@@ -7962,6 +8038,9 @@ declare namespace bob {
          * Allows to highlight search results on one or more fields. The implementation
          * uses either the lucene `plain` highlighter, the fast vector highlighter (`fvh`)
          * or `postings` highlighter.
+         *
+         * Note: The `postings` highlighter has been removed in elasticsearch 6.0. The `unified`
+         * highlighter outputs the same highlighting when `index_options` is set to `offsets`.
          *
          * @param {Highlight} highlight
          */

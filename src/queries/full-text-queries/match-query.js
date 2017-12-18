@@ -140,6 +140,10 @@ class MatchQuery extends MonoFieldQueryBase {
      *
      * Default is `constant_score`.
      *
+     * Note: The deprecated multi term rewrite parameters `constant_score_auto`,
+     * `constant_score_filter` (synonyms for `constant_score`) have been removed
+     * in elasticsearch 6.0.
+     *
      * This is an advanced option, use with care.
      *
      * @param {string} method The rewrite method as a string.
@@ -179,6 +183,10 @@ class MatchQuery extends MonoFieldQueryBase {
      * Default is `constant_score`.
      *
      * This is an advanced option, use with care.
+     *
+     * Note: The deprecated multi term rewrite parameters `constant_score_auto`,
+     * `constant_score_filter` (synonyms for `constant_score`) have been removed
+     * in elasticsearch 6.0.
      *
      * @param {string} method The rewrite method as a string.
      * @returns {MatchQuery} returns `this` so that calls can be chained.

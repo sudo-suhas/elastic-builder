@@ -109,6 +109,10 @@ class InnerHits {
      * uses either the lucene `plain` highlighter, the fast vector highlighter (`fvh`)
      * or `postings` highlighter.
      *
+     * Note: The `postings` highlighter has been removed in elasticsearch 6.0.
+     * The `unified` highlighter outputs the same highlighting when
+     * `index_options` is set to `offsets`.
+     *
      * @param {Highlight} highlight
      * @returns {InnerHits} returns `this` so that calls can be chained
      */

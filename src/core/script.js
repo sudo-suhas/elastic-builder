@@ -111,7 +111,7 @@ class Script {
     /**
      * Specify the `file` script by stored as a file in the scripts folder.
      *
-     * Note: File scripts have been removed in elasticsearch v6. Instead, use
+     * Note: File scripts have been removed in elasticsearch 6.0. Instead, use
      * stored scripts.
      *
      * @param {string} fileName The name of the script stored as a file in the scripts folder.
@@ -136,14 +136,13 @@ class Script {
      * For a `file` script,  it should correspond with the script file suffix.
      * `groovy` for `config/scripts/calculate-score.groovy`.
      *
+     * Note: The Groovy, JavaScript, and Python scripting languages were
+     * deprecated in elasticsearch 5.0 and removed in 6.0. Use painless instead.
+     *
      * @param {string} lang The language for the script.
      * @returns {Script} returns `this` so that calls can be chained.
      */
     lang(lang) {
-        // TODO: Add warning.
-        // The Groovy, JavaScript, and Python scripting languages were
-        // deprecated in elasticsearch 5.0 and have now been removed. Use
-        // painless instead.
         this._body.lang = lang;
         return this;
     }

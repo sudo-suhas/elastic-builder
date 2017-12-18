@@ -46,6 +46,8 @@ class ConstantScoreQuery extends Query {
      * Adds the query to apply a constant score to.
      * Alias for method `filter`.
      *
+     * Note: This parameter has been removed in elasticsearch 6.0. Use `filter` instead.
+     *
      * @param {Query} filterQuery  Query to filter on.
      * @returns {ConstantScoreQuery} returns `this` so that calls can be chained.
      */

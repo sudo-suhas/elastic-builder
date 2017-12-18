@@ -124,6 +124,10 @@ class QueryStringQuery extends QueryStringQueryBase {
      *
      * This is an advanced option, use with care.
      *
+     * Note: The deprecated multi term rewrite parameters `constant_score_auto`,
+     * `constant_score_filter` (synonyms for `constant_score`) have been removed
+     * in elasticsearch 6.0.
+     *
      * @param {string} method The rewrite method as a string.
      * @returns {QueryStringQuery} returns `this` so that calls can be chained.
      * @throws {Error} If the given `rewrite` method is not valid.
@@ -162,6 +166,10 @@ class QueryStringQuery extends QueryStringQueryBase {
      *
      * This is an advanced option, use with care.
      *
+     * Note: The deprecated multi term rewrite parameters `constant_score_auto`,
+     * `constant_score_filter` (synonyms for `constant_score`) have been removed
+     * in elasticsearch 6.0.
+     *
      * @param {string} method The rewrite method as a string.
      * @returns {QueryStringQuery} returns `this` so that calls can be chained.
      * @throws {Error} If the given `fuzzy_rewrite` method is not valid.
@@ -187,6 +195,9 @@ class QueryStringQuery extends QueryStringQueryBase {
 
     /**
      * Auto generate phrase queries. Defaults to `false`.
+     *
+     * Note: This parameter has been removed in elasticsearch 6.0. If provided,
+     * it will be ignored and issue a deprecation warning.
      *
      * @param {boolean} enable
      * @returns {QueryStringQuery} returns `this` so that calls can be chained.
@@ -226,6 +237,10 @@ class QueryStringQuery extends QueryStringQueryBase {
      * Default is `false`. It is not allowed to set this option to `false`
      * if `auto_generate_phrase_queries` is already set to `true`.
      *
+     * Note: This parameter has been removed in elasticsearch 6.0. If provided,
+     * it will be ignored and issue a deprecation warning. The `query_string`
+     * query now splits on operator only.
+     *
      * @param {string} enable
      * @returns {QueryStringQuery} returns `this` so that calls can be chained.
      */
@@ -237,6 +252,10 @@ class QueryStringQuery extends QueryStringQueryBase {
     /**
      * Should the queries be combined using `dis_max` (set it to `true`),
      * or a bool query (set it to `false`). Defaults to `true`.
+     *
+     * Note: This parameter has been removed in elasticsearch 6.0. If provided,
+     * it will be ignored and issue a deprecation warning. The `tie_breaker`
+     * parameter must be used instead.
      *
      * @example
      * const qry = bob.queryStringQuery('this AND that OR thus')

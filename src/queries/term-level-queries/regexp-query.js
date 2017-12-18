@@ -89,6 +89,10 @@ class RegexpQuery extends MultiTermQueryBase {
      *
      * This is an advanced option, use with care.
      *
+     * Note: The deprecated multi term rewrite parameters `constant_score_auto`,
+     * `constant_score_filter` (synonyms for `constant_score`) have been removed
+     * in elasticsearch 6.0.
+     *
      * @param {string} method The rewrite method as a string.
      * @returns {RegexpQuery} returns `this` so that calls can be chained.
      * @throws {Error} If the given `rewrite` method is not valid.
