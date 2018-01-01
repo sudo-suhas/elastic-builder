@@ -4,13 +4,11 @@
   "eslint.autoFixOnSave": true,
   "files.eol": "\n",
   "vsicons.presets.angular": false,
-  "npm-intellisense.scanDevDependencies": true,
-  "npm-intellisense.packageSubfoldersIntellisense": true,
   "editor.detectIndentation": true,
   "[json]": {
     "editor.tabSize": 2
   },
-  "prettier.printWidth": 100,
+  "prettier.printWidth": 80,
   "prettier.tabWidth": 4,
   "prettier.singleQuote": true,
   "beautify.language": {

@@ -25,7 +25,9 @@
     "check": "npm run lint && npm test",
     "report": "nyc report --reporter=html",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "print-version": "cross-env-shell echo v$npm_package_version"
+    "print-version": "cross-env-shell echo v$npm_package_version",
+    "prepublishOnly": "npm run -s build",
+    "postpublish": "bash deploy-docs.sh"
   },
   "repository": {
     "type": "git",

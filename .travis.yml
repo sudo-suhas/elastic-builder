@@ -27,13 +27,5 @@ after_script:
   - yarn run coverage
 
 after_success:
-  - yarn global add semantic-release gh-pages
-  - 'semantic-release pre &&
-    npm run -s build &&
-    gh-pages --add
-      --dist .
-      --src "{browser/*,docs/*}"
-      --repo "https://$GH_TOKEN@github.com/sudo-suhas/elastic-builder.git"
-      --message "docs: Build docs for `npm run -s print-version`" &&
-    npm publish &&
-    semantic-release post'
+  - yarn global add travis-deploy-once
+  - travis-deploy-once "yarn global add semantic-release@12 && semantic-release"
