@@ -8,7 +8,7 @@ const { Query } = require('../core');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-all-query.html)
  *
  * @example
- * const qry = bob.matchAllQuery().boost(1.2);
+ * const qry = esb.matchAllQuery().boost(1.2);
  *
  * @extends Query
  */

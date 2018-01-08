@@ -15,17 +15,17 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-max-bucket-aggregation.html)
  *
  * @example
- * const reqBody = bob.requestBodySearch()
+ * const reqBody = esb.requestBodySearch()
  *     .agg(
- *         bob.dateHistogramAggregation('sales_per_month', 'date')
+ *         esb.dateHistogramAggregation('sales_per_month', 'date')
  *             .interval('month')
- *             .agg(bob.sumAggregation('sales', 'price'))
+ *             .agg(esb.sumAggregation('sales', 'price'))
  *     )
  *     .agg(
  *         // Metric embedded in sibling aggregation
  *         // Get the maximum value of `sales` aggregation in
  *         // `sales_per_month` histogram
- *         bob.maxBucketAggregation(
+ *         esb.maxBucketAggregation(
  *             'max_monthly_sales',
  *             'sales_per_month>sales'
  *         )

@@ -37,22 +37,22 @@ const invalidBoostModeParam = invalidParam(
  *
  * @example
  * // `function_score` with only one function
- * const qry = bob.functionScoreQuery()
- *     .query(bob.matchAllQuery())
- *     .function(bob.randomScoreFunction())
+ * const qry = esb.functionScoreQuery()
+ *     .query(esb.matchAllQuery())
+ *     .function(esb.randomScoreFunction())
  *     .boostMode('multiply')
  *     .boost('5');
  *
  * @example
  * // Several functions combined
- * const qry = bob.functionScoreQuery()
- *     .query(bob.matchAllQuery())
+ * const qry = esb.functionScoreQuery()
+ *     .query(esb.matchAllQuery())
  *     .functions([
- *         bob.randomScoreFunction()
- *             .filter(bob.matchQuery('test', 'bar'))
+ *         esb.randomScoreFunction()
+ *             .filter(esb.matchQuery('test', 'bar'))
  *             .weight(23),
- *         bob.weightScoreFunction()
- *             .filter(bob.matchQuery('test', 'cat'))
+ *         esb.weightScoreFunction()
+ *             .filter(esb.matchQuery('test', 'cat'))
  *             .weight(42)
  *     ])
  *     .maxBoost(42)
@@ -63,14 +63,14 @@ const invalidBoostModeParam = invalidParam(
  *
  * @example
  * // Combine decay functions
- * const qry = bob.functionScoreQuery()
+ * const qry = esb.functionScoreQuery()
  *     .functions([
- *         bob.decayScoreFunction('gauss', 'price').origin('0').scale('20'),
- *         bob.decayScoreFunction('gauss', 'location')
+ *         esb.decayScoreFunction('gauss', 'price').origin('0').scale('20'),
+ *         esb.decayScoreFunction('gauss', 'location')
  *             .origin('11, 12')
  *             .scale('2km')
  *     ])
- *     .query(bob.matchQuery('properties', 'balcony'))
+ *     .query(esb.matchQuery('properties', 'balcony'))
  *     .scoreMode('multiply');
  *
  * @extends Query

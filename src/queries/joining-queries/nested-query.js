@@ -15,13 +15,13 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html)
  *
  * @example
- * const qry = bob.nestedQuery()
+ * const qry = esb.nestedQuery()
  *     .path('obj1')
  *     .scoreMode('avg')
  *     .query(
- *         bob.boolQuery().must([
- *             bob.matchQuery('obj1.name', 'blue'),
- *             bob.rangeQuery('obj1.count').gt(5)
+ *         esb.boolQuery().must([
+ *             esb.matchQuery('obj1.name', 'blue'),
+ *             esb.rangeQuery('obj1.count').gt(5)
  *         ])
  *     );
  *

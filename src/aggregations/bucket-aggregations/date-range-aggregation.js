@@ -12,7 +12,7 @@ const RangeAggregationBase = require('./range-aggregation-base');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-daterange-aggregation.html)
  *
  * @example
- * const agg = bob.dateRangeAggregation('range', 'date')
+ * const agg = esb.dateRangeAggregation('range', 'date')
  *     .format('MM-yyy')
  *     .ranges([{ to: 'now-10M/M' }, { from: 'now-10M/M' }]);
  *
@@ -35,7 +35,7 @@ class DateRangeAggregation extends RangeAggregationBase {
      * bucketing should use a different time zone.
      *
      * @example
-     * const agg = bob.dateRangeAggregation('range', 'date')
+     * const agg = esb.dateRangeAggregation('range', 'date')
      *     .timeZone('CET')
      *     .ranges([
      *         { to: '2016/02/01' },

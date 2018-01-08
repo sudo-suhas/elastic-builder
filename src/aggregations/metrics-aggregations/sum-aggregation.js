@@ -14,35 +14,35 @@ const MetricsAggregationBase = require('./metrics-aggregation-base');
  * aggregated documents.
  *
  * @example
- * const reqBody = bob.requestBodySearch()
- *     .query(bob.constantScoreQuery(bob.matchQuery('type', 'hat')))
- *     .agg(bob.sumAggregation('hat_prices', 'price'));
+ * const reqBody = esb.requestBodySearch()
+ *     .query(esb.constantScoreQuery(esb.matchQuery('type', 'hat')))
+ *     .agg(esb.sumAggregation('hat_prices', 'price'));
  *
  * @example
  * // Script to fetch the sales price
- * const reqBody = bob.requestBodySearch()
- *     .query(bob.constantScoreQuery(bob.matchQuery('type', 'hat')))
+ * const reqBody = esb.requestBodySearch()
+ *     .query(esb.constantScoreQuery(esb.matchQuery('type', 'hat')))
  *     .agg(
- *         bob.sumAggregation('hat_prices').script(
- *             bob.script('inline', 'doc.price.value')
+ *         esb.sumAggregation('hat_prices').script(
+ *             esb.script('inline', 'doc.price.value')
  *         )
  *     );
  *
  * @example
  * // Access the field value from the script using `_value`
- * const reqBody = bob.requestBodySearch()
- *     .query(bob.constantScoreQuery(bob.matchQuery('type', 'hat')))
+ * const reqBody = esb.requestBodySearch()
+ *     .query(esb.constantScoreQuery(esb.matchQuery('type', 'hat')))
  *     .agg(
- *         bob.sumAggregation('square_hats', 'price').script(
- *             bob.script('inline', '_value * _value')
+ *         esb.sumAggregation('square_hats', 'price').script(
+ *             esb.script('inline', '_value * _value')
  *         )
  *     );
  *
  * @example
  * // Treat documents missing price as if they had a value
- * const reqBody = bob.requestBodySearch()
- *     .query(bob.constantScoreQuery(bob.matchQuery('type', 'hat')))
- *     .agg(bob.sumAggregation('hat_prices', 'price').missing(100));
+ * const reqBody = esb.requestBodySearch()
+ *     .query(esb.constantScoreQuery(esb.matchQuery('type', 'hat')))
+ *     .agg(esb.sumAggregation('hat_prices', 'price').missing(100));
  *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on

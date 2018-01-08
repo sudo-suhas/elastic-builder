@@ -14,15 +14,15 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-children-aggregation.html)
  *
  * @example
- * const reqBody = bob.requestBodySearch()
+ * const reqBody = esb.requestBodySearch()
  *     .agg(
- *         bob.termsAggregation('top-tags', 'tags.keyword')
+ *         esb.termsAggregation('top-tags', 'tags.keyword')
  *             .size(10)
  *             .agg(
- *                 bob.childrenAggregation('to-answers')
+ *                 esb.childrenAggregation('to-answers')
  *                     .type('answer')
  *                     .agg(
- *                         bob.termsAggregation(
+ *                         esb.termsAggregation(
  *                             'top-names',
  *                             'owner.display_name.keyword'
  *                         ).size(10)

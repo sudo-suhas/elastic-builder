@@ -34,8 +34,8 @@ function recMerge(arr) {
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
  *
  * @example
- * const reqBody = bob.requestBodySearch()
- *     .query(bob.termQuery('user', 'kimchy'))
+ * const reqBody = esb.requestBodySearch()
+ *     .query(esb.termQuery('user', 'kimchy'))
  *     .from(0)
  *     .size(10);
  *
@@ -48,19 +48,19 @@ function recMerge(arr) {
  *
  * @example
  * // Query and aggregation
- * const reqBody = bob.requestBodySearch()
- *     .query(bob.matchQuery('business_type', 'shop'))
+ * const reqBody = esb.requestBodySearch()
+ *     .query(esb.matchQuery('business_type', 'shop'))
  *     .agg(
- *         bob.geoBoundsAggregation('viewport', 'location').wrapLongitude(true)
+ *         esb.geoBoundsAggregation('viewport', 'location').wrapLongitude(true)
  *     );
  *
  * @example
  * // Query, aggregation with nested
- * const reqBody = bob.requestBodySearch()
- *     .query(bob.matchQuery('crime', 'burglary'))
+ * const reqBody = esb.requestBodySearch()
+ *     .query(esb.matchQuery('crime', 'burglary'))
  *     .agg(
- *         bob.termsAggregation('towns', 'town').agg(
- *             bob.geoCentroidAggregation('centroid', 'location')
+ *         esb.termsAggregation('towns', 'town').agg(
+ *             esb.geoCentroidAggregation('centroid', 'location')
  *         )
  *     );
  */
@@ -147,10 +147,10 @@ class RequestBodySearch {
      * Sets suggester on the request body.
      *
      * @example
-     * const req = bob.requestBodySearch()
-     *     .query(bob.matchQuery('message', 'trying out elasticsearch'))
+     * const req = esb.requestBodySearch()
+     *     .query(esb.matchQuery('message', 'trying out elasticsearch'))
      *     .suggest(
-     *         bob.termSuggester(
+     *         esb.termSuggester(
      *             'my-suggestion',
      *             'message',
      *             'tring out Elasticsearch'
@@ -172,10 +172,10 @@ class RequestBodySearch {
      * Sets the global suggest text to avoid repetition for multiple suggestions.
      *
      * @example
-     * const req = bob.requestBodySearch()
+     * const req = esb.requestBodySearch()
      *     .suggestText('tring out elasticsearch')
-     *     .suggest(bob.termSuggester('my-suggest-1', 'message'))
-     *     .suggest(bob.termSuggester('my-suggest-2', 'user'));
+     *     .suggest(esb.termSuggester('my-suggest-1', 'message'))
+     *     .suggest(esb.termSuggester('my-suggest-2', 'user'));
      *
      * @param {string} txt Global suggest text
      * @returns {RequestBodySearch} returns `this` so that calls can be chained.
@@ -245,14 +245,14 @@ class RequestBodySearch {
      * sort by score, and `_doc` to sort by index order.
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.termQuery('user', 'kimchy'))
-     *     .sort(bob.sort('post_date', 'asc'))
-     *     .sort(bob.sort('user'))
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.termQuery('user', 'kimchy'))
+     *     .sort(esb.sort('post_date', 'asc'))
+     *     .sort(esb.sort('user'))
      *     .sorts([
-     *         bob.sort('name', 'desc'),
-     *         bob.sort('age', 'desc'),
-     *         bob.sort('_score')
+     *         esb.sort('name', 'desc'),
+     *         esb.sort('age', 'desc'),
+     *         esb.sort('_score')
      *     ]);
      *
      * @param {Sort} sort
@@ -273,14 +273,14 @@ class RequestBodySearch {
      * sort by score, and _doc to sort by index order.
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.termQuery('user', 'kimchy'))
-     *     .sort(bob.sort('post_date', 'asc'))
-     *     .sort(bob.sort('user'))
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.termQuery('user', 'kimchy'))
+     *     .sort(esb.sort('post_date', 'asc'))
+     *     .sort(esb.sort('user'))
      *     .sorts([
-     *         bob.sort('name', 'desc'),
-     *         bob.sort('age', 'desc'),
-     *         bob.sort('_score')
+     *         esb.sort('name', 'desc'),
+     *         esb.sort('age', 'desc'),
+     *         esb.sort('_score')
      *     ]);
      *
      * @param {Array<Sort>} sorts Arry of sort
@@ -297,14 +297,14 @@ class RequestBodySearch {
      * scores will still be computed and tracked.
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
+     * const reqBody = esb.requestBodySearch()
      *     .trackScores(true)
      *     .sorts([
-     *         bob.sort('post_date', 'desc'),
-     *         bob.sort('name', 'desc'),
-     *         bob.sort('age', 'desc')
+     *         esb.sort('post_date', 'desc'),
+     *         esb.sort('name', 'desc'),
+     *         esb.sort('age', 'desc')
      *     ])
-     *     .query(bob.termQuery('user', 'kimchy'));
+     *     .query(esb.termQuery('user', 'kimchy'));
 
      *
      * @param {boolean} enable
@@ -324,26 +324,26 @@ class RequestBodySearch {
      *
      * @example
      * // To disable `_source` retrieval set to `false`:
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.termQuery('user', 'kimchy'))
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.termQuery('user', 'kimchy'))
      *     .source(false);
      *
      * @example
      * // The `_source` also accepts one or more wildcard patterns to control what
      * // parts of the `_source` should be returned:
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.termQuery('user', 'kimchy'))
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.termQuery('user', 'kimchy'))
      *     .source('obj.*');
      *
      * // OR
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.termQuery('user', 'kimchy'))
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.termQuery('user', 'kimchy'))
      *     .source([ 'obj1.*', 'obj2.*' ]);
      *
      * @example
      * // For complete control, you can specify both `includes` and `excludes` patterns:
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.termQuery('user', 'kimchy'))
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.termQuery('user', 'kimchy'))
      *     .source({
      *         'includes': [ 'obj1.*', 'obj2.*' ],
      *         'excludes': [ '*.description' ]
@@ -367,20 +367,20 @@ class RequestBodySearch {
      * @example
      * // Selectively load specific stored fields for each document
      * // represented by a search hit
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.termQuery('user', 'kimchy'))
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.termQuery('user', 'kimchy'))
      *     .storedFields(['user', 'postDate']);
      *
      * @example
      * // Return only the `_id` and `_type` to be returned:
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.termQuery('user', 'kimchy'))
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.termQuery('user', 'kimchy'))
      *     .storedFields([]);
      *
      * @example
      * // Disable the stored fields (and metadata fields) entirely
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.termQuery('user', 'kimchy'))
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.termQuery('user', 'kimchy'))
      *     .storedFields('_none_');
      *
      * @param {Array|string} fields
@@ -395,15 +395,15 @@ class RequestBodySearch {
      * Computes a document property dynamically based on the supplied `Script`.
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.matchAllQuery())
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.matchAllQuery())
      *     .scriptField(
      *         'test1',
-     *         bob.script('inline', "doc['my_field_name'].value * 2").lang('painless')
+     *         esb.script('inline', "doc['my_field_name'].value * 2").lang('painless')
      *     )
      *     .scriptField(
      *         'test2',
-     *         bob.script('inline', "doc['my_field_name'].value * factor")
+     *         esb.script('inline', "doc['my_field_name'].value * factor")
      *             .lang('painless')
      *             .params({ factor: 2.0 })
      *     );
@@ -411,8 +411,8 @@ class RequestBodySearch {
      * @example
      * // Script fields can also access the actual `_source` document and extract
      * // specific elements to be returned from it by using `params['_source']`.
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.matchAllQuery())
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.matchAllQuery())
      *     .scriptField('test1', "params['_source']['message']");
      *
      * @param {string} scriptFieldName
@@ -432,13 +432,13 @@ class RequestBodySearch {
      * Object should have `scriptFieldName` as key and `script` as the value.
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.matchAllQuery())
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.matchAllQuery())
      *     .scriptFields({
-     *         test1: bob
+     *         test1: esb
      *             .script('inline', "doc['my_field_name'].value * 2")
      *             .lang('painless'),
-     *         test2: bob
+     *         test2: esb
      *             .script('inline', "doc['my_field_name'].value * factor")
      *             .lang('painless')
      *             .params({ factor: 2.0 })
@@ -447,8 +447,8 @@ class RequestBodySearch {
      * @example
      * // Script fields can also access the actual `_source` document and extract
      * // specific elements to be returned from it by using `params['_source']`.
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.matchAllQuery())
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.matchAllQuery())
      *     .scriptFields({ test1: "params['_source']['message']" });
      * @param {Object} scriptFields Object with `scriptFieldName` as key and `script` as the value.
      * @returns {TopHitsAggregation} returns `this` so that calls can be chained
@@ -468,8 +468,8 @@ class RequestBodySearch {
      * Doc value fields can work on fields that are not stored.
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.matchAllQuery())
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.matchAllQuery())
      *     .docvalueFields(['test1', 'test2']);
      *
      * @param {Array} fields
@@ -485,16 +485,16 @@ class RequestBodySearch {
      * after aggregations have already been calculated.
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.boolQuery().filter(bob.termQuery('brand', 'gucci')))
-     *     .agg(bob.termsAggregation('colors', 'color'))
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.boolQuery().filter(esb.termQuery('brand', 'gucci')))
+     *     .agg(esb.termsAggregation('colors', 'color'))
      *     .agg(
-     *         bob.filterAggregation(
+     *         esb.filterAggregation(
      *             'color_red',
-     *             bob.termQuery('color', 'red')
-     *         ).agg(bob.termsAggregation('models', 'model'))
+     *             esb.termQuery('color', 'red')
+     *         ).agg(esb.termsAggregation('models', 'model'))
      *     )
-     *     .postFilter(bob.termQuery('color', 'red'));
+     *     .postFilter(esb.termQuery('color', 'red'));
      *
      * @param {Query} filterQuery The filter to be applied after aggregation.
      * @returns {RequestBodySearch} returns `this` so that calls can be chained
@@ -516,18 +516,18 @@ class RequestBodySearch {
      * `index_options` is set to `offsets`.
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.matchAllQuery())
-     *     .highlight(bob.highlight('content'));
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.matchAllQuery())
+     *     .highlight(esb.highlight('content'));
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
+     * const reqBody = esb.requestBodySearch()
      *     .query(
-     *         bob.percolateQuery('query', 'doctype').document({
+     *         esb.percolateQuery('query', 'doctype').document({
      *             message: 'The quick brown fox jumps over the lazy dog'
      *         })
      *     )
-     *     .highlight(bob.highlight('message'));
+     *     .highlight(esb.highlight('message'));
      *
      * @param {Highlight} highlight
      * @returns {RequestBodySearch} returns `this` so that calls can be chained
@@ -546,34 +546,34 @@ class RequestBodySearch {
      * all documents in the index.
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.matchQuery('message', 'the quick brown').operator('or'))
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.matchQuery('message', 'the quick brown').operator('or'))
      *     .rescore(
-     *         bob.rescore(
+     *         esb.rescore(
      *             50,
-     *             bob.matchPhraseQuery('message', 'the quick brown').slop(2)
+     *             esb.matchPhraseQuery('message', 'the quick brown').slop(2)
      *         )
      *             .queryWeight(0.7)
      *             .rescoreQueryWeight(1.2)
      *     );
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.matchQuery('message', 'the quick brown').operator('or'))
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.matchQuery('message', 'the quick brown').operator('or'))
      *     .rescore(
-     *         bob.rescore(
+     *         esb.rescore(
      *             100,
-     *             bob.matchPhraseQuery('message', 'the quick brown').slop(2)
+     *             esb.matchPhraseQuery('message', 'the quick brown').slop(2)
      *         )
      *             .queryWeight(0.7)
      *             .rescoreQueryWeight(1.2)
      *     )
      *     .rescore(
-     *         bob.rescore(
+     *         esb.rescore(
      *             10,
-     *             bob.functionScoreQuery().function(
-     *                 bob.scriptScoreFunction(
-     *                     bob.script('inline', 'Math.log10(doc.likes.value + 2)')
+     *             esb.functionScoreQuery().function(
+     *                 esb.scriptScoreFunction(
+     *                     esb.script('inline', 'Math.log10(doc.likes.value + 2)')
      *                 )
      *             )
      *         ).scoreMode('multiply')
@@ -604,8 +604,8 @@ class RequestBodySearch {
      * Enables explanation for each hit on how its score was computed.
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.termQuery('user', 'kimchy'))
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.termQuery('user', 'kimchy'))
      *     .explain(true);
      *
      * @param {boolean} enable
@@ -620,8 +620,8 @@ class RequestBodySearch {
      * Returns a version for each search hit.
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.termQuery('user', 'kimchy'))
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.termQuery('user', 'kimchy'))
      *     .version(true);
      *
      * @param {boolean} enable
@@ -640,7 +640,7 @@ class RequestBodySearch {
      * Alias for method `indicesBoost`.
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
+     * const reqBody = esb.requestBodySearch()
      *     .indexBoost('alias1', 1.4)
      *     .indexBoost('index*', 1.3);
      *
@@ -658,7 +658,7 @@ class RequestBodySearch {
      * matter more than hits coming from another index.
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
+     * const reqBody = esb.requestBodySearch()
      *     .indicesBoost('alias1', 1.4)
      *     .indicesBoost('index*', 1.3);
      *
@@ -679,8 +679,8 @@ class RequestBodySearch {
      * Exclude documents which have a `_score` less than the minimum specified in `min_score`.
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.termQuery('user', 'kimchy'))
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.termQuery('user', 'kimchy'))
      *     .minScore(0.5);
      *
      * @param {number} score
@@ -699,24 +699,24 @@ class RequestBodySearch {
      * field with `doc_values` activated
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.matchQuery('message', 'elasticsearch'))
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.matchQuery('message', 'elasticsearch'))
      *     .collapse('user')
-     *     .sort(bob.sort('likes'))
+     *     .sort(esb.sort('likes'))
      *     .from(10);
      *
      * @example
      * // Expand each collapsed top hits with the `inner_hits` option:
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.matchQuery('message', 'elasticsearch'))
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.matchQuery('message', 'elasticsearch'))
      *     .collapse(
      *         'user',
-     *         bob.innerHits('last_tweets')
+     *         esb.innerHits('last_tweets')
      *             .size(5)
-     *             .sort(bob.sort('date', 'asc')),
+     *             .sort(esb.sort('date', 'asc')),
      *         4
      *     )
-     *     .sort(bob.sort('likes'))
+     *     .sort(esb.sort('likes'))
      *     .from(10);
      *
      * @param {string} field
@@ -746,11 +746,11 @@ class RequestBodySearch {
      * The parameter `from` must be set to `0` (or `-1`) when `search_after` is used.
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
+     * const reqBody = esb.requestBodySearch()
      *     .size(10)
-     *     .query(bob.matchQuery('message', 'elasticsearch'))
+     *     .query(esb.matchQuery('message', 'elasticsearch'))
      *     .searchAfter(1463538857, 'tweet#654323')
-     *     .sorts([bob.sort('date', 'asc'), bob.sort('_uid', 'desc')]);
+     *     .sorts([esb.sort('date', 'asc'), esb.sort('_uid', 'desc')]);
      *
      * @param {Array} values The `sort values` of the last document to retrieve
      * the next page of results

@@ -20,13 +20,13 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html)
  *
  * @example
- * const reqBody = bob.requestBodySearch()
- *     .query(bob.matchQuery('name', 'led tv'))
+ * const reqBody = esb.requestBodySearch()
+ *     .query(esb.matchQuery('name', 'led tv'))
  *     .agg(
- *         bob.nestedAggregation('comments', 'comments').agg(
- *             bob.termsAggregation('top_usernames', 'comments.username').agg(
- *                 bob.reverseNestedAggregation('comment_to_issue').agg(
- *                     bob.termsAggregation('top_tags_per_comment', 'tags')
+ *         esb.nestedAggregation('comments', 'comments').agg(
+ *             esb.termsAggregation('top_usernames', 'comments.username').agg(
+ *                 esb.reverseNestedAggregation('comment_to_issue').agg(
+ *                     esb.termsAggregation('top_tags_per_comment', 'tags')
  *                 )
  *             )
  *         )

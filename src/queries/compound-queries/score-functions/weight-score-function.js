@@ -15,7 +15,7 @@ const { util: { recursiveToJSON } } = require('../../../core');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-weight)
  *
  * @example
- * const scoreFunc = bob.weightScoreFunction(42);
+ * const scoreFunc = esb.weightScoreFunction(42);
  *
  * @param {number=} weight The weight of this score function.
  * @extends ScoreFunction

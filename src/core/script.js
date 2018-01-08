@@ -12,12 +12,12 @@ const isNil = require('lodash.isnil');
  * This needs to be specified if optional argument `type` is passed.
  *
  * @example
- * const script = bob.script('inline', "doc['my_field'] * multiplier")
+ * const script = esb.script('inline', "doc['my_field'] * multiplier")
  *     .lang('expression')
  *     .params({ multiplier: 2 });
  *
  * // cat "log(_score * 2) + my_modifier" > config/scripts/calculate-score.groovy
- * const script = bob.script()
+ * const script = esb.script()
  *     .lang('groovy')
  *     .file('calculate-score')
  *     .params({ my_modifier: 2 });

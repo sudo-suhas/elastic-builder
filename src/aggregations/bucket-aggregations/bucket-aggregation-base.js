@@ -44,14 +44,14 @@ class BucketAggregationBase extends Aggregation {
      *
      * @example
      * // Generating the terms using a script
-     * const agg = bob.termsAggregation('genres').script(
-     *     bob.script('file', 'my_script').params({ field: 'genre' })
+     * const agg = esb.termsAggregation('genres').script(
+     *     esb.script('file', 'my_script').params({ field: 'genre' })
      * );
      *
      * @example
      * // Value script
-     * const agg = bob.termsAggregation('genres', 'genre').script(
-     *     bob.script('inline', "'Genre: ' +_value").lang('painless')
+     * const agg = esb.termsAggregation('genres', 'genre').script(
+     *     esb.script('inline', "'Genre: ' +_value").lang('painless')
      * );
      *
      * @param {Script} script

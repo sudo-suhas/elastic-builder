@@ -10,7 +10,7 @@ const GeoQueryBase = require('./geo-query-base');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-polygon-query.html)
  *
  * @example
- * const geoQry = bob.geoPolygonQuery('person.location')
+ * const geoQry = esb.geoPolygonQuery('person.location')
  *     .points([
  *         {"lat" : 40, "lon" : -70},
  *         {"lat" : 30, "lon" : -80},
@@ -34,7 +34,7 @@ class GeoPolygonQuery extends GeoQueryBase {
      *
      * @example
      * // Format in `[lon, lat]`
-     * const qry = bob.geoPolygonQuery('person.location').points([
+     * const qry = esb.geoPolygonQuery('person.location').points([
      *     [-70, 40],
      *     [-80, 30],
      *     [-90, 20]
@@ -42,7 +42,7 @@ class GeoPolygonQuery extends GeoQueryBase {
      *
      * @example
      * // Format in lat,lon
-     * const qry = bob.geoPolygonQuery('person.location').points([
+     * const qry = esb.geoPolygonQuery('person.location').points([
      *     '40, -70',
      *     '30, -80',
      *     '20, -90'
@@ -50,7 +50,7 @@ class GeoPolygonQuery extends GeoQueryBase {
      *
      * @example
      * // Geohash
-     * const qry = bob.geoPolygonQuery('person.location').points([
+     * const qry = esb.geoPolygonQuery('person.location').points([
      *     'drn5x1g8cu2y',
      *     '30, -80',
      *     '20, -90'

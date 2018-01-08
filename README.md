@@ -46,18 +46,18 @@ npm install elastic-builder --save
 ## Usage
 
 ```js
-const bob = require('elastic-builder'); // the builder
+const esb = require('elastic-builder'); // the builder
 
-const requestBody = bob.requestBodySearch()
-  .query(bob.matchQuery('message', 'this is a test'));
+const requestBody = esb.requestBodySearch()
+  .query(esb.matchQuery('message', 'this is a test'));
 
 // OR
 
-const requestBody = new bob.RequestBodySearch().query(
-  new bob.MatchQuery('message', 'this is a test')
+const requestBody = new esb.RequestBodySearch().query(
+  new esb.MatchQuery('message', 'this is a test')
 );
 
-requestBody.toJSON(); // or print to console - bob.prettyPrint(requestBody)
+requestBody.toJSON(); // or print to console - esb.prettyPrint(requestBody)
 {
   "query": {
     "match": {
@@ -77,8 +77,8 @@ Try it out on the command line using the node REPL:
 ```
 # Start the repl
 node ./node_modules/elastic-builder/repl.js
-# The builder is available in the context variable bob
-elastic-builder > bob.prettyPrint(bob.requestBodySearch().query(bob.matchQuery('message', 'this is a test')));
+# The builder is available in the context variable esb
+elastic-builder > esb.prettyPrint(esb.requestBodySearch().query(esb.matchQuery('message', 'this is a test')));
 ```
 
 ## Motivation
@@ -111,7 +111,7 @@ The library has a few helper recipes:
 * [Filter query][es-filter-query]
 
 ```js
-const qry = bob.cookMissingQuery('user');
+const qry = esb.cookMissingQuery('user');
 
 qry.toJSON();
 {
@@ -140,15 +140,15 @@ request][create-pull-request] :smile:.
 'use strict';
 
 const elasticsearch = require('elasticsearch');
-const bob = require('elastic-builder');
+const esb = require('elastic-builder');
 
 const client = new elasticsearch.Client({
   host: 'localhost:9200',
   log: 'trace'
 });
 
-const requestBody = bob.requestBodySearch()
-  .query(bob.matchQuery('body', 'elasticsearch'));
+const requestBody = esb.requestBodySearch()
+  .query(esb.matchQuery('body', 'elasticsearch'));
 
 client.search({
     index: 'twitter',
@@ -165,10 +165,10 @@ client.search({
 
 ```js
 // Bool query
-const requestBody = bob.requestBodySearch().query(
-  bob.boolQuery()
-    .must(bob.matchQuery('last_name', 'smith'))
-    .filter(bob.rangeQuery('age').gt(30))
+const requestBody = esb.requestBodySearch().query(
+  esb.boolQuery()
+    .must(esb.matchQuery('last_name', 'smith'))
+    .filter(esb.rangeQuery('age').gt(30))
 );
 requestBody.toJSON();
 {
@@ -185,8 +185,8 @@ requestBody.toJSON();
 }
 
 // Multi Match Query
-const requestBody = bob.requestBodySearch().query(
-  bob.multiMatchQuery(['title', 'body'], 'Quick brown fox')
+const requestBody = esb.requestBodySearch().query(
+  esb.multiMatchQuery(['title', 'body'], 'Quick brown fox')
     .type('best_fields')
     .tieBreaker(0.3)
     .minimumShouldMatch('30%')
@@ -203,9 +203,9 @@ requestBody.toJSON();
 }
 
 // Aggregation
-const requestBody = bob.requestBodySearch()
+const requestBody = esb.requestBodySearch()
   .size(0)
-  .agg(bob.termsAggregation('popular_colors', 'color'));
+  .agg(esb.termsAggregation('popular_colors', 'color'));
 requestBody.toJSON();
 {
   "size": 0,
@@ -217,12 +217,12 @@ requestBody.toJSON();
 }
 
 // Nested Aggregation
-const requestBody = bob.requestBodySearch()
+const requestBody = esb.requestBodySearch()
   .size(0)
   .agg(
-    bob.termsAggregation('colors', 'color')
-      .agg(bob.avgAggregation('avg_price', 'price'))
-      .agg(bob.termsAggregation('make', 'make'))
+    esb.termsAggregation('colors', 'color')
+      .agg(esb.avgAggregation('avg_price', 'price'))
+      .agg(esb.termsAggregation('make', 'make'))
   );
 requestBody.toJSON();
 {
@@ -243,11 +243,11 @@ requestBody.toJSON();
 }
 
 // If you prefer using the `new` keyword
-const agg = new bob.TermsAggregation('countries', 'artist.country')
+const agg = new esb.TermsAggregation('countries', 'artist.country')
   .order('rock>playback_stats.avg', 'desc')
   .agg(
-    new bob.FilterAggregation('rock', new bob.TermQuery('genre', 'rock')).agg(
-      new bob.StatsAggregation('playback_stats', 'play_count')
+    new esb.FilterAggregation('rock', new esb.TermQuery('genre', 'rock')).agg(
+      new esb.StatsAggregation('playback_stats', 'play_count')
     )
   )
   .toJSON();
@@ -274,16 +274,16 @@ agg.toJSON();
 }
 
 // Sort
-const requestBody = bob.requestBodySearch()
-  .query(bob.boolQuery().filter(bob.termQuery('message', 'test')))
-  .sort(bob.sort('timestamp', 'desc'))
+const requestBody = esb.requestBodySearch()
+  .query(esb.boolQuery().filter(esb.termQuery('message', 'test')))
+  .sort(esb.sort('timestamp', 'desc'))
   .sorts([
-    bob.sort('channel', 'desc'),
-    bob.sort('categories', 'desc'),
+    esb.sort('channel', 'desc'),
+    esb.sort('categories', 'desc'),
     // The order defaults to desc when sorting on the _score,
     // and defaults to asc when sorting on anything else.
-    bob.sort('content'),
-    bob.sort('price').order('desc').mode('avg')
+    esb.sort('content'),
+    esb.sort('price').order('desc').mode('avg')
   ]);
 requestBody.toJSON();
 {
@@ -304,8 +304,8 @@ requestBody.toJSON();
 }
 
 // From / size
-const requestBody = bob.requestBodySearch()
-  .query(bob.matchAllQuery())
+const requestBody = esb.requestBodySearch()
+  .query(esb.matchAllQuery())
   .size(5)
   .from(10);
 requestBody.toJSON();
@@ -324,7 +324,7 @@ For more examples, check out the [reference docs][api-docs].
 
 ```
 $ node ./node_modules/elastic-builder/repl.js
-elastic-builder > bob.multiMatchQuery().field('title').field('body').query('Quick brown fox').type('bwst_fields')
+elastic-builder > esb.multiMatchQuery().field('title').field('body').query('Quick brown fox').type('bwst_fields')
 See https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
 Got 'type' - bwst_fields
 Error: The 'type' parameter should belong to Set {

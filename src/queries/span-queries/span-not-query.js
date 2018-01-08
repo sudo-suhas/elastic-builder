@@ -11,12 +11,12 @@ const SpanQueryBase = require('./span-query-base');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-not-query.html)
  *
  * @example
- * const spanQry = bob.spanNotQuery()
- *     .include(bob.spanTermQuery('field1', 'hoya'))
- *     .exclude(bob.spanNearQuery()
+ * const spanQry = esb.spanNotQuery()
+ *     .include(esb.spanTermQuery('field1', 'hoya'))
+ *     .exclude(esb.spanNearQuery()
  *         .clauses([
- *             bob.spanTermQuery('field1', 'la'),
- *             bob.spanTermQuery('field1', 'hoya')
+ *             esb.spanTermQuery('field1', 'la'),
+ *             esb.spanTermQuery('field1', 'hoya')
  *         ])
  *         .slop(0)
  *         .inOrder(true));

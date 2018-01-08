@@ -32,8 +32,8 @@ const invalidDistanceTypeParam = invalidParam(
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geodistance-aggregation.html)
  *
  * @example
- * const agg = bob.geoDistanceAggregation('rings_around_amsterdam', 'location')
- *     .origin(bob.geoPoint().string('52.3760, 4.894'))
+ * const agg = esb.geoDistanceAggregation('rings_around_amsterdam', 'location')
+ *     .origin(esb.geoPoint().string('52.3760, 4.894'))
  *     .ranges([{ to: 100000 }, { from: 100000, to: 300000 }, { from: 300000 }]);
  *
  * @param {string} name The name which will be used to refer to this aggregation.
@@ -86,8 +86,8 @@ class GeoDistanceAggregation extends RangeAggregationBase {
      * ft(feet), NM(nauticalmiles)
      *
      * @example
-     * const agg = bob.geoDistanceAggregation('rings_around_amsterdam', 'location')
-     *     .origin(bob.geoPoint().string('52.3760, 4.894'))
+     * const agg = esb.geoDistanceAggregation('rings_around_amsterdam', 'location')
+     *     .origin(esb.geoPoint().string('52.3760, 4.894'))
      *     .unit('km')
      *     .ranges([{ to: 100 }, { from: 100, to: 300 }, { from: 300 }]);
      *
@@ -110,8 +110,8 @@ class GeoDistanceAggregation extends RangeAggregationBase {
      * The `plane` is the faster but least accurate.
      *
      * @example
-     * const agg = bob.geoDistanceAggregation('rings_around_amsterdam', 'location')
-     *     .origin(bob.geoPoint().string('52.3760, 4.894'))
+     * const agg = esb.geoDistanceAggregation('rings_around_amsterdam', 'location')
+     *     .origin(esb.geoPoint().string('52.3760, 4.894'))
      *     .unit('km')
      *     .distanceType('plane')
      *     .ranges([{ to: 100 }, { from: 100, to: 300 }, { from: 300 }]);

@@ -11,7 +11,7 @@ const { Aggregation, util: { checkType } } = require('../../core');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-matrix-stats-aggregation.html)
  *
  * @example
- * const agg = bob.matrixStatsAggregation('matrixstats', ['poverty', 'income']);
+ * const agg = esb.matrixStatsAggregation('matrixstats', ['poverty', 'income']);
  *
  * @param {string} name A valid aggregation name
  * @param {Array=} fields Array of fields
@@ -31,7 +31,7 @@ class MatrixStatsAggregation extends Aggregation {
      * the statistics.
      *
      * @example
-     * const agg = bob.matrixStatsAggregation('matrixstats')
+     * const agg = esb.matrixStatsAggregation('matrixstats')
      *     .fields(['poverty', 'income']);
      *
      * @param {Array} fields Array of fields
@@ -62,7 +62,7 @@ class MatrixStatsAggregation extends Aggregation {
      * them as if they had a value.
      *
      * @example
-     * const agg = bob.matrixStatsAggregation('matrixstats')
+     * const agg = esb.matrixStatsAggregation('matrixstats')
      *     .fields(['poverty', 'income'])
      *     .missing({ income: 50000 });
      *

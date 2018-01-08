@@ -16,12 +16,12 @@ const MetricsAggregationBase = require('./metrics-aggregation-base');
  * extracted from the aggregated documents.
  *
  * @example
- * const agg = bob.percentilesAggregation('load_time_outlier', 'load_time');
+ * const agg = esb.percentilesAggregation('load_time_outlier', 'load_time');
  *
  * @example
  * // Convert load time from mills to seconds on-the-fly using script
- * const agg = bob.percentilesAggregation('load_time_outlier').script(
- *     bob.script('inline', "doc['load_time'].value / params.timeUnit")
+ * const agg = esb.percentilesAggregation('load_time_outlier').script(
+ *     esb.script('inline', "doc['load_time'].value / params.timeUnit")
  *         .lang('painless')
  *         .params({ timeUnit: 1000 })
  * );
@@ -43,7 +43,7 @@ class PercentilesAggregation extends MetricsAggregationBase {
      *
      * @example
      * // Return the ranges as an array rather than a hash
-     * const agg = bob.percentilesAggregation('balance_outlier', 'balance').keyed(
+     * const agg = esb.percentilesAggregation('balance_outlier', 'balance').keyed(
      *     false
      * );
      *
@@ -61,7 +61,7 @@ class PercentilesAggregation extends MetricsAggregationBase {
      *
      * @example
      * // Specify particular percentiles to calculate
-     * const agg = bob.percentilesAggregation(
+     * const agg = esb.percentilesAggregation(
      *     'load_time_outlier',
      *     'load_time'
      * ).percents([95, 99, 99.9]);
@@ -86,7 +86,7 @@ class PercentilesAggregation extends MetricsAggregationBase {
      * value is 100.
      *
      * @example
-     * const agg = bob.percentilesAggregation(
+     * const agg = esb.percentilesAggregation(
      *     'load_time_outlier',
      *     'load_time'
      * ).tdigest(200);
@@ -111,7 +111,7 @@ class PercentilesAggregation extends MetricsAggregationBase {
      * Alias for `tdigest`
      *
      * @example
-     * const agg = bob.percentilesAggregation(
+     * const agg = esb.percentilesAggregation(
      *     'load_time_outlier',
      *     'load_time'
      * ).compression(200);
@@ -133,7 +133,7 @@ class PercentilesAggregation extends MetricsAggregationBase {
      * The HDR Histogram can be used by specifying the method parameter in the request.
      *
      * @example
-     * const agg = bob.percentilesAggregation('load_time_outlier', 'load_time')
+     * const agg = esb.percentilesAggregation('load_time_outlier', 'load_time')
      *     .percents([95, 99, 99.9])
      *     .hdr(3);
      *

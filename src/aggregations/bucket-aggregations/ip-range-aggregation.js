@@ -11,13 +11,13 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/5current/search-aggregations-bucket-iprange-aggregation.html)
  *
  * @example
- * const agg = bob.ipRangeAggregation('ip_ranges', 'ip').ranges([
+ * const agg = esb.ipRangeAggregation('ip_ranges', 'ip').ranges([
  *     { to: '10.0.0.5' },
  *     { from: '10.0.0.5' }
  * ]);
  *
  * @example
- * const agg = bob.ipRangeAggregation('ip_ranges', 'ip').ranges([
+ * const agg = esb.ipRangeAggregation('ip_ranges', 'ip').ranges([
  *     { mask: '10.0.0.0/25' },
  *     { mask: '10.0.0.127/25' }
  * ]);

@@ -12,8 +12,8 @@ const SpanQueryBase = require('./span-query-base');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-first-query.html)
  *
  * @example
- * const spanQry = bob.spanFirstQuery()
- *     .match(bob.spanTermQuery('user', 'kimchy'))
+ * const spanQry = esb.spanFirstQuery()
+ *     .match(esb.spanTermQuery('user', 'kimchy'))
  *     .end(3);
  *
  * @param {SpanQueryBase=} spanQry Any other span type query

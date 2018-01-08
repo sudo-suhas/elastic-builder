@@ -29,7 +29,7 @@ const invalidHighFreqOpParam = invalidParam(
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html)
  *
  * @example
- * const qry = bob.commonTermsQuery('body','this is bonsai cool')
+ * const qry = esb.commonTermsQuery('body','this is bonsai cool')
  *     .cutoffFrequency(0.001);
  *
  * @param {string=} field The document field to query against
@@ -99,7 +99,7 @@ class CommonTermsQuery extends MonoFieldQueryBase {
      * can be set to `or` or `and` to control the boolean clauses (defaults to `or`).
      *
      * @example
-     * const qry = bob.commonTermsQuery('body', 'nelly the elephant as a cartoon')
+     * const qry = esb.commonTermsQuery('body', 'nelly the elephant as a cartoon')
      *     .lowFreqOperator('and')
      *     .cutoffFrequency(0.001);
      *
@@ -144,7 +144,7 @@ class CommonTermsQuery extends MonoFieldQueryBase {
      * a percentage (30%) or a combination of both.
      *
      * @example
-     * const qry = bob.commonTermsQuery('body', 'nelly the elephant as a cartoon')
+     * const qry = esb.commonTermsQuery('body', 'nelly the elephant as a cartoon')
      *     .lowFreq(2)
      *     .highFreq(3)
      *     .cutoffFrequency(0.001);
@@ -165,7 +165,7 @@ class CommonTermsQuery extends MonoFieldQueryBase {
      * a percentage (30%) or a combination of both.
      *
      * @example
-     * const qry = bob.commonTermsQuery('body', 'nelly the elephant as a cartoon')
+     * const qry = esb.commonTermsQuery('body', 'nelly the elephant as a cartoon')
      *     .lowFreq(2)
      *     .highFreq(3)
      *     .cutoffFrequency(0.001);

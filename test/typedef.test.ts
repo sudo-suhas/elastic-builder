@@ -1,21 +1,21 @@
-import * as bob from '../';
+import * as esb from '../';
 
-new bob.RequestBodySearch().query(new bob.MatchQuery('message', 'this is a test')).toJSON();
+new esb.RequestBodySearch().query(new esb.MatchQuery('message', 'this is a test')).toJSON();
 
-bob
+esb
     .requestBodySearch()
     .query(
-        bob
+        esb
             .boolQuery()
-            .must(bob.matchQuery('last_name', 'smith'))
-            .filter(bob.rangeQuery('age').gt(30))
+            .must(esb.matchQuery('last_name', 'smith'))
+            .filter(esb.rangeQuery('age').gt(30))
     );
 
 // Multi Match Query
-bob
+esb
     .requestBodySearch()
     .query(
-        bob
+        esb
             .multiMatchQuery(['title', 'body'], 'Quick brown fox')
             .type('best_fields')
             .tieBreaker(0.3)
@@ -23,44 +23,44 @@ bob
     );
 
 // Aggregation
-bob.requestBodySearch().size(0).agg(bob.termsAggregation('popular_colors', 'color'));
+esb.requestBodySearch().size(0).agg(esb.termsAggregation('popular_colors', 'color'));
 
 // Nested Aggregation
-bob
+esb
     .requestBodySearch()
     .size(0)
     .agg(
-        bob
+        esb
             .termsAggregation('colors', 'color')
-            .agg(bob.avgAggregation('avg_price', 'price'))
-            .agg(bob.termsAggregation('make', 'make'))
+            .agg(esb.avgAggregation('avg_price', 'price'))
+            .agg(esb.termsAggregation('make', 'make'))
     );
 
-new bob.TermsAggregation('countries', 'artist.country')
+new esb.TermsAggregation('countries', 'artist.country')
     .order('rock>playback_stats.avg', 'desc')
     .agg(
-        new bob.FilterAggregation('rock', new bob.TermQuery('genre', 'rock')).agg(
-            new bob.StatsAggregation('playback_stats', 'play_count')
+        new esb.FilterAggregation('rock', new esb.TermQuery('genre', 'rock')).agg(
+            new esb.StatsAggregation('playback_stats', 'play_count')
         )
     )
     .toJSON();
 
 // Sort
-bob
+esb
     .requestBodySearch()
-    .query(bob.boolQuery().filter(bob.termQuery('message', 'test')))
-    .sort(bob.sort('timestamp', 'desc'))
+    .query(esb.boolQuery().filter(esb.termQuery('message', 'test')))
+    .sort(esb.sort('timestamp', 'desc'))
     .sorts([
-        bob.sort('channel', 'desc'),
-        bob.sort('categories', 'desc'),
+        esb.sort('channel', 'desc'),
+        esb.sort('categories', 'desc'),
         // The order defaults to desc when sorting on the _score,
         // and defaults to asc when sorting on anything else.
-        bob.sort('content'),
-        bob.sort('price').order('desc').mode('avg')
+        esb.sort('content'),
+        esb.sort('price').order('desc').mode('avg')
     ]);
 
 // From / size
-bob.requestBodySearch().query(bob.matchAllQuery()).size(5).from(10);
+esb.requestBodySearch().query(esb.matchAllQuery()).size(5).from(10);
 
-bob.recipes.filterQuery(bob.matchQuery('message', 'this is a test'))
+esb.recipes.filterQuery(esb.matchQuery('message', 'this is a test'))
 

@@ -51,7 +51,7 @@ class HistogramAggregationBase extends BucketAggregationBase {
      * If no format is specified, then it will use the first format specified in the field mapping.
      *
      * @example
-     * const agg = bob.dateHistogramAggregation(
+     * const agg = esb.dateHistogramAggregation(
      *     'sales_over_time',
      *     'date',
      *     '1M'
@@ -74,7 +74,7 @@ class HistogramAggregationBase extends BucketAggregationBase {
      * a value such as 1h for an hour, or 1d for a day.
      *
      * @example
-     * const agg = bob.dateHistogramAggregation('by_day', 'date', 'day').offset('6h');
+     * const agg = esb.dateHistogramAggregation('by_day', 'date', 'day').offset('6h');
      *
      * @param {string} offset Time or bucket key offset for bucketing.
      * @returns {HistogramAggregationBase} returns `this` so that calls can be chained
@@ -88,16 +88,16 @@ class HistogramAggregationBase extends BucketAggregationBase {
      * Sets the ordering for buckets
      *
      * @example
-     * const agg = bob.histogramAggregation('prices', 'price', 50)
+     * const agg = esb.histogramAggregation('prices', 'price', 50)
      *     .order('_count', 'desc');
      *
      * @example
-     * const agg = bob.histogramAggregation('prices', 'price', 50)
+     * const agg = esb.histogramAggregation('prices', 'price', 50)
      *     .order('promoted_products>rating_stats.avg', 'desc')
      *     .agg(
-     *         bob.filterAggregation('promoted_products')
-     *             .filter(bob.termQuery('promoted', 'true'))
-     *             .agg(bob.statsAggregation('rating_stats', 'rating'))
+     *         esb.filterAggregation('promoted_products')
+     *             .filter(esb.termQuery('promoted', 'true'))
+     *             .agg(esb.statsAggregation('rating_stats', 'rating'))
      *     );
      *
      * @param {string} key
@@ -129,7 +129,7 @@ class HistogramAggregationBase extends BucketAggregationBase {
      * Sets the minimum number of matching documents in range to return the bucket.
      *
      * @example
-     * const agg = bob.histogramAggregation('prices', 'price', 50).minDocCount(1);
+     * const agg = esb.histogramAggregation('prices', 'price', 50).minDocCount(1);
      *
      * @param {number} minDocCnt Integer value for minimum number of documents
      * required to return bucket in response
@@ -146,7 +146,7 @@ class HistogramAggregationBase extends BucketAggregationBase {
      * outside the bounds of indexed documents.
      *
      * @example
-     * const agg = bob.histogramAggregation('prices', 'price', 50).extendedBounds(0, 500);
+     * const agg = esb.histogramAggregation('prices', 'price', 50).extendedBounds(0, 500);
      *
      * @param {number|string} min Start bound / minimum bound value
      * For histogram aggregation, Integer value can be used.
@@ -170,7 +170,7 @@ class HistogramAggregationBase extends BucketAggregationBase {
      * that are missing a value should be treated.
      *
      * @example
-     * const agg = bob.histogramAggregation('quantity', 'quantity', 10).missing(0);
+     * const agg = esb.histogramAggregation('quantity', 'quantity', 10).missing(0);
      *
      * @param {string} value
      * @returns {HistogramAggregationBase} returns `this` so that calls can be chained
@@ -185,7 +185,7 @@ class HistogramAggregationBase extends BucketAggregationBase {
      * bucket interval.
      *
      * @example
-     * const agg = bob.dateHistogramAggregation('sales_over_time', 'date', '1M')
+     * const agg = esb.dateHistogramAggregation('sales_over_time', 'date', '1M')
      *     .keyed(true)
      *     .format('yyyy-MM-dd');
      *

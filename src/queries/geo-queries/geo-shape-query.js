@@ -36,17 +36,17 @@ const invalidRelationParam = invalidParam(
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-query.html)
  *
  * @example
- * const geoQry = bob.geoShapeQuery('location')
- *     .shape(bob.geoShape()
+ * const geoQry = esb.geoShapeQuery('location')
+ *     .shape(esb.geoShape()
  *         .type('envelope')
  *         .coordinates([[13.0, 53.0], [14.0, 52.0]]))
  *     .relation('within');
  *
  * @example
  * // Pre-indexed shape
- * const geoQry = bob.geoShapeQuery()
+ * const geoQry = esb.geoShapeQuery()
  *     .field('location')
- *     .indexedShape(bob.indexedShape()
+ *     .indexedShape(esb.indexedShape()
  *         .id('DEU')
  *         .type('countries')
  *         .index('shapes')

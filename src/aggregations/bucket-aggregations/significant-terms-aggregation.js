@@ -14,10 +14,10 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-significantterms-aggregation.html)
  *
  * @example
- * const reqBody = bob.requestBodySearch()
- *     .query(bob.termsQuery('force', 'British Transport Police'))
+ * const reqBody = esb.requestBodySearch()
+ *     .query(esb.termsQuery('force', 'British Transport Police'))
  *     .agg(
- *         bob.significantTermsAggregation(
+ *         esb.significantTermsAggregation(
  *             'significantCrimeTypes',
  *             'crime_type'
  *         )
@@ -25,8 +25,8 @@ const ES_REF_URL =
  *
  * @example
  * // Use parent aggregation for segregated data analysis
- * const agg = bob.termsAggregation('forces', 'force').agg(
- *     bob.significantTermsAggregation('significantCrimeTypes', 'crime_type')
+ * const agg = esb.termsAggregation('forces', 'force').agg(
+ *     esb.significantTermsAggregation('significantCrimeTypes', 'crime_type')
  * );
  *
  * @param {string} name The name which will be used to refer to this aggregation.
@@ -135,11 +135,11 @@ class SignificantTermsAggregation extends TermsAggregationBase {
      * for background term frequencies instead of using the entire index.
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
-     *     .query(bob.matchQuery('text', 'madrid'))
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.matchQuery('text', 'madrid'))
      *     .agg(
-     *         bob.significantTermsAggregation('tags', 'tag').backgroundFilter(
-     *             bob.termQuery('text', 'spain')
+     *         esb.significantTermsAggregation('tags', 'tag').backgroundFilter(
+     *             esb.termQuery('text', 'spain')
      *         )
      *     );
      *

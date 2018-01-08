@@ -14,19 +14,19 @@ const MetricsAggregationBase = require('./metrics-aggregation-base');
  * numeric values extracted from the aggregated documents.
  *
  * @example
- * const agg = bob.maxAggregation('max_price', 'price');
+ * const agg = esb.maxAggregation('max_price', 'price');
  *
  * @example
  * // Use a file script
- * const agg = bob.maxAggregation('max_price').script(
- *     bob.script('file', 'my_script').params({ field: 'price' })
+ * const agg = esb.maxAggregation('max_price').script(
+ *     esb.script('file', 'my_script').params({ field: 'price' })
  * );
  *
  * @example
  * // Value script to apply the conversion rate to every value
  * // before it is aggregated
- * const agg = bob.maxAggregation('max_price').script(
- *     bob.script('inline', '_value * params.conversion_rate').params({
+ * const agg = esb.maxAggregation('max_price').script(
+ *     esb.script('inline', '_value * params.conversion_rate').params({
  *         conversion_rate: 1.2
  *     })
  * );

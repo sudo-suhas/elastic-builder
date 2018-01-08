@@ -14,7 +14,7 @@ const ES_REF_URL =
  * values extracted from the aggregated documents.
  *
  * @example
- * const agg = bob.scriptedMetricAggregation('profit')
+ * const agg = esb.scriptedMetricAggregation('profit')
  *     .initScript('params._agg.transactions = []')
  *     .mapScript(
  *         "params._agg.transactions.add(doc.type.value == 'sale' ? doc.amount.value : -1 * doc.amount.value)"
@@ -28,15 +28,15 @@ const ES_REF_URL =
  *
  * @example
  * // Specify using file scripts
- * const agg = bob.scriptedMetricAggregation('profit')
- *     .initScript(bob.script('file', 'my_init_script'))
- *     .mapScript(bob.script('file', 'my_map_script'))
- *     .combineScript(bob.script('file', 'my_combine_script'))
+ * const agg = esb.scriptedMetricAggregation('profit')
+ *     .initScript(esb.script('file', 'my_init_script'))
+ *     .mapScript(esb.script('file', 'my_map_script'))
+ *     .combineScript(esb.script('file', 'my_combine_script'))
  *     // script parameters for `init`, `map` and `combine` scripts must be
  *     // specified in a global params object so that
  *     // it can be shared between the scripts
  *     .params({ field: 'amount', _agg: {} })
- *     .reduceScript(bob.script('file', 'my_reduce_script'));
+ *     .reduceScript(esb.script('file', 'my_reduce_script'));
  *
  * @param {string} name The name which will be used to refer to this aggregation.
  *

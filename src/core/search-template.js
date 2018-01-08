@@ -19,8 +19,8 @@ const { recursiveToJSON } = require('./util');
  * This needs to be specified if optional argument `type` is passed.
  *
  * @example
- * const templ = bob.searchTemplate('inline', {
- *     query: bob.matchQuery('{{my_field}}', '{{my_value}}'),
+ * const templ = esb.searchTemplate('inline', {
+ *     query: esb.matchQuery('{{my_field}}', '{{my_value}}'),
  *     size: '{{my_size}}'
  * }).params({
  *     my_field: 'message',
@@ -29,7 +29,7 @@ const { recursiveToJSON } = require('./util');
  * });
  *
  * @example
- * const templ = new bob.SearchTemplate(
+ * const templ = new esb.SearchTemplate(
  *     'inline',
  *     '{ "query": { "terms": {{#toJson}}statuses{{/toJson}} }}'
  * ).params({
@@ -39,14 +39,14 @@ const { recursiveToJSON } = require('./util');
  * });
  *
  * @example
- * const templ = new bob.SearchTemplate(
+ * const templ = new esb.SearchTemplate(
  *     'inline',
  *     '{ "query": { "bool": { "must": {{#toJson}}clauses{{/toJson}} } } }'
  * ).params({
  *     clauses: [
- *         bob.termQuery('user', 'boo'),
- *         bob.termQuery('user', 'bar'),
- *         bob.termQuery('user', 'baz')
+ *         esb.termQuery('user', 'boo'),
+ *         esb.termQuery('user', 'bar'),
+ *         esb.termQuery('user', 'baz')
  *     ]
  * });
  */
@@ -160,7 +160,7 @@ class SearchTemplate {
      * @example
      * // `templId` - Name of the query template in config/scripts/, i.e.,
      * // storedTemplate.mustache.
-     * const templ = new bob.SearchTemplate('file', 'storedTemplate').params({
+     * const templ = new esb.SearchTemplate('file', 'storedTemplate').params({
      *     query_string: 'search for these words'
      * });
      *

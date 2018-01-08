@@ -16,15 +16,15 @@ There are two ways to use the classes for constructing queries:
 
 ```js
 // Import the library
-const bob = require('elastic-builder'); // the builder
+const esb = require('elastic-builder'); // the builder
 
 // Use `new` keyword for constructor instances of class
-const requestBody = new bob.RequestBodySearch()
-    .query(new bob.MatchQuery('message', 'this is a test'));
+const requestBody = new esb.RequestBodySearch()
+    .query(new esb.MatchQuery('message', 'this is a test'));
 
 // Or use helper methods which construct the object without need for the `new` keyword
-const requestBody = bob.requestBodySearch()
-    .query(bob.matchQuery('message', 'this is a test'));
+const requestBody = esb.requestBodySearch()
+    .query(esb.matchQuery('message', 'this is a test'));
 
 // Build the request body
 requestBody.toJSON()
@@ -43,7 +43,7 @@ requestBody.toJSON()
 But this is not required in node env 6 and above. You can directly use the `src` files:
 
 ```js
-const bob = require('elastic-builder/src');
+const esb = require('elastic-builder/src');
 ```
 
 This module is heavily influenced by [elastic.js](https://github.com/fullscale/elastic.js)(not maintained anymore).

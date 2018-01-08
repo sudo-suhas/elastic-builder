@@ -11,7 +11,7 @@ const { Query, util: { checkType } } = require('../../core');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html)
  *
  * @example
- * const qry = bob.idsQuery('my_type', ['1', '4', '100']);
+ * const qry = esb.idsQuery('my_type', ['1', '4', '100']);
  *
  * @param {Array|string=} type The elasticsearch doc type
  * @param {Array=} ids List of ids to fiter on.

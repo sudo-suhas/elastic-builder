@@ -21,13 +21,13 @@ const ES_REF_URL =
  * aggregated.
  *
  * @example
- * const reqBody = bob.requestBodySearch()
+ * const reqBody = esb.requestBodySearch()
  *     .agg(
- *         bob.termsAggregation('top_tags', 'type')
+ *         esb.termsAggregation('top_tags', 'type')
  *             .size(3)
  *             .agg(
- *                 bob.topHitsAggregation('top_sales_hits')
- *                     .sort(bob.sort('date', 'desc'))
+ *                 esb.topHitsAggregation('top_sales_hits')
+ *                     .sort(esb.sort('date', 'desc'))
  *                     .source({ includes: ['date', 'price'] })
  *                     .size(1)
  *             )
@@ -37,15 +37,15 @@ const ES_REF_URL =
  * @example
  * // Field collapsing(logically groups a result set into
  * // groups and per group returns top documents)
- * const reqBody = bob.requestBodySearch()
- *     .query(bob.matchQuery('body', 'elections'))
+ * const reqBody = esb.requestBodySearch()
+ *     .query(esb.matchQuery('body', 'elections'))
  *     .agg(
- *         bob.termsAggregation('top-sites', 'domain')
+ *         esb.termsAggregation('top-sites', 'domain')
  *             .order('top_hit', 'desc')
- *             .agg(bob.topHitsAggregation('top_tags_hits'))
+ *             .agg(esb.topHitsAggregation('top_tags_hits'))
  *             .agg(
- *                 bob.maxAggregation('top_hit').script(
- *                     bob.script('inline', '_score')
+ *                 esb.maxAggregation('top_hit').script(
+ *                     esb.script('inline', '_score')
  *                 )
  *             )
  *     );

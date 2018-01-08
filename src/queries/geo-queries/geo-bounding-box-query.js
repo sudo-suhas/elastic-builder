@@ -22,24 +22,24 @@ const invalidTypeParam = invalidParam(
  *
  * @example
  * // Format of point in Geohash
- * const qry = bob.geoBoundingBoxQuery('pin.location')
- *     .topLeft(bob.geoPoint().string('dr5r9ydj2y73'))
- *     .bottomRight(bob.geoPoint().string('drj7teegpus6'));
+ * const qry = esb.geoBoundingBoxQuery('pin.location')
+ *     .topLeft(esb.geoPoint().string('dr5r9ydj2y73'))
+ *     .bottomRight(esb.geoPoint().string('drj7teegpus6'));
  *
  * @example
  * // Format of point with lat lon as properties
- * const qry = bob.geoBoundingBoxQuery()
+ * const qry = esb.geoBoundingBoxQuery()
  *     .field('pin.location')
- *     .topLeft(bob.geoPoint()
+ *     .topLeft(esb.geoPoint()
  *         .lat(40.73)
  *         .lon(-74.1))
- *     .bottomRight(bob.geoPoint()
+ *     .bottomRight(esb.geoPoint()
  *         .lat(40.10)
  *         .lon(-71.12));
  *
  * @example
  * // Set bounding box values separately
- * const qry = bob.geoBoundingBoxQuery('pin.location')
+ * const qry = esb.geoBoundingBoxQuery('pin.location')
  *     .top(40.73)
  *     .left(-74.1)
  *     .bottom(40.01)
@@ -164,12 +164,12 @@ class GeoBoundingBoxQuery extends GeoQueryBase {
      *
      * @example
      *
-     * const geoQry = bob.geoBoundingBoxQuery()
+     * const geoQry = esb.geoBoundingBoxQuery()
      *     .field('pin.location')
-     *     .topLeft(bob.geoPoint()
+     *     .topLeft(esb.geoPoint()
      *         .lat(40.73)
      *         .lon(-74.1))
-     *     .bottomRight(bob.geoPoint()
+     *     .bottomRight(esb.geoPoint()
      *         .lat(40.10)
      *         .lon(-71.12))
      *     .type('indexed');

@@ -37,7 +37,7 @@ const invalidStringDistanceParam = invalidParam(
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-term.html)
  *
  * @example
- * const suggest = bob.termSuggester(
+ * const suggest = esb.termSuggester(
  *     'my-suggestion',
  *     'message',
  *     'tring out Elasticsearch'

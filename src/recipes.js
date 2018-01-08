@@ -17,12 +17,12 @@ const { Query, util: { checkType } } = require('./core');
 /**
  * Recipe for the now removed `missing` query.
  *
- * Can be accessed using `bob.recipes.missingQuery` OR `bob.cookMissingQuery`.
+ * Can be accessed using `esb.recipes.missingQuery` OR `esb.cookMissingQuery`.
  *
  * [Elasticsearch refererence](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html#_literal_missing_literal_query)
  *
  * @example
- * const qry = bob.cookMissingQuery('user');
+ * const qry = esb.cookMissingQuery('user');
  *
  * qry.toJSON();
  * {
@@ -46,13 +46,13 @@ exports.missingQuery = function missingQuery(field) {
  * Recipe for random sort query. Takes a query and returns the same
  * wrapped in a random scoring query.
  *
- * Can be accessed using `bob.recipes.randomSortQuery` OR `bob.cookRandomSortQuery`.
+ * Can be accessed using `esb.recipes.randomSortQuery` OR `esb.cookRandomSortQuery`.
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-random)
  *
  * @example
- * const reqBody = bob.requestBodySearch()
- *     .query(bob.cookRandomSortQuery(bob.rangeQuery('age').gte(10)))
+ * const reqBody = esb.requestBodySearch()
+ *     .query(esb.cookRandomSortQuery(esb.rangeQuery('age').gte(10)))
  *     .size(100);
  *
  * reqBody.toJSON();
@@ -88,12 +88,12 @@ exports.randomSortQuery = function randomSortQuery(
  * Recipe for constructing a filter query using `bool` query.
  * Optionally, scoring can be enabled.
  *
- * Can be accessed using `bob.recipes.filterQuery` OR `bob.cookFilterQuery`.
+ * Can be accessed using `esb.recipes.filterQuery` OR `esb.cookFilterQuery`.
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html)
  *
  * @example
- * const boolQry = bob.cookFilterQuery(bob.termQuery('status', 'active'), true);
+ * const boolQry = esb.cookFilterQuery(esb.termQuery('status', 'active'), true);
  * boolQry.toJSON();
  * {
  *   "bool": {

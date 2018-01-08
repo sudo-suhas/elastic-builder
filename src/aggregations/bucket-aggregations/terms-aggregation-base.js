@@ -55,7 +55,7 @@ class TermsAggregationBase extends BucketAggregationBase {
      * Sets the minimum number of matching hits required to return the terms.
      *
      * @example
-     * const agg = bob.significantTermsAggregation('tags', 'tag').minDocCount(10);
+     * const agg = esb.significantTermsAggregation('tags', 'tag').minDocCount(10);
      *
      * @param {number} minDocCnt Integer value for minimum number of documents
      * required to return bucket in response
@@ -86,7 +86,7 @@ class TermsAggregationBase extends BucketAggregationBase {
      * Defines how many term buckets should be returned out of the overall terms list.
      *
      * @example
-     * const agg = bob.termsAggregation('products', 'product').size(5);
+     * const agg = esb.termsAggregation('products', 'product').size(5);
      *
      * @param {number} size
      * @returns {TermsAggregationBase} returns `this` so that calls can be chained
@@ -128,21 +128,21 @@ class TermsAggregationBase extends BucketAggregationBase {
      * Filter the values for which buckets will be created.
      *
      * @example
-     * const agg = bob.termsAggregation('tags', 'tags')
+     * const agg = esb.termsAggregation('tags', 'tags')
      *     .include('.*sport.*')
      *     .exclude('water_.*');
      *
      * @example
      * // Match on exact values
-     * const reqBody = bob.requestBodySearch()
+     * const reqBody = esb.requestBodySearch()
      *     .agg(
-     *         bob.termsAggregation('JapaneseCars', 'make').include([
+     *         esb.termsAggregation('JapaneseCars', 'make').include([
      *             'mazda',
      *             'honda'
      *         ])
      *     )
      *     .agg(
-     *         bob.termsAggregation('ActiveCarManufacturers', 'make').exclude([
+     *         esb.termsAggregation('ActiveCarManufacturers', 'make').exclude([
      *             'rover',
      *             'jensen'
      *         ])
@@ -160,21 +160,21 @@ class TermsAggregationBase extends BucketAggregationBase {
      * Filter the values for which buckets will be created.
      *
      * @example
-     * const agg = bob.termsAggregation('tags', 'tags')
+     * const agg = esb.termsAggregation('tags', 'tags')
      *     .include('.*sport.*')
      *     .exclude('water_.*');
      *
      * @example
      * // Match on exact values
-     * const reqBody = bob.requestBodySearch()
+     * const reqBody = esb.requestBodySearch()
      *     .agg(
-     *         bob.termsAggregation('JapaneseCars', 'make').include([
+     *         esb.termsAggregation('JapaneseCars', 'make').include([
      *             'mazda',
      *             'honda'
      *         ])
      *     )
      *     .agg(
-     *         bob.termsAggregation('ActiveCarManufacturers', 'make').exclude([
+     *         esb.termsAggregation('ActiveCarManufacturers', 'make').exclude([
      *             'rover',
      *             'jensen'
      *         ])
@@ -195,10 +195,10 @@ class TermsAggregationBase extends BucketAggregationBase {
      * the type of value held can be controlled
      *
      * @example
-     * const agg = bob.significantTermsAggregation('tags', 'tag').executionHint('map');
+     * const agg = esb.significantTermsAggregation('tags', 'tag').executionHint('map');
      *
      * @example
-     * const agg = bob.termsAggregation('tags', 'tags').executionHint('map');
+     * const agg = esb.termsAggregation('tags', 'tags').executionHint('map');
      *
      * @param {string} hint the possible values are `map`, `global_ordinals`,
      * `global_ordinals_hash` and `global_ordinals_low_cardinality`

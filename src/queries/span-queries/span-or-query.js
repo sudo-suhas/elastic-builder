@@ -10,11 +10,11 @@ const SpanQueryBase = require('./span-query-base');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-or-query.html)
  *
  * @example
- * const spanQry = bob.spanOrQuery()
+ * const spanQry = esb.spanOrQuery()
  *     .clauses([
- *         bob.spanTermQuery('field', 'value1'),
- *         bob.spanTermQuery('field', 'value2'),
- *         bob.spanTermQuery('field', 'value3')
+ *         esb.spanTermQuery('field', 'value1'),
+ *         esb.spanTermQuery('field', 'value2'),
+ *         esb.spanTermQuery('field', 'value3')
  *     ]);
  *
  * @extends SpanQueryBase

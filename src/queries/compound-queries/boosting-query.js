@@ -13,9 +13,9 @@ const { Query, util: { checkType } } = require('../../core');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html)
  *
  * @example
- * const qry = bob.boostingQuery(
- *     bob.termQuery('field1', 'value1'), // positiveQry
- *     bob.termQuery('field2', 'value2'), // negativeQry
+ * const qry = esb.boostingQuery(
+ *     esb.termQuery('field1', 'value1'), // positiveQry
+ *     esb.termQuery('field2', 'value2'), // negativeQry
  *     0.2 // negativeBoost
  * );
  *

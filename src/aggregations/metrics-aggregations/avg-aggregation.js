@@ -15,25 +15,25 @@ const MetricsAggregationBase = require('./metrics-aggregation-base');
  *
  * @example
  * // Compute the average grade over all documents
- * const agg = bob.avgAggregation('avg_grade', 'grade');
+ * const agg = esb.avgAggregation('avg_grade', 'grade');
  *
  * @example
  * // Compute the average grade based on a script
- * const agg = bob.avgAggregation('avg_grade').script(
- *     bob.script('inline', "doc['grade'].value").lang('painless')
+ * const agg = esb.avgAggregation('avg_grade').script(
+ *     esb.script('inline', "doc['grade'].value").lang('painless')
  * );
  *
  * @example
  * // Value script, apply grade correction
- * const agg = bob.avgAggregation('avg_grade', 'grade').script(
- *     bob.script('inline', '_value * params.correction')
+ * const agg = esb.avgAggregation('avg_grade', 'grade').script(
+ *     esb.script('inline', '_value * params.correction')
  *         .lang('painless')
  *         .params({ correction: 1.2 })
  * );
  *
  * @example
  * // Missing value
- * const agg = bob.avgAggregation('avg_grade', 'grade').missing(10);
+ * const agg = esb.avgAggregation('avg_grade', 'grade').missing(10);
  *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on

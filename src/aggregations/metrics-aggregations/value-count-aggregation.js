@@ -18,11 +18,11 @@ const ES_REF_URL =
  * aggregated documents.
  *
  * @example
- * const agg = bob.valueCountAggregation('types_count', 'type');
+ * const agg = esb.valueCountAggregation('types_count', 'type');
  *
  * @example
- * const agg = bob.valueCountAggregation('types_count').script(
- *     bob.script('inline', "doc['type'].value")
+ * const agg = esb.valueCountAggregation('types_count').script(
+ *     esb.script('inline', "doc['type'].value")
  * );
  *
  * @param {string} name The name which will be used to refer to this aggregation.

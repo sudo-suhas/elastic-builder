@@ -14,25 +14,25 @@ const MetricsAggregationBase = require('./metrics-aggregation-base');
  * the aggregated documents.
  *
  * @example
- * const agg = bob.extendedStatsAggregation('grades_stats', 'grade');
+ * const agg = esb.extendedStatsAggregation('grades_stats', 'grade');
  *
  * @example
  * // Compute the grade stats based on a script
- * const agg = bob.extendedStatsAggregation('grades_stats').script(
- *     bob.script('inline', "doc['grade'].value").lang('painless')
+ * const agg = esb.extendedStatsAggregation('grades_stats').script(
+ *     esb.script('inline', "doc['grade'].value").lang('painless')
  * );
  *
  * @example
  * // Value script, apply grade correction
- * const agg = bob.extendedStatsAggregation('grades_stats', 'grade').script(
- *     bob.script('inline', '_value * params.correction')
+ * const agg = esb.extendedStatsAggregation('grades_stats', 'grade').script(
+ *     esb.script('inline', '_value * params.correction')
  *         .lang('painless')
  *         .params({ correction: 1.2 })
  * );
  *
  * @example
  * // Missing value
- * const agg = bob.extendedStatsAggregation('grades_stats', 'grade').missing(0);
+ * const agg = esb.extendedStatsAggregation('grades_stats', 'grade').missing(0);
  *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on
@@ -50,7 +50,7 @@ class ExtendedStatsAggregation extends MetricsAggregationBase {
      * sigma controls how many standard deviations +/- from the mean should be displayed
      *
      * @example
-     * const agg = bob.extendedStatsAggregation('grades_stats', 'grade').sigma(3);
+     * const agg = esb.extendedStatsAggregation('grades_stats', 'grade').sigma(3);
      *
      * @param {number} sigma sigma can be any non-negative double,
      * meaning you can request non-integer values such as 1.5.

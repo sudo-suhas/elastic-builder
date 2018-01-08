@@ -12,7 +12,7 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html)
  *
  * @example
- * const qry = bob.queryStringQuery('this AND that OR thus')
+ * const qry = esb.queryStringQuery('this AND that OR thus')
  *     .defaultField('content');
  *
  * @param {string=} queryString The actual query to be parsed.
@@ -258,7 +258,7 @@ class QueryStringQuery extends QueryStringQueryBase {
      * parameter must be used instead.
      *
      * @example
-     * const qry = bob.queryStringQuery('this AND that OR thus')
+     * const qry = esb.queryStringQuery('this AND that OR thus')
      *     .fields(['content', 'name^5'])
      *     .useDisMax(true);
      *

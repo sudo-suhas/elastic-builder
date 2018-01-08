@@ -16,16 +16,16 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-query.html)
  *
  * @example
- * const qry = bob.hasParentQuery(bob.termQuery('tag', 'something'), 'blog');
+ * const qry = esb.hasParentQuery(esb.termQuery('tag', 'something'), 'blog');
  *
  * @example
  * // Sorting tags by parent documents' `view_count` field
- * const qry = bob.hasParentQuery()
+ * const qry = esb.hasParentQuery()
  *     .parentType('blog')
  *     .score(true)
  *     .query(
- *         bob.functionScoreQuery().function(
- *             bob.scriptScoreFunction("_score * doc['view_count'].value")
+ *         esb.functionScoreQuery().function(
+ *             esb.scriptScoreFunction("_score * doc['view_count'].value")
  *         )
  *     );
  *
@@ -81,8 +81,8 @@ class HasParentQuery extends JoiningQueryBase {
      * aggregated into the child documents belonging to the matching parent document.
      *
      * @example
-     * const qry = bob.hasParentQuery(
-     *     bob.termQuery('tag', 'something'),
+     * const qry = esb.hasParentQuery(
+     *     esb.termQuery('tag', 'something'),
      *     'blog'
      * ).score(true);
      *

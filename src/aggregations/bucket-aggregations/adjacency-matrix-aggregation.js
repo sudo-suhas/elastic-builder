@@ -16,10 +16,10 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-adjacency-matrix-aggregation.html)
  *
  * @example
- * const agg = bob.adjacencyMatrixAggregation('interactions').filters({
- *     grpA: bob.termsQuery('accounts', ['hillary', 'sidney']),
- *     grpB: bob.termsQuery('accounts', ['donald', 'mitt']),
- *     grpC: bob.termsQuery('accounts', ['vladimir', 'nigel'])
+ * const agg = esb.adjacencyMatrixAggregation('interactions').filters({
+ *     grpA: esb.termsQuery('accounts', ['hillary', 'sidney']),
+ *     grpB: esb.termsQuery('accounts', ['donald', 'mitt']),
+ *     grpC: esb.termsQuery('accounts', ['vladimir', 'nigel'])
  * });
  *
  * @param {string} name The name which will be used to refer to this aggregation.

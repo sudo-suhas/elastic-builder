@@ -12,12 +12,12 @@ const { Query } = require('../../core');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html)
  *
  * @example
- * const qry = bob.constantScoreQuery(
- *     bob.termsQuery('user', ['kimchy', 'elasticsearch'])
+ * const qry = esb.constantScoreQuery(
+ *     esb.termsQuery('user', ['kimchy', 'elasticsearch'])
  * );
  *
  * @example
- * const qry = bob.termsQuery('user')
+ * const qry = esb.termsQuery('user')
  *     .index('users')
  *     .type('user')
  *     .id(2)

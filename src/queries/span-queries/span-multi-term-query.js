@@ -15,8 +15,8 @@ const SpanQueryBase = require('./span-query-base');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-multi-term-query.html)
  *
  * @example
- * const spanQry = bob.spanMultiTermQuery()
- *     .match(bob.prefixQuery('user', 'ki').boost(1.08));
+ * const spanQry = esb.spanMultiTermQuery()
+ *     .match(esb.prefixQuery('user', 'ki').boost(1.08));
  *
  * @param {MultiTermQueryBase=} multiTermQry One of wildcard, fuzzy, prefix, range or regexp query
  *

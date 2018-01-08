@@ -13,7 +13,7 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-missing-aggregation.html)
  *
  * @example
- * const agg = bob.missingAggregation('products_without_a_price', 'price');
+ * const agg = esb.missingAggregation('products_without_a_price', 'price');
  *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on

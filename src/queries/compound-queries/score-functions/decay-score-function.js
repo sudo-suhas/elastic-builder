@@ -29,7 +29,7 @@ const invalidModeParam = invalidParam(
  *
  * @example
  * // Defaults to decay function `gauss`
- * const decayFunc = bob.decayScoreFunction()
+ * const decayFunc = esb.decayScoreFunction()
  *     .field('location') // field is a geo_point
  *     .origin('11, 12') // geo format
  *     .scale('2km')
@@ -37,7 +37,7 @@ const invalidModeParam = invalidParam(
  *     .decay(0.33);
  *
  * @example
- * const decayFunc = bob.decayScoreFunction('gauss', 'date')
+ * const decayFunc = esb.decayScoreFunction('gauss', 'date')
  *     .origin('2013-09-17')
  *     .scale('10d')
  *     .offset('5d')

@@ -19,13 +19,13 @@ const invalidTypeParam = invalidParam(ES_REF_URL, 'type', GEO_SHAPE_TYPES);
  *
  * @example
  * // Pass options using method
- * const shape = bob.geoShape()
+ * const shape = esb.geoShape()
  *     .type('linestring')
  *     .coordinates([[-77.03653, 38.897676], [-77.009051, 38.889939]]);
  *
  * @example
  * // Pass parameters using contructor
- * const shape = bob.geoShape('multipoint', [[102.0, 2.0], [103.0, 2.0]])
+ * const shape = esb.geoShape('multipoint', [[102.0, 2.0], [103.0, 2.0]])
  *
  * @param {string=} type A valid shape type.
  * Can be one of `point`, `linestring`, `polygon`, `multipoint`, `multilinestring`,
@@ -45,7 +45,7 @@ class GeoShape {
      * Sets the GeoJSON format type used to represent shape.
      *
      * @example
-     * const shape = bob.geoShape()
+     * const shape = esb.geoShape()
      *     .type('envelope')
      *     .coordinates([[-45.0, 45.0], [45.0, -45.0]])
      *
@@ -70,7 +70,7 @@ class GeoShape {
      * and [ElasticSearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-shape.html#input-structure) for correct coordinate definitions.
      *
      * @example
-     * const shape = bob.geoShape()
+     * const shape = esb.geoShape()
      *     .type('point')
      *     .coordinates([-77.03653, 38.897676])
      *
@@ -88,7 +88,7 @@ class GeoShape {
      * Sets the radius for parsing a circle `GeoShape`.
      *
      * @example
-     * const shape = bob.geoShape()
+     * const shape = esb.geoShape()
      *     .type('circle')
      *     .coordinates([-45.0, 45.0])
      *     .radius('100m')

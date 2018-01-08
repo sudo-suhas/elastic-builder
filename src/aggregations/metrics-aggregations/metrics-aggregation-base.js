@@ -47,14 +47,14 @@ class MetricsAggregationBase extends Aggregation {
      *
      * @example
      * // Compute the average grade based on a script
-     * const agg = bob.avgAggregation('avg_grade').script(
-     *     bob.script('inline', "doc['grade'].value").lang('painless')
+     * const agg = esb.avgAggregation('avg_grade').script(
+     *     esb.script('inline', "doc['grade'].value").lang('painless')
      * );
      *
      * @example
      * // Value script, apply grade correction
-     * const agg = bob.avgAggregation('avg_grade', 'grade').script(
-     *     bob.script('inline', '_value * params.correction')
+     * const agg = esb.avgAggregation('avg_grade', 'grade').script(
+     *     esb.script('inline', '_value * params.correction')
      *         .lang('painless')
      *         .params({ correction: 1.2 })
      * );
@@ -75,7 +75,7 @@ class MetricsAggregationBase extends Aggregation {
      * that are missing a value should be treated.
      *
      * @example
-     * const agg = bob.avgAggregation('avg_grade', 'grade').missing(10);
+     * const agg = esb.avgAggregation('avg_grade', 'grade').missing(10);
      *
      * @param {string} value
      * @returns {MetricsAggregationBase} returns `this` so that calls can be chained

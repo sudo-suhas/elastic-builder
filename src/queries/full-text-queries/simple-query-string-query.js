@@ -13,7 +13,7 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html)
  *
  * @example
- * const qry = bob.simpleQueryStringQuery(
+ * const qry = esb.simpleQueryStringQuery(
  *     '"fried eggs" +(eggplant | potato) -frittata'
  * )
  *     .analyzer('snowball')
@@ -35,7 +35,7 @@ class SimpleQueryStringQuery extends QueryStringQueryBase {
      * should be enabled. It is specified as a `|`-delimited string.
      *
      * @example
-     * const qry = bob.simpleQueryStringQuery('foo | bar + baz*')
+     * const qry = esb.simpleQueryStringQuery('foo | bar + baz*')
      *     .flags('OR|AND|PREFIX');
      *
      * @param {string} flags `|` delimited string. The available flags are: `ALL`, `NONE`,

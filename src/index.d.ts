@@ -2,9 +2,9 @@
 // Project: https://elastic-builder.js.org
 // Definitions by: Suhas Karanth <sudo.suhas@gmail.com>
 
-export = bob;
+export = esb;
 
-declare namespace bob {
+declare namespace esb {
     /**
      * The `RequestBodySearch` object provides methods generating an elasticsearch
      * search request body. The search request can be executed with a search DSL,
@@ -8207,7 +8207,7 @@ declare namespace bob {
     export namespace recipes {
         /**
          * Recipe for the now removed `missing` query.
-         * Can be accessed using `bob.recipes.missingQuery` OR `bob.cookMissingQuery`.
+         * Can be accessed using `esb.recipes.missingQuery` OR `esb.cookMissingQuery`.
          *
          * @param {string} field The field which should be missing the value.
          */
@@ -8216,7 +8216,7 @@ declare namespace bob {
         /**
          * Recipe for random sort query. Takes a query and returns the same
          * wrapped in a random scoring query.
-         * Can be accessed using `bob.recipes.randomSortQuery` OR `bob.cookRandomSortQuery`.
+         * Can be accessed using `esb.recipes.randomSortQuery` OR `esb.cookRandomSortQuery`.
          *
          * @param {Query=} query The query to fetch documents for. Defaults to `match_all` query.
          * @param {number=} seed A seed value for the random score function.
@@ -8230,7 +8230,7 @@ declare namespace bob {
         /**
          * Recipe for constructing a filter query using `bool` query.
          * Optionally, scoring can be enabled.
-         * Can be accessed using `bob.recipes.filterQuery` OR `bob.cookFilterQuery`.
+         * Can be accessed using `esb.recipes.filterQuery` OR `esb.cookFilterQuery`.
          *
          * @param {Query} query The query to fetch documents for.
          * @param {boolean=} scoring Optional flag for enabling/disabling scoring. Disabled by default.
@@ -8244,7 +8244,7 @@ declare namespace bob {
 
     /**
      * Recipe for the now removed `missing` query.
-     * Can be accessed using `bob.recipes.missingQuery` OR `bob.cookMissingQuery`.
+     * Can be accessed using `esb.recipes.missingQuery` OR `esb.cookMissingQuery`.
      *
      * @param {string} field The field which should be missing the value.
      */
@@ -8253,7 +8253,7 @@ declare namespace bob {
     /**
      * Recipe for random sort query. Takes a query and returns the same
      * wrapped in a random scoring query.
-     * Can be accessed using `bob.recipes.randomSortQuery` OR `bob.cookRandomSortQuery`.
+     * Can be accessed using `esb.recipes.randomSortQuery` OR `esb.cookRandomSortQuery`.
      *
      * @param {Query=} query The query to fetch documents for. Defaults to `match_all` query.
      * @param {number=} seed A seed value for the random score function.
@@ -8267,7 +8267,7 @@ declare namespace bob {
     /**
      * Recipe for constructing a filter query using `bool` query.
      * Optionally, scoring can be enabled.
-     * Can be accessed using `bob.recipes.filterQuery` OR `bob.cookFilterQuery`.
+     * Can be accessed using `esb.recipes.filterQuery` OR `esb.cookFilterQuery`.
      *
      * @param {Query} query The query to fetch documents for.
      * @param {boolean=} scoring Optional flag for enabling/disabling scoring. Disabled by default.

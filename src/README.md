@@ -43,7 +43,7 @@ from `elastic-builder/src`. But now I have added the type definition so that adv
 
 Starting from the base folder `src`, `index.js` simply pulls in all the concrete classes and re-exports
 them under the same object so that you can access all queries and aggregations. It also adds
-helper methods so that the class, for example `MatchQuery` can be instantiated with `bob.matchQuery()`
+helper methods so that the class, for example `MatchQuery` can be instantiated with `esb.matchQuery()`
 thereby avoiding the `new` keyword. This means there are 2 ways of doing the same thing. While this is not ideal,
 the reason for doing so because the documentation, type definitions declare classes and
 it might be confusing to access them using only functions. I am open to rethinking this approach.

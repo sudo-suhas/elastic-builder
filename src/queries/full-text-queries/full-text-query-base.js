@@ -36,11 +36,11 @@ class FullTextQueryBase extends Query {
      * Set the analyzer to control which analyzer will perform the analysis process on the text
      *
      * @example
-     * const qry = bob.matchPhraseQuery('message', 'this is a test')
+     * const qry = esb.matchPhraseQuery('message', 'this is a test')
      *     .analyzer('my_analyzer');
      *
      * @example
-     * const qry = bob.multiMatchQuery(['first', 'last', '*.edge'], 'Jon')
+     * const qry = esb.multiMatchQuery(['first', 'last', '*.edge'], 'Jon')
      *     .type('cross_fields')
      *     .analyzer('standard');
      *
@@ -60,7 +60,7 @@ class FullTextQueryBase extends Query {
      * keys `low_freq` and `high_freq` can be used.
      *
      * @example
-     * const qry = bob.commonTermsQuery('body', 'nelly the elephant as a cartoon')
+     * const qry = esb.commonTermsQuery('body', 'nelly the elephant as a cartoon')
      *     .minimumShouldMatch(2)
      *     .cutoffFrequency(0.001);
      *
@@ -77,7 +77,7 @@ class FullTextQueryBase extends Query {
      * Sets the query string.
      *
      * @example
-     * const qry = bob.queryStringQuery()
+     * const qry = esb.queryStringQuery()
      *     .query('city.\\*:(this AND that OR thus)')
      *     .useDisMax(true);
      *

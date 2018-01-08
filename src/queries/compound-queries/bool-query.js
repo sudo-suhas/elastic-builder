@@ -17,13 +17,13 @@ const {
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html)
  *
  * @example
- * const qry = bob.boolQuery()
- *     .must(bob.termQuery('user', 'kimchy'))
- *     .filter(bob.termQuery('tag', 'tech'))
- *     .mustNot(bob.rangeQuery('age').gte(10).lte(20))
+ * const qry = esb.boolQuery()
+ *     .must(esb.termQuery('user', 'kimchy'))
+ *     .filter(esb.termQuery('tag', 'tech'))
+ *     .mustNot(esb.rangeQuery('age').gte(10).lte(20))
  *     .should([
- *         bob.termQuery('tag', 'wow'),
- *         bob.termQuery('tag', 'elasticsearch')
+ *         esb.termQuery('tag', 'wow'),
+ *         esb.termQuery('tag', 'elasticsearch')
  *     ])
  *     .minimumShouldMatch(1)
  *     .boost(1.0);
@@ -87,12 +87,12 @@ class BoolQuery extends Query {
      *
      * @example
      * // Assign score of `0` to all documents
-     * const qry = bob.boolQuery().filter(bob.termQuery('status', 'active'));
+     * const qry = esb.boolQuery().filter(esb.termQuery('status', 'active'));
      *
      * // Assign a score of `1.0` to all documents
-     * const qry = bob.boolQuery()
-     *     .must(bob.matchAllQuery())
-     *     .filter(bob.termQuery('status', 'active'));
+     * const qry = esb.boolQuery()
+     *     .must(esb.matchAllQuery())
+     *     .filter(esb.termQuery('status', 'active'));
      *
      * @param {Array<Query>|Query} queries List of valid `Query` objects or a `Query` object
      * @returns {BoolQuery} returns `this` so that calls can be chained.

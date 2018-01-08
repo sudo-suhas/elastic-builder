@@ -12,7 +12,7 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase.html)
  *
  * @example
- * const qry = bob.matchPhraseQuery('message', 'to be or not to be');
+ * const qry = esb.matchPhraseQuery('message', 'to be or not to be');
  *
  * @param {string=} field The document field to query against
  * @param {string=} queryString The query string

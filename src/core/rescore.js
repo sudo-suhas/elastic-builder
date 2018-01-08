@@ -26,23 +26,23 @@ const invalidScoreModeParam = invalidParam(
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html)
  *
  * @example
- * const reqBody = bob.requestBodySearch()
- *     .query(bob.matchQuery('message', 'the quick brown').operator('or'))
+ * const reqBody = esb.requestBodySearch()
+ *     .query(esb.matchQuery('message', 'the quick brown').operator('or'))
  *     .rescore(
- *         bob.rescore(
+ *         esb.rescore(
  *             50,
- *             bob.matchPhraseQuery('message', 'the quick brown').slop(2)
+ *             esb.matchPhraseQuery('message', 'the quick brown').slop(2)
  *         )
  *             .queryWeight(0.7)
  *             .rescoreQueryWeight(1.2)
  *     );
  *
  * @example
- * const rescore = bob.rescore(
+ * const rescore = esb.rescore(
  *     10,
- *     bob.functionScoreQuery().function(
- *         bob.scriptScoreFunction(
- *             bob.script('inline', 'Math.log10(doc.likes.value + 2)')
+ *     esb.functionScoreQuery().function(
+ *         esb.scriptScoreFunction(
+ *             esb.script('inline', 'Math.log10(doc.likes.value + 2)')
  *         )
  *     )
  * ).scoreMode('multiply');

@@ -11,12 +11,12 @@ const { Query, Script, util: { checkType } } = require('../../core');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-script-query.html)
  *
  * @example
- * const scriptQry = bob.scriptQuery(bob.script()
+ * const scriptQry = esb.scriptQuery(esb.script()
  *  .lang('painless')
  *  .inline("doc['num1'].value > 1"))
  *
  * // Use in filter context
- * const qry = bob.boolQuery().must(scriptQry);
+ * const qry = esb.boolQuery().must(scriptQry);
  *
  * @param {Script=} script
  *

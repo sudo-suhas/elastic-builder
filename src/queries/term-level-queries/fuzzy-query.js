@@ -13,11 +13,11 @@ const MultiTermQueryBase = require('./multi-term-query-base');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html)
  *
  * @example
- * const qry = bob.fuzzyQuery('user', 'ki');
+ * const qry = esb.fuzzyQuery('user', 'ki');
  *
  * @example
  * // More advanced settings
- * const qry = bob.fuzzyQuery('user', 'ki')
+ * const qry = esb.fuzzyQuery('user', 'ki')
  *     .fuzziness(2)
  *     .prefixLength(0)
  *     .maxExpansions(100)

@@ -21,30 +21,30 @@ const invalidModelParam = invalidParam(ES_REF_URL, 'model', MODEL_SET);
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-movavg-aggregation.html)
  *
  * @example
- * const agg = bob.movingAverageAggregation('the_movavg', 'the_sum')
+ * const agg = esb.movingAverageAggregation('the_movavg', 'the_sum')
  *     .model('holt')
  *     .window(5)
  *     .gapPolicy('insert_zeros')
  *     .settings({ alpha: 0.8 });
  *
  * @example
- * const reqBody = bob.requestBodySearch()
+ * const reqBody = esb.requestBodySearch()
  *     .agg(
- *         bob.dateHistogramAggregation('my_date_histo', 'timestamp')
+ *         esb.dateHistogramAggregation('my_date_histo', 'timestamp')
  *             .interval('day')
- *             .agg(bob.sumAggregation('the_sum', 'lemmings'))
+ *             .agg(esb.sumAggregation('the_sum', 'lemmings'))
  *             // Relative path to sibling metric `the_sum`
- *             .agg(bob.movingAverageAggregation('the_movavg', 'the_sum'))
+ *             .agg(esb.movingAverageAggregation('the_movavg', 'the_sum'))
  *     )
  *     .size(0);
  *
  * @example
- * const reqBody = bob.requestBodySearch()
+ * const reqBody = esb.requestBodySearch()
  *     .agg(
- *         bob.dateHistogramAggregation('my_date_histo', 'timestamp')
+ *         esb.dateHistogramAggregation('my_date_histo', 'timestamp')
  *             .interval('day')
  *             // Use the document count as it's input
- *             .agg(bob.movingAverageAggregation('the_movavg', '_count'))
+ *             .agg(esb.movingAverageAggregation('the_movavg', '_count'))
  *     )
  *     .size(0);
  *
@@ -72,12 +72,12 @@ class MovingAverageAggregation extends PipelineAggregationBase {
      * Sets the moving average weighting model that we wish to use. Optional.
      *
      * @example
-     * const agg = bob.movingAverageAggregation('the_movavg', 'the_sum')
+     * const agg = esb.movingAverageAggregation('the_movavg', 'the_sum')
      *     .model('simple')
      *     .window(30);
      *
      * @example
-     * const agg = bob.movingAverageAggregation('the_movavg', 'the_sum')
+     * const agg = esb.movingAverageAggregation('the_movavg', 'the_sum')
      *     .model('ewma')
      *     .window(30)
      *     .settings({ alpha: 0.8 });
@@ -102,7 +102,7 @@ class MovingAverageAggregation extends PipelineAggregationBase {
      * Sets the size of window to "slide" across the histogram. Optional.
      *
      * @example
-     * const agg = bob.movingAverageAggregation('the_movavg', 'the_sum')
+     * const agg = esb.movingAverageAggregation('the_movavg', 'the_sum')
      *     .model('simple')
      *     .window(30)
      *
@@ -121,7 +121,7 @@ class MovingAverageAggregation extends PipelineAggregationBase {
      * while it is enabled by default for `holt_winters`.
      *
      * @example
-     * const agg = bob.movingAverageAggregation('the_movavg', 'the_sum')
+     * const agg = esb.movingAverageAggregation('the_movavg', 'the_sum')
      *     .model('holt_winters')
      *     .window(30)
      *     .minimize(true)
@@ -140,7 +140,7 @@ class MovingAverageAggregation extends PipelineAggregationBase {
      * Optional.
      *
      * @example
-     * const agg = bob.movingAverageAggregation('the_movavg', 'the_sum')
+     * const agg = esb.movingAverageAggregation('the_movavg', 'the_sum')
      *     .model('ewma')
      *     .window(30)
      *     .settings({ alpha: 0.8 });
@@ -158,7 +158,7 @@ class MovingAverageAggregation extends PipelineAggregationBase {
      * the current smoothed, moving average
      *
      * @example
-     * const agg = bob.movingAverageAggregation('the_movavg', 'the_sum')
+     * const agg = esb.movingAverageAggregation('the_movavg', 'the_sum')
      *     .model('simple')
      *     .window(30)
      *     .predict(10);

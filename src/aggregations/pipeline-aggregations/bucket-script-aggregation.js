@@ -14,17 +14,17 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-script-aggregation.html)
  *
  * @example
- * const reqBody = bob.requestBodySearch()
+ * const reqBody = esb.requestBodySearch()
  *     .agg(
- *         bob.dateHistogramAggregation('sales_per_month', 'date', 'month')
- *             .agg(bob.sumAggregation('total_sales', 'price'))
+ *         esb.dateHistogramAggregation('sales_per_month', 'date', 'month')
+ *             .agg(esb.sumAggregation('total_sales', 'price'))
  *             .agg(
- *                 bob.filterAggregation('t-shirts')
- *                     .filter(bob.termQuery('type', 't-shirt'))
- *                     .agg(bob.sumAggregation('sales', 'price'))
+ *                 esb.filterAggregation('t-shirts')
+ *                     .filter(esb.termQuery('type', 't-shirt'))
+ *                     .agg(esb.sumAggregation('sales', 'price'))
  *             )
  *             .agg(
- *                 bob.bucketScriptAggregation('t-shirt-percentage')
+ *                 esb.bucketScriptAggregation('t-shirt-percentage')
  *                     .bucketsPath({
  *                         tShirtSales: 't-shirts>sales',
  *                         totalSales: 'total_sales'

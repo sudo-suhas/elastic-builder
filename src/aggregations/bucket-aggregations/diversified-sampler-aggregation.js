@@ -26,13 +26,13 @@ const invalidExecutionHintParam = invalidParam(
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-diversified-sampler-aggregation.html)
  *
  * @example
- * const reqBody = bob.requestBodySearch()
- *     .query(bob.queryStringQuery('tags:elasticsearch'))
+ * const reqBody = esb.requestBodySearch()
+ *     .query(esb.queryStringQuery('tags:elasticsearch'))
  *     .agg(
- *         bob.diversifiedSamplerAggregation('my_unbiased_sample', 'author')
+ *         esb.diversifiedSamplerAggregation('my_unbiased_sample', 'author')
  *             .shardSize(200)
  *             .agg(
- *                 bob.significantTermsAggregation(
+ *                 esb.significantTermsAggregation(
  *                     'keywords',
  *                     'tags'
  *                 ).exclude(['elasticsearch'])
@@ -43,15 +43,15 @@ const invalidExecutionHintParam = invalidParam(
  * // Use a script to produce a hash of the multiple values in a tags field
  * // to ensure we don't have a sample that consists of the same repeated
  * // combinations of tags
- * const reqBody = bob.requestBodySearch()
- *     .query(bob.queryStringQuery('tags:kibana'))
+ * const reqBody = esb.requestBodySearch()
+ *     .query(esb.queryStringQuery('tags:kibana'))
  *     .agg(
- *         bob.diversifiedSamplerAggregation('my_unbiased_sample')
+ *         esb.diversifiedSamplerAggregation('my_unbiased_sample')
  *             .shardSize(200)
  *             .maxDocsPerValue(3)
- *             .script(bob.script('inline', "doc['tags'].values.hashCode()"))
+ *             .script(esb.script('inline', "doc['tags'].values.hashCode()"))
  *             .agg(
- *                 bob.significantTermsAggregation(
+ *                 esb.significantTermsAggregation(
  *                     'keywords',
  *                     'tags'
  *                 ).exclude(['kibana'])

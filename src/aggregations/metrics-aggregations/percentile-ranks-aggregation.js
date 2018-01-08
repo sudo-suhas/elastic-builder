@@ -21,7 +21,7 @@ const ES_REF_URL =
  * extracted from the aggregated documents.
  *
  * @example
- * const agg = bob.percentileRanksAggregation(
+ * const agg = esb.percentileRanksAggregation(
  *     'load_time_outlier',
  *     'load_time',
  *     [15, 30]
@@ -29,10 +29,10 @@ const ES_REF_URL =
  *
  * @example
  * // Convert load time from mills to seconds on-the-fly using script
- * const agg = bob.percentileRanksAggregation('load_time_outlier')
+ * const agg = esb.percentileRanksAggregation('load_time_outlier')
  *     .values([3, 5])
  *     .script(
- *         bob.script('inline', "doc['load_time'].value / params.timeUnit")
+ *         esb.script('inline', "doc['load_time'].value / params.timeUnit")
  *             .lang('painless')
  *             .params({ timeUnit: 1000 })
  *     );
@@ -71,7 +71,7 @@ class PercentileRanksAggregation extends MetricsAggregationBase {
      *
      * @example
      * // Return the ranges as an array rather than a hash
-     * const agg = bob.percentileRanksAggregation('balance_outlier', 'balance')
+     * const agg = esb.percentileRanksAggregation('balance_outlier', 'balance')
      *     .values([25000, 50000])
      *     .keyed(false);
      *
@@ -140,7 +140,7 @@ class PercentileRanksAggregation extends MetricsAggregationBase {
      * The HDR Histogram can be used by specifying the method parameter in the request.
      *
      * @example
-     * const agg = bob.percentileRanksAggregation(
+     * const agg = esb.percentileRanksAggregation(
      *     'load_time_outlier',
      *     'load_time',
      *     [15, 30]

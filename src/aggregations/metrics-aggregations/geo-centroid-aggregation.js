@@ -12,15 +12,15 @@ const ES_REF_URL =
  * [Elasticsearchreference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geocentroid-aggregation.html)
  *
  * @example
- * const agg = bob.geoCentroidAggregation('centroid', 'location');
+ * const agg = esb.geoCentroidAggregation('centroid', 'location');
  *
  * @example
  * // Combined as a sub-aggregation to other bucket aggregations
- * const reqBody = bob.requestBodySearch()
- *     .query(bob.matchQuery('crime', 'burglary'))
+ * const reqBody = esb.requestBodySearch()
+ *     .query(esb.matchQuery('crime', 'burglary'))
  *     .agg(
- *         bob.termsAggregation('towns', 'town').agg(
- *             bob.geoCentroidAggregation('centroid', 'location')
+ *         esb.termsAggregation('towns', 'town').agg(
+ *             esb.geoCentroidAggregation('centroid', 'location')
  *         )
  *     );
  *

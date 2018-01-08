@@ -28,7 +28,7 @@ const invalidCollectModeParam = invalidParam(
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html)
  *
  * @example
- * const agg = bob.termsAggregation('genres', 'genre');
+ * const agg = esb.termsAggregation('genres', 'genre');
  *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} field The field to aggregate on
@@ -65,11 +65,11 @@ class TermsAggregation extends TermsAggregationBase {
      * could change depending on community interest.
      *
      * @example
-     * const agg = bob.termsAggregation('expired_sessions', 'account_id')
+     * const agg = esb.termsAggregation('expired_sessions', 'account_id')
      *     .includePartition(0, 20)
      *     .size(10000)
      *     .order('last_access', 'asc')
-     *     .agg(bob.maxAggregation('last_access', 'access_date'));
+     *     .agg(esb.maxAggregation('last_access', 'access_date'));
      *
      * @param {number} partition
      * @param {number} numPartitions
@@ -90,10 +90,10 @@ class TermsAggregation extends TermsAggregationBase {
      * tree are expanded in one depth-first pass and only then any pruning occurs.
      *
      * @example
-     * const agg = bob.termsAggregation('actors', 'actors')
+     * const agg = esb.termsAggregation('actors', 'actors')
      *     .size(10)
      *     .collectMode('breadth_first')
-     *     .agg(bob.termsAggregation('costars', 'actors').size(5));
+     *     .agg(esb.termsAggregation('costars', 'actors').size(5));
      *
      * @param {string} mode The possible values are `breadth_first` and `depth_first`.
      * @returns {TermsAggregation} returns `this` so that calls can be chained
@@ -115,36 +115,36 @@ class TermsAggregation extends TermsAggregationBase {
      *
      * @example
      * // Ordering the buckets by their doc `_count` in an ascending manner
-     * const agg = bob.termsAggregation('genres', 'genre').order('_count', 'asc');
+     * const agg = esb.termsAggregation('genres', 'genre').order('_count', 'asc');
      *
      * @example
      * // Ordering the buckets alphabetically by their terms in an ascending manner
-     * const agg = bob.termsAggregation('genres', 'genre').order('_term', 'asc');
+     * const agg = esb.termsAggregation('genres', 'genre').order('_term', 'asc');
      *
      * @example
      * // Ordering the buckets by single value metrics sub-aggregation
      * // (identified by the aggregation name)
-     * const agg = bob.termsAggregation('genres', 'genre')
+     * const agg = esb.termsAggregation('genres', 'genre')
      *     .order('max_play_count', 'asc')
-     *     .agg(bob.maxAggregation('max_play_count', 'play_count'));
+     *     .agg(esb.maxAggregation('max_play_count', 'play_count'));
      *
      * @example
      * // Ordering the buckets by multi value metrics sub-aggregation
      * // (identified by the aggregation name):
-     * const agg = bob.termsAggregation('genres', 'genre')
+     * const agg = esb.termsAggregation('genres', 'genre')
      *     .order('playback_stats.max', 'desc')
-     *     .agg(bob.statsAggregation('playback_stats', 'play_count'));
+     *     .agg(esb.statsAggregation('playback_stats', 'play_count'));
      *
      * @example
      * // Multiple order criteria
-     * const agg = bob.termsAggregation('countries')
+     * const agg = esb.termsAggregation('countries')
      *     .field('artist.country')
      *     .order('rock>playback_stats.avg', 'desc')
      *     .order('_count', 'desc')
      *     .agg(
-     *         bob.filterAggregation('rock')
-     *             .filter(bob.termQuery('genre', 'rock'))
-     *             .agg(bob.statsAggregation('playback_stats', 'play_count'))
+     *         esb.filterAggregation('rock')
+     *             .filter(esb.termQuery('genre', 'rock'))
+     *             .agg(esb.statsAggregation('playback_stats', 'play_count'))
      *     );
      *
      * @param {string} key

@@ -10,11 +10,11 @@ const isNil = require('lodash.isnil');
  * provide their coordinates each time.
  *
  * @example
- * const shape = bob.indexedShape('DEU', 'countries')
+ * const shape = esb.indexedShape('DEU', 'countries')
  *     .index('shapes')
  *     .path('location');
  *
- * const shape = bob.indexedShape()
+ * const shape = esb.indexedShape()
  *     .id('DEU')
  *     .type('countries')
  *     .index('shapes')

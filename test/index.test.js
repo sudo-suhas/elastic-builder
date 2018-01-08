@@ -1,9 +1,9 @@
 import test from 'ava';
-import * as bob from '../src';
+import * as esb from '../src';
 
 test('request body search is exported', t => {
-    t.truthy(bob.RequestBodySearch);
-    t.truthy(bob.requestBodySearch);
+    t.truthy(esb.RequestBodySearch);
+    t.truthy(esb.requestBodySearch);
 });
 
 /* eslint-disable max-statements */
@@ -11,393 +11,393 @@ test('queries are exported', t => {
     /* ============ ============ ============ */
     /* ============== Queries =============== */
     /* ============ ============ ============ */
-    t.truthy(bob.MatchAllQuery);
-    t.truthy(bob.matchAllQuery);
+    t.truthy(esb.MatchAllQuery);
+    t.truthy(esb.matchAllQuery);
 
-    t.truthy(bob.MatchNoneQuery);
-    t.truthy(bob.matchNoneQuery);
+    t.truthy(esb.MatchNoneQuery);
+    t.truthy(esb.matchNoneQuery);
 
     /* ============ ============ ============ */
     /* ========== Full Text Queries ========= */
     /* ============ ============ ============ */
-    t.truthy(bob.MatchQuery);
-    t.truthy(bob.matchQuery);
+    t.truthy(esb.MatchQuery);
+    t.truthy(esb.matchQuery);
 
-    t.truthy(bob.MatchPhraseQuery);
-    t.truthy(bob.matchPhraseQuery);
+    t.truthy(esb.MatchPhraseQuery);
+    t.truthy(esb.matchPhraseQuery);
 
-    t.truthy(bob.MatchPhrasePrefixQuery);
-    t.truthy(bob.matchPhrasePrefixQuery);
+    t.truthy(esb.MatchPhrasePrefixQuery);
+    t.truthy(esb.matchPhrasePrefixQuery);
 
-    t.truthy(bob.MultiMatchQuery);
-    t.truthy(bob.multiMatchQuery);
+    t.truthy(esb.MultiMatchQuery);
+    t.truthy(esb.multiMatchQuery);
 
-    t.truthy(bob.CommonTermsQuery);
-    t.truthy(bob.commonTermsQuery);
+    t.truthy(esb.CommonTermsQuery);
+    t.truthy(esb.commonTermsQuery);
 
-    t.truthy(bob.QueryStringQuery);
-    t.truthy(bob.queryStringQuery);
+    t.truthy(esb.QueryStringQuery);
+    t.truthy(esb.queryStringQuery);
 
-    t.truthy(bob.SimpleQueryStringQuery);
-    t.truthy(bob.simpleQueryStringQuery);
+    t.truthy(esb.SimpleQueryStringQuery);
+    t.truthy(esb.simpleQueryStringQuery);
 
     /* ============ ============ ============ */
     /* ========= Term Level Queries ========= */
     /* ============ ============ ============ */
-    t.truthy(bob.TermQuery);
-    t.truthy(bob.termQuery);
+    t.truthy(esb.TermQuery);
+    t.truthy(esb.termQuery);
 
-    t.truthy(bob.TermsQuery);
-    t.truthy(bob.termsQuery);
+    t.truthy(esb.TermsQuery);
+    t.truthy(esb.termsQuery);
 
-    t.truthy(bob.RangeQuery);
-    t.truthy(bob.rangeQuery);
+    t.truthy(esb.RangeQuery);
+    t.truthy(esb.rangeQuery);
 
-    t.truthy(bob.ExistsQuery);
-    t.truthy(bob.existsQuery);
+    t.truthy(esb.ExistsQuery);
+    t.truthy(esb.existsQuery);
 
-    t.truthy(bob.PrefixQuery);
-    t.truthy(bob.prefixQuery);
+    t.truthy(esb.PrefixQuery);
+    t.truthy(esb.prefixQuery);
 
-    t.truthy(bob.WildcardQuery);
-    t.truthy(bob.wildcardQuery);
+    t.truthy(esb.WildcardQuery);
+    t.truthy(esb.wildcardQuery);
 
-    t.truthy(bob.RegexpQuery);
-    t.truthy(bob.regexpQuery);
+    t.truthy(esb.RegexpQuery);
+    t.truthy(esb.regexpQuery);
 
-    t.truthy(bob.FuzzyQuery);
-    t.truthy(bob.fuzzyQuery);
+    t.truthy(esb.FuzzyQuery);
+    t.truthy(esb.fuzzyQuery);
 
-    t.truthy(bob.TypeQuery);
-    t.truthy(bob.typeQuery);
+    t.truthy(esb.TypeQuery);
+    t.truthy(esb.typeQuery);
 
-    t.truthy(bob.IdsQuery);
-    t.truthy(bob.idsQuery);
+    t.truthy(esb.IdsQuery);
+    t.truthy(esb.idsQuery);
 
     /* ============ ============ ============ */
     /* ========== Compound Queries ========== */
     /* ============ ============ ============ */
-    t.truthy(bob.ConstantScoreQuery);
-    t.truthy(bob.constantScoreQuery);
+    t.truthy(esb.ConstantScoreQuery);
+    t.truthy(esb.constantScoreQuery);
 
-    t.truthy(bob.BoolQuery);
-    t.truthy(bob.boolQuery);
+    t.truthy(esb.BoolQuery);
+    t.truthy(esb.boolQuery);
 
-    t.truthy(bob.DisMaxQuery);
-    t.truthy(bob.disMaxQuery);
+    t.truthy(esb.DisMaxQuery);
+    t.truthy(esb.disMaxQuery);
 
-    t.truthy(bob.FunctionScoreQuery);
-    t.truthy(bob.functionScoreQuery);
+    t.truthy(esb.FunctionScoreQuery);
+    t.truthy(esb.functionScoreQuery);
 
-    t.truthy(bob.BoostingQuery);
-    t.truthy(bob.boostingQuery);
+    t.truthy(esb.BoostingQuery);
+    t.truthy(esb.boostingQuery);
 
     /* ============ ============ ============ */
     /* =========== Joining Queries ========== */
     /* ============ ============ ============ */
-    t.truthy(bob.NestedQuery);
-    t.truthy(bob.nestedQuery);
+    t.truthy(esb.NestedQuery);
+    t.truthy(esb.nestedQuery);
 
-    t.truthy(bob.HasChildQuery);
-    t.truthy(bob.hasChildQuery);
+    t.truthy(esb.HasChildQuery);
+    t.truthy(esb.hasChildQuery);
 
-    t.truthy(bob.HasParentQuery);
-    t.truthy(bob.hasParentQuery);
+    t.truthy(esb.HasParentQuery);
+    t.truthy(esb.hasParentQuery);
 
-    t.truthy(bob.ParentIdQuery);
-    t.truthy(bob.parentIdQuery);
+    t.truthy(esb.ParentIdQuery);
+    t.truthy(esb.parentIdQuery);
 
     /* ============ ============ ============ */
     /* ============ Geo Queries ============= */
     /* ============ ============ ============ */
-    t.truthy(bob.GeoShapeQuery);
-    t.truthy(bob.geoShapeQuery);
+    t.truthy(esb.GeoShapeQuery);
+    t.truthy(esb.geoShapeQuery);
 
-    t.truthy(bob.GeoBoundingBoxQuery);
-    t.truthy(bob.geoBoundingBoxQuery);
+    t.truthy(esb.GeoBoundingBoxQuery);
+    t.truthy(esb.geoBoundingBoxQuery);
 
-    t.truthy(bob.GeoDistanceQuery);
-    t.truthy(bob.geoDistanceQuery);
+    t.truthy(esb.GeoDistanceQuery);
+    t.truthy(esb.geoDistanceQuery);
 
-    t.truthy(bob.GeoPolygonQuery);
-    t.truthy(bob.geoPolygonQuery);
+    t.truthy(esb.GeoPolygonQuery);
+    t.truthy(esb.geoPolygonQuery);
 
     /* ============ ============ ============ */
     /* ======== Specialized Queries ========= */
     /* ============ ============ ============ */
-    t.truthy(bob.MoreLikeThisQuery);
-    t.truthy(bob.moreLikeThisQuery);
+    t.truthy(esb.MoreLikeThisQuery);
+    t.truthy(esb.moreLikeThisQuery);
 
-    t.truthy(bob.ScriptQuery);
-    t.truthy(bob.scriptQuery);
+    t.truthy(esb.ScriptQuery);
+    t.truthy(esb.scriptQuery);
 
-    t.truthy(bob.PercolateQuery);
-    t.truthy(bob.percolateQuery);
+    t.truthy(esb.PercolateQuery);
+    t.truthy(esb.percolateQuery);
 
     /* ============ ============ ============ */
     /* ============ Span Queries ============ */
     /* ============ ============ ============ */
-    t.truthy(bob.SpanTermQuery);
-    t.truthy(bob.spanTermQuery);
+    t.truthy(esb.SpanTermQuery);
+    t.truthy(esb.spanTermQuery);
 
-    t.truthy(bob.SpanMultiTermQuery);
-    t.truthy(bob.spanMultiTermQuery);
+    t.truthy(esb.SpanMultiTermQuery);
+    t.truthy(esb.spanMultiTermQuery);
 
-    t.truthy(bob.SpanFirstQuery);
-    t.truthy(bob.spanFirstQuery);
+    t.truthy(esb.SpanFirstQuery);
+    t.truthy(esb.spanFirstQuery);
 
-    t.truthy(bob.SpanNearQuery);
-    t.truthy(bob.spanNearQuery);
+    t.truthy(esb.SpanNearQuery);
+    t.truthy(esb.spanNearQuery);
 
-    t.truthy(bob.SpanOrQuery);
-    t.truthy(bob.spanOrQuery);
+    t.truthy(esb.SpanOrQuery);
+    t.truthy(esb.spanOrQuery);
 
-    t.truthy(bob.SpanNotQuery);
-    t.truthy(bob.spanNotQuery);
+    t.truthy(esb.SpanNotQuery);
+    t.truthy(esb.spanNotQuery);
 
-    t.truthy(bob.SpanContainingQuery);
-    t.truthy(bob.spanContainingQuery);
+    t.truthy(esb.SpanContainingQuery);
+    t.truthy(esb.spanContainingQuery);
 
-    t.truthy(bob.SpanWithinQuery);
-    t.truthy(bob.spanWithinQuery);
+    t.truthy(esb.SpanWithinQuery);
+    t.truthy(esb.spanWithinQuery);
 
-    t.truthy(bob.SpanFieldMaskingQuery);
-    t.truthy(bob.spanFieldMaskingQuery);
+    t.truthy(esb.SpanFieldMaskingQuery);
+    t.truthy(esb.spanFieldMaskingQuery);
 });
 
 test('aggregations are exported', t => {
     /* ============ ============ ============ */
     /* ======== Metrics Aggregations ======== */
     /* ============ ============ ============ */
-    t.truthy(bob.AvgAggregation);
-    t.truthy(bob.avgAggregation);
+    t.truthy(esb.AvgAggregation);
+    t.truthy(esb.avgAggregation);
 
-    t.truthy(bob.CardinalityAggregation);
-    t.truthy(bob.cardinalityAggregation);
+    t.truthy(esb.CardinalityAggregation);
+    t.truthy(esb.cardinalityAggregation);
 
-    t.truthy(bob.ExtendedStatsAggregation);
-    t.truthy(bob.extendedStatsAggregation);
+    t.truthy(esb.ExtendedStatsAggregation);
+    t.truthy(esb.extendedStatsAggregation);
 
-    t.truthy(bob.GeoBoundsAggregation);
-    t.truthy(bob.geoBoundsAggregation);
+    t.truthy(esb.GeoBoundsAggregation);
+    t.truthy(esb.geoBoundsAggregation);
 
-    t.truthy(bob.GeoCentroidAggregation);
-    t.truthy(bob.geoCentroidAggregation);
+    t.truthy(esb.GeoCentroidAggregation);
+    t.truthy(esb.geoCentroidAggregation);
 
-    t.truthy(bob.MaxAggregation);
-    t.truthy(bob.maxAggregation);
+    t.truthy(esb.MaxAggregation);
+    t.truthy(esb.maxAggregation);
 
-    t.truthy(bob.MinAggregation);
-    t.truthy(bob.minAggregation);
+    t.truthy(esb.MinAggregation);
+    t.truthy(esb.minAggregation);
 
-    t.truthy(bob.PercentilesAggregation);
-    t.truthy(bob.percentilesAggregation);
+    t.truthy(esb.PercentilesAggregation);
+    t.truthy(esb.percentilesAggregation);
 
-    t.truthy(bob.PercentileRanksAggregation);
-    t.truthy(bob.percentileRanksAggregation);
+    t.truthy(esb.PercentileRanksAggregation);
+    t.truthy(esb.percentileRanksAggregation);
 
-    t.truthy(bob.ScriptedMetricAggregation);
-    t.truthy(bob.scriptedMetricAggregation);
+    t.truthy(esb.ScriptedMetricAggregation);
+    t.truthy(esb.scriptedMetricAggregation);
 
-    t.truthy(bob.StatsAggregation);
-    t.truthy(bob.statsAggregation);
+    t.truthy(esb.StatsAggregation);
+    t.truthy(esb.statsAggregation);
 
-    t.truthy(bob.SumAggregation);
-    t.truthy(bob.sumAggregation);
+    t.truthy(esb.SumAggregation);
+    t.truthy(esb.sumAggregation);
 
-    t.truthy(bob.TopHitsAggregation);
-    t.truthy(bob.topHitsAggregation);
+    t.truthy(esb.TopHitsAggregation);
+    t.truthy(esb.topHitsAggregation);
 
-    t.truthy(bob.ValueCountAggregation);
-    t.truthy(bob.valueCountAggregation);
+    t.truthy(esb.ValueCountAggregation);
+    t.truthy(esb.valueCountAggregation);
 
     /* ============ ============ ============ */
     /* ========= Bucket Aggregations ======== */
     /* ============ ============ ============ */
-    t.truthy(bob.AdjacencyMatrixAggregation);
-    t.truthy(bob.adjacencyMatrixAggregation);
+    t.truthy(esb.AdjacencyMatrixAggregation);
+    t.truthy(esb.adjacencyMatrixAggregation);
 
-    t.truthy(bob.ChildrenAggregation);
-    t.truthy(bob.childrenAggregation);
+    t.truthy(esb.ChildrenAggregation);
+    t.truthy(esb.childrenAggregation);
 
-    t.truthy(bob.DateHistogramAggregation);
-    t.truthy(bob.dateHistogramAggregation);
+    t.truthy(esb.DateHistogramAggregation);
+    t.truthy(esb.dateHistogramAggregation);
 
-    t.truthy(bob.DateRangeAggregation);
-    t.truthy(bob.dateRangeAggregation);
+    t.truthy(esb.DateRangeAggregation);
+    t.truthy(esb.dateRangeAggregation);
 
-    t.truthy(bob.DiversifiedSamplerAggregation);
-    t.truthy(bob.diversifiedSamplerAggregation);
+    t.truthy(esb.DiversifiedSamplerAggregation);
+    t.truthy(esb.diversifiedSamplerAggregation);
 
-    t.truthy(bob.FilterAggregation);
-    t.truthy(bob.filterAggregation);
+    t.truthy(esb.FilterAggregation);
+    t.truthy(esb.filterAggregation);
 
-    t.truthy(bob.FiltersAggregation);
-    t.truthy(bob.filtersAggregation);
+    t.truthy(esb.FiltersAggregation);
+    t.truthy(esb.filtersAggregation);
 
-    t.truthy(bob.GeoDistanceAggregation);
-    t.truthy(bob.geoDistanceAggregation);
+    t.truthy(esb.GeoDistanceAggregation);
+    t.truthy(esb.geoDistanceAggregation);
 
-    t.truthy(bob.GeoHashGridAggregation);
-    t.truthy(bob.geoHashGridAggregation);
+    t.truthy(esb.GeoHashGridAggregation);
+    t.truthy(esb.geoHashGridAggregation);
 
-    t.truthy(bob.GlobalAggregation);
-    t.truthy(bob.globalAggregation);
+    t.truthy(esb.GlobalAggregation);
+    t.truthy(esb.globalAggregation);
 
-    t.truthy(bob.HistogramAggregation);
-    t.truthy(bob.histogramAggregation);
+    t.truthy(esb.HistogramAggregation);
+    t.truthy(esb.histogramAggregation);
 
-    t.truthy(bob.IpRangeAggregation);
-    t.truthy(bob.ipRangeAggregation);
+    t.truthy(esb.IpRangeAggregation);
+    t.truthy(esb.ipRangeAggregation);
 
-    t.truthy(bob.MissingAggregation);
-    t.truthy(bob.missingAggregation);
+    t.truthy(esb.MissingAggregation);
+    t.truthy(esb.missingAggregation);
 
-    t.truthy(bob.NestedAggregation);
-    t.truthy(bob.nestedAggregation);
+    t.truthy(esb.NestedAggregation);
+    t.truthy(esb.nestedAggregation);
 
-    t.truthy(bob.RangeAggregation);
-    t.truthy(bob.rangeAggregation);
+    t.truthy(esb.RangeAggregation);
+    t.truthy(esb.rangeAggregation);
 
-    t.truthy(bob.ReverseNestedAggregation);
-    t.truthy(bob.reverseNestedAggregation);
+    t.truthy(esb.ReverseNestedAggregation);
+    t.truthy(esb.reverseNestedAggregation);
 
-    t.truthy(bob.SamplerAggregation);
-    t.truthy(bob.samplerAggregation);
+    t.truthy(esb.SamplerAggregation);
+    t.truthy(esb.samplerAggregation);
 
-    t.truthy(bob.SignificantTermsAggregation);
-    t.truthy(bob.significantTermsAggregation);
+    t.truthy(esb.SignificantTermsAggregation);
+    t.truthy(esb.significantTermsAggregation);
 
-    t.truthy(bob.TermsAggregation);
-    t.truthy(bob.termsAggregation);
+    t.truthy(esb.TermsAggregation);
+    t.truthy(esb.termsAggregation);
 
     /* ============ ============ ============ */
     /* ======== Pipeline Aggregations ======= */
     /* ============ ============ ============ */
-    t.truthy(bob.AvgBucketAggregation);
-    t.truthy(bob.avgBucketAggregation);
+    t.truthy(esb.AvgBucketAggregation);
+    t.truthy(esb.avgBucketAggregation);
 
-    t.truthy(bob.DerivativeAggregation);
-    t.truthy(bob.derivativeAggregation);
+    t.truthy(esb.DerivativeAggregation);
+    t.truthy(esb.derivativeAggregation);
 
-    t.truthy(bob.MaxBucketAggregation);
-    t.truthy(bob.maxBucketAggregation);
+    t.truthy(esb.MaxBucketAggregation);
+    t.truthy(esb.maxBucketAggregation);
 
-    t.truthy(bob.MinBucketAggregation);
-    t.truthy(bob.minBucketAggregation);
+    t.truthy(esb.MinBucketAggregation);
+    t.truthy(esb.minBucketAggregation);
 
-    t.truthy(bob.SumBucketAggregation);
-    t.truthy(bob.sumBucketAggregation);
+    t.truthy(esb.SumBucketAggregation);
+    t.truthy(esb.sumBucketAggregation);
 
-    t.truthy(bob.StatsBucketAggregation);
-    t.truthy(bob.statsBucketAggregation);
+    t.truthy(esb.StatsBucketAggregation);
+    t.truthy(esb.statsBucketAggregation);
 
-    t.truthy(bob.ExtendedStatsBucketAggregation);
-    t.truthy(bob.extendedStatsBucketAggregation);
+    t.truthy(esb.ExtendedStatsBucketAggregation);
+    t.truthy(esb.extendedStatsBucketAggregation);
 
-    t.truthy(bob.PercentilesBucketAggregation);
-    t.truthy(bob.percentilesBucketAggregation);
+    t.truthy(esb.PercentilesBucketAggregation);
+    t.truthy(esb.percentilesBucketAggregation);
 
-    t.truthy(bob.MovingAverageAggregation);
-    t.truthy(bob.movingAverageAggregation);
+    t.truthy(esb.MovingAverageAggregation);
+    t.truthy(esb.movingAverageAggregation);
 
-    t.truthy(bob.CumulativeSumAggregation);
-    t.truthy(bob.cumulativeSumAggregation);
+    t.truthy(esb.CumulativeSumAggregation);
+    t.truthy(esb.cumulativeSumAggregation);
 
-    t.truthy(bob.BucketScriptAggregation);
-    t.truthy(bob.bucketScriptAggregation);
+    t.truthy(esb.BucketScriptAggregation);
+    t.truthy(esb.bucketScriptAggregation);
 
-    t.truthy(bob.BucketSelectorAggregation);
-    t.truthy(bob.bucketSelectorAggregation);
+    t.truthy(esb.BucketSelectorAggregation);
+    t.truthy(esb.bucketSelectorAggregation);
 
-    t.truthy(bob.SerialDifferencingAggregation);
-    t.truthy(bob.serialDifferencingAggregation);
+    t.truthy(esb.SerialDifferencingAggregation);
+    t.truthy(esb.serialDifferencingAggregation);
 
     /* ============ ============ ============ */
     /* ========= Matrix Aggregations ======== */
     /* ============ ============ ============ */
-    t.truthy(bob.MatrixStatsAggregation);
-    t.truthy(bob.matrixStatsAggregation);
+    t.truthy(esb.MatrixStatsAggregation);
+    t.truthy(esb.matrixStatsAggregation);
 });
 
 test('suggesters are exported', t => {
-    t.truthy(bob.TermSuggester);
-    t.truthy(bob.termSuggester);
+    t.truthy(esb.TermSuggester);
+    t.truthy(esb.termSuggester);
 
-    t.truthy(bob.DirectGenerator);
-    t.truthy(bob.directGenerator);
+    t.truthy(esb.DirectGenerator);
+    t.truthy(esb.directGenerator);
 
-    t.truthy(bob.PhraseSuggester);
-    t.truthy(bob.phraseSuggester);
+    t.truthy(esb.PhraseSuggester);
+    t.truthy(esb.phraseSuggester);
 
-    t.truthy(bob.CompletionSuggester);
-    t.truthy(bob.completionSuggester);
+    t.truthy(esb.CompletionSuggester);
+    t.truthy(esb.completionSuggester);
 });
 
 test('score functions are exported', t => {
     /* ============ ============ ============ */
     /* ========== Score Functions =========== */
     /* ============ ============ ============ */
-    t.truthy(bob.ScriptScoreFunction);
-    t.truthy(bob.scriptScoreFunction);
+    t.truthy(esb.ScriptScoreFunction);
+    t.truthy(esb.scriptScoreFunction);
 
-    t.truthy(bob.WeightScoreFunction);
-    t.truthy(bob.weightScoreFunction);
+    t.truthy(esb.WeightScoreFunction);
+    t.truthy(esb.weightScoreFunction);
 
-    t.truthy(bob.RandomScoreFunction);
-    t.truthy(bob.randomScoreFunction);
+    t.truthy(esb.RandomScoreFunction);
+    t.truthy(esb.randomScoreFunction);
 
-    t.truthy(bob.FieldValueFactorFunction);
-    t.truthy(bob.fieldValueFactorFunction);
+    t.truthy(esb.FieldValueFactorFunction);
+    t.truthy(esb.fieldValueFactorFunction);
 
-    t.truthy(bob.DecayScoreFunction);
-    t.truthy(bob.decayScoreFunction);
+    t.truthy(esb.DecayScoreFunction);
+    t.truthy(esb.decayScoreFunction);
 });
 
 test('misc are exported', t => {
     /* ============ ============ ============ */
     /* ============ Miscellaneous ===========  */
     /* ============ ============ ============ */
-    t.truthy(bob.recipes);
-    t.truthy(bob.recipes.missingQuery);
-    t.truthy(bob.recipes.randomSortQuery);
-    t.truthy(bob.recipes.filterQuery);
-    t.truthy(bob.cookMissingQuery);
-    t.truthy(bob.cookRandomSortQuery);
-    t.truthy(bob.cookFilterQuery);
+    t.truthy(esb.recipes);
+    t.truthy(esb.recipes.missingQuery);
+    t.truthy(esb.recipes.randomSortQuery);
+    t.truthy(esb.recipes.filterQuery);
+    t.truthy(esb.cookMissingQuery);
+    t.truthy(esb.cookRandomSortQuery);
+    t.truthy(esb.cookFilterQuery);
 
-    t.truthy(bob.Highlight);
-    t.truthy(bob.highlight);
+    t.truthy(esb.Highlight);
+    t.truthy(esb.highlight);
 
-    t.truthy(bob.Script);
-    t.truthy(bob.script);
+    t.truthy(esb.Script);
+    t.truthy(esb.script);
 
-    t.truthy(bob.GeoPoint);
-    t.truthy(bob.geoPoint);
+    t.truthy(esb.GeoPoint);
+    t.truthy(esb.geoPoint);
 
-    t.truthy(bob.GeoShape);
-    t.truthy(bob.geoShape);
+    t.truthy(esb.GeoShape);
+    t.truthy(esb.geoShape);
 
-    t.truthy(bob.IndexedShape);
-    t.truthy(bob.indexedShape);
+    t.truthy(esb.IndexedShape);
+    t.truthy(esb.indexedShape);
 
-    t.truthy(bob.Sort);
-    t.truthy(bob.sort);
+    t.truthy(esb.Sort);
+    t.truthy(esb.sort);
 
-    t.truthy(bob.Rescore);
-    t.truthy(bob.rescore);
+    t.truthy(esb.Rescore);
+    t.truthy(esb.rescore);
 
-    t.truthy(bob.InnerHits);
-    t.truthy(bob.innerHits);
+    t.truthy(esb.InnerHits);
+    t.truthy(esb.innerHits);
 
-    t.truthy(bob.SearchTemplate);
-    t.truthy(bob.searchTemplate);
+    t.truthy(esb.SearchTemplate);
+    t.truthy(esb.searchTemplate);
 
-    t.truthy(bob.prettyPrint);
+    t.truthy(esb.prettyPrint);
 });
 
 test('pretty print calls toJSON', t => {
-    bob.prettyPrint({
+    esb.prettyPrint({
         toJSON() {
             t.pass();
             return true;

@@ -16,15 +16,15 @@ const ES_REF_URL =
  * @param {string=} bucketsPath The relative path of metric to aggregate over
  *
  * @example
- * const reqBody = bob.requestBodySearch()
+ * const reqBody = esb.requestBodySearch()
  *     .agg(
- *         bob.dateHistogramAggregation('sales_per_month', 'date')
+ *         esb.dateHistogramAggregation('sales_per_month', 'date')
  *             .interval('month')
- *             .agg(bob.sumAggregation('sales', 'price'))
+ *             .agg(esb.sumAggregation('sales', 'price'))
  *     )
  *     .agg(
  *         // Get the sum of all the total monthly `sales` buckets
- *         bob.sumBucketAggregation(
+ *         esb.sumBucketAggregation(
  *             'sum_monthly_sales',
  *             'sales_per_month>sales'
  *         )

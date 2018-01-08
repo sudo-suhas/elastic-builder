@@ -15,17 +15,17 @@ const ES_REF_URL =
  *
  * @example
  * // Scoring support
- * const qry = bob.hasChildQuery(
- *     bob.termQuery('tag', 'something'),
+ * const qry = esb.hasChildQuery(
+ *     esb.termQuery('tag', 'something'),
  *     'blog_tag'
  * ).scoreMode('min');
  *
  * @example
  * // Sort by child documents' `click_count` field
- * const qry = bob.hasChildQuery()
+ * const qry = esb.hasChildQuery()
  *     .query(
- *         bob.functionScoreQuery().function(
- *             bob.scriptScoreFunction("_score * doc['click_count'].value")
+ *         esb.functionScoreQuery().function(
+ *             esb.scriptScoreFunction("_score * doc['click_count'].value")
  *         )
  *     )
  *     .type('blog_tag')
@@ -74,7 +74,7 @@ class HasChildQuery extends JoiningQueryBase {
      * for the parent doc to be considered a match
      *
      * @example
-     * const qry = bob.hasChildQuery(bob.termQuery('tag', 'something'), 'blog_tag')
+     * const qry = esb.hasChildQuery(esb.termQuery('tag', 'something'), 'blog_tag')
      *     .minChildren(2)
      *     .maxChildren(10)
      *     .scoreMode('min');
@@ -92,7 +92,7 @@ class HasChildQuery extends JoiningQueryBase {
      * for the parent doc to be considered a match
      *
      * @example
-     * const qry = bob.hasChildQuery(bob.termQuery('tag', 'something'), 'blog_tag')
+     * const qry = esb.hasChildQuery(esb.termQuery('tag', 'something'), 'blog_tag')
      *     .minChildren(2)
      *     .maxChildren(10)
      *     .scoreMode('min');

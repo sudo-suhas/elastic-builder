@@ -16,20 +16,20 @@ const MetricsAggregationBase = require('./metrics-aggregation-base');
  * aggregated documents.
  *
  * @example
- * const agg = bob.statsAggregation('grades_stats', 'grade');
+ * const agg = esb.statsAggregation('grades_stats', 'grade');
  *
  *
  * @example
  * // Use a file script
- * const agg = bob.statsAggregation('grades_stats').script(
- *     bob.script('file', 'my_script').params({ field: 'price' })
+ * const agg = esb.statsAggregation('grades_stats').script(
+ *     esb.script('file', 'my_script').params({ field: 'price' })
  * );
  *
  * @example
  * // Value script to apply the conversion rate to every value
  * // before it is aggregated
- * const agg = bob.statsAggregation('grades_stats').script(
- *     bob.script('inline', '_value * params.conversion_rate').params({
+ * const agg = esb.statsAggregation('grades_stats').script(
+ *     esb.script('inline', '_value * params.conversion_rate').params({
  *         conversion_rate: 1.2
  *     })
  * );

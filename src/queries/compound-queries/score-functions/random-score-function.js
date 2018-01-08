@@ -9,7 +9,7 @@ const ScoreFunction = require('./score-function');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-random)
  *
  * @example
- * const scoreFunc = bob.randomScoreFunction().seed(299792458);
+ * const scoreFunc = esb.randomScoreFunction().seed(299792458);
  *
  * @extends ScoreFunction
  */

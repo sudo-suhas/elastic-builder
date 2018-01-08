@@ -15,7 +15,7 @@ const { Query, util: { checkType } } = require('../../core');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-constant-score-query.html)
  *
  * @example
- * const qry = bob.constantScoreQuery(bob.termQuery('user', 'kimchy')).boost(1.2);
+ * const qry = esb.constantScoreQuery(esb.termQuery('user', 'kimchy')).boost(1.2);
  *
  * @param {Query=} filterQuery Query to filter on.
  *

@@ -28,14 +28,14 @@ const invalidSmoothingModeParam = invalidParam(
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html)
  *
  * @example
- * const suggest = bob.phraseSuggester(
+ * const suggest = esb.phraseSuggester(
  *     'simple_phrase',
  *     'title.trigram',
  *     'noble prize'
  * )
  *     .size(1)
  *     .gramSize(3)
- *     .directGenerator(bob.directGenerator('title.trigram').suggestMode('always'))
+ *     .directGenerator(esb.directGenerator('title.trigram').suggestMode('always'))
  *     .highlight('<em>', '</em>');
  *
  * @param {string} name The name of the Suggester, an arbitrary identifier
@@ -161,10 +161,10 @@ class PhraseSuggester extends AnalyzedSuggesterBase {
      * for prune is `false`.
      *
      * @example
-     * const suggest = bob.phraseSuggester('simple_phrase', 'title.trigram')
+     * const suggest = esb.phraseSuggester('simple_phrase', 'title.trigram')
      *     .size(1)
      *     .directGenerator(
-     *         bob.directGenerator('title.trigram')
+     *         esb.directGenerator('title.trigram')
      *             .suggestMode('always')
      *             .minWordLength(1)
      *     )
@@ -243,11 +243,11 @@ class PhraseSuggester extends AnalyzedSuggesterBase {
      * candidates from the other terms to for suggestion candidates.
      *
      * @example
-     * const suggest = bob.phraseSuggester('simple_phrase', 'title.trigram')
+     * const suggest = esb.phraseSuggester('simple_phrase', 'title.trigram')
      *     .size(1)
      *     .directGenerator([
-     *         bob.directGenerator('title.trigram').suggestMode('always'),
-     *         bob.directGenerator('title.reverse')
+     *         esb.directGenerator('title.trigram').suggestMode('always'),
+     *         esb.directGenerator('title.reverse')
      *             .suggestMode('always')
      *             .preFilter('reverse')
      *             .postFilter('reverse')

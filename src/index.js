@@ -527,11 +527,11 @@ exports.completionSuggester = constructorWrapper(CompletionSuggester);
  *
  * @example
  * // `recipes` namespace
- * const qry = bob.recipes.missingQuery('user');
+ * const qry = esb.recipes.missingQuery('user');
  *
  * @example
  * // `cookMissingQuery` alias
- * const qry = bob.cookMissingQuery('user');
+ * const qry = esb.cookMissingQuery('user');
  */
 exports.recipes = recipes;
 exports.cookMissingQuery = recipes.missingQuery;

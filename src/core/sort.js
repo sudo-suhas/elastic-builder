@@ -27,9 +27,9 @@ const invalidUnitParam = invalidParam(ES_REF_URL, 'unit', UNIT_SET);
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html)
  *
  * @example
- * const reqBody = bob.requestBodySearch()
- *     .query(bob.termQuery('user', 'kimchy'))
- *     .sort(bob.sort('post_date', 'asc'))
+ * const reqBody = esb.requestBodySearch()
+ *     .query(esb.termQuery('user', 'kimchy'))
+ *     .sort(esb.sort('post_date', 'asc'))
  *
  * @param {string} field The field to sort on
  * @param {string=} order The `order` option can have the following values.
@@ -84,7 +84,7 @@ class Sort {
      *   Only applicable for number based array fields.
      *
      * @example
-     * const sort = bob.sort('price', 'asc').mode('avg');
+     * const sort = esb.sort('price', 'asc').mode('avg');
      *
      * @param {string} mode One of `avg`, `min`, `max`, `sum` and `median`.
      * @returns {Sort} returns `this` so that calls can be chained.
@@ -107,9 +107,9 @@ class Sort {
      * is mandatory.
      *
      * @example
-     * const sort = bob.sort('offer.price', 'asc')
+     * const sort = esb.sort('offer.price', 'asc')
      *     .nestedPath('offer')
-     *     .nestedFilter(bob.termQuery('offer.color', 'blue'));
+     *     .nestedFilter(esb.termQuery('offer.color', 'blue'));
      *
      * @param {string} path Nested object to sort on
      * @returns {Sort} returns `this` so that calls can be chained.
@@ -125,9 +125,9 @@ class Sort {
      * `nested_filter` is active.
      *
      * @example
-     * const sort = bob.sort('offer.price', 'asc')
+     * const sort = esb.sort('offer.price', 'asc')
      *     .nestedPath('offer')
-     *     .nestedFilter(bob.termQuery('offer.color', 'blue'));
+     *     .nestedFilter(esb.termQuery('offer.color', 'blue'));
      *
      * @param {Query} filterQuery
      * @returns {Sort} returns `this` so that calls can be chained.
@@ -146,7 +146,7 @@ class Sort {
      * (that will be used for missing docs as the sort value). The default is `_last`.
      *
      * @example
-     * const sort = bob.sort('price').missing('_last');
+     * const sort = esb.sort('price').missing('_last');
      *
      * @param {string|number} value
      * @returns {Sort} returns `this` so that calls can be chained.
@@ -163,7 +163,7 @@ class Sort {
      * values to emit.
      *
      * @example
-     * const sort = bob.sort('price').unmappedType('long');
+     * const sort = esb.sort('price').unmappedType('long');
      *
      * @param {string} type
      * @returns {Sort} returns `this` so that calls can be chained.
@@ -180,7 +180,7 @@ class Sort {
      * points contained in the document to all points given in the sort request.
      *
      * @example
-     * const sort = bob.sort('pin.location', 'asc')
+     * const sort = esb.sort('pin.location', 'asc')
      *     .geoDistance([-70, 40])
      *     .unit('km')
      *     .mode('min')
@@ -241,10 +241,10 @@ class Sort {
      * Sorts based on custom script. When sorting on a field, scores are not computed.
      *
      * @example
-     * const sort = bob.sort()
+     * const sort = esb.sort()
      *    .type('number')
      *    .script(
-     *        bob.script('inline', "doc['field_name'].value * params.factor")
+     *        esb.script('inline', "doc['field_name'].value * params.factor")
      *            .lang('painless')
      *            .params({ factor: 1.1 })
      *    )

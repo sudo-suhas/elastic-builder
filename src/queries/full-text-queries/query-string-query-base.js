@@ -40,12 +40,12 @@ class QueryStringQueryBase extends FullTextQueryBase {
      * Example - `"subject^3"`
      *
      * @example
-     * const qry = bob.queryStringQuery('this AND that OR thus')
+     * const qry = esb.queryStringQuery('this AND that OR thus')
      *     .field('city.*')
      *     .useDisMax(true);
      *
      * @example
-     * const qry = bob.simpleQueryStringQuery('foo bar -baz').field('content');
+     * const qry = esb.simpleQueryStringQuery('foo bar -baz').field('content');
      *
      * @param {string} field One of the fields to be queried
      * @returns {QueryStringQueryBase} returns `this` so that calls can be chained.
@@ -65,11 +65,11 @@ class QueryStringQueryBase extends FullTextQueryBase {
      * Example - `[ "subject^3", "message" ]`
      *
      * @example
-     * const qry = bob.queryStringQuery('this AND that')
+     * const qry = esb.queryStringQuery('this AND that')
      *     .fields(['content', 'name'])
      *
      * @example
-     * const qry = bob.simpleQueryStringQuery('foo bar baz')
+     * const qry = esb.simpleQueryStringQuery('foo bar baz')
      *     .fields(['content', 'name.*^5']);
      *
      * @param {Array<string>} fields The fields to be queried

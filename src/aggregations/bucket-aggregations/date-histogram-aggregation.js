@@ -9,10 +9,10 @@ const HistogramAggregationBase = require('./histogram-aggregation-base');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-datehistogram-aggregation.html#_scripts)
  *
  * @example
- * const agg = bob.dateHistogramAggregation('sales_over_time', 'date', 'month');
+ * const agg = esb.dateHistogramAggregation('sales_over_time', 'date', 'month');
  *
  * @example
- * const agg = bob.dateHistogramAggregation(
+ * const agg = esb.dateHistogramAggregation(
  *     'sales_over_time',
  *     'date',
  *     '1M'
@@ -38,7 +38,7 @@ class DateHistogramAggregation extends HistogramAggregationBase {
      * Sets the date time zone
      *
      * @example
-     * const agg = bob.dateHistogramAggregation('by_day', 'date', 'day').timeZone(
+     * const agg = esb.dateHistogramAggregation('by_day', 'date', 'day').timeZone(
      *     '-01:00'
      * );
      *

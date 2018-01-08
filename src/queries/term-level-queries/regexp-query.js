@@ -14,7 +14,7 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html)
  *
  * @example
- * const qry = bob.regexpQuery('name.first', 's.*y').boost(1.2);
+ * const qry = esb.regexpQuery('name.first', 's.*y').boost(1.2);
  *
  * @param {string=} field
  * @param {string|number=} value
@@ -32,7 +32,7 @@ class RegexpQuery extends MultiTermQueryBase {
      * `ANYSTRING`, `COMPLEMENT`, `EMPTY`, `INTERSECTION`, `INTERVAL`, or `NONE`.
      *
      * @example
-     * const qry = bob.regexpQuery('name.first', 's.*y')
+     * const qry = esb.regexpQuery('name.first', 's.*y')
      *     .flags('INTERSECTION|COMPLEMENT|EMPTY');
      *
      * @param {string} flags `|` separated flags. Possible flags are `ALL` (default),
@@ -50,7 +50,7 @@ class RegexpQuery extends MultiTermQueryBase {
      * Defaults to 10000.
      *
      * @example
-     * const qry = bob.regexpQuery('name.first', 's.*y')
+     * const qry = esb.regexpQuery('name.first', 's.*y')
      *     .flags('INTERSECTION|COMPLEMENT|EMPTY')
      *     .maxDeterminizedStates(20000);
      *

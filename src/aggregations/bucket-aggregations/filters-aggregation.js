@@ -17,16 +17,16 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filters-aggregation.html)
  *
  * @example
- * const agg = bob.filtersAggregation('messages')
- *     .filter('errors', bob.matchQuery('body', 'error'))
- *     .filter('warnings', bob.matchQuery('body', 'warning'));
+ * const agg = esb.filtersAggregation('messages')
+ *     .filter('errors', esb.matchQuery('body', 'error'))
+ *     .filter('warnings', esb.matchQuery('body', 'warning'));
  *
  *
  * @example
- * const agg = bob.filtersAggregation('messages')
+ * const agg = esb.filtersAggregation('messages')
  *     .anonymousFilters([
- *         bob.matchQuery('body', 'error'),
- *         bob.matchQuery('body', 'warning')
+ *         esb.matchQuery('body', 'error'),
+ *         esb.matchQuery('body', 'warning')
  *     ])
  *
  * @param {string} name The name which will be used to refer to this aggregation.
@@ -206,9 +206,9 @@ class FiltersAggregation extends BucketAggregationBase {
      * If anonymous filters are being used, setting this parameter will not make sense.
      *
      * @example
-     * const agg = bob.filtersAggregation('messages')
-     *     .filter('errors', bob.matchQuery('body', 'error'))
-     *     .filter('warnings', bob.matchQuery('body', 'warning'))
+     * const agg = esb.filtersAggregation('messages')
+     *     .filter('errors', esb.matchQuery('body', 'error'))
+     *     .filter('warnings', esb.matchQuery('body', 'warning'))
      *     .otherBucketKey('other_messages');
      *
      * @param {string} otherBucketKey

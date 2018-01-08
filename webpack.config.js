@@ -4,7 +4,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     output: {
-        library: 'bob',
+        library: 'esb',
         libraryTarget: 'umd'
     },
     plugins: [

@@ -61,8 +61,8 @@ class JoiningQueryBase extends Query {
      * - `avg` - the default, the average of all matched child documents is used
      *
      * @example
-     * const qry = bob.hasChildQuery(
-     *     bob.termQuery('tag', 'something'),
+     * const qry = esb.hasChildQuery(
+     *     esb.termQuery('tag', 'something'),
      *     'blog_tag'
      * ).scoreMode('min');
      *

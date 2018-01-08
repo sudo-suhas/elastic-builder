@@ -14,11 +14,11 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-nested-aggregation.html)
  *
  * @example
- * const reqBody = bob.requestBodySearch()
- *     .query(bob.matchQuery('name', 'led tv'))
+ * const reqBody = esb.requestBodySearch()
+ *     .query(esb.matchQuery('name', 'led tv'))
  *     .agg(
- *         bob.nestedAggregation('resellers', 'resellers').agg(
- *             bob.minAggregation('min_price', 'resellers.price')
+ *         esb.nestedAggregation('resellers', 'resellers').agg(
+ *             esb.minAggregation('min_price', 'resellers.price')
  *         )
  *     );
  *

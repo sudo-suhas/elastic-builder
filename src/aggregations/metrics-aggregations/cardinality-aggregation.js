@@ -15,11 +15,11 @@ const ES_REF_URL =
  * Aggregation that calculates an approximate count of distinct values.
  *
  * @example
- * const agg = bob.cardinalityAggregation('author_count', 'author');
+ * const agg = esb.cardinalityAggregation('author_count', 'author');
  *
  * @example
- * const agg = bob.cardinalityAggregation('author_count').script(
- *     bob.script(
+ * const agg = esb.cardinalityAggregation('author_count').script(
+ *     esb.script(
  *         'inline',
  *         "doc['author.first_name'].value + ' ' + doc['author.last_name'].value"
  *     ).lang('painless')
@@ -51,7 +51,7 @@ class CardinalityAggregation extends MetricsAggregationBase {
      * and defines a unique count below which counts are expected to be close to accurate.
      *
      * @example
-     * const agg = bob.cardinalityAggregation(
+     * const agg = esb.cardinalityAggregation(
      *     'author_count',
      *     'author_hash'
      * ).precisionThreshold(100);

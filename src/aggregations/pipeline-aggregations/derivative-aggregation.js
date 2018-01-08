@@ -14,24 +14,24 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-derivative-aggregation.html)
  *
  * @example
- * const reqBody = bob.requestBodySearch()
+ * const reqBody = esb.requestBodySearch()
  *     .agg(
- *         bob.dateHistogramAggregation('sales_per_month', 'date')
+ *         esb.dateHistogramAggregation('sales_per_month', 'date')
  *             .interval('month')
- *             .agg(bob.sumAggregation('sales', 'price'))
- *             .agg(bob.derivativeAggregation('sales_deriv', 'sales'))
+ *             .agg(esb.sumAggregation('sales', 'price'))
+ *             .agg(esb.derivativeAggregation('sales_deriv', 'sales'))
  *     )
  *     .size(0);
  *
  * @example
  * // First and second order derivative of the monthly sales
- * const reqBody = bob.requestBodySearch()
+ * const reqBody = esb.requestBodySearch()
  *     .agg(
- *         bob.dateHistogramAggregation('sales_per_month', 'date')
+ *         esb.dateHistogramAggregation('sales_per_month', 'date')
  *             .interval('month')
- *             .agg(bob.sumAggregation('sales', 'price'))
- *             .agg(bob.derivativeAggregation('sales_deriv', 'sales'))
- *             .agg(bob.derivativeAggregation('sales_2nd_deriv', 'sales_deriv'))
+ *             .agg(esb.sumAggregation('sales', 'price'))
+ *             .agg(esb.derivativeAggregation('sales_deriv', 'sales'))
+ *             .agg(esb.derivativeAggregation('sales_2nd_deriv', 'sales_deriv'))
  *     )
  *     .size(0);
  *
@@ -51,12 +51,12 @@ class DerivativeAggregation extends PipelineAggregationBase {
      * the x-axis of the derivative calculation
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
+     * const reqBody = esb.requestBodySearch()
      *     .agg(
-     *         bob.dateHistogramAggregation('sales_per_month', 'date')
+     *         esb.dateHistogramAggregation('sales_per_month', 'date')
      *             .interval('month')
-     *             .agg(bob.sumAggregation('sales', 'price'))
-     *             .agg(bob.derivativeAggregation('sales_deriv', 'sales').unit('day'))
+     *             .agg(esb.sumAggregation('sales', 'price'))
+     *             .agg(esb.derivativeAggregation('sales_deriv', 'sales').unit('day'))
      *     )
      *     .size(0);
      *

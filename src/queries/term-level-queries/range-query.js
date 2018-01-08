@@ -26,13 +26,13 @@ const invalidRelationParam = invalidParam(
  * @param {string=} field
  *
  * @example
- * const qry = bob.rangeQuery('age')
+ * const qry = esb.rangeQuery('age')
  *     .gte(10)
  *     .lte(20)
  *     .boost(2.0);
  *
  * @example
- * const qry = bob.rangeQuery('date').gte('now-1d/d').lt('now/d');
+ * const qry = esb.rangeQuery('date').gte('now-1d/d').lt('now/d');
  *
  * @extends MultiTermQueryBase
  */
@@ -155,7 +155,7 @@ class RangeQuery extends MultiTermQueryBase {
      * If no format is specified, then it will use the first format specified in the field mapping.
      *
      * @example
-     * const qry = bob.rangeQuery('born')
+     * const qry = esb.rangeQuery('born')
      *     .gte('01/01/2012')
      *     .lte('2013')
      *     .format('dd/MM/yyyy||yyyy');

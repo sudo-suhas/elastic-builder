@@ -1,11 +1,11 @@
 import test from 'ava';
-import * as bob from '../src';
+import * as esb from '../src';
 import { illegalParamType } from './_macros';
 
 test('missing query recipe', t => {
-    t.is(bob.recipes.missingQuery, bob.cookMissingQuery);
+    t.is(esb.recipes.missingQuery, esb.cookMissingQuery);
 
-    const value = bob.recipes.missingQuery('my_field');
+    const value = esb.recipes.missingQuery('my_field');
     t.is(value.constructor.name, 'BoolQuery');
 
     const expected = {
@@ -16,11 +16,11 @@ test('missing query recipe', t => {
     t.deepEqual(value.toJSON(), expected);
 });
 
-test(illegalParamType, bob.recipes, 'randomSortQuery', 'Query');
+test(illegalParamType, esb.recipes, 'randomSortQuery', 'Query');
 test('random sort query', t => {
-    t.is(bob.recipes.randomSortQuery, bob.cookRandomSortQuery);
+    t.is(esb.recipes.randomSortQuery, esb.cookRandomSortQuery);
 
-    let value = bob.recipes.randomSortQuery();
+    let value = esb.recipes.randomSortQuery();
     t.is(value.constructor.name, 'FunctionScoreQuery');
 
     let expected = {
@@ -34,8 +34,8 @@ test('random sort query', t => {
     t.deepEqual(value.toJSON(), expected);
 
     const seed = Date.now();
-    value = bob.recipes
-        .randomSortQuery(new bob.RangeQuery('age').gte(10), seed)
+    value = esb.recipes
+        .randomSortQuery(new esb.RangeQuery('age').gte(10), seed)
         .toJSON();
     expected = {
         function_score: {
@@ -48,12 +48,12 @@ test('random sort query', t => {
     t.deepEqual(value, expected);
 });
 
-test(illegalParamType, bob.recipes, 'filterQuery', 'Query');
+test(illegalParamType, esb.recipes, 'filterQuery', 'Query');
 test('filter query', t => {
-    t.is(bob.recipes.filterQuery, bob.cookFilterQuery);
+    t.is(esb.recipes.filterQuery, esb.cookFilterQuery);
 
-    const qry = new bob.TermQuery('status', 'active');
-    let value = bob.recipes.filterQuery(qry);
+    const qry = new esb.TermQuery('status', 'active');
+    let value = esb.recipes.filterQuery(qry);
     t.is(value.constructor.name, 'BoolQuery');
 
     let expected = {
@@ -65,7 +65,7 @@ test('filter query', t => {
     };
     t.deepEqual(value.toJSON(), expected);
 
-    value = bob.recipes.filterQuery(qry, true).toJSON();
+    value = esb.recipes.filterQuery(qry, true).toJSON();
     expected = {
         bool: {
             must: { match_all: {} },

@@ -28,7 +28,7 @@ const invaliModifierdParam = invalidParam(
  *
  * @example
  * // Scoring formula - sqrt(1.2 * doc['popularity'].value)
- * const scoreFunc = bob.fieldValueFactorFunction('popularity')
+ * const scoreFunc = esb.fieldValueFactorFunction('popularity')
  *     .factor(1.2)
  *     .modifier('sqrt')
  *     .missing(1);

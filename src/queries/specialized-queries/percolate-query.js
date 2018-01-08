@@ -12,10 +12,10 @@ const { Query } = require('../../core');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-percolate-query.html)
  *
  * @example
- * const percolateQry = bob.percolateQuery('query', 'doctype')
+ * const percolateQry = esb.percolateQuery('query', 'doctype')
  *     .document({ message: 'A new bonsai tree in the office' });
  *
- * const percolateQry = bob.percolateQuery()
+ * const percolateQry = esb.percolateQuery()
  *     .field('query')
  *     .documentType('doctype')
  *     .index('my-index')

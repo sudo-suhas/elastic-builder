@@ -15,7 +15,7 @@ const { Query, util: { checkType } } = require('../../core');
  *
  * @example
  * // Ask for documents that are similar to a provided piece of text
- * const qry = bob.moreLikeThisQuery()
+ * const qry = esb.moreLikeThisQuery()
  *     .fields(['title', 'description'])
  *     .like('Once upon a time')
  *     .minTermFreq(1)
@@ -23,7 +23,7 @@ const { Query, util: { checkType } } = require('../../core');
  *
  * @example
  * // Mixing texts with documents already existing in the index
- * const qry = bob.moreLikeThisQuery()
+ * const qry = esb.moreLikeThisQuery()
  *     .fields(['title', 'description'])
  *     .like({ _index: 'imdb', _type: 'movies', _id: '1' })
  *     .like({ _index: 'imdb', _type: 'movies', _id: '2' })
@@ -33,7 +33,7 @@ const { Query, util: { checkType } } = require('../../core');
  *
  * @example
  * // Provide documents not present in the index
- * const qry = bob.moreLikeThisQuery()
+ * const qry = esb.moreLikeThisQuery()
  *     .fields(['name.first', 'name.last'])
  *     .like([
  *         {

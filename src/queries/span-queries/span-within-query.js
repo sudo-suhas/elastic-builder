@@ -11,12 +11,12 @@ const SpanLittleBigQueryBase = require('./span-little-big-query-base');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-containing-query.html)
  *
  * @example
- * const spanQry = bob.spanWithinQuery()
- *     .little(bob.spanTermQuery('field1', 'foo'))
- *     .big(bob.spanNearQuery()
+ * const spanQry = esb.spanWithinQuery()
+ *     .little(esb.spanTermQuery('field1', 'foo'))
+ *     .big(esb.spanNearQuery()
  *         .clauses([
- *             bob.spanTermQuery('field1', 'bar'),
- *             bob.spanTermQuery('field1', 'baz')
+ *             esb.spanTermQuery('field1', 'bar'),
+ *             esb.spanTermQuery('field1', 'baz')
  *         ])
  *         .slop(5)
  *         .inOrder(true));

@@ -14,11 +14,11 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-cumulative-sum-aggregation.html)
  *
  * @example
- * const reqBody = bob.requestBodySearch()
+ * const reqBody = esb.requestBodySearch()
  *     .agg(
- *         bob.dateHistogramAggregation('sales_per_month', 'date', 'month')
- *             .agg(bob.sumAggregation('sales', 'price'))
- *             .agg(bob.cumulativeSumAggregation('cumulative_sales', 'sales'))
+ *         esb.dateHistogramAggregation('sales_per_month', 'date', 'month')
+ *             .agg(esb.sumAggregation('sales', 'price'))
+ *             .agg(esb.cumulativeSumAggregation('cumulative_sales', 'sales'))
  *     )
  *     .size(0);
  *

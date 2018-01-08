@@ -34,7 +34,7 @@ const invalidBehaviorParam = invalidParam(
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html)
  *
  * @example
- * const qry = bob.multiMatchQuery(['subject', 'message'], 'this is a test');
+ * const qry = esb.multiMatchQuery(['subject', 'message'], 'this is a test');
  *
  * @param {Array<string>|string=} fields The fields to be queried
  * @param {string=} queryString The query string
@@ -81,11 +81,11 @@ class MultiMatchQuery extends FullTextQueryBase {
      *
      * @example
      * // Boost individual fields with caret `^` notation
-     * const qry = bob.multiMatchQuery(['subject^3', 'message'], 'this is a test');
+     * const qry = esb.multiMatchQuery(['subject^3', 'message'], 'this is a test');
      *
      * @example
      * // Specify fields with wildcards
-     *const qry = bob.multiMatchQuery(['title', '*_name'], 'Will Smith');
+     *const qry = esb.multiMatchQuery(['title', '*_name'], 'Will Smith');
      *
      * @param {Array<string>} fields The fields to be queried
      * @returns {MultiMatchQuery} returns `this` so that calls can be chained.
@@ -116,27 +116,27 @@ class MultiMatchQuery extends FullTextQueryBase {
      *
      * @example
      * // Find the single best matching field
-     * const qry = bob.multiMatchQuery(['subject', 'message'], 'brown fox')
+     * const qry = esb.multiMatchQuery(['subject', 'message'], 'brown fox')
      *     .type('best_fields')
      *     .tieBreaker(0.3);
      *
      * @example
      * // Query multiple fields analyzed differently for the same text
-     * const qry = bob.multiMatchQuery(
+     * const qry = esb.multiMatchQuery(
      *     ['title', 'title.original', 'title.shingles'],
      *     'quick brown fox'
      * ).type('most_fields');
      *
      * @example
      * // Run a `match_phrase_prefix` query on multiple fields
-     * const qry = bob.multiMatchQuery(
+     * const qry = esb.multiMatchQuery(
      *     ['subject', 'message'],
      *     'quick brown f'
      * ).type('phrase_prefix');
      *
      * @example
      * // All terms must be present in at least one field for document to match
-     * const qry = bob.multiMatchQuery(['first_name', 'last_name'], 'Will Smith')
+     * const qry = esb.multiMatchQuery(['first_name', 'last_name'], 'Will Smith')
      *     .type('cross_fields')
      *     .operator('and');
      *

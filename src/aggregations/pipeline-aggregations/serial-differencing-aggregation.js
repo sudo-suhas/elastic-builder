@@ -14,13 +14,13 @@ const ES_REF_URL =
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-serialdiff-aggregation.html)
  *
  * @example
- * const reqBody = bob.requestBodySearch()
+ * const reqBody = esb.requestBodySearch()
  *     .agg(
- *         bob.dateHistogramAggregation('my_date_histo', 'timestamp')
+ *         esb.dateHistogramAggregation('my_date_histo', 'timestamp')
  *             .interval('day')
- *             .agg(bob.sumAggregation('the_sum', 'lemmings'))
+ *             .agg(esb.sumAggregation('the_sum', 'lemmings'))
  *             .agg(
- *                 bob.serialDifferencingAggregation(
+ *                 esb.serialDifferencingAggregation(
  *                     'thirtieth_difference',
  *                     'the_sum'
  *                 ).lag(30)

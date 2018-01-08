@@ -29,7 +29,7 @@ const invalidZeroTermsQueryParam = invalidParam(
  * @param {string=} queryString The query string
  *
  * @example
- * const matchQry = bob.matchQuery('message', 'to be or not to be');
+ * const matchQry = esb.matchQuery('message', 'to be or not to be');
  *
  * @extends MonoFieldQueryBase
  */
@@ -81,7 +81,7 @@ class MatchQuery extends MonoFieldQueryBase {
      * the same as another string.
      *
      * @example
-     * const qry = bob.matchQuery('message', 'this is a test').operator('and');
+     * const qry = esb.matchQuery('message', 'this is a test').operator('and');
      *
      * @param {number|string} factor Can be specified either as a number, or the maximum
      * number of edits, or as `AUTO` which generates an edit distance based on the length
@@ -217,7 +217,7 @@ class MatchQuery extends MonoFieldQueryBase {
      * which corresponds to a `match_all` query.
      *
      * @example
-     * const qry = bob.matchQuery('message', 'to be or not to be')
+     * const qry = esb.matchQuery('message', 'to be or not to be')
      *     .operator('and')
      *     .zeroTermsQuery('all');
      *
@@ -243,7 +243,7 @@ class MatchQuery extends MonoFieldQueryBase {
      * all of the low frequency terms in the case of an `and` operator match.
      *
      * @example
-     * const qry = bob.matchQuery('message', 'to be or not to be')
+     * const qry = esb.matchQuery('message', 'to be or not to be')
      *     .cutoffFrequency(0.001);
      *
      * @param {number} frequency It can either be relative to the total number of documents

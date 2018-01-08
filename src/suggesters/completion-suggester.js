@@ -22,10 +22,10 @@ const { Suggester, util: { setDefault } } = require('../core');
  *   - [Context Suggester](https://www.elastic.co/guide/en/elasticsearch/reference/current/suggester-context.html)
  *
  * @example
- * const suggest = bob.completionSuggester('song-suggest', 'suggest').prefix('nir');
+ * const suggest = esb.completionSuggester('song-suggest', 'suggest').prefix('nir');
  *
  * @example
- * const suggest = new bob.CompletionSuggester('place_suggestion', 'suggest')
+ * const suggest = new esb.CompletionSuggester('place_suggestion', 'suggest')
  *     .prefix('tim')
  *     .size(10)
  *     .contexts('place_type', ['cafe', 'restaurants']);
@@ -84,7 +84,7 @@ class CompletionSuggester extends Suggester {
      * the same as another string.
      *
      * @example
-     * const suggest = bob.completionSuggester('song-suggest', 'suggest')
+     * const suggest = esb.completionSuggester('song-suggest', 'suggest')
      *     .prefix('nor')
      *     .fuzziness(2);
      *
@@ -163,7 +163,7 @@ class CompletionSuggester extends Suggester {
      * Sets the regular expression for completion suggester which supports regex queries.
      *
      * @example
-     * const suggest = bob.completionSuggester('song-suggest', 'suggest')
+     * const suggest = esb.completionSuggester('song-suggest', 'suggest')
      *     .regex('n[ever|i]r');
      *
      * @param {string} expr Regular expression
@@ -216,7 +216,7 @@ class CompletionSuggester extends Suggester {
      * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/suggester-context.html)
      *
      * @example
-     * const suggest = new bob.CompletionSuggester('place_suggestion', 'suggest')
+     * const suggest = new esb.CompletionSuggester('place_suggestion', 'suggest')
      *     .prefix('tim')
      *     .size(10)
      *     .contexts('place_type', [
@@ -228,7 +228,7 @@ class CompletionSuggester extends Suggester {
      * // Suggestions can be filtered and boosted with respect to how close they
      * // are to one or more geo points. The following filters suggestions that
      * // fall within the area represented by the encoded geohash of a geo point:
-     * const suggest = new bob.CompletionSuggester('place_suggestion', 'suggest')
+     * const suggest = new esb.CompletionSuggester('place_suggestion', 'suggest')
      *     .prefix('tim')
      *     .size(10)
      *     .contexts('location', { lat: 43.662, lon: -79.38 });
@@ -236,7 +236,7 @@ class CompletionSuggester extends Suggester {
      * @example
      * // Suggestions that are within an area represented by a geohash can also be
      * // boosted higher than others
-     * const suggest = new bob.CompletionSuggester('place_suggestion', 'suggest')
+     * const suggest = new esb.CompletionSuggester('place_suggestion', 'suggest')
      *     .prefix('tim')
      *     .size(10)
      *     .contexts('location', [

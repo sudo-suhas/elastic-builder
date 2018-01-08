@@ -47,15 +47,15 @@ class PipelineAggregationBase extends Aggregation {
      * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline.html#buckets-path-syntax)
      *
      * @example
-     * const reqBody = bob.requestBodySearch()
+     * const reqBody = esb.requestBodySearch()
      *     .agg(
-     *         bob.dateHistogramAggregation('histo', 'date')
+     *         esb.dateHistogramAggregation('histo', 'date')
      *             .interval('day')
-     *             .agg(bob.termsAggregation('categories', 'category'))
+     *             .agg(esb.termsAggregation('categories', 'category'))
      *             .agg(
-     *                 bob.bucketSelectorAggregation('min_bucket_selector')
+     *                 esb.bucketSelectorAggregation('min_bucket_selector')
      *                     .bucketsPath({ count: 'categories._bucket_count' })
-     *                     .script(bob.script('inline', 'params.count != 0'))
+     *                     .script(esb.script('inline', 'params.count != 0'))
      *             )
      *     )
      *     .size(0);

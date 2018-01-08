@@ -105,14 +105,14 @@ class RangeAggregationBase extends BucketAggregationBase {
      * bucket interval.
      *
      * @example
-     * const agg = bob.dateRangeAggregation('range', 'date')
+     * const agg = esb.dateRangeAggregation('range', 'date')
      *     .format('MM-yyy')
      *     .ranges([{ to: 'now-10M/M' }, { from: 'now-10M/M' }])
      *     .keyed(true);
      *
      * @example
-     * const agg = bob.geoDistanceAggregation('rings_around_amsterdam', 'location')
-     *     .origin(bob.geoPoint().string('52.3760, 4.894'))
+     * const agg = esb.geoDistanceAggregation('rings_around_amsterdam', 'location')
+     *     .origin(esb.geoPoint().string('52.3760, 4.894'))
      *     .ranges([
      *         { to: 100000, key: 'first_ring' },
      *         { from: 100000, to: 300000, key: 'second_ring' },

@@ -16,11 +16,11 @@ const { checkType, setDefault, recursiveToJSON } = require('./util');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-inner-hits.html)
  *
  * @example
- * const reqBody = bob.requestBodySearch().query(
- *     bob.nestedQuery(
- *         bob.matchQuery('comments.message', '[actual query]')
+ * const reqBody = esb.requestBodySearch().query(
+ *     esb.nestedQuery(
+ *         esb.matchQuery('comments.message', '[actual query]')
  *     ).innerHits(
- *         bob.innerHits().source(false).storedFields(['comments.text'])
+ *         esb.innerHits().source(false).storedFields(['comments.text'])
  *     )
  * );
  *

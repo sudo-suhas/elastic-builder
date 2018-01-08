@@ -43,12 +43,12 @@ const invalidFragmenterParam = invalidParam(
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html)
  *
  * @example
- * const reqBody = bob.requestBodySearch()
- *     .query(bob.matchAllQuery())
- *     .highlight(bob.highlight('content'));
+ * const reqBody = esb.requestBodySearch()
+ *     .query(esb.matchAllQuery())
+ *     .highlight(esb.highlight('content'));
  *
  * @example
- * const highlight = bob.highlight()
+ * const highlight = esb.highlight()
  *     .numberOfFragments(3)
  *     .fragmentSize(150)
  *     .fields(['_all', 'bio.title', 'bio.author', 'bio.content'])
@@ -139,12 +139,12 @@ class Highlight {
      * tags to a specific field by passing the optional field name parameter.
      *
      * @example
-     * const highlight = bob.highlight('_all')
+     * const highlight = esb.highlight('_all')
      *     .preTags('<tag1>')
      *     .postTags('</tag1>');
      *
      * @example
-     * const highlight = bob.highlight('_all')
+     * const highlight = esb.highlight('_all')
      *     .preTags(['<tag1>', '<tag2>'])
      *     .postTags(['</tag1>', '</tag2>']);
      *
@@ -162,12 +162,12 @@ class Highlight {
      * tags to a specific field by passing the optional field name parameter.
      *
      * @example
-     * const highlight = bob.highlight('_all')
+     * const highlight = esb.highlight('_all')
      *     .preTags('<tag1>')
      *     .postTags('</tag1>');
      *
      * @example
-     * const highlight = bob.highlight('_all')
+     * const highlight = esb.highlight('_all')
      *     .preTags(['<tag1>', '<tag2>'])
      *     .postTags(['</tag1>', '</tag2>']);
      *
@@ -190,7 +190,7 @@ class Highlight {
      * styled - 10 `<em>` pre tags with css class of hltN, where N is 1-10
      *
      * @example
-     * const highlight = bob.highlight('content').styledTagsSchema();
+     * const highlight = esb.highlight('content').styledTagsSchema();
      *
      * @returns {Highlight} returns `this` so that calls can be chained
      */
@@ -206,7 +206,7 @@ class Highlight {
      * score order to a specific field by passing the optional field name parameter.
      *
      * @example
-     * const highlight = bob.highlight('content').scoreOrder()
+     * const highlight = esb.highlight('content').scoreOrder()
      *
      * @param {string=} field An optional field name
      * @returns {Highlight} returns `this` so that calls can be chained
@@ -223,7 +223,7 @@ class Highlight {
      * option to a specific field by passing the optional field name parameter.
      *
      * @example
-     * const highlight = bob.highlight('content')
+     * const highlight = esb.highlight('content')
      *     .fragmentSize(150, 'content')
      *     .numberOfFragments(3, 'content');
      *
@@ -240,12 +240,12 @@ class Highlight {
      * option to a specific field by passing the optional field name parameter.
      *
      * @example
-     * const highlight = bob.highlight('content')
+     * const highlight = esb.highlight('content')
      *     .fragmentSize(150, 'content')
      *     .numberOfFragments(3, 'content');
      *
      * @example
-     * const highlight = bob.highlight(['_all', 'bio.title'])
+     * const highlight = esb.highlight(['_all', 'bio.title'])
      *     .numberOfFragments(0, 'bio.title');
      *
      * @param {number} count The maximum number of fragments to return
@@ -267,7 +267,7 @@ class Highlight {
      * Default is `0`.
      *
      * @example
-     * const highlight = bob.highlight('content')
+     * const highlight = esb.highlight('content')
      *     .fragmentSize(150, 'content')
      *     .numberOfFragments(3, 'content')
      *     .noMatchSize(150, 'content');
@@ -287,14 +287,14 @@ class Highlight {
      * are not taken into account by highlighting by default.
      *
      * @example
-     * const highlight = bob.highlight('content')
+     * const highlight = esb.highlight('content')
      *     .fragmentSize(150, 'content')
      *     .numberOfFragments(3, 'content')
      *     .highlightQuery(
-     *         bob.boolQuery()
-     *             .must(bob.matchQuery('content', 'foo bar'))
+     *         esb.boolQuery()
+     *             .must(esb.matchQuery('content', 'foo bar'))
      *             .should(
-     *                 bob.matchPhraseQuery('content', 'foo bar').slop(1).boost(10)
+     *                 esb.matchPhraseQuery('content', 'foo bar').slop(1).boost(10)
      *             )
      *             .minimumShouldMatch(0),
      *         'content'
@@ -318,7 +318,7 @@ class Highlight {
      * Sets the highlight type to Fast Vector Highlighter(`fvh`).
      *
      * @example
-     * const highlight = bob.highlight('content')
+     * const highlight = esb.highlight('content')
      *     .scoreOrder('content')
      *     .matchedFields(['content', 'content.plain'], 'content');
      *
@@ -396,7 +396,7 @@ class Highlight {
      * option to a specific field by passing the optional field name parameter.
      *
      * @example
-     * const highlight = bob.highlight('_all')
+     * const highlight = esb.highlight('_all')
      *     .preTags('<em>', '_all')
      *     .postTags('</em>', '_all')
      *     .requireFieldMatch(false);
@@ -450,7 +450,7 @@ class Highlight {
      * `index_options` is set to `offsets`.
      *
      * @example
-     * const highlight = bob.highlight('content').type('plain', 'content');
+     * const highlight = esb.highlight('content').type('plain', 'content');
      *
      * @param {string} type The allowed values are: `plain`, `postings` and `fvh`.
      * @param {string=} field An optional field name
@@ -478,7 +478,7 @@ class Highlight {
      * even if fields are stored separately. Defaults to false.
      *
      * @example
-     * const highlight = bob.highlight('content').forceSource(true, 'content');
+     * const highlight = esb.highlight('content').forceSource(true, 'content');
      *
      * @param {boolean} forceSource
      * @param {string=} field An optional field name
@@ -499,7 +499,7 @@ class Highlight {
      *      up Spans.
      *
      * @example
-     * const highlight = bob.highlight('message')
+     * const highlight = esb.highlight('message')
      *     .fragmentSize(15, 'message')
      *     .numberOfFragments(3, 'message')
      *     .fragmenter('simple', 'message');

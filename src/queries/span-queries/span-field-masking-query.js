@@ -25,12 +25,12 @@ const SpanQueryBase = require('./span-query-base');
  * @param {SpanQueryBase=} spanQry Any other span type query
  *
  * @example
- * const spanQry = bob.spanNearQuery()
+ * const spanQry = esb.spanNearQuery()
  *     .clauses([
- *         bob.spanTermQuery('text', 'quick brown'),
- *         bob.spanFieldMaskingQuery()
+ *         esb.spanTermQuery('text', 'quick brown'),
+ *         esb.spanFieldMaskingQuery()
  *             .field('text')
- *             .query(bob.spanTermQuery('text.stems', 'fox'))
+ *             .query(esb.spanTermQuery('text.stems', 'fox'))
  *     ])
  *     .slop(5)
  *     .inOrder(false);
