@@ -72,16 +72,16 @@
 
       inputEditor.onDidChangeModelContent(onInputChange);
       inputEditor.setValue([
-        "bob.requestBodySearch()",
+        "esb.requestBodySearch()",
         "    .query(",
-        "        bob.boolQuery()",
-        "            .must(bob.matchQuery('message', 'this is a test'))",
-        "            .filter(bob.termQuery('user', 'kimchy'))",
-        "            .filter(bob.termQuery('user', 'herald'))",
-        "            .should(bob.termQuery('user', 'johnny'))",
-        "            .mustNot(bob.termQuery('user', 'cassie'))",
+        "        esb.boolQuery()",
+        "            .must(esb.matchQuery('message', 'this is a test'))",
+        "            .filter(esb.termQuery('user', 'kimchy'))",
+        "            .filter(esb.termQuery('user', 'herald'))",
+        "            .should(esb.termQuery('user', 'johnny'))",
+        "            .mustNot(esb.termQuery('user', 'cassie'))",
         "    )",
-        "    .agg(bob.termsAggregation('user_terms', 'user'));"
+        "    .agg(esb.termsAggregation('user_terms', 'user'));"
       ].join('\n'));
     });
 
