@@ -78,7 +78,17 @@ Try it out on the command line using the node REPL:
 # Start the repl
 node ./node_modules/elastic-builder/repl.js
 # The builder is available in the context variable esb
-elastic-builder > esb.prettyPrint(esb.requestBodySearch().query(esb.matchQuery('message', 'this is a test')));
+elastic-builder > esb.prettyPrint(
+...   esb.requestBodySearch()
+...     .query(esb.matchQuery('message', 'this is a test'))
+... );
+{
+  "query": {
+    "match": {
+      "message": "this is a test"
+    }
+  }
+}
 ```
 
 ## Motivation
@@ -249,8 +259,7 @@ const agg = new esb.TermsAggregation('countries', 'artist.country')
     new esb.FilterAggregation('rock', new esb.TermQuery('genre', 'rock')).agg(
       new esb.StatsAggregation('playback_stats', 'play_count')
     )
-  )
-  .toJSON();
+  );
 agg.toJSON();
 {
   "countries": {
