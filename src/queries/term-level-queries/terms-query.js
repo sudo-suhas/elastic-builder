@@ -24,7 +24,7 @@ const { Query } = require('../../core');
  *     .path('followers');
  *
  * @param {string=} field
- * @param {Array|string|number=} values
+ * @param {Array|string|number|boolean=} values
  *
  * @extends Query
  */
@@ -52,7 +52,7 @@ class TermsQuery extends Query {
      *
      * @private
      * @param {string} key
-     * @param {string|number} val
+     * @param {string|number|boolean} val
      */
     _setTermsLookupOpt(key, val) {
         this._isTermsLookup = true;
@@ -73,7 +73,7 @@ class TermsQuery extends Query {
     /**
      * Append given value to list of values to run Terms Query with.
      *
-     * @param {string|number} value
+     * @param {string|number|boolean} value
      * @returns {TermsQuery} returns `this` so that calls can be chained
      */
     value(value) {

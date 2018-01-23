@@ -1325,7 +1325,7 @@ declare namespace esb {
         /**
          * Sets the query string.
          *
-         * @param {string|number} queryVal
+         * @param {string|number|boolean} queryVal
          */
         value(queryVal: string | number | boolean): this;
     }
@@ -1335,7 +1335,7 @@ declare namespace esb {
      * in the inverted index.
      *
      * @param {string=} field
-     * @param {string|number=} queryVal
+     * @param {string|number|boolean=} queryVal
      * @extends ValueTermQueryBase
      */
     export class TermQuery extends ValueTermQueryBase {
@@ -1347,7 +1347,7 @@ declare namespace esb {
      * in the inverted index.
      *
      * @param {string=} field
-     * @param {string|number=} queryVal
+     * @param {string|number|boolean=} queryVal
      */
     export function termQuery(
         field?: string,
@@ -1358,7 +1358,7 @@ declare namespace esb {
      * Filters documents that have fields that match any of the provided terms (**not analyzed**).
      *
      * @param {string=} field
-     * @param {Array|string|number=} values
+     * @param {Array|string|number|boolean=} values
      * @extends Query
      */
     export class TermsQuery extends Query {
@@ -1374,7 +1374,7 @@ declare namespace esb {
         /**
          * Append given value to list of values to run Terms Query with.
          *
-         * @param {string|number} value
+         * @param {string|number|boolean} value
          */
         value(value: string | number | boolean): this;
 

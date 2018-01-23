@@ -38,7 +38,7 @@ class ValueTermQueryBase extends Query {
     /**
      * Sets the query string.
      *
-     * @param {string|number} queryVal
+     * @param {string|number|boolean} queryVal
      * @returns {ValueTermQueryBase} returns `this` so that calls can be chained.
      */
     value(queryVal) {
