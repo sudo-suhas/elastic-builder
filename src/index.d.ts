@@ -1325,9 +1325,9 @@ declare namespace esb {
         /**
          * Sets the query string.
          *
-         * @param {string|number} queryVal
+         * @param {string|number|boolean} queryVal
          */
-        value(queryVal: string | number): this;
+        value(queryVal: string | number | boolean): this;
     }
 
     /**
@@ -1335,11 +1335,11 @@ declare namespace esb {
      * in the inverted index.
      *
      * @param {string=} field
-     * @param {string|number=} queryVal
+     * @param {string|number|boolean=} queryVal
      * @extends ValueTermQueryBase
      */
     export class TermQuery extends ValueTermQueryBase {
-        constructor(field?: string, queryVal?: string | number);
+        constructor(field?: string, queryVal?: string | number | boolean);
     }
 
     /**
@@ -1347,22 +1347,22 @@ declare namespace esb {
      * in the inverted index.
      *
      * @param {string=} field
-     * @param {string|number=} queryVal
+     * @param {string|number|boolean=} queryVal
      */
     export function termQuery(
         field?: string,
-        queryVal?: string | number
+        queryVal?: string | number | boolean
     ): TermQuery;
 
     /**
      * Filters documents that have fields that match any of the provided terms (**not analyzed**).
      *
      * @param {string=} field
-     * @param {Array|string|number=} values
+     * @param {Array|string|number|boolean=} values
      * @extends Query
      */
     export class TermsQuery extends Query {
-        constructor(field?: string, values?: string[] | string | number);
+        constructor(field?: string, values?: string[] | string | number | boolean);
 
         /**
          * Sets the field to search on.
@@ -1374,9 +1374,9 @@ declare namespace esb {
         /**
          * Append given value to list of values to run Terms Query with.
          *
-         * @param {string|number} value
+         * @param {string|number|boolean} value
          */
-        value(value: string | number): this;
+        value(value: string | number | boolean): this;
 
         /**
          * Specifies the values to run query for.
@@ -1438,7 +1438,7 @@ declare namespace esb {
 
     export function termsQuery(
         field?: string,
-        values?: string[] | string | number
+        values?: string[] | string | number | boolean
     ): TermsQuery;
 
     /**

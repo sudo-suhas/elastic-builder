@@ -12,7 +12,7 @@ const ValueTermQueryBase = require('./value-term-query-base');
  * const termQry = esb.termQuery('user', 'Kimchy');
  *
  * @param {string=} field
- * @param {string|number=} queryVal
+ * @param {string|number|boolean=} queryVal
  *
  * @extends ValueTermQueryBase
  */
