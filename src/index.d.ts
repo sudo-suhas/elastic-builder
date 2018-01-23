@@ -1327,7 +1327,7 @@ declare namespace esb {
          *
          * @param {string|number} queryVal
          */
-        value(queryVal: string | number): this;
+        value(queryVal: string | number | boolean): this;
     }
 
     /**
@@ -1339,7 +1339,7 @@ declare namespace esb {
      * @extends ValueTermQueryBase
      */
     export class TermQuery extends ValueTermQueryBase {
-        constructor(field?: string, queryVal?: string | number);
+        constructor(field?: string, queryVal?: string | number | boolean);
     }
 
     /**
@@ -1351,7 +1351,7 @@ declare namespace esb {
      */
     export function termQuery(
         field?: string,
-        queryVal?: string | number
+        queryVal?: string | number | boolean
     ): TermQuery;
 
     /**
@@ -1362,7 +1362,7 @@ declare namespace esb {
      * @extends Query
      */
     export class TermsQuery extends Query {
-        constructor(field?: string, values?: string[] | string | number);
+        constructor(field?: string, values?: string[] | string | number | boolean);
 
         /**
          * Sets the field to search on.
@@ -1376,7 +1376,7 @@ declare namespace esb {
          *
          * @param {string|number} value
          */
-        value(value: string | number): this;
+        value(value: string | number | boolean): this;
 
         /**
          * Specifies the values to run query for.
@@ -1438,7 +1438,7 @@ declare namespace esb {
 
     export function termsQuery(
         field?: string,
-        values?: string[] | string | number
+        values?: string[] | string | number | boolean
     ): TermsQuery;
 
     /**
