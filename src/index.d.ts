@@ -6448,17 +6448,17 @@ declare namespace esb {
          * If an `offset` is defined, the decay function will only compute the decay function
          * for documents with a distance greater that the defined offset. The default is `0`.
          *
-         * @param {string} offset A valid offset value for the field type.
+         * @param {number} offset A valid offset value for the field type.
          */
-        offset(offset: string): this;
+        offset(offset: number): this;
 
         /**
          * The `decay` parameter defines how documents are scored at the distance given at `scale`.
          * If no `decay` is defined, documents at the distance `scale` will be scored `0.5`.
          *
-         * @param {string} decay A decay value as a double.
+         * @param {number} decay A decay value as a double.
          */
-        decay(decay: string): this;
+        decay(decay: number): this;
     }
 
     /**
