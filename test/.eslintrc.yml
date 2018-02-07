@@ -1,4 +1,7 @@
 root: true
 extends: chatur/test
 rules:
+  id-length: off
   no-unexpected-multiline: off
+  # disabled because of too many false positives
+  unicorn/no-fn-reference-in-iterator: off
