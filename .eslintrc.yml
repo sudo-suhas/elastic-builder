@@ -1,6 +1,7 @@
 root: true
 extends: chatur
 rules:
+  id-length: off
   class-methods-use-this:
     - error
     - exceptMethods:
@@ -20,3 +21,5 @@ rules:
     # We use babel. So change the version
     # instead of inheriting from package.json#engines
     - version: 6
+  # disabled because of too many false positives
+  unicorn/no-fn-reference-in-iterator: off

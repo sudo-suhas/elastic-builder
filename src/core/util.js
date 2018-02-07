@@ -92,7 +92,7 @@ exports.recursiveToJSON = function recursiveToJSON(obj) {
     if (!isObject(obj)) return obj;
 
     // Each element in array needs to be recursively JSONified
-    if (Array.isArray(obj)) return obj.map(recursiveToJSON);
+    if (Array.isArray(obj)) return obj.map(x => recursiveToJSON(x));
 
     // If it is a native object, we'll not get anything different by calling toJSON
     // If it is a custom object, toJSON needs to be called
