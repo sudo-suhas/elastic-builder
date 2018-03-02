@@ -75,7 +75,7 @@
     "babel-preset-env": "^1.6.1",
     "coveralls": "^3.0.0",
     "cross-env": "^5.1.1",
-    "documentation": "^5.3.5",
+    "documentation": "^6.0.0",
     "eslint": "^4.17.0",
     "eslint-config-chatur": "^3.0.0",
     "eslint-config-prettier": "^2.9.0",
