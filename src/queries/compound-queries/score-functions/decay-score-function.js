@@ -130,7 +130,7 @@ class DecayScoreFunction extends ScoreFunction {
      * Required for geo and numeric field. For date fields the default is `now`.
      * Date math (for example `now-1h`) is supported for origin.
      *
-     * @param {*} origin A valid origin value for the field type.
+     * @param {number|string|Object} origin A valid origin value for the field type.
      * @returns {DecayScoreFunction} returns `this` so that calls can be chained.
      */
     origin(origin) {
@@ -145,7 +145,7 @@ class DecayScoreFunction extends ScoreFunction {
      * defined as a number+unit (`1h`, `10d`,…). Default unit is milliseconds.
      * For numeric field: Any number.
      *
-     * @param {*} scale A valid scale value for the field type.
+     * @param {number|string} scale A valid scale value for the field type.
      * @returns {DecayScoreFunction} returns `this` so that calls can be chained.
      */
     scale(scale) {
@@ -157,7 +157,7 @@ class DecayScoreFunction extends ScoreFunction {
      * If an `offset` is defined, the decay function will only compute the decay function
      * for documents with a distance greater that the defined offset. The default is `0`.
      *
-     * @param {*} offset A valid offset value for the field type.
+     * @param {number|string} offset A valid offset value for the field type.
      * @returns {DecayScoreFunction} returns `this` so that calls can be chained.
      */
     offset(offset) {
@@ -169,7 +169,7 @@ class DecayScoreFunction extends ScoreFunction {
      * The `decay` parameter defines how documents are scored at the distance given at `scale`.
      * If no `decay` is defined, documents at the distance `scale` will be scored `0.5`.
      *
-     * @param {*} decay A decay value as a double.
+     * @param {number} decay A decay value as a double.
      * @returns {DecayScoreFunction} returns `this` so that calls can be chained.
      */
     decay(decay) {
