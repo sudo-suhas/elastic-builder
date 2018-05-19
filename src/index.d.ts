@@ -6429,9 +6429,9 @@ declare namespace esb {
          * Required for geo and numeric field. For date fields the default is `now`.
          * Date math (for example `now-1h`) is supported for origin.
          *
-         * @param {*} origin A valid origin value for the field type.
+         * @param {string} origin A valid origin value for the field type.
          */
-        origin(origin: object): this;
+        origin(origin: string): this;
 
         /**
          * Required for all types. Defines the distance from origin + offset at which
@@ -6440,25 +6440,25 @@ declare namespace esb {
          * defined as a number+unit (`1h`, `10d`,…). Default unit is milliseconds.
          * For numeric field: Any number.
          *
-         * @param {*} scale A valid scale value for the field type.
+         * @param {string} scale A valid scale value for the field type.
          */
-        scale(scale: object): this;
+        scale(scale: string): this;
 
         /**
          * If an `offset` is defined, the decay function will only compute the decay function
          * for documents with a distance greater that the defined offset. The default is `0`.
          *
-         * @param {*} offset A valid offset value for the field type.
+         * @param {number} offset A valid offset value for the field type.
          */
-        offset(offset: object): this;
+        offset(offset: number): this;
 
         /**
          * The `decay` parameter defines how documents are scored at the distance given at `scale`.
          * If no `decay` is defined, documents at the distance `scale` will be scored `0.5`.
          *
-         * @param {*} decay A decay value as a double.
+         * @param {number} decay A decay value as a double.
          */
-        decay(decay: object): this;
+        decay(decay: number): this;
     }
 
     /**
