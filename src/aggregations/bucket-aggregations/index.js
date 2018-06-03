@@ -4,6 +4,7 @@ exports.BucketAggregationBase = require('./bucket-aggregation-base');
 exports.HistogramAggregationBase = require('./histogram-aggregation-base');
 exports.RangeAggregationBase = require('./range-aggregation-base');
 exports.TermsAggregationBase = require('./terms-aggregation-base');
+exports.SignificantAggregationBase = require('./significant-aggregation-base');
 
 exports.AdjacencyMatrixAggregation = require('./adjacency-matrix-aggregation');
 exports.ChildrenAggregation = require('./children-aggregation');
@@ -23,4 +24,5 @@ exports.RangeAggregation = require('./range-aggregation');
 exports.ReverseNestedAggregation = require('./reverse-nested-aggregation');
 exports.SamplerAggregation = require('./sampler-aggregation');
 exports.SignificantTermsAggregation = require('./significant-terms-aggregation');
+exports.SignificantTextAggregation = require('./significant-text-aggregation');
 exports.TermsAggregation = require('./terms-aggregation');

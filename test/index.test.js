@@ -271,6 +271,9 @@ test('aggregations are exported', t => {
     t.truthy(esb.SignificantTermsAggregation);
     t.truthy(esb.significantTermsAggregation);
 
+    t.truthy(esb.SignificantTextAggregation);
+    t.truthy(esb.significantTextAggregation);
+
     t.truthy(esb.TermsAggregation);
     t.truthy(esb.termsAggregation);
 
@@ -408,5 +411,3 @@ test('pretty print calls toJSON', t => {
     });
 });
 /* eslint-enable */
-
-// TODO: Test prettyPrint logs to console

@@ -26,8 +26,6 @@ class BucketAggregationBase extends Aggregation {
         if (!isNil(field)) this._aggsDef.field = field;
     }
 
-    // TODO: Investigate case when getters will be required
-
     /**
      * Sets field to run aggregation on.
      *

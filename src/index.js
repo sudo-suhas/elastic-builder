@@ -117,6 +117,7 @@ const {
         ReverseNestedAggregation,
         SamplerAggregation,
         SignificantTermsAggregation,
+        SignificantTextAggregation,
         TermsAggregation
     },
     pipelineAggregations: {
@@ -417,6 +418,11 @@ exports.samplerAggregation = constructorWrapper(SamplerAggregation);
 exports.SignificantTermsAggregation = SignificantTermsAggregation;
 exports.significantTermsAggregation = constructorWrapper(
     SignificantTermsAggregation
+);
+
+exports.SignificantTextAggregation = SignificantTextAggregation;
+exports.significantTextAggregation = constructorWrapper(
+    SignificantTextAggregation
 );
 
 exports.TermsAggregation = TermsAggregation;

@@ -5527,35 +5527,16 @@ declare namespace esb {
     }
 
     /**
-     * The `TermsAggregationBase` provides support for common options used across
-     * various terms `Aggregation` implementations like Significant terms and
-     * Terms aggregation.
+     * The `SignificantAggregationBase` provides support for common options used
+     * in `SignificantTermsAggregation` and `SignificantTextAggregation`.
+     *
      * **NOTE:** Instantiating this directly should not be required.
      * However, if you wish to add a custom implementation for whatever reason,
      * this class could be extended.
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string} aggType Type of aggregation
-     * @param {string} refUrl Elasticsearch reference URL.
-     * @param {string=} field The field to aggregate on
-     */
-    export function termsAggregationBase(
-        name: string,
-        aggType: string,
-        refUrl: string,
-        field?: string
-    ): TermsAggregationBase;
-
-    /**
-     * An aggregation that returns interesting or unusual occurrences of terms in
-     * a set.
      *
-     * @param {string} name The name which will be used to refer to this aggregation.
-     * @param {string=} field The field to aggregate on
      * @extends TermsAggregationBase
      */
-    export class SignificantTermsAggregation extends TermsAggregationBase {
-        constructor(name: string, field?: string);
-
+    export class SignificantAggregationBase extends TermsAggregationBase {
         /**
          * Use JLH score as significance score.
          */
@@ -5621,6 +5602,24 @@ declare namespace esb {
          * @param {Query} filterQuery Filter query
          */
         backgroundFilter(filterQuery: Query): this;
+
+        /**
+         * @override
+         * @throws {Error} This method cannot be called on SignificantAggregationBase
+         */
+        script(): never;
+    }
+
+    /**
+     * An aggregation that returns interesting or unusual occurrences of terms in
+     * a set.
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     * @param {string=} field The field to aggregate on
+     * @extends SignificantAggregationBase
+     */
+    export class SignificantTermsAggregation extends SignificantAggregationBase {
+        constructor(name: string, field?: string);
     }
 
     /**
@@ -5634,6 +5633,74 @@ declare namespace esb {
         name: string,
         field?: string
     ): SignificantTermsAggregation;
+
+    /**
+     * An aggregation that returns interesting or unusual occurrences of free-text
+     * terms in a set. It is like the `SignificantTermsAggregation` but differs in
+     * that:
+     *   - It is specifically designed for use on type `text` fields
+     *   - It does not require field data or doc-values
+     *   - It re-analyzes text content on-the-fly meaning it can also filter
+     *     duplicate sections of noisy text that otherwise tend to skew statistics.
+     *
+     * NOTE: This query was added in elasticsearch v6.0.
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     * @param {string=} field The field to aggregate on
+     * @extends SignificantAggregationBase
+     */
+    export class SignificantTextAggregation extends SignificantAggregationBase {
+        constructor(name: string, field?: string);
+
+        /**
+         * Control if duplicate paragraphs of text should try be filtered from the
+         * statistical text analysis. Can improve results but slows down analysis.
+         * Default is `false`.
+         *
+         * @param {boolean} enable
+         */
+        filterDuplicateText(enable: boolean): this;
+
+        /**
+         * Selects the fields to load from `_source` JSON and analyze. If none are
+         * specified, the indexed "fieldName" value is assumed to also be the name
+         * of the JSON field holding the value
+         *
+         * @param {Array<string>} srcFields Array of fields
+         */
+        sourceFields(srcFields: string[]): this;
+
+        /**
+         * @override
+         * @throws {Error} This method cannot be called on SignificantTextAggregation
+         */
+        missing(): never;
+
+        /**
+         * @override
+         * @throws {Error} This method cannot be called on SignificantTextAggregation
+         */
+        executionHint(): never;
+    }
+
+    /**
+     * An aggregation that returns interesting or unusual occurrences of free-text
+     * terms in a set. It is like the `SignificantTermsAggregation` but differs in
+     * that:
+     *   - It is specifically designed for use on type `text` fields
+     *   - It does not require field data or doc-values
+     *   - It re-analyzes text content on-the-fly meaning it can also filter
+     *     duplicate sections of noisy text that otherwise tend to skew statistics.
+     *
+     * NOTE: This query was added in elasticsearch v6.0.
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     * @param {string=} field The field to aggregate on
+     */
+    export function significantTextAggregation(
+        name: string,
+        field?: string
+    ): SignificantTextAggregation;
 
     /**
      * A multi-bucket value source based aggregation where buckets are dynamically
