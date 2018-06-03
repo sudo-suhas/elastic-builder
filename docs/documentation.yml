@@ -25,6 +25,7 @@ toc:
   - ValueTermQueryBase
   - TermQuery
   - TermsQuery
+  - TermsSetQuery
   - MultiTermQueryBase
   - RangeQuery
   - ExistsQuery
@@ -112,7 +113,9 @@ toc:
   - ReverseNestedAggregation
   - SamplerAggregation
   - TermsAggregationBase
+  - SignificantAggregationBase
   - SignificantTermsAggregation
+  - SignificantTextAggregation
   - TermsAggregation
   - name: Pipeline Aggregations
   - PipelineAggregationBase
