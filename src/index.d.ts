@@ -1451,6 +1451,85 @@ declare namespace esb {
     ): TermsQuery;
 
     /**
+     * Returns any documents that match with at least one or more of the provided
+     * terms. The terms are not analyzed and thus must match exactly. The number of
+     * terms that must match varies per document and is either controlled by a
+     * minimum should match field or computed per document in a minimum should match
+     * script.
+     *
+     * NOTE: This query was added in elasticsearch v6.1.
+     *
+     * @param {string=} field
+     * @param {Array<string|number|boolean>|string|number=} terms
+     *
+     * @extends Query
+     */
+    export class TermsSetQuery extends Query {
+        constructor(
+            field?: string,
+            terms?: string[] | number[] | boolean[] | string | number
+        );
+
+        /**
+         * Sets the field to search on.
+         *
+         * @param {string} field
+         */
+        field(field: string): this;
+
+        /**
+         * Append given term to set of terms to run Terms Set Query with.
+         *
+         * @param {string|number|boolean} term
+         */
+        term(term: string | number | boolean): this;
+
+        /**
+         * Specifies the terms to run query for.
+         *
+         * @param {Array<string|number|boolean>} terms Terms set to run query for.
+         * @throws {TypeError} If `terms` is not an instance of Array
+         */
+        terms(terms: string[] | number[] | boolean[]): this;
+
+        /**
+         * Controls the number of terms that must match per document.
+         *
+         * @param {string} fieldName
+         */
+        minimumShouldMatchField(fieldName: string): this;
+
+        /**
+         * Sets the `script` for query. It controls how many terms are required to
+         * match in a more dynamic way.
+         *
+         * The `params.num_terms` parameter is available in the script to indicate
+         * the number of terms that have been specified.
+         *
+         * @param {Script|string|Object} script
+         * @returns {ScriptQuery} returns `this` so that calls can be chained.
+         */
+        minimumShouldMatchScript(script: Script | string | object): this;
+    }
+
+    /**
+     * Returns any documents that match with at least one or more of the provided
+     * terms. The terms are not analyzed and thus must match exactly. The number of
+     * terms that must match varies per document and is either controlled by a
+     * minimum should match field or computed per document in a minimum should match
+     * script.
+     *
+     * NOTE: This query was added in elasticsearch v6.1.
+     *
+     * @param {string=} field
+     * @param {Array|string|number=} terms
+     */
+    export function termsSetQuery(
+        field?: string,
+        terms?: string[] | number[] | boolean[] | string | number
+    ): TermsSetQuery;
+
+    /**
      * Interface-like class used to group and identify various implementations of
      * multi term queries:
      * - Wildcard Query

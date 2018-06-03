@@ -4,6 +4,7 @@ exports.MultiTermQueryBase = require('./multi-term-query-base');
 
 exports.TermQuery = require('./term-query');
 exports.TermsQuery = require('./terms-query');
+exports.TermsSetQuery = require('./terms-set-query');
 exports.RangeQuery = require('./range-query');
 exports.ExistsQuery = require('./exists-query');
 exports.PrefixQuery = require('./prefix-query');

@@ -31,6 +31,7 @@ const {
     termLevelQueries: {
         TermQuery,
         TermsQuery,
+        TermsSetQuery,
         RangeQuery,
         ExistsQuery,
         PrefixQuery,
@@ -189,6 +190,9 @@ exports.termQuery = constructorWrapper(TermQuery);
 
 exports.TermsQuery = TermsQuery;
 exports.termsQuery = constructorWrapper(TermsQuery);
+
+exports.TermsSetQuery = TermsSetQuery;
+exports.termsSetQuery = constructorWrapper(TermsSetQuery);
 
 exports.RangeQuery = RangeQuery;
 exports.rangeQuery = constructorWrapper(RangeQuery);

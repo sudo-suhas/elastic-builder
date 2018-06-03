@@ -50,6 +50,9 @@ test('queries are exported', t => {
     t.truthy(esb.TermsQuery);
     t.truthy(esb.termsQuery);
 
+    t.truthy(esb.TermsSetQuery);
+    t.truthy(esb.termsSetQuery);
+
     t.truthy(esb.RangeQuery);
     t.truthy(esb.rangeQuery);
 
