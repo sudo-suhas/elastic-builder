@@ -66,7 +66,7 @@ class PercentilesAggregation extends MetricsAggregationBase {
      *     'load_time'
      * ).percents([95, 99, 99.9]);
      *
-     * @param {Array} percents Parameter to specify particular percentiles to calculate
+     * @param {Array<number>} percents Parameter to specify particular percentiles to calculate
      * @returns {PercentilesAggregation} returns `this` so that calls can be chained
      * @throws {TypeError} If `percents` is not an instance of Array
      */

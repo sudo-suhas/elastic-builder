@@ -34,7 +34,7 @@ class MatrixStatsAggregation extends Aggregation {
      * const agg = esb.matrixStatsAggregation('matrixstats')
      *     .fields(['poverty', 'income']);
      *
-     * @param {Array} fields Array of fields
+     * @param {Array<string>} fields Array of fields
      * @returns {MatrixStatsAggregation} returns `this` so that calls can be chained
      */
     fields(fields) {

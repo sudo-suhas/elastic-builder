@@ -45,7 +45,7 @@ class PercentilesBucketAggregation extends PipelineAggregationBase {
     /**
      * Sets the list of percentiles to calculate
      *
-     * @param {Array} percents The list of percentiles to calculate
+     * @param {Array<number>} percents The list of percentiles to calculate
      * @returns {PercentilesBucketAggregation} returns `this` so that calls can be chained
      */
     percents(percents) {

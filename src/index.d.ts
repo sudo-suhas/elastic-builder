@@ -176,9 +176,9 @@ declare namespace esb {
          * Allows to return the doc value representation of a field for each hit.
          * Doc value fields can work on fields that are not stored.
          *
-         * @param {Array} fields
+         * @param {Array<string>} fields
          */
-        docvalueFields(fields: object): this;
+        docvalueFields(fields: string[]): this;
 
         /**
          * The `post_filter` is applied to the search hits at the very end of a search request,
@@ -276,10 +276,10 @@ declare namespace esb {
          * of the next page. The `search_after` parameter provides a live cursor.
          * The parameter `from` must be set to `0` (or `-1`) when `search_after` is used.
          *
-         * @param {Array} values The `sort values` of the last document to retrieve
+         * @param {Array<*>} values The `sort values` of the last document to retrieve
          * the next page of results
          */
-        searchAfter(values: object): this;
+        searchAfter(values: any[]): this;
 
         /**
          * Override default `toJSON` to return DSL representation for the request body search
@@ -1362,7 +1362,10 @@ declare namespace esb {
      * @extends Query
      */
     export class TermsQuery extends Query {
-        constructor(field?: string, values?: string[] | string | number | boolean);
+        constructor(
+            field?: string,
+            values?: string[] | string | number | boolean
+        );
 
         /**
          * Sets the field to search on.
@@ -1381,10 +1384,10 @@ declare namespace esb {
         /**
          * Specifies the values to run query for.
          *
-         * @param {Array} values Values to run query for.
+         * @param {Array<string|number|boolean>} values Values to run query for.
          * @throws {TypeError} If `values` is not an instance of Array
          */
-        values(values: object): this;
+        values(values: string[] | number[] | boolean[]): this;
 
         /**
          * Convenience method for setting term lookup options.
@@ -1436,6 +1439,12 @@ declare namespace esb {
         routing(routing: string): this;
     }
 
+    /**
+     * Filters documents that have fields that match any of the provided terms (**not analyzed**).
+     *
+     * @param {string=} field
+     * @param {Array|string|number|boolean=} values
+     */
     export function termsQuery(
         field?: string,
         values?: string[] | string | number | boolean
@@ -1888,17 +1897,17 @@ declare namespace esb {
         /**
          * Sets the list of ids to fiter on.
          *
-         * @param {Array} ids
+         * @param {Array<string|number>} ids
          */
-        values(ids: object): this;
+        values(ids: string[] | number[]): this;
 
         /**
          * Sets the list of ids to fiter on.
          * Alias for `values` method.
          *
-         * @param {Array} ids
+         * @param {Array<string|number>} ids
          */
-        ids(ids: object): this;
+        ids(ids: string[] | number[]): this;
     }
 
     /**
@@ -2711,10 +2720,10 @@ declare namespace esb {
          * Points can be instances of `GeoPoint`, Object with `lat`, `lon` keys,
          * `GeoJSON` array representation or string(`geohash`/`lat, lon`)
          *
-         * @param {Array} points
+         * @param {Array<*>} points
          * @throws {TypeError} If `points` parameter is not an instance of `Array`.
          */
-        points(points: object): GeoPolygonQuery;
+        points(points: any[]): GeoPolygonQuery;
     }
 
     /**
@@ -3772,10 +3781,10 @@ declare namespace esb {
          * Specifies the percents of interest.
          * Requested percentiles must be a value between 0-100 inclusive
          *
-         * @param {Array} percents Parameter to specify particular percentiles to calculate
+         * @param {Array<number>} percents Parameter to specify particular percentiles to calculate
          * @throws {TypeError} If `percents` is not an instance of Array
          */
-        percents(percents: object): this;
+        percents(percents: number[]): this;
 
         /**
          * Compression controls memory usage and approximation error. The compression
@@ -3869,7 +3878,7 @@ declare namespace esb {
         /**
          * Specifies the values to compute percentiles from.
          *
-         * @param {Array} values Values to compute percentiles from.
+         * @param {Array<number>} values Values to compute percentiles from.
          * @throws {TypeError} If `values` is not an instance of Array
          */
         values(values: number[]): this;
@@ -4150,10 +4159,10 @@ declare namespace esb {
          * The sort is defined on a per field level, with special field name for _score to
          * sort by score, and _doc to sort by index order.
          *
-         * @param {Array} sorts Arry of sort How the top matching hits should be sorted.
+         * @param {Array<Sort>} sorts Arry of sort How the top matching hits should be sorted.
          * @throws {TypeError} If any item in parameter `sorts` is not an instance of `Sort`.
          */
-        sorts(sorts: object): this;
+        sorts(sorts: Sort[]): this;
 
         /**
          * Enables score computation and tracking during sorting.
@@ -4226,9 +4235,9 @@ declare namespace esb {
          * Allows to return the doc value representation of a field for each hit.
          * Doc value fields can work on fields that are not stored.
          *
-         * @param {Array} fields
+         * @param {Array<string>} fields
          */
-        docvalueFields(fields: object): this;
+        docvalueFields(fields: string[]): this;
     }
 
     /**
@@ -5889,9 +5898,9 @@ declare namespace esb {
         /**
          * Sets the list of percentiles to calculate
          *
-         * @param {Array} percents The list of percentiles to calculate
+         * @param {Array<number>} percents The list of percentiles to calculate
          */
-        percents(percents: object): this;
+        percents(percents: number[]): this;
     }
 
     /**
@@ -6150,9 +6159,9 @@ declare namespace esb {
          * The `fields` setting defines the set of fields (as an array) for computing
          * the statistics.
          *
-         * @param {Array} fields Array of fields
+         * @param {Array<string>} fields Array of fields
          */
-        fields(fields: object): this;
+        fields(fields: string[]): this;
 
         /**
          * The `mode` parameter controls what array value the aggregation will use for
@@ -6431,7 +6440,7 @@ declare namespace esb {
          *
          * @param {number|string|Object} origin A valid origin value for the field type.
          */
-        origin(origin: number|string|object): this;
+        origin(origin: number | string | object): this;
 
         /**
          * Required for all types. Defines the distance from origin + offset at which
@@ -6442,7 +6451,7 @@ declare namespace esb {
          *
          * @param {number|string} scale A valid scale value for the field type.
          */
-        scale(scale: number|string): this;
+        scale(scale: number | string): this;
 
         /**
          * If an `offset` is defined, the decay function will only compute the decay function
@@ -6450,7 +6459,7 @@ declare namespace esb {
          *
          * @param {number|string} offset A valid offset value for the field type.
          */
-        offset(offset: number|string): this;
+        offset(offset: number | string): this;
 
         /**
          * The `decay` parameter defines how documents are scored at the distance given at `scale`.
@@ -7253,18 +7262,18 @@ declare namespace esb {
          * Allows you to set a field that will be highlighted. The field is
          * added to the current list of fields.
          *
-         * @param {Array} field A field name.
+         * @param {string} field A field name.
          */
-        field(field: object): this;
+        field(field: string): this;
 
         /**
          * Allows you to set the fields that will be highlighted. All fields are
          * added to the current list of fields.
          *
-         * @param {Array} fields Array of field names.
+         * @param {Array<string>} fields Array of field names.
          * @throws {TypeError} If `fields` is not an instance of Array
          */
-        fields(fields: object): this;
+        fields(fields: string[]): this;
 
         /**
          * Sets the pre tags for highlighted fragments. You can apply the
@@ -7344,12 +7353,12 @@ declare namespace esb {
          * Useful for multifields that analyze the same string in different ways.
          * Sets the highlight type to Fast Vector Highlighter(`fvh`).
          *
-         * @param {Array} fields
+         * @param {Array<string>} fields
          * @param {string} field Field name
          * @throws {Error} field parameter should be valid field name
          * @throws {TypeError} If `fields` is not an instance of Array
          */
-        matchedFields(fields: object, field: string): this;
+        matchedFields(fields: string[], field: string): this;
 
         /**
          * The fast vector highlighter has a phrase_limit parameter that prevents
@@ -7576,10 +7585,10 @@ declare namespace esb {
          * Sets the Geo Point value expressed as an array
          * with the format: `[ lon, lat ]`.
          *
-         * @param {Array} point Array in format `[ lon, lat ]`(`GeoJson` standard)
+         * @param {Array<number>} point Array in format `[ lon, lat ]`(`GeoJson` standard)
          * @throws {TypeError} If `point` is not an instance of Array
          */
-        array(point: object): this;
+        array(point: number[]): this;
 
         /**
          * Sets Geo-point expressed as a string with the format: `"lat,lon"`
@@ -7652,7 +7661,7 @@ declare namespace esb {
          * are not validated in this api. Please see `GeoJSON`
          * and ElasticSearch documentation for correct coordinate definitions.
          *
-         * @param {Array} coords
+         * @param {Array<number>} coords
          */
         coordinates(coords: number[]): this;
 
@@ -8091,9 +8100,9 @@ declare namespace esb {
          * Allows to return the doc value representation of a field for each hit.
          * Doc value fields can work on fields that are not stored.
          *
-         * @param {Array} fields
+         * @param {Array<string>} fields
          */
-        docvalueFields(fields: object): this;
+        docvalueFields(fields: string[]): this;
 
         /**
          * Returns a version for each search hit.

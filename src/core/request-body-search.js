@@ -117,7 +117,7 @@ class RequestBodySearch {
      * Sets multiple nested aggregation items.
      * Alias for method `aggregations`
      *
-     * @param {Array} aggs Array of valid {@link Aggregation} items
+     * @param {Array<Aggregation>} aggs Array of valid {@link Aggregation} items
      * @returns {Aggregation} returns `this` so that calls can be chained.
      * @throws {TypeError} If `aggs` is not an instance of `Array`
      * @throws {TypeError} If `aggs` contains instances not of type `Aggregation`
@@ -130,7 +130,7 @@ class RequestBodySearch {
      * Sets multiple nested aggregation items.
      * This method accepts an array to set multiple nested aggregations in one call.
      *
-     * @param {Array} aggs Array of valid {@link Aggregation} items
+     * @param {Array<Aggregation>} aggs Array of valid {@link Aggregation} items
      * @returns {Aggregation} returns `this` so that calls can be chained.
      * @throws {TypeError} If `aggs` is not an instance of `Array`
      * @throws {TypeError} If `aggs` contains instances not of type `Aggregation`
@@ -472,7 +472,7 @@ class RequestBodySearch {
      *     .query(esb.matchAllQuery())
      *     .docvalueFields(['test1', 'test2']);
      *
-     * @param {Array} fields
+     * @param {Array<string>} fields
      * @returns {RequestBodySearch} returns `this` so that calls can be chained
      */
     docvalueFields(fields) {
@@ -752,7 +752,7 @@ class RequestBodySearch {
      *     .searchAfter(1463538857, 'tweet#654323')
      *     .sorts([esb.sort('date', 'asc'), esb.sort('_uid', 'desc')]);
      *
-     * @param {Array} values The `sort values` of the last document to retrieve
+     * @param {Array<*>} values The `sort values` of the last document to retrieve
      * the next page of results
      * @returns {RequestBodySearch} returns `this` so that calls can be chained.
      */

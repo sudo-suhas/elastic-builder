@@ -100,7 +100,7 @@ class GeoPoint {
      * Sets the Geo Point value expressed as an array
      * with the format: `[ lon, lat ]`.
      *
-     * @param {Array} point Array in format `[ lon, lat ]`(`GeoJson` standard)
+     * @param {Array<number>} point Array in format `[ lon, lat ]`(`GeoJson` standard)
      * @returns {GeoPoint} returns `this` so that calls can be chained
      * @throws {TypeError} If `point` is not an instance of Array
      */

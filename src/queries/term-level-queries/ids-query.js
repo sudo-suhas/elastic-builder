@@ -43,7 +43,7 @@ class IdsQuery extends Query {
     /**
      * Sets the list of ids to fiter on.
      *
-     * @param {Array} ids
+     * @param {Array<string|number>} ids
      * @returns {IdsQuery} returns `this` so that calls can be chained.
      */
     values(ids) {
@@ -57,7 +57,7 @@ class IdsQuery extends Query {
      * Sets the list of ids to fiter on.
      * Alias for `values` method.
      *
-     * @param {Array} ids
+     * @param {Array<string|number>} ids
      * @returns {IdsQuery} returns `this` so that calls can be chained.
      */
     ids(ids) {

@@ -196,7 +196,7 @@ class InnerHits {
      * Allows to return the doc value representation of a field for each hit.
      * Doc value fields can work on fields that are not stored.
      *
-     * @param {Array} fields
+     * @param {Array<string>} fields
      * @returns {InnerHits} returns `this` so that calls can be chained
      */
     docvalueFields(fields) {

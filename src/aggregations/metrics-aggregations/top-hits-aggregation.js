@@ -142,7 +142,7 @@ class TopHitsAggregation extends MetricsAggregationBase {
      * The sort is defined on a per field level, with special field name for _score to
      * sort by score, and _doc to sort by index order.
      *
-     * @param {Array} sorts Arry of sort How the top matching hits should be sorted.
+     * @param {Array<Sort>} sorts Arry of sort How the top matching hits should be sorted.
      * @returns {TopHitsAggregation} returns `this` so that calls can be chained.
      * @throws {TypeError} If any item in parameter `sorts` is not an instance of `Sort`.
      */
@@ -264,7 +264,7 @@ class TopHitsAggregation extends MetricsAggregationBase {
      * Allows to return the doc value representation of a field for each hit.
      * Doc value fields can work on fields that are not stored.
      *
-     * @param {Array} fields
+     * @param {Array<string>} fields
      * @returns {TopHitsAggregation} returns `this` so that calls can be chained
      */
     docvalueFields(fields) {

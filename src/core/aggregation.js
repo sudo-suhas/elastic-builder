@@ -80,7 +80,7 @@ class Aggregation {
      * Sets multiple nested aggregation items.
      * This method accepts an array to set multiple nested aggregations in one call.
      *
-     * @param {Array} aggs Array of valid {@link Aggregation} items
+     * @param {Array<Aggregation>} aggs Array of valid {@link Aggregation} items
      * @returns {Aggregation} returns `this` so that calls can be chained.
      * @throws {TypeError} If `aggs` is not an instance of `Array`
      * @throws {TypeError} If `aggs` contains instances not of type `Aggregation`
@@ -97,7 +97,7 @@ class Aggregation {
      * Sets multiple nested aggregation items.
      * Alias for method `aggregations`
      *
-     * @param {Array} aggs Array of valid {@link Aggregation} items
+     * @param {Array<Aggregation>} aggs Array of valid {@link Aggregation} items
      * @returns {Aggregation} returns `this` so that calls can be chained.
      * @throws {TypeError} If `aggs` is not an instance of `Array`
      * @throws {TypeError} If `aggs` contains instances not of type `Aggregation`

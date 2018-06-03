@@ -74,7 +74,7 @@ class GeoShape {
      *     .type('point')
      *     .coordinates([-77.03653, 38.897676])
      *
-     * @param {Array} coords
+     * @param {Array<number>} coords
      * @returns {GeoShape} returns `this` so that calls can be chained.
      */
     coordinates(coords) {

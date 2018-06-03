@@ -84,7 +84,7 @@ class TermsQuery extends Query {
     /**
      * Specifies the values to run query for.
      *
-     * @param {Array} values Values to run query for.
+     * @param {Array<string|number|boolean>} values Values to run query for.
      * @returns {TermsQuery} returns `this` so that calls can be chained
      * @throws {TypeError} If `values` is not an instance of Array
      */

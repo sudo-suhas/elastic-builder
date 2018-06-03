@@ -108,7 +108,7 @@ class Highlight {
      * Allows you to set a field that will be highlighted. The field is
      * added to the current list of fields.
      *
-     * @param {Array} field A field name.
+     * @param {string} field A field name.
      * @returns {Highlight} returns `this` so that calls can be chained
      */
     field(field) {
@@ -123,7 +123,7 @@ class Highlight {
      * Allows you to set the fields that will be highlighted. All fields are
      * added to the current list of fields.
      *
-     * @param {Array} fields Array of field names.
+     * @param {Array<string>} fields Array of field names.
      * @returns {Highlight} returns `this` so that calls can be chained
      * @throws {TypeError} If `fields` is not an instance of Array
      */
@@ -333,7 +333,7 @@ class Highlight {
      *     }
      * }
      *
-     * @param {Array} fields
+     * @param {Array<string>} fields
      * @param {string} field Field name
      * @returns {Highlight} returns `this` so that calls can be chained
      * @throws {Error} field parameter should be valid field name

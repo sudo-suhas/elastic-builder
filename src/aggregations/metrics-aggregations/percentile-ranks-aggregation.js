@@ -86,7 +86,7 @@ class PercentileRanksAggregation extends MetricsAggregationBase {
     /**
      * Specifies the values to compute percentiles from.
      *
-     * @param {Array} values Values to compute percentiles from.
+     * @param {Array<number>} values Values to compute percentiles from.
      * @returns {PercentileRanksAggregation} returns `this` so that calls can be chained
      * @throws {TypeError} If `values` is not an instance of Array
      */

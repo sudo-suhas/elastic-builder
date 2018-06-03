@@ -56,7 +56,7 @@ class GeoPolygonQuery extends GeoQueryBase {
      *     '20, -90'
      * ]);
      *
-     * @param {Array} points
+     * @param {Array<*>} points
      * @returns {GeoPolygonQuery} returns `this` so that calls can be chained
      * @throws {TypeError} If `points` parameter is not an instance of `Array`.
      */
