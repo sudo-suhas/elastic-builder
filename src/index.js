@@ -101,6 +101,7 @@ const {
     bucketAggregations: {
         AdjacencyMatrixAggregation,
         ChildrenAggregation,
+        CompositeAggregation,
         DateHistogramAggregation,
         DateRangeAggregation,
         DiversifiedSamplerAggregation,
@@ -367,6 +368,9 @@ exports.adjacencyMatrixAggregation = constructorWrapper(
 
 exports.ChildrenAggregation = ChildrenAggregation;
 exports.childrenAggregation = constructorWrapper(ChildrenAggregation);
+
+exports.CompositeAggregation = CompositeAggregation;
+exports.compositeAggregation = constructorWrapper(CompositeAggregation);
 
 exports.DateHistogramAggregation = DateHistogramAggregation;
 exports.dateHistogramAggregation = constructorWrapper(DateHistogramAggregation);

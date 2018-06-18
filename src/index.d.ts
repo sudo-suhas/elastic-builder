@@ -4515,6 +4515,266 @@ declare namespace esb {
     export function childrenAggregation(name: string): ChildrenAggregation;
 
     /**
+     * CompositeAggregation is a multi-bucket values source based aggregation that
+     * can be used to calculate unique composite values from source documents.
+     *
+     * Unlike the other multi-bucket aggregation the composite aggregation can be
+     * used to paginate **all** buckets from a multi-level aggregation efficiently.
+     * This aggregation provides a way to stream **all** buckets of a specific
+     * aggregation similarly to what scroll does for documents.
+     *
+     * NOTE: This query was added in elasticsearch v6.1.
+     *
+     * @param {string} name a valid aggregation name
+     *
+     * @extends Aggregation
+     */
+    export class CompositeAggregation extends Aggregation {
+        constructor(name: string);
+
+        /**
+         * Specifies the Composite Aggregation values sources to use in the
+         * aggregation.
+         *
+         * @param {...ValuesSourceBase} sources
+         * @throws {TypeError} If any of the rest parameters `sources` is not an
+         * instance of `ValuesSourceBase`
+         */
+        sources(...sources: CompositeAggregation.ValuesSourceBase[]): this;
+
+        /**
+         * Defines how many composite buckets should be returned. Each composite
+         * bucket is considered as a single bucket so setting a size of 10 will
+         * return the first 10 composite buckets created from the values source. The
+         * response contains the values for each composite bucket in an array
+         * containing the values extracted from each value source.
+         *
+         * @param {number} size
+         */
+        size(size: number): this;
+
+        /**
+         * The `after` parameter can be used to retrieve the composite buckets that
+         * are after the last composite buckets returned in a previous round.
+         *
+         * @param {Object} afterKey
+         */
+        after(afterKey: object): this;
+    }
+
+    /**
+     * CompositeAggregation is a multi-bucket values source based aggregation that
+     * can be used to calculate unique composite values from source documents.
+     *
+     * Unlike the other multi-bucket aggregation the composite aggregation can be
+     * used to paginate **all** buckets from a multi-level aggregation efficiently.
+     * This aggregation provides a way to stream **all** buckets of a specific
+     * aggregation similarly to what scroll does for documents.
+     *
+     * NOTE: This query was added in elasticsearch v6.1.
+     *
+     * @param {string} name a valid aggregation name
+     */
+    export function compositeAggregation(name: string): CompositeAggregation;
+
+    namespace CompositeAggregation {
+        /**
+         * Base class implementation for all Composite Aggregation values sources.
+         *
+         * **NOTE:** Instantiating this directly should not be required.
+         *
+         * @param {string} valueSrcType Type of value source.
+         * @param {string} refUrl Elasticsearch reference URL
+         * @param {string} name
+         * @param {string=} field The field to aggregate on
+         *
+         * @throws {Error} if `name` is empty
+         * @throws {Error} if `valueSrcType` is empty
+         */
+        class ValuesSourceBase {
+            constructor(
+                valueSrcType: string,
+                refUrl: string,
+                name: string,
+                field?: string
+            );
+
+            /**
+             * Field to use for this source.
+             *
+             * @param {string} field a valid field name
+             */
+            field(field: string): this;
+
+            /**
+             * Script to use for this source.
+             *
+             * @param {Script|Object|string} script
+             * @throws {TypeError} If `script` is not an instance of `Script`
+             */
+            script(script: Script | object | string): this;
+
+            /**
+             * Specifies the type of values produced by this source, e.g. `string` or
+             * `date`.
+             *
+             * @param {string} valueType
+             */
+            valueType(valueType: string): this;
+
+            /**
+             * Order specifies the order in the values produced by this source. It can
+             * be either `asc` or `desc`.
+             *
+             * @param {string} order The `order` option can have the following values.
+             * `asc`, `desc` to sort in ascending, descending order respectively..
+             */
+            order(order: 'asc' | 'desc'): this;
+
+            /**
+             * Missing specifies the value to use when the source finds a missing value
+             * in a document.
+             *
+             * @param {string} value
+             */
+            missing(value: string): this;
+
+            /**
+             * Override default `toJSON` to return DSL representation for the Composite
+             * Aggregation values source.
+             *
+             * @override
+             */
+            toJSON(): object;
+        }
+
+        /**
+         * `TermsValuesSource` is a source for the `CompositeAggregation` that handles
+         * terms. It works very similar to a terms aggregation with a slightly different
+         * syntax.
+         *
+         * @param {string} name
+         * @param {string=} field The field to aggregate on
+         *
+         * @extends ValuesSourceBase
+         */
+        export class TermsValuesSource extends ValuesSourceBase {
+            constructor(name: string, field?: string);
+        }
+
+        /**
+         * `TermsValuesSource` is a source for the `CompositeAggregation` that handles
+         * terms. It works very similar to a terms aggregation with a slightly different
+         * syntax.
+         *
+         * @param {string} name
+         * @param {string=} field The field to aggregate on
+         */
+        export function termsValuesSource(
+            name: string,
+            field?: string
+        ): TermsValuesSource;
+
+        /**
+         * `HistogramValuesSource` is a source for the `CompositeAggregation` that handles
+         * histograms. It works very similar to a histogram aggregation with a slightly
+         * different syntax.
+         *
+         * @param {string} name
+         * @param {string=} field The field to aggregate on
+         * @param {number=} interval Interval to generate histogram over.
+         *
+         * @extends ValuesSourceBase
+         */
+        export class HistogramValuesSource extends ValuesSourceBase {
+            constructor(name: string, field?: string, interval?: number);
+
+            /**
+             * Sets the histogram interval. Buckets are generated based on this interval value.
+             *
+             * @param {number} interval Interval to generate histogram over.
+             */
+            interval(interval: number): this;
+        }
+
+        /**
+         * `HistogramValuesSource` is a source for the `CompositeAggregation` that handles
+         * histograms. It works very similar to a histogram aggregation with a slightly
+         * different syntax.
+         *
+         * @param {string} name
+         * @param {string=} field The field to aggregate on
+         * @param {number=} interval Interval to generate histogram over.
+         */
+        export function histogramValuesSource(
+            name: string,
+            field?: string,
+            interval?: number
+        ): HistogramValuesSource;
+
+        /**
+         * `DateHistogramValuesSource` is a source for the `CompositeAggregation` that
+         * handles date histograms. It works very similar to a histogram aggregation
+         * with a slightly different syntax.
+         *
+         * @param {string} name
+         * @param {string=} field The field to aggregate on
+         * @param {string|number=} interval Interval to generate histogram over.
+         *
+         * @extends ValuesSourceBase
+         */
+        export class DateHistogramValuesSource extends ValuesSourceBase {
+            constructor(name: string, field?: string, interval?: string | number);
+
+            /**
+             * Sets the histogram interval. Buckets are generated based on this interval value.
+             *
+             * @param {string|number} interval Interval to generate histogram over.
+             */
+            interval(interval: string | number): this;
+
+            /**
+             * Sets the date time zone
+             *
+             * Date-times are stored in Elasticsearch in UTC. By default, all bucketing
+             * and rounding is also done in UTC. The `time_zone` parameter can be used
+             * to indicate that bucketing should use a different time zone.
+             *
+             * @param {string} tz Time zone. Time zones may either be specified
+             * as an ISO 8601 UTC offset (e.g. +01:00 or -08:00) or as a timezone id,
+             * an identifier used in the TZ database like America/Los_Angeles.
+             */
+            timeZone(tz: string): this;
+
+            /**
+             * Sets the format expression for `key_as_string` in response buckets.
+             * If no format is specified, then it will use the first format specified
+             * in the field mapping.
+             *
+             * @param {string} fmt Format mask to apply on aggregation response.
+            * For Date Histograms, supports expressive [date format pattern](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-daterange-aggregation.html#date-format-pattern)
+             */
+            format(fmt: string): this;
+        }
+
+
+        /**
+         * `DateHistogramValuesSource` is a source for the `CompositeAggregation` that
+         * handles date histograms. It works very similar to a histogram aggregation
+         * with a slightly different syntax.
+         *
+         * @param {string} name
+         * @param {string=} field The field to aggregate on
+         * @param {string|number=} interval Interval to generate histogram over.
+         */
+        export function dateHistogramValuesSource(
+            name: string,
+            field?: string,
+            interval?: string | number
+        ): DateHistogramValuesSource;
+    }
+
+    /**
      * The `HistogramAggregationBase` provides support for common options used across
      * various histogram `Aggregation` implementations like Histogram Aggregation,
      * Date Histogram aggregation.

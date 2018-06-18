@@ -111,7 +111,7 @@ export function simpleExpect(keyName, propValue) {
 export function nameTypeExpectStrategy(name, type, defaultDef) {
     return (keyName, propValue) => ({
         [name]: {
-            [type]: Object.assign({ [keyName]: propValue }, defaultDef)
+            [type]: Object.assign({}, defaultDef, { [keyName]: propValue })
         }
     });
 }

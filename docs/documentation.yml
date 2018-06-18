@@ -95,6 +95,18 @@ toc:
   - BucketAggregationBase
   - AdjacencyMatrixAggregation
   - ChildrenAggregation
+  - CompositeAggregation
+  - name: Values Source
+    description: |
+      The sources parameter controls the sources that should be used to build
+      the composite buckets. There are three different types of values source:
+        - [`Terms`](#termsvaluessource)
+        - [`Histogram`](#histogramvaluessource)
+        - [`Date Histogram`](#datehistogramvaluessource)
+  - ValuesSourceBase
+  - TermsValuesSource
+  - HistogramValuesSource
+  - DateHistogramValuesSource
   - HistogramAggregationBase
   - DateHistogramAggregation
   - RangeAggregationBase

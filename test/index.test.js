@@ -223,6 +223,9 @@ test('aggregations are exported', t => {
     t.truthy(esb.ChildrenAggregation);
     t.truthy(esb.childrenAggregation);
 
+    t.truthy(esb.CompositeAggregation);
+    t.truthy(esb.compositeAggregation);
+
     t.truthy(esb.DateHistogramAggregation);
     t.truthy(esb.dateHistogramAggregation);
 
@@ -324,6 +327,18 @@ test('aggregations are exported', t => {
     /* ============ ============ ============ */
     t.truthy(esb.MatrixStatsAggregation);
     t.truthy(esb.matrixStatsAggregation);
+});
+
+test('Composite Aggregation values sources are exported', t => {
+    const { CompositeAggregation } = esb;
+    t.truthy(CompositeAggregation.TermsValuesSource);
+    t.truthy(CompositeAggregation.termsValuesSource);
+
+    t.truthy(CompositeAggregation.HistogramValuesSource);
+    t.truthy(CompositeAggregation.histogramValuesSource);
+
+    t.truthy(CompositeAggregation.DateHistogramValuesSource);
+    t.truthy(CompositeAggregation.dateHistogramValuesSource);
 });
 
 test('suggesters are exported', t => {
