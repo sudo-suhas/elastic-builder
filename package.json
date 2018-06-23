@@ -76,7 +76,7 @@
     "coveralls": "^3.0.0",
     "cross-env": "^5.1.1",
     "documentation": "^5.3.5",
-    "eslint": "^4.17.0",
+    "eslint": "^5.0.0",
     "eslint-config-chatur": "^3.0.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-ava": "^4.5.0",
