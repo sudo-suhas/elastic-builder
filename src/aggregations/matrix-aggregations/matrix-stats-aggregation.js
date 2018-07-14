@@ -2,7 +2,10 @@
 
 const isNil = require('lodash.isnil');
 
-const { Aggregation, util: { checkType } } = require('../../core');
+const {
+    Aggregation,
+    util: { checkType }
+} = require('../../core');
 
 /**
  * The `matrix_stats` aggregation is a numeric aggregation that computes

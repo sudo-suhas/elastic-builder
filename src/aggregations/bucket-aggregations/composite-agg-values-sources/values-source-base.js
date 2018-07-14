@@ -3,7 +3,9 @@
 const isEmpty = require('lodash.isempty');
 const isNil = require('lodash.isnil');
 
-const { util: { invalidParam, recursiveToJSON } } = require('../../../core');
+const {
+    util: { invalidParam, recursiveToJSON }
+} = require('../../../core');
 
 const invalidOrderParam = invalidParam('', 'order', "'asc' or 'desc'");
 

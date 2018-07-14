@@ -4,7 +4,9 @@ const isNil = require('lodash.isnil');
 
 const ScoreFunction = require('./score-function');
 
-const { util: { recursiveToJSON } } = require('../../../core');
+const {
+    util: { recursiveToJSON }
+} = require('../../../core');
 
 /**
  * The `weight` score allows you to multiply the score by the provided `weight`.

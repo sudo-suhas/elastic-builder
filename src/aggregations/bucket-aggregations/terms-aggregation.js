@@ -3,7 +3,9 @@
 const has = require('lodash.has');
 const isNil = require('lodash.isnil');
 
-const { util: { invalidParam } } = require('../../core');
+const {
+    util: { invalidParam }
+} = require('../../core');
 
 const TermsAggregationBase = require('./terms-aggregation-base');
 

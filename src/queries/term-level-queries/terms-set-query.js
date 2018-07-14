@@ -2,7 +2,10 @@
 
 const isNil = require('lodash.isnil');
 
-const { Query, util: { checkType } } = require('../../core');
+const {
+    Query,
+    util: { checkType }
+} = require('../../core');
 
 /**
  * Returns any documents that match with at least one or more of the provided

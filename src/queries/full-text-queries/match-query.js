@@ -2,7 +2,9 @@
 
 const isNil = require('lodash.isnil');
 
-const { util: { invalidParam } } = require('../../core');
+const {
+    util: { invalidParam }
+} = require('../../core');
 const MonoFieldQueryBase = require('./mono-field-query-base');
 const { validateRewiteMethod } = require('../helper');
 

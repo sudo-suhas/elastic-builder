@@ -1,6 +1,10 @@
 'use strict';
 
-const { Query, Script, util: { checkType } } = require('../../core');
+const {
+    Query,
+    Script,
+    util: { checkType }
+} = require('../../core');
 
 const TermsAggregationBase = require('./terms-aggregation-base');
 

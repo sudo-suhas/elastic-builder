@@ -2,7 +2,10 @@
 
 const isObject = require('lodash.isobject');
 
-const { Suggester, util: { setDefault } } = require('../core');
+const {
+    Suggester,
+    util: { setDefault }
+} = require('../core');
 
 /**
  * The completion suggester provides auto-complete/search-as-you-type

@@ -2,7 +2,9 @@
 
 const isEmpty = require('lodash.isempty');
 
-const { util: { checkType } } = require('../../core');
+const {
+    util: { checkType }
+} = require('../../core');
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 

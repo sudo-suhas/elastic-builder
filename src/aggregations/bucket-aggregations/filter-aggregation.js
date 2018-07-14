@@ -2,7 +2,10 @@
 
 const isNil = require('lodash.isnil');
 
-const { Query, util: { checkType } } = require('../../core');
+const {
+    Query,
+    util: { checkType }
+} = require('../../core');
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 

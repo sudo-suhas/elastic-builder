@@ -4,7 +4,7 @@
       "env",
       {
         "targets": {
-          "node": 4,
+          "node": 6,
           "browsers": [">1%"]
         }
       }
@@ -21,11 +21,5 @@
       }
     ]
   ],
-  "ignore": ["test/**/*.js"],
-  "env": {
-    "test": {
-      "sourceMaps": "inline",
-      "plugins": ["istanbul"]
-    }
-  }
+  "ignore": ["test/**/*.js"]
 }

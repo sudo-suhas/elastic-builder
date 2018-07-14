@@ -3,7 +3,9 @@
 const isNil = require('lodash.isnil');
 const isObject = require('lodash.isobject');
 
-const { util: { invalidParam, setDefault } } = require('../../core');
+const {
+    util: { invalidParam, setDefault }
+} = require('../../core');
 
 const MonoFieldQueryBase = require('./mono-field-query-base');
 

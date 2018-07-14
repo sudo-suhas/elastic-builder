@@ -2,7 +2,9 @@
 
 const isNil = require('lodash.isnil');
 
-const { util: { checkType } } = require('../../core');
+const {
+    util: { checkType }
+} = require('../../core');
 
 const { MultiTermQueryBase } = require('../term-level-queries');
 

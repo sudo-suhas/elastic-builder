@@ -1,6 +1,8 @@
 'use strict';
 
-const { util: { checkType } } = require('../../core');
+const {
+    util: { checkType }
+} = require('../../core');
 
 const SignificantAggregationBase = require('./significant-aggregation-base');
 

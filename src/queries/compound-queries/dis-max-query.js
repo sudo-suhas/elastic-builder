@@ -1,6 +1,9 @@
 'use strict';
 
-const { Query, util: { checkType, setDefault } } = require('../../core');
+const {
+    Query,
+    util: { checkType, setDefault }
+} = require('../../core');
 
 /**
  * A query that generates the union of documents produced by its subqueries,

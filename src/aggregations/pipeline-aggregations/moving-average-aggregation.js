@@ -2,7 +2,10 @@
 
 const isNil = require('lodash.isnil');
 
-const { util: { invalidParam }, consts: { MODEL_SET } } = require('../../core');
+const {
+    util: { invalidParam },
+    consts: { MODEL_SET }
+} = require('../../core');
 
 const PipelineAggregationBase = require('./pipeline-aggregation-base');
 

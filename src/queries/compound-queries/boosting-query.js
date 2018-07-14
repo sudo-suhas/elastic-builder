@@ -2,7 +2,10 @@
 
 const isNil = require('lodash.isnil');
 
-const { Query, util: { checkType } } = require('../../core');
+const {
+    Query,
+    util: { checkType }
+} = require('../../core');
 
 /**
  * The boosting query can be used to effectively demote results that match

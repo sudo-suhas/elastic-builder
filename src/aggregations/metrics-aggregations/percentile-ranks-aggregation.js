@@ -2,7 +2,9 @@
 
 const isNil = require('lodash.isnil');
 
-const { util: { checkType } } = require('../../core');
+const {
+    util: { checkType }
+} = require('../../core');
 
 const MetricsAggregationBase = require('./metrics-aggregation-base');
 

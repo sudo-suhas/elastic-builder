@@ -2,7 +2,10 @@
 
 const isNil = require('lodash.isnil');
 
-const { Aggregation, util: { invalidParam } } = require('../../core');
+const {
+    Aggregation,
+    util: { invalidParam }
+} = require('../../core');
 
 const invalidGapPolicyParam = invalidParam(
     '',

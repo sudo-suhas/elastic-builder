@@ -79,7 +79,7 @@ test.serial('mixed representation logs warnings', t => {
             )
         );
         t.true(spy.secondCall.calledWith('[GeoPoint] Overwriting.'));
-        spy.reset();
+        spy.resetHistory();
     };
 
     new GeoPoint()

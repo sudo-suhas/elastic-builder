@@ -2,7 +2,9 @@
 
 const isNil = require('lodash.isnil');
 
-const { util: { invalidParam, recursiveToJSON } } = require('../../../core');
+const {
+    util: { invalidParam, recursiveToJSON }
+} = require('../../../core');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-decay';

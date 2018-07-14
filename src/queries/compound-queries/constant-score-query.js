@@ -2,7 +2,10 @@
 
 const isNil = require('lodash.isnil');
 
-const { Query, util: { checkType } } = require('../../core');
+const {
+    Query,
+    util: { checkType }
+} = require('../../core');
 
 /**
  * A query that wraps another query and simply returns a constant score

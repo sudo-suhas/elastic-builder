@@ -12,7 +12,10 @@ const {
     }
 } = require('./queries');
 
-const { Query, util: { checkType } } = require('./core');
+const {
+    Query,
+    util: { checkType }
+} = require('./core');
 
 /**
  * Recipe for the now removed `missing` query.

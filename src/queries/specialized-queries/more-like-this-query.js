@@ -2,7 +2,10 @@
 
 const has = require('lodash.has');
 
-const { Query, util: { checkType } } = require('../../core');
+const {
+    Query,
+    util: { checkType }
+} = require('../../core');
 
 /**
  * The More Like This Query (MLT Query) finds documents that are "like" a given set

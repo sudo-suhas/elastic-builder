@@ -6,9 +6,9 @@ branches:
     - /^greenkeeper/.*$/
 
 node_js:
+  - '10'
   - '8'
   - '6'
-  - '4'
 
 cache: yarn
 

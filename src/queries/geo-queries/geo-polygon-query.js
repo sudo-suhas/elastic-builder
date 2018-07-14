@@ -1,6 +1,8 @@
 'use strict';
 
-const { util: { checkType } } = require('../../core');
+const {
+    util: { checkType }
+} = require('../../core');
 
 const GeoQueryBase = require('./geo-query-base');
 

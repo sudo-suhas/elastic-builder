@@ -2,7 +2,9 @@
 
 const isNil = require('lodash.isnil');
 
-const { util: { checkType, setDefault, invalidParam } } = require('../../core');
+const {
+    util: { checkType, setDefault, invalidParam }
+} = require('../../core');
 const FullTextQueryBase = require('./full-text-query-base');
 
 const invalidOperatorParam = invalidParam('', 'operator', "'AND' or 'OR'");

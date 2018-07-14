@@ -2,7 +2,10 @@
 
 const isNil = require('lodash.isnil');
 
-const { GeoPoint, util: { checkType, invalidParam } } = require('../../core');
+const {
+    GeoPoint,
+    util: { checkType, invalidParam }
+} = require('../../core');
 
 const GeoQueryBase = require('./geo-query-base');
 
