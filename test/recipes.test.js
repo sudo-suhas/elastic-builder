@@ -28,7 +28,7 @@ test('random sort query', t => {
             query: {
                 match_all: {}
             },
-            random_score: {}
+            functions: [{ random_score: {} }]
         }
     };
     t.deepEqual(value.toJSON(), expected);
@@ -42,7 +42,7 @@ test('random sort query', t => {
             query: {
                 range: { age: { gte: 10 } }
             },
-            random_score: { seed }
+            functions: [{ random_score: { seed } }]
         }
     };
     t.deepEqual(value, expected);

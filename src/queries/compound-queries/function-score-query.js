@@ -2,12 +2,9 @@
 
 const isNil = require('lodash.isnil');
 
-const head = require('lodash.head');
-const omit = require('lodash.omit');
-
 const {
     Query,
-    util: { checkType, invalidParam, recursiveToJSON },
+    util: { checkType, invalidParam },
     consts: { SCORE_MODE_SET, BOOST_MODE_SET }
 } = require('../../core');
 
@@ -180,30 +177,6 @@ class FunctionScoreQuery extends Query {
 
         funcs.forEach(func => this.function(func));
         return this;
-    }
-
-    /**
-     * Overrides default `toJSON` to return DSL representation of the function score query
-     * class instance.
-     *
-     * @override
-     * @returns {Object} returns an Object which maps to the elasticsearch query DSL
-     */
-    toJSON() {
-        // TODO: Throw error if there is no score function
-        let qryOpts;
-        const scoreFunctions = this._queryOpts.functions;
-
-        if (scoreFunctions.length === 1) {
-            qryOpts = Object.assign(
-                omit(this._queryOpts, 'functions'),
-                recursiveToJSON(head(scoreFunctions))
-            );
-        } else qryOpts = this._queryOpts;
-
-        return recursiveToJSON({
-            [this.queryType]: qryOpts
-        });
     }
 }
 

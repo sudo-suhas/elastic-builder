@@ -257,11 +257,16 @@ test('sets multiple rescore', t => {
                 query: {
                     rescore_query: {
                         function_score: {
-                            script_score: {
-                                script: {
-                                    inline: 'Math.log10(doc.likes.value + 2)'
+                            functions: [
+                                {
+                                    script_score: {
+                                        script: {
+                                            inline:
+                                                'Math.log10(doc.likes.value + 2)'
+                                        }
+                                    }
                                 }
-                            }
+                            ]
                         }
                     },
                     score_mode: 'multiply'
