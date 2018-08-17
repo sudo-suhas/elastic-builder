@@ -6873,7 +6873,7 @@ declare namespace esb {
          *
          * @param {number} decay A decay value as a double.
          */
-        decay(decay: object): this;
+        decay(decay: number): this;
     }
 
     /**
