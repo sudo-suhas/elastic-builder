@@ -6517,6 +6517,54 @@ declare namespace esb {
     ): BucketSelectorAggregation;
 
     /**
+     * A parent pipeline aggregation which sorts the buckets of its parent
+     * multi-bucket aggregation. Zero or more sort fields may be specified
+     * together with the corresponding sort order. Each bucket may be sorted
+     * based on its _key, _count or its sub-aggregations. In addition, parameters
+     * from and size may be set in order to truncate the result buckets.
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     * @extends PipelineAggregationBase
+     */
+    export class BucketSortAggregation extends PipelineAggregationBase {
+        constructor(name: string);
+
+        /**
+         * Sets the list of fields to sort on.
+         *
+         * @param {Array<Sort>} sort The list of fields to sort on
+         */
+        sort(sort: Array<Sort>): this;
+
+        /**
+         * Sets the value buckets in positions prior to which will be truncated.
+         *
+         * @param {number} from Buckets in positions prior to the set value will be truncated.
+         */
+        from(from: number): this;
+
+        /**
+         * Sets the number of buckets to return.
+         *
+         * @param {number} size The number of buckets to return.
+         */
+        size(size: number): this;
+    }
+
+    /**
+     * A parent pipeline aggregation which sorts the buckets of its parent
+     * multi-bucket aggregation. Zero or more sort fields may be specified
+     * together with the corresponding sort order. Each bucket may be sorted
+     * based on its _key, _count or its sub-aggregations. In addition, parameters
+     * from and size may be set in order to truncate the result buckets.
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     */
+    export function bucketSortAggregation(
+        name: string
+    ): BucketSortAggregation;
+
+    /**
      * Serial differencing is a technique where values in a time series are
      * subtracted from itself at different time lags or periods.
      * Serial differences are built by first specifying a `histogram` or `date_histogram` over a field.

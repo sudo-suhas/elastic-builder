@@ -319,6 +319,9 @@ test('aggregations are exported', t => {
     t.truthy(esb.BucketSelectorAggregation);
     t.truthy(esb.bucketSelectorAggregation);
 
+    t.truthy(esb.BucketSortAggregation);
+    t.truthy(esb.bucketSortAggregation);
+
     t.truthy(esb.SerialDifferencingAggregation);
     t.truthy(esb.serialDifferencingAggregation);
 

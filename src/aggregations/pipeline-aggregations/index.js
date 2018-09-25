@@ -15,3 +15,4 @@ exports.CumulativeSumAggregation = require('./cumulative-sum-aggregation');
 exports.BucketScriptAggregation = require('./bucket-script-aggregation');
 exports.BucketSelectorAggregation = require('./bucket-selector-aggregation');
 exports.SerialDifferencingAggregation = require('./serial-differencing-aggregation');
+exports.BucketSortAggregation = require('./bucket-sort-aggregation');
