@@ -39,20 +39,6 @@ class BucketSortAggregation extends PipelineAggregationBase {
     /**
      * Sets the list of fields to sort on. Optional.
      *
-     * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-sort-aggregation.html#id-1.9.5.55.4.6)
-     *
-     * @example
-     * const reqBody = esb.requestBodySearch()
-     *     .agg(
-     *         esb.bucketSortAggregation('sort')
-     *             .sort([
-     *                  esb.sort('user', 'desc')
-     *              ])
-     *              .from(5)
-     *              .size(10)
-     *         )
-     *     );
-     *
      * @param {Array<Sort>} sort The list of fields to sort on
      * @returns {BucketSortAggregation} returns `this` so that calls can be chained
      */
@@ -64,20 +50,6 @@ class BucketSortAggregation extends PipelineAggregationBase {
     /**
      * Sets the value buckets in positions prior to which will be truncated. Optional.
      *
-     * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-sort-aggregation.html#id-1.9.5.55.4.6)
-     *
-     * @example
-     * const reqBody = esb.requestBodySearch()
-     *     .agg(
-     *         esb.bucketSortAggregation('sort')
-     *             .sort([
-     *                  esb.sort('user', 'desc')
-     *              ])
-     *              .from(5)
-     *              .size(10)
-     *         )
-     *     );
-     *
      * @param {number} from Buckets in positions prior to the set value will be truncated.
      * @returns {BucketSortAggregation} returns `this` so that calls can be chained
      */
@@ -88,20 +60,6 @@ class BucketSortAggregation extends PipelineAggregationBase {
 
     /**
      * Sets the number of buckets to return. Optional.
-     *
-     * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-sort-aggregation.html#id-1.9.5.55.4.6)
-     *
-     * @example
-     * const reqBody = esb.requestBodySearch()
-     *     .agg(
-     *         esb.bucketSortAggregation('sort')
-     *             .sort([
-     *                  esb.sort('user', 'desc')
-     *              ])
-     *              .from(5)
-     *              .size(10)
-     *         )
-     *     );
      *
      * @param {number} size The number of buckets to return.
      * @returns {BucketSortAggregation} returns `this` so that calls can be chained
