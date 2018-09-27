@@ -8230,6 +8230,17 @@ declare namespace esb {
         nestedFilter(filterQuery: Query): this;
 
         /**
+         * Defines on which nested object to sort and the filter that the inner objects inside
+         * the nested path should match with in order for its field values to be taken into
+         * account by sorting
+         *
+         * @param {Object} nested Nested config that contains path and filter
+         * @param {string} nested.path Nested object to sort on
+         * @param {Query} nested.filter Filter query
+         */
+        nested(nested: { path: string, filter: Query }): this;
+
+        /**
          * The missing parameter specifies how docs which are missing the field should
          * be treated: The missing value can be set to `_last`, `_first`, or a custom value
          * (that will be used for missing docs as the sort value). The default is `_last`.
