@@ -134,7 +134,8 @@ const {
         CumulativeSumAggregation,
         BucketScriptAggregation,
         BucketSelectorAggregation,
-        SerialDifferencingAggregation
+        SerialDifferencingAggregation,
+        BucketSortAggregation
     },
     matrixAggregations: { MatrixStatsAggregation }
 } = require('./aggregations');
@@ -446,6 +447,9 @@ exports.maxBucketAggregation = constructorWrapper(MaxBucketAggregation);
 
 exports.MinBucketAggregation = MinBucketAggregation;
 exports.minBucketAggregation = constructorWrapper(MinBucketAggregation);
+
+exports.BucketSortAggregation = BucketSortAggregation;
+exports.bucketSortAggregation = constructorWrapper(BucketSortAggregation);
 
 exports.SumBucketAggregation = SumBucketAggregation;
 exports.sumBucketAggregation = constructorWrapper(SumBucketAggregation);
