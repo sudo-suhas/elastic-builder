@@ -8214,6 +8214,9 @@ declare namespace esb {
          * Defines on which nested object to sort. The actual sort field must be a direct
          * field inside this nested object. When sorting by nested field, this field
          * is mandatory.
+         * 
+         * Note: This method has been deprecated in elasticsearch 6.1. From 6.1 and
+         * later, use `nested` method instead.
          *
          * @param {string} path Nested object to sort on
          */
@@ -8224,6 +8227,9 @@ declare namespace esb {
          * for its field values to be taken into account by sorting. By default no
          * `nested_filter` is active.
          *
+         * Note: This method has been deprecated in elasticsearch 6.1. From 6.1 and
+         * later, use `nested` method instead.
+         * 
          * @param {Query} filterQuery
          * @throws {TypeError} If filter query is not an instance of `Query`
          */
@@ -8233,6 +8239,9 @@ declare namespace esb {
          * Defines on which nested object to sort and the filter that the inner objects inside
          * the nested path should match with in order for its field values to be taken into
          * account by sorting
+         * 
+         * Note: This method is incompatible with elasticsearch 6.0 and older.
+         * Use it only with elasticsearch 6.1 and later.
          *
          * @param {Object} nested Nested config that contains path and filter
          * @param {string} nested.path Nested object to sort on
