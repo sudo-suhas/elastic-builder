@@ -26,5 +26,5 @@ after_script:
   - yarn run coverage
 
 after_success:
-  - yarn global add travis-deploy-once@5.0.4
+  - yarn global add travis-deploy-once
   - travis-deploy-once "yarn global add semantic-release@12 && semantic-release"
