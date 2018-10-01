@@ -7,7 +7,12 @@ const isNil = require('lodash.isnil');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting-using.html)
  *
- * @param {string=} type One of `inline`, `stored`, `file`
+ * Note: `inline` script type was deprecated in [elasticsearch v5.0](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/breaking_50_scripting.html).
+ * `source` should be used instead. And similarly for `stored` scripts, type
+ * `id` must be used instead. `file` scripts were removed as part of the
+ * breaking changes in [elasticsearch v6.0](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/breaking_60_scripting_changes.html#_file_scripts_removed)
+ *
+ * @param {string=} type One of `inline`, `stored`, `file`, `source`, `id`.
  * @param {string=} source Source of the script.
  * This needs to be specified if optional argument `type` is passed.
  *
@@ -39,8 +44,16 @@ class Script {
                     this.inline(source);
                     break;
 
+                case 'source':
+                    this.source(source);
+                    break;
+
                 case 'stored':
                     this.stored(source);
+                    break;
+
+                case 'id':
+                    this.id(source);
                     break;
 
                 case 'file':
@@ -71,20 +84,25 @@ class Script {
      * @private
      */
     _checkMixedRepr() {
-        if (this._isTypeSet) {
-            this._warn(
-                'Script source(`inline`/`stored`/`file`) was already specified!'
-            );
-            this._warn('Overwriting.');
+        if (!this._isTypeSet) return;
 
-            delete this._body.file;
-            delete this._body.stored;
-            delete this._body.file;
-        }
+        this._warn(
+            'Script source(`inline`/`source`/`stored`/`id`/`file`) was already specified!'
+        );
+        this._warn('Overwriting.');
+
+        delete this._body.inline;
+        delete this._body.source;
+        delete this._body.stored;
+        delete this._body.id;
+        delete this._body.file;
     }
 
     /**
      * Sets the type of script to be `inline` and specifies the source of the script.
+     *
+     * Note: This type was deprecated in elasticsearch v5.0. Use `source`
+     * instead if you are using elasticsearch `>= 5.0`.
      *
      * @param {string} scriptCode
      * @returns {Script} returns `this` so that calls can be chained.
@@ -98,7 +116,28 @@ class Script {
     }
 
     /**
+     * Sets the type of script to be `source` and specifies the source of the script.
+     *
+     * Note: `source` is an alias for the `inline` type which was deprecated
+     * in elasticsearch v5.0. So this type is supported only in versions
+     * `>= 5.0`.
+     *
+     * @param {string} scriptCode
+     * @returns {Script} returns `this` so that calls can be chained.
+     */
+    source(scriptCode) {
+        this._checkMixedRepr();
+
+        this._body.source = scriptCode;
+        this._isTypeSet = true;
+        return this;
+    }
+
+    /**
      * Specify the `stored` script by `id` which will be retrieved from cluster state.
+     *
+     * Note: This type was deprecated in elasticsearch v5.0. Use `id`
+     * instead if you are using elasticsearch `>= 5.0`.
      *
      * @param {string} scriptId The unique identifier for the stored script.
      * @returns {Script} returns `this` so that calls can be chained.
@@ -107,6 +146,24 @@ class Script {
         this._checkMixedRepr();
 
         this._body.stored = scriptId;
+        this._isTypeSet = true;
+        return this;
+    }
+
+    /**
+     * Specify the stored script to be used by it's `id` which will be retrieved
+     * from cluster state.
+     *
+     * Note: `id` is an alias for the `stored` type which was deprecated in
+     * elasticsearch v5.0. So this type is supported only in versions `>= 5.0`.
+     *
+     * @param {string} scriptId The unique identifier for the stored script.
+     * @returns {Script} returns `this` so that calls can be chained.
+     */
+    id(scriptId) {
+        this._checkMixedRepr();
+
+        this._body.id = scriptId;
         this._isTypeSet = true;
         return this;
     }

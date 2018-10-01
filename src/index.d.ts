@@ -4724,7 +4724,11 @@ declare namespace esb {
          * @extends ValuesSourceBase
          */
         export class DateHistogramValuesSource extends ValuesSourceBase {
-            constructor(name: string, field?: string, interval?: string | number);
+            constructor(
+                name: string,
+                field?: string,
+                interval?: string | number
+            );
 
             /**
              * Sets the histogram interval. Buckets are generated based on this interval value.
@@ -4752,11 +4756,10 @@ declare namespace esb {
              * in the field mapping.
              *
              * @param {string} fmt Format mask to apply on aggregation response.
-            * For Date Histograms, supports expressive [date format pattern](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-daterange-aggregation.html#date-format-pattern)
+             * For Date Histograms, supports expressive [date format pattern](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-daterange-aggregation.html#date-format-pattern)
              */
             format(fmt: string): this;
         }
-
 
         /**
          * `DateHistogramValuesSource` is a source for the `CompositeAggregation` that
@@ -6560,9 +6563,7 @@ declare namespace esb {
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      */
-    export function bucketSortAggregation(
-        name: string
-    ): BucketSortAggregation;
+    export function bucketSortAggregation(name: string): BucketSortAggregation;
 
     /**
      * Serial differencing is a technique where values in a time series are
@@ -7934,7 +7935,12 @@ declare namespace esb {
     /**
      * Class supporting the Elasticsearch scripting API.
      *
-     * @param {string=} type One of `inline`, `stored`, `file`
+     * Note: `inline` script type was deprecated in [elasticsearch v5.0](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/breaking_50_scripting.html).
+     * `source` should be used instead. And similarly for `stored` scripts, type
+     * `id` must be used instead. `file` scripts were removed as part of the
+     * breaking changes in [elasticsearch v6.0](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/breaking_60_scripting_changes.html#_file_scripts_removed)
+     *
+     * @param {string=} type One of `inline`, `stored`, `file`, `source`, `id`.
      * @param {string=} source Source of the script.
      * This needs to be specified if optional argument `type` is passed.
      */
@@ -7944,16 +7950,44 @@ declare namespace esb {
         /**
          * Sets the type of script to be `inline` and specifies the source of the script.
          *
+         * Note: This type was deprecated in elasticsearch v5.0. Use `source`
+         * instead if you are using elasticsearch `>= 5.0`.
+         *
          * @param {string} scriptCode
          */
         inline(scriptCode: string): this;
 
         /**
+         * Sets the type of script to be `source` and specifies the source of the script.
+         *
+         * Note: `source` is an alias for the `inline` type which was deprecated
+         * in elasticsearch v5.0. So this type is supported only in versions
+         * `>= 5.0`.
+         *
+         * @param {string} scriptCode
+         */
+        source(scriptCode): this;
+
+        /**
          * Specify the `stored` script by `id` which will be retrieved from cluster state.
+         *
+         * Note: This type was deprecated in elasticsearch v5.0. Use `id`
+         * instead if you are using elasticsearch `>= 5.0`.
          *
          * @param {string} scriptId The unique identifier for the stored script.
          */
         stored(scriptId: string): this;
+
+        /**
+         * Specify the stored script to be used by it's `id` which will be retrieved
+         * from cluster state.
+         *
+         * Note: `id` is an alias for the `stored` type which was deprecated in
+         * elasticsearch v5.0. So this type is supported only in versions `>= 5.0`.
+         *
+         * @param {string} scriptId The unique identifier for the stored script.
+         */
+        id(scriptId): this;
 
         /**
          * Specify the `stored` script by `id` which will be retrieved from cluster state.
