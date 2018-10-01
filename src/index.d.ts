@@ -8214,7 +8214,7 @@ declare namespace esb {
          * Defines on which nested object to sort. The actual sort field must be a direct
          * field inside this nested object. When sorting by nested field, this field
          * is mandatory.
-         * 
+         *
          * Note: This method has been deprecated in elasticsearch 6.1. From 6.1 and
          * later, use `nested` method instead.
          *
@@ -8239,7 +8239,7 @@ declare namespace esb {
          * Defines on which nested object to sort and the filter that the inner objects inside
          * the nested path should match with in order for its field values to be taken into
          * account by sorting
-         * 
+         *
          * Note: This method is incompatible with elasticsearch 6.0 and older.
          * Use it only with elasticsearch 6.1 and later.
          *

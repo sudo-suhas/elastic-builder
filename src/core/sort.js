@@ -147,12 +147,12 @@ class Sort {
     }
 
     /**
-     * Note: This method is uncompatible with elasticsearch 6.0 and older.
-     * Use it only with elasticsearch 6.1 and later.
-     *
      * Defines on which nested object to sort and the filter that the inner objects inside
      * the nested path should match with in order for its field values to be taken into
      * account by sorting
+     *
+     * Note: This method is incompatible with elasticsearch 6.0 and older.
+     * Use it only with elasticsearch 6.1 and later.
      *
      * @example
      * const sort = esb.sort('offer.price', 'asc')
