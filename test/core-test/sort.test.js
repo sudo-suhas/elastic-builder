@@ -44,6 +44,19 @@ test(validatedCorrectly, getInstance, 'unit', [
 );
 test(setsOption, 'nestedPath', { param: 'offer' });
 test(setsOption, 'nestedFilter', { param: filterQry });
+test(setsOption, 'nested', {
+    param: {
+        filter: filterQry,
+        path: 'offer'
+    },
+    keyName: 'nested'
+});
+test(setsOption, 'nested', {
+    param: {
+        path: 'offer'
+    },
+    keyName: 'nested'
+});
 test(setsOption, 'missing', { param: '_last' });
 test(setsOption, 'unmappedType', { param: 'long' });
 test(setsOption, 'reverse', { param: true });
