@@ -7966,7 +7966,7 @@ declare namespace esb {
          *
          * @param {string} scriptCode
          */
-        source(scriptCode): this;
+        source(scriptCode: string): this;
 
         /**
          * Specify the `stored` script by `id` which will be retrieved from cluster state.
@@ -7987,7 +7987,7 @@ declare namespace esb {
          *
          * @param {string} scriptId The unique identifier for the stored script.
          */
-        id(scriptId): this;
+        id(scriptId: string): this;
 
         /**
          * Specify the `stored` script by `id` which will be retrieved from cluster state.
