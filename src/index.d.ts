@@ -8425,8 +8425,8 @@ declare namespace esb {
      */
     export function sort(field: string, order?: string): Sort;
     /**
-     * Allows creating and configuring sort on specified field
-     * but It is required .script()
+     * Allows creating and configuring sort on specified script method.
+     * It is required .script()
      */
     export function sort(): Sort;
 
