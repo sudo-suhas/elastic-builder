@@ -8422,6 +8422,11 @@ declare namespace esb {
      * `asc`, `desc` to sort in ascending, descending order respectively.
      */
     export function sort(field: string, order?: string): Sort;
+    /**
+     * Allows creating and configuring sort on specified field
+     * but It is required .script()
+     */
+    export function sort(): Sort;
 
     /**
      * A `rescore` request can help to improve precision by reordering just
