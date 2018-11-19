@@ -8258,13 +8258,15 @@ declare namespace esb {
     /**
      * Allows creating and configuring sort on specified field.
      *
-     * @param {string} field The field to sort on
+     * @param {string=} field The field to sort on.
+     * If you use `.script()` function, You can omit it.
      * @param {string=} order The `order` option can have the following values.
      * `asc`, `desc` to sort in ascending, descending order respectively.
      */
     export class Sort {
         constructor(field: string, order?: string);
-
+        constructor();
+        
         /**
          * Set order for sorting. The order defaults to `desc` when sorting on the `_score`,
          * and defaults to `asc` when sorting on anything else.
