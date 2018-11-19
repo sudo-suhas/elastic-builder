@@ -31,7 +31,8 @@ const invalidUnitParam = invalidParam(ES_REF_URL, 'unit', UNIT_SET);
  *     .query(esb.termQuery('user', 'kimchy'))
  *     .sort(esb.sort('post_date', 'asc'))
  *
- * @param {string} field The field to sort on
+ * @param {string=} field The field to sort on.
+ * If you use `.script()` function, You can omit it.
  * @param {string=} order The `order` option can have the following values.
  * `asc`, `desc` to sort in ascending, descending order respectively.
  */
