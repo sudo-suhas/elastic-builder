@@ -8259,7 +8259,7 @@ declare namespace esb {
      * Allows creating and configuring sort on specified field.
      *
      * @param {string=} field The field to sort on.
-     * If `.script()` function is used, It will be omitted.
+     * If a script is used to specify the sort order, `field` should be omitted.
      * @param {string=} order The `order` option can have the following values.
      * `asc`, `desc` to sort in ascending, descending order respectively.
      */
@@ -8419,7 +8419,7 @@ declare namespace esb {
      * Allows creating and configuring sort on specified field.
      *
      * @param {string=} field The field to sort on.
-     * If `.script()` function is used, It will be omitted.
+     * If a script is used to specify the sort order, `field` should be omitted.
      * @param {string=} order The `order` option can have the following values.
      * `asc`, `desc` to sort in ascending, descending order respectively.
      */
