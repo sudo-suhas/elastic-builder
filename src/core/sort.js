@@ -32,7 +32,7 @@ const invalidUnitParam = invalidParam(ES_REF_URL, 'unit', UNIT_SET);
  *     .sort(esb.sort('post_date', 'asc'))
  *
  * @param {string=} field The field to sort on.
- * If `.script()` function is used, It will be omited.
+ * If `.script()` function is used, It will be omitted.
  * @param {string=} order The `order` option can have the following values.
  * `asc`, `desc` to sort in ascending, descending order respectively.
  */
