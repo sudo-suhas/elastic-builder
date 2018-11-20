@@ -31,19 +31,19 @@ const invalidUnitParam = invalidParam(ES_REF_URL, 'unit', UNIT_SET);
  *     .query(esb.termQuery('user', 'kimchy'))
  *     .sort(esb.sort('post_date', 'asc'))
  *
- * @param {string} field The field to sort on
+ * @param {string=} field The field to sort on.
+ * If a script is used to specify the sort order, `field` should be omitted.
  * @param {string=} order The `order` option can have the following values.
  * `asc`, `desc` to sort in ascending, descending order respectively.
  */
 class Sort {
     // eslint-disable-next-line require-jsdoc
     constructor(field, order) {
-        this._field = field;
-
         this._opts = {};
         this._geoPoint = null;
         this._script = null;
 
+        if (!isNil(field)) this._field = field;
         if (!isNil(order)) this.order(order);
     }
 
