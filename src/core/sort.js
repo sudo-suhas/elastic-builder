@@ -39,12 +39,11 @@ const invalidUnitParam = invalidParam(ES_REF_URL, 'unit', UNIT_SET);
 class Sort {
     // eslint-disable-next-line require-jsdoc
     constructor(field, order) {
-        this._field = field;
-
         this._opts = {};
         this._geoPoint = null;
         this._script = null;
 
+        if (!isNil(field)) this._field = field;
         if (!isNil(order)) this.order(order);
     }
 
