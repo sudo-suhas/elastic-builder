@@ -50,7 +50,7 @@
     "babel-preset-env": "^1.7.0",
     "coveralls": "^3.0.2",
     "cross-env": "^5.2.0",
-    "documentation": "^8.0.0",
+    "documentation": "^9.0.0",
     "eslint": "^5.1.0",
     "eslint-config-chatur": "^3.0.0",
     "eslint-config-prettier": "^2.9.0",
