@@ -97,5 +97,8 @@
     "ejs",
     "dsl"
   ],
-  "author": "Suhas Karanth <sudo.suhas@gmail.com>"
+  "author": "Suhas Karanth <sudo.suhas@gmail.com>",
+  "contributors": [
+    "austin ce <austin.cawley@gmail.com>"
+  ]
 }

@@ -3047,13 +3047,22 @@ declare namespace esb {
         documentType(docType: string): this;
 
         /**
-         * Sets the source of the document being percolated.
-         * Instead of specifying the source of the document being percolated,
+         * Appends given source document to the list of source documents being percolated.
+         * Instead of specifying the source document being percolated,
          * the source can also be retrieved from an already stored document.
          *
-         * @param {object} doc The source of the document being percolated.
+         * @param {Object} doc The source document being percolated.
          */
         document(doc: object): this;
+
+        /**
+         * Appends given source documents to the list of source documents being percolated.
+         * Instead of specifying the source documents being percolated,
+         * the source can also be retrieved from already stored documents.
+         *
+         * @param {Object[]} docs The source documents being percolated.
+         */
+        documents(docs: object[]): this;
 
         /**
          * Sets the index the document resides in. This is a required parameter if `document`
@@ -8265,7 +8274,7 @@ declare namespace esb {
      */
     export class Sort {
         constructor(field?: string, order?: string);
-        
+
         /**
          * Set order for sorting. The order defaults to `desc` when sorting on the `_score`,
          * and defaults to `asc` when sorting on anything else.
@@ -8312,7 +8321,7 @@ declare namespace esb {
          *
          * Note: This method has been deprecated in elasticsearch 6.1. From 6.1 and
          * later, use `nested` method instead.
-         * 
+         *
          * @param {Query} filterQuery
          * @throws {TypeError} If filter query is not an instance of `Query`
          */

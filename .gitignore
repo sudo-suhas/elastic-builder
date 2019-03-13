@@ -49,3 +49,6 @@ _build
 browser/
 docs/assets/
 docs/index.html
+
+# ides
+.idea
