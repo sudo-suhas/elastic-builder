@@ -2,7 +2,10 @@
 
 const isNil = require('lodash.isnil');
 
-const { Query } = require('../../core');
+const {
+    util: { checkType },
+    Query
+} = require('../../core');
 
 /**
  * The `percolate` query can be used to match queries stored in an index.
@@ -32,6 +35,7 @@ class PercolateQuery extends Query {
     // eslint-disable-next-line require-jsdoc
     constructor(field, docType) {
         super('percolate');
+        this._queryOpts.documents = [];
 
         if (!isNil(field)) this._queryOpts.field = field;
         // Delegate this to method:
@@ -64,15 +68,38 @@ class PercolateQuery extends Query {
     }
 
     /**
-     * Sets the source of the document being percolated.
-     * Instead of specifying the source of the document being percolated,
+     * Appends given source document to the list of source documents being percolated.
+     * Instead of specifying the source document being percolated,
      * the source can also be retrieved from an already stored document.
      *
-     * @param {Object} doc The source of the document being percolated.
+     * @example
+     *const qry = esb.percolateQuery('query', 'people')
+     * .document({ name: 'Will Smith' });
+     *
+     * @param {Object} doc The source document being percolated.
      * @returns {PercolateQuery} returns `this` so that calls can be chained.
      */
     document(doc) {
-        this._queryOpts.document = doc;
+        this._queryOpts.documents.push(doc);
+        return this;
+    }
+
+    /**
+     * Appends given source documents to the list of source documents being percolated.
+     * Instead of specifying the source documents being percolated,
+     * the source can also be retrieved from already stored documents.
+     *
+     * @example
+     *const qry = esb.percolateQuery('query', 'people')
+     * .documents([{ name: 'Will Smith' }, { name: 'Willow Smith' }]);
+     *
+     * @param {Object[]} docs The source documents being percolated.
+     * @returns {PercolateQuery} returns `this` so that calls can be chained.
+     */
+    documents(docs) {
+        checkType(docs, Array);
+
+        this._queryOpts.documents = this._queryOpts.documents.concat(docs);
         return this;
     }
 

@@ -22,6 +22,16 @@ esb
             .minimumShouldMatch('30%')
     );
 
+// Percolate Query
+esb
+    .requestBodySearch()
+    .query(
+        esb
+            .percolateQuery('query', 'people')
+            .document({ name: 'Will Smith' })
+            .documents([{ name: 'Willow Smith'}, { name: 'Jaden Smith' }])
+    );
+
 // Aggregation
 esb.requestBodySearch().size(0).agg(esb.termsAggregation('popular_colors', 'color'));
 
