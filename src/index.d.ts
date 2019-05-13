@@ -8158,9 +8158,9 @@ declare namespace esb {
          * are not validated in this api. Please see `GeoJSON`
          * and ElasticSearch documentation for correct coordinate definitions.
          *
-         * @param {Array<number>} coords
+         * @param {Array<Array<number>>|Array<number>} coords
          */
-        coordinates(coords: number[]): this;
+        coordinates(coords: number[][] | number[]): this;
 
         /**
          * Sets the radius for parsing a circle `GeoShape`.
