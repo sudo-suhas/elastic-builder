@@ -135,6 +135,15 @@ declare namespace esb {
         trackScores(enable: boolean): this;
 
         /**
+         * The track_total_hits parameter allows you to control how the total number of hits should be tracked.
+         *
+         * Pass true, false, or the upper limit of hits you want tracked.
+         *
+         * @param {boolean|number} enable
+         */
+        trackTotalHits(enable: boolean|number): this;
+
+        /**
          * Allows to control how the `_source` field is returned with every hit.
          * You can turn off `_source` retrieval by passing `false`.
          * It also accepts one(string) or more wildcard(array) patterns to control

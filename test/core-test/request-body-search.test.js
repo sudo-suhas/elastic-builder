@@ -98,6 +98,7 @@ test(setsOption, 'sorts', {
     keyName: 'sort'
 });
 test(setsOption, 'trackScores', { param: true });
+test(setsOption, 'trackTotalHits', { param: true });
 test(setsOption, 'version', { param: true });
 test(setsOption, 'explain', { param: true });
 test(setsOption, 'highlight', {
