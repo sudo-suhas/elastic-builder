@@ -317,7 +317,8 @@ class RequestBodySearch {
 
     /**
      * The `track_total_hits` parameter allows you to control how the total number of hits
-     * should be tracked.
+     * should be tracked. Passing `false` can increase performance in some situations.
+     * (Added in elasticsearch@7)
      *
      * Pass `true`, `false`, or the upper limit (default: `10000`) of hits you want tracked.
      *

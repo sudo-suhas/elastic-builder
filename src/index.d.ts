@@ -135,7 +135,9 @@ declare namespace esb {
         trackScores(enable: boolean): this;
 
         /**
-         * The track_total_hits parameter allows you to control how the total number of hits should be tracked.
+         * The `track_total_hits` parameter allows you to control how the total number of hits
+         * should be tracked. Passing `false` can increase performance in some situations.
+         * (Added in elasticsearch@7)
          *
          * Pass true, false, or the upper limit of hits you want tracked.
          *
