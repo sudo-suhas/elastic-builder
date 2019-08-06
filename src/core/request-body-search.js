@@ -316,6 +316,21 @@ class RequestBodySearch {
     }
 
     /**
+     * The `track_total_hits` parameter allows you to control how the total number of hits
+     * should be tracked. Passing `false` can increase performance in some situations.
+     * (Added in elasticsearch@7)
+     *
+     * Pass `true`, `false`, or the upper limit (default: `10000`) of hits you want tracked.
+     *
+     * @param {boolean|number} enableOrLimit
+     * @returns {RequestBodySearch} returns `this` so that calls can be chained
+     */
+    trackTotalHits(enableOrLimit) {
+        this._body.track_total_hits = enableOrLimit;
+        return this;
+    }
+
+    /**
      * Allows to control how the `_source` field is returned with every hit.
      * You can turn off `_source` retrieval by passing `false`.
      * It also accepts one(string) or more wildcard(array) patterns to control
