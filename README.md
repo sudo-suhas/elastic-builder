@@ -68,7 +68,7 @@ requestBody.toJSON(); // or print to console - esb.prettyPrint(requestBody)
 ```
 
 For each class, `MyClass`, a utility function `myClass` has been provided which
-contructs the object for us without the need for `new` keyword.
+constructs the object for us without the need for `new` keyword.
 
 ## REPL
 
