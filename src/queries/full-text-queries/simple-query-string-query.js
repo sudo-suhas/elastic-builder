@@ -18,7 +18,7 @@ const ES_REF_URL =
  * )
  *     .analyzer('snowball')
  *     .fields(['body^5', '_all'])
- *     .defaultOperator();
+ *     .defaultOperator('and');
  *
  * @param {string=} queryString The query string
  *

@@ -85,7 +85,7 @@ class MultiMatchQuery extends FullTextQueryBase {
      *
      * @example
      * // Specify fields with wildcards
-     *const qry = esb.multiMatchQuery(['title', '*_name'], 'Will Smith');
+     * const qry = esb.multiMatchQuery(['title', '*_name'], 'Will Smith');
      *
      * @param {Array<string>} fields The fields to be queried
      * @returns {MultiMatchQuery} returns `this` so that calls can be chained.

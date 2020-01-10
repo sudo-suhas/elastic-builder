@@ -33,6 +33,10 @@ const invalidZeroTermsQueryParam = invalidParam(
  * @example
  * const matchQry = esb.matchQuery('message', 'to be or not to be');
  *
+ * @example
+ * // Providing additional parameters:
+ * const qry = esb.matchQuery('message', 'this is a test').operator('and');
+ *
  * @extends MonoFieldQueryBase
  */
 class MatchQuery extends MonoFieldQueryBase {
@@ -81,9 +85,6 @@ class MatchQuery extends MonoFieldQueryBase {
      * Sets the `fuzziness` parameter which is interpreted as a Levenshtein Edit Distance —
      * the number of one character changes that need to be made to one string to make it
      * the same as another string.
-     *
-     * @example
-     * const qry = esb.matchQuery('message', 'this is a test').operator('and');
      *
      * @param {number|string} factor Can be specified either as a number, or the maximum
      * number of edits, or as `AUTO` which generates an edit distance based on the length
