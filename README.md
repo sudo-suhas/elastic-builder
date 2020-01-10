@@ -1,7 +1,6 @@
 # elastic-builder
 
-[![npm version][version-badge]][package]
-[![Build Status][build-badge]][build]
+[![npm version][version-badge]][package] [![Build Status][build-badge]][build]
 [![Coverage Status][coverage-badge]][coverage]
 [![semantic-release][semantic-release-badge]][semantic-release]
 
@@ -13,11 +12,11 @@ syntax.
 
 **Check out the [API reference documentation][api-docs].**
 
+Relavant blog post:
+https://blog.logrocket.com/elasticsearch-query-body-builder-node-js/
+
 elastic-builder includes TypeScript definition for superior development
 experience.
-
-For a zero DSL way to build elasticsearch queries, checkout
-[`elastic-muto`][elastic-muto]
 
 ## Elasticsearch compatibility
 
@@ -31,11 +30,11 @@ have been called out in the docs(ex: [`Script.file`][api-docs-script-file].
 
 What's Included:
 
-* [Request Body Search][es-search-request-body]
-* [Queries][es-query-dsl]
-* [Aggregations][es-search-aggregations]
-* [Suggesters][es-search-suggesters]
-* [Search Template][es-search-template.html]
+- [Request Body Search][es-search-request-body]
+- [Queries][es-query-dsl]
+- [Aggregations][es-search-aggregations]
+- [Suggesters][es-search-suggesters]
+- [Search Template][es-search-template.html]
 
 ## Install
 
@@ -116,9 +115,9 @@ https://github.com/js-org/dns.js.org
 
 The library has a few helper recipes:
 
-* [Missing query][es-missing-query]
-* [Random sort query][es-random-score-query]
-* [Filter query][es-filter-query]
+- [Missing query][es-missing-query]
+- [Random sort query][es-random-score-query]
+- [Filter query][es-filter-query]
 
 ```js
 const qry = esb.cookMissingQuery('user');
@@ -157,10 +156,12 @@ const client = new elasticsearch.Client({
   log: 'trace'
 });
 
-const requestBody = esb.requestBodySearch()
+const requestBody = esb
+  .requestBodySearch()
   .query(esb.matchQuery('body', 'elasticsearch'));
 
-client.search({
+client
+  .search({
     index: 'twitter',
     type: 'tweets',
     body: requestBody.toJSON()
@@ -369,48 +370,54 @@ npm test
 
 [`bodybuilder`][bodybuilder] for documentation style, build setup, demo page.
 
-## Related
-
-[`elastic-muto`][elastic-muto] - Easy expressive search queries for
-Elasticsearch
-
 ## License
 
 MIT © [Suhas Karanth][sudo-suhas]
 
 [version-badge]: https://badge.fury.io/js/elastic-builder.svg
 [package]: https://www.npmjs.com/package/elastic-builder
-[build-badge]: https://travis-ci.org/sudo-suhas/elastic-builder.svg?branch=master
+[build-badge]:
+  https://travis-ci.org/sudo-suhas/elastic-builder.svg?branch=master
 [build]: https://travis-ci.org/sudo-suhas/elastic-builder
-[coverage-badge]: https://coveralls.io/repos/github/sudo-suhas/elastic-builder/badge.svg?branch=master
+[coverage-badge]:
+  https://coveralls.io/repos/github/sudo-suhas/elastic-builder/badge.svg?branch=master
 [coverage]: https://coveralls.io/github/sudo-suhas/elastic-builder?branch=master
-[semantic-release-badge]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+[semantic-release-badge]:
+  https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-release]: https://github.com/semantic-release/semantic-release
-
 [elasticsearch]: https://www.elasticsearch.org/
-[es-js-client]: https://www.elasticsearch.org/guide/en/elasticsearch/client/javascript-api/current/index.html
-[es-reference]: https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
-[es-5-breaking-changes]: https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking_50_search_changes.html
-[es-6-breaking-changes]: https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking_60_search_changes.html
-[es-search-request-body]: https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
-[es-query-dsl]: https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html
-[es-missing-query]: https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html#_literal_missing_literal_query
-[es-random-score-query]: https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-random
-[es-filter-query]: https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html
-[es-search-aggregations]: https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html
-[es-search-suggesters]: https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters.html
-[es-search-template.html]: https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html
-
+[es-js-client]:
+  https://www.elasticsearch.org/guide/en/elasticsearch/client/javascript-api/current/index.html
+[es-reference]:
+  https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
+[es-5-breaking-changes]:
+  https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking_50_search_changes.html
+[es-6-breaking-changes]:
+  https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking_60_search_changes.html
+[es-search-request-body]:
+  https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
+[es-query-dsl]:
+  https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html
+[es-missing-query]:
+  https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html#_literal_missing_literal_query
+[es-random-score-query]:
+  https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-random
+[es-filter-query]:
+  https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html
+[es-search-aggregations]:
+  https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html
+[es-search-suggesters]:
+  https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters.html
+[es-search-template.html]:
+  https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html
 [api-docs]: https://elastic-builder.js.org/docs
 [api-docs-recipes]: https://elastic-builder.js.org/docs#recipes
 [api-docs-script-file]: https://elastic-builder.js.org/docs/#scriptfile
 [releases]: https://github.com/sudo-suhas/elastic-builder/releases
-
 [elastic-js]: https://github.com/fullscale/elastic.js
 [elastic-js-fork]: https://github.com/ErwanPigneul/elastic.js
 [bodybuilder]: https://github.com/danpaz/bodybuilder
-[elastic-muto]: https://github.com/booleanapp/elastic-muto
 [documentation-js]: https://github.com/documentationjs/documentation
-
-[create-pull-request]: https://help.github.com/articles/creating-a-pull-request-from-a-fork/
+[create-pull-request]:
+  https://help.github.com/articles/creating-a-pull-request-from-a-fork/
 [sudo-suhas]: https://github.com/sudo-suhas

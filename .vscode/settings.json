@@ -7,27 +7,5 @@
   "editor.detectIndentation": true,
   "[json]": {
     "editor.tabSize": 2
-  },
-  "prettier.printWidth": 80,
-  "prettier.tabWidth": 4,
-  "prettier.singleQuote": true,
-  "beautify.language": {
-    "js": {
-      "ext": [
-        "json"
-      ]
-    },
-    "css": [
-      "css"
-    ],
-    "html": [
-      "htm",
-      "html"
-    ]
-  },
-  "beautify.onSave": [
-    "html",
-    "css",
-    "json"
-  ]
+  }
 }
