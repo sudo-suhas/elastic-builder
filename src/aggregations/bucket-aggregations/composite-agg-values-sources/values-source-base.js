@@ -106,6 +106,17 @@ class ValuesSourceBase {
     }
 
     /**
+     * Specifies to include documents without a value for a given source in the
+     * response,or not. Defaults to `false` (not include.
+     *
+     * @param {boolean} value
+     */
+    missingBucket(value) {
+        this._opts.missing_bucket = value;
+        return this;
+    }
+
+    /**
      * Override default `toJSON` to return DSL representation for the Composite
      * Aggregation values source.
      *
