@@ -97,6 +97,10 @@ class ValuesSourceBase {
      * Missing specifies the value to use when the source finds a missing value
      * in a document.
      *
+     * Note: The `missing` option of the composite aggregation is deprecated in
+     * [Elasticsearch v6.0](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/breaking-changes-6.0.html#_literal_missing_literal_is_deprecated_in_the_literal_composite_literal_aggregation),
+     * `missing_bucket` should be used instead.
+     *
      * @param {string} value
      * @returns {ValuesSourceBase} returns `this` so that calls can be chained
      */
@@ -106,10 +110,14 @@ class ValuesSourceBase {
     }
 
     /**
-     * Specifies to include documents without a value for a given source in the
-     * response,or not. Defaults to `false` (not include.
+     * Specifies whether to include documents without a value for a given source
+     * in the response. Defaults to `false` (not included).
+     *
+     * Note: This method is incompatible with elasticsearch 5.6 and older.
+     * Use it only with elasticsearch 6.0 and later.
      *
      * @param {boolean} value
+     * @returns {ValuesSourceBase} returns `this` so that calls can be chained
      */
     missingBucket(value) {
         this._opts.missing_bucket = value;

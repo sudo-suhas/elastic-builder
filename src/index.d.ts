@@ -4656,7 +4656,7 @@ declare namespace esb {
              * in a document.
              *
              * Note: The `missing` option of the composite aggregation is deprecated in
-             * [Elastticsearch v6.0](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/breaking-changes-6.0.html#_literal_missing_literal_is_deprecated_in_the_literal_composite_literal_aggregation),
+             * [Elasticsearch v6.0](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/breaking-changes-6.0.html#_literal_missing_literal_is_deprecated_in_the_literal_composite_literal_aggregation),
              * `missing_bucket` should be used instead.
              * 
              * @param {string} value
@@ -4666,7 +4666,10 @@ declare namespace esb {
             /**
              * Specifies to include documents without a value for a given source in the
              * response, or not. Defaults to `false` (not include).
-             * 
+             *
+             * Note: This method is incompatible with elasticsearch 5.6 and older.
+             * Use it only with elasticsearch 6.0 and later.
+             *
              * @param {boolean} value
              */
             missingBucket(value: boolean): this;
