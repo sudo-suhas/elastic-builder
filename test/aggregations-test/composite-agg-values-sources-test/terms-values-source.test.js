@@ -36,7 +36,7 @@ test('constructor sets arguments', t => {
 test(setsAggType, TermsValuesSource, 'terms');
 test(validatedCorrectly, getInstance, 'order', ['asc', 'desc']);
 test(setsOption, 'missing', { param: 42 });
-test(setsOption, 'missingBucket', { param: 42 });
+test(setsOption, 'missingBucket', { param: true });
 test(setsOption, 'field', { param: 'my_field' });
 test(setsOption, 'script', {
     param: new Script()
