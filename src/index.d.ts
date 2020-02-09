@@ -732,9 +732,11 @@ declare namespace esb {
          * the `_score` from each field.
          * - `phrase_prefix` - Runs a `match_phrase_prefix` query on each field
          * and combines the `_score` from each field.
+         * - `bool_prefix` - Creates a match_bool_prefix query on each field and
+         * combines the _score from each field.
          *
          * @param {string} type Can be one of `best_fields`, `most_fields`,
-         * `cross_fields`, `phrase`, and `phrase_prefix`. Default is `best_fields`.
+         * `cross_fields`, `phrase`, `phrase_prefix` and `bool_prefix`. Default is `best_fields`.
          */
         type(
             type:
@@ -743,6 +745,7 @@ declare namespace esb {
                 | 'cross_fields'
                 | 'phrase'
                 | 'phrase_prefix'
+                | 'bool_prefix'
         ): this;
 
         /**
