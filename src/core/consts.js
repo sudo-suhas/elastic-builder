@@ -52,7 +52,8 @@ exports.MULTI_MATCH_TYPE = new Set([
     'most_fields',
     'cross_fields',
     'phrase',
-    'phrase_prefix'
+    'phrase_prefix',
+    'bool_prefix'
 ]);
 
 exports.SCORE_MODE_SET = new Set([

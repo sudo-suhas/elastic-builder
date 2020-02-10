@@ -114,6 +114,9 @@ class MultiMatchQuery extends FullTextQueryBase {
      * - `phrase_prefix` - Runs a `match_phrase_prefix` query on each field
      * and combines the `_score` from each field.
      *
+     * - `bool_prefix` - (added in v7.2) Creates a match_bool_prefix query on each field and
+     * combines the _score from each field.
+     *
      * @example
      * // Find the single best matching field
      * const qry = esb.multiMatchQuery(['subject', 'message'], 'brown fox')
@@ -141,7 +144,8 @@ class MultiMatchQuery extends FullTextQueryBase {
      *     .operator('and');
      *
      * @param {string} type Can be one of `best_fields`, `most_fields`,
-     * `cross_fields`, `phrase`, and `phrase_prefix`. Default is `best_fields`.
+     * `cross_fields`, `phrase`, `phrase_prefix` and `bool_prefix`. Default is
+     * `best_fields`.
      * @returns {MultiMatchQuery} returns `this` so that calls can be chained.
      */
     type(type) {
