@@ -114,7 +114,7 @@ class MultiMatchQuery extends FullTextQueryBase {
      * - `phrase_prefix` - Runs a `match_phrase_prefix` query on each field
      * and combines the `_score` from each field.
      *
-     * - `bool_prefix` - Creates a match_bool_prefix query on each field and
+     * - `bool_prefix` - (added in v7.2) Creates a match_bool_prefix query on each field and
      * combines the _score from each field.
      *
      * @example
