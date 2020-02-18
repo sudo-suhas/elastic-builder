@@ -22,12 +22,18 @@ test('constructor sets arguments', t => {
     ]).toJSON();
     const expected = {
         type: 'multipoint',
-        coordinates: [[102.0, 2.0], [103.0, 2.0]]
+        coordinates: [
+            [102.0, 2.0],
+            [103.0, 2.0]
+        ]
     };
     t.deepEqual(value, expected);
 
     value = new GeoShape('multipoint')
-        .coordinates([[102.0, 2.0], [103.0, 2.0]])
+        .coordinates([
+            [102.0, 2.0],
+            [103.0, 2.0]
+        ])
         .toJSON();
     t.deepEqual(value, expected);
 });
@@ -35,11 +41,17 @@ test('constructor sets arguments', t => {
 test('sets type and coordinates', t => {
     const value = new GeoShape()
         .type('envelope')
-        .coordinates([[-45.0, 45.0], [45.0, -45.0]])
+        .coordinates([
+            [-45.0, 45.0],
+            [45.0, -45.0]
+        ])
         .toJSON();
     const expected = {
         type: 'envelope',
-        coordinates: [[-45.0, 45.0], [45.0, -45.0]]
+        coordinates: [
+            [-45.0, 45.0],
+            [45.0, -45.0]
+        ]
     };
     t.deepEqual(value, expected);
 });

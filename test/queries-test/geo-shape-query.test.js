@@ -30,9 +30,10 @@ test(validatedCorrectly, getInstance, 'relation', [
     'INTERSECTS'
 ]);
 test(setsFieldOption, 'shape', {
-    param: new GeoShape()
-        .type('envelope')
-        .coordinates([[13.0, 53.0], [14.0, 52.0]])
+    param: new GeoShape().type('envelope').coordinates([
+        [13.0, 53.0],
+        [14.0, 52.0]
+    ])
 });
 test(setsFieldOption, 'indexedShape', {
     param: new IndexedShape()

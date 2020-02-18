@@ -89,7 +89,10 @@ test('sets unlike(arr) option', setsOption, 'unlike', {
 test(setsOption, 'likeText', { param: 'my text' });
 test(setsOption, 'ids', { param: ['1', '2'], spread: false });
 test(setsOption, 'docs', {
-    param: [{ _type: 'type', _id: '1' }, { _type: 'type', _id: '2' }],
+    param: [
+        { _type: 'type', _id: '1' },
+        { _type: 'type', _id: '2' }
+    ],
     spread: false
 });
 test(setsOption, 'maxQueryTerms', { param: 12 });
