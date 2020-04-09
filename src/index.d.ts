@@ -1457,11 +1457,11 @@ declare namespace esb {
      * Filters documents that have fields that match any of the provided terms (**not analyzed**).
      *
      * @param {string=} field
-     * @param {Array|string|number|boolean=} values
+     * @param {Array<string|number|boolean>|string|number|boolean=} values
      */
     export function termsQuery(
         field?: string,
-        values?: string[] | string | number | boolean
+        values?: string[] | number[] | boolean[] | string | number | boolean
     ): TermsQuery;
 
     /**
