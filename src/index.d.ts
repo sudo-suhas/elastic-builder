@@ -4919,19 +4919,19 @@ declare namespace esb {
     }
 
     /**
-         * The `AutoHistogramAggregationBase` provides support for common options used across
-         * various auto histogram `Aggregation` implementations like Auto Date Histogram aggregation.
-         *
-         * **NOTE:** Instantiating this directly should not be required.
-         * However, if you wish to add a custom implementation for whatever reason,
-         * this class could be extended.
-         *
-         * @param {string} name The name which will be used to refer to this aggregation.
-         * @param {string} aggType Type of aggregation
-         * @param {string=} field The field to aggregate on
-         * @param {number=} buckets Bucket count to generate histogram over.
-         * @extends BucketAggregationBase
-         */
+     * The `AutoHistogramAggregationBase` provides support for common options used across
+     * various auto histogram `Aggregation` implementations like Auto Date Histogram aggregation.
+     *
+     * **NOTE:** Instantiating this directly should not be required.
+     * However, if you wish to add a custom implementation for whatever reason,
+     * this class could be extended.
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     * @param {string} aggType Type of aggregation
+     * @param {string=} field The field to aggregate on
+     * @param {number=} buckets Bucket count to generate histogram over.
+     * @extends BucketAggregationBase
+     */
     export class AutoHistogramAggregationBase extends BucketAggregationBase {
         constructor(
             name: string,
@@ -5018,6 +5018,44 @@ declare namespace esb {
         keyed(keyed: boolean): this;
     }
 
+    /**
+     * A multi-bucket aggregation similar to the histogram except it can only be applied on date values.
+     * The interval can be specified by date/time expressions.
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     * @param {string=} field The field to aggregate on
+     * @param {number=} buckets Bucket count to generate histogram over.
+     * @extends AutoHistogramAggregationBase
+     */
+    export class AutoDateHistogramAggregation extends AutoHistogramAggregationBase {
+        constructor(name: string, field?: string, buckets?: number);
+
+        /**
+         * Date-times are stored in Elasticsearch in UTC.
+         * By default, all bucketing and rounding is also done in UTC.
+         * The `time_zone` parameter can be used to indicate that bucketing should use a different time zone.
+         * Sets the date time zone
+         *
+         * @param {string} tz Time zone. Time zones may either be specified
+         * as an ISO 8601 UTC offset (e.g. +01:00 or -08:00) or as a timezone id,
+         * an identifier used in the TZ database like America/Los_Angeles.
+         */
+        timeZone(tz: string): this;
+    }
+
+    /**
+     * A multi-bucket aggregation similar to the histogram except it can only be applied on date values.
+     * The interval can be specified by date/time expressions.
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     * @param {string=} field The field to aggregate on
+     * @param {number=} buckets Bucket count to generate histogram over.
+     */
+    export function autoDateHistogramAggregation(
+        name: string,
+        field?: string,
+        buckets?: number
+    ): AutoDateHistogramAggregation;
 
     /**
      * A multi-bucket aggregation similar to the histogram except it can only be applied on date values.
