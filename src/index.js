@@ -103,6 +103,7 @@ const {
         ChildrenAggregation,
         CompositeAggregation,
         DateHistogramAggregation,
+        AutoDateHistogramAggregation,
         DateRangeAggregation,
         DiversifiedSamplerAggregation,
         FilterAggregation,
@@ -375,6 +376,11 @@ exports.compositeAggregation = constructorWrapper(CompositeAggregation);
 
 exports.DateHistogramAggregation = DateHistogramAggregation;
 exports.dateHistogramAggregation = constructorWrapper(DateHistogramAggregation);
+
+exports.AutoDateHistogramAggregation = AutoDateHistogramAggregation;
+exports.autoDateHistogramAggregation = constructorWrapper(
+    AutoDateHistogramAggregation
+);
 
 exports.DateRangeAggregation = DateRangeAggregation;
 exports.dateRangeAggregation = constructorWrapper(DateRangeAggregation);
