@@ -21,6 +21,21 @@ test('constructor sets arguments', t => {
     t.deepEqual(value, expected);
 });
 
+test('buckets is set', t => {
+    const value = new AutoDateHistogramAggregation('by_day', 'date', 10)
+        .buckets(20)
+        .toJSON();
+    const expected = {
+        by_day: {
+            auto_date_histogram: {
+                field: 'date',
+                buckets: 20
+            }
+        }
+    };
+    t.deepEqual(value, expected);
+});
+
 test('format is set', t => {
     const value = new AutoDateHistogramAggregation('by_day', 'date', 10)
         .format('yyyy-MM-dd')
