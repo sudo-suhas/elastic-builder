@@ -4,7 +4,7 @@ import { setsAggType } from '../_macros';
 
 test(setsAggType, AutoDateHistogramAggregation, 'auto_date_histogram');
 
-test('constructor sets optional arguments', t => {
+test('constructor sets arguments', t => {
     const value = new AutoDateHistogramAggregation(
             'sale_date',
             'date',

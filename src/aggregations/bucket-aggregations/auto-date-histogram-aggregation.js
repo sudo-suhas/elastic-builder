@@ -17,8 +17,8 @@ const BucketAggregationBase = require('./bucket-aggregation-base');
  * const agg = esb.autoDateHistogramAggregation('sales_over_time', 'date', 15);
  *
  * @param {string} name The name which will be used to refer to this aggregation.
- * @param {string=} field The field to aggregate on
- * @param {number=} buckets Bucket count to generate histogram over.
+ * @param {string} field The field to aggregate on
+ * @param {number} buckets Bucket count to generate histogram over.
  *
  * @extends BucketAggregationBase
  */
@@ -32,7 +32,7 @@ class AutoDateHistogramAggregation extends BucketAggregationBase {
     /**
      * Sets the histogram bucket count. Buckets are generated based on this value.
      *
-     * @param {number=} buckets Bucket count to generate histogram over.
+     * @param {number} buckets Bucket count to generate histogram over.
      * @returns {AutoDateHistogramAggregation} returns `this` so that calls can be chained
      */
     buckets(buckets) {
