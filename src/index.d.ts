@@ -4919,6 +4919,83 @@ declare namespace esb {
     }
 
     /**
+     * The `AutoDateHistogramAggregation` is similar to the Date histogram aggregation except 
+     * instead of providing an interval to use as the width of each bucket, a target number 
+     * of buckets is provided indicating the number of buckets needed and the interval of the 
+     * buckets is automatically chosen to best achieve that target. 
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     * @param {string} aggType Type of aggregation
+     * @param {string=} field The field to aggregate on
+     * @param {number=} buckets Bucket count to generate histogram over.
+     * @extends BucketAggregationBase
+     */
+    export class AutoDateHistogramAggregation extends BucketAggregationBase {
+        constructor(
+            name: string,
+            field?: string,
+            buckets?: number
+        );
+
+        /**
+         * Sets the bucket count. Buckets are generated based on this interval value.
+         *
+         * @param {number} buckets Bucket count to generate histogram over.
+         */
+        buckets(buckets: number): this;
+
+        /**
+         * Sets the format expression for `key_as_string` in response buckets.
+         * If no format is specified, then it will use the first format specified in the field mapping.
+         *
+         * @param {string} fmt Format mask to apply on aggregation response. Example: ####.00.
+         * For Date Histograms, supports expressive date format pattern
+         */
+        format(fmt: string): this;
+
+        /**
+         * Sets the missing parameter which defines how documents
+         * that are missing a value should be treated.
+         *
+         * @param {string} value
+         */
+        missing(value: string): this;
+
+        /**
+         * Sets the minimum rounding interval that should be used.
+         *
+         * @param {string} value
+         */
+        minimumInterval(value: string): this;
+
+        /**
+         * Date-times are stored in Elasticsearch in UTC.
+         * By default, all bucketing and rounding is also done in UTC.
+         * The `time_zone` parameter can be used to indicate that bucketing should use a different time zone.
+         * Sets the date time zone
+         *
+         * @param {string} tz Time zone. Time zones may either be specified
+         * as an ISO 8601 UTC offset (e.g. +01:00 or -08:00) or as a timezone id,
+         * an identifier used in the TZ database like America/Los_Angeles.
+         */
+        timeZone(tz: string): this;
+    }
+
+    /**
+     * A multi-bucket aggregation similar to the histogram except it can only be applied on date values.
+     * The interval can be specified by date/time expressions.
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     * @param {string=} field The field to aggregate on
+     * @param {number=} buckets Bucket count to generate histogram over.
+     */
+    export function autoDateHistogramAggregation(
+        name: string,
+        field?: string,
+        buckets?: number
+    ): AutoDateHistogramAggregation;
+
+    /**
      * A multi-bucket aggregation similar to the histogram except it can only be applied on date values.
      * The interval can be specified by date/time expressions.
      *

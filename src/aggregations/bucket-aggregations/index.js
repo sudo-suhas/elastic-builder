@@ -10,6 +10,7 @@ exports.AdjacencyMatrixAggregation = require('./adjacency-matrix-aggregation');
 exports.ChildrenAggregation = require('./children-aggregation');
 exports.CompositeAggregation = require('./composite-aggregation');
 exports.DateHistogramAggregation = require('./date-histogram-aggregation');
+exports.AutoDateHistogramAggregation = require('./auto-date-histogram-aggregation');
 exports.DateRangeAggregation = require('./date-range-aggregation');
 exports.DiversifiedSamplerAggregation = require('./diversified-sampler-aggregation');
 exports.FilterAggregation = require('./filter-aggregation');
