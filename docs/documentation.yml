@@ -94,6 +94,7 @@ toc:
   - name: Bucket Aggregations
   - BucketAggregationBase
   - AdjacencyMatrixAggregation
+  - AutoDateHistogramAggregation
   - ChildrenAggregation
   - CompositeAggregation
   - name: Values Source
