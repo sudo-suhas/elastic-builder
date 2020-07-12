@@ -48,7 +48,7 @@ class TermsAggregation extends TermsAggregationBase {
      * which represents the _worst case error_ in the document count and can be useful
      * when deciding on a value for the shard_size parameter.
      *
-     * @param {booleam} enable
+     * @param {boolean} enable
      * @returns {TermsAggregation} returns `this` so that calls can be chained
      */
     showTermDocCountError(enable) {

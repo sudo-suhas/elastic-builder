@@ -6096,9 +6096,9 @@ declare namespace esb {
          * which represents the _worst case error_ in the document count and can be useful
          * when deciding on a value for the shard_size parameter.
          *
-         * @param {booleam} enable
+         * @param {boolean} enable
          */
-        showTermDocCountError(enable: object): this;
+        showTermDocCountError(enable: boolean): this;
 
         /**
          * Break the analysis up into multiple requests by grouping the field’s values
