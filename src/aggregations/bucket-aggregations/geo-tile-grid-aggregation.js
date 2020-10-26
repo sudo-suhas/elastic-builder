@@ -21,6 +21,8 @@ const ES_REF_URL =
 
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geotilegrid-aggregation.html)
  *
+ * NOTE: This query was added in elasticsearch v7.0.
+ *
  * @example
  * const agg = esb.geoTileGridAggregation('large-grid', 'location').precision(8);
  *
