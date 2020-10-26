@@ -5494,6 +5494,134 @@ declare namespace esb {
     ): GeoHashGridAggregation;
 
     /**
+     * A multi-bucket aggregation that works on geo_point fields and groups points
+     * into buckets that represent cells in a grid. The resulting grid can be sparse
+     * and only contains cells that have matching data. Each cell corresponds to a
+     * map tile as used by many online map sites. Each cell is labeled using a
+     * "{zoom}/{x}/{y}" format, where zoom is equal to the user-specified precision.
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     * @param {string=} field The field to aggregate on
+     * @extends BucketAggregationBase
+     */
+    export class GeoTileGridAggregation extends BucketAggregationBase {
+        constructor(name: string, field?: string);
+
+        /**
+         * @override
+         * @throws {Error} This method cannot be called on GeoTileGridAggregation
+         */
+        format(): never;
+
+        /**
+         * @override
+         * @throws {Error} This method cannot be called on GeoTileGridAggregation
+         */
+        script(): never;
+
+        /**
+         * Sets the precision for the generated geotile.
+         *
+         * @param {number} precision Precision can be between 0 and 29
+         * @throws {Error} If precision is not between 0 and 29.
+         */
+        precision(precision: number): this;
+
+        /**
+         * Sets the maximum number of geotile buckets to return.
+         * When results are trimmed, buckets are prioritised
+         * based on the volumes of documents they contain.
+         *
+         * @param {number} size Optional. The maximum number of geotile
+         * buckets to return (defaults to 10,000).
+         */
+        size(size: number): this;
+
+        /**
+         * Determines how many geotile_grid the coordinating node
+         * will request from each shard.
+         *
+         * @param {number} shardSize Optional.
+         */
+        shardSize(shardSize: number): this;
+
+        /**
+         * Sets the top left coordinate for the bounding box used to filter the
+         * points in the bucket.
+         *
+         * @param {GeoPoint} point A valid `GeoPoint`
+         */
+        topLeft(point: GeoPoint): this;
+
+        /**
+         * Sets the bottom right coordinate for the bounding box used to filter the
+         * points in the bucket.
+         *
+         * @param {GeoPoint} point A valid `GeoPoint`
+         */
+        bottomRight(point: GeoPoint): this;
+
+        /**
+         * Sets the top right coordinate for the bounding box used to filter the
+         * points in the bucket.
+         *
+         * @param {GeoPoint} point A valid `GeoPoint`
+         */
+        topRight(point: GeoPoint): this;
+
+        /**
+         * Sets the bottom left coordinate for the bounding box used to filter the
+         * points in the bucket.
+         *
+         * @param {GeoPoint} point A valid `GeoPoint`
+         */
+        bottomLeft(point: GeoPoint): this;
+
+        /**
+         * Sets value for top of the bounding box.
+         *
+         * @param {number} val
+         */
+        top(val: number): this;
+
+        /**
+         * Sets value for left of the bounding box.
+         *
+         * @param {number} val
+         */
+        left(val: number): this;
+
+        /**
+         * Sets value for bottom of the bounding box.
+         *
+         * @param {number} val
+         */
+        bottom(val: number): this;
+
+        /**
+         * Sets value for right of the bounding box.
+         *
+         * @param {number} val
+         */
+        right(val: number): this;
+    }
+
+    /**
+     * A multi-bucket aggregation that works on geo_point fields and groups points
+     * into buckets that represent cells in a grid. The resulting grid can be sparse
+     * and only contains cells that have matching data. Each cell corresponds to a
+     * map tile as used by many online map sites. Each cell is labeled using a
+     * "{zoom}/{x}/{y}" format, where zoom is equal to the user-specified precision.
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     * @param {string=} field The field to aggregate on
+     */
+    export function geoTileGridAggregation(
+        name: string,
+        field?: string
+    ): GeoTileGridAggregation;
+
+    /**
      * Defines a single bucket of all the documents within the search execution
      * context. This context is defined by the indices and the document types you’re
      * searching on, but is not influenced by the search query itself.

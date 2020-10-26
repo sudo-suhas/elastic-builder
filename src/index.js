@@ -110,6 +110,7 @@ const {
         FiltersAggregation,
         GeoDistanceAggregation,
         GeoHashGridAggregation,
+        GeoTileGridAggregation,
         GlobalAggregation,
         HistogramAggregation,
         IpRangeAggregation,
@@ -401,6 +402,9 @@ exports.geoDistanceAggregation = constructorWrapper(GeoDistanceAggregation);
 
 exports.GeoHashGridAggregation = GeoHashGridAggregation;
 exports.geoHashGridAggregation = constructorWrapper(GeoHashGridAggregation);
+
+exports.GeoTileGridAggregation = GeoTileGridAggregation;
+exports.geoTileGridAggregation = constructorWrapper(GeoTileGridAggregation);
 
 exports.GlobalAggregation = GlobalAggregation;
 exports.globalAggregation = constructorWrapper(GlobalAggregation);
