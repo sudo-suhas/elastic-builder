@@ -12,7 +12,7 @@ syntax.
 
 **Check out the [API reference documentation][api-docs].**
 
-Relavant blog post:
+Relevant blog post:
 https://blog.logrocket.com/elasticsearch-query-body-builder-node-js/
 
 elastic-builder includes TypeScript definition for superior development
