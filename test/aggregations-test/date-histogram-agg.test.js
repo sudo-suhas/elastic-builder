@@ -36,3 +36,33 @@ test('time_zone is set', t => {
     };
     t.deepEqual(value, expected);
 });
+
+test('calendar_interval_is_set', t => {
+    const value = new DateHistogramAggregation('by_day', 'date')
+        .calendarInterval('month')
+        .toJSON();
+    const expected = {
+        by_day: {
+            date_histogram: {
+                field: 'date',
+                calendar_interval: 'month'
+            }
+        }
+    };
+    t.deepEqual(value, expected);
+});
+
+test('fixed_interval_is_set', t => {
+    const value = new DateHistogramAggregation('by_day', 'date')
+        .fixedInterval('90s')
+        .toJSON();
+    const expected = {
+        by_day: {
+            date_histogram: {
+                field: 'date',
+                fixed_interval: '90s'
+            }
+        }
+    };
+    t.deepEqual(value, expected);
+});
