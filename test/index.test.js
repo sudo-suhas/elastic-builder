@@ -268,6 +268,9 @@ test('aggregations are exported', t => {
     t.truthy(esb.NestedAggregation);
     t.truthy(esb.nestedAggregation);
 
+    t.truthy(esb.ParentAggregation);
+    t.truthy(esb.parentAggregation);
+
     t.truthy(esb.RangeAggregation);
     t.truthy(esb.rangeAggregation);
 
