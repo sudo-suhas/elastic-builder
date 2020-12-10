@@ -1,5 +1,7 @@
 'use strict';
 
+const isNil = require('lodash.isnil');
+
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
 const ES_REF_URL =
@@ -32,13 +34,16 @@ const ES_REF_URL =
  *     .size(0);
  *
  * @param {string} name The name which will be used to refer to this aggregation.
+ * @param {string=} type The type of the child document.
  *
  * @extends BucketAggregationBase
  */
 class ParentAggregation extends BucketAggregationBase {
     // eslint-disable-next-line require-jsdoc
-    constructor(name) {
+    constructor(name, type) {
         super(name, 'parent');
+
+        if (!isNil(type)) this.type(type);
     }
 
     /**
