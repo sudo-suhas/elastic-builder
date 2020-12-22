@@ -5816,6 +5816,8 @@ declare namespace esb {
      * A special single bucket aggregation that enables aggregating
      * from buckets on child document types to buckets on parent documents.
      * This aggregation relies on the `_parent` field in the mapping.
+     * 
+     * NOTE: This query was added in elasticsearch v6.6.
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @extends BucketAggregationBase
