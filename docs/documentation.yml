@@ -122,6 +122,7 @@ toc:
   - IpRangeAggregation
   - MissingAggregation
   - NestedAggregation
+  - ParentAggregation
   - RangeAggregation
   - ReverseNestedAggregation
   - SamplerAggregation
