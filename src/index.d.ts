@@ -5813,6 +5813,47 @@ declare namespace esb {
     ): NestedAggregation;
 
     /**
+     * A special single bucket aggregation that enables aggregating
+     * from buckets on child document types to buckets on parent documents.
+     * This aggregation relies on the `_parent` field in the mapping.
+     * 
+     * NOTE: This query was added in elasticsearch v6.6.
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     * @extends BucketAggregationBase
+     */
+    export class ParentAggregation extends BucketAggregationBase {
+        constructor(name: string);
+        /**
+         * @override
+         * @throws {Error} This method cannot be called on ParentAggregation
+         */
+        field(): never;
+
+        /**
+         * @override
+         * @throws {Error} This method cannot be called on ParentAggregation
+         */
+        script(): never;
+
+        /**
+         * Sets the child type/mapping for aggregation.
+         *
+         * @param {string} type The child type that the buckets in the parent space should be mapped to.
+         */
+        type(type: string): this;
+    }
+
+    /**
+     * A special single bucket aggregation that enables aggregating
+     * from buckets on child document types to buckets on parent documents.
+     * This aggregation relies on the `_parent` field in the mapping.
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     */
+    export function parentAggregation(name: string): ParentAggregation;
+
+    /**
      * A multi-bucket value source based aggregation that enables the user to
      * define a set of ranges - each representing a bucket. During the aggregation
      * process, the values extracted from each document will be checked against each

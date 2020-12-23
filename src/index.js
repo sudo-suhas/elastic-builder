@@ -116,6 +116,7 @@ const {
         IpRangeAggregation,
         MissingAggregation,
         NestedAggregation,
+        ParentAggregation,
         RangeAggregation,
         ReverseNestedAggregation,
         SamplerAggregation,
@@ -420,6 +421,9 @@ exports.missingAggregation = constructorWrapper(MissingAggregation);
 
 exports.NestedAggregation = NestedAggregation;
 exports.nestedAggregation = constructorWrapper(NestedAggregation);
+
+exports.ParentAggregation = ParentAggregation;
+exports.parentAggregation = constructorWrapper(ParentAggregation);
 
 exports.RangeAggregation = RangeAggregation;
 exports.rangeAggregation = constructorWrapper(RangeAggregation);

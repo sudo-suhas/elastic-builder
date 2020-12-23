@@ -23,6 +23,7 @@ exports.HistogramAggregation = require('./histogram-aggregation');
 exports.IpRangeAggregation = require('./ip-range-aggregation');
 exports.MissingAggregation = require('./missing-aggregation');
 exports.NestedAggregation = require('./nested-aggregation');
+exports.ParentAggregation = require('./parent-aggregation');
 exports.RangeAggregation = require('./range-aggregation');
 exports.ReverseNestedAggregation = require('./reverse-nested-aggregation');
 exports.SamplerAggregation = require('./sampler-aggregation');
