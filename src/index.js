@@ -134,6 +134,7 @@ const {
         ExtendedStatsBucketAggregation,
         PercentilesBucketAggregation,
         MovingAverageAggregation,
+        MovingFunctionAggregation,
         CumulativeSumAggregation,
         BucketScriptAggregation,
         BucketSelectorAggregation,
@@ -483,6 +484,11 @@ exports.percentilesBucketAggregation = constructorWrapper(
 
 exports.MovingAverageAggregation = MovingAverageAggregation;
 exports.movingAverageAggregation = constructorWrapper(MovingAverageAggregation);
+
+exports.MovingFunctionAggregation = MovingFunctionAggregation;
+exports.movingFunctionAggregation = constructorWrapper(
+    MovingFunctionAggregation
+);
 
 exports.CumulativeSumAggregation = CumulativeSumAggregation;
 exports.cumulativeSumAggregation = constructorWrapper(CumulativeSumAggregation);
