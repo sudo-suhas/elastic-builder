@@ -2,17 +2,10 @@
 
 const isNil = require('lodash.isnil');
 
-const {
-    util: { invalidParam },
-    consts: { MODEL_SET }
-} = require('../../core');
-
 const PipelineAggregationBase = require('./pipeline-aggregation-base');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/master/search-aggregations-pipeline-movfn-aggregation.html';
-
-const invalidModelParam = invalidParam(ES_REF_URL, 'model', MODEL_SET);
 
 /**
  * Given an ordered series of data, the Moving Function aggregation
@@ -119,7 +112,6 @@ class MovingFunctionAggregation extends PipelineAggregationBase {
      * @returns {MovingFunctionAggregation} returns `this` so that calls can be chained
      */
     script(script) {
-        if (isNil(script)) invalidModelParam(script);
         this._aggsDef.script = script;
         return this;
     }
