@@ -142,6 +142,7 @@ toc:
   - ExtendedStatsBucketAggregation
   - PercentilesBucketAggregation
   - MovingAverageAggregation
+  - MovingFunctionAggregation
   - CumulativeSumAggregation
   - BucketScriptAggregation
   - BucketSelectorAggregation

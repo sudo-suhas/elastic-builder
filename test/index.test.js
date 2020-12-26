@@ -319,6 +319,9 @@ test('aggregations are exported', t => {
     t.truthy(esb.MovingAverageAggregation);
     t.truthy(esb.movingAverageAggregation);
 
+    t.truthy(esb.MovingFunctionAggregation);
+    t.truthy(esb.movingFunctionAggregation);
+
     t.truthy(esb.CumulativeSumAggregation);
     t.truthy(esb.cumulativeSumAggregation);
 

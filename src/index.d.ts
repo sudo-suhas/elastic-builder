@@ -4919,10 +4919,10 @@ declare namespace esb {
     }
 
     /**
-     * The `AutoDateHistogramAggregation` is similar to the Date histogram aggregation except 
-     * instead of providing an interval to use as the width of each bucket, a target number 
-     * of buckets is provided indicating the number of buckets needed and the interval of the 
-     * buckets is automatically chosen to best achieve that target. 
+     * The `AutoDateHistogramAggregation` is similar to the Date histogram aggregation except
+     * instead of providing an interval to use as the width of each bucket, a target number
+     * of buckets is provided indicating the number of buckets needed and the interval of the
+     * buckets is automatically chosen to best achieve that target.
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string} aggType Type of aggregation
@@ -4931,11 +4931,7 @@ declare namespace esb {
      * @extends BucketAggregationBase
      */
     export class AutoDateHistogramAggregation extends BucketAggregationBase {
-        constructor(
-            name: string,
-            field?: string,
-            buckets?: number
-        );
+        constructor(name: string, field?: string, buckets?: number);
 
         /**
          * Sets the bucket count. Buckets are generated based on this interval value.
@@ -5816,7 +5812,7 @@ declare namespace esb {
      * A special single bucket aggregation that enables aggregating
      * from buckets on child document types to buckets on parent documents.
      * This aggregation relies on the `_parent` field in the mapping.
-     * 
+     *
      * NOTE: This query was added in elasticsearch v6.6.
      *
      * @param {string} name The name which will be used to refer to this aggregation.
@@ -6715,6 +6711,67 @@ declare namespace esb {
         name: string,
         bucketsPath?: string
     ): MovingAverageAggregation;
+
+    /**
+     * Given an ordered series of data, the Moving Function aggregation
+     * will slide a window across the data and allow the user to specify
+     * a custom script that is executed on each window of data.
+     * For convenience, a number of common functions are predefined such as min/max, moving averages, etc.
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     * @param {string=} bucketsPath The relative path of metric to aggregate over.
+     * @param {string=} window The size of window to "slide" across the histogram.
+     * @param {string=} script The script that should be executed on each window of data.
+     * @extends PipelineAggregationBase
+     */
+    export class MovingFunctionAggregation extends PipelineAggregationBase {
+        constructor(
+            name: string,
+            bucketsPath?: string,
+            window?: number,
+            script?: string
+        );
+
+        /**
+         * Sets the size of window to "slide" across the histogram. Required.
+         *
+         * @param {number} window
+         */
+        window(window: number): this;
+
+        /**
+         * Sets shift of window position. Optional.
+         *
+         * @param {number} window
+         */
+        shift(shift: number): this;
+
+        /**
+         * Sets the script that should be executed on each window of data. Required.
+         *
+         * @param {string} script
+         */
+        script(script: string): this;
+    }
+
+    /**
+     * Given an ordered series of data, the Moving Function aggregation
+     * will slide a window across the data and allow the user to specify
+     * a custom script that is executed on each window of data.
+     * For convenience, a number of common functions are predefined such as min/max, moving averages, etc.
+     *
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     * @param {string=} bucketsPath The relative path of metric to aggregate over.
+     * @param {string=} window The size of window to "slide" across the histogram.
+     * @param {string=} script The script that should be executed on each window of data.
+     */
+    export function movingFunctionAggregation(
+        name: string,
+        bucketsPath?: string,
+        window?: number,
+        script?: string
+    ): MovingFunctionAggregation;
 
     /**
      * A parent pipeline aggregation which calculates the cumulative sum of
