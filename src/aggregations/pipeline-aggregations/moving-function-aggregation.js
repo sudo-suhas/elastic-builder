@@ -16,7 +16,7 @@ const ES_REF_URL =
  * `moving_fn` aggregations must be embedded inside of a histogram or
  * date_histogram aggregation.
  *
- * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/master/search-aggregations-pipeline-movfn-aggregation.html)
+ * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-movfn-aggregation.html)
  *
  * @example
  * const agg = esb.movingFunctionAggregation('the_movfn', 'the_sum')
