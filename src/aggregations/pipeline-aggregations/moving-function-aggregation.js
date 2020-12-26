@@ -5,7 +5,7 @@ const isNil = require('lodash.isnil');
 const PipelineAggregationBase = require('./pipeline-aggregation-base');
 
 const ES_REF_URL =
-    'https://www.elastic.co/guide/en/elasticsearch/reference/master/search-aggregations-pipeline-movfn-aggregation.html';
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-movfn-aggregation.html';
 
 /**
  * Given an ordered series of data, the Moving Function aggregation
