@@ -6720,7 +6720,7 @@ declare namespace esb {
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} bucketsPath The relative path of metric to aggregate over.
-     * @param {string=} window 	The size of window to "slide" across the histogram.
+     * @param {string=} window The size of window to "slide" across the histogram.
      * @param {string=} script The script that should be executed on each window of data.
      * @extends PipelineAggregationBase
      */
@@ -6731,12 +6731,6 @@ declare namespace esb {
             window?: number,
             script?: string
         );
-
-        /**
-         * @override
-         * @throws {Error} This method cannot be called on MovingFunctionAggregation
-         */
-        format(): never;
 
         /**
          * Sets the size of window to "slide" across the histogram. Required.
@@ -6769,7 +6763,7 @@ declare namespace esb {
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} bucketsPath The relative path of metric to aggregate over.
-     * @param {string=} window 	The size of window to "slide" across the histogram.
+     * @param {string=} window The size of window to "slide" across the histogram.
      * @param {string=} script The script that should be executed on each window of data.
      */
     export function movingFunctionAggregation(

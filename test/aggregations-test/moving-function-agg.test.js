@@ -2,7 +2,6 @@ import test from 'ava';
 import { MovingFunctionAggregation } from '../../src';
 import {
     setsAggType,
-    illegalCall,
     nameTypeExpectStrategy,
     makeSetsOptionMacro
 } from '../_macros';
@@ -16,7 +15,7 @@ const setsOption = makeSetsOptionMacro(
 );
 
 test(setsAggType, MovingFunctionAggregation, 'moving_fn');
-test(illegalCall, MovingFunctionAggregation, 'format', 'my_agg');
+test(setsOption, 'format', { param: '####.00' });
 test(setsOption, 'window', { param: 7 });
 test(setsOption, 'shift', { param: 0 });
 test(setsOption, 'script', { param: 'MovingFunctions.unweightedAvg(values)' });

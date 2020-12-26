@@ -5,7 +5,7 @@ const isNil = require('lodash.isnil');
 const PipelineAggregationBase = require('./pipeline-aggregation-base');
 
 const ES_REF_URL =
-    'https://www.elastic.co/guide/en/elasticsearch/reference/master/search-aggregations-pipeline-movfn-aggregation.html';
+    'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-movfn-aggregation.html';
 
 /**
  * Given an ordered series of data, the Moving Function aggregation
@@ -16,7 +16,9 @@ const ES_REF_URL =
  * `moving_fn` aggregations must be embedded inside of a histogram or
  * date_histogram aggregation.
  *
- * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/master/search-aggregations-pipeline-movfn-aggregation.html)
+ * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-movfn-aggregation.html)
+ *
+ * NOTE: Only available in Elasticsearch 6.4.0+.
  *
  * @example
  * const agg = esb.movingFunctionAggregation('the_movfn', 'the_sum')
@@ -48,7 +50,7 @@ const ES_REF_URL =
  *
  * @param {string} name The name which will be used to refer to this aggregation.
  * @param {string=} bucketsPath The relative path of metric to aggregate over.
- * @param {string=} window 	The size of window to "slide" across the histogram.
+ * @param {string=} window The size of window to "slide" across the histogram.
  * @param {string=} script The script that should be executed on each window of data.
  *
  * @extends PipelineAggregationBase
@@ -60,15 +62,6 @@ class MovingFunctionAggregation extends PipelineAggregationBase {
 
         if (!isNil(window)) this._aggsDef.window = window;
         if (!isNil(script)) this._aggsDef.script = script;
-    }
-
-    /**
-     * @override
-     * @throws {Error} This method cannot be called on MovingFunctionAggregation
-     */
-    format() {
-        console.log(`Please refer ${ES_REF_URL}`);
-        throw new Error('format is not supported in MovingFunctionAggregation');
     }
 
     /**
