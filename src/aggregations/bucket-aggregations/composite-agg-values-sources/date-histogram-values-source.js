@@ -47,6 +47,50 @@ class DateHistogramValuesSource extends ValuesSourceBase {
     }
 
     /**
+     * Calendar-aware intervals are configured with the calendarInterval parameter.
+     * The combined interval field for date histograms is deprecated from ES 7.2.
+     *
+     * @example
+     * const agg = esb.dateHistogramValuesSource('by_month', 'date').calendarInterval(
+     *     'month'
+     * );
+     *
+     * @param {string} interval Interval to generate histogram over.
+     * You can specify calendar intervals using the unit name, such as month, or as
+     * a single unit quantity, such as 1M. For example, day and 1d are equivalent.
+     * Multiple quantities, such as 2d, are not supported.
+     * @returns {DateHistogramValuesSource} returns `this` so that calls can be chained
+     */
+    calendarInterval(interval) {
+        this._aggsDef.calendar_interval = interval;
+        return this;
+    }
+
+    /**
+     * Fixed intervals are configured with the fixedInterval parameter.
+     * The combined interval field for date histograms is deprecated from ES 7.2.
+     *
+     * @param {string} interval Interval to generate histogram over.
+     * Intervals are a fixed number of SI units and never deviate, regardless
+     * of where they fall on the calendar. However, it means fixed intervals
+     * cannot express other units such as months, since the duration of a
+     * month is not a fixed quantity.
+     *
+     * @example
+     * const agg = esb.dateHistogramValuesSource('by_minute', 'date').calendarInterval(
+     *     '60s'
+     * );
+     *
+     * The accepted units for fixed intervals are:
+     * millseconds (ms), seconds (s), minutes (m), hours (h) and days (d).
+     * @returns {DateHistogramValuesSource} returns `this` so that calls can be chained
+     */
+    fixedInterval(interval) {
+        this._aggsDef.fixed_interval = interval;
+        return this;
+    }
+
+    /**
      * Sets the date time zone
      *
      * Date-times are stored in Elasticsearch in UTC. By default, all bucketing
