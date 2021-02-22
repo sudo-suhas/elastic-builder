@@ -22,6 +22,7 @@ test('prefix is set', t => {
     t.deepEqual(value, expected);
 });
 
+test(setsOption, 'skipDuplicates', { propValue: true });
 test(setsOption, 'fuzzy', { param: true });
 test(setsOption, 'fuzzy', { propValue: true });
 test(setsOption, 'fuzziness', {
