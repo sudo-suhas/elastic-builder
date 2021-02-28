@@ -58,6 +58,19 @@ class CompletionSuggester extends Suggester {
     }
 
     /**
+     * Sets whether duplicate suggestions should be filtered out (defaults to false).
+     *
+     * NOTE: This option was added in elasticsearch v6.1.
+     *
+     * @param {boolean} skip Enable/disable skipping duplicates
+     * @returns {CompletionSuggester} returns `this` so that calls can be chained.
+     */
+    skipDuplicates(skip = true) {
+        this._suggestOpts.skip_duplicates = skip;
+        return this;
+    }
+
+    /**
      * Check that the object property `this._suggestOpts.fuzzy` is an object.
      * Set empty object if required.
      *

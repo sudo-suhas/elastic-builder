@@ -7944,6 +7944,15 @@ declare namespace esb {
         prefix(prefix: string): this;
 
         /**
+         * Sets whether duplicate suggestions should be filtered out (defaults to false).
+         *
+         * NOTE: This option was added in elasticsearch v6.1.
+         *
+         * @param {boolean} skip Enable/disable skipping duplicates
+         */
+        skipDuplicates(skip?: boolean): this;
+
+        /**
          * Sets the `fuzzy` parameter. Can be customised with specific fuzzy parameters.
          *
          * @param {boolean|Object=} fuzzy Enable/disable `fuzzy` using boolean or
