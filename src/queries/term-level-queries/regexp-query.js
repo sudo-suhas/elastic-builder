@@ -45,6 +45,22 @@ class RegexpQuery extends MultiTermQueryBase {
     }
 
     /**
+     * Allow case insensitive matching or not.
+     * Defaults to false.
+     *
+     * @example
+     * const qry = esb.regexpQuery('name.first', 's.*y')
+     *     .caseInsensitive(true);
+     *
+     * @param {boolean} caseInsensitive
+     * @returns {RegexpQuery} returns `this` so that calls can be chained.
+     */
+    caseInsensitive(caseInsensitive) {
+        this._queryOpts.case_insensitive = caseInsensitive;
+        return this;
+    }
+
+    /**
      * Limit on how many automaton states regexp queries are allowed to create.
      * This protects against too-difficult (e.g. exponentially hard) regexps.
      * Defaults to 10000.
