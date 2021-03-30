@@ -1819,6 +1819,14 @@ declare namespace esb {
         flags(flags: string): this;
 
         /**
+         * Allow case insensitive matching or not (added in 7.10.0).
+         * Defaults to false.
+         *
+         * @param {boolean} caseInsensitive
+         */
+        caseInsensitive(caseInsensitive: boolean) : this;
+
+        /**
          * Limit on how many automaton states regexp queries are allowed to create.
          * This protects against too-difficult (e.g. exponentially hard) regexps.
          * Defaults to 10000.

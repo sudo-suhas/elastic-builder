@@ -45,7 +45,7 @@ class RegexpQuery extends MultiTermQueryBase {
     }
 
     /**
-     * Allow case insensitive matching or not.
+     * Allow case insensitive matching or not (added in 7.10.0).
      * Defaults to false.
      *
      * @example
