@@ -24,5 +24,6 @@ const validRewrites = [
 
 test(validatedCorrectly, getInstance, 'rewrite', validRewrites, false);
 test(setsOption, 'flags', { param: 'PREFIX|PHRASE' });
+test(setsOption, 'caseInsensitive', true);
 test(setsOption, 'maxDeterminizedStates', { param: 10500 });
 test(setsOption, 'rewrite', { param: 'constant_score' });
