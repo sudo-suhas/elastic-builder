@@ -26,6 +26,22 @@ class WildcardQuery extends MultiTermQueryBase {
     }
 
     /**
+     * Allow case insensitive matching or not (added in 7.10.0).
+     * Defaults to false.
+     *
+     * @example
+     * const qry = esb.wildcardQuery('user', 'ki*y')
+     *     .caseInsensitive(true);
+     *
+     * @param {boolean} caseInsensitive
+     * @returns {RegexpQuery} returns `this` so that calls can be chained.
+     */
+    caseInsensitive(caseInsensitive) {
+        this._queryOpts.case_insensitive = caseInsensitive;
+        return this;
+    }
+
+    /**
      * Sets the rewrite method. Valid values are:
      * - `constant_score` - tries to pick the best constant-score rewrite
      *  method based on term and document counts from the query.
