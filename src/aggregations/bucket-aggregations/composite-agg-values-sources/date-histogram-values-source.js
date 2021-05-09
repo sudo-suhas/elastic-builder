@@ -62,7 +62,7 @@ class DateHistogramValuesSource extends ValuesSourceBase {
      * @returns {DateHistogramValuesSource} returns `this` so that calls can be chained
      */
     calendarInterval(interval) {
-        this._aggsDef.calendar_interval = interval;
+        this._opts.calendar_interval = interval;
         return this;
     }
 
@@ -86,7 +86,7 @@ class DateHistogramValuesSource extends ValuesSourceBase {
      * @returns {DateHistogramValuesSource} returns `this` so that calls can be chained
      */
     fixedInterval(interval) {
-        this._aggsDef.fixed_interval = interval;
+        this._opts.fixed_interval = interval;
         return this;
     }
 

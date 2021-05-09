@@ -30,14 +30,15 @@ test('constructor sets arguments', t => {
 });
 
 test('calendar_interval_is_set', t => {
-    const value = getInstance('by_day', 'date')
+    const value = getInstance('field_name', 'date')
         .calendarInterval('month')
         .toJSON();
     const expected = {
         my_val_src: {
             date_histogram: {
-                field: 'date',
-                calendar_interval: 'month'
+                field: 'field_name',
+                calendar_interval: 'month',
+                interval: 'date'
             }
         }
     };
@@ -45,14 +46,15 @@ test('calendar_interval_is_set', t => {
 });
 
 test('fixed_interval_is_set', t => {
-    const value = getInstance('by_day', 'date')
+    const value = getInstance('field_name', 'date')
         .fixedInterval('90s')
         .toJSON();
     const expected = {
         my_val_src: {
             date_histogram: {
-                field: 'date',
-                fixed_interval: '90s'
+                field: 'field_name',
+                fixed_interval: '90s',
+                interval: 'date'
             }
         }
     };
@@ -63,5 +65,5 @@ test(setsAggType, DateHistogramValuesSource, 'date_histogram');
 test(setsOption, 'interval', { param: 5 });
 test(setsOption, 'timeZone', { param: 'America/Los_Angeles' });
 test(setsOption, 'format', { param: 'yyyy-MM-dd' });
-test(setsOption, 'calendar_interval', { param: 'month' });
-test(setsOption, 'fixed_interval', { param: '90s' });
+test(setsOption, 'calendarInterval', { param: 'month' });
+test(setsOption, 'fixedInterval', { param: '90s' });
