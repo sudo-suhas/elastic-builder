@@ -70,7 +70,6 @@ class DateHistogramValuesSource extends ValuesSourceBase {
      * Fixed intervals are configured with the fixedInterval parameter.
      * The combined interval field for date histograms is deprecated from ES 7.2.
      *
-     *
      * @example
      * const agg = esb.dateHistogramValuesSource('by_minute', 'date').calendarInterval(
      *     '60s'
