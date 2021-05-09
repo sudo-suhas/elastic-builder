@@ -70,17 +70,17 @@ class DateHistogramValuesSource extends ValuesSourceBase {
      * Fixed intervals are configured with the fixedInterval parameter.
      * The combined interval field for date histograms is deprecated from ES 7.2.
      *
-     * @param {string} interval Interval to generate histogram over.
-     * Intervals are a fixed number of SI units and never deviate, regardless
-     * of where they fall on the calendar. However, it means fixed intervals
-     * cannot express other units such as months, since the duration of a
-     * month is not a fixed quantity.
      *
      * @example
      * const agg = esb.dateHistogramValuesSource('by_minute', 'date').calendarInterval(
      *     '60s'
      * );
      *
+     * @param {string} interval Interval to generate histogram over.
+     * Intervals are a fixed number of SI units and never deviate, regardless
+     * of where they fall on the calendar. However, it means fixed intervals
+     * cannot express other units such as months, since the duration of a
+     * month is not a fixed quantity.
      * The accepted units for fixed intervals are:
      * millseconds (ms), seconds (s), minutes (m), hours (h) and days (d).
      * @returns {DateHistogramValuesSource} returns `this` so that calls can be chained
