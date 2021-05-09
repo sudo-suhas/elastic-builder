@@ -1756,6 +1756,14 @@ declare namespace esb {
         constructor(field?: string, value?: string);
 
         /**
+         * Allow case insensitive matching or not (added in 7.10.0).
+         * Defaults to false.
+         *
+         * @param {boolean} caseInsensitive
+         */
+        caseInsensitive(caseInsensitive: boolean): this;
+
+        /**
          * Sets the rewrite method. Valid values are:
          * - `constant_score` - tries to pick the best constant-score rewrite
          *  method based on term and document counts from the query.

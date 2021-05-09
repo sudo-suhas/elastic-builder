@@ -24,3 +24,4 @@ const validRewrites = [
 
 test(validatedCorrectly, getInstance, 'rewrite', validRewrites, false);
 test(setsOption, 'rewrite', { param: 'constant_score' });
+test(setsOption, 'caseInsensitive', true);
