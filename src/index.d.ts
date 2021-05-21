@@ -5924,6 +5924,96 @@ declare namespace esb {
     ): RangeAggregation;
 
     /**
+     * A multi-bucket value source based aggregation which finds
+     * "rare" terms — terms that are at the long-tail of the
+     * distribution and are not frequent. Conceptually, this is like
+     * a terms aggregation that is sorted by `_count` ascending.
+     * As noted in the terms aggregation docs, actually ordering
+     * a `terms` agg by count ascending has unbounded error.
+     * Instead, you should use the `rare_terms` aggregation
+     *
+     * NOTE: Only available in Elasticsearch 7.3.0+.
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     * @param {string} field The field we wish to find rare terms in
+     * @extends BucketAggregationBase
+     */
+    export class RareTermsAggregation extends BucketAggregationBase {
+        constructor(name: string, field: string);
+
+        /**
+         * Sets the maximum number of documents a term should appear in.
+         *
+         * @param {number} maxDocCnt Integer value for maximum number of documents a term should appear in.
+         * Max doc count can be between 1 and 100.
+         * @returns {RareTermsAggregation} returns `this` so that calls can be chained
+         */
+        maxDocCount(maxDocCnt: number): this;
+
+        /**
+         * Sets the precision of the internal CuckooFilters. Smaller precision
+         * leads to better approximation, but higher memory usage.
+         * Cannot be smaller than 0.00001
+         *
+         * @param {number} precision Float value for precision of the internal CuckooFilters. Default is 0.01
+         * @returns {RareTermsAggregation} returns `this` so that calls can be chained
+         */
+        precision(precision: number): this;
+
+        /**
+         * Sets terms that should be included in the aggregation
+         *
+         * @param {string} include Regular expression that will determine what values
+         * are "allowed" to be aggregated
+         * @returns {RareTermsAggregation} returns `this` so that calls can be chained
+         */
+        include(include: string): this;
+
+        /**
+         * Sets terms that should be excluded from the aggregation
+         *
+         * @param {string} exclude Regular expression that will determine what values
+         * should not be aggregated
+         * @returns {RareTermsAggregation} returns `this` so that calls can be chained
+         */
+        exclude(exclude: string): this;
+
+        /**
+         * Sets the missing parameter which defines how documents
+         * that are missing a value should be treated.
+         *
+         * @param {string} value
+         * @returns {RareTermsAggregation} returns `this` so that calls can be chained
+         */
+        missing(value: string): this;
+
+        /**
+         * @override
+         * @throws {Error} This method cannot be called on RareTermsAggregation
+         */
+        script(): never;
+    }
+
+    /**
+     * A multi-bucket value source based aggregation which finds
+     * "rare" terms — terms that are at the long-tail of the
+     * distribution and are not frequent. Conceptually, this is like
+     * a terms aggregation that is sorted by `_count` ascending.
+     * As noted in the terms aggregation docs, actually ordering
+     * a `terms` agg by count ascending has unbounded error.
+     * Instead, you should use the `rare_terms` aggregation
+     *
+     * NOTE: Only available in Elasticsearch 7.3.0+.
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     * @param {string} field The field we wish to find rare terms in
+     */
+    export function rareTermsAggregation(
+        name: string,
+        field: string
+    ): RareTermsAggregation;
+
+    /**
      * A special single bucket aggregation that enables aggregating
      * on parent docs from nested documents. Effectively this
      * aggregation can break out of the nested block structure and

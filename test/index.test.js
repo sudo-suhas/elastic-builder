@@ -274,6 +274,9 @@ test('aggregations are exported', t => {
     t.truthy(esb.RangeAggregation);
     t.truthy(esb.rangeAggregation);
 
+    t.truthy(esb.RareTermsAggregation);
+    t.truthy(esb.rareTermsAggregation);
+
     t.truthy(esb.ReverseNestedAggregation);
     t.truthy(esb.reverseNestedAggregation);
 

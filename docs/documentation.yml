@@ -124,6 +124,7 @@ toc:
   - NestedAggregation
   - ParentAggregation
   - RangeAggregation
+  - RareTermsAggregation
   - ReverseNestedAggregation
   - SamplerAggregation
   - TermsAggregationBase
