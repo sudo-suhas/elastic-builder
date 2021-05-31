@@ -81,14 +81,8 @@ test('precision is set', t => {
 });
 
 test('precision correctly validated', t => {
-    let err = t.throws(() => getInstance().precision(null), Error);
-    t.is(err.message, '`precision` cannot be smaller than 0.00001.');
-
-    err = t.throws(() => getInstance().precision(undefined), Error);
-    t.is(err.message, '`precision` cannot be smaller than 0.00001.');
-
-    err = t.throws(() => getInstance().precision(0.000001), Error);
-    t.is(err.message, '`precision` cannot be smaller than 0.00001.');
+    const err = t.throws(() => getInstance().precision(0.000001), Error);
+    t.is(err.message, '`precision` must be greater than 0.00001.');
 });
 
 test('include is set', t => {

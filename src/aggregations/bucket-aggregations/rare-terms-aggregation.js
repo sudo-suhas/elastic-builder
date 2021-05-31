@@ -65,8 +65,8 @@ class RareTermsAggregation extends BucketAggregationBase {
      * @returns {RareTermsAggregation} returns `this` so that calls can be chained
      */
     precision(precision) {
-        if (isNil(precision) || precision < 0.00001) {
-            throw new Error('`precision` cannot be smaller than 0.00001.');
+        if (precision < 0.00001) {
+            throw new Error('`precision` must be greater than 0.00001.');
         }
 
         this._aggsDef.precision = precision;
