@@ -25,6 +25,7 @@ exports.MissingAggregation = require('./missing-aggregation');
 exports.NestedAggregation = require('./nested-aggregation');
 exports.ParentAggregation = require('./parent-aggregation');
 exports.RangeAggregation = require('./range-aggregation');
+exports.RareTermsAggregation = require('./rare-terms-aggregation');
 exports.ReverseNestedAggregation = require('./reverse-nested-aggregation');
 exports.SamplerAggregation = require('./sampler-aggregation');
 exports.SignificantTermsAggregation = require('./significant-terms-aggregation');

@@ -118,6 +118,7 @@ const {
         NestedAggregation,
         ParentAggregation,
         RangeAggregation,
+        RareTermsAggregation,
         ReverseNestedAggregation,
         SamplerAggregation,
         SignificantTermsAggregation,
@@ -428,6 +429,9 @@ exports.parentAggregation = constructorWrapper(ParentAggregation);
 
 exports.RangeAggregation = RangeAggregation;
 exports.rangeAggregation = constructorWrapper(RangeAggregation);
+
+exports.RareTermsAggregation = RareTermsAggregation;
+exports.rareTermsAggregation = constructorWrapper(RareTermsAggregation);
 
 exports.ReverseNestedAggregation = ReverseNestedAggregation;
 exports.reverseNestedAggregation = constructorWrapper(ReverseNestedAggregation);
