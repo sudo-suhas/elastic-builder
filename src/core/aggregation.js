@@ -135,6 +135,15 @@ class Aggregation {
         // aggregation name. Error out.
         throw new Error('Aggregation name could not be determined');
     }
+    
+    /**
+     * Helper function for determining the aggregation name.
+     *
+     * @returns {string} Aggregation name
+     */
+    getAggsName() {
+        return this._aggsName();
+    }
 
     /**
      * Build and returns DSL representation of the `Aggregation` class instance.
