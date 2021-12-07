@@ -21,7 +21,15 @@ const validRewrites = [
     'top_terms_boost_23',
     'top_terms_15'
 ];
-
+const validType = [
+    'best_fields',
+    'most_fields',
+    'cross_fields',
+    'phrase',
+    'phrase_prefix',
+    'bool_prefix'
+];
+test(validatedCorrectly, getInstance, 'type', validType, false);
 test(validatedCorrectly, getInstance, 'rewrite', validRewrites, false);
 test(validatedCorrectly, getInstance, 'fuzzyRewrite', validRewrites, false);
 test(setsOption, 'defaultField', { param: 'my_field' });
@@ -41,3 +49,4 @@ test(setsOption, 'useDisMax', { param: true });
 test(setsOption, 'tieBreaker', { param: 0.3 });
 test(setsOption, 'quoteAnalyzer', { param: 'my_analyzer' });
 test(setsOption, 'escape', { param: true });
+test(setsOption, 'type', { param: 'best_fields' });

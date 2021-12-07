@@ -2,9 +2,15 @@
 
 const QueryStringQueryBase = require('./query-string-query-base');
 const { validateRewiteMethod } = require('../helper');
-
+const isNil = require('lodash.isnil');
+const {
+    util: { invalidParam },
+    consts: { QUERY_STRING_TYPE }
+} = require('../../core');
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html';
+
+const invalidTypeParam = invalidParam(ES_REF_URL, 'type', QUERY_STRING_TYPE);
 
 /**
  * A query that uses a query parser in order to parse its content.
@@ -301,6 +307,42 @@ class QueryStringQuery extends QueryStringQueryBase {
      */
     escape(enable) {
         this._queryOpts.escape = enable;
+        return this;
+    }
+
+    /**
+     * Sets the type of query string query. Valid values are:
+     * - `best_fields` - (default) Finds documents which match any field,
+     * but uses the `_score` from the best field.
+     *
+     * - `most_fields` - Finds documents which match any field and combines
+     * the `_score` from each field.
+     *
+     * - `cross_fields` - Treats fields with the same `analyzer` as though
+     * they were one big field. Looks for each word in *any* field
+     *
+     * - `phrase` - Runs a `match_phrase` query on each field and combines
+     * the `_score` from each field.
+     *
+     * - `phrase_prefix` - Runs a `match_phrase_prefix` query on each field
+     * and combines the `_score` from each field.
+     *
+     * - `bool_prefix` - Creates a match_bool_prefix query on each field and
+     * combines the _score from each field.
+     *
+     *
+     * @param {string} type Can be one of `best_fields`, `most_fields`,
+     * `cross_fields`, `phrase`, `phrase_prefix` and `bool_prefix`. Default is
+     * `best_fields`.
+     * @returns {QueryStringQuery} returns `this` so that calls can be chained.
+     */
+    type(type) {
+        if (isNil(type)) invalidTypeParam(type);
+
+        const typeLower = type.toLowerCase();
+        if (!QUERY_STRING_TYPE.has(typeLower)) invalidTypeParam(type);
+
+        this._queryOpts.type = typeLower;
         return this;
     }
 }
