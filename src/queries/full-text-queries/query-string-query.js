@@ -311,7 +311,7 @@ class QueryStringQuery extends QueryStringQueryBase {
     }
 
     /**
-     * Sets the type of query string query. Valid values are:
+     * Sets the type of query string query (Added in v6.0). Valid values are:
      * - `best_fields` - (default) Finds documents which match any field,
      * but uses the `_score` from the best field.
      *
@@ -327,7 +327,7 @@ class QueryStringQuery extends QueryStringQueryBase {
      * - `phrase_prefix` - Runs a `match_phrase_prefix` query on each field
      * and combines the `_score` from each field.
      *
-     * - `bool_prefix` - Creates a match_bool_prefix query on each field and
+     * - `bool_prefix` - (added in v7.2) Creates a match_bool_prefix query on each field and
      * combines the _score from each field.
      *
      *
