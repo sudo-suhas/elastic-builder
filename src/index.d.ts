@@ -3607,7 +3607,7 @@ declare namespace esb {
         script(script: Script): this;
 
         /**
-         * Sets the missing parameter ehich defines how documents
+         * Sets the missing parameter which defines how documents
          * that are missing a value should be treated.
          *
          * @param {string} value
