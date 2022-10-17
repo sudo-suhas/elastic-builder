@@ -1832,7 +1832,7 @@ declare namespace esb {
          *
          * @param {boolean} caseInsensitive
          */
-        caseInsensitive(caseInsensitive: boolean) : this;
+        caseInsensitive(caseInsensitive: boolean): this;
 
         /**
          * Limit on how many automaton states regexp queries are allowed to create.
@@ -3154,6 +3154,40 @@ declare namespace esb {
         field?: string,
         docType?: string
     ): PercolateQuery;
+
+    /**
+     * @param {string} field The field inside the document to be used in the query
+     * @extends Query
+     */
+    export class DistanceFeatureQuery extends Query {
+        constructor(field?: string);
+
+        /**
+         * Sets the field for the `distance_feature` query
+         * @param {string} fieldName Name of the field inside the document
+         * @returns {DistanceFeatureQuery} Instance of the query
+         */
+        field(fieldName: string): DistanceFeatureQuery;
+
+        /**
+         * Sets the origin of the function. Date or point of coordinates
+         * used to calculate distances
+         * @param {GeoPoint | string} originPoint
+         * @returns {DistanceFeatureQuery} Instance of the distance feature query
+         */
+        origin(originPoint: string | GeoPoint): DistanceFeatureQuery;
+
+        /**
+         * Distance from the origin at which relevance scores receive half of the boost value.
+         * @param {string} pivotDistance Distance value. If the field value is date then this must be a
+         * [time unit](https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#time-units).
+         * If it's a geo point field, then a [distance unit](https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#distance-units)
+         * @returns {DistanceFeatureQuery} Instance of the distance feature query
+         */
+        pivot(pivotDistance: string): DistanceFeatureQuery;
+    }
+
+    export function distanceFeatureQuery(field?: string): DistanceFeatureQuery;
 
     /**
      * Interface-like class used to group and identify various implementations of Span queries.
