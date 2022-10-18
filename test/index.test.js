@@ -137,6 +137,9 @@ test('queries are exported', t => {
     t.truthy(esb.PercolateQuery);
     t.truthy(esb.percolateQuery);
 
+    t.truthy(esb.DistanceFeatureQuery);
+    t.truthy(esb.distanceFeatureQuery);
+
     /* ============ ============ ============ */
     /* ============ Span Queries ============ */
     /* ============ ============ ============ */
