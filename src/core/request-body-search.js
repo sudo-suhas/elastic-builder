@@ -407,6 +407,74 @@ class RequestBodySearch {
     }
 
     /**
+     * Computes a document property dynamically based on the supplied `script`.
+     *
+     * @example
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.matchAllQuery())
+     *     .runtimeField(
+     *       'sessionId-name',
+     *       esb.runtimeField(
+     *         'keyword',
+     *         `emit(doc['session_id'].value + '::' + doc['name'].value)`
+     *       )
+     *     )
+     *
+     * @example
+     * // runtime fields can also be used in query aggregation
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.matchAllQuery())
+     *     .runtimeField(
+     *       'sessionId-eventName',
+     *       esb.runtimeField(
+     *         'keyword',
+     *         `emit(doc['session_id'].value + '::' + doc['eventName'].value)`,
+     *       )
+     *     )
+     *     .agg(esb.cardinalityAggregation('uniqueCount', `sessionId-eventName`)),;
+     *
+     * @param {string} runtimeFieldName
+     * @param {RuntimeField} instance of `RuntimeField`
+     * @returns {RequestBodySearch} returns `this` so that calls can be chained
+     */
+    runtimeMapping(runtimeMappingName, runtimeField) {
+        setDefault(this._body, 'runtime_mappings', {});
+        this._body.runtime_mappings[runtimeMappingName] = runtimeField;
+        return this;
+    }
+
+    /**
+     * Computes one or more document properties dynamically based on supplied `RuntimeField`s.
+     *
+     * @example
+     * const fieldA = esb.runtimeField(
+     *       'keyword',
+     *       `emit(doc['session_id'].value + '::' + doc['name'].value)`,
+     *       'sessionId-name'
+     * );
+     * const reqBody = esb.requestBodySearch()
+     *     .query(esb.matchAllQuery())
+     *     .runtimeFields({
+     *       'sessionId-name': fieldA,
+     *     })
+     *
+     * @param {Object} runtimeFields Object with `runtimeFieldName` as key and `RuntimeField` instance as the value.
+     * @returns {RequestBodySearch} returns `this` so that calls can be chained
+     */
+    runtimeMappings(runtimeMappings) {
+        checkType(runtimeMappings, Object);
+
+        Object.keys(runtimeMappings).forEach(runtimeMappingName =>
+            this.runtimeMapping(
+                runtimeMappingName,
+                runtimeMappings[runtimeMappingName]
+            )
+        );
+
+        return this;
+    }
+
+    /**
      * Computes a document property dynamically based on the supplied `Script`.
      *
      * @example

@@ -12,6 +12,7 @@ const {
     Sort,
     Rescore,
     InnerHits,
+    RuntimeField,
     SearchTemplate,
     Query,
     util: { constructorWrapper }
@@ -639,6 +640,9 @@ exports.innerHits = constructorWrapper(InnerHits);
 
 exports.SearchTemplate = SearchTemplate;
 exports.searchTemplate = constructorWrapper(SearchTemplate);
+
+exports.RuntimeField = RuntimeField;
+exports.runtimeField = constructorWrapper(RuntimeField);
 
 exports.prettyPrint = function prettyPrint(obj) {
     console.log(JSON.stringify(obj, null, 2));
