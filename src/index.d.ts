@@ -167,6 +167,9 @@ declare namespace esb {
          */
         storedFields(fields: object | string): this;
 
+        runtimeMapping(runtimeMappingName: string, script: string | RuntimeField): this;
+        runtimeMappings(runtimeMappings: object): this;
+
         /**
          * Computes a document property dynamically based on the supplied `Script`.
          *
@@ -8439,6 +8442,20 @@ declare namespace esb {
      * @param {string|Array=} fields An optional field or array of fields to highlight.
      */
     export function highlight(fields?: string | string[]): Highlight;
+
+    export class RuntimeField {
+        constructor(type?: string, script?: string, name?: string);
+        name(name: string);
+        type(type: 'boolean' | 'composite' | 'date' | 'double' | 'geo_point' | 'ip' | 'keyword' | 'long' | 'lookup');
+        script(script: string);
+        /**
+         * Override default `toJSON` to return DSL representation for the `script`.
+         *
+         * @override
+         */
+        toJSON(): object;
+    }
+    export function runtimeField(type?: string, script?: string, name?: string): RuntimeField;
 
     /**
      * Class supporting the Elasticsearch scripting API.
