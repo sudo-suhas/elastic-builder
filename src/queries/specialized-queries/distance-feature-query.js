@@ -18,6 +18,8 @@ const { Query } = require('../../core');
  *       .origin('now')
  *       .pivot('1h')
  *       .toJSON();
+ * @param {string} field The field inside the document to be used in the query
+ * @extends Query
  */
 class DistanceFeatureQuery extends Query {
     /**

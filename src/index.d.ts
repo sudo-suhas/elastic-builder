@@ -3156,6 +3156,21 @@ declare namespace esb {
     ): PercolateQuery;
 
     /**
+     * The `distance_feature` query can be used to filter documents that are inside
+     * a timeframe or radius given an **origin** point. For dates the difference can be
+     * minutes, hours, etc and for coordinates it can be meters, kilometers..
+     *
+     *  [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-distance-feature-query.html)
+     *
+     * NOTE: Only available in Elasticsearch 7.1.0+.
+     *
+     * @example
+     * const query = new DistanceFeatureQuery('time');
+     *   query
+     *       .origin('now')
+     *       .pivot('1h')
+     *       .toJSON();
+     *
      * @param {string} field The field inside the document to be used in the query
      * @extends Query
      */
@@ -3187,6 +3202,25 @@ declare namespace esb {
         pivot(pivotDistance: string): DistanceFeatureQuery;
     }
 
+    /**
+     * The `distance_feature` query can be used to filter documents that are inside
+     * a timeframe or radius given an **origin** point. For dates the difference can be
+     * minutes, hours, etc and for coordinates it can be meters, kilometers..
+     *
+     *  [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-distance-feature-query.html)
+     *
+     * NOTE: Only available in Elasticsearch 7.1.0+.
+     *
+     * @example
+     * const query = new DistanceFeatureQuery('time');
+     *   query
+     *       .origin('now')
+     *       .pivot('1h')
+     *       .toJSON();
+     *
+     * @param {string} field The field inside the document to be used in the query
+     * @return {DistanceFeatureQuery}
+     */
     export function distanceFeatureQuery(field?: string): DistanceFeatureQuery;
 
     /**
