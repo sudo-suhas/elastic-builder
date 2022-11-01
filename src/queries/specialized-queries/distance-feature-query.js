@@ -10,6 +10,8 @@ const { Query } = require('../../core');
  *
  *  [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-distance-feature-query.html)
  *
+ * NOTE: Only available in Elasticsearch 7.1.0+.
+ *
  * @example
  * const query = new DistanceFeatureQuery('time');
  *   query
