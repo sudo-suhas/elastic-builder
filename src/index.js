@@ -67,7 +67,12 @@ const {
         GeoDistanceQuery,
         GeoPolygonQuery
     },
-    specializedQueries: { MoreLikeThisQuery, ScriptQuery, PercolateQuery },
+    specializedQueries: {
+        MoreLikeThisQuery,
+        ScriptQuery,
+        PercolateQuery,
+        DistanceFeatureQuery
+    },
     spanQueries: {
         SpanTermQuery,
         SpanMultiTermQuery,
@@ -285,6 +290,9 @@ exports.scriptQuery = constructorWrapper(ScriptQuery);
 
 exports.PercolateQuery = PercolateQuery;
 exports.percolateQuery = constructorWrapper(PercolateQuery);
+
+exports.DistanceFeatureQuery = DistanceFeatureQuery;
+exports.distanceFeatureQuery = constructorWrapper(DistanceFeatureQuery);
 
 /* ============ ============ ============ */
 /* ============ Span Queries ============ */
