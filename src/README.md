@@ -8,14 +8,6 @@ You absolutely don't _need_ to read this. But you could. If you wanted to.
 
 ## Project structure overview
 All the source files written in ES6 are present in the `src` folder.
-This gets transpiled using babel to the `lib` folder.
-
-npm script:
-```
-cross-env BABEL_ENV=production babel src --out-dir lib
-```
-
-This is not tracked in git but is present in the npm package which the end user gets.
 
 ```js
 // package.json snippet
@@ -24,7 +16,6 @@ This is not tracked in git but is present in the npm package which the end user 
   // Files to be picked up by npm
   "files": [
     "browser/",
-    "lib/",
     "src/",
     "repl.js",
     "index.d.ts"
@@ -33,7 +24,7 @@ This is not tracked in git but is present in the npm package which the end user 
 }
 ```
 
-These transpiled files are then `webpack`ed into a minified `umd` module
+These files are then packed into a minified `umd` module
 for use in the browser and kept in the `browser` folder.
 This is also used by the demo hosted on https://elastic-builder.js.org
 
