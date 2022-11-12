@@ -1,14 +1,13 @@
 'use strict';
 
-const { inspect } = require('util');
-
 const isEmpty = require('lodash.isempty'),
     isNil = require('lodash.isnil'),
     isString = require('lodash.isstring'),
     isObject = require('lodash.isobject'),
-    hasIn = require('lodash.hasin');
+    hasIn = require('lodash.hasin'),
+    has = require('lodash.has');
 
-const has = require('lodash.has');
+const inspect = require('./inspect');
 
 /**
  * Check if the object is instance of class type
