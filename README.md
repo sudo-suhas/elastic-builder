@@ -1,6 +1,6 @@
 # elastic-builder
 
-[![npm version][version-badge]][package] [![Build Status][build-badge]][build]
+[![npm version][version-badge]][package] [![.github/workflows/build.yml][build-badge]][build]
 [![Coverage Status][coverage-badge]][coverage]
 [![semantic-release][semantic-release-badge]][semantic-release]
 
@@ -377,8 +377,8 @@ MIT © [Suhas Karanth][sudo-suhas]
 [version-badge]: https://badge.fury.io/js/elastic-builder.svg
 [package]: https://www.npmjs.com/package/elastic-builder
 [build-badge]:
-  https://travis-ci.org/sudo-suhas/elastic-builder.svg?branch=master
-[build]: https://travis-ci.org/sudo-suhas/elastic-builder
+  https://github.com/sudo-suhas/elastic-builder/actions/workflows/release-with-check.yml/badge.svg
+[build]: https://github.com/sudo-suhas/elastic-builder/actions/workflows/build.yml
 [coverage-badge]:
   https://coveralls.io/repos/github/sudo-suhas/elastic-builder/badge.svg?branch=master
 [coverage]: https://coveralls.io/github/sudo-suhas/elastic-builder?branch=master
