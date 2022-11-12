@@ -26,6 +26,8 @@ jobs:
         run: yarn --frozen-lockfile
       - name: Check
         run: yarn run check
+      - name: Coverage
+        run: yarn coverage
 
   release:
     needs: [check]
@@ -47,5 +49,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release@19
-      - name: Coverage
-        run: yarn coverage
