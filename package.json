@@ -21,7 +21,7 @@
     "test": "npm run test:src && npm run test:typedef",
     "check": "npm run lint && npm test",
     "report": "nyc report --reporter=html",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc report --reporter=lcov",
     "print-version": "cross-env-shell echo v$npm_package_version",
     "prepublishOnly": "npm run -s build",
     "postpublish": "bash deploy-docs.sh"
@@ -45,7 +45,6 @@
     "babel-loader": "^7.1.5",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
-    "coveralls": "^3.0.2",
     "cross-env": "^5.2.0",
     "documentation": "^8.0.0",
     "eslint": "^5.1.0",

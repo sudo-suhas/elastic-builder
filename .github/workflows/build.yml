@@ -25,12 +25,28 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - name: Check
-        run: yarn run check
-      - name: Coverage
-        run: yarn coverage
+        run: |
+          yarn run check
+          yarn coverage
+      - name: Coveralls
+        uses: coverallsapp/github-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          flag-name: ${{matrix.os}}-node-${{ matrix.node }}
+          parallel: true
+
+  finish:
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          parallel-finished: true
 
   release:
-    needs: [check]
+    needs: check
 
     runs-on: ubuntu-latest
 
