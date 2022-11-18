@@ -1,6 +1,6 @@
 'use strict';
 
-const { inspect } = require('util');
+const { inspect } = require('../core/inspect');
 
 const {
     util: { firstDigitPos },
