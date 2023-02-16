@@ -64,7 +64,10 @@
     "webpack-cli": "^3.0.8"
   },
   "release": {
-    "branches": ["master", "next"]
+    "branches": [
+      "master",
+      "next"
+    ]
   },
   "lint-staged": {
     "src/**/*.js": [
@@ -99,6 +102,8 @@
   "author": "Suhas Karanth <sudo.suhas@gmail.com>",
   "contributors": [
     "austin ce <austin.cawley@gmail.com>",
-    "ochan12 <mateochando@gmail.com>"
+    "ochan12 <mateochando@gmail.com>",
+    "kennylindahl <haxxblaster@gmail.com>",
+    "foxstarius <aj.franzon@gmail.com>"
   ]
 }

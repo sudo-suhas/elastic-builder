@@ -5102,6 +5102,40 @@ declare namespace esb {
     ): AutoDateHistogramAggregation;
 
     /**
+     * A multi-bucket aggregation similar to Histogram, but the width of each bucket is not specified.
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     * @param {string=} [field] The field to aggregate on
+     * @param {number=} [buckets] Bucket count to generate histogram over.
+     * @extends BucketAggregationBase
+     */
+    export class VariableWidthHistogramAggregation extends BucketAggregationBase {
+        constructor(name: string, field?: string, buckets?: number);
+
+        /**
+         * Sets the histogram bucket count. Buckets are generated based on this value.
+         *
+         * @param {number} buckets Bucket count to generate histogram over.
+         * @returns {VariableWidthHistogramAggregation} returns `this` so that calls can be chained
+         */
+        buckets(buckets): this;
+    }
+
+    /**
+     * A multi-bucket aggregation similar to Histogram, but the width of each bucket is not specified.
+     *
+     * @param {string} name The name which will be used to refer to this aggregation.
+     * @param {string=} [field] The field to aggregate on
+     * @param {number=} [buckets] Bucket count to generate histogram over.
+     * @extends BucketAggregationBase
+     */
+    export function variableWidthHistogramAggregation(
+        name: string,
+        field?: string,
+        buckets?: number
+    ): VariableWidthHistogramAggregation;
+
+    /**
      * A multi-bucket aggregation similar to the histogram except it can only be applied on date values.
      * The interval can be specified by date/time expressions.
      *

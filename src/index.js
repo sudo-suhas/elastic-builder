@@ -109,6 +109,7 @@ const {
         CompositeAggregation,
         DateHistogramAggregation,
         AutoDateHistogramAggregation,
+        VariableWidthHistogramAggregation,
         DateRangeAggregation,
         DiversifiedSamplerAggregation,
         FilterAggregation,
@@ -392,6 +393,11 @@ exports.dateHistogramAggregation = constructorWrapper(DateHistogramAggregation);
 exports.AutoDateHistogramAggregation = AutoDateHistogramAggregation;
 exports.autoDateHistogramAggregation = constructorWrapper(
     AutoDateHistogramAggregation
+);
+
+exports.VariableWidthHistogramAggregation = VariableWidthHistogramAggregation;
+exports.variableWidthHistogramAggregation = constructorWrapper(
+    VariableWidthHistogramAggregation
 );
 
 exports.DateRangeAggregation = DateRangeAggregation;
