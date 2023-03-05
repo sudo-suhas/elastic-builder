@@ -235,6 +235,9 @@ test('aggregations are exported', t => {
     t.truthy(esb.AutoDateHistogramAggregation);
     t.truthy(esb.autoDateHistogramAggregation);
 
+    t.truthy(esb.VariableWidthHistogramAggregation);
+    t.truthy(esb.variableWidthHistogramAggregation);
+
     t.truthy(esb.DateRangeAggregation);
     t.truthy(esb.dateRangeAggregation);
 
