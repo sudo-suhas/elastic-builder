@@ -5104,6 +5104,7 @@ declare namespace esb {
     /**
      * A multi-bucket aggregation similar to Histogram, but the width of each bucket is not specified.
      *
+     * NOTE: Only available in Elasticsearch v7.9.0+
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} [field] The field to aggregate on
      * @param {number=} [buckets] Bucket count to generate histogram over.

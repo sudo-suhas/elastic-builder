@@ -13,6 +13,7 @@ const BucketAggregationBase = require('./bucket-aggregation-base');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-variablewidthhistogram-aggregation.html)
  *
+ * NOTE: Only available in Elasticsearch v7.9.0+
  * @example
  * const agg = esb.variableWidthHistogramAggregation('price', 'lowestPrice', 10)
  *
