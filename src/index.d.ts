@@ -5119,7 +5119,7 @@ declare namespace esb {
          * @param {number} buckets Bucket count to generate histogram over.
          * @returns {VariableWidthHistogramAggregation} returns `this` so that calls can be chained
          */
-        buckets(buckets): this;
+        buckets(buckets: number): this;
     }
 
     /**
