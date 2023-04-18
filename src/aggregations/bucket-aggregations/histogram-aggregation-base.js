@@ -146,6 +146,7 @@ class HistogramAggregationBase extends BucketAggregationBase {
      * Set's the range/bounds for the histogram aggregation.
      * Useful when you want to include buckets that might be
      * outside the bounds of indexed documents.
+     * NOTE: Only available in Elasticsearch v7.10.0+
      *
      * @example
      * const agg = esb.histogramAggregation('prices', 'price', 50).extendedBounds(0, 500);
