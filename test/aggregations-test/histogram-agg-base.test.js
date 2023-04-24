@@ -20,6 +20,10 @@ test(setsOption, 'extendedBounds', {
     param: [0, 500],
     propValue: { min: 0, max: 500 }
 });
+test(setsOption, 'hardBounds', {
+    param: [0, 500],
+    propValue: { min: 0, max: 500 }
+});
 test(setsOption, 'order', {
     param: 'my_field',
     propValue: { my_field: 'desc' }

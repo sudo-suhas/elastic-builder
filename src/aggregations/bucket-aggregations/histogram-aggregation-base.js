@@ -168,6 +168,32 @@ class HistogramAggregationBase extends BucketAggregationBase {
     }
 
     /**
+     * Set's the range/bounds for the histogram aggregation.
+     * Useful when you want to limit the range of buckets in the histogram.
+     * It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
+     * NOTE: Only available in Elasticsearch v7.10.0+
+     *
+     * @example
+     * const agg = esb.histogramAggregation('prices', 'price', 50).hardBounds(0, 500);
+     *
+     * @param {number|string} min Start bound / minimum bound value
+     * For histogram aggregation, Integer value can be used.
+     * For Date histogram, date expression can be used.
+     * Available expressions for interval:
+     * year, quarter, month, week, day, hour, minute, second
+     * @param {number|string} max End bound / maximum bound value
+     * For histogram aggregation, Integer value can be used.
+     * For Date histogram, date expression can be used.
+     * Available expressions for interval:
+     * year, quarter, month, week, day, hour, minute, second
+     * @returns {HistogramAggregationBase} returns `this` so that calls can be chained
+     */
+    hardBounds(min, max) {
+        this._aggsDef.hard_bounds = { min, max };
+        return this;
+    }
+
+    /**
      * Sets the missing parameter which defines how documents
      * that are missing a value should be treated.
      *
