@@ -71,6 +71,16 @@ class ValueTermQueryBase extends Query {
             }
         };
     }
+
+    /**
+     *
+     * @param {boolean} value
+     * @returns {ValueTermQueryBase} returns `this` so that calls can be chained.
+     */
+    caseInsensitive(value = true) {
+        this._queryOpts.case_insensitive = value;
+        return this;
+    }
 }
 
 module.exports = ValueTermQueryBase;

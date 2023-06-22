@@ -1342,6 +1342,13 @@ declare namespace esb {
          * @param {string|number|boolean} queryVal
          */
         value(queryVal: string | number | boolean): this;
+        
+        /**
+         * 
+         * @param enable 
+         */
+        caseInsensitive(enable: boolean): this;
+
     }
 
     /**
