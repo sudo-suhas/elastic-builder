@@ -23,3 +23,50 @@ test('all in one', t => {
     };
     t.deepEqual(valueA.toJSON(), expected);
 });
+test('test caseInsensitive: default', t => {
+    const valueA = new TermQuery('my_field', 'my-value')
+        .caseInsensitive()
+        .toJSON();
+
+    const expected = {
+        term: {
+            my_field: {
+                value: 'my-value',
+                case_insensitive: true
+            }
+        }
+    };
+    t.deepEqual(valueA, expected);
+});
+
+test('test caseInsensitive: false', t => {
+    const valueA = new TermQuery('my_field', 'my-value')
+        .caseInsensitive(false)
+        .toJSON();
+
+    const expected = {
+        term: {
+            my_field: {
+                value: 'my-value',
+                case_insensitive: false
+            }
+        }
+    };
+    t.deepEqual(valueA, expected);
+});
+
+test('test caseInsensitive: true', t => {
+    const valueA = new TermQuery('my_field', 'my-value')
+        .caseInsensitive(true)
+        .toJSON();
+
+    const expected = {
+        term: {
+            my_field: {
+                value: 'my-value',
+                case_insensitive: true
+            }
+        }
+    };
+    t.deepEqual(valueA, expected);
+});

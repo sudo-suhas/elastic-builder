@@ -71,6 +71,20 @@ class ValueTermQueryBase extends Query {
             }
         };
     }
+
+    /**
+     * Allows ASCII case insensitive matching of the value with the indexed
+     * field values when set to true.
+     *
+     * NOTE: Only available in Elasticsearch v7.10.0+
+     *
+     * @param {boolean} value
+     * @returns {ValueTermQueryBase} returns `this` so that calls can be chained.
+     */
+    caseInsensitive(value = true) {
+        this._queryOpts.case_insensitive = value;
+        return this;
+    }
 }
 
 module.exports = ValueTermQueryBase;

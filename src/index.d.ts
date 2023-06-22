@@ -1342,6 +1342,17 @@ declare namespace esb {
          * @param {string|number|boolean} queryVal
          */
         value(queryVal: string | number | boolean): this;
+        
+        /**
+         * Allows ASCII case insensitive matching of the value with the indexed
+         * field values when set to true. 
+         *
+         * NOTE: Only available in Elasticsearch v7.10.0+
+         *
+         * @param enable 
+         */
+        caseInsensitive(enable: boolean): this;
+
     }
 
     /**
