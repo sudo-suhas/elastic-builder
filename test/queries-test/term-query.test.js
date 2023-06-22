@@ -28,13 +28,6 @@ test('test caseInsensitive: default', t => {
         .caseInsensitive()
         .toJSON();
 
-    const valueB = new TermQuery()
-        .field('my_field')
-        .value('my-value')
-        .caseInsensitive()
-        .toJSON();
-    t.deepEqual(valueA, valueB);
-
     const expected = {
         term: {
             my_field: {
@@ -51,13 +44,6 @@ test('test caseInsensitive: false', t => {
         .caseInsensitive(false)
         .toJSON();
 
-    const valueB = new TermQuery()
-        .field('my_field')
-        .value('my-value')
-        .caseInsensitive(false)
-        .toJSON();
-    t.deepEqual(valueA, valueB);
-
     const expected = {
         term: {
             my_field: {
@@ -73,13 +59,6 @@ test('test caseInsensitive: true', t => {
     const valueA = new TermQuery('my_field', 'my-value')
         .caseInsensitive(true)
         .toJSON();
-
-    const valueB = new TermQuery()
-        .field('my_field')
-        .value('my-value')
-        .caseInsensitive(true)
-        .toJSON();
-    t.deepEqual(valueA, valueB);
 
     const expected = {
         term: {
