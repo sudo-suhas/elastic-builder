@@ -5722,8 +5722,8 @@ declare namespace esb {
         /**
          * Sets the precision for the generated geohex.
          *
-         * @param {number} precision Precision can be between 1 and 12
-         * @throws {Error} If precision is not between 1 and 12.
+         * @param {number} precision Precision can be between 0 and 15
+         * @throws {Error} If precision is not between 0 and 15.
          */
         precision(precision: number): this;
 
