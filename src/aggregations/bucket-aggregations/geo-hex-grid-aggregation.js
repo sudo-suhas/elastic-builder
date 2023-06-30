@@ -52,13 +52,13 @@ class GeoHexGridAggregation extends BucketAggregationBase {
     /**
      * Sets the precision for the generated geohex.
      *
-     * @param {number} precision Precision can be between 1 and 12
+     * @param {number} precision Precision can be between 0 and 15
      * @returns {GeoHexGridAggregation} returns `this` so that calls can be chained
-     * @throws {Error} If precision is not between 1 and 12.
+     * @throws {Error} If precision is not between 0 and 15.
      */
     precision(precision) {
-        if (isNil(precision) || precision < 1 || precision > 12) {
-            throw new Error('`precision` can only be value from 1 to 12.');
+        if (isNil(precision) || precision < 0 || precision > 15) {
+            throw new Error('`precision` can only be value from 0 to 15.');
         }
 
         this._aggsDef.precision = precision;

@@ -22,15 +22,15 @@ test(setsOption, 'size', { param: 10000 });
 test(setsOption, 'shardSize', { param: 3 });
 
 test('precision correctly validated', t => {
-    let err = t.throws(() => getInstance().precision(0), Error);
-    t.is(err.message, '`precision` can only be value from 1 to 12.');
+    let err = t.throws(() => getInstance().precision(-1), Error);
+    t.is(err.message, '`precision` can only be value from 0 to 15.');
 
-    err = t.throws(() => getInstance().precision(13), Error);
-    t.is(err.message, '`precision` can only be value from 1 to 12.');
+    err = t.throws(() => getInstance().precision(16), Error);
+    t.is(err.message, '`precision` can only be value from 0 to 15.');
 
     err = t.throws(() => getInstance().precision(null), Error);
-    t.is(err.message, '`precision` can only be value from 1 to 12.');
+    t.is(err.message, '`precision` can only be value from 0 to 15.');
 
     err = t.throws(() => getInstance().precision(undefined), Error);
-    t.is(err.message, '`precision` can only be value from 1 to 12.');
+    t.is(err.message, '`precision` can only be value from 0 to 15.');
 });
