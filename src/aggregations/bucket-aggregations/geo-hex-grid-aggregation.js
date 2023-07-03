@@ -15,7 +15,7 @@ const ES_REF_URL =
 
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohexgrid-aggregation.html)
  *
- * NOTE: This query was added in elasticsearch v8.1.0.
+ * NOTE: This aggregation was added in elasticsearch v8.1.0.
  *
  * @example
  * const agg = esb.geoHexGridAggregation('hex-grid', 'location').precision(3);

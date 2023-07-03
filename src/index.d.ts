@@ -5700,6 +5700,8 @@ declare namespace esb {
      * that have matching data. Each cell corresponds to a H3 cell index and is labeled
      * using the H3Index representation.
      *
+     * NOTE: This aggregation was added in elasticsearch v8.1.0.
+     *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
      * @extends BucketAggregationBase
@@ -5751,6 +5753,8 @@ declare namespace esb {
      * that represent a grid. The resulting grid can be sparse and only contains cells
      * that have matching data. Each cell corresponds to a H3 cell index and is labeled
      * using the H3Index representation.
+     *
+     * NOTE: This aggregation was added in elasticsearch v8.1.0.
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} field The field to aggregate on
