@@ -256,6 +256,9 @@ test('aggregations are exported', t => {
     t.truthy(esb.GeoHashGridAggregation);
     t.truthy(esb.geoHashGridAggregation);
 
+    t.truthy(esb.GeoHexGridAggregation);
+    t.truthy(esb.geoHexGridAggregation);
+
     t.truthy(esb.GeoTileGridAggregation);
     t.truthy(esb.geoTileGridAggregation);
 

@@ -18,6 +18,7 @@ exports.FilterAggregation = require('./filter-aggregation');
 exports.FiltersAggregation = require('./filters-aggregation');
 exports.GeoDistanceAggregation = require('./geo-distance-aggregation');
 exports.GeoHashGridAggregation = require('./geo-hash-grid-aggregation');
+exports.GeoHexGridAggregation = require('./geo-hex-grid-aggregation');
 exports.GeoTileGridAggregation = require('./geo-tile-grid-aggregation');
 exports.GlobalAggregation = require('./global-aggregation');
 exports.HistogramAggregation = require('./histogram-aggregation');
