@@ -1,5 +1,5 @@
 {
-  "name": "elastic-builder",
+  "name": "opensearch-js",
   "version": "0.0.0-development",
   "description": "A JavaScript implementation of the elasticsearch Query DSL",
   "main": "src/index.js",
