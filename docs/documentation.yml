@@ -17,6 +17,7 @@ toc:
   - MatchPhraseQuery
   - MatchPhrasePrefixQuery
   - MultiMatchQuery
+  - NeuralQuery
   - CommonTermsQuery
   - QueryStringQueryBase
   - QueryStringQuery

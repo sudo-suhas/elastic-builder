@@ -12,3 +12,4 @@ exports.MultiMatchQuery = require('./multi-match-query');
 exports.CommonTermsQuery = require('./common-terms-query');
 exports.QueryStringQuery = require('./query-string-query');
 exports.SimpleQueryStringQuery = require('./simple-query-string-query');
+exports.NeuralQuery = require('./neural-query');

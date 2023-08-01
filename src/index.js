@@ -26,7 +26,8 @@ const {
         MultiMatchQuery,
         CommonTermsQuery,
         QueryStringQuery,
-        SimpleQueryStringQuery
+        SimpleQueryStringQuery,
+        NeuralQuery
     },
     termLevelQueries: {
         TermQuery,
@@ -196,6 +197,9 @@ exports.queryStringQuery = constructorWrapper(QueryStringQuery);
 
 exports.SimpleQueryStringQuery = SimpleQueryStringQuery;
 exports.simpleQueryStringQuery = constructorWrapper(SimpleQueryStringQuery);
+
+exports.NeuralQuery = NeuralQuery;
+exports.neuralQuery = constructorWrapper(NeuralQuery);
 
 /* ============ ============ ============ */
 /* ========= Term Level Queries ========= */

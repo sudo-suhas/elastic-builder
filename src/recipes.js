@@ -9,7 +9,8 @@ const {
         BoolQuery,
         FunctionScoreQuery,
         scoreFunctions: { RandomScoreFunction }
-    }
+    },
+    fullTextQueries: { NeuralQuery, MultiMatchQuery }
 } = require('./queries');
 
 const {
@@ -118,4 +119,17 @@ exports.filterQuery = function filterQuery(query, scoring = false) {
 
     const boolQry = new BoolQuery().filter(query);
     return scoring === true ? boolQry.must(new MatchAllQuery()) : boolQry;
+};
+
+exports.withSemantic = function withSemantic(query, fields) {
+    return new BoolQuery().should(
+        fields.map(field => new NeuralQuery(field, query))
+    );
+};
+
+exports.withNeural = function withNeural(query, fields) {
+    return new BoolQuery().should(
+        fields.map(field => new NeuralQuery(field, query)),
+        new MultiMatchQuery(fields, query)
+    );
 };

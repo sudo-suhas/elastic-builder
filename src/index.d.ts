@@ -602,6 +602,11 @@ declare namespace esb {
         queryString?: string
     ): MatchQuery;
 
+    export function neuralQuery(
+        field?: string,
+        queryString?: string
+    )
+
     /**
      * The `MatchPhraseQueryBase` provides support for common options used across
      * various bucket match phrase query implementations.
