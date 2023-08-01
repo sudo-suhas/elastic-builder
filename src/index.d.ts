@@ -602,10 +602,7 @@ declare namespace esb {
         queryString?: string
     ): MatchQuery;
 
-    export function neuralQuery(
-        field?: string,
-        queryString?: string
-    )
+    export function neuralQuery(field?: string, queryString?: string);
 
     /**
      * The `MatchPhraseQueryBase` provides support for common options used across
@@ -1347,17 +1344,16 @@ declare namespace esb {
          * @param {string|number|boolean} queryVal
          */
         value(queryVal: string | number | boolean): this;
-        
+
         /**
          * Allows ASCII case insensitive matching of the value with the indexed
-         * field values when set to true. 
+         * field values when set to true.
          *
          * NOTE: Only available in Elasticsearch v7.10.0+
          *
-         * @param enable 
+         * @param enable
          */
         caseInsensitive(enable: boolean): this;
-
     }
 
     /**
@@ -9477,6 +9473,15 @@ declare namespace esb {
          * @throws {TypeError} If `query` is not an instance of `Query`.
          */
         export function filterQuery(query: Query, scoring?: boolean): BoolQuery;
+
+        export function filterQuery(query: Query, scoring?: boolean): BoolQuery;
+
+        export function withNeural(query: string, fields: string[]): BoolQuery;
+
+        export function withSemantic(
+            query: string,
+            fields: string[]
+        ): BoolQuery;
     }
 
     // Dunno how to define alias for namespaced functions
