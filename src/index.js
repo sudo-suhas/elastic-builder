@@ -19,6 +19,7 @@ const {
 const {
     MatchAllQuery,
     MatchNoneQuery,
+    CustomQuery,
     fullTextQueries: {
         MatchQuery,
         MatchPhraseQuery,
@@ -167,6 +168,9 @@ exports.requestBodySearch = constructorWrapper(RequestBodySearch);
 /* ============ ============ ============ */
 /* ============== Queries =============== */
 /* ============ ============ ============ */
+exports.CustomQuery = CustomQuery;
+exports.customQuery = constructorWrapper(CustomQuery);
+
 exports.MatchAllQuery = MatchAllQuery;
 exports.matchAllQuery = constructorWrapper(MatchAllQuery);
 

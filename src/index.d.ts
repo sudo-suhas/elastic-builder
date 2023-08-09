@@ -349,6 +349,21 @@ declare namespace esb {
     }
 
     /**
+     * Extensible custom query to support types of queries not implemented in this module
+     *
+     * @extends Query
+     */
+    export class CustomQuery extends Query {
+        constructor(queryType: string, field?: string)
+
+        field(field: string): this;
+
+        toJSON(): object;
+    }
+
+    export function customQuery(): CustomQuery;
+    
+    /**
      * The most simple query, which matches all documents, giving them all a `_score` of `1.0`.
      *
      * @extends Query

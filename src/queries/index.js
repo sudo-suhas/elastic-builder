@@ -1,5 +1,7 @@
 'use strict';
 
+exports.CustomQuery = require('./custom-query');
+
 exports.MatchAllQuery = require('./match-all-query');
 exports.MatchNoneQuery = require('./match-none-query');
 
