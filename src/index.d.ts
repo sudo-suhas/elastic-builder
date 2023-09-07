@@ -317,7 +317,7 @@ declare namespace esb {
      *
      * @param {string} queryType
      */
-    class Query {
+    export class Query {
         constructor(queryType: string);
 
         /**

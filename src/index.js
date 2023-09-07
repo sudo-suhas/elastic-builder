@@ -13,6 +13,7 @@ const {
     Rescore,
     InnerHits,
     SearchTemplate,
+    Query,
     util: { constructorWrapper }
 } = require('./core');
 
@@ -167,6 +168,9 @@ exports.requestBodySearch = constructorWrapper(RequestBodySearch);
 /* ============ ============ ============ */
 /* ============== Queries =============== */
 /* ============ ============ ============ */
+exports.Query = Query;
+exports.query = constructorWrapper(Query);
+
 exports.MatchAllQuery = MatchAllQuery;
 exports.matchAllQuery = constructorWrapper(MatchAllQuery);
 
