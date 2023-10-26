@@ -9117,7 +9117,9 @@ declare namespace esb {
         /**
          * Sets the format of the date when sorting a date field.
          *
-         *  [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/mapping-date-format.html#built-in-date-formats)
+         * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/mapping-date-format.html#built-in-date-formats)
+         *
+         * Note: The format argument is [supported since version 7.13](https://www.elastic.co/guide/en/elasticsearch/reference/7.13/release-notes-7.13.0.html) of ElasticSearch.
          *
          * @param {string} fmt
          */
