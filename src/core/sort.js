@@ -308,6 +308,19 @@ class Sort {
     }
 
     /**
+     * Sets the format of the date when sorting a date field.
+     *
+     *  [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/mapping-date-format.html#built-in-date-formats)
+     *
+     * @param {string} fmt
+     * @returns {Sort} returns `this` so that calls can be chained
+     */
+    format(fmt) {
+        this._opts.format = fmt;
+        return this;
+    }
+
+    /**
      * Reverse the sort order. Valid during sort types: field, geo distance, and script.
      *
      * @param {boolean} reverse If sort should be in reverse order.

@@ -115,3 +115,17 @@ test('_script sort', t => {
     };
     t.deepEqual(value, expected);
 });
+
+test('_format sort', t => {
+    const value = new Sort('date_field')
+        .order('asc')
+        .format('epoch_millis')
+        .toJSON();
+    const expected = {
+        date_field: {
+            order: 'asc',
+            format: 'epoch_millis'
+        }
+    };
+    t.deepEqual(value, expected);
+});

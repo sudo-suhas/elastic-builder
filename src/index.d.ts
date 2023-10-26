@@ -1342,17 +1342,16 @@ declare namespace esb {
          * @param {string|number|boolean} queryVal
          */
         value(queryVal: string | number | boolean): this;
-        
+
         /**
          * Allows ASCII case insensitive matching of the value with the indexed
-         * field values when set to true. 
+         * field values when set to true.
          *
          * NOTE: Only available in Elasticsearch v7.10.0+
          *
-         * @param enable 
+         * @param enable
          */
         caseInsensitive(enable: boolean): this;
-
     }
 
     /**
@@ -9114,6 +9113,96 @@ declare namespace esb {
          * @param {string} type
          */
         type(type: string): this;
+
+        /**
+         * Sets the format of the date when sorting a date field.
+         *
+         *  [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/mapping-date-format.html#built-in-date-formats)
+         *
+         * @param {string} fmt
+         */
+        format(
+            fmt:
+                | 'epoch_millis'
+                | 'epoch_second'
+                | 'date_optional_time'
+                | 'strict_date_optional_time'
+                | 'strict_date_optional_time_nanos'
+                | 'basic_date'
+                | 'basic_date_time'
+                | 'basic_date_time_no_millis'
+                | 'basic_ordinal_date'
+                | 'basic_ordinal_date_time'
+                | 'basic_ordinal_date_time_no_millis'
+                | 'basic_time'
+                | 'basic_time_no_millis'
+                | 'basic_t_time'
+                | 'basic_t_time_no_millis'
+                | 'basic_week_date'
+                | 'strict_basic_week_date'
+                | 'basic_week_date_time'
+                | 'strict_basic_week_date_time'
+                | 'basic_week_date_time_no_millis'
+                | 'strict_basic_week_date_time_no_millis'
+                | 'date'
+                | 'strict_date'
+                | 'date_hour'
+                | 'strict_date_hour'
+                | 'date_hour_minute'
+                | 'strict_date_hour_minute'
+                | 'date_hour_minute_second'
+                | 'strict_date_hour_minute_second'
+                | 'date_hour_minute_second_fraction'
+                | 'strict_date_hour_minute_second_fraction'
+                | 'date_hour_minute_second_millis'
+                | 'strict_date_hour_minute_second_millis'
+                | 'date_time'
+                | 'strict_date_time'
+                | 'date_time_no_millis'
+                | 'strict_date_time_no_millis'
+                | 'hour'
+                | 'strict_hour'
+                | 'hour_minute'
+                | 'strict_hour_minute'
+                | 'hour_minute_second'
+                | 'strict_hour_minute_second'
+                | 'hour_minute_second_fraction'
+                | 'strict_hour_minute_second_fraction'
+                | 'hour_minute_second_millis'
+                | 'strict_hour_minute_second_millis'
+                | 'ordinal_date'
+                | 'strict_ordinal_date'
+                | 'ordinal_date_time'
+                | 'strict_ordinal_date_time'
+                | 'ordinal_date_time_no_millis'
+                | 'strict_ordinal_date_time_no_millis'
+                | 'time'
+                | 'strict_time'
+                | 'time_no_millis'
+                | 'strict_time_no_millis'
+                | 't_time'
+                | 'strict_t_time'
+                | 't_time_no_millis'
+                | 'strict_t_time_no_millis'
+                | 'week_date'
+                | 'strict_week_date'
+                | 'week_date_time'
+                | 'strict_week_date_time'
+                | 'week_date_time_no_millis'
+                | 'strict_week_date_time_no_millis'
+                | 'weekyear'
+                | 'strict_weekyear'
+                | 'weekyear_week'
+                | 'strict_weekyear_week'
+                | 'weekyear_week_day'
+                | 'strict_weekyear_week_day'
+                | 'year'
+                | 'strict_year'
+                | 'year_month'
+                | 'strict_year_month'
+                | 'year_month_day'
+                | 'strict_year_month_day'
+        ): this;
 
         /**
          * Reverse the sort order. Valid during sort types: field, geo distance, and script.
