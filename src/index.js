@@ -71,6 +71,7 @@ const {
     specializedQueries: {
         MoreLikeThisQuery,
         ScriptQuery,
+        ScriptScoreQuery,
         PercolateQuery,
         DistanceFeatureQuery
     },
@@ -293,6 +294,9 @@ exports.moreLikeThisQuery = constructorWrapper(MoreLikeThisQuery);
 
 exports.ScriptQuery = ScriptQuery;
 exports.scriptQuery = constructorWrapper(ScriptQuery);
+
+exports.ScriptScoreQuery = ScriptScoreQuery;
+exports.scriptScoreQuery = constructorWrapper(ScriptScoreQuery);
 
 exports.PercolateQuery = PercolateQuery;
 exports.percolateQuery = constructorWrapper(PercolateQuery);

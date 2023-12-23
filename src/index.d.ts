@@ -3058,6 +3058,41 @@ declare namespace esb {
     export function scriptQuery(script?: Script): ScriptQuery;
 
     /**
+     * A query that uses a script to provide a custom score for returned documents.
+     *
+     * @extends Query
+     */
+    export class ScriptScoreQuery extends Query {
+        constructor();
+
+        /**
+         * Sets the query used to return documents.
+         *
+         * @param {Query} query A valid `Query` object
+         */
+        query(query: Query): this;
+
+        /**
+         * Sets the script used to compute the score of documents returned by the query.
+         * 
+         * @param {Script} script A valid `Script` object
+         */
+        script(script: Script): this;
+
+        /**
+         * Sets the minimum score limit for documents to be included in search result.
+         *
+         * @param {number} limit Minimum score threshold
+         */
+        minScore(limit: number): this;
+    }
+
+    /**
+     * A query that uses a script to provide a custom score for returned documents.
+     */
+    export function scriptScoreQuery(): ScriptScoreQuery;
+
+    /**
      * The `percolate` query can be used to match queries stored in an index.
      * The `percolate` query itself contains the document that will be used
      * as query to match with the stored queries.
