@@ -134,6 +134,9 @@ test('queries are exported', t => {
     t.truthy(esb.ScriptQuery);
     t.truthy(esb.scriptQuery);
 
+    t.truthy(esb.ScriptScoreQuery);
+    t.truthy(esb.scriptScoreQuery);
+
     t.truthy(esb.PercolateQuery);
     t.truthy(esb.percolateQuery);
 
