@@ -73,7 +73,8 @@ const {
         ScriptQuery,
         ScriptScoreQuery,
         PercolateQuery,
-        DistanceFeatureQuery
+        DistanceFeatureQuery,
+        RankFeatureQuery
     },
     spanQueries: {
         SpanTermQuery,
@@ -303,6 +304,9 @@ exports.percolateQuery = constructorWrapper(PercolateQuery);
 
 exports.DistanceFeatureQuery = DistanceFeatureQuery;
 exports.distanceFeatureQuery = constructorWrapper(DistanceFeatureQuery);
+
+exports.RankFeatureQuery = RankFeatureQuery;
+exports.rankFeatureQuery = constructorWrapper(RankFeatureQuery);
 
 /* ============ ============ ============ */
 /* ============ Span Queries ============ */
