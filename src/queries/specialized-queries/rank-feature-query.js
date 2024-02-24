@@ -9,6 +9,8 @@ const isNil = require('lodash.isnil');
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-rank-feature-query.html)
  *
+ * NOTE: This query was added in elasticsearch v7.0.
+ *
  * @example
  * const query = new RankFeatureQuery('rank_feature_field');
  *   query
