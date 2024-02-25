@@ -3269,6 +3269,86 @@ declare namespace esb {
     export function distanceFeatureQuery(field?: string): DistanceFeatureQuery;
 
     /**
+     * The `rank_feature` query boosts the relevance score on the numeric value of
+     * document with a rank_feature/rank_features field.
+     *
+     * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-rank-feature-query.html)
+     *
+     * NOTE: This query was added in elasticsearch v7.0.
+     *
+     * @example
+     * const query = new RankFeatureQuery('rank_feature_field');
+     *   query
+     *       .linear()
+     *       .toJSON();
+     * @param {string} field The field inside the document to be used in the query
+     * @return {RankFeatureQuery}
+     */
+    export class RankFeatureQuery extends Query {
+        constructor(field?: string);
+
+        /**
+         * Sets the field for the `distance_feature` query
+         * @param {string} fieldName Name of the field inside the document
+         * @returns {DistanceFeatureQuery} Instance of the query
+         */
+        field(fieldName: string): RankFeatureQuery;
+
+        /**
+         * Linear function to boost relevance scores based on the value of the rank feature field
+         * @returns {RankFeatureQuery}
+         */
+        linear() : RankFeatureQuery;
+
+        /**
+         * Saturation function to boost relevance scores based on the value of the rank feature field.
+         * Uses a default pivot value computed by Elasticsearch.
+         * @returns {RankFeatureQuery}
+         */
+        saturation() : RankFeatureQuery;
+
+        /**
+         * Saturation function to boost relevance scores based on the value of the rank feature field.
+         * @param {number} pivot
+         * @returns {RankFeatureQuery}
+         */
+        saturationPivot(pivot : number) : RankFeatureQuery;
+
+        /**
+         * The log function gives a score equal to log(scaling_factor + S), where S
+         * is the value of the rank feature field and scaling_factor is a configurable
+         * scaling factor.
+         * @param {number} scaling_factor
+         * @returns {RankFeatureQuery}
+         */
+        log(scalingFactor : number) : RankFeatureQuery;
+
+        /**
+         * The sigmoid function extends the saturation function with a configurable exponent.
+         * @param {number} pivot
+         * @param {number} exponent
+         * @returns {RankFeatureQuery}
+         */
+        sigmoid(pivot : number, exponent : number) : RankFeatureQuery
+    }
+
+    /**
+     * The `rank_feature` query boosts the relevance score on the numeric value of
+     * document with a rank_feature/rank_features field.
+     *
+     * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-rank-feature-query.html)
+     *
+     * @example
+     * const query = new RankFeatureQuery('rank_feature_field');
+     *   query
+     *       .linear()
+     *       .toJSON();
+     * @param {string} field The field inside the document to be used in the query
+     * @return {RankFeatureQuery}
+     */
+    export function rankFeatureQuery(field?: string): RankFeatureQuery;
+
+    /**
      * Interface-like class used to group and identify various implementations of Span queries.
      *
      * **NOTE:** Instantiating this directly should not be required.
