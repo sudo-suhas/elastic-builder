@@ -27,6 +27,8 @@ const invalidZeroTermsQueryParam = invalidParam(
  * @example
  * const qry = esb.combinedFieldsQuery(['subject', 'message'], 'this is a test');
  *
+ * NOTE: This query was added in elasticsearch v7.13.
+ *
  * @param {Array<string>|string=} fields The fields to be queried
  * @param {string=} queryString The query string
  *
