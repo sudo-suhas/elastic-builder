@@ -13,10 +13,24 @@ const validType = [
     'lookup'
 ];
 
+/**
+ * Class supporting the Elasticsearch runtime field.
+ *
+ * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/runtime.html)
+ *
+ * Added in Elasticsearch v7.11.0
+ * [Release note](https://www.elastic.co/guide/en/elasticsearch/reference/7.11/release-notes-7.11.0.html)
+ *
+ * @param {string=} type One of `boolean`, `composite`, `date`, `double`, `geo_point`, `ip`, `keyword`, `long`, `lookup`.
+ * @param {string=} script Source of the script.
+ *
+ * @example
+ * const field = esb.runtimeField('keyword', `emit(doc['sessionId'].value + '::' + doc['name'].value)`);
+ */
 class RuntimeField {
-    constructor(type, script, name) {
+    // eslint-disable-next-line require-jsdoc
+    constructor(type, script) {
         this._body = {};
-        this._name = name;
         this._isTypeSet = false;
         this._isScriptSet = false;
 
@@ -29,10 +43,11 @@ class RuntimeField {
         }
     }
 
-    name(name) {
-        this._name = name;
-    }
-
+    /**
+     * Sets the source of the script.
+     * @param {string} script
+     * @returns {void}
+     */
     script(script) {
         this._body.script = {
             source: script
@@ -40,6 +55,11 @@ class RuntimeField {
         this._isScriptSet = true;
     }
 
+    /**
+     * Sets the type of the runtime field.
+     * @param {string} type One of `boolean`, `composite`, `date`, `double`, `geo_point`, `ip`, `keyword`, `long`, `lookup`.
+     * @returns {void}
+     */
     type(type) {
         const typeLower = type.toLowerCase();
         if (!validType.includes(typeLower)) {

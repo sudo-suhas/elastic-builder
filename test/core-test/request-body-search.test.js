@@ -39,15 +39,10 @@ const suggest = new TermSuggester(
 const sortChannel = new Sort('channel', 'desc');
 const sortCategories = new Sort('categories', 'desc');
 
-const runtimeFieldA = new RuntimeField(
-    'keyword',
-    "emit(doc['name'].value)",
-    'test1'
-);
+const runtimeFieldA = new RuntimeField('keyword', "emit(doc['name'].value)");
 const runtimeFieldB = new RuntimeField(
     'boolean',
-    "emit(doc['qty'].value > 10)",
-    'test2'
+    "emit(doc['qty'].value > 10)"
 );
 
 const scriptA = new Script('inline', "doc['my_field_name'].value * 2").lang(

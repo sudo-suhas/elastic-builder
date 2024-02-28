@@ -44,9 +44,3 @@ test('type validate and set argument', t => {
         '`type` must be one of boolean, composite, date, double, geo_point, ip, keyword, long, lookup'
     );
 });
-
-test('name set _name', t => {
-    const fieldA = new RuntimeField();
-    fieldA.name('field-name');
-    t.deepEqual(fieldA._name, 'field-name');
-});

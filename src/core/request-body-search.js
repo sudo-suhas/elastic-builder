@@ -13,6 +13,7 @@ const Query = require('./query'),
     InnerHits = require('./inner-hits');
 
 const { checkType, setDefault, recursiveToJSON } = require('./util');
+const RuntimeField = require('./runtime-field');
 
 /**
  * Helper function to call `recursiveToJSON` on elements of array and assign to object.
@@ -407,12 +408,17 @@ class RequestBodySearch {
     }
 
     /**
-     * Computes a document property dynamically based on the supplied `script`.
+     * Computes a document property dynamically based on the supplied `runtimeField`.
+     *
+     * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/runtime-search-request.html)
+     *
+     * Added in Elasticsearch v7.11.0
+     * [Release note](https://www.elastic.co/guide/en/elasticsearch/reference/7.11/release-notes-7.11.0.html)
      *
      * @example
      * const reqBody = esb.requestBodySearch()
      *     .query(esb.matchAllQuery())
-     *     .runtimeField(
+     *     .runtimeMapping(
      *       'sessionId-name',
      *       esb.runtimeField(
      *         'keyword',
@@ -424,7 +430,7 @@ class RequestBodySearch {
      * // runtime fields can also be used in query aggregation
      * const reqBody = esb.requestBodySearch()
      *     .query(esb.matchAllQuery())
-     *     .runtimeField(
+     *     .runtimeMapping(
      *       'sessionId-eventName',
      *       esb.runtimeField(
      *         'keyword',
@@ -433,41 +439,49 @@ class RequestBodySearch {
      *     )
      *     .agg(esb.cardinalityAggregation('uniqueCount', `sessionId-eventName`)),;
      *
-     * @param {string} runtimeFieldName
-     * @param {RuntimeField} instance of `RuntimeField`
+     * @param {string} runtimeFieldName Name for the computed runtime mapping field.
+     * @param {RuntimeField} runtimeField Instance of RuntimeField
+     *
      * @returns {RequestBodySearch} returns `this` so that calls can be chained
+     *
      */
-    runtimeMapping(runtimeMappingName, runtimeField) {
+    runtimeMapping(runtimeFieldName, runtimeField) {
+        checkType(runtimeField, RuntimeField);
+
         setDefault(this._body, 'runtime_mappings', {});
-        this._body.runtime_mappings[runtimeMappingName] = runtimeField;
+        this._body.runtime_mappings[runtimeFieldName] = runtimeField;
         return this;
     }
 
     /**
      * Computes one or more document properties dynamically based on supplied `RuntimeField`s.
      *
+     * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/runtime-search-request.html)
+     *
+     * Added in Elasticsearch v7.11.0
+     * [Release note](https://www.elastic.co/guide/en/elasticsearch/reference/7.11/release-notes-7.11.0.html)
+     *
      * @example
      * const fieldA = esb.runtimeField(
      *       'keyword',
-     *       `emit(doc['session_id'].value + '::' + doc['name'].value)`,
-     *       'sessionId-name'
+     *       `emit(doc['session_id'].value + '::' + doc['name'].value)`
      * );
      * const reqBody = esb.requestBodySearch()
      *     .query(esb.matchAllQuery())
-     *     .runtimeFields({
+     *     .runtimeMappings({
      *       'sessionId-name': fieldA,
      *     })
      *
-     * @param {Object} runtimeFields Object with `runtimeFieldName` as key and `RuntimeField` instance as the value.
+     * @param {Object} runtimeMappings Object with `runtimeFieldName` as key and instance of `RuntimeField` as the value.
      * @returns {RequestBodySearch} returns `this` so that calls can be chained
      */
     runtimeMappings(runtimeMappings) {
         checkType(runtimeMappings, Object);
 
-        Object.keys(runtimeMappings).forEach(runtimeMappingName =>
+        Object.keys(runtimeMappings).forEach(runtimeFieldName =>
             this.runtimeMapping(
-                runtimeMappingName,
-                runtimeMappings[runtimeMappingName]
+                runtimeFieldName,
+                runtimeMappings[runtimeFieldName]
             )
         );
 
