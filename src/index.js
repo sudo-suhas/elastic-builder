@@ -104,7 +104,8 @@ const {
         StatsAggregation,
         SumAggregation,
         TopHitsAggregation,
-        ValueCountAggregation
+        ValueCountAggregation,
+        MetricsAggregationBase
     },
     bucketAggregations: {
         AdjacencyMatrixAggregation,
@@ -133,7 +134,12 @@ const {
         SamplerAggregation,
         SignificantTermsAggregation,
         SignificantTextAggregation,
-        TermsAggregation
+        TermsAggregation,
+        RangeAggregationBase,
+        TermsAggregationBase,
+        BucketAggregationBase,
+        HistogramAggregationBase,
+        SignificantAggregationBase
     },
     pipelineAggregations: {
         AvgBucketAggregation,
@@ -150,7 +156,8 @@ const {
         BucketScriptAggregation,
         BucketSelectorAggregation,
         SerialDifferencingAggregation,
-        BucketSortAggregation
+        BucketSortAggregation,
+        PipelineAggregationBase
     },
     matrixAggregations: { MatrixStatsAggregation }
 } = require('./aggregations');
@@ -386,6 +393,8 @@ exports.topHitsAggregation = constructorWrapper(TopHitsAggregation);
 exports.ValueCountAggregation = ValueCountAggregation;
 exports.valueCountAggregation = constructorWrapper(ValueCountAggregation);
 
+exports.MetricsAggregationBase = MetricsAggregationBase;
+
 /* ============ ============ ============ */
 /* ========= Bucket Aggregations ======== */
 /* ============ ============ ============ */
@@ -482,6 +491,16 @@ exports.significantTextAggregation = constructorWrapper(
 exports.TermsAggregation = TermsAggregation;
 exports.termsAggregation = constructorWrapper(TermsAggregation);
 
+exports.RangeAggregationBase = RangeAggregationBase;
+
+exports.TermsAggregationBase = TermsAggregationBase;
+
+exports.BucketAggregationBase = BucketAggregationBase;
+
+exports.HistogramAggregationBase = HistogramAggregationBase;
+
+exports.SignificantAggregationBase = SignificantAggregationBase;
+
 /* ============ ============ ============ */
 /* ======== Pipeline Aggregations ======= */
 /* ============ ============ ============ */
@@ -539,6 +558,8 @@ exports.SerialDifferencingAggregation = SerialDifferencingAggregation;
 exports.serialDifferencingAggregation = constructorWrapper(
     SerialDifferencingAggregation
 );
+
+exports.PipelineAggregationBase = PipelineAggregationBase;
 
 /* ============ ============ ============ */
 /* ========= Matrix Aggregations ======== */
