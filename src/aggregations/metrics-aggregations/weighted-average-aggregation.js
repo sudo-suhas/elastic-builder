@@ -13,7 +13,10 @@ const ES_REF_URL =
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-weight-avg-aggregation.html)
  *
- * As a formula, a weighted average is the ∑(value * weight) / ∑(weight)
+ * Added in Elasticsearch v6.4.0
+ * [Release notes](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/release-notes-6.4.0.html)
+ *
+ * As a formula, a weighted average is ∑(value * weight) / ∑(weight)
  *
  * @example
  * // Compute the average grade over all documents, weighing by teacher score.

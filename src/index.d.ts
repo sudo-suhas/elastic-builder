@@ -3846,6 +3846,11 @@ declare namespace esb {
     /**
      * A single-value metrics aggregation that computes the weighted average of numeric values that are extracted from the aggregated documents.
      * These values can be extracted either from specific numeric fields in the documents.
+     * 
+     * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-weight-avg-aggregation.html)
+     * 
+     * Added in Elasticsearch v6.4.0
+     * [Release notes](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/release-notes-6.4.0.html)
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string=} value The field or script to be used as the value.
@@ -3879,6 +3884,11 @@ declare namespace esb {
     /**
      * A single-value metrics aggregation that computes the weighted average of numeric values that are extracted from the aggregated documents.
      * These values can be extracted either from specific numeric fields in the documents.
+     * 
+     * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-weight-avg-aggregation.html)
+     * 
+     * Added in Elasticsearch v6.4.0
+     * [Release notes](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/release-notes-6.4.0.html)
      *
      * @param {string} name The name which will be used to refer to this aggregation.
      * @param {string | Script =} value The field or script to be used as the value.
