@@ -75,7 +75,7 @@ class MetricsAggregationBase extends Aggregation {
     }
 
     /**
-     * Sets the missing parameter ehich defines how documents
+     * Sets the missing parameter which defines how documents
      * that are missing a value should be treated.
      *
      * @example
