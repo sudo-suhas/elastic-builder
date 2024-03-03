@@ -27,7 +27,8 @@ const {
         MultiMatchQuery,
         CommonTermsQuery,
         QueryStringQuery,
-        SimpleQueryStringQuery
+        SimpleQueryStringQuery,
+        CombinedFieldsQuery
     },
     termLevelQueries: {
         TermQuery,
@@ -202,6 +203,9 @@ exports.queryStringQuery = constructorWrapper(QueryStringQuery);
 
 exports.SimpleQueryStringQuery = SimpleQueryStringQuery;
 exports.simpleQueryStringQuery = constructorWrapper(SimpleQueryStringQuery);
+
+exports.CombinedFieldsQuery = CombinedFieldsQuery;
+exports.combinedFieldsQuery = constructorWrapper(CombinedFieldsQuery);
 
 /* ============ ============ ============ */
 /* ========= Term Level Queries ========= */
