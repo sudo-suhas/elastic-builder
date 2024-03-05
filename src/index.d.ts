@@ -3879,6 +3879,24 @@ declare namespace esb {
          * @return {WeightedAverageAggregation} returns `this` so that calls can be chained
          */
         weight(weight: string | Script, missing?: number): WeightedAverageAggregation
+
+        /**
+        * @override
+        * @throws {Error} This method cannot be called on WeightedAverageAggregation
+        */
+        script(): never;
+
+        /**
+        * @override
+        * @throws {Error} This method cannot be called on WeightedAverageAggregation
+        */
+        missing(): never;
+
+        /**
+        * @override
+        * @throws {Error} This method cannot be called on WeightedAverageAggregation
+        */
+        field(): never;
     }
 
     /**
