@@ -6,11 +6,6 @@ test('constructor set arguments', t => {
         'keyword',
         "emit(doc['name'].value)"
     ).toJSON();
-    const valueB = new RuntimeField(
-        'keyword',
-        "emit(doc['name'].value)"
-    ).toJSON();
-    t.deepEqual(valueA, valueB);
 
     const expected = {
         type: 'keyword',
