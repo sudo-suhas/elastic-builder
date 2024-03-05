@@ -39,3 +39,15 @@ test('type validate and set argument', t => {
         '`type` must be one of boolean, composite, date, double, geo_point, ip, keyword, long, lookup'
     );
 });
+
+test('script method sets script source', t => {
+    const fieldA = new RuntimeField('keyword');
+    fieldA.script("emit(doc['name'].value)");
+    const expected = {
+        type: 'keyword',
+        script: {
+            source: "emit(doc['name'].value)"
+        }
+    };
+    t.deepEqual(fieldA.toJSON(), expected);
+});
