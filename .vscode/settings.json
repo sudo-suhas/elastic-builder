@@ -1,11 +1,13 @@
 // Place your settings in this file to overwrite default and user settings.
 {
   "eslint.enable": true,
-  "eslint.autoFixOnSave": true,
   "files.eol": "\n",
   "vsicons.presets.angular": false,
   "editor.detectIndentation": true,
   "[json]": {
     "editor.tabSize": 2
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
   }
 }

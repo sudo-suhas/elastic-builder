@@ -167,6 +167,73 @@ declare namespace esb {
          */
         storedFields(fields: object | string): this;
 
+
+
+        /**
+        * Computes a document property dynamically based on the supplied `runtimeField`.
+        *
+        * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/runtime-search-request.html)
+        *
+        * Added in Elasticsearch v7.11.0
+        * [Release note](https://www.elastic.co/guide/en/elasticsearch/reference/7.11/release-notes-7.11.0.html)
+        *
+        * @example
+        * const reqBody = esb.requestBodySearch()
+        *     .query(esb.matchAllQuery())
+        *     .runtimeMapping(
+        *       'sessionId-name',
+        *       esb.runtimeField(
+        *         'keyword',
+        *         `emit(doc['session_id'].value + '::' + doc['name'].value)`
+        *       )
+        *     )
+        *
+        * @example
+        * // runtime fields can also be used in query aggregation
+        * const reqBody = esb.requestBodySearch()
+        *     .query(esb.matchAllQuery())
+        *     .runtimeMapping(
+        *       'sessionId-eventName',
+        *       esb.runtimeField(
+        *         'keyword',
+        *         `emit(doc['session_id'].value + '::' + doc['eventName'].value)`,
+        *       )
+        *     )
+        *     .agg(esb.cardinalityAggregation('uniqueCount', `sessionId-eventName`)),;
+        *
+        * @param {string} runtimeFieldName Name for the computed runtime mapping field.
+        * @param {RuntimeField} runtimeField Instance of RuntimeField
+        *
+        * @returns {RequestBodySearch} returns `this` so that calls can be chained
+        *
+        */
+        runtimeMapping(runtimeFieldName: string, runtimeField: RuntimeField): this;
+
+
+        /**
+        * Computes one or more document properties dynamically based on supplied `RuntimeField`s.
+        *
+        * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/runtime-search-request.html)
+        *
+        * Added in Elasticsearch v7.11.0
+        * [Release note](https://www.elastic.co/guide/en/elasticsearch/reference/7.11/release-notes-7.11.0.html)
+        *
+        * @example
+        * const fieldA = esb.runtimeField(
+        *       'keyword',
+        *       `emit(doc['session_id'].value + '::' + doc['name'].value)`
+        * );
+        * const reqBody = esb.requestBodySearch()
+        *     .query(esb.matchAllQuery())
+        *     .runtimeMappings({
+        *       'sessionId-name': fieldA,
+        *     })
+        *
+        * @param {Object} runtimeMappings Object with `runtimeFieldName` as key and instance of `RuntimeField` as the value.
+        * @returns {RequestBodySearch} returns `this` so that calls can be chained
+        */
+        runtimeMappings(runtimeMappings: object): this;
+
         /**
          * Computes a document property dynamically based on the supplied `Script`.
          *
@@ -8835,6 +8902,63 @@ declare namespace esb {
      * @param {string|Array=} fields An optional field or array of fields to highlight.
      */
     export function highlight(fields?: string | string[]): Highlight;
+
+    /**
+    * Class supporting the Elasticsearch runtime field.
+    *
+    * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/runtime.html)
+    *
+    * Added in Elasticsearch v7.11.0
+    * [Release note](https://www.elastic.co/guide/en/elasticsearch/reference/7.11/release-notes-7.11.0.html)
+    *
+    * @param {string=} type One of `boolean`, `composite`, `date`, `double`, `geo_point`, `ip`, `keyword`, `long`, `lookup`.
+    * @param {string=} script Source of the script.
+    *
+    * @example
+    * const field = esb.runtimeField('keyword', `emit(doc['sessionId'].value + '::' + doc['name'].value)`);
+    */
+    export class RuntimeField {
+        constructor(type?: string, script?: string);
+
+        /**
+         * Sets the type of the runtime field.
+         * 
+         * @param {string} type One of `boolean`, `composite`, `date`, `double`, `geo_point`, `ip`, `keyword`, `long`, `lookup`.
+         * @returns {void}
+         */
+        type(type: 'boolean' | 'composite' | 'date' | 'double' | 'geo_point' | 'ip' | 'keyword' | 'long' | 'lookup');
+
+        /**
+         * Sets the source of the script.
+         * 
+         * @param {string} script
+         * @returns {void}
+         */
+        script(script: string);
+
+        /**
+         * Override default `toJSON` to return DSL representation for the `script`.
+         *
+         * @override
+         */
+        toJSON(): object;
+    }
+
+    /**
+    * Class supporting the Elasticsearch runtime field.
+    *
+    * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/runtime.html)
+    *
+    * Added in Elasticsearch v7.11.0
+    * [Release note](https://www.elastic.co/guide/en/elasticsearch/reference/7.11/release-notes-7.11.0.html)
+    *
+    * @param {string=} type One of `boolean`, `composite`, `date`, `double`, `geo_point`, `ip`, `keyword`, `long`, `lookup`.
+    * @param {string=} script Source of the script.
+    *
+    * @example
+    * const field = esb.runtimeField('keyword', `emit(doc['sessionId'].value + '::' + doc['name'].value)`);
+    */
+    export function runtimeField(type?: 'boolean' | 'composite' | 'date' | 'double' | 'geo_point' | 'ip' | 'keyword' | 'long' | 'lookup', script?: string): RuntimeField;
 
     /**
      * Class supporting the Elasticsearch scripting API.

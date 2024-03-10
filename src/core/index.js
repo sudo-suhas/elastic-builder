@@ -31,3 +31,5 @@ exports.SearchTemplate = require('./search-template');
 exports.consts = require('./consts');
 
 exports.util = require('./util');
+
+exports.RuntimeField = require('./runtime-field');

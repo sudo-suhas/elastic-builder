@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import test from 'ava';
 import {
     RequestBodySearch,
@@ -14,7 +15,8 @@ import {
     Script,
     Highlight,
     Rescore,
-    InnerHits
+    InnerHits,
+    RuntimeField
 } from '../../src';
 import { illegalParamType, makeSetsOptionMacro } from '../_macros';
 
@@ -36,6 +38,12 @@ const suggest = new TermSuggester(
 
 const sortChannel = new Sort('channel', 'desc');
 const sortCategories = new Sort('categories', 'desc');
+
+const runtimeFieldA = new RuntimeField('keyword', "emit(doc['name'].value)");
+const runtimeFieldB = new RuntimeField(
+    'boolean',
+    "emit(doc['qty'].value > 10)"
+);
 
 const scriptA = new Script('inline', "doc['my_field_name'].value * 2").lang(
     'painless'
@@ -131,6 +139,38 @@ test('sets stored_fields(arr) option', setsOption, 'storedFields', {
     param: ['user', 'postDate'],
     spread: false
 });
+
+test(setsOption, 'runtimeMapping', {
+    param: ['test1', runtimeFieldA],
+    propValue: {
+        test1: {
+            type: 'keyword',
+            script: {
+                source: "emit(doc['name'].value)"
+            }
+        }
+    },
+    keyName: 'runtime_mappings'
+});
+test(setsOption, 'runtimeMappings', {
+    param: { test1: runtimeFieldA, test2: runtimeFieldB },
+    propValue: {
+        test1: {
+            type: 'keyword',
+            script: {
+                source: "emit(doc['name'].value)"
+            }
+        },
+        test2: {
+            type: 'boolean',
+            script: {
+                source: "emit(doc['qty'].value > 10)"
+            }
+        }
+    },
+    keyName: 'runtime_mappings'
+});
+
 test(setsOption, 'scriptField', {
     param: ['test1', scriptA],
     propValue: { test1: { script: scriptA } },
