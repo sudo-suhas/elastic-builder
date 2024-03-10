@@ -16,3 +16,4 @@ exports.StatsAggregation = require('./stats-aggregation');
 exports.SumAggregation = require('./sum-aggregation');
 exports.TopHitsAggregation = require('./top-hits-aggregation');
 exports.ValueCountAggregation = require('./value-count-aggregation');
+exports.WeightedAverageAggregation = require('./weighted-average-aggregation');

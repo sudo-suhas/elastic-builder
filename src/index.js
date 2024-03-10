@@ -105,7 +105,8 @@ const {
         StatsAggregation,
         SumAggregation,
         TopHitsAggregation,
-        ValueCountAggregation
+        ValueCountAggregation,
+        WeightedAverageAggregation
     },
     bucketAggregations: {
         AdjacencyMatrixAggregation,
@@ -346,6 +347,11 @@ exports.spanFieldMaskingQuery = constructorWrapper(SpanFieldMaskingQuery);
 /* ============ ============ ============ */
 exports.AvgAggregation = AvgAggregation;
 exports.avgAggregation = constructorWrapper(AvgAggregation);
+
+exports.WeightedAverageAggregation = WeightedAverageAggregation;
+exports.weightedAverageAggregation = constructorWrapper(
+    WeightedAverageAggregation
+);
 
 exports.CardinalityAggregation = CardinalityAggregation;
 exports.cardinalityAggregation = constructorWrapper(CardinalityAggregation);
