@@ -55,9 +55,8 @@ class KNN {
      * @returns {KNN} Returns the instance of KNN for method chaining.
      * @throws {Error} Throws an error if both query_vector_builder and query_vector are provided.
      *
-     * Usage example:
-     * let knn = new KNN();
-     * knn.queryVectorBuilder('model_123', 'Sample model text');
+     * @example
+     * let knn = new esb.KNN().queryVectorBuilder('model_123', 'Sample model text');
      */
     queryVectorBuilder(modelId, modelText) {
         if (this._body.query_vector)
