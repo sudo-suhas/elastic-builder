@@ -10,16 +10,14 @@ const Query = require('./query');
  *
  * @example
  * const qry = esb.kNN('my_field', 100, 1000).vector([1,2,3]);
- * const qry = esb.kNN('my_field', 100, 1000).query_vector_builder('model_123', 'Sample model text');
+ * const qry = esb.kNN('my_field', 100, 1000).queryVectorBuilder('model_123', 'Sample model text');
  *
  * NOTE: kNN search was added to Elasticsearch in v8.0
  *
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/knn-search.html)
  */
 class KNN {
-    /**
-     * Creates an instance of KNN.
-     */
+   // eslint-disable-next-line require-jsdoc
     constructor(field, k, numCandidates) {
         if (k > numCandidates)
             throw new Error('KNN numCandidates cannot be less than k');
