@@ -84,10 +84,14 @@ class KNN {
      * @returns {KNN} Returns `this` to allow method chaining.
      * @throws {TypeError} If any of the provided queries is not an instance of `Query`.
      *
-     * Usage example:
-     * let knn = new KNN();
-     * knn.filter(new TermQuery('field', 'value')); // Applying a single filter query
-     * knn.filter([new TermQuery('field1', 'value1'), new TermQuery('field2', 'value2')]); // Applying multiple filter queries
+     * @example
+     * let knn = new esb.KNN().filter(new esb.TermQuery('field', 'value')); // Applying a single filter query
+     *
+     * @example
+     * let knn = new esb.KNN().filter([
+     *     new esb.TermQuery('field1', 'value1'), 
+     *     new esb.TermQuery('field2', 'value2')
+     * ]); // Applying multiple filter queries
      */
     filter(queries) {
         const queryArray = Array.isArray(queries) ? queries : [queries];
