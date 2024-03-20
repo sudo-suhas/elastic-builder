@@ -17,7 +17,7 @@ const Query = require('./query');
  * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/knn-search.html)
  */
 class KNN {
-   // eslint-disable-next-line require-jsdoc
+    // eslint-disable-next-line require-jsdoc
     constructor(field, k, numCandidates) {
         if (k > numCandidates)
             throw new Error('KNN numCandidates cannot be less than k');
@@ -87,7 +87,7 @@ class KNN {
      *
      * @example
      * let knn = new esb.KNN().filter([
-     *     new esb.TermQuery('field1', 'value1'), 
+     *     new esb.TermQuery('field1', 'value1'),
      *     new esb.TermQuery('field2', 'value2')
      * ]); // Applying multiple filter queries
      */
