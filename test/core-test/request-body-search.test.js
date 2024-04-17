@@ -44,6 +44,12 @@ const runtimeFieldB = new RuntimeField(
     'boolean',
     "emit(doc['qty'].value > 10)"
 );
+const runtimeFieldC = new RuntimeField(
+    'keyword',
+    "emit(doc['my_field_name'].value * params.factor)"
+)
+    .lang('painless')
+    .params({ factor: 2.0 });
 
 const scriptA = new Script('inline', "doc['my_field_name'].value * 2").lang(
     'painless'
@@ -165,6 +171,22 @@ test(setsOption, 'runtimeMappings', {
             type: 'boolean',
             script: {
                 source: "emit(doc['qty'].value > 10)"
+            }
+        }
+    },
+    keyName: 'runtime_mappings'
+});
+test('Runtime mappging with lang and params', setsOption, 'runtimeMapping', {
+    param: ['test1', runtimeFieldC],
+    propValue: {
+        test1: {
+            type: 'keyword',
+            lang: 'painless',
+            script: {
+                source: "emit(doc['my_field_name'].value * params.factor)"
+            },
+            params: {
+                factor: 2.0
             }
         }
     },

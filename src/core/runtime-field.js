@@ -33,6 +33,7 @@ class RuntimeField {
         this._body = {};
         this._isTypeSet = false;
         this._isScriptSet = false;
+        this._isParamsSet = false;
 
         if (!isNil(type)) {
             this.type(type);
@@ -46,19 +47,20 @@ class RuntimeField {
     /**
      * Sets the source of the script.
      * @param {string} script
-     * @returns {void}
+     * @returns {RuntimeField} returns `this` so that calls can be chained.
      */
     script(script) {
         this._body.script = {
             source: script
         };
         this._isScriptSet = true;
+        return this;
     }
 
     /**
      * Sets the type of the runtime field.
      * @param {string} type One of `boolean`, `composite`, `date`, `double`, `geo_point`, `ip`, `keyword`, `long`, `lookup`.
-     * @returns {void}
+     * @returns {RuntimeField} returns `this` so that calls can be chained.
      */
     type(type) {
         const typeLower = type.toLowerCase();
@@ -67,6 +69,30 @@ class RuntimeField {
         }
         this._body.type = typeLower;
         this._isTypeSet = true;
+        return this;
+    }
+
+    /**
+     * Specifies the language the script is written in. Defaults to `painless` but
+     * may be set to any of languages listed in [Scripting](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html).
+     *
+     * @param {string} lang The language for the script.
+     * @returns {RuntimeField} returns `this` so that calls can be chained.
+     */
+    lang(lang) {
+        this._body.lang = lang;
+        return this;
+    }
+
+    /**
+     * Specifies any named parameters that are passed into the script as variables.
+     *
+     * @param {Object} params Named parameters to be passed to script.
+     * @returns {RuntimeField} returns `this` so that calls can be chained.
+     */
+    params(params) {
+        this._body.params = params;
+        return this;
     }
 
     /**

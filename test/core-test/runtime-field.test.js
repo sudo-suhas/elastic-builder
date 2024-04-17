@@ -51,3 +51,21 @@ test('script method sets script source', t => {
     };
     t.deepEqual(fieldA.toJSON(), expected);
 });
+
+test('set script, lang and params', t => {
+    const fieldA = new RuntimeField('keyword');
+    fieldA.script("emit(doc['my_field_name'].value * params.factor)");
+    fieldA.lang('painless');
+    fieldA.params({ factor: 2.0 });
+    const expected = {
+        type: 'keyword',
+        lang: 'painless',
+        script: {
+            source: "emit(doc['my_field_name'].value * params.factor)"
+        },
+        params: {
+            factor: 2.0
+        }
+    };
+    t.deepEqual(fieldA.toJSON(), expected);
+});

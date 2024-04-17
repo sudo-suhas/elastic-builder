@@ -8924,17 +8924,34 @@ declare namespace esb {
          * Sets the type of the runtime field.
          * 
          * @param {string} type One of `boolean`, `composite`, `date`, `double`, `geo_point`, `ip`, `keyword`, `long`, `lookup`.
-         * @returns {void}
+         * @returns {RuntimeField} returns `this` so that calls can be chained.
          */
-        type(type: 'boolean' | 'composite' | 'date' | 'double' | 'geo_point' | 'ip' | 'keyword' | 'long' | 'lookup'): void;
+        type(type: 'boolean' | 'composite' | 'date' | 'double' | 'geo_point' | 'ip' | 'keyword' | 'long' | 'lookup'): this;
 
         /**
          * Sets the source of the script.
          * 
-         * @param {string} script
-         * @returns {void}
+         * @param {string} script 
+         * @returns {RuntimeField} returns `this` so that calls can be chained.
          */
-        script(script: string): void;
+        script(script: string): this;
+
+        /**
+         * Specifies the language the script is written in. Defaults to `painless` but
+         * may be set to any of languages listed in [Scripting](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html).
+         *
+         * @param {string} lang The language for the script.
+         * @returns {RuntimeField} returns `this` so that calls can be chained.
+         */
+        lang(lang: string): this;
+    
+        /**
+         * Specifies any named parameters that are passed into the script as variables.
+         *
+         * @param {object} params Named parameters to be passed to script.
+         * @returns {RuntimeField} returns `this` so that calls can be chained.
+         */
+        params(params: object): this;
 
         /**
          * Override default `toJSON` to return DSL representation for the `script`.
