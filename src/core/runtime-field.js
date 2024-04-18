@@ -33,7 +33,6 @@ class RuntimeField {
         this._body = {};
         this._isTypeSet = false;
         this._isScriptSet = false;
-        this._isParamsSet = false;
 
         if (!isNil(type)) {
             this.type(type);
