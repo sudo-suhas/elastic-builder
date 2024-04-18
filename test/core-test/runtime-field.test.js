@@ -59,12 +59,12 @@ test('set script, lang and params', t => {
     fieldA.params({ factor: 2.0 });
     const expected = {
         type: 'keyword',
-        lang: 'painless',
         script: {
-            source: "emit(doc['my_field_name'].value * params.factor)"
-        },
-        params: {
-            factor: 2.0
+            lang: 'painless',
+            source: "emit(doc['my_field_name'].value * params.factor)",
+            params: {
+                factor: 2.0
+            }
         }
     };
     t.deepEqual(fieldA.toJSON(), expected);

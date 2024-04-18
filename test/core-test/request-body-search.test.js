@@ -181,12 +181,12 @@ test('Runtime mappging with lang and params', setsOption, 'runtimeMapping', {
     propValue: {
         test1: {
             type: 'keyword',
-            lang: 'painless',
             script: {
-                source: "emit(doc['my_field_name'].value * params.factor)"
-            },
-            params: {
-                factor: 2.0
+                lang: 'painless',
+                source: "emit(doc['my_field_name'].value * params.factor)",
+                params: {
+                    factor: 2.0
+                }
             }
         }
     },

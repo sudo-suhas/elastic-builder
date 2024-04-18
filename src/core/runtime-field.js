@@ -80,7 +80,9 @@ class RuntimeField {
      * @returns {RuntimeField} returns `this` so that calls can be chained.
      */
     lang(lang) {
-        this._body.lang = lang;
+        if (!isNil(this._body.script)) {
+            this._body.script.lang = lang;
+        }
         return this;
     }
 
@@ -91,7 +93,9 @@ class RuntimeField {
      * @returns {RuntimeField} returns `this` so that calls can be chained.
      */
     params(params) {
-        this._body.params = params;
+        if (!isNil(this._body.script)) {
+            this._body.script.params = params;
+        }
         return this;
     }
 
