@@ -43,6 +43,15 @@ test('knn filter method adds queries correctly', t => {
     t.deepEqual(json.filter, [query.toJSON()]);
 });
 
+test('knn filter method adds queries as array correctly', t => {
+    const knn = new KNN('my_field', 5, 10).queryVector([1, 2, 3]);
+    const query1 = new TermQuery('field1', 'value1');
+    const query2 = new TermQuery('field2', 'value2');
+    knn.filter([query1, query2]);
+    const json = knn.toJSON();
+    t.deepEqual(json.filter, [query1.toJSON(), query2.toJSON()]);
+});
+
 test('knn boost method sets correctly', t => {
     const boostValue = 1.5;
     const knn = new KNN('my_field', 5, 10)
@@ -84,4 +93,38 @@ test('knn toJSON throws error if neither query_vector nor query_vector_builder i
         error.message,
         'either query_vector_builder or query_vector must be provided'
     );
+});
+
+test('knn throws error when first queryVector and then queryVectorBuilder are set', t => {
+    const knn = new KNN('my_field', 5, 10).queryVector([1, 2, 3]);
+    const error = t.throws(() => {
+        knn.queryVectorBuilder('model_123', 'Sample model text');
+    });
+    t.is(
+        error.message,
+        'cannot provide both query_vector_builder and query_vector'
+    );
+});
+
+test('knn throws error when first queryVectorBuilder and then queryVector are set', t => {
+    const knn = new KNN('my_field', 5, 10).queryVectorBuilder(
+        'model_123',
+        'Sample model text'
+    );
+    const error = t.throws(() => {
+        knn.queryVector([1, 2, 3]);
+    });
+    t.is(
+        error.message,
+        'cannot provide both query_vector_builder and query_vector'
+    );
+});
+
+test('knn filter throws TypeError if non-Query type is passed', t => {
+    const knn = new KNN('my_field', 5, 10).queryVector([1, 2, 3]);
+    const error = t.throws(() => {
+        knn.filter('not_a_query');
+    }, TypeError);
+
+    t.is(error.message, 'Argument must be an instance of Query');
 });

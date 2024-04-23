@@ -884,7 +884,11 @@ class RequestBodySearch {
     toJSON() {
         const dsl = recursiveToJSON(this._body);
 
-        if (!isEmpty(this._knn)) dsl.knn = this._knn;
+        if (!isEmpty(this._knn))
+            dsl.knn =
+                this._knn.length == 1
+                    ? recMerge(this._knn)
+                    : this._knn.map(knn => recursiveToJSON(knn));
 
         if (!isEmpty(this._aggs)) dsl.aggs = recMerge(this._aggs);
 
