@@ -9011,7 +9011,7 @@ declare namespace esb {
          * @param {string} type One of `boolean`, `composite`, `date`, `double`, `geo_point`, `ip`, `keyword`, `long`, `lookup`.
          * @returns {void}
          */
-        type(type: 'boolean' | 'composite' | 'date' | 'double' | 'geo_point' | 'ip' | 'keyword' | 'long' | 'lookup');
+        type(type: 'boolean' | 'composite' | 'date' | 'double' | 'geo_point' | 'ip' | 'keyword' | 'long' | 'lookup'): void;
 
         /**
          * Sets the source of the script.
@@ -9019,7 +9019,7 @@ declare namespace esb {
          * @param {string} script
          * @returns {void}
          */
-        script(script: string);
+        script(script: string): void;
 
         /**
          * Override default `toJSON` to return DSL representation for the `script`.
