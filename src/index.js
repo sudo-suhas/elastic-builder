@@ -15,6 +15,7 @@ const {
     RuntimeField,
     SearchTemplate,
     Query,
+    KNN,
     util: { constructorWrapper }
 } = require('./core');
 
@@ -343,6 +344,13 @@ exports.spanWithinQuery = constructorWrapper(SpanWithinQuery);
 
 exports.SpanFieldMaskingQuery = SpanFieldMaskingQuery;
 exports.spanFieldMaskingQuery = constructorWrapper(SpanFieldMaskingQuery);
+
+/* ============ ============ ============ */
+/* ======== KNN ======== */
+/* ============ ============ ============ */
+exports.KNN = KNN;
+exports.kNN = constructorWrapper(KNN);
+
 /* ============ ============ ============ */
 /* ======== Metrics Aggregations ======== */
 /* ============ ============ ============ */
