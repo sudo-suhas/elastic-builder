@@ -19,6 +19,13 @@ declare namespace esb {
         query(query: Query): this;
 
         /**
+         * Sets knn on the request body.
+         *
+         * @param {KNN|KNN[]} knn
+         */
+        kNN(knn: KNN | KNN[]): this;
+
+        /**
          * Sets aggregation on the request body.
          * Alias for method `aggregation`
          *
@@ -3141,7 +3148,7 @@ declare namespace esb {
 
         /**
          * Sets the script used to compute the score of documents returned by the query.
-         * 
+         *
          * @param {Script} script A valid `Script` object
          */
         script(script: Script): this;
@@ -3762,6 +3769,84 @@ declare namespace esb {
     ): SpanFieldMaskingQuery;
 
     /**
+     * Knn performs k-nearest neighbor (KNN) searches.
+     * This class allows configuring the KNN search with various parameters such as field, query vector,
+     * number of nearest neighbors (k), number of candidates, boost factor, and similarity metric.
+     *
+     * NOTE: Only available in Elasticsearch v8.0+
+     */
+    export class KNN {
+        /**
+         * Creates an instance of Knn, initializing the internal state for the k-NN search.
+         *
+         * @param {string} field - (Optional) The field against which to perform the k-NN search.
+         * @param {number} k - (Optional) The number of nearest neighbors to retrieve.
+         * @param {number} numCandidates - (Optional) The number of candidate neighbors to consider during the search.
+         * @throws {Error} If the number of candidates (numCandidates) is less than the number of neighbors (k).
+         */
+        constructor(field: string, k: number, numCandidates: number);
+
+        /**
+         * Sets the query vector for the KNN search, an array of numbers representing the reference point.
+         *
+         * @param {number[]} vector
+         */
+        queryVector(vector: number[]): this;
+
+        /**
+         * Sets the query vector builder for the k-NN search.
+         * This method configures a query vector builder using a specified model ID and model text.
+         * Note that either a direct query vector or a query vector builder can be provided, but not both.
+         *
+         * @param {string} modelId - The ID of the model used for generating the query vector.
+         * @param {string} modelText - The text input based on which the query vector is generated.
+         * @returns {KNN} Returns the instance of Knn for method chaining.
+         * @throws {Error} If both query_vector_builder and query_vector are provided.
+         */
+        queryVectorBuilder(modelId: string, modelText: string): this;
+
+        /**
+         * Adds one or more filter queries to the k-NN search.
+         * This method is designed to apply filters to the k-NN search. It accepts either a single
+         * query or an array of queries. Each query acts as a filter, refining the search results
+         * according to the specified conditions. These queries must be instances of the `Query` class.
+         *
+         * @param {Query|Query[]} queries - A single `Query` instance or an array of `Query` instances for filtering.
+         * @returns {KNN} Returns `this` to allow method chaining.
+         * @throws {TypeError} If any of the provided queries is not an instance of `Query`.
+         */
+        filter(queries: Query | Query[]): this;
+
+        /**
+         * Applies a boost factor to the query to influence the relevance score of returned documents.
+         *
+         * @param {number} boost
+         */
+        boost(boost: number): this;
+
+        /**
+         * Sets the similarity metric used in the KNN algorithm to calculate similarity.
+         *
+         * @param {number} similarity
+         */
+        similarity(similarity: number): this;
+
+        /**
+         * Override default `toJSON` to return DSL representation for the `query`
+         *
+         * @override
+         */
+        toJSON(): object;
+    }
+
+    /**
+     * Factory function to instantiate a new Knn object.
+     *
+     * @returns {KNN}
+     */
+    export function kNN(field: string, k: number, numCandidates: number): KNN;
+
+    /**
      * Base class implementation for all aggregation types.
      *
      * **NOTE:** Instantiating this directly should not be required.
@@ -3913,9 +3998,9 @@ declare namespace esb {
     /**
      * A single-value metrics aggregation that computes the weighted average of numeric values that are extracted from the aggregated documents.
      * These values can be extracted either from specific numeric fields in the documents.
-     * 
+     *
      * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-weight-avg-aggregation.html)
-     * 
+     *
      * Added in Elasticsearch v6.4.0
      * [Release notes](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/release-notes-6.4.0.html)
      *
@@ -3929,7 +4014,7 @@ declare namespace esb {
 
         /**
          * Sets the value
-         * 
+         *
          * @param {string | Script} value Field name or script to be used as the value
          * @param {number=} missing Sets the missing parameter which defines how documents
          * that are missing a value should be treated.
@@ -3939,7 +4024,7 @@ declare namespace esb {
 
         /**
          * Sets the weight
-         * 
+         *
          * @param {string | Script} weight Field name or script to be used as the weight
          * @param {number=} missing Sets the missing parameter which defines how documents
          * that are missing a value should be treated.
@@ -3969,9 +4054,9 @@ declare namespace esb {
     /**
      * A single-value metrics aggregation that computes the weighted average of numeric values that are extracted from the aggregated documents.
      * These values can be extracted either from specific numeric fields in the documents.
-     * 
+     *
      * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-weight-avg-aggregation.html)
-     * 
+     *
      * Added in Elasticsearch v6.4.0
      * [Release notes](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/release-notes-6.4.0.html)
      *
@@ -8922,7 +9007,7 @@ declare namespace esb {
 
         /**
          * Sets the type of the runtime field.
-         * 
+         *
          * @param {string} type One of `boolean`, `composite`, `date`, `double`, `geo_point`, `ip`, `keyword`, `long`, `lookup`.
          * @returns {RuntimeField} returns `this` so that calls can be chained.
          */
@@ -8930,8 +9015,8 @@ declare namespace esb {
 
         /**
          * Sets the source of the script.
-         * 
-         * @param {string} script 
+         *
+         * @param {string} script
          * @returns {RuntimeField} returns `this` so that calls can be chained.
          */
         script(script: string): this;

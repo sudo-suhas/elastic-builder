@@ -16,7 +16,8 @@ import {
     Highlight,
     Rescore,
     InnerHits,
-    RuntimeField
+    RuntimeField,
+    KNN
 } from '../../src';
 import { illegalParamType, makeSetsOptionMacro } from '../_macros';
 
@@ -77,6 +78,11 @@ const innerHits = new InnerHits()
     .name('last_tweets')
     .size(5)
     .sort(new Sort('date', 'desc'));
+const kNNVectorBuilder = new KNN('my_field', 5, 10)
+    .similarity(0.6)
+    .filter(new TermQuery('field', 'value'))
+    .queryVectorBuilder('model_123', 'Sample model text');
+const kNNVector = new KNN('my_field', 5, 10).queryVector([1, 2, 3]);
 
 const instance = new RequestBodySearch();
 
@@ -89,9 +95,11 @@ test(illegalParamType, instance, 'scriptFields', 'Object');
 test(illegalParamType, instance, 'highlight', 'Highlight');
 test(illegalParamType, instance, 'rescore', 'Rescore');
 test(illegalParamType, instance, 'postFilter', 'Query');
+test(illegalParamType, instance, 'kNN', 'KNN');
 test(setsOption, 'query', { param: searchQry });
 test(setsOption, 'aggregation', { param: aggA, keyName: 'aggs' });
 test(setsOption, 'agg', { param: aggA, keyName: 'aggs' });
+test(setsOption, 'kNN', { param: kNNVectorBuilder, keyName: 'knn' });
 test(setsOption, 'suggest', { param: suggest });
 test(setsOption, 'suggestText', {
     param: 'suggest-text',
@@ -367,5 +375,85 @@ test('sets multiple indices_boost', t => {
     const expected = {
         indices_boost: [{ alias1: 1.4 }, { 'index*': 1.3 }]
     };
+    t.deepEqual(value, expected);
+});
+
+test('kNN setup query vector builder', t => {
+    const value = new RequestBodySearch().kNN(kNNVectorBuilder).toJSON();
+    const expected = {
+        knn: {
+            field: 'my_field',
+            k: 5,
+            filter: [
+                {
+                    term: {
+                        field: 'value'
+                    }
+                }
+            ],
+            num_candidates: 10,
+            query_vector_builder: {
+                text_embeddings: {
+                    model_id: 'model_123',
+                    model_text: 'Sample model text'
+                }
+            },
+            similarity: 0.6
+        }
+    };
+
+    t.deepEqual(value, expected);
+});
+
+test('kNN setup query vector', t => {
+    const value = new RequestBodySearch().kNN(kNNVector).toJSON();
+    const expected = {
+        knn: {
+            field: 'my_field',
+            k: 5,
+            filter: [],
+            num_candidates: 10,
+            query_vector: [1, 2, 3]
+        }
+    };
+
+    t.deepEqual(value, expected);
+});
+
+test('kNN setup query vector array', t => {
+    const value = new RequestBodySearch()
+        .kNN([kNNVector, kNNVectorBuilder])
+        .toJSON();
+    const expected = {
+        knn: [
+            {
+                field: 'my_field',
+                k: 5,
+                filter: [],
+                num_candidates: 10,
+                query_vector: [1, 2, 3]
+            },
+            {
+                field: 'my_field',
+                filter: [
+                    {
+                        term: {
+                            field: 'value'
+                        }
+                    }
+                ],
+                k: 5,
+                num_candidates: 10,
+                query_vector_builder: {
+                    text_embeddings: {
+                        model_id: 'model_123',
+                        model_text: 'Sample model text'
+                    }
+                },
+                similarity: 0.6
+            }
+        ]
+    };
+
     t.deepEqual(value, expected);
 });
