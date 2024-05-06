@@ -69,3 +69,11 @@ test('set script, lang and params', t => {
     };
     t.deepEqual(fieldA.toJSON(), expected);
 });
+
+test("don't set lang and params if script is not set", t => {
+    const fieldA = new RuntimeField('keyword');
+    fieldA.lang('painless');
+    fieldA.params({ factor: 2.0 });
+    const error = t.throws(() => fieldA.toJSON());
+    t.is(error.message, '`script` should be set');
+});
