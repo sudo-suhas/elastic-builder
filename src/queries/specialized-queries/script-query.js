@@ -43,7 +43,7 @@ class ScriptQuery extends Query {
     script(script) {
         checkType(script, Script);
 
-        this._queryOpts.script = script;
+        this._body.script = script;
         return this;
     }
 }
