@@ -19,7 +19,7 @@ const invalidEncoderParam = invalidParam(
 const invalidTypeParam = invalidParam(
     ES_REF_URL,
     'type',
-    "'plain', 'postings' or 'fvh'"
+    "'plain', 'postings', 'unified' or 'fvh'"
 );
 const invalidFragmenterParam = invalidParam(
     ES_REF_URL,
@@ -452,10 +452,10 @@ class Highlight {
      * @example
      * const highlight = esb.highlight('content').type('plain', 'content');
      *
-     * @param {string} type The allowed values are: `plain`, `postings` and `fvh`.
+     * @param {string} type The allowed values are: `plain`, `postings`, `unified` and `fvh`.
      * @param {string=} field An optional field name
      * @returns {Highlight} returns `this` so that calls can be chained
-     * @throws {Error} Type can be one of `plain`, `postings` or `fvh`.
+     * @throws {Error} Type can be one of `plain`, `postings`, `unified` or `fvh`.
      */
     type(type, field) {
         if (isNil(type)) invalidTypeParam(type);
@@ -464,6 +464,7 @@ class Highlight {
         if (
             typeLower !== 'plain' &&
             typeLower !== 'postings' &&
+            typeLower !== 'unified' &&
             typeLower !== 'fvh'
         ) {
             invalidTypeParam(type);
