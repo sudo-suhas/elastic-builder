@@ -449,6 +449,9 @@ class Highlight {
      * The `unified` highlighter outputs the same highlighting when
      * `index_options` is set to `offsets`.
      *
+     * Note: The `unified` highlighter is only supported in elasticsearch 6.0
+     * and later.
+     *
      * @example
      * const highlight = esb.highlight('content').type('plain', 'content');
      *
