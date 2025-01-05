@@ -8932,11 +8932,11 @@ declare namespace esb {
          * Note: The `postings` highlighter has been removed in elasticsearch 6.0. The `unified`
          * highlighter outputs the same highlighting when `index_options` is set to `offsets`.
          *
-         * @param {string} type The allowed values are: `plain`, `postings` and `fvh`.
+         * @param {string} type The allowed values are: `plain`, `postings`, `unified` and `fvh`.
          * @param {string=} field An optional field name
-         * @throws {Error} Type can be one of `plain`, `postings` or `fvh`.
+         * @throws {Error} Type can be one of `plain`, `postings`, `unified` or `fvh`.
          */
-        type(type: 'plain' | 'postings' | 'fvh', field?: string): this;
+        type(type: 'plain' | 'postings' | 'unified' | 'fvh', field?: string): this;
 
         /**
          * Forces the highlighting to highlight fields based on the source

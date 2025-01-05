@@ -106,7 +106,12 @@ test(illegalParamType, new Highlight(), 'fields', 'Array');
 test(illegalParamType, new Highlight(), 'highlightQuery', 'Query');
 test(illegalParamType, new Highlight(), 'matchedFields', 'Array');
 test(validatedCorrectly, highlight, 'encoder', ['default', 'html']);
-test(validatedCorrectly, highlight, 'type', ['plain', 'postings', 'fvh']);
+test(validatedCorrectly, highlight, 'type', [
+    'plain',
+    'postings',
+    'unified',
+    'fvh'
+]);
 test(validatedCorrectly, highlight, 'fragmenter', ['simple', 'span']);
 test(setHighlightOption, 'preTags', ['<tag1>', '<tag2>']);
 test('sets pre_tags(str) option', setHighlightOption, 'preTags', '<tag1>', [
