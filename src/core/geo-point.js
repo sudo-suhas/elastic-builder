@@ -1,7 +1,6 @@
 'use strict';
 
-const isObject = require('lodash.isobject');
-const isNil = require('lodash.isnil');
+const { isObject, isNil } = require('lodash');
 
 const { checkType } = require('./util');
 

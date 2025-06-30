@@ -1,11 +1,6 @@
 'use strict';
 
-const isEmpty = require('lodash.isempty'),
-    isNil = require('lodash.isnil'),
-    isString = require('lodash.isstring'),
-    isObject = require('lodash.isobject'),
-    hasIn = require('lodash.hasin'),
-    has = require('lodash.has');
+const { isEmpty, isNil, isString, isObject, hasIn, has } = require('lodash');
 
 const inspect = require('./inspect');
 

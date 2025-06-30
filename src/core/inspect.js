@@ -2,8 +2,7 @@
 /* eslint-disable max-lines */
 'use strict';
 
-const isString = require('lodash.isstring'),
-    isObject = require('lodash.isobject');
+const { isString, isObject } = require('lodash');
 
 /**
  * Echos the value of a value. Trys to print the value out

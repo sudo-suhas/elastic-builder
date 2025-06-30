@@ -1,8 +1,6 @@
 'use strict';
 
-const has = require('lodash.has');
-const head = require('lodash.head');
-const omit = require('lodash.omit');
+const { has, head, omit } = require('lodash');
 
 const {
     Query,

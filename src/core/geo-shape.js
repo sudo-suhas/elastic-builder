@@ -1,7 +1,6 @@
 'use strict';
 
-const isNil = require('lodash.isnil');
-const has = require('lodash.has');
+const { isNil, has } = require('lodash');
 
 const { checkType, invalidParam } = require('./util');
 const { GEO_SHAPE_TYPES } = require('./consts');

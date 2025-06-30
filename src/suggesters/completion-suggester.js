@@ -1,6 +1,6 @@
 'use strict';
 
-const isObject = require('lodash.isobject');
+const { isObject } = require('lodash');
 
 const {
     Suggester,

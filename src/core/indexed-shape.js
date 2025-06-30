@@ -1,6 +1,6 @@
 'use strict';
 
-const isNil = require('lodash.isnil');
+const { isNil } = require('lodash');
 
 /**
  * A shape which has already been indexed in another index and/or index

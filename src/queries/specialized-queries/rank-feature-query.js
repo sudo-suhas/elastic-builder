@@ -1,7 +1,7 @@
 'use strict';
 
 const { Query } = require('../../core');
-const isNil = require('lodash.isnil');
+const { isNil } = require('lodash');
 
 /**
  * The rank_feature query boosts the relevance score on the numeric value of
