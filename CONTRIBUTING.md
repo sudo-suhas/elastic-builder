@@ -20,9 +20,9 @@ Fork, then clone the repo:
 git clone https://github.com/your-username/elastic-builder.git
 ```
 
-Install dependencies using npm (install [node.js][2] first if necessary).
+Install dependencies using Yarn 1.x (install [node.js][2] and [Yarn][3] first if necessary).
 ```
-npm install
+yarn install
 ```
 
 ### Write code
@@ -36,11 +36,11 @@ elastic-builder is published to npm.
 ### Run tests
 
 This project uses eslint for javascript linting and ava for testing. Run
-linting using `npm run lint` and run tests using `npm test`. Or run both using:
+linting using `yarn lint` and run tests using `yarn test`. Or run both using:
 ```
-npm run check
+yarn run check
 ```
-This should take care of formatting as well thanks to [eslint-plugin-prettier][3].
+This should take care of formatting as well thanks to [eslint-plugin-prettier][4].
 
 ### (Optional) Add yourself as a contributor
 
@@ -61,9 +61,10 @@ helpful!
 
 If you have any questions about the feature or fix you want to make, or if you
 have doubts about the approach, or anything else you're not sure about, the best
-way to get in touch is to [open an issue][4]. I am happy to help out.
+way to get in touch is to [open an issue][5]. I am happy to help out.
 
 [1]: https://babeljs.io/docs/learn-es2015/
 [2]: https://nodejs.org/
-[3]: https://github.com/not-an-aardvark/eslint-plugin-prettier
-[4]: https://github.com/sudo-suhas/elastic-builder/issues/new
+[3]: https://classic.yarnpkg.com/lang/en/docs/install/
+[4]: https://github.com/not-an-aardvark/eslint-plugin-prettier
+[5]: https://github.com/sudo-suhas/elastic-builder/issues/new
