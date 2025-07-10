@@ -1,6 +1,6 @@
 'use strict';
 
-const isNil = require('lodash.isnil');
+const { isNil } = require('lodash');
 
 const {
     consts: { SUGGEST_MODE_SET, STRING_DISTANCE_SET },

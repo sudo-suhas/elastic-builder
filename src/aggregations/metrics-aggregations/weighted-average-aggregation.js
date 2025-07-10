@@ -2,7 +2,7 @@
 
 const { Script } = require('../../core');
 const MetricsAggregationBase = require('./metrics-aggregation-base');
-const isNil = require('lodash.isnil');
+const { isNil } = require('lodash');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-weight-avg-aggregation.html';

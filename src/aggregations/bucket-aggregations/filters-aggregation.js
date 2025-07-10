@@ -1,6 +1,6 @@
 'use strict';
 
-const isEmpty = require('lodash.isempty');
+const { isEmpty } = require('lodash');
 
 const {
     Query,

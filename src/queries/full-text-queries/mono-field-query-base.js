@@ -1,7 +1,6 @@
 'use strict';
 
-const has = require('lodash.has');
-const isNil = require('lodash.isnil');
+const { has, isNil } = require('lodash');
 
 const FullTextQueryBase = require('./full-text-query-base');
 

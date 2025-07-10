@@ -1,7 +1,6 @@
 'use strict';
 
-const isEmpty = require('lodash.isempty');
-const isNil = require('lodash.isnil');
+const { isEmpty, isNil } = require('lodash');
 
 const {
     util: { invalidParam, recursiveToJSON }

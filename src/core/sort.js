@@ -1,8 +1,6 @@
 'use strict';
 
-const isEmpty = require('lodash.isempty');
-const has = require('lodash.has');
-const isNil = require('lodash.isnil');
+const { isEmpty, has, isNil } = require('lodash');
 
 const Query = require('./query');
 const Script = require('./script');

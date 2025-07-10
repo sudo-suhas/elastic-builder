@@ -1,7 +1,6 @@
 'use strict';
 
-const isNil = require('lodash.isnil');
-const isObject = require('lodash.isobject');
+const { isNil, isObject } = require('lodash');
 
 const {
     util: { invalidParam, setDefault }

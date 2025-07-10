@@ -1,7 +1,6 @@
 'use strict';
 
-const has = require('lodash.has');
-const isEmpty = require('lodash.isempty');
+const { has, isEmpty } = require('lodash');
 
 const { checkType, recursiveToJSON } = require('./util');
 

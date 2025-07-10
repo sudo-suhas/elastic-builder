@@ -1,8 +1,6 @@
 'use strict';
 
-const isNil = require('lodash.isnil');
-
-const isEmpty = require('lodash.isempty');
+const { isNil, isEmpty } = require('lodash');
 
 /**
  * Base class implementation for all suggester types.

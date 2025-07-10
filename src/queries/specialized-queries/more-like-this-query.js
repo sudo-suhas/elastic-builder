@@ -1,6 +1,6 @@
 'use strict';
 
-const has = require('lodash.has');
+const { has } = require('lodash');
 
 const {
     Query,

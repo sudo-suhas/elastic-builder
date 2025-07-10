@@ -1,6 +1,6 @@
 'use strict';
 
-const isNil = require('lodash.isnil');
+const { isNil } = require('lodash');
 
 const Sort = require('./sort');
 const Highlight = require('./highlight');

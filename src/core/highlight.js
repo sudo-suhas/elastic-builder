@@ -1,10 +1,6 @@
 'use strict';
 
-const has = require('lodash.has'),
-    isEmpty = require('lodash.isempty'),
-    isNil = require('lodash.isnil'),
-    isString = require('lodash.isstring');
-
+const { has, isEmpty, isNil, isString } = require('lodash');
 const Query = require('./query');
 const { checkType, invalidParam, recursiveToJSON } = require('./util');
 
