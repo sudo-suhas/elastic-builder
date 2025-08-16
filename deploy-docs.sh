@@ -5,7 +5,7 @@
 #   (except in until or while loops, if-tests, list constructs)
 
 if ! hash gh-pages 2> /dev/null; then
-    yarn global add gh-pages
+    npm i -g gh-pages
 fi
 
 gh-pages --add \
