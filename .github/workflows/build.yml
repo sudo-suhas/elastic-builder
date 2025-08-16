@@ -21,13 +21,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
+          cache: 'npm'
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: npm ci
       - name: Check
         run: |
-          yarn run check
-          yarn coverage
+          npm run check
+          npm run coverage
       - name: Coveralls
         uses: coverallsapp/github-action@1.1.3
         with:
@@ -59,9 +59,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
-          cache: 'yarn'
+          cache: 'npm'
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: npm ci
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
