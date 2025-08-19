@@ -108,6 +108,15 @@ exports.GEO_RELATION_SET = new Set([
     'INTERSECTS'
 ]);
 
+exports.QUERY_STRING_TYPE = new Set([
+    'best_fields',
+    'most_fields',
+    'cross_fields',
+    'phrase',
+    'phrase_prefix',
+    'bool_prefix'
+]);
+
 exports.SUGGEST_MODE_SET = new Set(['missing', 'popular', 'always']);
 
 exports.STRING_DISTANCE_SET = new Set([
