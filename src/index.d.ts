@@ -3768,6 +3768,28 @@ declare namespace esb {
         spanQry?: SpanQueryBase
     ): SpanFieldMaskingQuery;
 
+    export class SparseVectorQuery extends Query {
+        constructor(field?: string);
+
+        field(field : string) : SparseVectorQuery;
+
+        inferenceId(inferenceId : string) : SparseVectorQuery;
+
+        queryVector(queryVector : object) : SparseVectorQuery;
+
+        prune(prune: boolean): SparseVectorQuery;
+
+        tokensFreqRatioThreshold(tokensFreqRatioThreshold : number) : SparseVectorQuery;
+
+        tokensWeightThreshold(tokensWeightThreshold : number) : SparseVectorQuery;
+
+        onlyScorePrunedTokens(onlyScorePrunedTokens : boolean) : SparseVectorQuery;
+    }
+
+    export function sparseVectorQuery(
+        field? : string
+    ) : SparseVectorQuery;
+
     /**
      * Knn performs k-nearest neighbor (KNN) searches.
      * This class allows configuring the KNN search with various parameters such as field, query vector,
