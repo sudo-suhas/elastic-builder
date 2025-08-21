@@ -172,6 +172,9 @@ test('queries are exported', t => {
 
     t.truthy(esb.SpanFieldMaskingQuery);
     t.truthy(esb.spanFieldMaskingQuery);
+
+    t.truthy(esb.sparseVectorQuery());
+    t.truthy(esb.SparseVectorQuery);
 });
 
 test('aggregations are exported', t => {

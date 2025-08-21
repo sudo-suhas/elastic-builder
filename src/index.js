@@ -89,7 +89,8 @@ const {
         SpanContainingQuery,
         SpanWithinQuery,
         SpanFieldMaskingQuery
-    }
+    },
+    vectorQueries: { SparseVectorQuery }
 } = require('./queries');
 
 const {
@@ -344,6 +345,9 @@ exports.spanWithinQuery = constructorWrapper(SpanWithinQuery);
 
 exports.SpanFieldMaskingQuery = SpanFieldMaskingQuery;
 exports.spanFieldMaskingQuery = constructorWrapper(SpanFieldMaskingQuery);
+
+exports.SparseVectorQuery = SparseVectorQuery;
+exports.sparseVectorQuery = constructorWrapper(SparseVectorQuery);
 
 /* ============ ============ ============ */
 /* ======== KNN ======== */

@@ -16,3 +16,5 @@ exports.geoQueries = require('./geo-queries');
 exports.specializedQueries = require('./specialized-queries');
 
 exports.spanQueries = require('./span-queries');
+
+exports.vectorQueries = require('./vector-queries');
