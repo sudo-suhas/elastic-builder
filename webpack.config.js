@@ -1,23 +1,27 @@
 'use strict';
 
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     output: {
-        library: 'esb',
-        libraryTarget: 'umd'
+        library: {
+            name: 'esb',
+            type: 'umd'
+        }
     },
     optimization: {
         minimizer: [
-            new UglifyJSPlugin({
-                sourceMap: false,
-                uglifyOptions: {
-                    beautify: false,
+            new TerserPlugin({
+                terserOptions: {
+                    format: {
+                        beautify: false,
+                        comments: false
+                    },
                     mangle: {
                         toplevel: true,
                         keep_fnames: false
                     },
-                    compressor: {
+                    compress: {
                         warnings: false,
                         conditionals: true,
                         unused: true,
@@ -28,8 +32,7 @@ module.exports = {
                         if_return: true,
                         join_vars: true,
                         negate_iife: false
-                    },
-                    comments: false
+                    }
                 }
             })
         ]
