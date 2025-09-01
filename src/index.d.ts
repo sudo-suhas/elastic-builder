@@ -3769,6 +3769,96 @@ declare namespace esb {
     ): SpanFieldMaskingQuery;
 
     /**
+     * The sparse vector query executes a query consisting of sparse vectors, such as built by a learned sparse retrieval model,
+     *
+     * NOTE: Only available in Elasticsearch v8.15+
+     */
+    export class SparseVectorQuery extends Query {
+        constructor(field?: string);
+
+        /**
+         * Sets the field to query
+         *
+         * @param {string} field the field for the query
+         * @returns {SparseVectorQuery}
+         */
+        field(field : string) : SparseVectorQuery;
+
+        /**
+         * Set model inference id
+         *
+         * @param {string} inferenceId The model inference ID
+         * @returns {SparseVectorQuery}
+         */
+        inferenceId(inferenceId : string) : SparseVectorQuery;
+
+        /**
+         * Sets the input query
+         *
+         * @param {string} query The input query
+         * @returns {SparseVectorQuery}
+         */
+        query(query : string) : SparseVectorQuery;
+
+        /**
+         * Set a query vector to the query to run. if you don't use inference
+         *
+         * @param {Object} queryVector
+         * @returns {SparseVectorQuery}
+         */
+        queryVector(queryVector : object) : SparseVectorQuery;
+
+        /**
+         * Enable pruning
+         *
+         * NOTE: Only available in Elasticsearch v9.0+
+         *
+         * @param {boolean} prune
+         * @returns {SparseVectorQuery} returns `this` so that calls can be chained.
+         */
+        prune(prune: boolean): SparseVectorQuery;
+
+        /**
+         * Set pruning config tokens_freq_ratio_threshold
+         *
+         * NOTE: Only available in Elasticsearch v9.0+
+         *
+         * @param {number} tokensFreqRatioThreshold
+         * @returns {SparseVectorQuery} returns `this` so that calls can be chained.
+         */
+        tokensFreqRatioThreshold(tokensFreqRatioThreshold : number) : SparseVectorQuery;
+
+        /**
+         * Set pruning config tokens_weight_threshold
+         *
+         * NOTE: Only available in Elasticsearch v9.0+
+         *
+         * @param {number} tokensWeightThreshold
+         * @returns {SparseVectorQuery} returns `this` so that calls can be chained.
+         */
+        tokensWeightThreshold(tokensWeightThreshold : number) : SparseVectorQuery;
+
+        /**
+         * Set pruning config only_score_pruned_tokens
+         *
+         * NOTE: Only available in Elasticsearch v9.0+
+         *
+         * @param {boolean} onlyScorePrunedTokens
+         * @returns {SparseVectorQuery} returns `this` so that calls can be chained.
+         */
+        onlyScorePrunedTokens(onlyScorePrunedTokens : boolean) : SparseVectorQuery;
+    }
+
+    /**
+     * Factory function to instantiate a new SparseVectorQuery object.
+     *
+     * @returns {SparseVectorQuery}
+     */
+    export function sparseVectorQuery(
+        field? : string
+    ) : SparseVectorQuery;
+
+    /**
      * Knn performs k-nearest neighbor (KNN) searches.
      * This class allows configuring the KNN search with various parameters such as field, query vector,
      * number of nearest neighbors (k), number of candidates, boost factor, and similarity metric.
