@@ -1,5 +1,5 @@
 import test from 'ava';
-import { SparseVectorQuery } from '../../src';
+import esb, { SparseVectorQuery } from '../../src';
 
 test('with inference id and query', t => {
     const q = new SparseVectorQuery();
@@ -132,6 +132,18 @@ test('with pruning config for multiple elements', t => {
                 tokens_weight_threshold: 0.4,
                 only_score_pruned_tokens: false
             }
+        }
+    };
+    t.deepEqual(q.toJSON(), expected);
+});
+
+test('call sparse vector query via esb', t => {
+    const q = esb.sparseVectorQuery('my_field').query('my query');
+
+    const expected = {
+        sparse_vector: {
+            field: 'my_field',
+            query: 'my query'
         }
     };
     t.deepEqual(q.toJSON(), expected);
