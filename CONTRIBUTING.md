@@ -53,7 +53,7 @@ This is the last step! Make sure your PR is aimed to merge with the `master`
 branch.
 
 You should also write a good PR message with information on why this feature or
-fix is necesary or a good idea. For features, be sure to include information on
+fix is necessary or a good idea. For features, be sure to include information on
 how to use the feature; and for bugs, information on how to reproduce the bug is
 helpful!
 
