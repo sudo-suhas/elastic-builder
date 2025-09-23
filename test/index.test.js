@@ -175,6 +175,9 @@ test('queries are exported', t => {
 
     t.truthy(esb.sparseVectorQuery());
     t.truthy(esb.SparseVectorQuery);
+
+    t.truthy(esb.semanticQuery());
+    t.truthy(esb.SemanticQuery);
 });
 
 test('aggregations are exported', t => {
