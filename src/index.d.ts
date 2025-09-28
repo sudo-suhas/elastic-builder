@@ -1392,6 +1392,108 @@ declare namespace esb {
     ): SimpleQueryStringQuery;
 
     /**
+     * The `combined_fields` query supports searching multiple text fields as if
+     * their contents had been indexed into one combined field. It takes a term-centric
+     * view of the query: first it analyzes the query string to produce individual terms,
+     * then looks for each term in any of the fields.
+     *
+     * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-combined-fields-query.html)
+     *
+     * NOTE: This query was added in elasticsearch v7.13.
+     *
+     * @param {Array<string>|string=} fields The fields to be queried
+     * @param {string=} queryString The query string
+     * @extends FullTextQueryBase
+     */
+    export class CombinedFieldsQuery extends FullTextQueryBase {
+        constructor(fields?: string[] | string, queryString?: string);
+
+        /**
+         * Appends given field to the list of fields to search against.
+         * Fields can be specified with wildcards.
+         * Individual fields can be boosted with the caret (^) notation.
+         * Example - `"subject^3"`
+         *
+         * @param {string} field One of the fields to be queried
+         * @returns {CombinedFieldsQuery} returns `this` so that calls can be chained.
+         */
+        field(field: string): this;
+
+        /**
+         * Appends given fields to the list of fields to search against.
+         * Fields can be specified with wildcards.
+         * Individual fields can be boosted with the caret (^) notation.
+         *
+         * @example
+         * // Boost individual fields with caret `^` notation
+         * const qry = esb.combinedFieldsQuery(['subject^3', 'message'], 'this is a test');
+         *
+         * @example
+         * // Specify fields with wildcards
+         * const qry = esb.combinedFieldsQuery(['title', '*_name'], 'Will Smith');
+         *
+         * @param {Array<string>} fields The fields to be queried
+         * @returns {CombinedFieldsQuery} returns `this` so that calls can be chained.
+         */
+        fields(fields: string[]): this;
+
+        /**
+         * If true, match phrase queries are automatically created for multi-term synonyms.
+         *
+         * @param {boolean} enable Defaults to `true`
+         * @returns {CombinedFieldsQuery} returns `this` so that calls can be chained.
+         */
+        autoGenerateSynonymsPhraseQuery(enable: boolean): this;
+
+        /**
+         * The operator to be used in the boolean query which is constructed
+         * by analyzing the text provided. The `operator` flag can be set to `or` or
+         * `and` to control the boolean clauses (defaults to `or`).
+         *
+         * @param {string} operator Can be `and`/`or`. Default is `or`.
+         * @returns {CombinedFieldsQuery} returns `this` so that calls can be chained.
+         */
+        operator(operator: 'and' | 'or'): this;
+
+        /**
+         * If the analyzer used removes all tokens in a query like a `stop` filter does,
+         * the default behavior is to match no documents at all. In order to change that
+         * the `zero_terms_query` option can be used, which accepts `none` (default) and `all`
+         * which corresponds to a `match_all` query.
+         *
+         * @example
+         * const qry = esb.combinedFieldsQuery('message', 'to be or not to be')
+         *     .operator('and')
+         *     .zeroTermsQuery('all');
+         *
+         * @param {string} behavior A no match action, `all` or `none`. Default is `none`.
+         * @returns {CombinedFieldsQuery} returns `this` so that calls can be chained.
+         */
+        zeroTermsQuery(behavior: 'all' | 'none'): this;
+    }
+
+    /**
+     * The `combined_fields` query supports searching multiple text fields as if
+     * their contents had been indexed into one combined field. It takes a term-centric
+     * view of the query: first it analyzes the query string to produce individual terms,
+     * then looks for each term in any of the fields.
+     *
+     * [Elasticsearch reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-combined-fields-query.html)
+     *
+     * NOTE: This query was added in elasticsearch v7.13.
+     *
+     * @example
+     * const qry = esb.combinedFieldsQuery(['subject', 'message'], 'this is a test');
+     *
+     * @param {Array<string>|string=} fields The fields to be queried
+     * @param {string=} queryString The query string
+     */
+    export function combinedFieldsQuery(
+        fields?: string[] | string,
+        queryString?: string
+    ): CombinedFieldsQuery;
+
+    /**
      * The `ValueTermQueryBase` provides support for common options used across
      * various term level query implementations.
      *

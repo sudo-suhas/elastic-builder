@@ -22,6 +22,33 @@ esb
             .minimumShouldMatch('30%')
     );
 
+// Combined Fields Query
+esb
+    .requestBodySearch()
+    .query(
+        esb
+            .combinedFieldsQuery(['title', 'body'], 'Quick brown fox')
+            .operator('and')
+            .autoGenerateSynonymsPhraseQuery(true)
+            .zeroTermsQuery('all')
+    );
+
+// Combined Fields Query with single field
+esb
+    .requestBodySearch()
+    .query(
+        esb
+            .combinedFieldsQuery('title', 'Quick brown fox')
+            .field('description')
+            .fields(['tags', 'content^2'])
+    );
+
+// Combined Fields Query - class constructor
+new esb.CombinedFieldsQuery(['title', 'content'], 'search terms')
+    .operator('or')
+    .autoGenerateSynonymsPhraseQuery(false)
+    .toJSON();
+
 // Percolate Query
 esb
     .requestBodySearch()
