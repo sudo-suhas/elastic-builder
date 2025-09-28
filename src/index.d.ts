@@ -3868,10 +3868,6 @@ declare namespace esb {
      * @extends Query
      */
     export class SemanticQuery extends Query {
-        /**
-         * @param {string=} field The semantic_text field to query.
-         * @param {string=} query The semantic query text.
-         */
         constructor(field?: string, query?: string);
 
         /**
