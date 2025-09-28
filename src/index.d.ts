@@ -3859,6 +3859,44 @@ declare namespace esb {
     ) : SparseVectorQuery;
 
     /**
+     * The `semantic` query enables semantic search on a `semantic_text` field.
+     * 
+     *  NOTE: Only available in Elasticsearch v9.0+
+     *
+     * @param {string=} field The semantic_text field to query.
+     * @param {string=} query The semantic query text.
+     * @extends Query
+     */
+    export class SemanticQuery extends Query {
+        constructor(field?: string, query?: string);
+
+        /**
+         * Sets the semantic field to query.
+         *
+         * @param {string} field The `semantic_text` field name.
+         */
+        field(field: string): this;
+
+        /**
+         * Sets the semantic query text.
+         *
+         * @param {string} query The query text.
+         */
+        query(query: string): this;
+    }
+
+    /**
+     * Creates a `semantic` query.
+     *
+     * @param {string=} field The semantic_text field to query.
+     * @param {string=} query The semantic query text.
+     */
+    export function semanticQuery(
+        field?: string, 
+        query?: string
+    ): SemanticQuery;
+
+    /**
      * Knn performs k-nearest neighbor (KNN) searches.
      * This class allows configuring the KNN search with various parameters such as field, query vector,
      * number of nearest neighbors (k), number of candidates, boost factor, and similarity metric.
