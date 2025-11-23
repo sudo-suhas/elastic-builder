@@ -1,5 +1,17 @@
 root: true
-extends: chatur
+parser: '@babel/eslint-parser'
+parserOptions:
+  ecmaVersion: 2020
+  sourceType: module
+  requireConfigFile: false
+env:
+  node: true
+  es6: true
+extends:
+  - 'eslint:recommended'
+  - 'plugin:prettier/recommended'
+plugins:
+  - prettier
 rules:
   id-length: off
   class-methods-use-this:
@@ -17,12 +29,12 @@ rules:
       - value
       - executionHint
       - _warn
-  node/no-unsupported-features:
+  no-unused-vars:
     - error
-    # We use babel. So change the version
-    # instead of inheriting from package.json#engines
-    - version: 6
-  # disabled because of too many false positives
-  unicorn/no-fn-reference-in-iterator: off
-  # doesn't work with eslint 5
-  eslint-comments/no-unused-disable: off
+    - argsIgnorePattern: '^_'
+  no-console: off
+  prefer-const: error
+  no-var: error
+  no-irregular-whitespace:
+    - error
+    - skipComments: true

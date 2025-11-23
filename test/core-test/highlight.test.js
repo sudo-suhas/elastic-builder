@@ -245,10 +245,7 @@ test('sets order as score', t => {
     };
     t.deepEqual(value.toJSON(), expected);
 
-    value = new Highlight()
-        .scoreOrder('my_field')
-        .scoreOrder()
-        .toJSON();
+    value = new Highlight().scoreOrder('my_field').scoreOrder().toJSON();
     expected = {
         fields: {
             my_field: { order: 'score' }

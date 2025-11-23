@@ -22,10 +22,7 @@ const lang = 'painless';
 const source =
     "decayNumericLinear(params.origin, params.scale, params.offset, params.decay, doc['dval'].value)";
 const params = { origin: 20, scale: 10, decay: 0.5, offset: 0 };
-const script = new Script()
-    .lang(lang)
-    .source(source)
-    .params(params);
+const script = new Script().lang(lang).source(source).params(params);
 
 const instance = new ScriptScoreQuery();
 

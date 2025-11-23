@@ -62,10 +62,7 @@ test(setsOption, 'routing', {
 
 test('constructor sets arguments', t => {
     let valueA = new TermsQuery('my_field', 'my-value').toJSON();
-    let valueB = new TermsQuery()
-        .field('my_field')
-        .value('my-value')
-        .toJSON();
+    let valueB = new TermsQuery().field('my_field').value('my-value').toJSON();
     t.deepEqual(valueA, valueB);
 
     let expected = { terms: { my_field: ['my-value'] } };

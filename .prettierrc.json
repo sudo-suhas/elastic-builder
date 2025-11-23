@@ -3,12 +3,15 @@
   "semi": true,
   "singleQuote": true,
   "trailingComma": "none",
-  "proseWrap": "always",
+  "proseWrap": "preserve",
+  "arrowParens": "avoid",
+  "printWidth": 80,
   "overrides": [
     {
       "files": "*.md",
       "options": {
-        "tabWidth": 2
+        "tabWidth": 2,
+        "proseWrap": "always"
       }
     },
     {

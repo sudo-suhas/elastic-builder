@@ -70,9 +70,7 @@ test('anonymous filters are set', t => {
     };
     t.deepEqual(value, expected);
 
-    value = getInstance()
-        .anonymousFilters([filterQryA, filterQryB])
-        .toJSON();
+    value = getInstance().anonymousFilters([filterQryA, filterQryB]).toJSON();
     t.deepEqual(value, expected);
 });
 
@@ -128,9 +126,7 @@ test.serial('mixed representation logs warning', t => {
 });
 
 test('other_bucket_key is set', t => {
-    const value = getInstance()
-        .otherBucket(true, 'other_messages')
-        .toJSON();
+    const value = getInstance().otherBucket(true, 'other_messages').toJSON();
     const expected = {
         my_filters_agg: {
             filters: {

@@ -13,12 +13,8 @@ test(setsOption, 'boost', { param: 10 });
 test(setsOption, 'name', { param: 'my_name', keyName: '_name' });
 
 test('getDSL gets DSL', t => {
-    const valueA = getInstance()
-        .boost(10)
-        .toJSON();
-    const valueB = getInstance()
-        .boost(10)
-        .getDSL();
+    const valueA = getInstance().boost(10).toJSON();
+    const valueB = getInstance().boost(10).getDSL();
     const expected = {
         my_type: {
             boost: 10

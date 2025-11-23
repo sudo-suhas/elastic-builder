@@ -93,7 +93,8 @@ class SparseVectorQuery extends Query {
         if (!this._queryOpts.pruning_config) {
             this._queryOpts.pruning_config = {};
         }
-        this._queryOpts.pruning_config.tokens_freq_ratio_threshold = tokensFreqRatioThreshold;
+        this._queryOpts.pruning_config.tokens_freq_ratio_threshold =
+            tokensFreqRatioThreshold;
         return this;
     }
 
@@ -109,7 +110,8 @@ class SparseVectorQuery extends Query {
         if (!this._queryOpts.pruning_config) {
             this._queryOpts.pruning_config = {};
         }
-        this._queryOpts.pruning_config.tokens_weight_threshold = tokensWeightThreshold;
+        this._queryOpts.pruning_config.tokens_weight_threshold =
+            tokensWeightThreshold;
         return this;
     }
 
@@ -125,7 +127,8 @@ class SparseVectorQuery extends Query {
         if (!this._queryOpts.pruning_config) {
             this._queryOpts.pruning_config = {};
         }
-        this._queryOpts.pruning_config.only_score_pruned_tokens = onlyScorePrunedTokens;
+        this._queryOpts.pruning_config.only_score_pruned_tokens =
+            onlyScorePrunedTokens;
         return this;
     }
 }

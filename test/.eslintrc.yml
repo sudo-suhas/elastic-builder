@@ -1,10 +1,26 @@
 root: true
-parser: babel-eslint
-extends: chatur/test
+parser: '@babel/eslint-parser'
+parserOptions:
+  ecmaVersion: 2020
+  sourceType: module
+  requireConfigFile: false
+env:
+  node: true
+  es6: true
+extends:
+  - 'eslint:recommended'
+  - 'plugin:ava/recommended'
+  - 'plugin:prettier/recommended'
+plugins:
+  - ava
+  - prettier
 rules:
   id-length: off
   no-unexpected-multiline: off
-  # disabled because of too many false positives
-  unicorn/no-fn-reference-in-iterator: off
-  # doesn't work with eslint 5
-  eslint-comments/no-unused-disable: off
+  no-unused-vars:
+    - error
+    - argsIgnorePattern: '^_'
+  no-console: off
+  no-irregular-whitespace:
+    - error
+    - skipComments: true

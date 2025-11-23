@@ -18,9 +18,7 @@ test(setsOption, 'sigma', { param: 3 });
 
 test('constructor sets field', t => {
     const valueA = getInstance('my_field').toJSON();
-    const valueB = getInstance()
-        .field('my_field')
-        .toJSON();
+    const valueB = getInstance().field('my_field').toJSON();
     t.deepEqual(valueA, valueB);
 
     const expected = {

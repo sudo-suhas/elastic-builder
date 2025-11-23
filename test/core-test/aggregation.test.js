@@ -47,12 +47,8 @@ test('getDSL gets DSL', t => {
 });
 
 test('nested aggs', t => {
-    const valueA = getInstance()
-        .agg(termsAgg)
-        .toJSON();
-    const valueB = getInstance()
-        .aggregation(termsAgg)
-        .toJSON();
+    const valueA = getInstance().agg(termsAgg).toJSON();
+    const valueB = getInstance().aggregation(termsAgg).toJSON();
     t.deepEqual(valueA, valueB);
 
     const expected = {
@@ -105,12 +101,8 @@ test('multiple nested aggs', t => {
         new TermsAggregation('users', 'user')
     ];
 
-    const valueA = getInstance()
-        .aggs(aggsArray)
-        .toJSON();
-    const valueB = getInstance()
-        .aggregations(aggsArray)
-        .toJSON();
+    const valueA = getInstance().aggs(aggsArray).toJSON();
+    const valueB = getInstance().aggregations(aggsArray).toJSON();
 
     t.deepEqual(valueA, valueB);
 
@@ -145,9 +137,7 @@ test('name is set', t => {
 });
 
 test('meta is set', t => {
-    const value = getInstance()
-        .meta({ color: 'blue' })
-        .toJSON();
+    const value = getInstance().meta({ color: 'blue' }).toJSON();
     const expected = {
         my_agg: {
             my_type: {},

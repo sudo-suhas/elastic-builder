@@ -6,10 +6,7 @@ const getInstance = (field, queryStr) =>
 
 test('constructor sets arguments', t => {
     const valueA = getInstance('my_field', 'query str').toJSON();
-    const valueB = getInstance()
-        .field('my_field')
-        .query('query str')
-        .toJSON();
+    const valueB = getInstance().field('my_field').query('query str').toJSON();
     t.deepEqual(valueA, valueB);
 
     const expected = {
