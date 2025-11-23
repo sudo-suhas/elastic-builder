@@ -3,10 +3,7 @@ import { SpanTermQuery } from '../../src';
 
 test('all in one', t => {
     let valueA = new SpanTermQuery('user', 'kimchy').toJSON();
-    const valueB = new SpanTermQuery()
-        .field('user')
-        .value('kimchy')
-        .toJSON();
+    const valueB = new SpanTermQuery().field('user').value('kimchy').toJSON();
     t.deepEqual(valueA, valueB);
 
     let expected = {

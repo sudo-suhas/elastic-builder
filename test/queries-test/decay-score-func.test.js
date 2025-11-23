@@ -18,9 +18,7 @@ const setsOption = makeSetsOptionMacro(getInstance, decayExpectStrategy);
  * @param {string} modeName
  */
 function setsMode(t, modeName) {
-    const value = getInstance()
-        [modeName]()
-        .toJSON();
+    const value = getInstance()[modeName]().toJSON();
     const expected = { [modeName]: { my_field: {} } };
     t.deepEqual(value, expected);
 }

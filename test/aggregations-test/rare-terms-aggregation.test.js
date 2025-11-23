@@ -35,9 +35,7 @@ test('tries to construct agg name if not given', t => {
 });
 
 test('maxDocCount is set', t => {
-    const value = getInstance('my_field')
-        .maxDocCount(42)
-        .toJSON();
+    const value = getInstance('my_field').maxDocCount(42).toJSON();
 
     const expected = {
         my_agg: {
@@ -65,9 +63,7 @@ test('maxDocCount correctly validated', t => {
 });
 
 test('precision is set', t => {
-    const value = getInstance('my_field')
-        .precision(0.001)
-        .toJSON();
+    const value = getInstance('my_field').precision(0.001).toJSON();
 
     const expected = {
         my_agg: {
@@ -86,9 +82,7 @@ test('precision correctly validated', t => {
 });
 
 test('include is set', t => {
-    const value = getInstance('my_field')
-        .include('swi*')
-        .toJSON();
+    const value = getInstance('my_field').include('swi*').toJSON();
 
     const expected = {
         my_agg: {
@@ -102,9 +96,7 @@ test('include is set', t => {
 });
 
 test('exclude is set', t => {
-    const value = getInstance('my_field')
-        .exclude('electro*')
-        .toJSON();
+    const value = getInstance('my_field').exclude('electro*').toJSON();
 
     const expected = {
         my_agg: {
@@ -118,9 +110,7 @@ test('exclude is set', t => {
 });
 
 test('missing is set', t => {
-    const value = getInstance('my_field')
-        .missing('N/A')
-        .toJSON();
+    const value = getInstance('my_field').missing('N/A').toJSON();
 
     const expected = {
         my_agg: {

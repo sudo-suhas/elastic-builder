@@ -33,9 +33,7 @@ test(setsOption, 'innerHits', { param: new InnerHits('my_inner_hits') });
 
 test('constructor sets arguments', t => {
     const valueA = getInstance(qry).toJSON();
-    const valueB = getInstance()
-        .query(qry)
-        .toJSON();
+    const valueB = getInstance().query(qry).toJSON();
     t.deepEqual(valueA, valueB);
 
     const expected = {

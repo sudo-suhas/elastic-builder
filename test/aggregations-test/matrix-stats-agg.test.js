@@ -22,9 +22,7 @@ test(setsOption, 'missing', { param: { income: 50000 } });
 
 test('constructor sets arguments', t => {
     const valueA = getInstance(['fieldA', 'fieldB']).toJSON();
-    const valueB = getInstance()
-        .fields(['fieldA', 'fieldB'])
-        .toJSON();
+    const valueB = getInstance().fields(['fieldA', 'fieldB']).toJSON();
     t.deepEqual(valueA, valueB);
 
     const expected = {

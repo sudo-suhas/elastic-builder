@@ -255,10 +255,7 @@ test(setsOption, 'searchAfter', {
 
 // agg, aggregation
 test('sets multiple aggs', t => {
-    const value = new RequestBodySearch()
-        .agg(aggA)
-        .agg(aggB)
-        .toJSON();
+    const value = new RequestBodySearch().agg(aggA).agg(aggB).toJSON();
     const expected = {
         aggs: {
             user_term_agg: {
@@ -332,8 +329,7 @@ test('sets multiple rescore', t => {
                                 {
                                     script_score: {
                                         script: {
-                                            inline:
-                                                'Math.log10(doc.likes.value + 2)'
+                                            inline: 'Math.log10(doc.likes.value + 2)'
                                         }
                                     }
                                 }

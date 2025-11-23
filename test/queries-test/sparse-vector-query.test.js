@@ -3,9 +3,7 @@ import esb, { SparseVectorQuery } from '../../src';
 
 test('with inference id and query', t => {
     const q = new SparseVectorQuery();
-    q.field('my_field')
-        .inferenceId('model_id')
-        .query('my query');
+    q.field('my_field').inferenceId('model_id').query('my query');
 
     const expected = {
         sparse_vector: {
@@ -36,10 +34,7 @@ test('with vector as parameter', t => {
 
 test('with pruning enabled', t => {
     const q = new SparseVectorQuery();
-    q.field('my_field')
-        .inferenceId('model_id')
-        .query('my query')
-        .prune(true);
+    q.field('my_field').inferenceId('model_id').query('my query').prune(true);
 
     const expected = {
         sparse_vector: {

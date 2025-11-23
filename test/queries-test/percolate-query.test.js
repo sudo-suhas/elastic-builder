@@ -43,10 +43,7 @@ test('set document after documents', t => {
     const field = 'query';
     const docType = 'docType';
     const query = new PercolateQuery(field, docType);
-    const value = query
-        .document(docA)
-        .documents([docB])
-        .toJSON();
+    const value = query.document(docA).documents([docB]).toJSON();
 
     const expected = {
         percolate: {

@@ -178,9 +178,7 @@ export function makeSetsOptionMacro(getInstance, getExpected = simpleExpect) {
                 ? getInstance()
                       [methodName](...param)
                       .toJSON()
-                : getInstance()
-                      [methodName](param)
-                      .toJSON();
+                : getInstance()[methodName](param).toJSON();
         const expected = getExpected(keyName, recursiveToJSON(propValue));
         t.deepEqual(value, expected);
     }

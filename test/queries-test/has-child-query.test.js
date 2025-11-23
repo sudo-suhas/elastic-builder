@@ -16,10 +16,7 @@ test(setsOption, 'maxChildren', { param: 10 });
 
 test('constructor sets argumetns', t => {
     const valueA = new HasChildQuery(qry, 'my_type').toJSON();
-    const valueB = new HasChildQuery()
-        .childType('my_type')
-        .query(qry)
-        .toJSON();
+    const valueB = new HasChildQuery().childType('my_type').query(qry).toJSON();
     t.deepEqual(valueA, valueB);
 
     const expected = {

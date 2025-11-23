@@ -30,9 +30,7 @@ test('constructor sets arguments', t => {
 });
 
 test('time_zone is set', t => {
-    const value = getInstance()
-        .timeZone('CET')
-        .toJSON();
+    const value = getInstance().timeZone('CET').toJSON();
     const expected = {
         my_agg: {
             date_range: {

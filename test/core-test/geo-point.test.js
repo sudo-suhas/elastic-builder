@@ -7,10 +7,7 @@ test(illegalParamType, new GeoPoint(), 'object', 'Object');
 test(illegalParamType, new GeoPoint(), 'array', 'Array');
 
 test('sets lat lon', t => {
-    const value = new GeoPoint()
-        .lat(41.12)
-        .lon(-71.34)
-        .toJSON();
+    const value = new GeoPoint().lat(41.12).lon(-71.34).toJSON();
     const expected = { lat: 41.12, lon: -71.34 };
 
     t.deepEqual(value, expected);
@@ -38,10 +35,7 @@ test('sets string', t => {
 });
 
 test('mixed representation', t => {
-    let value = new GeoPoint()
-        .lat(41.12)
-        .array([-71.34, 41.12])
-        .toJSON();
+    let value = new GeoPoint().lat(41.12).array([-71.34, 41.12]).toJSON();
     let expected = [-71.34, 41.12];
     t.deepEqual(value, expected);
 
@@ -60,10 +54,7 @@ test('mixed representation', t => {
     expected = { lat: 41.12, lon: -71.34 };
     t.deepEqual(value, expected);
 
-    value = new GeoPoint()
-        .lat(41.12)
-        .string('41.12,-71.34')
-        .toJSON();
+    value = new GeoPoint().lat(41.12).string('41.12,-71.34').toJSON();
     expected = '41.12,-71.34';
     t.deepEqual(value, expected);
 });
@@ -82,10 +73,7 @@ test.serial('mixed representation logs warnings', t => {
         spy.resetHistory();
     };
 
-    new GeoPoint()
-        .lat(41.12)
-        .array([-71.34, 41.12])
-        .toJSON();
+    new GeoPoint().lat(41.12).array([-71.34, 41.12]).toJSON();
     checkAndReset();
 
     new GeoPoint()
@@ -94,10 +82,7 @@ test.serial('mixed representation logs warnings', t => {
         .toJSON();
     checkAndReset();
 
-    new GeoPoint()
-        .lat(41.12)
-        .string('41.12,-71.34')
-        .toJSON();
+    new GeoPoint().lat(41.12).string('41.12,-71.34').toJSON();
     checkAndReset();
 
     console.warn.restore();

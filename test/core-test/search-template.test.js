@@ -102,8 +102,7 @@ test('toJSON can handle elastic-builder objs', t => {
         })
         .toJSON();
     const expected = {
-        inline:
-            '{ "query": { "bool": { "must": {{#toJson}}clauses{{/toJson}} } } }',
+        inline: '{ "query": { "bool": { "must": {{#toJson}}clauses{{/toJson}} } } }',
         params: {
             clauses: [{ term: { user: 'foo' } }, { term: { user: 'bar' } }]
         }

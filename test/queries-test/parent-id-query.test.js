@@ -13,10 +13,7 @@ test(setsOption, 'ignoreUnmapped', { param: true });
 
 test('constructor sets argumetns', t => {
     const valueA = new ParentIdQuery('blog_tag', '1').toJSON();
-    const valueB = new ParentIdQuery()
-        .type('blog_tag')
-        .id('1')
-        .toJSON();
+    const valueB = new ParentIdQuery().type('blog_tag').id('1').toJSON();
     t.deepEqual(valueA, valueB);
 
     const expected = {

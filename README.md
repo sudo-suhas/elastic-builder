@@ -18,6 +18,10 @@ https://blog.logrocket.com/elasticsearch-query-body-builder-node-js/
 elastic-builder includes TypeScript definition for superior development
 experience.
 
+## Node.js Requirements
+
+`elastic-builder` supports Node.js **20.x**, **22.x**, and **24.x** (LTS versions).
+
 ## Elasticsearch compatibility
 
 `elastic-builder` was built for 5.x query DSL. However, the library should be
