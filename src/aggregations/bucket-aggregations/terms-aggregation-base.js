@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     util: { invalidParam },
@@ -206,7 +206,7 @@ class TermsAggregationBase extends BucketAggregationBase {
      * @throws {Error} If Execution Hint is outside the accepted set.
      */
     executionHint(hint) {
-        if (isNil(hint)) invalidExecutionHintParam(hint, this._refUrl);
+        if (_.isNil(hint)) invalidExecutionHintParam(hint, this._refUrl);
 
         const hintLower = hint.toLowerCase();
         if (!EXECUTION_HINT_SET.has(hintLower)) {

@@ -1,6 +1,6 @@
 'use strict';
 
-const { isObject, isNil } = require('lodash');
+const _ = require('../_');
 
 const { checkType } = require('./util');
 
@@ -45,8 +45,8 @@ class GeoPoint {
      * @private
      */
     _checkObjRepr() {
-        if (isNil(this._point)) this._point = {};
-        else if (!isObject(this._point)) {
+        if (_.isNil(this._point)) this._point = {};
+        else if (!_.isObject(this._point)) {
             this._warnMixedRepr();
             this._point = {};
         }
@@ -89,7 +89,7 @@ class GeoPoint {
     object(point) {
         checkType(point, Object);
 
-        !isNil(this._point) && this._warnMixedRepr();
+        !_.isNil(this._point) && this._warnMixedRepr();
 
         this._point = point;
         return this; // This doesn't make much sense. What else are you gonna call?
@@ -106,7 +106,7 @@ class GeoPoint {
     array(point) {
         checkType(point, Array);
 
-        !isNil(this._point) && this._warnMixedRepr();
+        !_.isNil(this._point) && this._warnMixedRepr();
 
         this._point = point;
         return this; // This doesn't make much sense. What else are you gonna call?
@@ -120,7 +120,7 @@ class GeoPoint {
      * @returns {GeoPoint} returns `this` so that calls can be chained
      */
     string(point) {
-        !isNil(this._point) && this._warnMixedRepr();
+        !_.isNil(this._point) && this._warnMixedRepr();
 
         this._point = point;
         return this;

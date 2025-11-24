@@ -1,6 +1,6 @@
 'use strict';
 
-const { isObject } = require('lodash');
+const _ = require('../_');
 
 const {
     Suggester,
@@ -77,7 +77,7 @@ class CompletionSuggester extends Suggester {
      * @private
      */
     _checkFuzzy() {
-        if (!isObject(this._suggestOpts.fuzzy)) {
+        if (!_.isObject(this._suggestOpts.fuzzy)) {
             this._suggestOpts.fuzzy = {};
         }
     }

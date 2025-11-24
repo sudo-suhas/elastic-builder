@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
@@ -44,7 +44,7 @@ class ReverseNestedAggregation extends BucketAggregationBase {
     constructor(name, path) {
         super(name, 'reverse_nested');
 
-        if (!isNil(path)) this._aggsDef.path = path;
+        if (!_.isNil(path)) this._aggsDef.path = path;
     }
 
     /**

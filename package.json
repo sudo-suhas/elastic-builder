@@ -31,9 +31,9 @@
     "node": ">=20.0.0"
   },
   "dependencies": {
-    "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "lodash": "^4.17.21",
     "@babel/cli": "^7.25.9",
     "@babel/core": "^7.25.9",
     "@babel/eslint-parser": "^7.25.9",

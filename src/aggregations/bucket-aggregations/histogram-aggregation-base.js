@@ -1,6 +1,6 @@
 'use strict';
 
-const { has, isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     util: { invalidParam }
@@ -31,7 +31,7 @@ class HistogramAggregationBase extends BucketAggregationBase {
     constructor(name, aggType, field, interval) {
         super(name, aggType, field);
 
-        if (!isNil(interval)) this._aggsDef.interval = interval;
+        if (!_.isNil(interval)) this._aggsDef.interval = interval;
     }
 
     /**
@@ -106,14 +106,14 @@ class HistogramAggregationBase extends BucketAggregationBase {
      * @returns {HistogramAggregationBase} returns `this` so that calls can be chained
      */
     order(key, direction = 'desc') {
-        if (isNil(direction)) invalidDirectionParam(direction);
+        if (_.isNil(direction)) invalidDirectionParam(direction);
 
         const directionLower = direction.toLowerCase();
         if (directionLower !== 'asc' && directionLower !== 'desc') {
             invalidDirectionParam(direction);
         }
 
-        if (has(this._aggsDef, 'order')) {
+        if (_.has(this._aggsDef, 'order')) {
             if (!Array.isArray(this._aggsDef.order)) {
                 this._aggsDef.order = [this._aggsDef.order];
             }

@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     GeoPoint,
@@ -64,7 +64,7 @@ class GeoTileGridAggregation extends BucketAggregationBase {
      * @throws {Error} If precision is not between 0 and 29.
      */
     precision(precision) {
-        if (isNil(precision) || precision < 0 || precision > 29) {
+        if (_.isNil(precision) || precision < 0 || precision > 29) {
             throw new Error('`precision` can only be value from 0 to 29.');
         }
 

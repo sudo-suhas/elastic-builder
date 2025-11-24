@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     util: { checkType, invalidParam }
@@ -43,7 +43,7 @@ class CombinedFieldsQuery extends FullTextQueryBase {
         // Avoid checking for key in `this.field`
         this._queryOpts.fields = [];
 
-        if (!isNil(fields)) {
+        if (!_.isNil(fields)) {
             if (Array.isArray(fields)) this.fields(fields);
             else this.field(fields);
         }
@@ -106,7 +106,7 @@ class CombinedFieldsQuery extends FullTextQueryBase {
      * @returns {CombinedFieldsQuery} returns `this` so that calls can be chained.
      */
     operator(operator) {
-        if (isNil(operator)) invalidOperatorParam(operator);
+        if (_.isNil(operator)) invalidOperatorParam(operator);
 
         const operatorLower = operator.toLowerCase();
         if (operatorLower !== 'and' && operatorLower !== 'or') {
@@ -132,7 +132,7 @@ class CombinedFieldsQuery extends FullTextQueryBase {
      * @returns {CombinedFieldsQuery} returns `this` so that calls can be chained.
      */
     zeroTermsQuery(behavior) {
-        if (isNil(behavior)) invalidZeroTermsQueryParam(behavior);
+        if (_.isNil(behavior)) invalidZeroTermsQueryParam(behavior);
 
         const behaviorLower = behavior.toLowerCase();
         if (behaviorLower !== 'all' && behaviorLower !== 'none') {

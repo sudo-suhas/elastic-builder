@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../_');
 
 /**
  * Class supporting the Elasticsearch scripting API.
@@ -36,7 +36,7 @@ class Script {
         // NOTE: Script syntax changed in elasticsearch 5.6 to use `id`/`source`
         // instead of `inline`/`source`/`file`. This needs to be handled
         // somehow.
-        if (!isNil(type) && !isNil(source)) {
+        if (!_.isNil(type) && !_.isNil(source)) {
             const typeLower = type.toLowerCase();
 
             switch (typeLower) {

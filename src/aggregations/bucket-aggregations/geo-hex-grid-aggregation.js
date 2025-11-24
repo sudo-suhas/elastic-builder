@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
@@ -57,7 +57,7 @@ class GeoHexGridAggregation extends BucketAggregationBase {
      * @throws {Error} If precision is not between 0 and 15.
      */
     precision(precision) {
-        if (isNil(precision) || precision < 0 || precision > 15) {
+        if (_.isNil(precision) || precision < 0 || precision > 15) {
             throw new Error('`precision` can only be value from 0 to 15.');
         }
 

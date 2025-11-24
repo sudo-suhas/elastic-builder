@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../../_');
 
 const ScoreFunction = require('./score-function');
 
@@ -36,7 +36,7 @@ class WeightScoreFunction extends ScoreFunction {
         */
         super(null);
 
-        if (!isNil(weight)) this._body.weight = weight;
+        if (!_.isNil(weight)) this._body.weight = weight;
     }
 
     /**

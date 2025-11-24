@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     Aggregation,
@@ -27,7 +27,7 @@ class MetricsAggregationBase extends Aggregation {
     constructor(name, aggType, field) {
         super(name, aggType);
 
-        if (!isNil(field)) this._aggsDef.field = field;
+        if (!_.isNil(field)) this._aggsDef.field = field;
     }
 
     // TODO: Investigate whether Metrics Aggregations can have sub aggregations

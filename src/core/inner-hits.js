@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../_');
 
 const Sort = require('./sort');
 const Highlight = require('./highlight');
@@ -34,7 +34,7 @@ class InnerHits {
         // Maybe accept some optional parameter?
         this._body = {};
 
-        if (!isNil(name)) this._body.name = name;
+        if (!_.isNil(name)) this._body.name = name;
     }
 
     /**

@@ -1,6 +1,6 @@
 'use strict';
 
-const { has, head, omit } = require('lodash');
+const _ = require('../../_');
 
 const {
     Query,
@@ -188,20 +188,20 @@ class BoolQuery extends Query {
 
         // Pick the clauses which have some queries
         const cleanQryOpts = clauseKeys
-            .filter(clause => has(this._queryOpts, clause))
+            .filter(clause => _.has(this._queryOpts, clause))
             .reduce(
                 // Unwrap array and put into qryOpts if required
                 (qryOpts, clause) => {
                     const clauseQueries = this._queryOpts[clause];
                     qryOpts[clause] = recursiveToJSON(
                         clauseQueries.length === 1
-                            ? head(clauseQueries)
+                            ? _.head(clauseQueries)
                             : clauseQueries
                     );
                     return qryOpts;
                 },
                 // initial value - all key-value except clauses
-                omit(this._queryOpts, clauseKeys)
+                _.omit(this._queryOpts, clauseKeys)
             );
 
         return {

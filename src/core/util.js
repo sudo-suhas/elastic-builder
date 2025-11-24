@@ -1,6 +1,6 @@
 'use strict';
 
-const { isEmpty, isNil, isString, isObject, hasIn, has } = require('lodash');
+const _ = require('../_');
 
 const inspect = require('./inspect');
 
@@ -14,7 +14,7 @@ const inspect = require('./inspect');
  */
 exports.checkType = function checkType(instance, type) {
     if (!(instance instanceof type)) {
-        if (isNil(instance)) {
+        if (_.isNil(instance)) {
             console.warn(
                 `Was expecting instance of ${type.name} but got ${instance}!`
             );
@@ -62,7 +62,7 @@ function between(num, min, max) {
  * `-1` if digit is not found in string
  */
 exports.firstDigitPos = function firstDigitPos(str) {
-    if (isEmpty(str)) return -1;
+    if (_.isEmpty(str)) return -1;
 
     const len = str.length;
     for (let idx = 0; idx < len; idx++) {
@@ -82,17 +82,17 @@ exports.firstDigitPos = function firstDigitPos(str) {
  * @returns {Object} JSON representation of class.
  */
 exports.recursiveToJSON = function recursiveToJSON(obj) {
-    // Strings, numbers, booleans
-    if (!isObject(obj)) return obj;
-
     // Each element in array needs to be recursively JSONified
     if (Array.isArray(obj)) return obj.map(x => recursiveToJSON(x));
+
+    // Strings, numbers, booleans
+    if (!_.isObject(obj)) return obj;
 
     // If it is a native object, we'll not get anything different by calling toJSON
     // If it is a custom object, toJSON needs to be called
     // Custom object toJSON might return any datatype
     // So let us handle it recursively
-    if (hasIn(obj, 'toJSON') && obj.constructor !== Object) {
+    if (_.hasIn(obj, 'toJSON') && obj.constructor !== Object) {
         return recursiveToJSON(obj.toJSON());
     }
 
@@ -120,7 +120,7 @@ exports.invalidParam = function invalidParam(refUrl, paramName, validValues) {
         referenceUrl && console.log(`See ${referenceUrl}`);
         console.warn(`Got '${paramName}' - '${paramVal}'`);
 
-        const validValuesStr = isString(validValues)
+        const validValuesStr = _.isString(validValues)
             ? validValues
             : inspect(validValues);
         throw new Error(
@@ -139,7 +139,7 @@ exports.invalidParam = function invalidParam(refUrl, paramName, validValues) {
  * @returns {boolean} `true` if the given object did not have `key` and `false` otherwise.
  */
 exports.setDefault = function setDefault(obj, key, value) {
-    const itHasNot = !has(obj, key);
+    const itHasNot = !_.has(obj, key);
     if (itHasNot) obj[key] = value;
     return itHasNot;
 };

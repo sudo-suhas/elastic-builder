@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil, isObject } = require('lodash');
+const _ = require('../../_');
 
 const {
     util: { invalidParam, setDefault }
@@ -72,7 +72,7 @@ class CommonTermsQuery extends MonoFieldQueryBase {
     _checkMinMatchRepr() {
         if (
             !setDefault(this._queryOpts, 'minimum_should_match', {}) &&
-            !isObject(this._queryOpts.minimum_should_match)
+            !_.isObject(this._queryOpts.minimum_should_match)
         ) {
             this._warnMixedRepr();
             this._queryOpts.minimum_should_match = {};
@@ -108,7 +108,7 @@ class CommonTermsQuery extends MonoFieldQueryBase {
      * @returns {CommonTermsQuery} returns `this` so that calls can be chained.
      */
     lowFreqOperator(operator) {
-        if (isNil(operator)) invalidLowFreqOpParam(operator);
+        if (_.isNil(operator)) invalidLowFreqOpParam(operator);
 
         const operatorLower = operator.toLowerCase();
         if (operatorLower !== 'and' && operatorLower !== 'or') {
@@ -128,7 +128,7 @@ class CommonTermsQuery extends MonoFieldQueryBase {
      * @returns {CommonTermsQuery} returns `this` so that calls can be chained.
      */
     highFreqOperator(operator) {
-        if (isNil(operator)) invalidHighFreqOpParam(operator);
+        if (_.isNil(operator)) invalidHighFreqOpParam(operator);
 
         const operatorLower = operator.toLowerCase();
         if (operatorLower !== 'and' && operatorLower !== 'or') {

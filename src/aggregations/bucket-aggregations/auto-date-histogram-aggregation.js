@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
@@ -26,7 +26,7 @@ class AutoDateHistogramAggregation extends BucketAggregationBase {
     // eslint-disable-next-line require-jsdoc
     constructor(name, field, buckets) {
         super(name, 'auto_date_histogram', field);
-        if (!isNil(buckets)) this._aggsDef.buckets = buckets;
+        if (!_.isNil(buckets)) this._aggsDef.buckets = buckets;
     }
 
     /**

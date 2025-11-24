@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     util: { checkType, invalidParam },
@@ -54,7 +54,7 @@ class MultiMatchQuery extends FullTextQueryBase {
         // Avoid checking for key in `this.field`
         this._queryOpts.fields = [];
 
-        if (!isNil(fields)) {
+        if (!_.isNil(fields)) {
             if (Array.isArray(fields)) this.fields(fields);
             else this.field(fields);
         }
@@ -149,7 +149,7 @@ class MultiMatchQuery extends FullTextQueryBase {
      * @returns {MultiMatchQuery} returns `this` so that calls can be chained.
      */
     type(type) {
-        if (isNil(type)) invalidTypeParam(type);
+        if (_.isNil(type)) invalidTypeParam(type);
 
         const typeLower = type.toLowerCase();
         if (!MULTI_MATCH_TYPE.has(typeLower)) invalidTypeParam(type);
@@ -182,7 +182,7 @@ class MultiMatchQuery extends FullTextQueryBase {
      * @returns {MultiMatchQuery} returns `this` so that calls can be chained.
      */
     operator(operator) {
-        if (isNil(operator)) invalidOperatorParam(operator);
+        if (_.isNil(operator)) invalidOperatorParam(operator);
 
         const operatorLower = operator.toLowerCase();
         if (operatorLower !== 'and' && operatorLower !== 'or') {
@@ -355,7 +355,7 @@ class MultiMatchQuery extends FullTextQueryBase {
      * @returns {MultiMatchQuery} returns `this` so that calls can be chained.
      */
     zeroTermsQuery(behavior) {
-        if (isNil(behavior)) invalidBehaviorParam(behavior);
+        if (_.isNil(behavior)) invalidBehaviorParam(behavior);
 
         const behaviorLower = behavior.toLowerCase();
         if (behaviorLower !== 'all' && behaviorLower !== 'none') {

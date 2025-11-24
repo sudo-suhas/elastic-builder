@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     util: { invalidParam },
@@ -177,7 +177,7 @@ class RangeQuery extends MultiTermQueryBase {
      * @returns {RangeQuery} returns `this` so that calls can be chained
      */
     relation(relation) {
-        if (isNil(relation)) invalidRelationParam(relation);
+        if (_.isNil(relation)) invalidRelationParam(relation);
 
         const relationUpper = relation.toUpperCase();
         if (!GEO_RELATION_SET.has(relationUpper)) {

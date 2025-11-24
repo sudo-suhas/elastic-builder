@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     util: { invalidParam }
@@ -57,7 +57,7 @@ class MatchQuery extends MonoFieldQueryBase {
      * @returns {MatchQuery} returns `this` so that calls can be chained.
      */
     operator(operator) {
-        if (isNil(operator)) invalidOperatorParam(operator);
+        if (_.isNil(operator)) invalidOperatorParam(operator);
 
         const operatorLower = operator.toLowerCase();
         if (operatorLower !== 'and' && operatorLower !== 'or') {
@@ -228,7 +228,7 @@ class MatchQuery extends MonoFieldQueryBase {
      * @returns {MatchQuery} returns `this` so that calls can be chained.
      */
     zeroTermsQuery(behavior) {
-        if (isNil(behavior)) invalidZeroTermsQueryParam(behavior);
+        if (_.isNil(behavior)) invalidZeroTermsQueryParam(behavior);
 
         const behaviorLower = behavior.toLowerCase();
         if (behaviorLower !== 'all' && behaviorLower !== 'none') {

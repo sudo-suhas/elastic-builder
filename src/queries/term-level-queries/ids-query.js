@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     Query,
@@ -26,8 +26,8 @@ class IdsQuery extends Query {
     constructor(type, ids) {
         super('ids');
 
-        if (!isNil(type)) this._queryOpts.type = type;
-        if (!isNil(ids)) this.values(ids);
+        if (!_.isNil(type)) this._queryOpts.type = type;
+        if (!_.isNil(ids)) this.values(ids);
     }
 
     /**

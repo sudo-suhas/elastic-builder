@@ -1,6 +1,6 @@
 'use strict';
 
-const { has, isEmpty, isNil, isString } = require('lodash');
+const _ = require('../_');
 const Query = require('./query');
 const { checkType, invalidParam, recursiveToJSON } = require('./util');
 
@@ -76,9 +76,9 @@ class Highlight {
         this._highlight = { fields: this._fields };
 
         // Does this smell?
-        if (isNil(fields)) return;
+        if (_.isNil(fields)) return;
 
-        if (isString(fields)) this.field(fields);
+        if (_.isString(fields)) this.field(fields);
         else this.fields(fields);
     }
 
@@ -91,7 +91,7 @@ class Highlight {
      * @private
      */
     _setFieldOption(field, option, val) {
-        if (isNil(field)) {
+        if (_.isNil(field)) {
             this._highlight[option] = val;
             return;
         }
@@ -108,7 +108,7 @@ class Highlight {
      * @returns {Highlight} returns `this` so that calls can be chained
      */
     field(field) {
-        if (!isNil(field) && !has(this._fields, field)) {
+        if (!_.isNil(field) && !_.has(this._fields, field)) {
             this._fields[field] = {};
         }
 
@@ -149,7 +149,11 @@ class Highlight {
      * @returns {Highlight} returns `this` so that calls can be chained
      */
     preTags(tags, field) {
-        this._setFieldOption(field, 'pre_tags', isString(tags) ? [tags] : tags);
+        this._setFieldOption(
+            field,
+            'pre_tags',
+            _.isString(tags) ? [tags] : tags
+        );
         return this;
     }
 
@@ -175,7 +179,7 @@ class Highlight {
         this._setFieldOption(
             field,
             'post_tags',
-            isString(tags) ? [tags] : tags
+            _.isString(tags) ? [tags] : tags
         );
         return this;
     }
@@ -337,7 +341,7 @@ class Highlight {
      */
     matchedFields(fields, field) {
         checkType(fields, Array);
-        if (isEmpty(field)) {
+        if (_.isEmpty(field)) {
             throw new Error(
                 '`matched_fields` requires field name to be passed'
             );
@@ -374,7 +378,7 @@ class Highlight {
      * @throws {Error} Encoder can be either `default` or `html`
      */
     encoder(encoder) {
-        if (isNil(encoder)) invalidEncoderParam(encoder);
+        if (_.isNil(encoder)) invalidEncoderParam(encoder);
 
         const encoderLower = encoder.toLowerCase();
         if (encoderLower !== 'default' && encoderLower !== 'html') {
@@ -457,7 +461,7 @@ class Highlight {
      * @throws {Error} Type can be one of `plain`, `postings`, `unified` or `fvh`.
      */
     type(type, field) {
-        if (isNil(type)) invalidTypeParam(type);
+        if (_.isNil(type)) invalidTypeParam(type);
 
         const typeLower = type.toLowerCase();
         if (
@@ -510,7 +514,7 @@ class Highlight {
      * @throws {Error} Fragmenter can be either `simple` or `span`
      */
     fragmenter(fragmenter, field) {
-        if (isNil(fragmenter)) invalidFragmenterParam(fragmenter);
+        if (_.isNil(fragmenter)) invalidFragmenterParam(fragmenter);
 
         const fragmenterLower = fragmenter.toLowerCase();
         if (fragmenterLower !== 'simple' && fragmenterLower !== 'span') {

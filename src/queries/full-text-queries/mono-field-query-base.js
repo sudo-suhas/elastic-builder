@@ -1,6 +1,6 @@
 'use strict';
 
-const { has, isNil } = require('lodash');
+const _ = require('../../_');
 
 const FullTextQueryBase = require('./full-text-query-base');
 
@@ -23,7 +23,7 @@ class MonoFieldQueryBase extends FullTextQueryBase {
     constructor(queryType, field, queryString) {
         super(queryType, queryString);
 
-        if (!isNil(field)) this._field = field;
+        if (!_.isNil(field)) this._field = field;
     }
 
     /**
@@ -48,7 +48,7 @@ class MonoFieldQueryBase extends FullTextQueryBase {
         // recursiveToJSON doesn't seem to be required here.
 
         // Revisit this.. Smells a little bit
-        if (!has(this._queryOpts, 'query')) {
+        if (!_.has(this._queryOpts, 'query')) {
             throw new Error('Query string is required for full text query!');
         }
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     Query,
@@ -29,7 +29,7 @@ class ConstantScoreQuery extends Query {
     constructor(filterQuery) {
         super('constant_score');
 
-        if (!isNil(filterQuery)) this.filter(filterQuery);
+        if (!_.isNil(filterQuery)) this.filter(filterQuery);
     }
 
     /**

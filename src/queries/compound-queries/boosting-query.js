@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     Query,
@@ -33,9 +33,9 @@ class BoostingQuery extends Query {
     constructor(positiveQry, negativeQry, negativeBoost) {
         super('boosting');
 
-        if (!isNil(positiveQry)) this.positive(positiveQry);
-        if (!isNil(negativeQry)) this.negative(negativeQry);
-        if (!isNil(negativeBoost))
+        if (!_.isNil(positiveQry)) this.positive(positiveQry);
+        if (!_.isNil(negativeQry)) this.negative(negativeQry);
+        if (!_.isNil(negativeBoost))
             this._queryOpts.negative_boost = negativeBoost;
     }
 

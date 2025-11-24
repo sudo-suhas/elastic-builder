@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     util: { invalidParam },
@@ -92,7 +92,7 @@ class MovingAverageAggregation extends PipelineAggregationBase {
      * @returns {MovingAverageAggregation} returns `this` so that calls can be chained
      */
     model(model) {
-        if (isNil(model)) invalidModelParam(model);
+        if (_.isNil(model)) invalidModelParam(model);
 
         const modelLower = model.toLowerCase();
         if (!MODEL_SET.has(modelLower)) invalidModelParam(model);

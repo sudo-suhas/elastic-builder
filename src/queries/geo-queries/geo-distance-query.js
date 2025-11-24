@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     GeoPoint,
@@ -42,7 +42,7 @@ class GeoDistanceQuery extends GeoQueryBase {
     constructor(field, point) {
         super('geo_distance', field);
 
-        if (!isNil(point)) this.geoPoint(point);
+        if (!_.isNil(point)) this.geoPoint(point);
     }
 
     /**
@@ -68,7 +68,7 @@ class GeoDistanceQuery extends GeoQueryBase {
      * @throws {Error} If `type` is neither `plane` nor `arc`.
      */
     distanceType(type) {
-        if (isNil(type)) invalidDistanceTypeParam(type);
+        if (_.isNil(type)) invalidDistanceTypeParam(type);
 
         const typeLower = type.toLowerCase();
         if (typeLower !== 'plane' && typeLower !== 'arc')

@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     Query,
@@ -101,7 +101,7 @@ class FunctionScoreQuery extends Query {
      * @returns {FunctionScoreQuery} returns `this` so that calls can be chained.
      */
     scoreMode(mode) {
-        if (isNil(mode)) invalidScoreModeParam(mode);
+        if (_.isNil(mode)) invalidScoreModeParam(mode);
 
         const modeLower = mode.toLowerCase();
         if (!SCORE_MODE_SET.has(modeLower)) {
@@ -120,7 +120,7 @@ class FunctionScoreQuery extends Query {
      * @returns {FunctionScoreQuery} returns `this` so that calls can be chained.
      */
     boostMode(mode) {
-        if (isNil(mode)) invalidBoostModeParam(mode);
+        if (_.isNil(mode)) invalidBoostModeParam(mode);
 
         const modeLower = mode.toLowerCase();
         if (!BOOST_MODE_SET.has(modeLower)) {

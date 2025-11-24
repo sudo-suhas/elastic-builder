@@ -1,7 +1,7 @@
 'use strict';
 
 const { Query } = require('../../core');
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 /**
  * The sparse vector query executes a query consisting of sparse vectors, such as built by a learned sparse retrieval model,
@@ -19,7 +19,7 @@ class SparseVectorQuery extends Query {
 
     constructor(field) {
         super('sparse_vector');
-        if (!isNil(field)) this._queryOpts.field = field;
+        if (!_.isNil(field)) this._queryOpts.field = field;
     }
 
     /**

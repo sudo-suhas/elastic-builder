@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../_');
 
 const { recursiveToJSON } = require('./util');
 
@@ -56,7 +56,7 @@ class SearchTemplate {
         this._isTypeSet = false;
         this._body = {};
 
-        if (!isNil(type) && !isNil(source)) {
+        if (!_.isNil(type) && !_.isNil(source)) {
             const typeLower = type.toLowerCase();
 
             if (
