@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     Query,
@@ -34,7 +34,7 @@ class GeoQueryBase extends Query {
         this._field = null;
         this._fieldOpts = {};
 
-        if (!isNil(field)) this._field = field;
+        if (!_.isNil(field)) this._field = field;
     }
 
     /**
@@ -62,7 +62,7 @@ class GeoQueryBase extends Query {
      * @throws {Error} If `method` parameter is not one of `IGNORE_MALFORMED`, `COERCE` or `STRICT`
      */
     validationMethod(method) {
-        if (isNil(method)) invalidValidationMethod(method);
+        if (_.isNil(method)) invalidValidationMethod(method);
 
         const methodUpper = method.toUpperCase();
         if (

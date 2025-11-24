@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     GeoShape,
@@ -108,7 +108,7 @@ class GeoShapeQuery extends GeoQueryBase {
      * @returns {GeoShapeQuery} returns `this` so that calls can be chained
      */
     relation(relation) {
-        if (isNil(relation)) invalidRelationParam(relation);
+        if (_.isNil(relation)) invalidRelationParam(relation);
 
         const relationUpper = relation.toUpperCase();
         if (!GEO_RELATION_SET.has(relationUpper)) {

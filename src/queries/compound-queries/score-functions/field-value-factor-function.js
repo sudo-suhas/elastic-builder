@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../../_');
 
 const {
     util: { invalidParam },
@@ -42,7 +42,7 @@ class FieldValueFactorFunction extends ScoreFunction {
     constructor(field) {
         super('field_value_factor');
 
-        if (!isNil(field)) this._opts.field = field;
+        if (!_.isNil(field)) this._opts.field = field;
     }
 
     /**
@@ -78,7 +78,7 @@ class FieldValueFactorFunction extends ScoreFunction {
      * @returns {FieldValueFactorFunction} returns `this` so that calls can be chained.
      */
     modifier(mod) {
-        if (isNil(mod)) invaliModifierdParam(mod);
+        if (_.isNil(mod)) invaliModifierdParam(mod);
 
         const modLower = mod.toLowerCase();
         if (!FIELD_MODIFIER_SET.has(modLower)) {

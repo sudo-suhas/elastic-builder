@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     GeoPoint,
@@ -181,7 +181,7 @@ class GeoBoundingBoxQuery extends GeoQueryBase {
      * @returns {GeoBoundingBoxQuery} returns `this` so that calls can be chained.
      */
     type(type) {
-        if (isNil(type)) invalidTypeParam(type);
+        if (_.isNil(type)) invalidTypeParam(type);
 
         const typeLower = type.toLowerCase();
         if (typeLower !== 'memory' && typeLower !== 'indexed') {

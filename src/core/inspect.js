@@ -2,7 +2,7 @@
 /* eslint-disable max-lines */
 'use strict';
 
-const { isString, isObject } = require('lodash');
+const _ = require('../_');
 
 /**
  * Echos the value of a value. Trys to print the value out
@@ -70,7 +70,7 @@ function formatValue(ctx, value, recurseTimes) {
         !(value.constructor && value.constructor.prototype === value)
     ) {
         let ret = value.inspect(recurseTimes, ctx);
-        if (!isString(ret)) {
+        if (!_.isString(ret)) {
             ret = formatValue(ctx, ret, recurseTimes);
         }
         return ret;
@@ -195,16 +195,16 @@ function isUndefined(arg) {
 }
 
 function isRegExp(re) {
-    return isObject(re) && objectToString(re) === '[object RegExp]';
+    return _.isObject(re) && objectToString(re) === '[object RegExp]';
 }
 
 function isDate(d) {
-    return isObject(d) && objectToString(d) === '[object Date]';
+    return _.isObject(d) && objectToString(d) === '[object Date]';
 }
 
 function isError(e) {
     return (
-        isObject(e) &&
+        _.isObject(e) &&
         (objectToString(e) === '[object Error]' || e instanceof Error)
     );
 }
@@ -230,7 +230,7 @@ function formatError(value) {
 // eslint-disable-next-line consistent-return
 function formatPrimitive(ctx, value) {
     if (isUndefined(value)) return ctx.stylize('undefined', 'undefined');
-    if (isString(value)) {
+    if (_.isString(value)) {
         const simple = `'${JSON.stringify(value)
             .replace(/^"|"$/g, '')
             .replace(/'/g, "\\'")

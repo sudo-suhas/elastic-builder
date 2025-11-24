@@ -1,6 +1,6 @@
 'use strict';
 
-const { isEmpty } = require('lodash');
+const _ = require('../../_');
 
 const {
     Query,
@@ -198,7 +198,7 @@ class FiltersAggregation extends BucketAggregationBase {
     otherBucket(enable, otherBucketKey) {
         this._aggsDef.other_bucket = enable;
 
-        !isEmpty(otherBucketKey) && this.otherBucketKey(otherBucketKey);
+        !_.isEmpty(otherBucketKey) && this.otherBucketKey(otherBucketKey);
 
         return this;
     }

@@ -1,6 +1,6 @@
 'use strict';
 
-const { has } = require('lodash');
+const _ = require('../../_');
 
 const {
     Query,
@@ -69,7 +69,7 @@ class MoreLikeThisQuery extends Query {
     _setSearchClause(clauseType, clauses) {
         // Replace the field. Don't care about previous contents
         if (Array.isArray(clauses)) this._queryOpts[clauseType] = clauses;
-        else if (!has(this._queryOpts, clauseType)) {
+        else if (!_.has(this._queryOpts, clauseType)) {
             // Keep the single `like` without array.
             this._queryOpts[clauseType] = clauses;
         } else {

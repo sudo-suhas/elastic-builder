@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('./_');
 
 const {
     MatchAllQuery,
@@ -84,7 +84,7 @@ exports.randomSortQuery = function randomSortQuery(
     const func = new RandomScoreFunction();
     return new FunctionScoreQuery()
         .query(query)
-        .function(isNil(seed) ? func : func.seed(seed));
+        .function(_.isNil(seed) ? func : func.seed(seed));
 };
 
 /**

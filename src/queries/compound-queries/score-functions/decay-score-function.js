@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../../_');
 
 const {
     util: { invalidParam, recursiveToJSON }
@@ -56,7 +56,7 @@ class DecayScoreFunction extends ScoreFunction {
     constructor(mode = 'gauss', field) {
         super(mode);
 
-        if (!isNil(field)) this._field = field;
+        if (!_.isNil(field)) this._field = field;
     }
 
     /**
@@ -67,7 +67,7 @@ class DecayScoreFunction extends ScoreFunction {
      * @returns {DecayScoreFunction} returns `this` so that calls can be chained.
      */
     mode(mode) {
-        if (isNil(mode)) invalidModeParam(mode);
+        if (_.isNil(mode)) invalidModeParam(mode);
 
         const modeLower = mode.toLowerCase();
         if (

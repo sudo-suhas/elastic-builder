@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
@@ -43,7 +43,7 @@ class ParentAggregation extends BucketAggregationBase {
     constructor(name, type) {
         super(name, 'parent');
 
-        if (!isNil(type)) this.type(type);
+        if (!_.isNil(type)) this.type(type);
     }
 
     /**

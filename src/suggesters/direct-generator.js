@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../_');
 
 const {
     consts: { SUGGEST_MODE_SET },
@@ -35,7 +35,7 @@ class DirectGenerator {
     constructor(field) {
         this._body = {};
 
-        if (!isNil(field)) this._body.field = field;
+        if (!_.isNil(field)) this._body.field = field;
     }
 
     /**
@@ -83,7 +83,7 @@ class DirectGenerator {
      * @throws {Error} If `mode` is not one of `missing`, `popular` or `always`.
      */
     suggestMode(mode) {
-        if (isNil(mode)) invalidSuggestModeParam(mode);
+        if (_.isNil(mode)) invalidSuggestModeParam(mode);
 
         const modeLower = mode.toLowerCase();
         if (!SUGGEST_MODE_SET.has(modeLower)) {

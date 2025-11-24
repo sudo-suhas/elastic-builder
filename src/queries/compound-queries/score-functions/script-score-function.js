@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../../_');
 
 const ScoreFunction = require('./score-function');
 
@@ -37,7 +37,7 @@ class ScriptScoreFunction extends ScoreFunction {
     constructor(script) {
         super('script_score');
 
-        if (!isNil(script)) this._opts.script = script;
+        if (!_.isNil(script)) this._opts.script = script;
     }
 
     /**

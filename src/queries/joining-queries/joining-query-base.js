@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     Query,
@@ -34,7 +34,7 @@ class JoiningQueryBase extends Query {
         super(queryType);
         this.refUrl = refUrl;
 
-        if (!isNil(qry)) this.query(qry);
+        if (!_.isNil(qry)) this.query(qry);
     }
 
     /**
@@ -71,7 +71,7 @@ class JoiningQueryBase extends Query {
      * @returns {JoiningQueryBase} returns `this` so that calls can be chained.
      */
     scoreMode(mode) {
-        if (isNil(mode)) invalidScoreModeParam(mode);
+        if (_.isNil(mode)) invalidScoreModeParam(mode);
 
         const modeLower = mode.toLowerCase();
         if (!NESTED_SCORE_MODE_SET.has(modeLower)) {

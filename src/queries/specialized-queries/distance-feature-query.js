@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 const { Query } = require('../../core');
 
 /**
@@ -27,7 +27,7 @@ class DistanceFeatureQuery extends Query {
      */
     constructor(field) {
         super('distance_feature');
-        if (!isNil(field)) this._queryOpts.field = field;
+        if (!_.isNil(field)) this._queryOpts.field = field;
     }
 
     /**

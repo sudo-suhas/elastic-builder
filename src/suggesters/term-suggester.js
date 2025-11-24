@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../_');
 
 const {
     consts: { SUGGEST_MODE_SET, STRING_DISTANCE_SET },
@@ -72,7 +72,7 @@ class TermSuggester extends AnalyzedSuggesterBase {
      * @throws {Error} If `sort` is neither `score` nor `frequency`.
      */
     sort(sort) {
-        if (isNil(sort)) invalidSortParam(sort);
+        if (_.isNil(sort)) invalidSortParam(sort);
 
         const sortLower = sort.toLowerCase();
         if (sortLower !== 'score' && sortLower !== 'frequency') {
@@ -99,7 +99,7 @@ class TermSuggester extends AnalyzedSuggesterBase {
      * @throws {Error} If `mode` is not one of `missing`, `popular` or `always`.
      */
     suggestMode(mode) {
-        if (isNil(mode)) invalidSuggestModeParam(mode);
+        if (_.isNil(mode)) invalidSuggestModeParam(mode);
 
         const modeLower = mode.toLowerCase();
         if (!SUGGEST_MODE_SET.has(modeLower)) {
@@ -225,7 +225,7 @@ class TermSuggester extends AnalyzedSuggesterBase {
      * `levenstein`, `jarowinkler` or ngram`.
      */
     stringDistance(implMethod) {
-        if (isNil(implMethod)) invalidStringDistanceParam(implMethod);
+        if (_.isNil(implMethod)) invalidStringDistanceParam(implMethod);
 
         const implMethodLower = implMethod.toLowerCase();
         if (!STRING_DISTANCE_SET.has(implMethodLower)) {

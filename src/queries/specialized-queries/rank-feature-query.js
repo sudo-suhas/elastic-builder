@@ -1,7 +1,7 @@
 'use strict';
 
 const { Query } = require('../../core');
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 /**
  * The rank_feature query boosts the relevance score on the numeric value of
@@ -25,7 +25,7 @@ class RankFeatureQuery extends Query {
      */
     constructor(field) {
         super('rank_feature');
-        if (!isNil(field)) this._queryOpts.field = field;
+        if (!_.isNil(field)) this._queryOpts.field = field;
     }
 
     /**

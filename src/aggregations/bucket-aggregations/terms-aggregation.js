@@ -1,6 +1,6 @@
 'use strict';
 
-const { has, isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     util: { invalidParam }
@@ -100,7 +100,7 @@ class TermsAggregation extends TermsAggregationBase {
      * @returns {TermsAggregation} returns `this` so that calls can be chained
      */
     collectMode(mode) {
-        if (isNil(mode)) invalidCollectModeParam(mode);
+        if (_.isNil(mode)) invalidCollectModeParam(mode);
 
         const modeLower = mode.toLowerCase();
         if (modeLower !== 'breadth_first' && modeLower !== 'depth_first') {
@@ -153,14 +153,14 @@ class TermsAggregation extends TermsAggregationBase {
      * @returns {TermsAggregation} returns `this` so that calls can be chained
      */
     order(key, direction = 'desc') {
-        if (isNil(direction)) invalidDirectionParam(direction);
+        if (_.isNil(direction)) invalidDirectionParam(direction);
 
         const directionLower = direction.toLowerCase();
         if (directionLower !== 'asc' && directionLower !== 'desc') {
             invalidDirectionParam(direction);
         }
 
-        if (has(this._aggsDef, 'order')) {
+        if (_.has(this._aggsDef, 'order')) {
             if (!Array.isArray(this._aggsDef.order)) {
                 this._aggsDef.order = [this._aggsDef.order];
             }

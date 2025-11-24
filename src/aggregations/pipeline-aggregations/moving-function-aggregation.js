@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const PipelineAggregationBase = require('./pipeline-aggregation-base');
 
@@ -60,8 +60,8 @@ class MovingFunctionAggregation extends PipelineAggregationBase {
     constructor(name, bucketsPath, window, script) {
         super(name, 'moving_fn', ES_REF_URL, bucketsPath);
 
-        if (!isNil(window)) this._aggsDef.window = window;
-        if (!isNil(script)) this._aggsDef.script = script;
+        if (!_.isNil(window)) this._aggsDef.window = window;
+        if (!_.isNil(script)) this._aggsDef.script = script;
     }
 
     /**

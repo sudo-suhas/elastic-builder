@@ -1,7 +1,7 @@
 'use strict';
 
 const { Query } = require('../../core');
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 /**
  * The semantic query enables you to perform semantic search on data stored in a semantic_text field.
@@ -21,8 +21,8 @@ class SemanticQuery extends Query {
     // eslint-disable-next-line require-jsdoc
     constructor(field, query) {
         super('semantic');
-        if (!isNil(field)) this._queryOpts.field = field;
-        if (!isNil(query)) this._queryOpts.query = query;
+        if (!_.isNil(field)) this._queryOpts.field = field;
+        if (!_.isNil(query)) this._queryOpts.query = query;
     }
 
     /**

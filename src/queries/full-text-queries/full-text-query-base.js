@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const { Query } = require('../../core');
 
@@ -29,7 +29,7 @@ class FullTextQueryBase extends Query {
     constructor(queryType, queryString) {
         super(queryType);
 
-        if (!isNil(queryString)) this._queryOpts.query = queryString;
+        if (!_.isNil(queryString)) this._queryOpts.query = queryString;
     }
 
     /**

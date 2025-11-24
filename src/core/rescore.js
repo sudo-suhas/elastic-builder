@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../_');
 
 const Query = require('./query');
 const { checkType, invalidParam, recursiveToJSON } = require('./util');
@@ -56,8 +56,8 @@ class Rescore {
         this._body = {};
         this._rescoreOpts = this._body.query = {};
 
-        if (!isNil(windowSize)) this._body.window_size = windowSize;
-        if (!isNil(rescoreQuery)) this.rescoreQuery(rescoreQuery);
+        if (!_.isNil(windowSize)) this._body.window_size = windowSize;
+        if (!_.isNil(rescoreQuery)) this.rescoreQuery(rescoreQuery);
     }
 
     /**
@@ -116,7 +116,7 @@ class Rescore {
      * @returns {Rescore} returns `this` so that calls can be chained.
      */
     scoreMode(mode) {
-        if (isNil(mode)) invalidScoreModeParam(mode);
+        if (_.isNil(mode)) invalidScoreModeParam(mode);
 
         const modeLower = mode.toLowerCase();
         if (!RESCORE_MODE_SET.has(modeLower)) {

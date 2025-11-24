@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     util: { invalidParam },
@@ -106,7 +106,7 @@ class DiversifiedSamplerAggregation extends BucketAggregationBase {
      * @throws {Error} If Execution Hint is outside the accepted set.
      */
     executionHint(hint) {
-        if (isNil(hint)) invalidExecutionHintParam(hint);
+        if (_.isNil(hint)) invalidExecutionHintParam(hint);
 
         const hintLower = hint.toLowerCase();
         if (!EXECUTION_HINT_SET.has(hintLower)) {

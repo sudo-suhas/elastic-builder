@@ -1,6 +1,6 @@
 'use strict';
 
-const { isEmpty } = require('lodash');
+const _ = require('../../_');
 
 const {
     util: { checkType }
@@ -135,7 +135,7 @@ class RangeAggregationBase extends BucketAggregationBase {
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON() {
-        if (isEmpty(this._aggsDef.ranges)) {
+        if (_.isEmpty(this._aggsDef.ranges)) {
             throw new Error('`ranges` cannot be empty.');
         }
 

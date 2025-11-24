@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../_');
 
 const { Suggester } = require('../core');
 
@@ -28,7 +28,7 @@ class AnalyzedSuggesterBase extends Suggester {
     constructor(suggesterType, name, field, txt) {
         super(suggesterType, name, field);
 
-        if (!isNil(txt)) this._opts.text = txt;
+        if (!_.isNil(txt)) this._opts.text = txt;
     }
 
     /**

@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     util: { checkType }
@@ -52,7 +52,7 @@ class PercentileRanksAggregation extends MetricsAggregationBase {
     constructor(name, field, values) {
         super(name, 'percentile_ranks', field);
 
-        if (!isNil(values)) this.values(values);
+        if (!_.isNil(values)) this.values(values);
     }
 
     /**

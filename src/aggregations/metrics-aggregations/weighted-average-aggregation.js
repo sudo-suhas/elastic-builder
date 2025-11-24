@@ -2,7 +2,7 @@
 
 const { Script } = require('../../core');
 const MetricsAggregationBase = require('./metrics-aggregation-base');
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const ES_REF_URL =
     'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-weight-avg-aggregation.html';
@@ -58,11 +58,11 @@ class WeightedAverageAggregation extends MetricsAggregationBase {
         this._aggsDef.value = {};
         this._aggsDef.weight = {};
 
-        if (!isNil(value)) {
+        if (!_.isNil(value)) {
             this.value(value);
         }
 
-        if (!isNil(weight)) {
+        if (!_.isNil(weight)) {
             this.weight(weight);
         }
     }
@@ -95,7 +95,7 @@ class WeightedAverageAggregation extends MetricsAggregationBase {
             this._aggsDef.value.field = value;
         }
 
-        if (!isNil(missing)) {
+        if (!_.isNil(missing)) {
             this._aggsDef.value.missing = missing;
         }
 
@@ -129,7 +129,7 @@ class WeightedAverageAggregation extends MetricsAggregationBase {
             this._aggsDef.weight.field = weight;
         }
 
-        if (!isNil(missing)) {
+        if (!_.isNil(missing)) {
             this._aggsDef.weight.missing = missing;
         }
 

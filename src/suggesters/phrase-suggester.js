@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../_');
 
 const {
     consts: { SMOOTHING_MODEL_SET },
@@ -223,7 +223,7 @@ class PhraseSuggester extends AnalyzedSuggesterBase {
      * @returns {PhraseSuggester} returns `this` so that calls can be chained.
      */
     smoothing(model) {
-        if (isNil(model)) invalidSmoothingModeParam(model);
+        if (_.isNil(model)) invalidSmoothingModeParam(model);
 
         const modelLower = model.toLowerCase();
         if (!SMOOTHING_MODEL_SET.has(modelLower)) {

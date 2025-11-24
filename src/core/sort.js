@@ -1,6 +1,6 @@
 'use strict';
 
-const { isEmpty, has, isNil } = require('lodash');
+const _ = require('../_');
 
 const Query = require('./query');
 const Script = require('./script');
@@ -41,8 +41,8 @@ class Sort {
         this._geoPoint = null;
         this._script = null;
 
-        if (!isNil(field)) this._field = field;
-        if (!isNil(order)) this.order(order);
+        if (!_.isNil(field)) this._field = field;
+        if (!_.isNil(order)) this.order(order);
     }
 
     /**
@@ -54,7 +54,7 @@ class Sort {
      * @returns {Sort} returns `this` so that calls can be chained.
      */
     order(order) {
-        if (isNil(order)) invalidOrderParam(order);
+        if (_.isNil(order)) invalidOrderParam(order);
 
         const orderLower = order.toLowerCase();
         if (orderLower !== 'asc' && orderLower !== 'desc') {
@@ -88,7 +88,7 @@ class Sort {
      * @returns {Sort} returns `this` so that calls can be chained.
      */
     mode(mode) {
-        if (isNil(mode)) invalidModeParam(mode);
+        if (_.isNil(mode)) invalidModeParam(mode);
 
         const modeLower = mode.toLowerCase();
         if (!SORT_MODE_SET.has(modeLower)) {
@@ -167,7 +167,7 @@ class Sort {
      */
     nested(nested) {
         const { filter } = nested;
-        if (!isNil(filter)) checkType(filter, Query);
+        if (!_.isNil(filter)) checkType(filter, Query);
 
         this._opts.nested = nested;
         return this;
@@ -240,7 +240,7 @@ class Sort {
      * @throws {Error} If `type` is neither `plane` nor `arc`.
      */
     distanceType(type) {
-        if (isNil(type)) invalidDistanceTypeParam(type);
+        if (_.isNil(type)) invalidDistanceTypeParam(type);
 
         const typeLower = type.toLowerCase();
         if (typeLower !== 'plane' && typeLower !== 'arc') {
@@ -340,15 +340,15 @@ class Sort {
      * @returns {Object|string} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON() {
-        const geoPointIsNil = isNil(this._geoPoint);
-        const scriptIsNil = isNil(this._script);
+        const geoPointIsNil = _.isNil(this._geoPoint);
+        const scriptIsNil = _.isNil(this._script);
 
         if (geoPointIsNil && scriptIsNil) {
-            if (isEmpty(this._opts)) return this._field;
+            if (_.isEmpty(this._opts)) return this._field;
 
             if (
                 Object.keys(this._opts).length === 1 &&
-                has(this._opts, 'order')
+                _.has(this._opts, 'order')
             ) {
                 return { [this._field]: this._opts.order };
             }

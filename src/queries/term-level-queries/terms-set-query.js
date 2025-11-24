@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     Query,
@@ -34,8 +34,8 @@ class TermsSetQuery extends Query {
 
         this._queryOpts.terms = [];
 
-        if (!isNil(field)) this._field = field;
-        if (!isNil(terms)) {
+        if (!_.isNil(field)) this._field = field;
+        if (!_.isNil(terms)) {
             if (Array.isArray(terms)) this.terms(terms);
             else this.term(terms);
         }

@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     util: { checkType, setDefault, invalidParam }
@@ -96,7 +96,7 @@ class QueryStringQueryBase extends FullTextQueryBase {
      * @returns {QueryStringQueryBase} returns `this` so that calls can be chained.
      */
     defaultOperator(operator) {
-        if (isNil(operator)) invalidOperatorParam(operator, this._refUrl);
+        if (_.isNil(operator)) invalidOperatorParam(operator, this._refUrl);
 
         const operatorUpper = operator.toUpperCase();
         if (operatorUpper !== 'AND' && operatorUpper !== 'OR') {

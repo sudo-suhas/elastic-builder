@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil, has } = require('lodash');
+const _ = require('../_');
 
 const { checkType, invalidParam } = require('./util');
 const { GEO_SHAPE_TYPES } = require('./consts');
@@ -36,8 +36,8 @@ class GeoShape {
     constructor(type, coords) {
         this._body = {};
 
-        if (!isNil(type)) this.type(type);
-        if (!isNil(coords)) this.coordinates(coords);
+        if (!_.isNil(type)) this.type(type);
+        if (!_.isNil(coords)) this.coordinates(coords);
     }
 
     /**
@@ -54,7 +54,7 @@ class GeoShape {
      * @returns {GeoShape} returns `this` so that calls can be chained.
      */
     type(type) {
-        if (isNil(type)) invalidTypeParam(type);
+        if (_.isNil(type)) invalidTypeParam(type);
 
         const typeLower = type.toLowerCase();
         if (!GEO_SHAPE_TYPES.has(typeLower)) invalidTypeParam(type);
@@ -109,7 +109,7 @@ class GeoShape {
      * @returns {Object} returns an Object which maps to the elasticsearch query DSL
      */
     toJSON() {
-        if (!has(this._body, 'type') || !has(this._body, 'coordinates')) {
+        if (!_.has(this._body, 'type') || !_.has(this._body, 'coordinates')) {
             throw new Error(
                 'For all types, both the inner `type` and `coordinates` fields are required.'
             );

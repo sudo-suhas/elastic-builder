@@ -1,6 +1,6 @@
 'use strict';
 
-const { has, isNil } = require('lodash');
+const _ = require('../../_');
 
 const { Query } = require('../../core');
 
@@ -19,8 +19,8 @@ class ValueTermQueryBase extends Query {
     constructor(queryType, field, value) {
         super(queryType);
 
-        if (!isNil(field)) this._field = field;
-        if (!isNil(value)) this._queryOpts.value = value;
+        if (!_.isNil(field)) this._field = field;
+        if (!_.isNil(value)) this._queryOpts.value = value;
     }
 
     /**
@@ -56,7 +56,7 @@ class ValueTermQueryBase extends Query {
         // recursiveToJSON doesn't seem to be required here.
 
         // Revisit this.. Smells a little bit
-        if (!has(this._queryOpts, 'value')) {
+        if (!_.has(this._queryOpts, 'value')) {
             throw new Error('Value is required for term level query!');
         }
 

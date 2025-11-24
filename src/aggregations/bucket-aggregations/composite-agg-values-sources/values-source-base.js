@@ -1,6 +1,6 @@
 'use strict';
 
-const { isEmpty, isNil } = require('lodash');
+const _ = require('../../../_');
 
 const {
     util: { invalidParam, recursiveToJSON }
@@ -24,7 +24,7 @@ const invalidOrderParam = invalidParam('', 'order', "'asc' or 'desc'");
 class ValuesSourceBase {
     // eslint-disable-next-line require-jsdoc
     constructor(valueSrcType, refUrl, name, field) {
-        if (isEmpty(valueSrcType))
+        if (_.isEmpty(valueSrcType))
             throw new Error('ValuesSourceBase `valueSrcType` cannot be empty');
 
         this._name = name;
@@ -34,7 +34,7 @@ class ValuesSourceBase {
         this._body = {};
         this._opts = this._body[valueSrcType] = {};
 
-        if (!isNil(field)) this._opts.field = field;
+        if (!_.isNil(field)) this._opts.field = field;
     }
 
     /**
@@ -81,7 +81,7 @@ class ValuesSourceBase {
      * @returns {ValuesSourceBase} returns `this` so that calls can be chained.
      */
     order(order) {
-        if (isNil(order)) invalidOrderParam(order, this._refUrl);
+        if (_.isNil(order)) invalidOrderParam(order, this._refUrl);
 
         const orderLower = order.toLowerCase();
         if (orderLower !== 'asc' && orderLower !== 'desc') {

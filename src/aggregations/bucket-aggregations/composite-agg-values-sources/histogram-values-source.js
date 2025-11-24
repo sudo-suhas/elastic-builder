@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../../_');
 
 const ValuesSourceBase = require('./values-source-base');
 
@@ -32,7 +32,7 @@ class HistogramValuesSource extends ValuesSourceBase {
     constructor(name, field, interval) {
         super('histogram', REF_URL, name, field);
 
-        if (!isNil(interval)) this._opts.interval = interval;
+        if (!_.isNil(interval)) this._opts.interval = interval;
     }
 
     /**

@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     util: { checkType }
@@ -42,8 +42,8 @@ class TermsQuery extends Query {
         this._termsLookupOpts = {};
         this._values = [];
 
-        if (!isNil(field)) this._field = field;
-        if (!isNil(values)) {
+        if (!_.isNil(field)) this._field = field;
+        if (!_.isNil(values)) {
             if (Array.isArray(values)) this.values(values);
             else this.value(values);
         }

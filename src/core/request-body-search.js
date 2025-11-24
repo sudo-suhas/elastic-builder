@@ -1,6 +1,6 @@
 'use strict';
 
-const { has, isNil, isEmpty } = require('lodash');
+const _ = require('../_');
 
 const Query = require('./query'),
     Aggregation = require('./aggregation'),
@@ -698,7 +698,7 @@ class RequestBodySearch {
     rescore(rescore) {
         checkType(rescore, Rescore);
 
-        if (has(this._body, 'rescore')) {
+        if (_.has(this._body, 'rescore')) {
             if (!Array.isArray(this._body.rescore)) {
                 this._body.rescore = [this._body.rescore];
             }
@@ -841,7 +841,7 @@ class RequestBodySearch {
     collapse(field, innerHits, maxConcurrentGroupRequests) {
         const collapse = (this._body.collapse = { field });
 
-        if (!isNil(innerHits)) {
+        if (!_.isNil(innerHits)) {
             checkType(innerHits, InnerHits);
 
             collapse.inner_hits = innerHits;
@@ -882,18 +882,18 @@ class RequestBodySearch {
     toJSON() {
         const dsl = recursiveToJSON(this._body);
 
-        if (!isEmpty(this._knn))
+        if (!_.isEmpty(this._knn))
             dsl.knn =
                 this._knn.length == 1
                     ? recMerge(this._knn)
                     : this._knn.map(knn => recursiveToJSON(knn));
 
-        if (!isEmpty(this._aggs)) dsl.aggs = recMerge(this._aggs);
+        if (!_.isEmpty(this._aggs)) dsl.aggs = recMerge(this._aggs);
 
-        if (!isEmpty(this._suggests) || !isNil(this._suggestText)) {
+        if (!_.isEmpty(this._suggests) || !_.isNil(this._suggestText)) {
             dsl.suggest = recMerge(this._suggests);
 
-            if (!isNil(this._suggestText)) {
+            if (!_.isNil(this._suggestText)) {
                 dsl.suggest.text = this._suggestText;
             }
         }

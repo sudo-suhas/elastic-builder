@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../_');
 const validType = [
     'boolean',
     'composite',
@@ -34,11 +34,11 @@ class RuntimeField {
         this._isTypeSet = false;
         this._isScriptSet = false;
 
-        if (!isNil(type)) {
+        if (!_.isNil(type)) {
             this.type(type);
         }
 
-        if (!isNil(script)) {
+        if (!_.isNil(script)) {
             this.script(script);
         }
     }
@@ -79,7 +79,7 @@ class RuntimeField {
      * @returns {RuntimeField} returns `this` so that calls can be chained.
      */
     lang(lang) {
-        if (!isNil(this._body.script)) {
+        if (!_.isNil(this._body.script)) {
             this._body.script.lang = lang;
         }
         return this;
@@ -92,7 +92,7 @@ class RuntimeField {
      * @returns {RuntimeField} returns `this` so that calls can be chained.
      */
     params(params) {
-        if (!isNil(this._body.script)) {
+        if (!_.isNil(this._body.script)) {
             this._body.script.params = params;
         }
         return this;

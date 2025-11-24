@@ -1,6 +1,6 @@
 'use strict';
 
-const { has, isEmpty } = require('lodash');
+const _ = require('../_');
 
 const { checkType, recursiveToJSON } = require('./util');
 
@@ -21,7 +21,7 @@ const { checkType, recursiveToJSON } = require('./util');
 class Aggregation {
     // eslint-disable-next-line require-jsdoc
     constructor(name, aggType) {
-        if (isEmpty(aggType))
+        if (_.isEmpty(aggType))
             throw new Error('Aggregation `aggType` cannot be empty');
 
         this._name = name;
@@ -124,9 +124,9 @@ class Aggregation {
      * @private
      */
     _aggsName() {
-        if (!isEmpty(this._name)) return this._name;
+        if (!_.isEmpty(this._name)) return this._name;
 
-        if (has(this._aggsDef, 'field')) {
+        if (_.has(this._aggsDef, 'field')) {
             return `agg_${this.aggType}_${this._aggsDef.field}`;
         }
 
@@ -153,7 +153,7 @@ class Aggregation {
     toJSON() {
         const mainAggs = recursiveToJSON(this._aggs);
 
-        if (!isEmpty(this._nestedAggs)) {
+        if (!_.isEmpty(this._nestedAggs)) {
             mainAggs.aggs = Object.assign(
                 {},
                 ...recursiveToJSON(this._nestedAggs)

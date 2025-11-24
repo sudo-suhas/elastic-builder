@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const BucketAggregationBase = require('./bucket-aggregation-base');
 
@@ -45,7 +45,7 @@ class RareTermsAggregation extends BucketAggregationBase {
      * @returns {RareTermsAggregation} returns `this` so that calls can be chained
      */
     maxDocCount(maxDocCnt) {
-        if (isNil(maxDocCnt) || maxDocCnt < 1 || maxDocCnt > 100) {
+        if (_.isNil(maxDocCnt) || maxDocCnt < 1 || maxDocCnt > 100) {
             throw new Error('`maxDocCount` can only be value from 1 to 100.');
         }
 

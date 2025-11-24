@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil, isEmpty } = require('lodash');
+const _ = require('../_');
 
 /**
  * Base class implementation for all suggester types.
@@ -21,9 +21,10 @@ const { isNil, isEmpty } = require('lodash');
 class Suggester {
     // eslint-disable-next-line require-jsdoc
     constructor(suggesterType, name, field) {
-        if (isEmpty(suggesterType))
+        if (_.isEmpty(suggesterType))
             throw new Error('Suggester `suggesterType` cannot be empty');
-        if (isEmpty(name)) throw new Error('Suggester `name` cannot be empty');
+        if (_.isEmpty(name))
+            throw new Error('Suggester `name` cannot be empty');
 
         this.name = name;
         this.suggesterType = suggesterType;
@@ -32,7 +33,7 @@ class Suggester {
         this._opts = this._body[name] = {};
         this._suggestOpts = this._opts[suggesterType] = {};
 
-        if (!isNil(field)) this._suggestOpts.field = field;
+        if (!_.isNil(field)) this._suggestOpts.field = field;
     }
 
     /**

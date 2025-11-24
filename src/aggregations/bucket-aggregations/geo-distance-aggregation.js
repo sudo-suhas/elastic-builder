@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     GeoPoint,
@@ -121,7 +121,7 @@ class GeoDistanceAggregation extends RangeAggregationBase {
      * @throws {Error} If `type` is neither `plane` nor `arc`.
      */
     distanceType(type) {
-        if (isNil(type)) invalidDistanceTypeParam(type);
+        if (_.isNil(type)) invalidDistanceTypeParam(type);
 
         const typeLower = type.toLowerCase();
         if (typeLower !== 'plane' && typeLower !== 'arc')

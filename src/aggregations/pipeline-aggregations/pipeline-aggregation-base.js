@@ -1,6 +1,6 @@
 'use strict';
 
-const { isNil } = require('lodash');
+const _ = require('../../_');
 
 const {
     Aggregation,
@@ -40,7 +40,7 @@ class PipelineAggregationBase extends Aggregation {
 
         this._refUrl = refUrl;
 
-        if (!isNil(bucketsPath)) this._aggsDef.buckets_path = bucketsPath;
+        if (!_.isNil(bucketsPath)) this._aggsDef.buckets_path = bucketsPath;
     }
 
     /**
@@ -80,7 +80,7 @@ class PipelineAggregationBase extends Aggregation {
      * @returns {PipelineAggregationBase} returns `this` so that calls can be chained
      */
     gapPolicy(policy) {
-        if (isNil(policy)) invalidGapPolicyParam(policy, this._refUrl);
+        if (_.isNil(policy)) invalidGapPolicyParam(policy, this._refUrl);
 
         const policyLower = policy.toLowerCase();
         if (policyLower !== 'skip' && policyLower !== 'insert_zeros') {
