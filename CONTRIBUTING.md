@@ -35,12 +35,24 @@ elastic-builder is published to npm.
 
 ### Run tests
 
-This project uses eslint for javascript linting and ava for testing. Run
-linting using `npm run lint` and run tests using `npm run test`. Or run both using:
+This project uses eslint for javascript linting and vitest for testing. Run
+linting using `npm run lint` and run tests using `npm test`. Or run both using:
 ```
 npm run check
 ```
 This should take care of formatting as well thanks to [eslint-plugin-prettier][3].
+
+You can also run tests in watch mode during development:
+```
+npm run test:watch
+```
+
+To generate coverage reports:
+```
+npm run test:src
+```
+
+Coverage reports are generated in the `coverage/` directory.
 
 ### (Optional) Add yourself as a contributor
 

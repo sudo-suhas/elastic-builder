@@ -1,87 +1,139 @@
-import test from 'ava';
-import sinon from 'sinon';
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
 import { Script, script } from '../../src';
-import { makeSetsOptionMacro } from '../_macros';
 
-const setsOption = makeSetsOptionMacro(script);
+describe('Script', () => {
+    describe('options', () => {
+        test('sets inline option', () => {
+            const result = script()
+                .inline("doc['my_field'] * multiplier")
+                .toJSON();
+            const expected = { inline: "doc['my_field'] * multiplier" };
+            expect(result).toEqual(expected);
+        });
 
-test(setsOption, 'inline', { param: "doc['my_field'] * multiplier" });
-test(setsOption, 'source', { param: "doc['my_field'] * multiplier" });
-test(setsOption, 'file', { param: 'calculate-score' });
-test(setsOption, 'stored', { param: 'calculate-score' });
-test(setsOption, 'id', { param: 'calculate-score' });
-test(setsOption, 'lang', { param: 'painless' });
-test(setsOption, 'params', { param: { my_modifier: 2 } });
+        test('sets source option', () => {
+            const result = script()
+                .source("doc['my_field'] * multiplier")
+                .toJSON();
+            const expected = { source: "doc['my_field'] * multiplier" };
+            expect(result).toEqual(expected);
+        });
 
-test('constructor sets arguments', t => {
-    let valueA = new Script(
-        'inline',
-        'params.my_var1 / params.my_var2'
-    ).toJSON();
-    let valueB = new Script()
-        .inline('params.my_var1 / params.my_var2')
-        .toJSON();
-    t.deepEqual(valueA, valueB);
+        test('sets file option', () => {
+            const result = script().file('calculate-score').toJSON();
+            const expected = { file: 'calculate-score' };
+            expect(result).toEqual(expected);
+        });
 
-    let expected = {
-        inline: 'params.my_var1 / params.my_var2'
-    };
-    t.deepEqual(valueA, expected);
+        test('sets stored option', () => {
+            const result = script().stored('calculate-score').toJSON();
+            const expected = { stored: 'calculate-score' };
+            expect(result).toEqual(expected);
+        });
 
-    valueA = new Script('source', 'params.my_var1 / params.my_var2').toJSON();
-    valueB = new Script().source('params.my_var1 / params.my_var2').toJSON();
-    t.deepEqual(valueA, valueB);
+        test('sets id option', () => {
+            const result = script().id('calculate-score').toJSON();
+            const expected = { id: 'calculate-score' };
+            expect(result).toEqual(expected);
+        });
 
-    expected = {
-        source: 'params.my_var1 / params.my_var2'
-    };
-    t.deepEqual(valueA, expected);
+        test('sets lang option', () => {
+            const result = script().lang('painless').toJSON();
+            const expected = { lang: 'painless' };
+            expect(result).toEqual(expected);
+        });
 
-    valueA = new Script('file', 'calculate-score').toJSON();
-    valueB = new Script().file('calculate-score').toJSON();
-    t.deepEqual(valueA, valueB);
+        test('sets params option', () => {
+            const result = script().params({ my_modifier: 2 }).toJSON();
+            const expected = { params: { my_modifier: 2 } };
+            expect(result).toEqual(expected);
+        });
+    });
 
-    expected = {
-        file: 'calculate-score'
-    };
-    t.deepEqual(valueA, expected);
+    describe('constructor', () => {
+        test('sets inline via constructor', () => {
+            const valueA = new Script(
+                'inline',
+                'params.my_var1 / params.my_var2'
+            ).toJSON();
+            const valueB = new Script()
+                .inline('params.my_var1 / params.my_var2')
+                .toJSON();
+            expect(valueA).toEqual(valueB);
+            expect(valueA).toEqual({
+                inline: 'params.my_var1 / params.my_var2'
+            });
+        });
 
-    valueA = new Script('stored', 'calculate-score').toJSON();
-    valueB = new Script().stored('calculate-score').toJSON();
-    t.deepEqual(valueA, valueB);
+        test('sets source via constructor', () => {
+            const valueA = new Script(
+                'source',
+                'params.my_var1 / params.my_var2'
+            ).toJSON();
+            const valueB = new Script()
+                .source('params.my_var1 / params.my_var2')
+                .toJSON();
+            expect(valueA).toEqual(valueB);
+            expect(valueA).toEqual({
+                source: 'params.my_var1 / params.my_var2'
+            });
+        });
 
-    expected = { stored: 'calculate-score' };
-    t.deepEqual(valueA, expected);
+        test('sets file via constructor', () => {
+            const valueA = new Script('file', 'calculate-score').toJSON();
+            const valueB = new Script().file('calculate-score').toJSON();
+            expect(valueA).toEqual(valueB);
+            expect(valueA).toEqual({ file: 'calculate-score' });
+        });
 
-    valueA = new Script('id', 'calculate-score').toJSON();
-    valueB = new Script().id('calculate-score').toJSON();
-    t.deepEqual(valueA, valueB);
+        test('sets stored via constructor', () => {
+            const valueA = new Script('stored', 'calculate-score').toJSON();
+            const valueB = new Script().stored('calculate-score').toJSON();
+            expect(valueA).toEqual(valueB);
+            expect(valueA).toEqual({ stored: 'calculate-score' });
+        });
 
-    expected = { id: 'calculate-score' };
-    t.deepEqual(valueA, expected);
+        test('sets id via constructor', () => {
+            const valueA = new Script('id', 'calculate-score').toJSON();
+            const valueB = new Script().id('calculate-score').toJSON();
+            expect(valueA).toEqual(valueB);
+            expect(valueA).toEqual({ id: 'calculate-score' });
+        });
 
-    const err = t.throws(() => new Script('invalid_script_type', 'src'), Error);
-    t.is(err.message, '`type` must be one of `inline`, `stored`, `file`');
-});
+        test('throws error for invalid script type', () => {
+            expect(() => new Script('invalid_script_type', 'src')).toThrow(
+                new Error('`type` must be one of `inline`, `stored`, `file`')
+            );
+        });
+    });
 
-test.serial('mixed representaion', t => {
-    const spy = sinon.spy(console, 'warn');
+    describe('mixed representation', () => {
+        let spy;
 
-    const value = new Script()
-        .file('calculate-score')
-        .stored('calculate-score')
-        .toJSON();
-    const expected = {
-        stored: 'calculate-score'
-    };
-    t.deepEqual(value, expected);
+        beforeEach(() => {
+            spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+        });
 
-    t.true(spy.calledTwice);
-    t.true(
-        spy.firstCall.calledWith(
-            '[Script] Script source(`inline`/`source`/`stored`/`id`/`file`) was already specified!'
-        )
-    );
-    t.true(spy.secondCall.calledWith('[Script] Overwriting.'));
-    console.warn.restore();
+        afterEach(() => {
+            spy.mockRestore();
+        });
+
+        test('logs warnings when overwriting script source', () => {
+            const value = new Script()
+                .file('calculate-score')
+                .stored('calculate-score')
+                .toJSON();
+            const expected = {
+                stored: 'calculate-score'
+            };
+            expect(value).toEqual(expected);
+
+            expect(spy).toHaveBeenCalledTimes(2);
+            expect(spy).toHaveBeenNthCalledWith(
+                1,
+                '[Script] Script source(`inline`/`source`/`stored`/`id`/`file`) was already specified!'
+            );
+            expect(spy).toHaveBeenNthCalledWith(2, '[Script] Overwriting.');
+        });
+    });
 });

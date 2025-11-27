@@ -1,42 +1,55 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { ScriptScoreFunction, scriptScoreFunction, Script } from '../../src';
-import { nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
-
-const setsOption = makeSetsOptionMacro(
-    scriptScoreFunction,
-    nameExpectStrategy('script_score')
-);
+import { recursiveToJSON } from '../testutil/index.js';
 
 const scoreScript = new Script('inline', 'Math.log10(doc.likes.value + 2)');
 
-test(setsOption, 'script', { param: scoreScript });
+describe('ScriptScoreFunction', () => {
+    describe('options', () => {
+        test('sets script option', () => {
+            const result = scriptScoreFunction().script(scoreScript).toJSON();
+            const expected = {
+                script_score: {
+                    script: recursiveToJSON(scoreScript.toJSON())
+                }
+            };
+            expect(result).toEqual(expected);
+        });
+    });
 
-test('constructor sets script', t => {
-    let valueA = new ScriptScoreFunction(scoreScript).toJSON();
-    let valueB = new ScriptScoreFunction().script(scoreScript).toJSON();
-    t.deepEqual(valueA, valueB);
+    describe('constructor', () => {
+        test('constructor sets script with Script object', () => {
+            const valueA = new ScriptScoreFunction(scoreScript).toJSON();
+            const valueB = new ScriptScoreFunction()
+                .script(scoreScript)
+                .toJSON();
+            expect(valueA).toEqual(valueB);
 
-    let expected = {
-        script_score: {
-            script: {
-                inline: 'Math.log10(doc.likes.value + 2)'
-            }
-        }
-    };
-    t.deepEqual(valueA, expected);
+            const expected = {
+                script_score: {
+                    script: {
+                        inline: 'Math.log10(doc.likes.value + 2)'
+                    }
+                }
+            };
+            expect(valueA).toEqual(expected);
+        });
 
-    valueA = new ScriptScoreFunction(
-        "_score * doc['view_count'].value"
-    ).toJSON();
-    valueB = new ScriptScoreFunction()
-        .script("_score * doc['view_count'].value")
-        .toJSON();
-    t.deepEqual(valueA, valueB);
+        test('constructor sets script with string', () => {
+            const valueA = new ScriptScoreFunction(
+                "_score * doc['view_count'].value"
+            ).toJSON();
+            const valueB = new ScriptScoreFunction()
+                .script("_score * doc['view_count'].value")
+                .toJSON();
+            expect(valueA).toEqual(valueB);
 
-    expected = {
-        script_score: {
-            script: "_score * doc['view_count'].value"
-        }
-    };
-    t.deepEqual(valueA, expected);
+            const expected = {
+                script_score: {
+                    script: "_score * doc['view_count'].value"
+                }
+            };
+            expect(valueA).toEqual(expected);
+        });
+    });
 });

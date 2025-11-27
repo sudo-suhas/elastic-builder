@@ -1,8 +1,10 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { MatchNoneQuery } from '../../src';
 
-test('can be instantiated', t => {
-    const value = new MatchNoneQuery().toJSON();
-    const expected = { match_none: {} };
-    t.deepEqual(value, expected);
+describe('MatchNoneQuery', () => {
+    test('can be instantiated', () => {
+        const value = new MatchNoneQuery().toJSON();
+        const expected = { match_none: {} };
+        expect(value).toEqual(expected);
+    });
 });

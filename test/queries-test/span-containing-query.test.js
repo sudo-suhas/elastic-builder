@@ -1,10 +1,12 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { SpanContainingQuery } from '../../src';
 
-test('sets correct type', t => {
-    const value = new SpanContainingQuery().toJSON();
-    const expected = {
-        span_containing: {}
-    };
-    t.deepEqual(value, expected);
+describe('SpanContainingQuery', () => {
+    test('sets correct type', () => {
+        const value = new SpanContainingQuery().toJSON();
+        const expected = {
+            span_containing: {}
+        };
+        expect(value).toEqual(expected);
+    });
 });

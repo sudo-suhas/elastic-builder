@@ -1,40 +1,50 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { BucketSortAggregation, Sort } from '../../src';
-import { setsAggType } from '../_macros';
 
 const getInstance = () => new BucketSortAggregation('my_agg');
 
-test(setsAggType, BucketSortAggregation, 'bucket_sort');
+describe('BucketSortAggregation', () => {
+    test('sets type as bucket_sort', () => {
+        const value = new BucketSortAggregation('my_agg').toJSON();
+        expect(value).toEqual({
+            my_agg: { bucket_sort: {} }
+        });
+    });
 
-test('can be instantiated', t => {
-    const value = getInstance().toJSON();
-    const expected = {
-        my_agg: {
-            bucket_sort: {}
-        }
-    };
-    t.deepEqual(value, expected);
-});
+    describe('constructor', () => {
+        test('can be instantiated', () => {
+            const value = getInstance().toJSON();
+            const expected = {
+                my_agg: {
+                    bucket_sort: {}
+                }
+            };
+            expect(value).toEqual(expected);
+        });
+    });
 
-test('sort from and size are set', t => {
-    const value = getInstance()
-        .sort([new Sort('myField', 'desc')])
-        .from(5)
-        .size(10)
-        .toJSON();
+    describe('options', () => {
+        test('sort from and size are set', () => {
+            const value = getInstance()
+                .sort([new Sort('myField', 'desc')])
+                .from(5)
+                .size(10)
+                .toJSON();
 
-    const expected = {
-        my_agg: {
-            bucket_sort: {
-                sort: [
-                    {
-                        myField: 'desc'
+            const expected = {
+                my_agg: {
+                    bucket_sort: {
+                        sort: [
+                            {
+                                myField: 'desc'
+                            }
+                        ],
+                        from: 5,
+                        size: 10
                     }
-                ],
-                from: 5,
-                size: 10
-            }
-        }
-    };
-    t.deepEqual(value, expected);
+                }
+            };
+            expect(value).toEqual(expected);
+        });
+    });
 });

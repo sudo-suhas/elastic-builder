@@ -1,43 +1,62 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { Suggester } from '../../src/core';
-import { nameTypeExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = field => new Suggester('my_type', 'my_suggester', field);
 
-const setsOption = makeSetsOptionMacro(
-    getInstance,
-    nameTypeExpectStrategy('my_suggester', 'my_type')
-);
+describe('Suggester', () => {
+    describe('constructor', () => {
+        test('aggType cannot be empty', () => {
+            expect(() => new Suggester()).toThrow(
+                new Error('Suggester `suggesterType` cannot be empty')
+            );
+        });
 
-test('aggType cannot be empty', t => {
-    const err = t.throws(() => new Suggester());
-    t.is(err.message, 'Suggester `suggesterType` cannot be empty');
+        test('name cannot be empty', () => {
+            expect(() => new Suggester('my_type')).toThrow(
+                new Error('Suggester `name` cannot be empty')
+            );
+        });
+
+        test('can be instantiated', () => {
+            const value = getInstance().toJSON();
+            const expected = {
+                my_suggester: {
+                    my_type: {}
+                }
+            };
+            expect(value).toEqual(expected);
+        });
+
+        test('sets field', () => {
+            const value = getInstance('my_field').toJSON();
+            const expected = {
+                my_suggester: {
+                    my_type: { field: 'my_field' }
+                }
+            };
+            expect(value).toEqual(expected);
+        });
+    });
+
+    describe('options', () => {
+        test('sets field option', () => {
+            const result = getInstance().field('my_field').toJSON();
+            const expected = {
+                my_suggester: {
+                    my_type: { field: 'my_field' }
+                }
+            };
+            expect(result).toEqual(expected);
+        });
+
+        test('sets size option', () => {
+            const result = getInstance().size(5).toJSON();
+            const expected = {
+                my_suggester: {
+                    my_type: { size: 5 }
+                }
+            };
+            expect(result).toEqual(expected);
+        });
+    });
 });
-
-test('name cannot be empty', t => {
-    const err = t.throws(() => new Suggester('my_type'));
-    t.is(err.message, 'Suggester `name` cannot be empty');
-});
-
-test('can be instantiated', t => {
-    const value = getInstance().toJSON();
-    const expected = {
-        my_suggester: {
-            my_type: {}
-        }
-    };
-    t.deepEqual(value, expected);
-});
-
-test('constructor sets field', t => {
-    const value = getInstance('my_field').toJSON();
-    const expected = {
-        my_suggester: {
-            my_type: { field: 'my_field' }
-        }
-    };
-    t.deepEqual(value, expected);
-});
-
-test(setsOption, 'field', { param: 'my_field' });
-test(setsOption, 'size', { param: 5 });

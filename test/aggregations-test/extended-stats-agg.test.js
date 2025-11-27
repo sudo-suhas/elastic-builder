@@ -1,32 +1,44 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { ExtendedStatsAggregation } from '../../src';
-import {
-    setsAggType,
-    nameTypeExpectStrategy,
-    makeSetsOptionMacro
-} from '../_macros';
 
 const getInstance = field => new ExtendedStatsAggregation('my_agg', field);
 
-const setsOption = makeSetsOptionMacro(
-    getInstance,
-    nameTypeExpectStrategy('my_agg', 'extended_stats')
-);
+describe('ExtendedStatsAggregation', () => {
+    test('sets type as extended_stats', () => {
+        const value = new ExtendedStatsAggregation('my_agg').toJSON();
+        expect(value).toEqual({
+            my_agg: { extended_stats: {} }
+        });
+    });
 
-test(setsAggType, ExtendedStatsAggregation, 'extended_stats');
-test(setsOption, 'sigma', { param: 3 });
+    describe('options', () => {
+        test('sets sigma', () => {
+            const value = getInstance('my_field').sigma(3).toJSON();
+            expect(value).toEqual({
+                my_agg: {
+                    extended_stats: {
+                        field: 'my_field',
+                        sigma: 3
+                    }
+                }
+            });
+        });
+    });
 
-test('constructor sets field', t => {
-    const valueA = getInstance('my_field').toJSON();
-    const valueB = getInstance().field('my_field').toJSON();
-    t.deepEqual(valueA, valueB);
+    describe('constructor', () => {
+        test('sets field', () => {
+            const valueA = getInstance('my_field').toJSON();
+            const valueB = getInstance().field('my_field').toJSON();
+            expect(valueA).toEqual(valueB);
 
-    const expected = {
-        my_agg: {
-            extended_stats: {
-                field: 'my_field'
-            }
-        }
-    };
-    t.deepEqual(valueA, expected);
+            const expected = {
+                my_agg: {
+                    extended_stats: {
+                        field: 'my_field'
+                    }
+                }
+            };
+            expect(valueA).toEqual(expected);
+        });
+    });
 });

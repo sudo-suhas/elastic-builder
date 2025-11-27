@@ -1,27 +1,46 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { SpanMultiTermQuery, spanMultiTermQuery, PrefixQuery } from '../../src';
-import {
-    illegalParamType,
-    nameExpectStrategy,
-    makeSetsOptionMacro
-} from '../_macros';
-
-const setsOption = makeSetsOptionMacro(
-    spanMultiTermQuery,
-    nameExpectStrategy('span_multi')
-);
 
 const qry = new PrefixQuery('user', 'ki');
 
-test(illegalParamType, new SpanMultiTermQuery(), 'match', 'MultiTermQueryBase');
-test(setsOption, 'match', { param: qry });
+describe('SpanMultiTermQuery', () => {
+    describe('parameter type validation', () => {
+        test('checks MultiTermQueryBase class for match', () => {
+            const instance = new SpanMultiTermQuery();
+            expect(() => instance.match(null)).toThrow(
+                new TypeError(
+                    'Argument must be an instance of MultiTermQueryBase'
+                )
+            );
+            expect(() => instance.match(Object.create(null))).toThrow(
+                new TypeError(
+                    'Argument must be an instance of MultiTermQueryBase'
+                )
+            );
+        });
+    });
 
-test('constructor sets query', t => {
-    const value = new SpanMultiTermQuery(qry).toJSON();
-    const expected = {
-        span_multi: {
-            match: { prefix: { user: 'ki' } }
-        }
-    };
-    t.deepEqual(value, expected);
+    describe('options', () => {
+        test('sets match option', () => {
+            const result = spanMultiTermQuery().match(qry).toJSON();
+            const expected = {
+                span_multi: {
+                    match: { prefix: { user: 'ki' } }
+                }
+            };
+            expect(result).toEqual(expected);
+        });
+    });
+
+    describe('constructor', () => {
+        test('constructor sets query', () => {
+            const value = new SpanMultiTermQuery(qry).toJSON();
+            const expected = {
+                span_multi: {
+                    match: { prefix: { user: 'ki' } }
+                }
+            };
+            expect(value).toEqual(expected);
+        });
+    });
 });

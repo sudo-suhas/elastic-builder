@@ -1,19 +1,41 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { IndexedShape, indexedShape } from '../../src';
-import { makeSetsOptionMacro } from '../_macros';
 
-const setsOption = makeSetsOptionMacro(indexedShape);
+describe('IndexedShape', () => {
+    describe('constructor', () => {
+        test('sets options', () => {
+            const value = new IndexedShape('DEU', 'countries').toJSON();
+            const expected = {
+                id: 'DEU',
+                type: 'countries'
+            };
+            expect(value).toEqual(expected);
+        });
+    });
 
-test('constructor sets options', t => {
-    const value = new IndexedShape('DEU', 'countries').toJSON();
-    const expected = {
-        id: 'DEU',
-        type: 'countries'
-    };
-    t.deepEqual(value, expected);
+    describe('options', () => {
+        test('sets id option', () => {
+            const result = indexedShape().id('DEU').toJSON();
+            const expected = { id: 'DEU' };
+            expect(result).toEqual(expected);
+        });
+
+        test('sets type option', () => {
+            const result = indexedShape().type('countries').toJSON();
+            const expected = { type: 'countries' };
+            expect(result).toEqual(expected);
+        });
+
+        test('sets index option', () => {
+            const result = indexedShape().index('shapes').toJSON();
+            const expected = { index: 'shapes' };
+            expect(result).toEqual(expected);
+        });
+
+        test('sets path option', () => {
+            const result = indexedShape().path('location').toJSON();
+            const expected = { path: 'location' };
+            expect(result).toEqual(expected);
+        });
+    });
 });
-
-test(setsOption, 'id', { param: 'DEU' });
-test(setsOption, 'type', { param: 'countries' });
-test(setsOption, 'index', { param: 'shapes' });
-test(setsOption, 'path', { param: 'location' });

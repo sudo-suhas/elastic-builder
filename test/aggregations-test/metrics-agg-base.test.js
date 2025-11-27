@@ -1,46 +1,94 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { Script } from '../../src';
 import { MetricsAggregationBase } from '../../src/aggregations/metrics-aggregations';
-import {
-    illegalParamType,
-    nameTypeExpectStrategy,
-    makeSetsOptionMacro
-} from '../_macros';
 
 const getInstance = field =>
     new MetricsAggregationBase('my_agg', 'my_type', field);
 
-const setsOption = makeSetsOptionMacro(
-    getInstance,
-    nameTypeExpectStrategy('my_agg', 'my_type')
-);
+describe('MetricsAggregationBase', () => {
+    test('can be instantiated', () => {
+        expect(getInstance()).toBeTruthy();
+    });
 
-test('can be instantiated', t => {
-    t.truthy(getInstance());
-});
-
-test(illegalParamType, getInstance(), 'script', 'Script');
-test(setsOption, 'field', { param: 'my_field' });
-test(setsOption, 'script', {
-    param: new Script()
-        .lang('groovy')
-        .file('calculate-score')
-        .params({ my_modifier: 2 })
-});
-test(setsOption, 'missing', { param: 1 });
-test(setsOption, 'format', { param: '####.00' });
-
-test('constructor sets field', t => {
-    const valueA = getInstance('my_field').toJSON();
-    const valueB = getInstance().field('my_field').toJSON();
-    t.deepEqual(valueA, valueB);
-
-    const expected = {
-        my_agg: {
-            my_type: {
-                field: 'my_field'
+    describe('parameter validation', () => {
+        describe.each([
+            { name: 'throw TypeError for null parameter', value: null },
+            {
+                name: 'throw TypeError for invalid parameter',
+                value: Object.create(null)
             }
-        }
-    };
-    t.deepEqual(valueA, expected);
+        ])('$name', ({ value }) => {
+            test('script()', () => {
+                expect(() => getInstance().script(value)).toThrow(
+                    new TypeError('Argument must be an instance of Script')
+                );
+            });
+        });
+    });
+
+    describe('options', () => {
+        test('sets field', () => {
+            const value = getInstance().field('my_field').toJSON();
+            expect(value).toEqual({
+                my_agg: {
+                    my_type: {
+                        field: 'my_field'
+                    }
+                }
+            });
+        });
+
+        test('sets script', () => {
+            const scriptInstance = new Script()
+                .lang('groovy')
+                .file('calculate-score')
+                .params({ my_modifier: 2 });
+            const value = getInstance().script(scriptInstance).toJSON();
+            const expected = {
+                my_agg: {
+                    my_type: {
+                        script: scriptInstance.toJSON()
+                    }
+                }
+            };
+            expect(value).toEqual(expected);
+        });
+
+        test('sets missing', () => {
+            const value = getInstance().missing(1).toJSON();
+            expect(value).toEqual({
+                my_agg: {
+                    my_type: {
+                        missing: 1
+                    }
+                }
+            });
+        });
+
+        test('sets format', () => {
+            const value = getInstance().format('####.00').toJSON();
+            expect(value).toEqual({
+                my_agg: {
+                    my_type: {
+                        format: '####.00'
+                    }
+                }
+            });
+        });
+    });
+
+    test('constructor sets field', () => {
+        const valueA = getInstance('my_field').toJSON();
+        const valueB = getInstance().field('my_field').toJSON();
+        expect(valueA).toEqual(valueB);
+
+        const expected = {
+            my_agg: {
+                my_type: {
+                    field: 'my_field'
+                }
+            }
+        };
+        expect(valueA).toEqual(expected);
+    });
 });

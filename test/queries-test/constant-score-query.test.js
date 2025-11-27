@@ -1,32 +1,68 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { ConstantScoreQuery, constantScoreQuery, TermQuery } from '../../src';
-import {
-    illegalParamType,
-    nameExpectStrategy,
-    makeSetsOptionMacro
-} from '../_macros';
-
-const setsOption = makeSetsOptionMacro(
-    constantScoreQuery,
-    nameExpectStrategy('constant_score')
-);
+import { recursiveToJSON } from '../testutil/index.js';
 
 const termQry = new TermQuery('user', 'kimchy');
 
-test(illegalParamType, constantScoreQuery(), 'filter', 'Query');
-test(illegalParamType, constantScoreQuery(), 'query', 'Query');
-test(setsOption, 'filter', { param: termQry });
-test(setsOption, 'query', { param: termQry, keyName: 'filter' });
+describe('ConstantScoreQuery', () => {
+    describe('parameter type validation', () => {
+        describe.each([
+            { name: 'throw TypeError for null parameter', value: null },
+            {
+                name: 'throw TypeError for invalid parameter',
+                value: Object.create(null)
+            }
+        ])('$name', ({ value }) => {
+            test('filter()', () => {
+                const instance = constantScoreQuery();
+                expect(() => instance.filter(value)).toThrow(
+                    new TypeError('Argument must be an instance of Query')
+                );
+            });
 
-test('constructor sets filter', t => {
-    const valueA = new ConstantScoreQuery(termQry).toJSON();
-    const valueB = new ConstantScoreQuery().filter(termQry).toJSON();
-    t.deepEqual(valueA, valueB);
+            test('query()', () => {
+                const instance = constantScoreQuery();
+                expect(() => instance.query(value)).toThrow(
+                    new TypeError('Argument must be an instance of Query')
+                );
+            });
+        });
+    });
 
-    const expected = {
-        constant_score: {
-            filter: { term: { user: 'kimchy' } }
-        }
-    };
-    t.deepEqual(valueA, expected);
+    describe('options', () => {
+        test('sets filter option', () => {
+            const result = constantScoreQuery().filter(termQry).toJSON();
+            const expected = {
+                constant_score: {
+                    filter: recursiveToJSON(termQry.toJSON())
+                }
+            };
+            expect(result).toEqual(expected);
+        });
+
+        test('sets filter option via query method', () => {
+            const result = constantScoreQuery().query(termQry).toJSON();
+            const expected = {
+                constant_score: {
+                    filter: recursiveToJSON(termQry.toJSON())
+                }
+            };
+            expect(result).toEqual(expected);
+        });
+    });
+
+    describe('constructor', () => {
+        test('constructor sets filter', () => {
+            const valueA = new ConstantScoreQuery(termQry).toJSON();
+            const valueB = new ConstantScoreQuery().filter(termQry).toJSON();
+            expect(valueA).toEqual(valueB);
+
+            const expected = {
+                constant_score: {
+                    filter: { term: { user: 'kimchy' } }
+                }
+            };
+            expect(valueA).toEqual(expected);
+        });
+    });
 });

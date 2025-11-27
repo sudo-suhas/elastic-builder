@@ -1,18 +1,34 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { ValueCountAggregation } from '../../src';
-import { setsAggType, illegalCall } from '../_macros';
 
-test(setsAggType, ValueCountAggregation, 'value_count');
-test(illegalCall, ValueCountAggregation, 'format', 'my_agg');
+describe('ValueCountAggregation', () => {
+    test('sets type as value_count', () => {
+        const value = new ValueCountAggregation('my_agg').toJSON();
+        expect(value).toEqual({
+            my_agg: { value_count: {} }
+        });
+    });
 
-test('constructor sets field', t => {
-    const value = new ValueCountAggregation('my_agg', 'my_field').toJSON();
-    const expected = {
-        my_agg: {
-            value_count: {
-                field: 'my_field'
-            }
-        }
-    };
-    t.deepEqual(value, expected);
+    test('format cannot be set', () => {
+        expect(() => new ValueCountAggregation('my_agg').format()).toThrow(
+            new Error('format is not supported in ValueCountAggregation')
+        );
+    });
+
+    describe('constructor', () => {
+        test('sets field', () => {
+            const value = new ValueCountAggregation(
+                'my_agg',
+                'my_field'
+            ).toJSON();
+            const expected = {
+                my_agg: {
+                    value_count: {
+                        field: 'my_field'
+                    }
+                }
+            };
+            expect(value).toEqual(expected);
+        });
+    });
 });

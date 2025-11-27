@@ -1,52 +1,107 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { PercentileRanksAggregation } from '../../src';
-import {
-    setsAggType,
-    illegalCall,
-    illegalParamType,
-    nameTypeExpectStrategy,
-    makeSetsOptionMacro
-} from '../_macros';
 
 const getInstance = (field, values) =>
     new PercentileRanksAggregation('my_agg', field, values);
 
-const setsOption = makeSetsOptionMacro(
-    getInstance,
-    nameTypeExpectStrategy('my_agg', 'percentile_ranks')
-);
+describe('PercentileRanksAggregation', () => {
+    test('sets type as percentile_ranks', () => {
+        const value = new PercentileRanksAggregation('my_agg').toJSON();
+        expect(value).toEqual({
+            my_agg: { percentile_ranks: {} }
+        });
+    });
 
-test(setsAggType, PercentileRanksAggregation, 'percentile_ranks');
-test(illegalCall, PercentileRanksAggregation, 'format', 'my_agg');
-test(illegalParamType, getInstance(), 'values', 'Array');
-test(setsOption, 'keyed', { param: true });
-test(setsOption, 'values', { param: [15, 30], spread: false });
-test(setsOption, 'keyed', { param: true });
-test(setsOption, 'tdigest', { param: 200, propValue: { compression: 200 } });
-test(setsOption, 'hdr', {
-    param: 3,
-    propValue: { number_of_significant_value_digits: 3 }
-});
+    test('format cannot be set', () => {
+        expect(() => new PercentileRanksAggregation('my_agg').format()).toThrow(
+            new Error('format is not supported in PercentileRanksAggregation')
+        );
+    });
 
-test('compression same as tdigest', t => {
-    t.deepEqual(
-        getInstance().tdigest(3).toJSON(),
-        getInstance().compression(3).toJSON()
-    );
-});
-
-test('constructor sets arguments', t => {
-    const valueA = getInstance('my_field', [15, 30]).toJSON();
-    const valueB = getInstance().field('my_field').values([15, 30]).toJSON();
-    t.deepEqual(valueA, valueB);
-
-    const expected = {
-        my_agg: {
-            percentile_ranks: {
-                field: 'my_field',
-                values: [15, 30]
+    describe('parameter validation', () => {
+        describe.each([
+            { name: 'throw TypeError for null parameter', value: null },
+            {
+                name: 'throw TypeError for invalid parameter',
+                value: Object.create(null)
             }
-        }
-    };
-    t.deepEqual(valueA, expected);
+        ])('$name', ({ value }) => {
+            test('values()', () => {
+                expect(() => getInstance().values(value)).toThrow(
+                    new TypeError('Argument must be an instance of Array')
+                );
+            });
+        });
+    });
+
+    describe('options', () => {
+        test('sets keyed', () => {
+            const value = getInstance().keyed(true).toJSON();
+            expect(value).toEqual({
+                my_agg: {
+                    percentile_ranks: {
+                        keyed: true
+                    }
+                }
+            });
+        });
+
+        test('sets values', () => {
+            const value = getInstance().values([15, 30]).toJSON();
+            expect(value).toEqual({
+                my_agg: {
+                    percentile_ranks: {
+                        values: [15, 30]
+                    }
+                }
+            });
+        });
+
+        test('sets tdigest', () => {
+            const value = getInstance().tdigest(200).toJSON();
+            expect(value).toEqual({
+                my_agg: {
+                    percentile_ranks: {
+                        tdigest: { compression: 200 }
+                    }
+                }
+            });
+        });
+
+        test('sets hdr', () => {
+            const value = getInstance().hdr(3).toJSON();
+            expect(value).toEqual({
+                my_agg: {
+                    percentile_ranks: {
+                        hdr: { number_of_significant_value_digits: 3 }
+                    }
+                }
+            });
+        });
+    });
+
+    test('compression same as tdigest', () => {
+        expect(getInstance().tdigest(3).toJSON()).toEqual(
+            getInstance().compression(3).toJSON()
+        );
+    });
+
+    test('constructor sets arguments', () => {
+        const valueA = getInstance('my_field', [15, 30]).toJSON();
+        const valueB = getInstance()
+            .field('my_field')
+            .values([15, 30])
+            .toJSON();
+        expect(valueA).toEqual(valueB);
+
+        const expected = {
+            my_agg: {
+                percentile_ranks: {
+                    field: 'my_field',
+                    values: [15, 30]
+                }
+            }
+        };
+        expect(valueA).toEqual(expected);
+    });
 });

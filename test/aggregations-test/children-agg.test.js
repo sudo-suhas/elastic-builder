@@ -1,19 +1,37 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { ChildrenAggregation } from '../../src';
-import { illegalCall, setsAggType } from '../_macros';
 
-test(setsAggType, ChildrenAggregation, 'children');
-test(illegalCall, ChildrenAggregation, 'field', 'my_agg');
-test(illegalCall, ChildrenAggregation, 'script', 'my_agg');
+describe('ChildrenAggregation', () => {
+    test('sets type as children', () => {
+        const value = new ChildrenAggregation('my_agg').toJSON();
+        expect(value).toEqual({
+            my_agg: { children: {} }
+        });
+    });
 
-test('type is set', t => {
-    const value = new ChildrenAggregation('to_answers').type('answer').toJSON();
-    const expected = {
-        to_answers: {
-            children: {
-                type: 'answer'
+    test('field cannot be set', () => {
+        expect(() => new ChildrenAggregation('my_agg').field()).toThrow(
+            new Error('field is not supported in ChildrenAggregation')
+        );
+    });
+
+    test('script cannot be set', () => {
+        expect(() => new ChildrenAggregation('my_agg').script()).toThrow(
+            new Error('script is not supported in ChildrenAggregation')
+        );
+    });
+
+    test('type is set', () => {
+        const value = new ChildrenAggregation('to_answers')
+            .type('answer')
+            .toJSON();
+        const expected = {
+            to_answers: {
+                children: {
+                    type: 'answer'
+                }
             }
-        }
-    };
-    t.deepEqual(value, expected);
+        };
+        expect(value).toEqual(expected);
+    });
 });

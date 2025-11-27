@@ -1,23 +1,33 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { MonoFieldQueryBase } from '../../src/queries/full-text-queries';
 
 const getInstance = (field, queryStr) =>
     new MonoFieldQueryBase('my_qry_type', field, queryStr);
 
-test('constructor sets arguments', t => {
-    const valueA = getInstance('my_field', 'query str').toJSON();
-    const valueB = getInstance().field('my_field').query('query str').toJSON();
-    t.deepEqual(valueA, valueB);
+describe('MonoFieldQueryBase', () => {
+    describe('constructor', () => {
+        test('constructor sets arguments', () => {
+            const valueA = getInstance('my_field', 'query str').toJSON();
+            const valueB = getInstance()
+                .field('my_field')
+                .query('query str')
+                .toJSON();
+            expect(valueA).toEqual(valueB);
 
-    const expected = {
-        my_qry_type: {
-            my_field: 'query str'
-        }
-    };
-    t.deepEqual(valueA, expected);
-});
+            const expected = {
+                my_qry_type: {
+                    my_field: 'query str'
+                }
+            };
+            expect(valueA).toEqual(expected);
+        });
+    });
 
-test('query is required', t => {
-    const err = t.throws(() => getInstance().toJSON(), Error);
-    t.is(err.message, 'Query string is required for full text query!');
+    describe('validation', () => {
+        test('query is required', () => {
+            expect(() => getInstance().toJSON()).toThrow(
+                new Error('Query string is required for full text query!')
+            );
+        });
+    });
 });

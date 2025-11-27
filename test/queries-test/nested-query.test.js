@@ -1,26 +1,34 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { NestedQuery, nestedQuery, TermQuery } from '../../src';
-import { nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
-
-const setsOption = makeSetsOptionMacro(
-    nestedQuery,
-    nameExpectStrategy('nested')
-);
 
 const qry = new TermQuery('user', 'kimchy');
 
-test(setsOption, 'path', { param: 'obj1' });
+describe('NestedQuery', () => {
+    describe('options', () => {
+        test('sets path option', () => {
+            const result = nestedQuery().path('obj1').toJSON();
+            const expected = {
+                nested: {
+                    path: 'obj1'
+                }
+            };
+            expect(result).toEqual(expected);
+        });
+    });
 
-test('constructor sets arguments', t => {
-    const valueA = new NestedQuery(qry, 'obj1').toJSON();
-    const valueB = new NestedQuery().path('obj1').query(qry).toJSON();
-    t.deepEqual(valueA, valueB);
+    describe('constructor', () => {
+        test('constructor sets arguments', () => {
+            const valueA = new NestedQuery(qry, 'obj1').toJSON();
+            const valueB = new NestedQuery().path('obj1').query(qry).toJSON();
+            expect(valueA).toEqual(valueB);
 
-    const expected = {
-        nested: {
-            query: { term: { user: 'kimchy' } },
-            path: 'obj1'
-        }
-    };
-    t.deepEqual(valueA, expected);
+            const expected = {
+                nested: {
+                    query: { term: { user: 'kimchy' } },
+                    path: 'obj1'
+                }
+            };
+            expect(valueA).toEqual(expected);
+        });
+    });
 });

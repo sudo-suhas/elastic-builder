@@ -1,18 +1,28 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { HistogramAggregation } from '../../src';
-import { setsAggType } from '../_macros';
 
-test(setsAggType, HistogramAggregation, 'histogram');
+describe('HistogramAggregation', () => {
+    test('sets type as histogram', () => {
+        const value = new HistogramAggregation('my_agg').toJSON();
+        expect(value).toEqual({
+            my_agg: { histogram: {} }
+        });
+    });
 
-test('constructor sets arguments', t => {
-    const value = new HistogramAggregation('my_agg', 'my_field', 10).toJSON();
-    const expected = {
-        my_agg: {
-            histogram: {
-                field: 'my_field',
-                interval: 10
+    test('constructor sets arguments', () => {
+        const value = new HistogramAggregation(
+            'my_agg',
+            'my_field',
+            10
+        ).toJSON();
+        const expected = {
+            my_agg: {
+                histogram: {
+                    field: 'my_field',
+                    interval: 10
+                }
             }
-        }
-    };
-    t.deepEqual(value, expected);
+        };
+        expect(value).toEqual(expected);
+    });
 });

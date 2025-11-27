@@ -1,89 +1,133 @@
-import test from 'ava';
-import sinon from 'sinon';
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
 import { GeoPoint } from '../../src';
-import { illegalParamType } from '../_macros';
 
-test(illegalParamType, new GeoPoint(), 'object', 'Object');
-test(illegalParamType, new GeoPoint(), 'array', 'Array');
+describe('GeoPoint', () => {
+    describe('parameter validation', () => {
+        describe.each([
+            { name: 'throw TypeError for null parameter', value: null },
+            {
+                name: 'throw TypeError for invalid parameter',
+                value: Object.create(null)
+            }
+        ])('$name', ({ value }) => {
+            test('object()', () => {
+                expect(() => new GeoPoint().object(value)).toThrow(
+                    new TypeError('Argument must be an instance of Object')
+                );
+            });
 
-test('sets lat lon', t => {
-    const value = new GeoPoint().lat(41.12).lon(-71.34).toJSON();
-    const expected = { lat: 41.12, lon: -71.34 };
+            test('array()', () => {
+                expect(() => new GeoPoint().array(value)).toThrow(
+                    new TypeError('Argument must be an instance of Array')
+                );
+            });
+        });
+    });
 
-    t.deepEqual(value, expected);
-});
+    describe('representation setters', () => {
+        test('sets lat lon', () => {
+            const value = new GeoPoint().lat(41.12).lon(-71.34).toJSON();
+            expect(value).toEqual({ lat: 41.12, lon: -71.34 });
+        });
 
-test('sets object', t => {
-    const value = new GeoPoint().object({ lat: 41.12, lon: -71.34 }).toJSON();
-    const expected = { lat: 41.12, lon: -71.34 };
+        test('sets object', () => {
+            const value = new GeoPoint()
+                .object({ lat: 41.12, lon: -71.34 })
+                .toJSON();
+            expect(value).toEqual({ lat: 41.12, lon: -71.34 });
+        });
 
-    t.deepEqual(value, expected);
-});
+        test('sets array', () => {
+            const value = new GeoPoint().array([-71.34, 41.12]).toJSON();
+            expect(value).toEqual([-71.34, 41.12]);
+        });
 
-test('sets array', t => {
-    const value = new GeoPoint().array([-71.34, 41.12]).toJSON();
-    const expected = [-71.34, 41.12];
+        test('sets string', () => {
+            const value = new GeoPoint().string('41.12,-71.34').toJSON();
+            const expected = '41.12,-71.34';
+            expect(value).toBe(expected);
+        });
+    });
 
-    t.deepEqual(value, expected);
-});
+    describe('mixed representation', () => {
+        test('lat then array overwrites', () => {
+            const value = new GeoPoint()
+                .lat(41.12)
+                .array([-71.34, 41.12])
+                .toJSON();
+            expect(value).toEqual([-71.34, 41.12]);
+        });
 
-test('sets string', t => {
-    const value = new GeoPoint().string('41.12,-71.34').toJSON();
-    const expected = '41.12,-71.34';
+        test('string then lat/lon overwrites', () => {
+            const value = new GeoPoint()
+                .string('41.12,-71.34')
+                .lat(41.12)
+                .lon(-71.34)
+                .toJSON();
+            expect(value).toEqual({ lat: 41.12, lon: -71.34 });
+        });
 
-    t.is(value, expected);
-});
+        test('array then object overwrites', () => {
+            const value = new GeoPoint()
+                .array([-71.34, 41.12])
+                .object({ lat: 41.12, lon: -71.34 })
+                .toJSON();
+            expect(value).toEqual({ lat: 41.12, lon: -71.34 });
+        });
 
-test('mixed representation', t => {
-    let value = new GeoPoint().lat(41.12).array([-71.34, 41.12]).toJSON();
-    let expected = [-71.34, 41.12];
-    t.deepEqual(value, expected);
+        test('lat then string overwrites', () => {
+            const value = new GeoPoint()
+                .lat(41.12)
+                .string('41.12,-71.34')
+                .toJSON();
+            expect(value).toEqual('41.12,-71.34');
+        });
+    });
 
-    value = new GeoPoint()
-        .string('41.12,-71.34')
-        .lat(41.12)
-        .lon(-71.34)
-        .toJSON();
-    expected = { lat: 41.12, lon: -71.34 };
-    t.deepEqual(value, expected);
+    describe('mixed representation warnings', () => {
+        let spy;
 
-    value = new GeoPoint()
-        .array([-71.34, 41.12])
-        .object({ lat: 41.12, lon: -71.34 })
-        .toJSON();
-    expected = { lat: 41.12, lon: -71.34 };
-    t.deepEqual(value, expected);
+        beforeEach(() => {
+            spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+        });
 
-    value = new GeoPoint().lat(41.12).string('41.12,-71.34').toJSON();
-    expected = '41.12,-71.34';
-    t.deepEqual(value, expected);
-});
+        afterEach(() => {
+            spy.mockRestore();
+        });
 
-test.serial('mixed representation logs warnings', t => {
-    const spy = sinon.spy(console, 'warn');
-
-    const checkAndReset = () => {
-        t.true(spy.calledTwice);
-        t.true(
-            spy.firstCall.calledWith(
+        test('lat then array logs warnings', () => {
+            const geoPoint = new GeoPoint().lat(41.12).array([-71.34, 41.12]);
+            geoPoint.toJSON();
+            expect(spy).toHaveBeenCalledTimes(2);
+            expect(spy).toHaveBeenNthCalledWith(
+                1,
                 '[GeoPoint] Do not mix with other representation!'
-            )
-        );
-        t.true(spy.secondCall.calledWith('[GeoPoint] Overwriting.'));
-        spy.resetHistory();
-    };
+            );
+            expect(spy).toHaveBeenNthCalledWith(2, '[GeoPoint] Overwriting.');
+        });
 
-    new GeoPoint().lat(41.12).array([-71.34, 41.12]).toJSON();
-    checkAndReset();
+        test('array then object logs warnings', () => {
+            const geoPoint = new GeoPoint()
+                .array([-71.34, 41.12])
+                .object({ lat: 41.12, lon: -71.34 });
+            geoPoint.toJSON();
+            expect(spy).toHaveBeenCalledTimes(2);
+            expect(spy).toHaveBeenNthCalledWith(
+                1,
+                '[GeoPoint] Do not mix with other representation!'
+            );
+            expect(spy).toHaveBeenNthCalledWith(2, '[GeoPoint] Overwriting.');
+        });
 
-    new GeoPoint()
-        .array([-71.34, 41.12])
-        .object({ lat: 41.12, lon: -71.34 })
-        .toJSON();
-    checkAndReset();
-
-    new GeoPoint().lat(41.12).string('41.12,-71.34').toJSON();
-    checkAndReset();
-
-    console.warn.restore();
+        test('lat then string logs warnings', () => {
+            const geoPoint = new GeoPoint().lat(41.12).string('41.12,-71.34');
+            geoPoint.toJSON();
+            expect(spy).toHaveBeenCalledTimes(2);
+            expect(spy).toHaveBeenNthCalledWith(
+                1,
+                '[GeoPoint] Do not mix with other representation!'
+            );
+            expect(spy).toHaveBeenNthCalledWith(2, '[GeoPoint] Overwriting.');
+        });
+    });
 });

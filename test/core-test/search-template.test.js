@@ -1,111 +1,167 @@
-import test from 'ava';
-import sinon from 'sinon';
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
 import {
     SearchTemplate,
     searchTemplate,
     matchQuery,
     termQuery
 } from '../../src';
-import { makeSetsOptionMacro } from '../_macros';
 
-const setsOption = makeSetsOptionMacro(searchTemplate);
+describe('SearchTemplate', () => {
+    describe('constructor', () => {
+        test('sets inline via constructor', () => {
+            const valueA = new SearchTemplate(
+                'inline',
+                '{ "query": { "terms": {{#toJson}}statuses{{/toJson}} }}'
+            ).toJSON();
+            const valueB = new SearchTemplate()
+                .inline(
+                    '{ "query": { "terms": {{#toJson}}statuses{{/toJson}} }}'
+                )
+                .toJSON();
+            expect(valueA).toEqual(valueB);
+            expect(valueA).toEqual({
+                inline: '{ "query": { "terms": {{#toJson}}statuses{{/toJson}} }}'
+            });
+        });
 
-test(setsOption, 'inline', {
-    param: {
-        query: matchQuery('{{my_field}}', '{{my_value}}'),
-        size: '{{my_size}}'
-    }
-});
-test(setsOption, 'file', { param: 'storedTemplate' });
-test(setsOption, 'id', { param: 'indexedTemplate' });
-test(setsOption, 'indexed', { param: 'indexedTemplate', keyName: 'id' });
-test(setsOption, 'params', {
-    param: {
-        my_field: 'message',
-        my_value: 'some message',
-        my_size: 5
-    }
-});
+        test('sets file via constructor', () => {
+            const valueA = new SearchTemplate(
+                'file',
+                'storedTemplate'
+            ).toJSON();
+            const valueB = new SearchTemplate().file('storedTemplate').toJSON();
+            expect(valueA).toEqual(valueB);
+            expect(valueA).toEqual({ file: 'storedTemplate' });
+        });
 
-test('constructor sets arguments', t => {
-    let valueA = new SearchTemplate(
-        'inline',
-        '{ "query": { "terms": {{#toJson}}statuses{{/toJson}} }}'
-    ).toJSON();
-    let valueB = new SearchTemplate()
-        .inline('{ "query": { "terms": {{#toJson}}statuses{{/toJson}} }}')
-        .toJSON();
-    t.deepEqual(valueA, valueB);
+        test('sets id via constructor', () => {
+            const valueA = new SearchTemplate('id', 'indexedTemplate').toJSON();
+            const valueB = new SearchTemplate().id('indexedTemplate').toJSON();
+            expect(valueA).toEqual(valueB);
+            expect(valueA).toEqual({ id: 'indexedTemplate' });
+        });
 
-    let expected = {
-        inline: '{ "query": { "terms": {{#toJson}}statuses{{/toJson}} }}'
-    };
-    t.deepEqual(valueA, expected);
+        test('throws error for invalid script type', () => {
+            expect(
+                () => new SearchTemplate('invalid_script_type', 'src')
+            ).toThrow(
+                new Error(
+                    '`type` must be one of `inline`, `id`, `indexed`, `file`'
+                )
+            );
+        });
+    });
 
-    valueA = new SearchTemplate('file', 'storedTemplate').toJSON();
-    valueB = new SearchTemplate().file('storedTemplate').toJSON();
-    t.deepEqual(valueA, valueB);
+    describe('options', () => {
+        test('sets inline option', () => {
+            const result = searchTemplate()
+                .inline({
+                    query: matchQuery('{{my_field}}', '{{my_value}}'),
+                    size: '{{my_size}}'
+                })
+                .toJSON();
+            const expected = {
+                inline: {
+                    query: { match: { '{{my_field}}': '{{my_value}}' } },
+                    size: '{{my_size}}'
+                }
+            };
+            expect(result).toEqual(expected);
+        });
 
-    expected = {
-        file: 'storedTemplate'
-    };
-    t.deepEqual(valueA, expected);
+        test('sets file option', () => {
+            const result = searchTemplate().file('storedTemplate').toJSON();
+            const expected = { file: 'storedTemplate' };
+            expect(result).toEqual(expected);
+        });
 
-    valueA = new SearchTemplate('id', 'indexedTemplate').toJSON();
-    valueB = new SearchTemplate().id('indexedTemplate').toJSON();
-    t.deepEqual(valueA, valueB);
+        test('sets id option', () => {
+            const result = searchTemplate().id('indexedTemplate').toJSON();
+            const expected = { id: 'indexedTemplate' };
+            expect(result).toEqual(expected);
+        });
 
-    expected = {
-        id: 'indexedTemplate'
-    };
-    t.deepEqual(valueA, expected);
+        test('sets params option', () => {
+            const result = searchTemplate()
+                .params({
+                    my_field: 'message',
+                    my_value: 'some message',
+                    my_size: 5
+                })
+                .toJSON();
+            const expected = {
+                params: {
+                    my_field: 'message',
+                    my_value: 'some message',
+                    my_size: 5
+                }
+            };
+            expect(result).toEqual(expected);
+        });
 
-    const err = t.throws(
-        () => new SearchTemplate('invalid_script_type', 'src'),
-        Error
-    );
-    t.is(
-        err.message,
-        '`type` must be one of `inline`, `id`, `indexed`, `file`'
-    );
-});
+        test('sets indexed option (maps to id)', () => {
+            const result = searchTemplate().indexed('indexedTemplate').toJSON();
+            const expected = { id: 'indexedTemplate' };
+            expect(result).toEqual(expected);
+        });
+    });
 
-test.serial('mixed representaion', t => {
-    const spy = sinon.spy(console, 'warn');
+    describe('mixed representation', () => {
+        let spy;
 
-    const value = new SearchTemplate()
-        .file('storedTemplate')
-        .id('indexedTemplate')
-        .toJSON();
-    const expected = {
-        id: 'indexedTemplate'
-    };
-    t.deepEqual(value, expected);
+        beforeEach(() => {
+            spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+        });
 
-    t.true(spy.calledTwice);
-    t.true(
-        spy.firstCall.calledWith(
-            '[SearchTemplate] Search template source(`inline`/`id`/`file`) was already specified!'
-        )
-    );
-    t.true(spy.secondCall.calledWith('[SearchTemplate] Overwriting.'));
-    console.warn.restore();
-});
+        afterEach(() => {
+            spy.mockRestore();
+        });
 
-test('toJSON can handle elastic-builder objs', t => {
-    const value = new SearchTemplate(
-        'inline',
-        '{ "query": { "bool": { "must": {{#toJson}}clauses{{/toJson}} } } }'
-    )
-        .params({
-            clauses: [termQuery('user', 'foo'), termQuery('user', 'bar')]
-        })
-        .toJSON();
-    const expected = {
-        inline: '{ "query": { "bool": { "must": {{#toJson}}clauses{{/toJson}} } } }',
-        params: {
-            clauses: [{ term: { user: 'foo' } }, { term: { user: 'bar' } }]
-        }
-    };
-    t.deepEqual(value, expected);
+        test('logs warnings when overwriting template source', () => {
+            const value = new SearchTemplate()
+                .file('storedTemplate')
+                .id('indexedTemplate')
+                .toJSON();
+            const expected = {
+                id: 'indexedTemplate'
+            };
+            expect(value).toEqual(expected);
+
+            expect(spy).toHaveBeenCalledTimes(2);
+            expect(spy).toHaveBeenNthCalledWith(
+                1,
+                '[SearchTemplate] Search template source(`inline`/`id`/`file`) was already specified!'
+            );
+            expect(spy).toHaveBeenNthCalledWith(
+                2,
+                '[SearchTemplate] Overwriting.'
+            );
+        });
+    });
+
+    describe('toJSON', () => {
+        test('can handle elastic-builder objs', () => {
+            const value = new SearchTemplate(
+                'inline',
+                '{ "query": { "bool": { "must": {{#toJson}}clauses{{/toJson}} } } }'
+            )
+                .params({
+                    clauses: [
+                        termQuery('user', 'foo'),
+                        termQuery('user', 'bar')
+                    ]
+                })
+                .toJSON();
+            const expected = {
+                inline: '{ "query": { "bool": { "must": {{#toJson}}clauses{{/toJson}} } } }',
+                params: {
+                    clauses: [
+                        { term: { user: 'foo' } },
+                        { term: { user: 'bar' } }
+                    ]
+                }
+            };
+            expect(value).toEqual(expected);
+        });
+    });
 });

@@ -1,26 +1,43 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { Query } from '../../src/core';
-import { nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = () => new Query('my_type');
 
-const setsOption = makeSetsOptionMacro(
-    getInstance,
-    nameExpectStrategy('my_type')
-);
+describe('Query', () => {
+    describe('options', () => {
+        test('sets boost option', () => {
+            const result = getInstance().boost(10).toJSON();
+            const expected = {
+                my_type: {
+                    boost: 10
+                }
+            };
+            expect(result).toEqual(expected);
+        });
 
-test(setsOption, 'boost', { param: 10 });
-test(setsOption, 'name', { param: 'my_name', keyName: '_name' });
+        test('sets name option', () => {
+            const result = getInstance().name('my_name').toJSON();
+            const expected = {
+                my_type: {
+                    _name: 'my_name'
+                }
+            };
+            expect(result).toEqual(expected);
+        });
+    });
 
-test('getDSL gets DSL', t => {
-    const valueA = getInstance().boost(10).toJSON();
-    const valueB = getInstance().boost(10).getDSL();
-    const expected = {
-        my_type: {
-            boost: 10
-        }
-    };
+    describe('toJSON', () => {
+        test('getDSL gets DSL', () => {
+            const valueA = getInstance().boost(10).toJSON();
+            const valueB = getInstance().boost(10).getDSL();
+            const expected = {
+                my_type: {
+                    boost: 10
+                }
+            };
 
-    t.deepEqual(valueA, valueB);
-    t.deepEqual(valueA, expected);
+            expect(valueA).toEqual(valueB);
+            expect(valueA).toEqual(expected);
+        });
+    });
 });

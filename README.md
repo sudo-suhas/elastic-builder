@@ -367,6 +367,20 @@ Run unit tests:
 npm test
 ```
 
+Run tests in watch mode:
+
+```
+npm run test:watch
+```
+
+Run tests with coverage:
+
+```
+npm run test:src
+```
+
+Coverage reports are generated in the `coverage/` directory.
+
 ## Credits
 
 `elastic-builder` is heavily inspired by [`elastic.js`][elastic-js] and the
