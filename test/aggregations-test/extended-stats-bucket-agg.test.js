@@ -1,33 +1,47 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { ExtendedStatsBucketAggregation } from '../../src';
-import {
-    setsAggType,
-    nameTypeExpectStrategy,
-    makeSetsOptionMacro
-} from '../_macros';
 
 const getInstance = bucketsPath =>
     new ExtendedStatsBucketAggregation('my_agg', bucketsPath);
 
-const setsOption = makeSetsOptionMacro(
-    getInstance,
-    nameTypeExpectStrategy('my_agg', 'extended_stats_bucket')
-);
+describe('ExtendedStatsBucketAggregation', () => {
+    test('sets type as extended_stats_bucket', () => {
+        const value = new ExtendedStatsBucketAggregation('my_agg').toJSON();
+        expect(value).toEqual({
+            my_agg: { extended_stats_bucket: {} }
+        });
+    });
 
-test(setsAggType, ExtendedStatsBucketAggregation, 'extended_stats_bucket');
-test(setsOption, 'sigma', { param: 3 });
+    describe('options', () => {
+        test('sets sigma', () => {
+            const value = getInstance('my_buckets_path').sigma(3).toJSON();
+            expect(value).toEqual({
+                my_agg: {
+                    extended_stats_bucket: {
+                        buckets_path: 'my_buckets_path',
+                        sigma: 3
+                    }
+                }
+            });
+        });
+    });
 
-test('constructor sets buckets_path', t => {
-    const valueA = getInstance('my_buckets_path').toJSON();
-    const valueB = getInstance().bucketsPath('my_buckets_path').toJSON();
-    t.deepEqual(valueA, valueB);
+    describe('constructor', () => {
+        test('sets buckets_path', () => {
+            const valueA = getInstance('my_buckets_path').toJSON();
+            const valueB = getInstance()
+                .bucketsPath('my_buckets_path')
+                .toJSON();
+            expect(valueA).toEqual(valueB);
 
-    const expected = {
-        my_agg: {
-            extended_stats_bucket: {
-                buckets_path: 'my_buckets_path'
-            }
-        }
-    };
-    t.deepEqual(valueA, expected);
+            const expected = {
+                my_agg: {
+                    extended_stats_bucket: {
+                        buckets_path: 'my_buckets_path'
+                    }
+                }
+            };
+            expect(valueA).toEqual(expected);
+        });
+    });
 });

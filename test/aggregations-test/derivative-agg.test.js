@@ -1,30 +1,42 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { DerivativeAggregation } from '../../src';
-import {
-    setsAggType,
-    nameTypeExpectStrategy,
-    makeSetsOptionMacro
-} from '../_macros';
 
 const getInstance = bucketsPath =>
     new DerivativeAggregation('my_agg', bucketsPath);
 
-const setsOption = makeSetsOptionMacro(
-    getInstance,
-    nameTypeExpectStrategy('my_agg', 'derivative')
-);
+describe('DerivativeAggregation', () => {
+    test('sets type as derivative', () => {
+        const value = new DerivativeAggregation('my_agg').toJSON();
+        expect(value).toEqual({
+            my_agg: { derivative: {} }
+        });
+    });
 
-test(setsAggType, DerivativeAggregation, 'derivative');
-test(setsOption, 'unit', { param: 'day' });
+    describe('options', () => {
+        test('sets unit', () => {
+            const value = getInstance('my_buckets_path').unit('day').toJSON();
+            expect(value).toEqual({
+                my_agg: {
+                    derivative: {
+                        buckets_path: 'my_buckets_path',
+                        unit: 'day'
+                    }
+                }
+            });
+        });
+    });
 
-test('constructor sets buckets_path', t => {
-    const value = getInstance('my_buckets_path').toJSON();
-    const expected = {
-        my_agg: {
-            derivative: {
-                buckets_path: 'my_buckets_path'
-            }
-        }
-    };
-    t.deepEqual(value, expected);
+    describe('constructor', () => {
+        test('sets buckets_path', () => {
+            const value = getInstance('my_buckets_path').toJSON();
+            const expected = {
+                my_agg: {
+                    derivative: {
+                        buckets_path: 'my_buckets_path'
+                    }
+                }
+            };
+            expect(value).toEqual(expected);
+        });
+    });
 });

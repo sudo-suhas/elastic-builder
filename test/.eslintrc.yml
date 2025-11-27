@@ -7,12 +7,19 @@ parserOptions:
 env:
   node: true
   es6: true
+globals:
+  describe: readonly
+  test: readonly
+  expect: readonly
+  beforeEach: readonly
+  afterEach: readonly
+  beforeAll: readonly
+  afterAll: readonly
+  vi: readonly
 extends:
   - 'eslint:recommended'
-  - 'plugin:ava/recommended'
   - 'plugin:prettier/recommended'
 plugins:
-  - ava
   - prettier
 rules:
   id-length: off

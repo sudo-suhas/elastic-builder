@@ -114,6 +114,9 @@ function formatValue(ctx, value, recurseTimes) {
         if (isError(value)) {
             return formatError(value);
         }
+        if (isSet(value)) {
+            return formatSet(ctx, value);
+        }
     }
 
     let base = '',
@@ -213,6 +216,10 @@ function isFunction(arg) {
     return typeof arg === 'function';
 }
 
+function isSet(s) {
+    return _.isObject(s) && objectToString(s) === '[object Set]';
+}
+
 function arrayToHash(array) {
     const hash = {};
 
@@ -225,6 +232,20 @@ function arrayToHash(array) {
 
 function formatError(value) {
     return `[${Error.prototype.toString.call(value)}]`;
+}
+
+function formatSet(ctx, set) {
+    if (set.size === 0) {
+        return ctx.stylize('{}', 'special');
+    }
+
+    // Convert Set to sorted array and format each value
+    const sortedValues = Array.from(set).sort();
+    const formattedValues = sortedValues.map(
+        val => formatPrimitive(ctx, val) || formatValue(ctx, val, ctx.depth)
+    );
+
+    return formattedValues.join(', ');
 }
 
 // eslint-disable-next-line consistent-return

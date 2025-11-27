@@ -1,12 +1,19 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { MatchPhraseQuery } from '../../src';
 
-test('constructor sets arguments', t => {
-    const value = new MatchPhraseQuery('my_field', 'query str').toJSON();
-    const expected = {
-        match_phrase: {
-            my_field: 'query str'
-        }
-    };
-    t.deepEqual(value, expected);
+describe('MatchPhraseQuery', () => {
+    describe('constructor', () => {
+        test('constructor sets arguments', () => {
+            const value = new MatchPhraseQuery(
+                'my_field',
+                'query str'
+            ).toJSON();
+            const expected = {
+                match_phrase: {
+                    my_field: 'query str'
+                }
+            };
+            expect(value).toEqual(expected);
+        });
+    });
 });

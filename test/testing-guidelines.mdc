@@ -1,0 +1,1303 @@
+# Testing Guidelines
+
+This document defines the testing standards for the elastic-builder project. Use it as context when writing or refactoring tests.
+
+## AVA to Vitest Migration
+
+This section provides patterns and references for refactoring tests from AVA to Vitest.
+
+### Import Changes
+
+```javascript
+// ❌ AVA
+import test from 'ava';
+
+// ✅ Vitest
+import { describe, test, expect } from 'vitest';
+// Add beforeEach, afterEach, vi as needed
+```
+
+### Assertion Mapping
+
+| AVA | Vitest |
+|-----|--------|
+| `t.deepEqual(value, expected)` | `expect(value).toEqual(expected)` |
+| `t.is(value, expected)` | `expect(value).toBe(expected)` |
+| `t.true(value)` | `expect(value).toBe(true)` |
+| `t.false(value)` | `expect(value).toBe(false)` |
+| `t.truthy(value)` | `expect(value).toBeTruthy()` |
+| `t.falsy(value)` | `expect(value).toBeFalsy()` |
+| `t.throws(() => fn())` | `expect(() => fn()).toThrow()` |
+| `t.throws(() => fn(), TypeError)` | `expect(() => fn()).toThrow(TypeError)` |
+| `t.notThrows(() => fn())` | `expect(() => fn()).not.toThrow()` |
+| `const err = t.throws(fn); t.is(err.message, 'msg')` | `expect(fn).toThrow(new Error('msg'))` |
+
+### Eliminating Test Macros
+
+The codebase uses AVA test macros in `_macros.js`. These must be eliminated and replaced with explicit inline tests. **Do not import from `_macros.js`** in refactored tests.
+
+#### Pattern 1: `setsAggType` Macro
+
+```javascript
+// ❌ AVA with macro
+import { setsAggType } from '../_macros';
+test(setsAggType, TermsAggregation, 'terms');
+
+// ✅ Vitest - explicit inline test
+test('sets type as terms', () => {
+    const value = new TermsAggregation('my_agg').toJSON();
+    expect(value).toEqual({
+        my_agg: { terms: {} }
+    });
+});
+```
+
+#### Pattern 2: `validatedCorrectly` Macro
+
+The `validatedCorrectly` macro tests valid values, case variations, and invalid values in one call with dynamic method invocation. Replace with split `test.each` blocks and explicit method calls.
+
+```javascript
+// ❌ AVA with macro (dynamic method calls, tests all case variants)
+import { validatedCorrectly } from '../_macros';
+test(validatedCorrectly, getInstance, 'collectMode', ['depth_first', 'breadth_first']);
+
+// ✅ Vitest - split into valid/invalid with explicit method calls
+describe('collectMode() validation', () => {
+    test.each([
+        { name: 'accepts valid value: depth_first', value: 'depth_first' },
+        { name: 'accepts valid value: DEPTH_FIRST (case-insensitive)', value: 'DEPTH_FIRST' },
+        { name: 'accepts valid value: breadth_first', value: 'breadth_first' },
+        { name: 'accepts valid value: BREADTH_FIRST (case-insensitive)', value: 'BREADTH_FIRST' }
+    ])('$name', ({ value }) => {
+        expect(() => getInstance().collectMode(value)).not.toThrow();
+    });
+
+    test.each([
+        { name: 'throws for null value', value: null },
+        { name: 'throws for invalid value', value: 'invalid_collect_mode' }
+    ])('$name', ({ value }) => {
+        expect(() => getInstance().collectMode(value)).toThrow(
+            new Error('`collect_mode` must be one of `depth_first`, `breadth_first`')
+        );
+    });
+});
+```
+
+#### Pattern 3: `makeSetsOptionMacro` / `setsOption` Factory
+
+The `makeSetsOptionMacro` creates a macro that tests option setters. Replace with explicit individual tests.
+
+```javascript
+// ❌ AVA with makeSetsOptionMacro
+import { makeSetsOptionMacro, nameTypeExpectStrategy } from '../_macros';
+const setsOption = makeSetsOptionMacro(getInstance, nameTypeExpectStrategy('my_agg', 'terms'));
+test(setsOption, 'showTermDocCountError', { param: true });
+test(setsOption, 'collectMode', { param: 'breadth_first' });
+
+// ✅ Vitest - explicit tests grouped under describe
+describe('options', () => {
+    test('sets showTermDocCountError', () => {
+        const value = getInstance().showTermDocCountError(true).toJSON();
+        expect(value).toEqual({
+            my_agg: { terms: { show_term_doc_count_error: true } }
+        });
+    });
+
+    test('sets collectMode', () => {
+        const value = getInstance().collectMode('breadth_first').toJSON();
+        expect(value).toEqual({
+            my_agg: { terms: { collect_mode: 'breadth_first' } }
+        });
+    });
+});
+```
+
+#### Pattern 4: `illegalParamType` Macro
+
+The `illegalParamType` macro tests that a method throws TypeError for null and invalid parameters using dynamic method calls. Replace with `describe.each` pattern.
+
+**IMPORTANT:** When testing multiple methods with the same validation, each method MUST have its own `test()` call. Never combine multiple method validations in a single test, even if they validate against the same values.
+
+```javascript
+// ❌ AVA with macro (dynamic method calls, separate type/message assertions)
+import { illegalParamType } from '../_macros';
+test(illegalParamType, getInstance(), 'filter', 'Query');
+
+// ❌ BAD - Multiple method calls in one test
+test('checks Query class', () => {
+    expect(() => instance.positive(null)).toThrow(new TypeError('...'));
+    expect(() => instance.positive(Object.create(null))).toThrow(new TypeError('...'));
+    expect(() => instance.negative(null)).toThrow(new TypeError('...'));
+    expect(() => instance.negative(Object.create(null))).toThrow(new TypeError('...'));
+});
+
+// ✅ GOOD - describe.each with separate tests for each method
+describe('parameter validation', () => {
+    describe.each([
+        { name: 'throw TypeError for null parameter', value: null },
+        { name: 'throw TypeError for invalid parameter', value: Object.create(null) }
+    ])('$name', ({ value }) => {
+        test('filter()', () => {
+            expect(() => getInstance().filter(value)).toThrow(
+                new TypeError('Argument must be an instance of Query')
+            );
+        });
+        
+        test('query()', () => {
+            expect(() => getInstance().query(value)).toThrow(
+                new TypeError('Argument must be an instance of Query')
+            );
+        });
+    });
+});
+```
+
+This pattern ensures:
+- Each method gets its own test for clear failure reporting
+- Test output shows exactly which method failed
+- Easier to debug and maintain
+- Follows the "one test, one concern" principle
+
+#### Pattern 5: `illegalCall` Macro
+
+The `illegalCall` macro tests that a method cannot be called on an instance. Replace with explicit inline test.
+
+```javascript
+// ❌ AVA with macro
+import { illegalCall } from '../_macros';
+test(illegalCall, MyClass, 'unsupportedMethod', 'arg1', 'arg2');
+
+// ✅ Vitest - explicit inline test
+test('unsupported_method cannot be set', () => {
+    expect(() => new MyClass('arg1', 'arg2').unsupportedMethod()).toThrow(
+        new Error('unsupportedMethod is not supported in MyClass')
+    );
+});
+```
+
+### Error Assertion Consolidation
+
+AVA tests often capture the error and assert on it separately. Consolidate into a single Vitest assertion:
+
+```javascript
+// ❌ AVA pattern - separate assertions
+let err = t.throws(() => getInstance().method(null), Error);
+t.is(err.message, 'expected message');
+
+err = t.throws(() => getInstance().method('invalid'), Error);
+t.is(err.message, 'expected message');
+
+// ✅ Vitest - single consolidated assertions
+expect(() => getInstance().method(null)).toThrow(
+    new Error('expected message')
+);
+expect(() => getInstance().method('invalid')).toThrow(
+    new Error('expected message')
+);
+```
+
+### Wrapping Tests in Describe Blocks
+
+AVA tests are often at the file's root level. Vitest tests should be wrapped in a `describe` block named after the class being tested:
+
+```javascript
+// ❌ AVA - tests at root level
+test('can be instantiated', t => { /* ... */ });
+test('sets option', t => { /* ... */ });
+
+// ✅ Vitest - wrapped in describe
+describe('ClassName', () => {
+    test('can be instantiated', () => { /* ... */ });
+
+    describe('options', () => {
+        test('sets option', () => { /* ... */ });
+    });
+});
+```
+
+### Test Naming Conventions
+
+Test names should be **clear and descriptive**. There is flexibility in naming style:
+
+**Acceptable patterns:**
+```javascript
+// Present tense (preferred for most cases)
+test('sets option', () => { /* ... */ });
+test('throws error for invalid input', () => { /* ... */ });
+
+// Descriptive with "Should" (acceptable for feature-focused tests)
+test('Should set time for distance feature', () => { /* ... */ });
+
+// Assertion-style (acceptable)
+test('can be instantiated', () => { /* ... */ });
+test('serializes to correct DSL', () => { /* ... */ });
+```
+
+**Key principles:**
+- Be descriptive and specific
+- Avoid overly technical jargon
+- Use consistent style within a file
+- Test name should explain what behavior is being verified
+
+All of the above patterns are acceptable. Choose the style that best communicates the test's intent.
+
+### Migration Checklist
+
+For each test file being migrated:
+
+1. [ ] Replace import: `import test from 'ava'` → `import { describe, test, expect } from 'vitest'`
+2. [ ] Remove all `_macros` imports
+3. [ ] Remove the `t` parameter from all test callbacks
+4. [ ] Convert all assertions using the mapping table above
+5. [ ] Replace macro usages with explicit inline tests
+6. [ ] Wrap all tests under a `describe('ClassName')` block
+7. [ ] Group related tests into logical `describe` sub-blocks
+8. [ ] Split validation tests into valid/invalid `test.each` blocks
+9. [ ] Verify error messages are asserted (not just error types)
+10. [ ] Consolidate `t.throws` + `t.is(err.message)` into single `toThrow(new Error())` assertions
+11. [ ] Run tests to confirm behavior is preserved
+
+## Core Principles
+
+### 1. One Test, One Concern
+Each test should verify a single behavior or concern. Avoid testing multiple unrelated methods or behaviors in the same test.
+
+**❌ BAD - Multiple unrelated concerns:**
+```javascript
+test('validation works', () => {
+    expect(() => instance.methodA(value)).toThrow(TypeError);
+    expect(() => instance.methodB(value)).toThrow(TypeError);
+});
+```
+
+**✅ GOOD - Separate tests for each method:**
+```javascript
+describe('validation', () => {
+    test('methodA()', () => {
+        expect(() => instance.methodA(value)).toThrow(TypeError);
+    });
+    
+    test('methodB()', () => {
+        expect(() => instance.methodB(value)).toThrow(TypeError);
+    });
+});
+```
+
+### 2. Keep Tests Simple and Explicit
+- No abstraction, no hidden logic
+- Test names must be static strings (never use template literals with variables)
+- No dynamic method calls - always call methods explicitly: `instance.method()` not `instance[tc.method]()`
+- No conditional logic in test bodies
+- **Prefer repetition over abstraction** - If similar tests exist for different methods or scenarios, it's better to repeat the test code than to abstract it into helper functions or dynamic patterns. Explicit, readable tests are more valuable than DRY test code.
+
+### 3. Use Table-Driven Tests Appropriately
+Use table-driven tests when:
+- The exact same method(s) are called in each test case
+- Only the input data varies between tests
+- The test structure is identical across cases
+
+### 4. Use Vitest's Built-in Tools
+- Use Vitest's `vi` for mocking - no external libraries like sinon
+- Use `test.each` for parameterized/table-driven tests
+- Use `expect.assertions()` in async tests to ensure all assertions run
+
+## Table-Driven Tests
+
+### Use `test.each` for Parameterized Tests
+
+Always use Vitest's built-in `test.each` for table-driven tests. This is mandatory - do not use `forEach` loops.
+
+**Benefits of `test.each`:**
+- Better test output with clear naming
+- Built-in Vitest feature with first-class support
+- Cleaner, more declarative syntax
+- Improved IDE integration and debugging
+
+### Pattern 1: Multiple Methods with Same Input (Separate Tests)
+
+When multiple methods need to be tested with the same inputs but represent different concerns, use `describe.each` with nested tests:
+
+```javascript
+describe.each([
+    { name: 'throw TypeError for null parameter', value: null },
+    { name: 'throw TypeError for invalid parameter', value: Object.create(null) }
+])('$name', ({ value }) => {
+    test('methodA()', () => {
+        expect(() => instance.methodA(value)).toThrow(
+            new TypeError('Argument must be an instance of Type')
+        );
+    });
+
+    test('methodB()', () => {
+        expect(() => instance.methodB(value)).toThrow(
+            new TypeError('Argument must be an instance of Other')
+        );
+    });
+});
+```
+
+**Why this pattern:**
+- Each method gets its own test
+- Maintains clarity about what's being tested
+- Easier to debug when a specific method fails
+- Allows for method-specific assertions
+
+### Pattern 2: Multiple Methods Producing Same Result
+
+When testing that multiple methods produce identical output for the same input:
+
+```javascript
+describe.each([
+    { name: 'description of test scenario', input: inputValue, expected: expectedOutput }
+])('$name', ({ input, expected }) => {
+    test('methodA()', () => {
+        const value = instance.methodA(input).toJSON();
+        expect(value).toEqual(expected);
+    });
+
+    test('methodB()', () => {
+        const value = instance.methodB(input).toJSON();
+        expect(value).toEqual(expected);
+    });
+});
+```
+
+### Pattern 3: Same Test Logic, Different Inputs (Validation Tests)
+
+When testing a single method with multiple input variations, **split valid and invalid cases into separate `test.each` blocks** to avoid conditional logic and ensure error messages are verified:
+
+**❌ BAD - Conditional logic and no error message verification:**
+```javascript
+test.each([
+    { name: 'accepts valid value: default', value: 'default', shouldThrow: false },
+    { name: 'accepts valid value: html', value: 'html', shouldThrow: false },
+    { name: 'throws for null value', value: null, shouldThrow: true },
+    { name: 'throws for invalid value', value: 'invalid_value', shouldThrow: true }
+])('$name', ({ value, shouldThrow }) => {
+    const fn = () => instance.method(value);
+    if (shouldThrow) {
+        expect(fn).toThrow();  // Doesn't verify the error message!
+    } else {
+        expect(fn).not.toThrow();
+    }
+});
+```
+
+**✅ GOOD - Separate blocks with error message verification:**
+```javascript
+describe('method() validation', () => {
+    // Valid values - test that they don't throw
+    test.each([
+        { name: 'accepts valid value: default', value: 'default' },
+        { name: 'accepts valid value: html', value: 'html' },
+        { name: 'accepts valid value: HTML (case-insensitive)', value: 'HTML' }
+    ])('$name', ({ value }) => {
+        expect(() => instance.method(value)).not.toThrow();
+    });
+
+    // Invalid values - test that they throw with specific error
+    test.each([
+        { name: 'throws for null value', value: null },
+        { name: 'throws for invalid value', value: 'invalid_value' }
+    ])('$name', ({ value }) => {
+        expect(() => instance.method(value)).toThrow(
+            new Error('`method` must be one of `default`, `html`')
+        );
+    });
+});
+```
+
+**Benefits of splitting:**
+- No conditional logic in test bodies
+- Error messages are verified (catches bugs where wrong error is thrown)
+- Clearer test intent
+- Easier to maintain
+
+### Case-Insensitive Value Testing
+
+When testing methods that accept case-insensitive enum values, test the lowercase version and **one** uppercase variant to demonstrate case-insensitivity. Testing all case variations (lowercase, UPPERCASE, MixedCase) is unnecessary.
+
+**✅ GOOD - Minimal case coverage:**
+```javascript
+test.each([
+    { name: 'accepts valid value: plain', value: 'plain' },
+    { name: 'accepts valid value: PLAIN (case-insensitive)', value: 'PLAIN' },
+    { name: 'accepts valid value: postings', value: 'postings' },
+    { name: 'accepts valid value: POSTINGS (case-insensitive)', value: 'POSTINGS' }
+])('$name', ({ value }) => {
+    expect(() => instance.type(value)).not.toThrow();
+});
+```
+
+**❌ BAD - Excessive case variations:**
+```javascript
+test.each([
+    { name: 'accepts value: plain (lowercase)', value: 'plain' },
+    { name: 'accepts value: PLAIN (uppercase)', value: 'PLAIN' },
+    { name: 'accepts value: Plain (title case)', value: 'Plain' },
+    { name: 'accepts value: pLaIn (mixed case)', value: 'pLaIn' }
+])('$name', ({ value }) => { /* ... */ });
+```
+
+**Key principle:** One uppercase test per enum value is sufficient to prove case-insensitivity.
+
+### When NOT to Use Table-Driven Tests
+
+**Critical Rule:** If different methods are called in each test, DO NOT use table-driven tests. Each method must be tested separately.
+
+❌ **Don't use table-driven tests when:**
+- **Different methods are tested per case** - Each method should have its own test
+- **Test structure differs between cases** - Keep tests separate if they follow different patterns
+- **You need conditional logic** - Any `if/else` in test body means tests should be split
+- **Methods would be called dynamically** - Never use `instance[tc.method]()`
+- **Subtle variations in setup or assertions** - Even small differences warrant separate tests
+- **Different fields or properties are being set** - e.g., `topLeft()` vs `bottomRight()` vs `top()` vs `left()`
+
+**Examples of tests that should NOT be table-driven:**
+
+```javascript
+// ❌ BAD - Different methods being called
+test.each([
+    { name: 'sets topLeft', method: 'topLeft', point: pt1 },
+    { name: 'sets bottomRight', method: 'bottomRight', point: pt2 },
+    { name: 'sets top', method: 'top', value: 40.73 },
+    { name: 'sets left', method: 'left', value: -74.1 }
+])('$name', ({ method, point, value }) => {
+    // Would require conditional logic or dynamic method calls!
+});
+
+// ✅ GOOD - Separate tests for each method
+test('sets topLeft option', () => {
+    const result = getInstance().topLeft(pt1).toJSON();
+    expect(result).toEqual({ geo_bounding_box: { my_field: { top_left: ... } } });
+});
+
+test('sets bottomRight option', () => {
+    const result = getInstance().bottomRight(pt2).toJSON();
+    expect(result).toEqual({ geo_bounding_box: { my_field: { bottom_right: ... } } });
+});
+
+test('sets top option', () => {
+    const result = getInstance().top(40.73).toJSON();
+    expect(result).toEqual({ geo_bounding_box: { my_field: { top: 40.73 } } });
+});
+```
+
+```javascript
+// ❌ BAD - Different setups and structures
+test.each([
+    { name: 'time for distance feature', field: 'time', origin: 'now', pivot: '1h' },
+    { name: 'position for distance feature', field: 'location', origin: [-71.3, 41.15], pivot: '1000m' }
+])('$name', ({ field, origin, pivot }) => {
+    // origin is sometimes string, sometimes array - requires different handling
+});
+
+// ✅ GOOD - Separate tests for conceptually different scenarios
+test('Should set time for distance feature', () => {
+    const value = new DistanceFeatureQuery('time').origin('now').pivot('1h').toJSON();
+    expect(value).toEqual({ distance_feature: { field: 'time', pivot: '1h', origin: 'now' } });
+});
+
+test('Should set position for distance feature', () => {
+    const value = new DistanceFeatureQuery('location').origin([-71.3, 41.15]).pivot('1000m').toJSON();
+    expect(value).toEqual({ distance_feature: { field: 'location', pivot: '1000m', origin: [-71.3, 41.15] } });
+});
+```
+
+**When table-driven tests ARE appropriate:**
+- Testing the **exact same method** with different input values
+- Validation tests (valid values vs invalid values for **one method**)
+- Testing alias methods that should behave identically
+
+### Decision Tree
+
+1. **Are the exact same method(s) being called in each test case?**
+   - NO → Write individual tests
+   - YES → Continue to question 2
+
+2. **Do the methods represent different concerns?**
+   - YES → Use Pattern 1 (separate tests with nested describe)
+   - NO → Continue to question 3
+
+3. **Does only the input data vary between tests?**
+   - NO → Write individual tests
+   - YES → Use Pattern 2 or 3 depending on scenario
+
+## Identifying Refactoring Opportunities
+
+### Pattern 1: Repeated Tests for Same Method
+
+**❌ Should be consolidated:**
+```javascript
+describe('encoder() validation', () => {
+    test('accepts valid value: default', () => {
+        expect(() => highlight().encoder('default')).not.toThrow();
+    });
+    
+    test('accepts valid value: html', () => {
+        expect(() => highlight().encoder('html')).not.toThrow();
+    });
+    
+    test('throws for null value', () => {
+        expect(() => highlight().encoder(null)).toThrow();
+    });
+});
+```
+
+**Indicators:**
+- Multiple tests calling the same method
+- Each test differs only in the input value
+- Test names follow a repetitive pattern
+- Same assertion type across tests
+
+**✅ Refactored:**
+Use Pattern 3 from table-driven tests above.
+
+### Pattern 2: Similar Tests Across Multiple Methods
+
+**❌ Should be consolidated:**
+```javascript
+describe('method1() validation', () => {
+    test('accepts string', () => { /* ... */ });
+    test('accepts number', () => { /* ... */ });
+    test('throws for null', () => { /* ... */ });
+});
+
+describe('method2() validation', () => {
+    test('accepts string', () => { /* ... */ });
+    test('accepts number', () => { /* ... */ });
+    test('throws for null', () => { /* ... */ });
+});
+```
+
+**Indicators:**
+- Multiple describe blocks with similar structure
+- Same validation patterns repeated for different methods
+- Test names are nearly identical across describe blocks
+
+**✅ Refactored:**
+Use Pattern 1 from table-driven tests above.
+
+### Pattern 3: Case-Insensitive Value Testing
+
+**❌ Redundant:**
+```javascript
+test('accepts value: html (lowercase)', () => { /* ... */ });
+test('accepts value: HTML (uppercase)', () => { /* ... */ });
+test('accepts value: Html (mixed)', () => { /* ... */ });
+```
+
+**Indicators:**
+- Multiple tests that only differ in the casing of the input
+- Test names explicitly mention "lowercase", "uppercase", "mixed case"
+
+**✅ Refactored:**
+Consolidate into a single table-driven test with case variations.
+
+### Quick Checklist
+
+Ask these questions when reviewing tests:
+
+1. **Repetition**: Do I see 3+ consecutive tests calling the same method?
+2. **Pattern matching**: Do the test names follow a template (e.g., "accepts X", "throws for Y")?
+3. **Input variation**: Is the only difference between tests the input value?
+4. **Assertion uniformity**: Are all tests using the same assertion pattern?
+5. **Single concern**: Does each test verify only one behavior/method?
+
+If you answer "yes" to questions 1-4, the tests are likely candidates for table-driven refactoring.
+
+## Anti-Patterns
+
+### ❌ Dynamic Test Names
+```javascript
+// BAD
+test(`method ${name}`, () => { /* ... */ });
+
+// GOOD - use test.each with $name interpolation
+test.each([
+    { name: 'accepts valid type: point', value: 'point' }
+])('$name', ({ value }) => { /* ... */ });
+```
+
+### ❌ Dynamic Method Calls
+```javascript
+// BAD - method name is in a variable
+test.each([
+    { name: 'test methodA', method: 'methodA', value: null },
+    { name: 'test methodB', method: 'methodB', value: null }
+])('$name', ({ method, value }) => {
+    expect(() => instance[method](value)).toThrow(TypeError);
+});
+
+// GOOD - each method is explicitly called
+describe.each([
+    { name: 'throws for null', value: null }
+])('$name', ({ value }) => {
+    test('methodA()', () => {
+        expect(() => instance.methodA(value)).toThrow(TypeError);
+    });
+    test('methodB()', () => {
+        expect(() => instance.methodB(value)).toThrow(TypeError);
+    });
+});
+```
+
+**Key principle:** You should be able to read the test and see exactly which method is being called without looking at the test data.
+
+### ❌ Testing Multiple Unrelated Concerns
+```javascript
+// BAD - tests two different methods in one test
+test('both methods throw', () => {
+    expect(() => instance.methodA(value)).toThrow();
+    expect(() => instance.methodB(value)).toThrow();
+});
+
+// GOOD - separate test for each method
+describe('throw for invalid input', () => {
+    test('methodA()', () => {
+        expect(() => instance.methodA(value)).toThrow();
+    });
+    test('methodB()', () => {
+        expect(() => instance.methodB(value)).toThrow();
+    });
+});
+```
+
+### ❌ Setup Functions That Hide Logic
+Don't abstract away test logic into helper functions that make it unclear what's being tested.
+
+### ❌ External Fixture Objects
+Don't extract test data to module-scope fixture objects that separate the data from the test. This forces readers to scroll back and forth to understand the test.
+
+```javascript
+// BAD - fixture object separates data from test
+const fixtures = {
+    'scenario A': { input: new Thing(), expected: { /* ... */ } },
+    'scenario B': { input: new OtherThing(), expected: { /* ... */ } }
+};
+
+describe.each([{ name: 'scenario A' }, { name: 'scenario B' }])('$name', ({ name }) => {
+    test('method()', () => {
+        const { input, expected } = fixtures[name];  // Where is this data? Have to scroll up!
+        expect(instance.method(input).toJSON()).toEqual(expected);
+    });
+});
+
+// GOOD - data is inline with the test
+describe('scenario A', () => {
+    test('method()', () => {
+        const input = new Thing();
+        const value = instance.method(input).toJSON();
+        expect(value).toEqual({ /* expected inline */ });
+    });
+});
+
+describe('scenario B', () => {
+    test('method()', () => {
+        const input = new OtherThing();
+        const value = instance.method(input).toJSON();
+        expect(value).toEqual({ /* expected inline */ });
+    });
+});
+```
+
+**Key principle:** Test data should be immediately visible when reading the test. Prefer duplicating setup over creating abstraction layers that hide the actual test inputs and outputs.
+
+### ❌ Conditional Logic in Tests
+Keep test bodies linear - avoid if/else statements when possible.
+
+When you find yourself needing conditional logic in a parameterized test, it's a sign that the test cases are too different and should be written as separate tests instead.
+
+```javascript
+// BAD - conditional logic based on test data
+test.each([
+    { name: 'scenario A', scenario: 'a' },
+    { name: 'scenario B', scenario: 'b' }
+])('$name', ({ scenario }) => {
+    let instance;
+    if (scenario === 'a') {
+        instance = new Thing().methodA();
+    } else {
+        instance = new Thing().methodB();
+    }
+    expect(instance.toJSON()).toBeTruthy();
+});
+
+// GOOD - separate tests for different scenarios
+test('scenario A', () => {
+    const instance = new Thing().methodA();
+    expect(instance.toJSON()).toBeTruthy();
+});
+
+test('scenario B', () => {
+    const instance = new Thing().methodB();
+    expect(instance.toJSON()).toBeTruthy();
+});
+```
+
+### ❌ Dynamic Data in Test Cases
+Test case data should not contain functions, factory methods, or any executable code. However, **object instances as input values are allowed** when testing alias methods (see [Testing Alias Methods](#testing-alias-methods)).
+
+```javascript
+// ❌ BAD - factory functions in test data
+test.each([
+    { name: 'scenario A', setup: () => new Thing().methodA() },
+    { name: 'scenario B', setup: () => new Thing().methodB() }
+])('$name', ({ setup }) => {
+    const instance = setup();
+    expect(instance.toJSON()).toBeTruthy();
+});
+
+// ❌ BAD - different classes/methods per test case (conditional behavior)
+test.each([
+    { name: 'test 1', instance: new SomeClass() },
+    { name: 'test 2', instance: new OtherClass() }
+])('$name', ({ instance }) => {
+    expect(instance.method()).toBeTruthy();
+});
+
+// ✅ GOOD - write separate tests when setup differs
+test('scenario A', () => {
+    const instance = new Thing().methodA();
+    expect(instance.toJSON()).toBeTruthy();
+});
+
+test('scenario B', () => {
+    const instance = new Thing().methodB();
+    expect(instance.toJSON()).toBeTruthy();
+});
+
+// ✅ GOOD - object instances as shared input for alias method testing
+describe.each([
+    {
+        name: 'scenario A',
+        input: new TermsAggregation('users', 'user'),
+        expected: { /* ... */ }
+    },
+    {
+        name: 'scenario B',
+        input: new TermsAggregation('countries', 'country'),
+        expected: { /* ... */ }
+    }
+])('$name', ({ input, expected }) => {
+    test('aggregation()', () => {
+        const value = getInstance().aggregation(input).toJSON();
+        expect(value).toEqual(expected);
+    });
+
+    test('agg()', () => {
+        const value = getInstance().agg(input).toJSON();
+        expect(value).toEqual(expected);
+    });
+});
+```
+
+**Key distinctions:**
+- ❌ Functions/factories in test data → BAD (hides setup logic)
+- ❌ Different classes per test case → BAD (conditional behavior)
+- ✅ Same class instances as shared input for alias methods → OK (both methods use identical input)
+
+### ❌ External Mocking Libraries
+Use `vi`, not sinon or other external libraries.
+
+### ❌ Using `forEach` Instead of `test.each`
+```javascript
+// BAD - using forEach for parameterized tests
+const cases = [{ name: 'test 1', value: 1 }, { name: 'test 2', value: 2 }];
+cases.forEach((tc) => {
+    test(tc.name, () => { /* ... */ });
+});
+
+// GOOD - use test.each
+test.each([
+    { name: 'test 1', value: 1 },
+    { name: 'test 2', value: 2 }
+])('$name', ({ value }) => { /* ... */ });
+```
+
+### ❌ Async Tests Without `expect.assertions()`
+```javascript
+// BAD - no assertion count
+test('fetches data', async () => {
+    const data = await fetchData();
+    expect(data).toBeTruthy();
+});
+
+// GOOD - explicit assertion count
+test('fetches data', async () => {
+    expect.assertions(1);
+    const data = await fetchData();
+    expect(data).toBeTruthy();
+});
+```
+
+## Mocking with Vitest
+
+Use Vitest's built-in `vi` instead of external libraries.
+
+### Spy Cleanup with Lifecycle Hooks
+
+Always use `beforeEach`/`afterEach` for spy setup and cleanup. This ensures spies are properly restored even if a test fails:
+
+```javascript
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
+
+describe('warning scenarios', () => {
+    let spy;
+
+    beforeEach(() => {
+        spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+        spy.mockRestore();
+    });
+
+    test('logs warning for scenario A', () => {
+        // ... test code ...
+        expect(spy).toHaveBeenCalledTimes(2);
+        expect(spy).toHaveBeenNthCalledWith(1, 'expected message');
+    });
+
+    test('logs warning for scenario B', () => {
+        // ... test code ...
+        expect(spy).toHaveBeenCalledTimes(2);
+    });
+});
+```
+
+**❌ BAD - Manual cleanup that may not run on failure:**
+```javascript
+test('logs warning', () => {
+    const spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    
+    // ... test code that might throw ...
+    
+    spy.mockRestore(); // Won't run if test fails above!
+});
+```
+
+**Benefits:**
+- No external dependencies
+- Better API integration
+- Prevents console output during tests
+- Built-in TypeScript support
+- Automatic cleanup even on test failure
+
+## Error Assertions
+
+### Consolidated Error Checking
+
+When testing that a function throws with a specific error type and message, use a single assertion instead of two:
+
+**❌ BAD - Redundant execution:**
+```javascript
+expect(() => func()).toThrow(TypeError);
+expect(() => func()).toThrow('message');
+```
+
+**✅ GOOD - Single assertion with type and message:**
+```javascript
+expect(() => func()).toThrow(new TypeError('message'));
+```
+
+**✅ ALSO GOOD - Using Error constructor name:**
+```javascript
+expect(() => func()).toThrow(
+    expect.objectContaining({
+        name: 'TypeError',
+        message: 'Expected error message'
+    })
+);
+```
+
+### Pattern for Validation Error Tests
+
+When testing parameter validation across multiple methods with the same invalid inputs:
+
+```javascript
+describe.each([
+    { name: 'throw TypeError for null parameter', value: null },
+    { name: 'throw TypeError for invalid parameter', value: Object.create(null) }
+])('$name', ({ value }) => {
+    test('methodA()', () => {
+        expect(() => instance.methodA(value)).toThrow(
+            new TypeError('Argument must be an instance of TypeA')
+        );
+    });
+
+    test('methodB()', () => {
+        expect(() => instance.methodB(value)).toThrow(
+            new TypeError('Argument must be an instance of TypeB')
+        );
+    });
+});
+```
+
+## Async Testing
+
+### Mandatory: Use `expect.assertions()` in Async Tests
+
+**All async tests must include `expect.assertions(n)`** at the start to declare the expected number of assertions. This is mandatory because:
+- Prevents false positives when callbacks don't execute
+- Makes test intent explicit
+- Catches bugs where async code paths are skipped
+
+```javascript
+test('callback is executed', async () => {
+    expect.assertions(2);
+    
+    await someAsyncOperation((data) => {
+        expect(data).toBeTruthy();
+        expect(data.value).toBe('expected');
+    });
+});
+```
+
+**❌ BAD - No assertion count (test could pass without assertions running):**
+```javascript
+test('callback is executed', async () => {
+    await someAsyncOperation((data) => {
+        expect(data).toBeTruthy();
+    });
+});
+```
+
+**✅ GOOD - Explicit assertion count:**
+```javascript
+test('callback is executed', async () => {
+    expect.assertions(1);
+    
+    await someAsyncOperation((data) => {
+        expect(data).toBeTruthy();
+    });
+});
+```
+
+### When to Use `expect.assertions()`
+
+Use in **all** of the following scenarios:
+1. Any test with `async`/`await`
+2. Tests with callbacks that contain assertions
+3. Tests with `.then()`/`.catch()` chains
+4. Tests using `Promise.all()` or similar patterns
+
+**Note:** For simple synchronous tests, `expect.assertions()` is optional but can still add clarity.
+
+## Test File Organization
+
+### Structure
+
+Organize test files with a consistent structure. All tests should be grouped under `describe` blocks - avoid placing tests at the root level of the file.
+
+```javascript
+describe('ClassName', () => {
+    // 1. Constructor tests (if applicable)
+    describe('constructor', () => {
+        test('sets arguments', () => { /* ... */ });
+        test('throws error for invalid arguments', () => { /* ... */ });
+    });
+
+    // 2. Parameter validation tests (type checking)
+    describe('parameter validation', () => {
+        describe.each([
+            { name: 'throw TypeError for null parameter', value: null },
+            { name: 'throw TypeError for invalid parameter', value: Object.create(null) }
+        ])('$name', ({ value }) => {
+            test('methodA()', () => { /* ... */ });
+            test('methodB()', () => { /* ... */ });
+        });
+    });
+
+    // 3. Validation tests for specific methods (enum values, ranges, etc.)
+    describe('methodName() validation', () => {
+        test.each([
+            { name: 'accepts valid value: foo', value: 'foo' },
+            { name: 'accepts valid value: FOO (case-insensitive)', value: 'FOO' }
+        ])('$name', ({ value }) => {
+            expect(() => instance.methodName(value)).not.toThrow();
+        });
+
+        test.each([
+            { name: 'throws for null value', value: null },
+            { name: 'throws for invalid value', value: 'invalid' }
+        ])('$name', ({ value }) => {
+            expect(() => instance.methodName(value)).toThrow(
+                new Error('`methodName` must be one of `foo`, `bar`')
+            );
+        });
+    });
+
+    // 4. Option setters / method behavior tests
+    describe('options', () => {
+        test('sets optionA', () => { /* ... */ });
+        test('sets optionB', () => { /* ... */ });
+    });
+
+    // 5. Specific feature tests
+    describe('feature name', () => {
+        test('does specific behavior', () => { /* ... */ });
+    });
+
+    // 6. Output/serialization tests (if applicable)
+    describe('toJSON', () => {
+        test('returns correct DSL', () => { /* ... */ });
+        test('throws error when required fields missing', () => { /* ... */ });
+    });
+});
+```
+
+### Grouping Guidelines
+
+1. **All tests under describe blocks** - Never place `test()` calls at the root level of a `describe('ClassName')` block. Group related tests into nested `describe` blocks.
+
+2. **Consistent ordering** - Follow this order when applicable:
+   - Constructor behavior
+   - Parameter validation (type checking)
+   - Method-specific validation (enums, ranges)
+   - Option setters
+   - Feature-specific behavior
+   - Output/serialization (`toJSON`)
+
+3. **Descriptive describe names** - Use names that clearly indicate what aspect is being tested:
+   - `'constructor'` - for constructor tests
+   - `'parameter validation'` - for type checking tests
+   - `'[methodName]() validation'` - for value validation on specific methods
+   - `'options'` - for simple option setters
+   - `'[feature name]'` - for specific feature behavior
+
+**❌ BAD - Mixed organization:**
+```javascript
+describe('KNN', () => {
+    test('can be instantiated', () => { /* ... */ });
+    
+    describe('filter method', () => {
+        test('adds single query', () => { /* ... */ });
+    });
+    
+    test('queryVector sets correctly', () => { /* ... */ });
+    
+    describe('option setters', () => { /* ... */ });
+});
+```
+
+**✅ GOOD - Consistent organization:**
+```javascript
+describe('KNN', () => {
+    describe('constructor', () => {
+        test('can be instantiated', () => { /* ... */ });
+        test('throws error if numCandidates is less than k', () => { /* ... */ });
+    });
+
+    describe('parameter validation', () => {
+        describe.each([
+            { name: 'throw TypeError for null parameter', value: null },
+            { name: 'throw TypeError for invalid parameter', value: 'not_a_query' }
+        ])('$name', ({ value }) => {
+            test('filter()', () => { /* ... */ });
+        });
+    });
+
+    describe('options', () => {
+        test('queryVector sets correctly', () => { /* ... */ });
+        test('boost sets correctly', () => { /* ... */ });
+    });
+
+    describe('filter method', () => {
+        test('adds single query correctly', () => { /* ... */ });
+        test('adds queries as array correctly', () => { /* ... */ });
+    });
+});
+```
+
+## Testing Alias Methods
+
+When a method has an alias (e.g., `agg()` is an alias for `aggregation()`), test both methods with the same logic. Use table-driven tests when you have multiple scenarios to test.
+
+### Pattern: Table-Driven Alias Method Tests
+
+When testing alias methods across multiple scenarios, use `describe.each` with the input and expected values inline in the test data. Object instances ARE allowed in test data for this specific pattern because:
+- Both alias methods need the **exact same input** (shared reference is correct)
+- The input/expected pairs are self-contained within the test data array
+- No external fixture lookups are required
+
+**✅ GOOD - Table-driven with inline object instances:**
+```javascript
+describe.each([
+    {
+        name: 'nested aggs',
+        input: new TermsAggregation('users', 'user'),
+        expected: {
+            my_agg: {
+                my_type: {},
+                aggs: {
+                    users: { terms: { field: 'user' } }
+                }
+            }
+        }
+    },
+    {
+        name: 'deep nested aggs',
+        input: new TermsAggregation('countries', 'artist.country')
+            .order('rock>playback_stats.avg', 'desc')
+            .agg(
+                new FilterAggregation('rock', new TermQuery('genre', 'rock'))
+                    .agg(new StatsAggregation('playback_stats', 'play_count'))
+            ),
+        expected: {
+            my_agg: {
+                my_type: {},
+                aggs: {
+                    countries: {
+                        terms: {
+                            field: 'artist.country',
+                            order: { 'rock>playback_stats.avg': 'desc' }
+                        },
+                        aggs: {
+                            rock: {
+                                filter: { term: { genre: 'rock' } },
+                                aggs: {
+                                    playback_stats: { stats: { field: 'play_count' } }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+])('$name', ({ input, expected }) => {
+    test('aggregation()', () => {
+        const value = getInstance().aggregation(input).toJSON();
+        expect(value).toEqual(expected);
+    });
+
+    test('agg()', () => {
+        const value = getInstance().agg(input).toJSON();
+        expect(value).toEqual(expected);
+    });
+});
+```
+
+**Why this works:**
+- Each scenario has its `input` and `expected` defined together (no external lookups)
+- Both alias methods share the same input instance (correct for alias testing)
+- Adding new scenarios is straightforward
+- Test output clearly shows which scenario and method failed
+
+### Single Scenario Pattern
+
+For a single scenario with alias methods, define `input` and `expected` once within the describe block:
+
+**✅ GOOD - Shared input/expected within describe:**
+```javascript
+describe('multiple nested aggs', () => {
+    const input = [
+        new TermsAggregation('countries', 'country'),
+        new TermsAggregation('users', 'user')
+    ];
+    const expected = {
+        my_agg: {
+            my_type: {},
+            aggs: {
+                countries: { terms: { field: 'country' } },
+                users: { terms: { field: 'user' } }
+            }
+        }
+    };
+
+    test('aggregations()', () => {
+        const value = getInstance().aggregations(input).toJSON();
+        expect(value).toEqual(expected);
+    });
+
+    test('aggs()', () => {
+        const value = getInstance().aggs(input).toJSON();
+        expect(value).toEqual(expected);
+    });
+});
+```
+
+**❌ BAD - External fixtures object with name-based lookup:**
+```javascript
+// Don't do this - separates test data from the test via indirection
+const fixtures = {
+    'nested aggs': { input: termsAgg, expected: { /* ... */ } }
+};
+
+describe.each([{ name: 'nested aggs' }])('$name', ({ name }) => {
+    test('aggregation()', () => {
+        const { input, expected } = fixtures[name];  // BAD: lookup by name
+        // ...
+    });
+});
+```
+
+**Key distinction:**
+- ✅ Object instances in `describe.each` array with `input`/`expected` inline → OK
+- ❌ Separate fixtures object with name-based lookup → BAD
+
+## Factory Functions for Instance Creation
+
+Simple factory functions like `getInstance()` are acceptable for reducing boilerplate when creating test instances, as long as they don't hide test logic or contain conditional setup.
+
+**✅ GOOD - Simple factory for common instance:**
+```javascript
+const getInstance = (order) => new Sort('my_field', order);
+
+describe('Sort', () => {
+    test('sets nestedPath option', () => {
+        const result = getInstance().nestedPath('offer').toJSON();
+        expect(result).toEqual({ my_field: { nested_path: 'offer' } });
+    });
+});
+```
+
+**❌ BAD - Factory with hidden logic:**
+```javascript
+// BAD - contains conditional logic that should be in the test
+const getInstance = (type) => {
+    if (type === 'complex') {
+        return new Sort('field').nestedPath('path').nestedFilter(query);
+    }
+    return new Sort('field');
+};
+```
+
+**Key principle:** Factory functions should only encapsulate simple, unconditional instance creation. Any setup that varies between tests should be explicit in the test itself.
+
+## Summary
+
+When writing or refactoring tests:
+
+### Core Testing Principles
+
+1. **One test, one concern** - Each test should verify a single method or behavior
+2. **Be explicit** - No dynamic method calls, no template literal test names, no conditional logic
+3. **Prefer repetition over abstraction** - Explicit, repeated tests are better than DRY abstractions
+4. **Use `test.each` for parameterized tests** - Never use `forEach` loops; always use Vitest's `test.each` or `describe.each`
+5. **No functions in test data** - No functions or factory methods in `test.each` arrays; object instances are allowed for alias method testing
+6. **Separate unrelated methods** - Even if they validate the same condition, give each method its own test
+7. **Use Vitest's `vi`** - No external mocking libraries
+8. **Use lifecycle hooks for spy cleanup** - Always use `beforeEach`/`afterEach` to ensure cleanup runs even on failure
+9. **Consolidate error assertions** - Use `toThrow(new TypeError('message'))` instead of separate type and message checks
+10. **Use `expect.assertions()` in async tests** - All async tests must declare expected assertion count
+11. **Consistent file organization** - Group all tests under `describe` blocks with consistent ordering
+12. **Split validation tests** - Separate valid and invalid value tests into distinct `test.each` blocks; always verify error messages
+13. **Minimal case-sensitivity testing** - One uppercase variant per enum value is sufficient to prove case-insensitivity
+14. **Test alias methods with table-driven tests** - Use `describe.each` with input/expected inline; object instances as input are allowed
+15. **Keep test data close to tests** - Never extract test data to module-scope fixture objects; inline data in each test
+16. **Simple factory functions are OK** - Use for instance creation, but don't hide conditional logic in them
+
+### AVA Migration Checklist
+
+When refactoring AVA tests to Vitest:
+
+1. **Replace imports** - `import test from 'ava'` → `import { describe, test, expect } from 'vitest'`
+2. **Remove `_macros` imports** - All macro usages must be replaced with explicit inline tests
+3. **Remove `t` parameter** - Test callbacks no longer receive the test context
+4. **Convert assertions** - Use the assertion mapping table (e.g., `t.deepEqual` → `expect().toEqual()`)
+5. **Eliminate macros** - Replace `test(macro, args)` patterns with explicit tests
+6. **Wrap in describe blocks** - All tests should be under a `describe('ClassName')` block
+7. **Consolidate error assertions** - Merge `t.throws` + `t.is(err.message)` into single `toThrow(new Error())` calls
+8. **Split validation tests** - Separate valid and invalid cases into distinct `test.each` blocks

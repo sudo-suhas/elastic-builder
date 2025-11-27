@@ -1,35 +1,76 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { GeoQueryBase } from '../../src/queries/geo-queries';
-import {
-    validatedCorrectly,
-    nameExpectStrategy,
-    makeSetsOptionMacro
-} from '../_macros';
 
 const getInstance = (field = 'my_field') =>
     new GeoQueryBase('my_qry_type', field);
 
-const setsOption = makeSetsOptionMacro(
-    getInstance,
-    nameExpectStrategy('my_qry_type', { my_field: {} })
-);
+describe('GeoQueryBase', () => {
+    describe('validationMethod() validation', () => {
+        test.each([
+            {
+                name: 'accepts valid value: IGNORE_MALFORMED',
+                value: 'IGNORE_MALFORMED'
+            },
+            {
+                name: 'accepts valid value: ignore_malformed (case-insensitive)',
+                value: 'ignore_malformed'
+            },
+            { name: 'accepts valid value: COERCE', value: 'COERCE' },
+            {
+                name: 'accepts valid value: coerce (case-insensitive)',
+                value: 'coerce'
+            },
+            { name: 'accepts valid value: STRICT', value: 'STRICT' },
+            {
+                name: 'accepts valid value: strict (case-insensitive)',
+                value: 'strict'
+            }
+        ])('$name', ({ value }) => {
+            expect(() => getInstance().validationMethod(value)).not.toThrow();
+        });
 
-test(validatedCorrectly, getInstance, 'validationMethod', [
-    'IGNORE_MALFORMED',
-    'COERCE',
-    'STRICT'
-]);
-test(setsOption, 'validationMethod', { param: 'COERCE' });
+        test.each([
+            { name: 'throws for null value', value: null },
+            {
+                name: 'throws for invalid value',
+                value: 'invalid_validation_method'
+            }
+        ])('$name', ({ value }) => {
+            expect(() => getInstance().validationMethod(value)).toThrow(
+                new Error(
+                    "The 'validation_method' parameter should be one of 'IGNORE_MALFORMED', 'COERCE' or 'STRICT'"
+                )
+            );
+        });
+    });
 
-test('constructor sets field', t => {
-    const valueA = new GeoQueryBase('my_qry_type', 'my_field').toJSON();
-    const valueB = new GeoQueryBase('my_qry_type').field('my_field').toJSON();
-    t.deepEqual(valueA, valueB);
+    describe('options', () => {
+        test('sets validation_method option', () => {
+            const result = getInstance().validationMethod('COERCE').toJSON();
+            const expected = {
+                my_qry_type: {
+                    my_field: {},
+                    validation_method: 'COERCE'
+                }
+            };
+            expect(result).toEqual(expected);
+        });
+    });
 
-    const expected = {
-        my_qry_type: {
-            my_field: {}
-        }
-    };
-    t.deepEqual(valueA, expected);
+    describe('constructor', () => {
+        test('constructor sets field', () => {
+            const valueA = new GeoQueryBase('my_qry_type', 'my_field').toJSON();
+            const valueB = new GeoQueryBase('my_qry_type')
+                .field('my_field')
+                .toJSON();
+            expect(valueA).toEqual(valueB);
+
+            const expected = {
+                my_qry_type: {
+                    my_field: {}
+                }
+            };
+            expect(valueA).toEqual(expected);
+        });
+    });
 });

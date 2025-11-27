@@ -1,12 +1,18 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { SimpleQueryStringQuery } from '../../src';
-import { nameExpectStrategy, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = () => new SimpleQueryStringQuery();
 
-const setsOption = makeSetsOptionMacro(
-    getInstance,
-    nameExpectStrategy('simple_query_string')
-);
-
-test(setsOption, 'flags', { param: 'PREFIX|PHRASE' });
+describe('SimpleQueryStringQuery', () => {
+    describe('options', () => {
+        test('sets flags option', () => {
+            const result = getInstance().flags('PREFIX|PHRASE').toJSON();
+            const expected = {
+                simple_query_string: {
+                    flags: 'PREFIX|PHRASE'
+                }
+            };
+            expect(result).toEqual(expected);
+        });
+    });
+});

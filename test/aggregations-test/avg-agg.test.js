@@ -1,17 +1,25 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { AvgAggregation } from '../../src';
-import { setsAggType } from '../_macros';
 
-test(setsAggType, AvgAggregation, 'avg');
+describe('AvgAggregation', () => {
+    test('sets type as avg', () => {
+        const value = new AvgAggregation('my_agg').toJSON();
+        expect(value).toEqual({
+            my_agg: { avg: {} }
+        });
+    });
 
-test('constructor sets field', t => {
-    const value = new AvgAggregation('my_agg', 'my_field').toJSON();
-    const expected = {
-        my_agg: {
-            avg: {
-                field: 'my_field'
-            }
-        }
-    };
-    t.deepEqual(value, expected);
+    describe('constructor', () => {
+        test('sets field', () => {
+            const value = new AvgAggregation('my_agg', 'my_field').toJSON();
+            const expected = {
+                my_agg: {
+                    avg: {
+                        field: 'my_field'
+                    }
+                }
+            };
+            expect(value).toEqual(expected);
+        });
+    });
 });

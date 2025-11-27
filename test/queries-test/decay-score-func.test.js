@@ -1,55 +1,122 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { DecayScoreFunction } from '../../src';
-import { validatedCorrectly, makeSetsOptionMacro } from '../_macros';
 
 const getInstance = (mode, field = 'my_field') =>
     new DecayScoreFunction(mode, field);
 
-const decayExpectStrategy = (keyName, propValue) => ({
-    gauss: { my_field: { [keyName]: propValue } }
-});
+describe('DecayScoreFunction', () => {
+    describe('mode() validation', () => {
+        test.each([
+            { name: 'accepts valid value: linear', value: 'linear' },
+            {
+                name: 'accepts valid value: LINEAR (case-insensitive)',
+                value: 'LINEAR'
+            },
+            { name: 'accepts valid value: exp', value: 'exp' },
+            {
+                name: 'accepts valid value: EXP (case-insensitive)',
+                value: 'EXP'
+            },
+            { name: 'accepts valid value: gauss', value: 'gauss' },
+            {
+                name: 'accepts valid value: GAUSS (case-insensitive)',
+                value: 'GAUSS'
+            }
+        ])('$name', ({ value }) => {
+            expect(() => getInstance().mode(value)).not.toThrow();
+        });
 
-const setsOption = makeSetsOptionMacro(getInstance, decayExpectStrategy);
+        test.each([
+            { name: 'throws for null value', value: null },
+            { name: 'throws for invalid value', value: 'invalid_mode' }
+        ])('$name', ({ value }) => {
+            expect(() => getInstance().mode(value)).toThrow(
+                new Error(
+                    "The 'mode' parameter should be one of 'linear', 'exp' or 'gauss'"
+                )
+            );
+        });
+    });
 
-/**
- * Macro for testing decay mode.
- *
- * @param {*} t
- * @param {string} modeName
- */
-function setsMode(t, modeName) {
-    const value = getInstance()[modeName]().toJSON();
-    const expected = { [modeName]: { my_field: {} } };
-    t.deepEqual(value, expected);
-}
+    describe('options', () => {
+        test('sets origin option', () => {
+            const result = getInstance().origin('now-1h').toJSON();
+            const expected = {
+                gauss: { my_field: { origin: 'now-1h' } }
+            };
+            expect(result).toEqual(expected);
+        });
 
-setsMode.title = (ignore, modeName) => `sets ${modeName} mode`;
+        test('sets scale option', () => {
+            const result = getInstance().scale('10d').toJSON();
+            const expected = {
+                gauss: { my_field: { scale: '10d' } }
+            };
+            expect(result).toEqual(expected);
+        });
 
-test(validatedCorrectly, getInstance, 'mode', ['linear', 'exp', 'gauss']);
-test(setsOption, 'origin', { param: 'now-1h' });
-test(setsOption, 'scale', { param: '10d' });
-test(setsOption, 'offset', { param: '5d' });
-test(setsOption, 'decay', { param: 0.6 });
-test(setsMode, 'linear');
-test(setsMode, 'exp');
-test(setsMode, 'gauss');
+        test('sets offset option', () => {
+            const result = getInstance().offset('5d').toJSON();
+            const expected = {
+                gauss: { my_field: { offset: '5d' } }
+            };
+            expect(result).toEqual(expected);
+        });
 
-test('create with mode', t => {
-    let value = getInstance('gauss').toJSON();
-    let expected = { gauss: { my_field: {} } };
-    t.deepEqual(value, expected);
+        test('sets decay option', () => {
+            const result = getInstance().decay(0.6).toJSON();
+            const expected = {
+                gauss: { my_field: { decay: 0.6 } }
+            };
+            expect(result).toEqual(expected);
+        });
+    });
 
-    value = getInstance('linear').toJSON();
-    expected = { linear: { my_field: {} } };
-    t.deepEqual(value, expected);
+    describe('mode methods', () => {
+        test('sets linear mode', () => {
+            const value = getInstance().linear().toJSON();
+            const expected = { linear: { my_field: {} } };
+            expect(value).toEqual(expected);
+        });
 
-    value = getInstance('exp').toJSON();
-    expected = { exp: { my_field: {} } };
-    t.deepEqual(value, expected);
-});
+        test('sets exp mode', () => {
+            const value = getInstance().exp().toJSON();
+            const expected = { exp: { my_field: {} } };
+            expect(value).toEqual(expected);
+        });
 
-test('sets field', t => {
-    const value = new DecayScoreFunction().field('my_field').toJSON();
-    const expected = { gauss: { my_field: {} } };
-    t.deepEqual(value, expected);
+        test('sets gauss mode', () => {
+            const value = getInstance().gauss().toJSON();
+            const expected = { gauss: { my_field: {} } };
+            expect(value).toEqual(expected);
+        });
+    });
+
+    describe('constructor', () => {
+        test('create with gauss mode', () => {
+            const value = getInstance('gauss').toJSON();
+            const expected = { gauss: { my_field: {} } };
+            expect(value).toEqual(expected);
+        });
+
+        test('create with linear mode', () => {
+            const value = getInstance('linear').toJSON();
+            const expected = { linear: { my_field: {} } };
+            expect(value).toEqual(expected);
+        });
+
+        test('create with exp mode', () => {
+            const value = getInstance('exp').toJSON();
+            const expected = { exp: { my_field: {} } };
+            expect(value).toEqual(expected);
+        });
+    });
+
+    describe('field', () => {
+        test('sets field', () => {
+            const value = new DecayScoreFunction().field('my_field').toJSON();
+            const expected = { gauss: { my_field: {} } };
+            expect(value).toEqual(expected);
+        });
+    });
 });

@@ -1,32 +1,55 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { GeoBoundsAggregation } from '../../src';
-import {
-    setsAggType,
-    illegalCall,
-    nameTypeExpectStrategy,
-    makeSetsOptionMacro
-} from '../_macros';
 
 const getInstance = field => new GeoBoundsAggregation('my_agg', field);
 
-const setsOption = makeSetsOptionMacro(
-    getInstance,
-    nameTypeExpectStrategy('my_agg', 'geo_bounds')
-);
+describe('GeoBoundsAggregation', () => {
+    test('sets type as geo_bounds', () => {
+        const value = new GeoBoundsAggregation('my_agg').toJSON();
+        expect(value).toEqual({
+            my_agg: { geo_bounds: {} }
+        });
+    });
 
-test(setsAggType, GeoBoundsAggregation, 'geo_bounds');
-test(illegalCall, GeoBoundsAggregation, 'format', 'my_agg');
-test(illegalCall, GeoBoundsAggregation, 'script', 'my_agg');
-test(setsOption, 'wrapLongitude', { param: 'true' });
+    test('format cannot be set', () => {
+        expect(() => new GeoBoundsAggregation('my_agg').format()).toThrow(
+            new Error('format is not supported in GeoBoundsAggregation')
+        );
+    });
 
-test('constructor sets field', t => {
-    const value = getInstance('my_field').toJSON();
-    const expected = {
-        my_agg: {
-            geo_bounds: {
-                field: 'my_field'
-            }
-        }
-    };
-    t.deepEqual(value, expected);
+    test('script cannot be set', () => {
+        expect(() => new GeoBoundsAggregation('my_agg').script()).toThrow(
+            new Error('script is not supported in GeoBoundsAggregation')
+        );
+    });
+
+    describe('options', () => {
+        test('sets wrapLongitude', () => {
+            const value = getInstance('my_field')
+                .wrapLongitude('true')
+                .toJSON();
+            expect(value).toEqual({
+                my_agg: {
+                    geo_bounds: {
+                        field: 'my_field',
+                        wrap_longitude: 'true'
+                    }
+                }
+            });
+        });
+    });
+
+    describe('constructor', () => {
+        test('sets field', () => {
+            const value = getInstance('my_field').toJSON();
+            const expected = {
+                my_agg: {
+                    geo_bounds: {
+                        field: 'my_field'
+                    }
+                }
+            };
+            expect(value).toEqual(expected);
+        });
+    });
 });

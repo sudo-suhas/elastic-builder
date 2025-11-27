@@ -1,15 +1,19 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { ExistsQuery } from '../../src';
 
-test('all in one', t => {
-    const valueA = new ExistsQuery('my_field').toJSON();
-    const valueB = new ExistsQuery().field('my_field').toJSON();
-    t.deepEqual(valueA, valueB);
+describe('ExistsQuery', () => {
+    describe('constructor', () => {
+        test('constructor sets arguments', () => {
+            const valueA = new ExistsQuery('my_field').toJSON();
+            const valueB = new ExistsQuery().field('my_field').toJSON();
+            expect(valueA).toEqual(valueB);
 
-    const expected = {
-        exists: {
-            field: 'my_field'
-        }
-    };
-    t.deepEqual(valueA, expected);
+            const expected = {
+                exists: {
+                    field: 'my_field'
+                }
+            };
+            expect(valueA).toEqual(expected);
+        });
+    });
 });

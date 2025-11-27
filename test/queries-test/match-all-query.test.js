@@ -1,8 +1,12 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { MatchAllQuery } from '../../src';
 
-test('can be instantiated', t => {
-    const value = new MatchAllQuery().toJSON();
-    const expected = { match_all: {} };
-    t.deepEqual(value, expected);
+describe('MatchAllQuery', () => {
+    describe('constructor', () => {
+        test('can be instantiated', () => {
+            const value = new MatchAllQuery().toJSON();
+            const expected = { match_all: {} };
+            expect(value).toEqual(expected);
+        });
+    });
 });

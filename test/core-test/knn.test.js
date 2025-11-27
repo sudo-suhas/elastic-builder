@@ -1,130 +1,153 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { KNN, TermQuery } from '../../src';
 
-test('knn can be instantiated', t => {
-    const knn = new KNN('my_field', 5, 10).queryVector([1, 2, 3]);
-    const json = knn.toJSON();
-    t.truthy(json);
-});
+describe('KNN', () => {
+    describe('constructor', () => {
+        test('can be instantiated', () => {
+            const knn = new KNN('my_field', 5, 10).queryVector([1, 2, 3]);
+            const json = knn.toJSON();
+            expect(json).toEqual({
+                field: 'my_field',
+                k: 5,
+                num_candidates: 10,
+                query_vector: [1, 2, 3],
+                filter: []
+            });
+        });
 
-test('knn throws error if numCandidates is less than k', t => {
-    const error = t.throws(() =>
-        new KNN('my_field', 10, 5).queryVector([1, 2, 3])
-    );
-    t.is(error.message, 'KNN numCandidates cannot be less than k');
-});
-
-test('knn queryVector sets correctly', t => {
-    const vector = [1, 2, 3];
-    const knn = new KNN('my_field', 5, 10).queryVector(vector);
-    const json = knn.toJSON();
-    t.deepEqual(json.query_vector, vector);
-});
-
-test('knn queryVectorBuilder sets correctly', t => {
-    const modelId = 'model_123';
-    const modelText = 'Sample model text';
-    const knn = new KNN('my_field', 5, 10).queryVectorBuilder(
-        modelId,
-        modelText
-    );
-    const json = knn.toJSON();
-    t.deepEqual(json.query_vector_builder.text_embeddings, {
-        model_id: modelId,
-        model_text: modelText
+        test('throws error if numCandidates is less than k', () => {
+            expect(() =>
+                new KNN('my_field', 10, 5).queryVector([1, 2, 3])
+            ).toThrow(new Error('KNN numCandidates cannot be less than k'));
+        });
     });
-});
 
-test('knn filter method adds queries correctly', t => {
-    const knn = new KNN('my_field', 5, 10).queryVector([1, 2, 3]);
-    const query = new TermQuery('field', 'value');
-    knn.filter(query);
-    const json = knn.toJSON();
-    t.deepEqual(json.filter, [query.toJSON()]);
-});
-
-test('knn filter method adds queries as array correctly', t => {
-    const knn = new KNN('my_field', 5, 10).queryVector([1, 2, 3]);
-    const query1 = new TermQuery('field1', 'value1');
-    const query2 = new TermQuery('field2', 'value2');
-    knn.filter([query1, query2]);
-    const json = knn.toJSON();
-    t.deepEqual(json.filter, [query1.toJSON(), query2.toJSON()]);
-});
-
-test('knn boost method sets correctly', t => {
-    const boostValue = 1.5;
-    const knn = new KNN('my_field', 5, 10)
-        .boost(boostValue)
-        .queryVector([1, 2, 3]);
-    const json = knn.toJSON();
-    t.is(json.boost, boostValue);
-});
-
-test('knn similarity method sets correctly', t => {
-    const similarityValue = 0.8;
-    const knn = new KNN('my_field', 5, 10)
-        .similarity(similarityValue)
-        .queryVector([1, 2, 3]);
-    const json = knn.toJSON();
-    t.is(json.similarity, similarityValue);
-});
-
-test('knn toJSON method returns correct DSL', t => {
-    const knn = new KNN('my_field', 5, 10)
-        .queryVector([1, 2, 3])
-        .filter(new TermQuery('field', 'value'));
-
-    const expectedDSL = {
-        field: 'my_field',
-        k: 5,
-        num_candidates: 10,
-        query_vector: [1, 2, 3],
-        filter: [{ term: { field: 'value' } }]
-    };
-
-    t.deepEqual(knn.toJSON(), expectedDSL);
-});
-
-test('knn toJSON throws error if neither query_vector nor query_vector_builder is provided', t => {
-    const knn = new KNN('my_field', 5, 10);
-    const error = t.throws(() => knn.toJSON());
-    t.is(
-        error.message,
-        'either query_vector_builder or query_vector must be provided'
-    );
-});
-
-test('knn throws error when first queryVector and then queryVectorBuilder are set', t => {
-    const knn = new KNN('my_field', 5, 10).queryVector([1, 2, 3]);
-    const error = t.throws(() => {
-        knn.queryVectorBuilder('model_123', 'Sample model text');
+    describe('parameter validation', () => {
+        describe.each([
+            { name: 'throw TypeError for null parameter', value: null },
+            {
+                name: 'throw TypeError for invalid parameter',
+                value: 'not_a_query'
+            }
+        ])('$name', ({ value }) => {
+            test('filter()', () => {
+                const knn = new KNN('my_field', 5, 10).queryVector([1, 2, 3]);
+                expect(() => knn.filter(value)).toThrow(
+                    new TypeError('Argument must be an instance of Query')
+                );
+            });
+        });
     });
-    t.is(
-        error.message,
-        'cannot provide both query_vector_builder and query_vector'
-    );
-});
 
-test('knn throws error when first queryVectorBuilder and then queryVector are set', t => {
-    const knn = new KNN('my_field', 5, 10).queryVectorBuilder(
-        'model_123',
-        'Sample model text'
-    );
-    const error = t.throws(() => {
-        knn.queryVector([1, 2, 3]);
+    describe('options', () => {
+        test('queryVector sets correctly', () => {
+            const vector = [1, 2, 3];
+            const knn = new KNN('my_field', 5, 10).queryVector(vector);
+            const json = knn.toJSON();
+            expect(json.query_vector).toEqual(vector);
+        });
+
+        test('queryVectorBuilder sets correctly', () => {
+            const modelId = 'model_123';
+            const modelText = 'Sample model text';
+            const knn = new KNN('my_field', 5, 10).queryVectorBuilder(
+                modelId,
+                modelText
+            );
+            const json = knn.toJSON();
+            expect(json.query_vector_builder.text_embeddings).toEqual({
+                model_id: modelId,
+                model_text: modelText
+            });
+        });
+
+        test('boost sets correctly', () => {
+            const knn = new KNN('my_field', 5, 10)
+                .boost(1.5)
+                .queryVector([1, 2, 3]);
+            const json = knn.toJSON();
+            expect(json.boost).toBe(1.5);
+        });
+
+        test('similarity sets correctly', () => {
+            const knn = new KNN('my_field', 5, 10)
+                .similarity(0.8)
+                .queryVector([1, 2, 3]);
+            const json = knn.toJSON();
+            expect(json.similarity).toBe(0.8);
+        });
     });
-    t.is(
-        error.message,
-        'cannot provide both query_vector_builder and query_vector'
-    );
-});
 
-test('knn filter throws TypeError if non-Query type is passed', t => {
-    const knn = new KNN('my_field', 5, 10).queryVector([1, 2, 3]);
-    const error = t.throws(() => {
-        knn.filter('not_a_query');
-    }, TypeError);
+    describe('filter method', () => {
+        test('adds single query correctly', () => {
+            const knn = new KNN('my_field', 5, 10).queryVector([1, 2, 3]);
+            const query = new TermQuery('field', 'value');
+            knn.filter(query);
+            const json = knn.toJSON();
+            expect(json.filter).toEqual([query.toJSON()]);
+        });
 
-    t.is(error.message, 'Argument must be an instance of Query');
+        test('adds queries as array correctly', () => {
+            const knn = new KNN('my_field', 5, 10).queryVector([1, 2, 3]);
+            const query1 = new TermQuery('field1', 'value1');
+            const query2 = new TermQuery('field2', 'value2');
+            knn.filter([query1, query2]);
+            const json = knn.toJSON();
+            expect(json.filter).toEqual([query1.toJSON(), query2.toJSON()]);
+        });
+    });
+
+    describe('toJSON', () => {
+        test('returns correct DSL', () => {
+            const knn = new KNN('my_field', 5, 10)
+                .queryVector([1, 2, 3])
+                .filter(new TermQuery('field', 'value'));
+
+            const expectedDSL = {
+                field: 'my_field',
+                k: 5,
+                num_candidates: 10,
+                query_vector: [1, 2, 3],
+                filter: [{ term: { field: 'value' } }]
+            };
+
+            expect(knn.toJSON()).toEqual(expectedDSL);
+        });
+
+        test('throws error if neither query_vector nor query_vector_builder is provided', () => {
+            const knn = new KNN('my_field', 5, 10);
+            expect(() => knn.toJSON()).toThrow(
+                new Error(
+                    'either query_vector_builder or query_vector must be provided'
+                )
+            );
+        });
+    });
+
+    describe('query_vector and query_vector_builder mutual exclusivity', () => {
+        test('throws error when first queryVector and then queryVectorBuilder are set', () => {
+            const knn = new KNN('my_field', 5, 10).queryVector([1, 2, 3]);
+            expect(() => {
+                knn.queryVectorBuilder('model_123', 'Sample model text');
+            }).toThrow(
+                new Error(
+                    'cannot provide both query_vector_builder and query_vector'
+                )
+            );
+        });
+
+        test('throws error when first queryVectorBuilder and then queryVector are set', () => {
+            const knn = new KNN('my_field', 5, 10).queryVectorBuilder(
+                'model_123',
+                'Sample model text'
+            );
+            expect(() => {
+                knn.queryVector([1, 2, 3]);
+            }).toThrow(
+                new Error(
+                    'cannot provide both query_vector_builder and query_vector'
+                )
+            );
+        });
+    });
 });

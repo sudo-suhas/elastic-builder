@@ -1,17 +1,25 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { MaxAggregation } from '../../src';
-import { setsAggType } from '../_macros';
 
-test(setsAggType, MaxAggregation, 'max');
+describe('MaxAggregation', () => {
+    test('sets type as max', () => {
+        const value = new MaxAggregation('my_agg').toJSON();
+        expect(value).toEqual({
+            my_agg: { max: {} }
+        });
+    });
 
-test('constructor sets field', t => {
-    const value = new MaxAggregation('my_agg', 'my_field').toJSON();
-    const expected = {
-        my_agg: {
-            max: {
-                field: 'my_field'
-            }
-        }
-    };
-    t.deepEqual(value, expected);
+    describe('constructor', () => {
+        test('sets field', () => {
+            const value = new MaxAggregation('my_agg', 'my_field').toJSON();
+            const expected = {
+                my_agg: {
+                    max: {
+                        field: 'my_field'
+                    }
+                }
+            };
+            expect(value).toEqual(expected);
+        });
+    });
 });

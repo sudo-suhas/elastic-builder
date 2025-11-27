@@ -1,32 +1,50 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { NestedAggregation } from '../../src';
-import {
-    setsAggType,
-    illegalCall,
-    nameTypeExpectStrategy,
-    makeSetsOptionMacro
-} from '../_macros';
 
 const getInstance = (...args) => new NestedAggregation('my_agg', ...args);
 
-const setsOption = makeSetsOptionMacro(
-    getInstance,
-    nameTypeExpectStrategy('my_agg', 'nested')
-);
+describe('NestedAggregation', () => {
+    test('sets type as nested', () => {
+        const value = new NestedAggregation('my_agg').toJSON();
+        expect(value).toEqual({
+            my_agg: { nested: {} }
+        });
+    });
 
-test(setsAggType, NestedAggregation, 'nested');
-test(illegalCall, NestedAggregation, 'field', 'my_agg');
-test(illegalCall, NestedAggregation, 'script', 'my_agg');
-test(setsOption, 'path', { param: 'nested_path' });
+    test('field cannot be set', () => {
+        expect(() => new NestedAggregation('my_agg').field()).toThrow(
+            new Error('field is not supported in NestedAggregation')
+        );
+    });
 
-test('constructor sets arguments', t => {
-    const value = getInstance('nested_path').toJSON();
-    const expected = {
-        my_agg: {
-            nested: {
-                path: 'nested_path'
+    test('script cannot be set', () => {
+        expect(() => new NestedAggregation('my_agg').script()).toThrow(
+            new Error('script is not supported in NestedAggregation')
+        );
+    });
+
+    describe('options', () => {
+        test('sets path', () => {
+            const value = getInstance().path('nested_path').toJSON();
+            expect(value).toEqual({
+                my_agg: {
+                    nested: {
+                        path: 'nested_path'
+                    }
+                }
+            });
+        });
+    });
+
+    test('constructor sets arguments', () => {
+        const value = getInstance('nested_path').toJSON();
+        const expected = {
+            my_agg: {
+                nested: {
+                    path: 'nested_path'
+                }
             }
-        }
-    };
-    t.deepEqual(value, expected);
+        };
+        expect(value).toEqual(expected);
+    });
 });

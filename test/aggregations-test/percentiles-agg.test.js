@@ -1,48 +1,96 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { PercentilesAggregation } from '../../src';
-import {
-    setsAggType,
-    illegalParamType,
-    nameTypeExpectStrategy,
-    makeSetsOptionMacro
-} from '../_macros';
 
 const getInstance = field => new PercentilesAggregation('my_agg', field);
 
-const setsOption = makeSetsOptionMacro(
-    getInstance,
-    nameTypeExpectStrategy('my_agg', 'percentiles')
-);
+describe('PercentilesAggregation', () => {
+    test('sets type as percentiles', () => {
+        const value = new PercentilesAggregation('my_agg').toJSON();
+        expect(value).toEqual({
+            my_agg: { percentiles: {} }
+        });
+    });
 
-test(setsAggType, PercentilesAggregation, 'percentiles');
-test(illegalParamType, getInstance(), 'percents', 'Array');
-test(setsOption, 'keyed', { param: true });
-test(setsOption, 'percents', { param: [95, 99, 99.9], spread: false });
-test(setsOption, 'keyed', { param: true });
-test(setsOption, 'tdigest', { param: 200, propValue: { compression: 200 } });
-test(setsOption, 'hdr', {
-    param: 3,
-    propValue: { number_of_significant_value_digits: 3 }
-});
-
-test('compression same as tdigest', t => {
-    t.deepEqual(
-        getInstance().tdigest(3).toJSON(),
-        getInstance().compression(3).toJSON()
-    );
-});
-
-test('constructor sets field', t => {
-    const valueA = getInstance('my_field').toJSON();
-    const valueB = getInstance().field('my_field').toJSON();
-    t.deepEqual(valueA, valueB);
-
-    const expected = {
-        my_agg: {
-            percentiles: {
-                field: 'my_field'
+    describe('parameter validation', () => {
+        describe.each([
+            { name: 'throw TypeError for null parameter', value: null },
+            {
+                name: 'throw TypeError for invalid parameter',
+                value: Object.create(null)
             }
-        }
-    };
-    t.deepEqual(valueA, expected);
+        ])('$name', ({ value }) => {
+            test('percents()', () => {
+                expect(() => getInstance().percents(value)).toThrow(
+                    new TypeError('Argument must be an instance of Array')
+                );
+            });
+        });
+    });
+
+    describe('options', () => {
+        test('sets keyed', () => {
+            const value = getInstance().keyed(true).toJSON();
+            expect(value).toEqual({
+                my_agg: {
+                    percentiles: {
+                        keyed: true
+                    }
+                }
+            });
+        });
+
+        test('sets percents', () => {
+            const value = getInstance().percents([95, 99, 99.9]).toJSON();
+            expect(value).toEqual({
+                my_agg: {
+                    percentiles: {
+                        percents: [95, 99, 99.9]
+                    }
+                }
+            });
+        });
+
+        test('sets tdigest', () => {
+            const value = getInstance().tdigest(200).toJSON();
+            expect(value).toEqual({
+                my_agg: {
+                    percentiles: {
+                        tdigest: { compression: 200 }
+                    }
+                }
+            });
+        });
+
+        test('sets hdr', () => {
+            const value = getInstance().hdr(3).toJSON();
+            expect(value).toEqual({
+                my_agg: {
+                    percentiles: {
+                        hdr: { number_of_significant_value_digits: 3 }
+                    }
+                }
+            });
+        });
+    });
+
+    test('compression same as tdigest', () => {
+        expect(getInstance().tdigest(3).toJSON()).toEqual(
+            getInstance().compression(3).toJSON()
+        );
+    });
+
+    test('constructor sets field', () => {
+        const valueA = getInstance('my_field').toJSON();
+        const valueB = getInstance().field('my_field').toJSON();
+        expect(valueA).toEqual(valueB);
+
+        const expected = {
+            my_agg: {
+                percentiles: {
+                    field: 'my_field'
+                }
+            }
+        };
+        expect(valueA).toEqual(expected);
+    });
 });

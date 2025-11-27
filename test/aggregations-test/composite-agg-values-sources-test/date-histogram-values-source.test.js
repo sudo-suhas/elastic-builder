@@ -1,69 +1,120 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { CompositeAggregation } from '../../../src';
-import {
-    setsAggType,
-    nameTypeExpectStrategy,
-    makeSetsOptionMacro
-} from '../../_macros';
 
 const { DateHistogramValuesSource } = CompositeAggregation;
 
 const getInstance = (...args) =>
     new DateHistogramValuesSource('my_val_src', ...args);
 
-const setsOption = makeSetsOptionMacro(
-    getInstance,
-    nameTypeExpectStrategy('my_val_src', 'date_histogram')
-);
-
-test('constructor sets arguments', t => {
-    const value = getInstance('my_field', '1d').toJSON();
-    const expected = {
-        my_val_src: {
-            date_histogram: {
-                field: 'my_field',
-                interval: '1d'
+describe('DateHistogramValuesSource', () => {
+    test('constructor sets arguments', () => {
+        const value = getInstance('my_field', '1d').toJSON();
+        const expected = {
+            my_val_src: {
+                date_histogram: {
+                    field: 'my_field',
+                    interval: '1d'
+                }
             }
-        }
-    };
-    t.deepEqual(value, expected);
-});
+        };
+        expect(value).toEqual(expected);
+    });
 
-test('calendar_interval_is_set', t => {
-    const value = getInstance('field_name', 'date')
-        .calendarInterval('month')
-        .toJSON();
-    const expected = {
-        my_val_src: {
-            date_histogram: {
-                field: 'field_name',
-                calendar_interval: 'month',
-                interval: 'date'
+    test('calendar interval is set', () => {
+        const value = getInstance('field_name', 'date')
+            .calendarInterval('month')
+            .toJSON();
+        const expected = {
+            my_val_src: {
+                date_histogram: {
+                    field: 'field_name',
+                    calendar_interval: 'month',
+                    interval: 'date'
+                }
             }
-        }
-    };
-    t.deepEqual(value, expected);
-});
+        };
+        expect(value).toEqual(expected);
+    });
 
-test('fixed_interval_is_set', t => {
-    const value = getInstance('field_name', 'date')
-        .fixedInterval('90s')
-        .toJSON();
-    const expected = {
-        my_val_src: {
-            date_histogram: {
-                field: 'field_name',
-                fixed_interval: '90s',
-                interval: 'date'
+    test('fixed interval is set', () => {
+        const value = getInstance('field_name', 'date')
+            .fixedInterval('90s')
+            .toJSON();
+        const expected = {
+            my_val_src: {
+                date_histogram: {
+                    field: 'field_name',
+                    fixed_interval: '90s',
+                    interval: 'date'
+                }
             }
-        }
-    };
-    t.deepEqual(value, expected);
-});
+        };
+        expect(value).toEqual(expected);
+    });
 
-test(setsAggType, DateHistogramValuesSource, 'date_histogram');
-test(setsOption, 'interval', { param: 5 });
-test(setsOption, 'timeZone', { param: 'America/Los_Angeles' });
-test(setsOption, 'format', { param: 'yyyy-MM-dd' });
-test(setsOption, 'calendarInterval', { param: 'month' });
-test(setsOption, 'fixedInterval', { param: '90s' });
+    test('sets type as date_histogram', () => {
+        const value = new DateHistogramValuesSource('my_val_src').toJSON();
+        expect(value).toEqual({
+            my_val_src: { date_histogram: {} }
+        });
+    });
+
+    describe('options', () => {
+        test('sets interval', () => {
+            const value = getInstance().interval(5).toJSON();
+            expect(value).toEqual({
+                my_val_src: {
+                    date_histogram: {
+                        interval: 5
+                    }
+                }
+            });
+        });
+
+        test('sets timeZone', () => {
+            const value = getInstance()
+                .timeZone('America/Los_Angeles')
+                .toJSON();
+            expect(value).toEqual({
+                my_val_src: {
+                    date_histogram: {
+                        time_zone: 'America/Los_Angeles'
+                    }
+                }
+            });
+        });
+
+        test('sets format', () => {
+            const value = getInstance().format('yyyy-MM-dd').toJSON();
+            expect(value).toEqual({
+                my_val_src: {
+                    date_histogram: {
+                        format: 'yyyy-MM-dd'
+                    }
+                }
+            });
+        });
+
+        test('sets calendarInterval', () => {
+            const value = getInstance().calendarInterval('month').toJSON();
+            expect(value).toEqual({
+                my_val_src: {
+                    date_histogram: {
+                        calendar_interval: 'month'
+                    }
+                }
+            });
+        });
+
+        test('sets fixedInterval', () => {
+            const value = getInstance().fixedInterval('90s').toJSON();
+            expect(value).toEqual({
+                my_val_src: {
+                    date_histogram: {
+                        fixed_interval: '90s'
+                    }
+                }
+            });
+        });
+    });
+});

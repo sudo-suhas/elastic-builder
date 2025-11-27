@@ -1,14 +1,16 @@
-import test from 'ava';
+import { describe, test, expect } from 'vitest';
 import { TypeQuery } from '../../src';
 
-test('all in one', t => {
-    const valueA = new TypeQuery('my_type').toJSON();
-    let valueB = new TypeQuery().value('my_type').toJSON();
-    t.deepEqual(valueA, valueB);
+describe('TypeQuery', () => {
+    test('all in one', () => {
+        const valueA = new TypeQuery('my_type').toJSON();
+        let valueB = new TypeQuery().value('my_type').toJSON();
+        expect(valueA).toEqual(valueB);
 
-    valueB = new TypeQuery().type('my_type').toJSON();
-    t.deepEqual(valueA, valueB);
+        valueB = new TypeQuery().type('my_type').toJSON();
+        expect(valueA).toEqual(valueB);
 
-    const expected = { type: { value: 'my_type' } };
-    t.deepEqual(valueA, expected);
+        const expected = { type: { value: 'my_type' } };
+        expect(valueA).toEqual(expected);
+    });
 });
